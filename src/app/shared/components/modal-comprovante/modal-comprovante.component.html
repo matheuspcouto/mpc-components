@@ -1,0 +1,88 @@
+<div *ngIf="exibir && modal" class="modal">
+  <div class="tela-inteira" *ngIf="dados">
+    <div class="modal-content">
+      <div class="modal-body">
+        <!-- Imagem -->
+        <img src="/img/logo.png" class="modal-image">
+
+        <!-- Título -->
+        <h2 class="modal-title mb-5">{{ modal.titulo }}</h2>
+
+        <div class="row mb-2">
+
+          <div class="col-md-4 mb-2">
+            <h5>Inscrição:</h5>
+            <div class="input-group">
+              <p>{{ dados.id }}</p>
+              <em (click)="copiarCodigo()">
+                <i [class]="isCopiado ? 'bi bi-clipboard-check' : 'bi bi-clipboard'"></i>
+              </em>
+            </div>
+          </div>
+
+          <div class="col-md-4 mb-2">
+            <h5 class="mb-2">Status:</h5>
+            <h5 *ngIf="dados.status == 'A PAGAR'"><span class="badge text-bg-danger mb-2">
+                Aguardando Pagamento
+              </span>
+            </h5>
+            <h5 *ngIf="dados.status == 'PAGO'"><span class="badge text-bg-success mb-2">
+                Pagamento Confirmado
+              </span>
+            </h5>
+          </div>
+
+          <div class="col-md-4" *ngIf="dados.dataCriacao">
+            <h5 class="mb-2">Data da Inscrição:</h5>
+            <p>{{ formatarData(dados.dataCriacao) }}</p>
+          </div>
+
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-md-4 mb-2">
+            <h5 class="mb-2">Nome</h5>
+            <p>{{ dados.nome }}</p>
+          </div>
+
+          <div class="col-md-4 mb-2" *ngIf="dados.telefone">
+            <h5 class="mb-2">Telefone:</h5>
+            <p>{{ dados.telefone }}</p>
+          </div>
+
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-md-6 mb-2">
+            <h5 class="mb-2">Forma de Pagamento:</h5>
+            <p>{{ dados.formaPagamento }}</p>
+          </div>
+
+          <div class="col-md-6 mb-2">
+            <h5 class="mb-2">Valor:</h5>
+            <p>{{ formatarValor(dados.valor) }}</p>
+          </div>
+
+        </div>
+
+        <!-- Botões -->
+        <div class="modal-buttons">
+
+          <div *ngIf="dados.status == 'A PAGAR' && dados.formaPagamento != 'Dinheiro'">
+            <div class="label-info alert alert-warning text-center mt-3">
+              <i class="bi bi-exclamation-circle float-left"></i>
+              <p>Solicite o pix/link para pagamento ou envie o comprovante clicando no
+                botão abaixo. </p>
+            </div>
+          </div>
+
+          <button class="btn btn-success" *ngIf="dados.status == 'A PAGAR' && dados.formaPagamento != 'Dinheiro'" (click)="pedirLinkPagamento()">
+            Solicitar pelo WhatsApp <i class="bi bi-whatsapp"></i>
+          </button>
+
+          <button class="btn btn-outline-secondary mt-2" (click)="botao()">Fechar <i
+              class="bi bi-x-lg"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>

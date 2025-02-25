@@ -1,0 +1,200 @@
+<form [formGroup]="formGroup">
+
+  <div class="alert alert-warning text-center mt-1" *ngIf="celulas.length === 0">
+    <i class="bi bi-exclamation-circle float-left"></i>
+    Não foi possível trazer as células. Mas não se preocupe, você pode continuar a inscrição.
+  </div>
+
+  <h5>Dados Pessoais</h5>
+
+  <div class="row mt-3">
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Nome *</label>
+      <div class="input-group">
+        <input type="text" class="form-control" formControlName="nome"
+          [style]="formGroup.controls['nome'].errors && formGroup.controls['nome'].touched ? 'border-color: red' : ''" />
+      </div>
+      <div *ngIf="formGroup.controls['nome'].errors && formGroup.controls['nome'].touched">
+        <p *ngIf="formGroup.controls['nome'].errors['required']" class="text-danger"> Campo obrigatório </p>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Sobrenome *</label>
+      <div class="input-group">
+        <input id="sobrenome" type="text" class="form-control" formControlName="sobrenome"
+          [style]="formGroup.controls['sobrenome'].errors && formGroup.controls['sobrenome'].touched ? 'border-color: red' : ''" />
+
+      </div>
+      <div class="mb-1" *ngIf="formGroup.controls['sobrenome'].errors && formGroup.controls['sobrenome'].touched">
+        <p *ngIf="formGroup.controls['sobrenome'].errors['required']" class="text-danger"> Campo obrigatório
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label class="form-label">Endereço *</label>
+    <div class="input-group">
+      <input type="text" class="form-control" formControlName="endereco"
+        [style]="formGroup.controls['endereco'].errors && formGroup.controls['endereco'].touched ? 'border-color: red' : ''" />
+    </div>
+    <div class="mb-1" *ngIf="formGroup.controls['endereco'].errors && formGroup.controls['endereco'].touched">
+      <p *ngIf="formGroup.controls['endereco'].errors['required']" class="text-danger"> Campo obrigatório
+      </p>
+      <p *ngIf="formGroup.controls['endereco'].errors['minlength']" class="text-danger"> O endereço precisa ter pelo
+        menos 10 caracteres </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Data de Nascimento *</label>
+      <div class="input-group">
+        <input type="date" class="form-control" formControlName="dataNasc" [max]="dataAtual"
+          [style]="formGroup.controls['dataNasc'].errors && formGroup.controls['dataNasc'].touched ? 'border-color: red' : ''" />
+      </div>
+      <div class="mb-1" *ngIf="formGroup.controls['dataNasc'].errors && formGroup.controls['dataNasc'].touched">
+        <p *ngIf="formGroup.controls['dataNasc'].errors['required']" class="text-danger"> Campo obrigatório
+        </p>
+        <p *ngIf="formGroup.controls['dataNasc'].errors['formatoInvalido']" class="text-danger">
+          A data de nascimento não pode ser maior que a data atual
+        </p>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <div class="input-group">
+        <label class="form-label">Sexo *</label>
+        <div class="input-group justify-content-center">
+          <div>
+            <label class="p-3" *ngIf="!inscricoesHomensEncerradas">
+              <input type="radio" formControlName="sexo" value="Masculino" (change)="filtrarCelulas()" /> Masculino
+            </label>
+            <!-- <label class="p-3" *ngIf="!inscricoesMulheresEncerradas">
+              <input type="radio" formControlName="sexo" value="Feminino" (change)="filtrarCelulas()" /> Feminino
+            </label> -->
+          </div>
+        </div>
+
+        <div class="mb-1" *ngIf="formGroup.controls['sexo'].errors && formGroup.controls['sexo'].touched">
+          <p *ngIf="formGroup.controls['sexo'].errors['required']" class="text-danger"> Campo
+            obrigatório </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Telefone *</label>
+      <div class="input-group">
+        <input id="telefone" type="text" class="form-control col-md-4" formControlName="telefone"
+          [style]="formGroup.controls['telefone'].errors && formGroup.controls['telefone'].touched ? 'border-color: red' : ''"
+          [mask]="mascaraTelefone" />
+        <div *ngIf="formGroup.controls['telefone'].touched">
+          <em [style]="formGroup.controls['telefone'].errors ? 'color: red;' : 'color: green'">
+            <i [class]="formGroup.controls['telefone'].errors ? 'bi bi-exclamation-circle' : 'bi bi-check-lg'"></i>
+          </em>
+        </div>
+      </div>
+      <div class="mb-1" *ngIf="formGroup.controls['telefone'].errors && formGroup.controls['telefone'].touched">
+        <p *ngIf="formGroup.controls['telefone'].errors['formatoInvalido']" class="text-danger"> Telefone
+          inválido
+        </p>
+        <p *ngIf="formGroup.controls['telefone'].errors['required']" class="text-danger"> Campo obrigatório
+        </p>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <div class="input-group">
+        <label class="form-label">Estado Civil *</label>
+        <div class="input-group">
+          <select class="form-select form-select-md" formControlName="estadoCivil"
+            [style]="formGroup.controls['estadoCivil'].errors && formGroup.controls['estadoCivil'].touched ? 'border-color: red' : ''">
+            <option *ngFor="let ec of estadosCivis; let i = index" [value]="ec">
+              {{ ec }}
+            </option>
+          </select>
+        </div>
+
+        <div class="mb-1" *ngIf="formGroup.controls['estadoCivil'].errors && formGroup.controls['estadoCivil'].touched">
+          <p *ngIf="formGroup.controls['estadoCivil'].errors['formatoInvalido']" class="text-danger">
+            Formato inválido
+          </p>
+          <p *ngIf="formGroup.controls['estadoCivil'].errors['required']" class="text-danger"> Campo
+            obrigatório </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row mb-3">
+    <label class="form-label">Você costuma utilizar algum remédio de uso contínuo ? Se sim, coloque abaixo </label>
+    <div class="input-group">
+      <input type="text" class="form-control" formControlName="remediosControlados"
+        [style]="formGroup.controls['remediosControlados'].errors && formGroup.controls['remediosControlados'].touched ? 'border-color: red' : ''" />
+    </div>
+    <div class="mb-1"
+      *ngIf="formGroup.controls['remediosControlados'].errors && formGroup.controls['remediosControlados'].touched">
+      <p *ngIf="formGroup.controls['remediosControlados'].errors['required']" class="text-danger"> Campo
+        obrigatório
+      </p>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label class="form-label">Você possui alergia a algum alimento ou medicação? Se sim, coloque abaixo </label>
+    <div class="input-group">
+      <input type="text" class="form-control" formControlName="alergias"
+        [style]="formGroup.controls['alergias'].errors && formGroup.controls['alergias'].touched ? 'border-color: red' : ''" />
+    </div>
+    <div class="mb-1" *ngIf="formGroup.controls['alergias'].errors && formGroup.controls['alergias'].touched">
+      <p *ngIf="formGroup.controls['alergias'].errors['required']" class="text-danger"> Campo
+        obrigatório
+      </p>
+    </div>
+  </div>
+
+  <div *ngIf="celulas.length > 0 && formGroup.controls['sexo'].value" class="mb-3">
+    <h5 class="card-title text-center">Célula</h5>
+    <p class="text-center mt-2">
+      Caso você já faça parte de uma célula, selecione abaixo.
+    </p>
+
+    <div class="row mt-3 d-flex align-items-center justify-content-center" *ngIf="celulas.length > 0">
+      <div class="col-md-4">
+        <div class="input-group">
+          <div class="input-group">
+            <select class="form-select form-select-md" formControlName="celula"
+              [style]="formGroup.controls['celula'].errors && formGroup.controls['celula'].touched ? 'border-color: red' : ''">
+              <option *ngFor="let cel of celulasDropdown; let i = index" [value]="cel">
+                {{ cel }}
+              </option>
+            </select>
+
+            <div class="mb-1" *ngIf="formGroup.controls['celula'].errors && formGroup.controls['celula'].touched">
+              <p *ngIf="formGroup.controls['celula'].errors['formatoInvalido']" class="text-danger">
+                Formato inválido
+              </p>
+              <p *ngIf="formGroup.controls['celula'].errors['required']" class="text-danger"> Campo
+                obrigatório </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="d-flex justify-content-center align-items-center mt-5">
+    <button class="btn btn-primary" (click)="proximaEtapa()" [disabled]="formGroup.invalid">
+      Próximo <i class="bi bi-arrow-right float-right"></i>
+    </button>
+  </div>
+
+</form>
+
+<modal #modalErro></modal>

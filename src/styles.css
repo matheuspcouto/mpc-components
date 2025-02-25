@@ -1,1 +1,249 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.cdnfonts.com/css/laythis');
+
+:root {
+  /* Fontes */
+  --font-titulo: "Laythis", sans-serif;
+  --font-padrao: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-secundaria: "Inter", sans-serif;
+
+  /* Cores */
+  --cor-primaria: #0E2749;
+  --cor-secundaria: #149DDD;
+  --cor-terciaria: gray;
+  --preto: #000;
+  --branco: #fff;
+
+  scroll-behavior: smooth;
+}
+
+/* Background Colors */
+.bg-color-primary {
+  background-color: var(--cor-primaria) !important;
+}
+
+.bg-color-secondary {
+  background-color: var(--cor-secundaria) !important;
+}
+
+.bg-color-tertiary {
+  background-color: var(--cor-terciaria) !important;
+}
+
+.bg-color-black {
+  background-color: var(--preto) !important;
+}
+
+.bg-color-white {
+  background-color: var(--branco);
+}
+
+/* Text Colors */
+.text-color-primary {
+  color: var(--cor-primaria) !important;
+}
+
+.text-color-secondary {
+  color: var(--cor-secundaria) !important;
+}
+
+.text-color-tertiary {
+  color: var(--cor-terciaria) !important;
+}
+
+.text-color-black {
+  color: var(--preto) !important;
+}
+
+.text-color-white {
+  color: var(--branco) !important;
+}
+
+/*--------------------------------------------------------------
+# Geral
+--------------------------------------------------------------*/
+html {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+body {
+  font-family: var(--font-padrao);
+  color: var(--cor-secundaria);
+  overflow: auto !important;
+  cursor: default !important;
+}
+
+/* Botões */
+.btn {
+  display: flex;
+  position: relative !important;
+  transition: all 0.1s ease-in-out !important;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2) !important;
+  padding-block: 0.5rem !important;
+  padding-inline: 1.25rem !important;
+  border-radius: 9999px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  gap: 10px !important;
+  outline: none !important;
+  overflow: hidden !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: var(--branco);
+  width: 30vh;
+  min-width: 20vh;
+  text-decoration: none !important;
+
+  i {
+    width: 24px !important;
+    height: 24px !important;
+    transition: all 0.1s ease-in-out !important;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .btn {
+    max-width: 30vh;
+  }
+
+}
+
+em {
+  display: flex;
+  position: relative !important;
+  transition: all 0.3s ease-in-out !important;
+  padding-block: 0.5rem !important;
+  padding-inline: 1.25rem !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  max-width: 20vh;
+  text-decoration: none;
+}
+
+a {
+  color: var(--cor-primaria);
+  text-decoration: none !important;
+
+  &:hover {
+    color: var(--cor-primaria);
+    text-decoration: none;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-secundaria);
+}
+
+/* Media Queries for Desktop & Mobile */
+@media (max-width: 768px) {
+  .mobile {
+    display: flex !important;
+  }
+
+  .desktop {
+    display: none !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile {
+    display: none !important;
+  }
+
+  .desktop {
+    display: flex !important;
+  }
+}
+
+/*--------------------------------------------------------------
+# Sections & Section Header
+--------------------------------------------------------------*/
+section {
+  overflow: hidden;
+  padding: 40px 0;
+  scroll-margin-top: 90px;
+  overflow: clip;
+
+  .section-bg {
+    background-color: var(--branco);
+  }
+
+  .section-header {
+    text-align: center;
+    padding-bottom: 30px;
+
+    h2 {
+      font-size: 13px;
+      letter-spacing: 1px;
+      font-weight: 400;
+      margin: 0;
+      padding: 0;
+      color: var(--cor-terciaria);
+      text-transform: uppercase;
+      font-family: var(--font-padrao);
+    }
+
+    p {
+      margin: 0;
+      font-size: 48px;
+      font-weight: 400;
+      font-family: var(--fonte-padrao);
+
+      span {
+        color: var(--cor-primaria);
+      }
+    }
+  }
+}
+
+/*--------------------------------------------------------------
+# Capa Section
+--------------------------------------------------------------*/
+.capa {
+  width: 100%;
+  position: relative;
+  min-height: 60vh;
+  padding: 160px 0 60px 0;
+  background-size: cover !important;
+  background-position: center !important;
+
+  span {
+    color: var(--cor-primaria);
+    font-family: var(--font-titulo);
+    font-size: clamp(1em, 1em + 1vw, 3em);
+    font-weight: 300;
+  }
+
+  h2 {
+    font-size: 64px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--branco);
+    font-family: var(--fonte-padrao);
+  }
+
+  p {
+    color: var(--cor-terciaria);
+    font-weight: 400;
+    margin-bottom: 30px;
+  }
+
+  @media (max-width: 640px) {
+    h2 {
+      font-size: 36px;
+    }
+  }
+}

@@ -1,0 +1,60 @@
+name: Deploy on Production
+
+on:
+  workflow_dispatch:
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+jobs:
+  # Verifica Versoes NPM e Node => Instala Dependencias => Executa Testes Unitarios => Build
+  Build-Tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "20.x"
+
+      - name: Verificando versoes Node e NPM
+        run: node --version && npm --version
+
+      - name: Instalando dependencias
+        run: npm install
+
+      - name: Executando testes unitarios
+        run: echo Nao ha testes unitarios para serem executados
+
+      - name: Executando build do projeto
+        run: npm run build --if-present
+
+  # Deploy Production
+  Deploy-Production:
+    needs: Build-Tests
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://encontro-com-deus-imep.vercel.app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel
+
+      - name: Baixando configuracoes de ambiente do vercel - ENV=Production
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Executando build do projeto
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Executando deploy
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Criando url para o deploy
+        run: |
+          url="$(vercel deploy --prod --prebuilt --token=${{ secrets.VERCEL_TOKEN }})"
+          vercel alias --token=${{ secrets.VERCEL_TOKEN }} set "$url" "encontro-com-deus-imep.vercel.app"

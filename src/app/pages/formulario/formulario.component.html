@@ -1,0 +1,107 @@
+<navbar></navbar>
+
+<div *ngIf="!inscricoesHomensEncerradas || !inscricoesMulheresEncerradas">
+  <!-- ======= Capa Section ======= -->
+  <section id="capa" class="capa d-flex align-items-center bg-image">
+    <div class="container">
+      <div class="row justify-content-between gy-5">
+        <div
+          class="col-lg-12 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center text-center">
+          <h2> <span>Formulário de</span> <br> Inscrição</h2>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ======= End Capa Section ======= -->
+
+  <main id="main">
+
+    <section id="inscricao" class="inscricao col-md-12 px-4">
+      <div class="container">
+        <!-- Barra de progresso -->
+        <div class="progress-container">
+          <div class="step" id="step1">
+            <i [class]="getIconeEtapa(etapa, 1)"></i>
+            <p>Dados Pessoais</p>
+          </div>
+          <div class="step" id="step2">
+            <i [class]="getIconeEtapa(etapa, 2)"></i>
+            <p>Contato</p>
+          </div>
+          <div class="step" id="step3">
+            <i [class]="getIconeEtapa(etapa, 3)"></i>
+            <p>Pagamento</p>
+          </div>
+        </div>
+        <div class="progress-bar mb-5">
+          <div class="progress-fill" id="progressFill" [style.width.%]="(etapa / 3) * 100"></div>
+        </div>
+
+        <hr>
+
+        <div class="alert alert-warning text-center mb-1"
+          *ngIf="inscricoesHomensEncerradas && !inscricoesMulheresEncerradas">
+          <i class="bi bi-exclamation-circle float-left"></i>
+          Atenção! <br> As inscrições para homens estão encerradas. Somente inscrições para mulheres serão realizadas.
+        </div>
+
+        <div class="alert alert-warning text-center mb-1"
+          *ngIf="!inscricoesHomensEncerradas && inscricoesMulheresEncerradas">
+          <i class="bi bi-exclamation-circle float-left"></i>
+          Atenção! <br> As inscrições para mulheres estão encerradas. Somente inscrições para homens serão realizadas.
+        </div>
+
+        <div class="alert alert-light text-center mb-4">
+          Campos obrigatórios (*)
+        </div>
+
+        <div class="row no-gutters">
+          <!-- Etapa 1: Dados Pessoais -->
+          <div *ngIf="etapa === 1">
+            <primeira-etapa (dados)="getDadosPrimeiraEtapa($event)"
+              [inscricoesHomensEncerradas]="inscricoesHomensEncerradas"
+              [inscricoesMulheresEncerradas]="inscricoesMulheresEncerradas"></primeira-etapa>
+          </div>
+
+          <!-- Etapa 2: Contatos -->
+          <div *ngIf="etapa === 2">
+            <segunda-etapa (dados)="getDadosSegundaEtapa($event)"></segunda-etapa>
+          </div>
+
+          <!-- Step 3: Pagamento -->
+          <div *ngIf="etapa === 3">
+            <terceira-etapa (dados)="getDadosTerceiraEtapa($event)"></terceira-etapa>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<section class="section-inscricoes-encerradas section-bg"
+  *ngIf="inscricoesHomensEncerradas && inscricoesMulheresEncerradas">
+  <div class="container">
+
+    <div class="section-header">
+
+      <div class="col-lg-12 col-md-12 d-flex align-items-center justify-content-center mb-5">
+        <img src="img/modal/atencao.png" width="150px" height="auto">
+      </div>
+
+      <p>Inscrições <span>Encerradas</span> !
+      </p>
+    </div>
+
+    <p class="text-center text-muted" style="font-style: italic;">
+      Infelizmente, as inscrições para o evento foram encerradas, mas não deixe de acompanhar nossas programações <br>
+      pelo instagram da igreja: <a href="https://www.instagram.com/palmasmetodista/" target="_blank">
+        &#64;palmasmetodista </a>
+    </p>
+  </div>
+
+</section>
+
+<modal #modalErro></modal>
+<modal #modalSucesso></modal>
+<comprovante #comprovante></comprovante>

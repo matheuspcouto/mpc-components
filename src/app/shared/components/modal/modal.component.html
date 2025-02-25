@@ -1,0 +1,28 @@
+<div *ngIf="exibirModal && modal" class="modal">
+  <div [ngClass]="isTelaInteira ? 'tela-inteira' : 'metade-tela'">
+    <div class="modal-content">
+      <div class="modal-body">
+        <!-- Imagem -->
+        <img *ngIf="modal.imagem && isTelaInteira" [src]="'img/modal/' + modal.imagem" class="modal-image">
+
+        <!-- Título -->
+        <h2 class="modal-title">{{ modal.titulo }}</h2>
+
+        <!-- Descrição -->
+        <p class="modal-description">{{ modal.texto }}</p>
+      </div>
+
+      <!-- Botões -->
+      <div class="modal-buttons">
+        <button class="btn btn-primary" (click)="botao()">{{ modal.textoBotao }}</button>
+        <button *ngIf="modal.textoSegundoBotao" class="btn btn-link" (click)="segundoBotao()">{{
+          modal.textoSegundoBotao}}
+        </button>
+        <button *ngIf="btnCopiarMensagemErro" class="btn btn-outline-secondary" (click)="copiarCodigo()"><i
+            [class]="isCopiado ? 'bi bi-clipboard-check' : 'bi bi-clipboard'"></i>
+          Copiar Erro
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

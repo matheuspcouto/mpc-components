@@ -1,0 +1,162 @@
+/*--------------------------------------------------------------
+# Capa
+--------------------------------------------------------------*/
+.capa {
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(/img/home/mountain.jpg);
+
+  .btn-faca-inscricao {
+    box-shadow: 0 8px 28px var(--cor-terciaria);
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 12px 36px;
+    border-radius: 50px;
+    transition: 0.5s;
+
+    &:hover {
+      box-shadow: 0 8px 28px var(--cor-secundaria);
+    }
+  }
+
+  span {
+    font-size: 6rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    span {
+      font-size: 4rem;
+    }
+  }
+}
+
+/*--------------------------------------------------------------
+# descricao Section
+--------------------------------------------------------------*/
+.descricao {
+  padding-bottom: 30px;
+
+  .item-descricao {
+    padding: 30px;
+    width: 100%;
+
+    i {
+      display: block;
+      font-size: 35px;
+      color: var(--cor-primaria);
+      float: left;
+    }
+
+    span {
+      font-size: 30px;
+      display: block;
+      font-weight: 600;
+      margin-left: 60px;
+      font-family: var(--font-secundaria);
+      color: var(--cor-terciaria);
+    }
+
+    h5 {
+      padding: 15px 0 0 0;
+      margin: 0 0 0 60px;
+    }
+
+    a {
+      font-size: 20px;
+      transition: ease-in-out 0.3s;
+
+      &:hover {
+        color: var(--cor-secundaria);
+      }
+    }
+  }
+}
+
+/*--------------------------------------------------------------
+# Capa Meio Section
+--------------------------------------------------------------*/
+.capa-meio {
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(/img/home/mountain.jpg);
+  background-size: cover;
+  background-position: center;
+  padding: 100px 0;
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+  }
+
+  @media (min-width: 992px) {
+    background-attachment: fixed;
+  }
+
+  .texto-capa {
+    padding: 30px;
+    width: 100%;
+
+    h2,
+    span {
+      font-family: var(--font-titulo) !important;
+      font-size: 80px;
+    }
+
+    span {
+      color: var(--cor-primaria);
+    }
+
+    h2 {
+      color: var(--branco);
+    }
+  }
+}
+
+/*--------------------------------------------------------------
+# Contato Section
+--------------------------------------------------------------*/
+.contato {
+  .info-item {
+    background: #f4f4f4;
+    padding: 30px;
+    height: 100%;
+
+    .icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      font-size: 24px;
+      color: var(--branco);
+      background: var(--cor-primaria);
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+
+    h3 {
+      font-size: 20px;
+      color: var(--cor-terciaria);
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    p {
+      padding: 0;
+      margin: 0;
+      line-height: 24px;
+      font-size: 14px;
+    }
+
+    .social-links {
+      a {
+        font-size: 24px;
+        display: inline-block;
+        color: var(--cor-terciaria);
+        margin: 4px 6px 0 0;
+        transition: 0.3s;
+
+        &:hover {
+          color: var(--cor-primaria);
+        }
+      }
+    }
+  }
+}
