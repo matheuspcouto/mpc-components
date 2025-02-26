@@ -193,13 +193,14 @@
 
   <div class="d-flex flex-column mt-3 mb-3 justify-content-center align-items-center">
     <button class="btn btn-outline-dark mb-3 botoesContato" [disabled]="qtdContatos == 4"
-      (click)="aumentarQtdContatos()">Adicionar Contato
+      (click)="aumentarQtdContatos()">
       <i class="bi bi-plus-lg"></i>
+      Adicionar Contato
     </button>
 
-    <button class="btn btn-outline-dark botoesContato" [disabled]="qtdContatos == 2"
-      (click)="diminuirQtdContatos()">Remover Contato
+    <button class="btn btn-outline-dark botoesContato" [disabled]="qtdContatos == 2" (click)="diminuirQtdContatos()">
       <i class="bi bi-trash"></i>
+      Remover Contato
     </button>
   </div>
 
@@ -207,11 +208,12 @@
 
 <div class="row justify-content-between align-items-center mt-5">
   <button class="btn btn-outline-secondary" (click)="etapaAnterior()">
-    <i class="bi bi-arrow-left float-left"></i>
+    <i class="bi bi-arrow-left"></i>
     Voltar
   </button>
 
   <button class="btn btn-primary" (click)="proximaEtapa()" [disabled]="formGroup.invalid">
-    Próximo <i class="bi bi-arrow-right float-right"></i>
+    <i class="bi bi-arrow-right"></i>
+    Próximo
   </button>
 </div>

@@ -13,6 +13,15 @@ const WINDOW = new InjectionToken<Window>('WindowToken', {
   }
 });
 
+interface NavbarConfig {
+  titulo: string,
+  rota: string,
+  icone: string,
+  ativo: boolean,
+  focado: boolean,
+  subMenus?: NavbarConfig[]
+}
+
 @Component({
   selector: 'navbar',
   imports: [CommonModule, RouterLink],
@@ -21,11 +30,36 @@ const WINDOW = new InjectionToken<Window>('WindowToken', {
 })
 export class NavbarComponent {
 
-  abas: any = [
+  abas: NavbarConfig[] = [
     { titulo: 'Home', rota: Rotas.HOME, icone: 'bi bi-house-fill', ativo: true, focado: false },
+    { titulo: 'Documentação', rota: Rotas.DOCS, icone: 'bi bi-book-fill', ativo: true, focado: false },
     { titulo: 'Formulário', rota: Rotas.FORMULARIO, icone: 'bi bi-send-fill', ativo: true, focado: false },
-    { titulo: 'Aguarde', rota: Rotas.AGUARDE, icone: 'bi bi-search', ativo: true, focado: false },
+    {
+      titulo: 'Componentes',
+      rota: Rotas.COMPONENTES,
+      icone: 'bi bi-file-code-fill',
+      ativo: true,
+      focado: false,
+      subMenus: [
+        { titulo: 'Modais', rota: Rotas.MODAIS, icone: 'bi bi-house-fill', ativo: true, focado: false },
+        { titulo: 'Loader', rota: Rotas.LOADER, icone: 'bi bi-house-fill', ativo: true, focado: false },
+        { titulo: 'Notificações', rota: Rotas.NOTIFICACOES, icone: 'bi bi-house-fill', ativo: true, focado: false },
+        { titulo: 'Cards', rota: Rotas.CARDS, icone: 'bi bi-house-fill', ativo: true, focado: false },
+      ]
+    },
+    {
+      titulo: 'Páginas',
+      rota: Rotas.PAGINAS,
+      icone: 'bi bi-file-earmark-fill',
+      ativo: true,
+      focado: false,
+      subMenus: [
+        { titulo: 'Aguarde', rota: Rotas.AGUARDE, icone: 'bi bi-alarm-fill', ativo: true, focado: false },
+        { titulo: 'Login', rota: Rotas.LOGIN, icone: 'bi bi-house-fill', ativo: false, focado: false },
+      ]
+    },
   ];
+
   showNavbar = true;
   isClicado = false;
   anoAtual = new Date().getFullYear();

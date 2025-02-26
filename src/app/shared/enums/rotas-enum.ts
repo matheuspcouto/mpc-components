@@ -1,5 +1,17 @@
 export const Rotas = {
   HOME: "/",
+  DOCS: "/documentacao",
   FORMULARIO: "/formulario",
-  AGUARDE: "/aguarde",
+
+  // Componentes
+  COMPONENTES: "/componentes",
+  CARDS: "/componentes/#cards",
+  MODAIS: "/componentes/#modais",
+  LOADER: "/componentes/#loader",
+  NOTIFICACOES: "/componentes/#notificacao",
+
+  // Paginas
+  PAGINAS: "/paginas",
+  AGUARDE: "/paginas/aguarde",
+  LOGIN: "/paginas/login",
 }

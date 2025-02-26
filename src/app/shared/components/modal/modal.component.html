@@ -18,8 +18,8 @@
         <button *ngIf="modal.textoSegundoBotao" class="btn btn-link" (click)="segundoBotao()">{{
           modal.textoSegundoBotao}}
         </button>
-        <button *ngIf="btnCopiarMensagemErro" class="btn btn-outline-secondary" (click)="copiarCodigo()"><i
-            [class]="isCopiado ? 'bi bi-clipboard-check' : 'bi bi-clipboard'"></i>
+        <button *ngIf="btnCopiarMensagemErro" class="btn btn-link text-color-primary" (click)="copiarCodigo()">
+          <i [class]="isCopiado ? 'bi bi-clipboard-check' : 'bi bi-clipboard'"></i>
           Copiar Erro
         </button>
       </div>

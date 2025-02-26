@@ -6,10 +6,13 @@
     <div class="row justify-content-between gy-5">
       <div
         class="col-lg-8 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
-        <h2 class="mb-5">My Components</h2>
+        <h2><span>My Components</span> </h2>
+        <br>
+        <p>Desenvolvido por <a href="https://www.linkedin.com/in/matheuspcouto/" target="_blank">matheuspcouto</a> </p>
         <div class="d-flex">
-          <a routerLink="/inscricao" class="btn-faca-inscricao bg-color-primary text-color-white">Saiba mais
-            <i class="bi bi-arrow-right"></i>
+          <a routerLink="/documentacao" class="btn-faca-inscricao bg-color-white text-color-primary">
+            <i class="bi bi-book-fill"></i>
+            Veja como usar
           </a>
         </div>
       </div>
@@ -33,119 +36,44 @@
       </div>
 
       <div class="row no-gutters">
-
-        <div class="col-lg-4 d-md-flex align-items-md-stretch">
+        <div class="col-lg-12 d-md-flex align-items-md-stretch justify-content-center">
           <div class="item-descricao">
             <i class="bi bi-chat-fill"></i>
             <span>O que é ?</span>
-            <h5 class="text-muted"> Um repositório de componentes Angular responsíveis e
-              personalizáveis para
-              aplicações web. Esta página inteira foi feita com esses componentes, como: navbar, footer, buttons, cards,
-              forms e mais :) </h5>
-          </div>
-        </div>
-
-        <div class="col-lg-4 d-md-flex align-items-md-stretch">
-          <div class="item-descricao">
-            <i class="bi bi-question-circle-fill"></i>
-            <span>Como usar ?</span>
-            <h5 class="text-muted"> Baixe o Angular (v19) e acesse este
-              <a href="https://github.com/matheuspcouto/MyComponents" target="_blank">repositório</a>,
-              baixe o código para sua máquina
-              e é só procurar
-              o componente desejado na pasta do projeto.
+            <h5 class="mb-3">
+              Um repositório de componentes Angular responsivos e personalizáveis, projetado para
+              facilitar o desenvolvimento de aplicações web. Este repositório oferece uma coleção de componentes
+              reutilizáveis, como navbar, footer, buttons, cards e forms, que podem ser facilmente
+              integrados em diferentes projetos. Este site foi totalmente desenvolvido com utilizando esses componentes.
+            </h5>
+            <h5>
+              Os componentes são desenvolvidos com foco na responsividade, garantindo que se adaptem a diferentes
+              tamanhos de tela e dispositivos. Além disso, cada componente é altamente personalizável, permitindo que os
+              desenvolvedores ajustem estilos e comportamentos conforme as necessidades específicas de suas aplicações.
             </h5>
           </div>
         </div>
+      </div>
 
-        <div class="col-lg-4 d-md-flex align-items-md-stretch">
+      <div class="row no-gutters">
+        <div class="col-lg-12 d-md-flex align-items-md-stretch justify-content-center">
           <div class="item-descricao">
             <i class="bi bi-coin"></i>
             <span>Quanto custa ?</span>
-            <h5 class="text-muted">NADA! <br> o repositório é open source!</h5>
+            <h5>NADA! <br>
+              O repositório é open source, o que significa que é gratuito para uso e modificação. Os desenvolvedores
+              podem baixar o código, explorar os componentes disponíveis e utilizá-los em seus próprios projetos,
+              promovendo a colaboração e a inovação na comunidade Angular. Com o My Components, você pode acelerar o
+              desenvolvimento de suas aplicações, aproveitando componentes prontos e testados, economizando tempo e
+              esforço.
+            </h5>
           </div>
         </div>
-
       </div>
 
     </div>
   </section>
   <!-- ======= descricao Section ======= -->
-
-  <!-- ======= Modais, Loader & Notification Toast Section ======= -->
-  <section id="descricao" class="descricao">
-    <div class="container">
-
-      <div class="section-header">
-        <h2>esta seção é sobre</h2>
-        <p><span>Modais</span>, Loader & Notificações </p>
-      </div>
-
-      <div class="row justify-content-center align-items-center">
-
-        <div class="col-md-4 mb-3 d-flex justify-content-center">
-          <button class="btn btn-success" (click)="abrirModalSucesso()" tabindex="0">
-            <i class="bi bi-check-all me-2"></i>
-            <span>Modal de Sucesso</span>
-          </button>
-        </div>
-
-        <div class="col-md-4 mb-3 d-flex justify-content-center">
-          <button class="btn btn-warning" (click)="abrirModalAviso()" tabindex="0">
-            <i class="bi bi-exclamation-triangle me-2"></i>
-            <span>Modal de Aviso</span>
-          </button>
-        </div>
-
-        <div class="col-md-4 mb-3 d-flex justify-content-center">
-          <button class="btn btn-danger" (click)="abrirModalErro()" tabindex="0">
-            <i class="bi bi-bug me-2"></i>
-            <span>Modal de Erro</span>
-          </button>
-        </div>
-
-      </div>
-
-      <div class="row">
-
-        <div class="col-md-4 mb-3 d-flex justify-content-center">
-          <button class="btn btn-outline-success" (click)="abrirModalConfirmacao()" tabindex="0">
-            <i class="bi bi-check-lg me-2"></i>
-            <span>Modal de Confirmação</span>
-          </button>
-        </div>
-
-        <div class="col-md-4 mb-3 d-flex justify-content-center">
-          <button class="btn btn-outline-secondary" (click)="abrirModalComprovante()" tabindex="0">
-            <i class="bi bi-body-text me-2"></i>
-            <span>Modal de Comprovante</span>
-          </button>
-        </div>
-
-      </div>
-
-      <div class="row">
-
-        <div class="col-md-4 mb-3 d-flex justify-content-center">
-          <button class="btn btn-outline-secondary" (click)="abrirLoading()" tabindex="0">
-            <i class="bi bi-arrow-clockwise me-2"></i>
-            <span>Loader</span>
-          </button>
-        </div>
-
-        <div class="col-md-4 mb-3 d-flex justify-content-center">
-          <button class="btn btn-outline-secondary" (click)="mostrarNotificacao()" tabindex="0">
-            <i class="bi bi-info-circle me-2"></i>
-            <span>Notificação</span>
-          </button>
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-  <!-- ======= Modais, Loader & Notification Toast Section ======= -->
 
   <!-- ======= Capa Meio Section ======= -->
   <section id="capa-meio" class="capa-meio">
@@ -154,7 +82,7 @@
       <div class="row gy-4">
         <div class="col-lg-12 col-md-12 justify-content-center align-items-center">
           <div class="texto-capa text-center w-100 h-100">
-            <h2>Divisor de <span>Página</span>.
+            <h2>My <span>Components</span>.
             </h2>
           </div>
         </div>
@@ -170,14 +98,14 @@
     <div class="container">
 
       <div class="section-header">
-        <h2>seção para</h2>
-        <p>Informações de <span>Contato</span></p>
+        <h2>informações de</h2>
+        <p>Contato</p>
       </div>
 
       <div class="mb-3">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d31416.51104492992!2d-48.342735231809975!3d-10.175463146480574!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spt-BR!2sbr!4v1740512106198!5m2!1spt-BR!2sbr"
-          style="border-radius: 5px; width: 100%; height: 350px;" allowfullscreen frameBorder="0"></iframe>
+          allowfullscreen frameBorder="0"></iframe>
       </div>
 
       <div class="row gy-4">
@@ -209,6 +137,3 @@
   <!-- ======= End Contato Section ======= -->
 
 </main>
-
-<modal #modal></modal>
-<comprovante #comprovante></comprovante>

@@ -1,0 +1,188 @@
+<navbar></navbar>
+
+<!-- ======= Capa Section ======= -->
+<section id="capa" class="capa d-flex align-items-center bg-image">
+  <div class="container">
+    <div class="row justify-content-between gy-5">
+      <div
+        class="col-lg-12 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center text-center">
+        <h2> <span>Componentes</span> </h2>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ======= End Capa Section ======= -->
+
+<main id="main">
+
+  <!-- ======= Modais ======= -->
+  <section id="modais" class="modais">
+    <div class="container">
+
+      <div class="section-header">
+        <h2>experimente os</h2>
+        <p>Botões & <span> Modais </span> </p>
+      </div>
+
+      <h5>
+        Os modais do MyComponents são gerados pelo componente "ModalComponent", localizado no diretório
+        "src/app/shared/components/modal".
+      </h5>
+
+      <h5>
+        Os botões do MyComponents utilizam ícones do Bootstrap Icons,
+        importados no arquivo
+        "src/styles.css".
+        <br>
+        Caso deseje utilizar outros ícones, basta importá-los no mesmo arquivo.
+        <br>
+        Experimente clicando neles abaixo.
+      </h5>
+
+      <div class="row">
+        <div class="col-lg-6">
+
+          <div class="col-md-12 mb-3 d-flex justify-content-center">
+            <pre class="chroma">
+              <code class="language-html" data-lang="html">
+                  &lt;button class="btn btn-success" (click)="abrirModalSucesso()" tabindex="0"&gt;
+                    &lt;i class="bi bi-check-all"&gt;&lt;/i&gt;
+                    &lt;span&gt;Modal de Sucesso&lt;/span&gt;
+                  &lt;/button&gt;
+              </code>
+            </pre>
+          </div>
+          <div class="col-md-12 mb-3 d-flex justify-content-center">
+            <button class="btn btn-success" (click)="abrirModalSucesso()" tabindex="0">
+              <i class="bi bi-check-all"></i>
+              <span>Modal de Sucesso</span>
+            </button>
+          </div>
+
+
+          <div class="col-md-12 mb-3 d-flex justify-content-center">
+            <pre class="chroma">
+              <code class="language-html" data-lang="html">
+                  &lt;button class="btn btn-outline-success" (click)="abrirModalConfirmacao()" tabindex="0"&gt;
+                    &lt;i class="bi bi-check-lg"&gt;&lt;/i&gt;
+                    &lt;span&gt;Modal de Confirmação&lt;/span&gt;
+                  &lt;/button&gt;
+              </code>
+            </pre>
+          </div>
+          <div class="col-md-12 mb-3 d-flex justify-content-center">
+            <button class="btn btn-outline-success" (click)="abrirModalConfirmacao()" tabindex="0">
+              <i class="bi bi-check-lg"></i>
+              <span>Modal de Confirmação</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+
+          <div class="col-md-12 mb-3 d-flex justify-content-center">
+            <pre class="chroma">
+              <code class="language-html" data-lang="html">
+                  &lt;button class="btn btn-warning" (click)="abrirModalAviso()" tabindex="0"&gt;
+                    &lt;i class="bi bi-exclamation-triangle"&gt;&lt;/i&gt;
+                    &lt;span&gt;Modal de Aviso&lt;/span&gt;
+                  &lt;/button&gt;
+              </code>
+            </pre>
+          </div>
+          <div class="col-md-12 mb-3 d-flex justify-content-center">
+            <button class="btn btn-warning" (click)="abrirModalAviso()" tabindex="0">
+              <i class="bi bi-exclamation-triangle"></i>
+              <span>Modal de Aviso</span>
+            </button>
+          </div>
+
+          <div class="col-md-12 mb-3 d-flex justify-content-center">
+            <pre class="chroma">
+              <code class="language-html" data-lang="html">
+                  &lt;button class="btn btn-danger" (click)="abrirModalErro()" tabindex="0"&gt;
+                    &lt;i class="bi bi-bug"&gt;&lt;/i&gt;
+                    &lt;span&gt;Modal de Erro&lt;/span&gt;
+                  &lt;/button&gt;
+              </code>
+            </pre>
+          </div>
+          <div class="col-md-6 mb-3 d-flex justify-content-center">
+            <button class="btn btn-danger" (click)="abrirModalErro()" tabindex="0">
+              <i class="bi bi-bug"></i>
+              <span>Modal de Erro</span>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+  <!-- ======= Modais ======= -->
+
+  <!-- ======= Notificações ======= -->
+  <section id="notificacoes" class="notificacoes bg-color-primary text-color-white">
+    <div class="container">
+
+      <div class="section-header">
+        <h2 class="text-color-white">experimente as</h2>
+        <p><span>Notificações</span> & Loader </p>
+      </div>
+
+      <h5 class="text-color-white">
+        As notificações do MyComponents são geradas pelo componente "NotificationService", da biblioteca "ngx-toastr".
+      </h5>
+
+      <h5 class="text-color-white">
+        O Loader é gerado pelo componente "LoaderService", localizado no diretório "src/app/shared/components/loader".
+      </h5>
+
+      <div class="row">
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+          <button class="btn btn-light" (click)="abrirLoading()" tabindex="0">
+            <i class="bi bi-arrow-clockwise"></i>
+            <span>Loader</span>
+          </button>
+        </div>
+
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+          <button class="btn btn-light" (click)="mostrarNotificacao()" tabindex="0">
+            <i class="bi bi-info-circle"></i>
+            <span>Notificação</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+  <!-- ======= Notificações ======= -->
+
+  <!-- ======= Comprovante ======= -->
+  <section id="modais" class="modais">
+    <div class="container">
+
+      <div class="section-header">
+        <h2>experimente este modelo de</h2>
+        <p> Comprovante </p>
+      </div>
+
+      <div class="col-md-12 mb-3 d-flex justify-content-center">
+        <button class="btn btn-outline-secondary" (click)="abrirModalComprovante()" tabindex="0">
+          <i class="bi bi-body-text"></i>
+          <span>Comprovante</span>
+        </button>
+      </div>
+
+    </div>
+
+  </section>
+  <!-- ======= Comprovante ======= -->
+
+</main>
+
+<modal #modal></modal>
+<comprovante #comprovante></comprovante>

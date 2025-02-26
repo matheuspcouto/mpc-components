@@ -14,6 +14,10 @@
     border-radius: 50px;
     transition: 0.5s;
 
+    i {
+      margin-right: 0.5rem !important;
+    }
+
     &:hover {
       box-shadow: 0 8px 28px var(--cor-secundaria);
     }
@@ -23,9 +27,13 @@
     font-size: 6rem;
   }
 
+  p {
+    font-size: 1.5rem;
+  }
+
   @media screen and (max-width: 768px) {
     span {
-      font-size: 4rem;
+      font-size: 2rem;
     }
   }
 }
@@ -53,20 +61,22 @@
       font-weight: 600;
       margin-left: 60px;
       font-family: var(--font-secundaria);
-      color: var(--cor-terciaria);
+      color: var(--cor-primaria);
     }
 
     h5 {
       padding: 15px 0 0 0;
       margin: 0 0 0 60px;
+      color: var(--cor-terciaria);
     }
 
     a {
       font-size: 20px;
       transition: ease-in-out 0.3s;
+      color: var(--cor-secundaria);
 
       &:hover {
-        color: var(--cor-secundaria);
+        color: var(--cor-primaria);
       }
     }
   }
@@ -96,7 +106,7 @@
     h2,
     span {
       font-family: var(--font-titulo) !important;
-      font-size: 80px;
+      font-size: 2rem;
     }
 
     span {
@@ -113,10 +123,19 @@
 # Contato Section
 --------------------------------------------------------------*/
 .contato {
+  background-color: var(--branco);
+
+  iframe {
+    border-radius: 5px;
+    width: 100%;
+    height: 350px;
+  }
+
   .info-item {
     background: #f4f4f4;
     padding: 30px;
     height: 100%;
+    border-radius: 5px;
 
     .icon {
       display: flex;
@@ -133,7 +152,7 @@
 
     h3 {
       font-size: 20px;
-      color: var(--cor-terciaria);
+      color: var(--cor-primaria);
       font-weight: 700;
       margin-bottom: 5px;
     }

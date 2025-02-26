@@ -12,8 +12,7 @@
           </select>
         </div>
 
-        <div
-          *ngIf="formGroup.controls['formaPagamento'].errors && formGroup.controls['formaPagamento'].touched">
+        <div *ngIf="formGroup.controls['formaPagamento'].errors && formGroup.controls['formaPagamento'].touched">
           <p *ngIf="formGroup.controls['formaPagamento'].errors['formatoInvalido']" class="text-danger">
             Formato inválido
           </p>
@@ -27,11 +26,12 @@
 
 <div class="row justify-content-between align-items-center mt-5">
   <button class="btn btn-outline-secondary" (click)="etapaAnterior()">
-    <i class="bi bi-arrow-left float-left"></i>
+    <i class="bi bi-arrow-left"></i>
     Voltar
   </button>
 
   <button class="btn btn-success" (click)="finalizarInscricao()" [disabled]="formGroup.invalid">
-    Inscrever-se <i class="bi bi-send-fill float-right"></i>
+    <i class="bi bi-send-fill"></i>
+    Inscrever-se
   </button>
 </div>

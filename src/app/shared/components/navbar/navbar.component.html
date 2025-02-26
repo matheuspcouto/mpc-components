@@ -10,15 +10,25 @@
     <nav id="navbar" class="navbar">
       <ul>
         <div *ngFor="let aba of abas; let i = index">
-          <li *ngIf="aba.ativo">
+          <li *ngIf="aba.ativo && !aba.subMenus">
             <a (click)="setAbaAtiva(i)" [routerLink]="aba.rota" [ngClass]="aba.focado ? 'active show' : ''">
               {{ aba.titulo }}
             </a>
           </li>
+          <li *ngIf="aba.ativo && aba.subMenus" class="nav-item dropdown">
+            <a (click)="setAbaAtiva(i)" class="nav-link dropdown-toggle" [routerLink]="aba.rota" id="navbarDropdown"
+              data-bs-toggle="navbarDropdown">
+              {{ aba.titulo }}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a *ngFor="let sub of aba.subMenus" class="dropdown-item" [routerLink]="sub.rota">
+                {{ sub.titulo }}
+              </a>
+            </div>
+          </li>
         </div>
       </ul>
     </nav>
-
   </div>
 </header>
 <!-- ======= End Header ======= -->

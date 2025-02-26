@@ -1,9 +1,13 @@
-@import url('https://fonts.cdnfonts.com/css/laythis');
+/* Importação de fontes */
+@import url('https://fonts.cdnfonts.com/css/potential');
+
+/* Importação de bootstrap-icons */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
 
 :root {
   /* Fontes */
-  --font-titulo: "Laythis", sans-serif;
-  --font-padrao: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-titulo: 'Potential', sans-serif;
+  --font-padrao: "Raleway", sans-serif;
   --font-secundaria: "Inter", sans-serif;
 
   /* Cores */
@@ -105,6 +109,7 @@ body {
     width: 24px !important;
     height: 24px !important;
     transition: all 0.1s ease-in-out !important;
+    margin-right: 0.5rem !important;
   }
 }
 
@@ -177,6 +182,14 @@ section {
   scroll-margin-top: 90px;
   overflow: clip;
 
+  h5 {
+    font-weight: 400;
+    color: var(--cor-terciaria);
+    text-align: center;
+    padding-bottom: 2rem;
+    font-style: italic;
+  }
+
   .section-bg {
     background-color: var(--branco);
   }
@@ -203,7 +216,7 @@ section {
       font-family: var(--fonte-padrao);
 
       span {
-        color: var(--cor-primaria);
+        color: var(--cor-secundaria);
       }
     }
   }
@@ -215,14 +228,14 @@ section {
 .capa {
   width: 100%;
   position: relative;
-  min-height: 60vh;
+  min-height: 100vh;
   padding: 160px 0 60px 0;
   background-size: cover !important;
   background-position: center !important;
 
   span {
-    color: var(--cor-primaria);
     font-family: var(--font-titulo);
+    color: var(--cor-secundaria);
     font-size: clamp(1em, 1em + 1vw, 3em);
     font-weight: 300;
   }
@@ -230,15 +243,23 @@ section {
   h2 {
     font-size: 64px;
     font-weight: 700;
-    margin-bottom: 20px;
-    color: var(--branco);
-    font-family: var(--fonte-padrao);
+    color: var(--branco) !important;
+    font-family: var(--fonte-padrao) !important;
   }
 
   p {
     color: var(--cor-terciaria);
+    font-size: 30px;
     font-weight: 400;
     margin-bottom: 30px;
+  }
+
+  a {
+    color: var(--branco);
+
+    &:hover {
+      color: var(--cor-secundaria);
+    }
   }
 
   @media (max-width: 640px) {

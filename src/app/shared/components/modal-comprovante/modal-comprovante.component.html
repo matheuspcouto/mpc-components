@@ -76,12 +76,16 @@
             </div>
           </div>
 
-          <button class="btn btn-success" *ngIf="dados.status == 'A PAGAR' && dados.formaPagamento != 'Dinheiro'" (click)="pedirLinkPagamento()">
-            Solicitar pelo WhatsApp <i class="bi bi-whatsapp"></i>
+          <button class="btn btn-success" *ngIf="dados.status == 'A PAGAR' && dados.formaPagamento != 'Dinheiro'"
+            (click)="pedirLinkPagamento()">
+            <i class="bi bi-whatsapp"></i>
+            Solicitar pelo WhatsApp
           </button>
 
-          <button class="btn btn-outline-secondary mt-2" (click)="botao()">Fechar <i
-              class="bi bi-x-lg"></i></button>
+          <button class="btn btn-outline-secondary mt-2" (click)="botao()">
+            <i class="bi bi-x-lg"></i>
+            Fechar
+          </button>
         </div>
       </div>
     </div>
