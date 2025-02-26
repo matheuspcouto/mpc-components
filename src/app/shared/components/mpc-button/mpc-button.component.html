@@ -1,0 +1,13 @@
+<button [id]="id" class="btn" [ngClass]="corBotao" [disabled]="disabled" [tabindex]="tabIndex">
+
+  <div *ngIf="posicaoIcone === 'direita'">
+    <ng-content select="[titulo]"></ng-content>
+    <i [ngClass]="icone" class="icon-float-right"></i>
+  </div>
+
+  <div *ngIf="posicaoIcone === 'esquerda'">
+    <i [ngClass]="icone" class="icon-float-left"></i>
+    <ng-content select="[titulo]"></ng-content>
+  </div>
+
+</button>

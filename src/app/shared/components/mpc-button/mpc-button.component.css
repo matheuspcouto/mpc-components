@@ -1,0 +1,35 @@
+/* Botões */
+.btn {
+  display: flex;
+  position: relative !important;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2) !important;
+  padding-block: 0.5rem !important;
+  padding-inline: 1.25rem !important;
+  border-radius: 9999px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  gap: 10px !important;
+  outline: none !important;
+  overflow: hidden !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: var(--branco);
+  width: 30vh;
+  min-width: 20vh;
+  text-decoration: none !important;
+
+  .icon-float-left {
+    margin-right: 0.5rem !important;
+  }
+
+  .icon-float-right {
+    margin-left: 0.5rem !important;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .btn {
+    max-width: 30vh;
+  }
+}
