@@ -3,14 +3,15 @@ import { FormGroup, Validators, FormBuilder, FormsModule, ReactiveFormsModule } 
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgxMaskDirective } from 'ngx-mask';
-import { ModalComponent, TipoModal } from '../../../shared/components/modal/modal.component';
+import { MpcModalComponent, TipoModal } from '../../../shared/components/mpc-modal/mpc-modal.component';
 import { Rotas } from '../../../shared/enums/rotas-enum';
 import { enderecoValidator, InscricaoValidator, telefoneValidator } from '../formulario.validator';
 import { InscricaoService } from '../../../services/inscricao.service';
+import { MpcButtonComponent } from '../../../shared/components/mpc-button/mpc-button.component';
 
 @Component({
   selector: 'primeira-etapa',
-  imports: [CommonModule, ModalComponent, NgxMaskDirective, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, MpcModalComponent, NgxMaskDirective, FormsModule, ReactiveFormsModule],
   templateUrl: './primeira-etapa.component.html',
   styleUrl: './primeira-etapa.component.css'
 })
@@ -25,7 +26,7 @@ export class PrimeiraEtapaComponent {
   @Input() inscricoesHomensEncerradas = false;
   @Input() inscricoesMulheresEncerradas = false;
 
-  @ViewChild('modalErro', { static: true }) modalErro: ModalComponent | undefined;
+  @ViewChild('modalErro', { static: true }) modalErro: MpcModalComponent | undefined;
   formBuild = inject(FormBuilder);
 
   formGroup: FormGroup = this.formBuild.group({
@@ -126,7 +127,7 @@ export class PrimeiraEtapaComponent {
       botao: () => { this.router.navigate([Rotas.HOME]); this.modalErro?.fecharModal() },
     }
 
-    this.modalErro?.abrirModal(MODAL);
+    this.modalErro?.abrirModal();
   }
 
 }

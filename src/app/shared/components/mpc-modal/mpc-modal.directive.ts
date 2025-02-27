@@ -1,6 +1,6 @@
 import { Directive, InjectionToken, Input } from '@angular/core';
 
-export interface ModalConfig {
+export interface MpcModalConfig {
   titulo: string,
   texto: string,
   textoBotao: string,
@@ -11,13 +11,13 @@ export interface ModalConfig {
   segundoBotao?: () => void
 }
 
-export type Modal = (config: ModalConfig) => Promise<boolean>;
+export type Modal = (config: MpcModalConfig) => Promise<boolean>;
 
-export const MODAL = new InjectionToken<Modal>('ModalConfig');
+export const MODAL = new InjectionToken<Modal>('MpcModalConfig');
 
 @Directive({ selector: '[modal]', exportAs: 'Modal' })
-export class ModalDetalhesDirective {
+export class MpcModalDirective {
 
   @Input('modal')
-  config?: ModalConfig;
+  config?: MpcModalConfig;
 }

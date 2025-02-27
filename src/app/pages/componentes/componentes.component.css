@@ -19,11 +19,11 @@ pre {
   justify-content: center;
   justify-items: center;
   align-items: center;
-  width: 60%;
+  width: 80%;
 
   code {
     width: 100%;
-    white-space: initial;
+    white-space: pre-line;
   }
 }
 
@@ -34,8 +34,18 @@ pre {
 }
 
 
-.modais {
+.section-components {
   .col-lg-6 {
     justify-items: center;
+  }
+
+  h5 {
+    font-weight: 400;
+    color: var(--cor-terciaria);
+    font-size: 18px;
+  }
+
+  li {
+    list-style: none;
   }
 }

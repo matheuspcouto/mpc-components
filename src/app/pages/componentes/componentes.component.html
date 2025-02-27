@@ -15,66 +15,174 @@
 
 <main id="main">
 
-  <!-- ======= Modais ======= -->
-  <section id="modais" class="modais">
+  <!-- ======= MpcButton ======= -->
+  <section id="buttons" class="section-components">
     <div class="container">
 
       <div class="section-header">
         <h2>experimente os</h2>
-        <p>Botões & <span> Modais </span> </p>
+        <p>MPC<span> Buttons </span> </p>
       </div>
 
       <h5>
-        Os modais do MyComponents são gerados pelo componente "ModalComponent", localizado no diretório
-        "src/app/shared/components/modal".
+        Os botões do MyComponents são baseados no framework Bootstrap, que oferece uma ampla gama de estilos e
+        funcionalidades para botões.
+        Abaixo, você pode ver como utilizar o componente <code>mpc-button</code> e seus parâmetros.
       </h5>
 
       <h5>
-        Os botões do MyComponents utilizam ícones do Bootstrap Icons,
-        importados no arquivo
-        "src/styles.css".
-        <br>
-        Caso deseje utilizar outros ícones, basta importá-los no mesmo arquivo.
-        <br>
-        Experimente clicando neles abaixo.
+        Os parâmetros que você pode passar para o componente <code>mpc-button</code> incluem:
+        <ul class="text-start mt-3">
+          <li><strong>id</strong>: (opcional) Um identificador único para o botão.</li>
+          <li><strong>texto</strong>: O texto que será exibido no botão.</li>
+          <li><strong>corBotao</strong>: A classe de cor do botão, que pode ser qualquer uma das classes de botão do
+            Bootstrap.</li>
+          <li><strong>tabIndex</strong>: O índice de tabulação para acessibilidade.</li>
+          <li><strong>disabled</strong>: (opcional) Um booleano que indica se o botão deve estar desabilitado.</li>
+          <li><strong>posicaoIcone</strong>: (opcional) Define a posição do ícone em relação ao texto, podendo ser
+            <code>esquerda</code> ou <code>direita</code>. Padrão: <code>esquerda</code>.
+          </li>
+          <li><strong>icone</strong>: O ícone a ser exibido no botão, utilizando classes do Bootstrap Icons ou a que
+            preferir.</li>
+        </ul>
+      </h5>
+
+      <h5>
+        Para mais informações sobre como utilizar botões no Bootstrap, consulte a <a
+          href="https://getbootstrap.com/docs/5.1/components/buttons/" target="_blank">documentação oficial do Bootstrap
+          sobre botões</a>.
       </h5>
 
       <div class="row">
+
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+          <pre class="chroma">
+              <code class="language-html" data-lang="html">
+                &lt;mpc-button [disabled]="false" (click)="" [corBotao]="'btn-info'"
+                [icone]="'bi bi-code-slash'" [posicaoIcone]="'esquerda'" [tabIndex]="0" [texto]="'Exemplo de Botão'&gt;
+              &lt;/mpc-button&gt;
+              </code>
+            </pre>
+        </div>
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+          <mpc-button [disabled]="false" (click)="alert('Exemplo de Botão')" [corBotao]="'btn-info'"
+            [icone]="'bi bi-code-slash'" [posicaoIcone]="'esquerda'" [tabIndex]="0" [texto]="'Exemplo de Botão'">
+          </mpc-button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <!-- ======= MpcButton ======= -->
+
+  <!-- ======= MpcModal ======= -->
+  <section id="modais" class="section-components">
+    <div class="container">
+
+      <div class="section-header">
+        <h2>experimente os</h2>
+        <p>MPC<span> Modais </span> </p>
+      </div>
+
+      <h5>
+        O componente <code>mpc-modal</code> é baseado na estrutura de modais do Bootstrap, que permite criar janelas
+        modais responsivas e estilizadas. Os modais são utilizados para exibir informações, formulários ou mensagens ao
+        usuário sem sair da página atual.
+      </h5>
+
+      <h5>
+        Veja como é a implementação deste componente no arquivo <code>.html</code> no exemplo abaixo.
+
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+          <pre class="chroma">
+            <code class="language-html" data-lang="html">
+            &lt;mpc-modal #modalExemplo&gt;&lt;/mpc-modal&gt;
+            </code>
+          </pre>
+        </div>
+
+        <h5>Os parâmetros deste componente são enviados no arquivo <code>.ts</code> com os seguintes campos:</h5>
+
+        <ul class="text-start mt-3">
+          <li><strong>titulo</strong>: O título que será exibido no cabeçalho do modal.</li>
+          <li><strong>texto</strong>: O conteúdo principal que será exibido dentro do modal.</li>
+          <li><strong>tipoModal</strong>: Define o tipo do modal, como confirmação, sucesso, aviso, etc.</li>
+          <li><strong>botao</strong>: A função que será chamada ao clicar no botão principal do modal.</li>
+          <li><strong>textoBotao</strong>: O texto que será exibido no botão principal.</li>
+          <li><strong>segundoBotao</strong>: (opcional) A função que será chamada ao clicar no segundo botão, se houver.
+          </li>
+          <li><strong>textoSegundoBotao</strong>: (opcional) O texto que será exibido no segundo botão, se houver.</li>
+        </ul>
+      </h5>
+
+      <div class="row mb-5">
         <div class="col-lg-6">
 
           <div class="col-md-12 mb-3 d-flex justify-content-center">
             <pre class="chroma">
-              <code class="language-html" data-lang="html">
-                  &lt;button class="btn btn-success" (click)="abrirModalSucesso()" tabindex="0"&gt;
-                    &lt;i class="bi bi-check-all"&gt;&lt;/i&gt;
-                    &lt;span&gt;Modal de Sucesso&lt;/span&gt;
-                  &lt;/button&gt;
+              <code class="language-html mb-2" data-lang="html">
+                &commat;ViewChild('modalExemplo', &lcub; static: true &rcub;) modalExemplo!: MpcModalComponent;
               </code>
             </pre>
           </div>
           <div class="col-md-12 mb-3 d-flex justify-content-center">
-            <button class="btn btn-success" (click)="abrirModalSucesso()" tabindex="0">
-              <i class="bi bi-check-all"></i>
-              <span>Modal de Sucesso</span>
-            </button>
+            <pre class="chroma">
+              <code>
+                abrirModalSucesso() &lcub;
+                  const modalSucesso: ModalConfig = &lcub;
+                    titulo: 'Modal de Sucesso',
+                    texto: 'Parabéns',
+                    tipoModal: TipoModal.SUCESSO,
+                    botao: () => &lcub; return true; &rcub;,
+                    textoBotao: 'OK',
+                    segundoBotao: () => &lcub; this.modalExemplo?.fecharModal(); &rcub;,
+                    textoSegundoBotao: 'Fechar',
+                  &rcub;
+
+                  this.modalExemplo.modal = modalSucesso;
+                  this.modalExemplo?.abrirModal();
+                &rcub;
+              </code>
+            </pre>
+          </div>
+          <div class="col-md-12 mb-3 d-flex justify-content-center">
+            <mpc-button [disabled]="false" (click)="abrirModalSucesso()" [corBotao]="'btn-success'"
+              [icone]="'bi bi-check-all'" [posicaoIcone]="'esquerda'" [tabIndex]="0" [texto]="'Modal de Sucesso'">
+            </mpc-button>
           </div>
 
 
           <div class="col-md-12 mb-3 d-flex justify-content-center">
             <pre class="chroma">
-              <code class="language-html" data-lang="html">
-                  &lt;button class="btn btn-outline-success" (click)="abrirModalConfirmacao()" tabindex="0"&gt;
-                    &lt;i class="bi bi-check-lg"&gt;&lt;/i&gt;
-                    &lt;span&gt;Modal de Confirmação&lt;/span&gt;
-                  &lt;/button&gt;
+              <code class="language-html mb-2" data-lang="html">
+                &commat;ViewChild('modalExemplo', &lcub; static: true &rcub;) modalExemplo!: MpcModalComponent;
               </code>
             </pre>
           </div>
           <div class="col-md-12 mb-3 d-flex justify-content-center">
-            <button class="btn btn-outline-success" (click)="abrirModalConfirmacao()" tabindex="0">
-              <i class="bi bi-check-lg"></i>
-              <span>Modal de Confirmação</span>
-            </button>
+            <pre class="chroma">
+              <code>
+                abrirModalConfirmacao() &lcub;
+                  const modalConfirmacao: ModalConfig = &lcub;
+                  titulo: 'Modal de Confirmação',
+                  texto: 'Este é um modal de confirmação',
+                  tipoModal: TipoModal.CONFIRMACAO,
+                  botao: () => &lcub; return true; &rcub;,
+                  textoBotao: 'OK',
+                  segundoBotao: () => &lcub; this.modalExemplo?.fecharModal(); &rcub;,
+                  textoSegundoBotao: 'Fechar',
+                &rcub;;
+
+                this.modalExemplo.modal = modalConfirmacao;
+                this.modalExemplo?.abrirModal();
+                &rcub;
+              </code>
+            </pre>
+          </div>
+          <div class="col-md-12 mb-3 d-flex justify-content-center">
+            <mpc-button [disabled]="false" (click)="abrirModalConfirmacao()" [corBotao]="'btn-info'"
+              [icone]="'bi bi-question-lg'" [posicaoIcone]="'esquerda'" [tabIndex]="0" [texto]="'Modal de Confirmação'">
+            </mpc-button>
           </div>
         </div>
 
@@ -82,49 +190,88 @@
 
           <div class="col-md-12 mb-3 d-flex justify-content-center">
             <pre class="chroma">
-              <code class="language-html" data-lang="html">
-                  &lt;button class="btn btn-warning" (click)="abrirModalAviso()" tabindex="0"&gt;
-                    &lt;i class="bi bi-exclamation-triangle"&gt;&lt;/i&gt;
-                    &lt;span&gt;Modal de Aviso&lt;/span&gt;
-                  &lt;/button&gt;
+              <code class="language-html mb-2" data-lang="html">
+                &commat;ViewChild('modalExemplo', &lcub; static: true &rcub;) modalExemplo!: MpcModalComponent;
               </code>
             </pre>
           </div>
           <div class="col-md-12 mb-3 d-flex justify-content-center">
-            <button class="btn btn-warning" (click)="abrirModalAviso()" tabindex="0">
-              <i class="bi bi-exclamation-triangle"></i>
-              <span>Modal de Aviso</span>
-            </button>
+            <pre class="chroma">
+              <code>
+                abrirModalAlerta() &lcub;
+                  const modalAlerta: ModalConfig = &lcub;
+                    titulo: 'Modal de Alerta',
+                    texto: 'Este é um modal de alerta',
+                    tipoModal: TipoModal.ALERTA,
+                    botao: () => &lcub; return true; &rcub;,
+                    textoBotao: 'OK',
+                    segundoBotao: () => &lcub; this.modalExemplo?.fecharModal(); &rcub;,
+                    textoSegundoBotao: 'Fechar',
+                  &rcub;
+
+                  this.modalExemplo.modal = modalAlerta;
+                  this.modalExemplo?.abrirModal();
+                &rcub;
+              </code>
+            </pre>
+          </div>
+          <div class="col-md-12 mb-3 d-flex justify-content-center">
+            <mpc-button [disabled]="false" (click)="abrirModalAlerta()" [corBotao]="'btn-warning'"
+              [icone]="'bi bi-exclamation-triangle'" [posicaoIcone]="'esquerda'" [tabIndex]="0"
+              [texto]="'Modal de Alerta'">
+            </mpc-button>
           </div>
 
           <div class="col-md-12 mb-3 d-flex justify-content-center">
             <pre class="chroma">
-              <code class="language-html" data-lang="html">
-                  &lt;button class="btn btn-danger" (click)="abrirModalErro()" tabindex="0"&gt;
-                    &lt;i class="bi bi-bug"&gt;&lt;/i&gt;
-                    &lt;span&gt;Modal de Erro&lt;/span&gt;
-                  &lt;/button&gt;
+              <code class="language-html mb-2" data-lang="html">
+                &commat;ViewChild('modalExemplo', &lcub; static: true &rcub;) modalExemplo!: MpcModalComponent;
+              </code>
+            </pre>
+          </div>
+          <div class="col-md-12 mb-3 d-flex justify-content-center">
+            <pre class="chroma">
+              <code>
+                abrirModalErro() &lcub;
+                  const modalErro: ModalConfig = &lcub;
+                    titulo: 'Modal de Erro',
+                    texto: 'Este é um modal de erro',
+                    tipoModal: TipoModal.ERRO,
+                    botao: () => this.modalExemplo?.fecharModal(),
+                    textoBotao: 'OK',
+                    // Não é necessário passar o segundo botão
+                    // O modal de erro já possui um botão de copiar o erro
+                  &rcub;
+
+                  this.modalExemplo.modal = modalErro;
+                  this.modalExemplo?.abrirModal();
+                &rcub;
               </code>
             </pre>
           </div>
           <div class="col-md-6 mb-3 d-flex justify-content-center">
-            <button class="btn btn-danger" (click)="abrirModalErro()" tabindex="0">
-              <i class="bi bi-bug"></i>
-              <span>Modal de Erro</span>
-            </button>
+            <mpc-button [disabled]="false" (click)="abrirModalErro()" [corBotao]="'btn-danger'" [icone]="'bi bi-bug'"
+              [posicaoIcone]="'esquerda'" [tabIndex]="0" [texto]="'Modal de Erro'">
+            </mpc-button>
           </div>
 
         </div>
 
       </div>
 
+      <h5>
+        Para mais informações sobre como utilizar modais no Bootstrap, consulte a <a
+          href="https://getbootstrap.com/docs/5.1/components/modal/" target="_blank">documentação oficial do Bootstrap
+          sobre modais</a>.
+      </h5>
+
     </div>
 
   </section>
-  <!-- ======= Modais ======= -->
+  <!-- ======= MpcModal ======= -->
 
   <!-- ======= Notificações ======= -->
-  <section id="notificacoes" class="notificacoes bg-color-primary text-color-white">
+  <section id="notificacoes" class="section-components bg-color-primary text-color-white">
     <div class="container">
 
       <div class="section-header">
@@ -161,28 +308,96 @@
   </section>
   <!-- ======= Notificações ======= -->
 
-  <!-- ======= Comprovante ======= -->
-  <section id="modais" class="modais">
+  <!-- ======= MpcComprovante ======= -->
+  <section id="comprovantes" class="section-components">
     <div class="container">
 
       <div class="section-header">
-        <h2>experimente este modelo de</h2>
-        <p> Comprovante </p>
+        <h2>experimente os</h2>
+        <p>MPC<span> Comprovantes </span> </p>
       </div>
 
-      <div class="col-md-12 mb-3 d-flex justify-content-center">
-        <button class="btn btn-outline-secondary" (click)="abrirModalComprovante()" tabindex="0">
-          <i class="bi bi-body-text"></i>
-          <span>Comprovante</span>
-        </button>
+      <h5>
+        O componente <code>mpc-comprovante</code> é baseado na estrutura de modais do Bootstrap, que permite criar
+        janelas
+        modais responsivas e estilizadas. Os modais são utilizados para exibir informações, formulários ou mensagens ao
+        usuário sem sair da página atual.
+      </h5>
+
+      <h5>
+        Veja como é a implementação deste componente no arquivo <code>.html</code> no exemplo abaixo.
+
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+          <pre class="chroma">
+            <code class="language-html" data-lang="html">
+            &lt;mpc-comprovante [comprovante]="dadosComprovante" #comprovanteExemplo&gt;&lt;/mpc-comprovante&gt;
+            </code>
+          </pre>
+        </div>
+      </h5>
+
+      <h5>Agora, veja como é a implementação deste componente no arquivo <code>.ts</code></h5>
+
+      <div class="row mb-5">
+
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+          <pre class="chroma">
+              <code class="language-html mb-2" data-lang="html">
+                &commat;ViewChild('comprovanteExemplo', &lcub; static: true &rcub;) comprovanteExemplo!: MpcComprovanteComponent;
+                dadosComprovante: MpcComprovanteConfig = &lcub;&rcub; as MpcComprovanteConfig;
+              </code>
+            </pre>
+        </div>
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+          <pre class="chroma">
+              <code>
+                abrirModalComprovante() &lcub;
+                  this.dadosComprovante = &lcub;
+                    titulo: 'Comprovante de inscrição',
+                    dados: &lcub;
+                      dadosInscricao: &lcub;
+                        codigoInscricao: '123456',
+                        dataInscricao: new Date().toLocaleDateString('pt-BR'),
+                        status: 'ATIVO',
+                      &rcub;,
+                      dadosPessoais: [
+                        &lcub; label: 'Nome', valor: 'Fulano de Tal' &rcub;,
+                        &lcub; label: 'CPF', valor: '123.456.789-00' &rcub;,
+                        &lcub; label: 'E-mail', valor: 'fulano&commat;example.com' &rcub;,
+                      ],
+                      dadosPagamento: &lcub;
+                        formaPagamento: 'Cartão de Crédito',
+                        valor: 100.00,
+                        statusPagamento: 'A PAGAR'
+                      &rcub;,
+                    &rcub;
+                  &rcub;;
+
+                  this.comprovanteExemplo?.abrirComprovante();
+                &rcub;
+              </code>
+            </pre>
+        </div>
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+          <mpc-button [disabled]="false" (click)="abrirModalComprovante()" [corBotao]="'btn-outline-secondary'"
+            [icone]="'bi bi-body-text'" [posicaoIcone]="'esquerda'" [tabIndex]="0" [texto]="'Abrir Comprovante'">
+          </mpc-button>
+        </div>
+
       </div>
+
+      <h5>
+        Para mais informações sobre como utilizar modais no Bootstrap, consulte a <a
+          href="https://getbootstrap.com/docs/5.1/components/modal/" target="_blank">documentação oficial do Bootstrap
+          sobre modais</a>.
+      </h5>
 
     </div>
 
   </section>
-  <!-- ======= Comprovante ======= -->
+  <!-- ======= MpcComprovante ======= -->
 
 </main>
 
-<modal #modal></modal>
-<comprovante #comprovante></comprovante>
+<mpc-modal #modalExemplo></mpc-modal>
+<mpc-comprovante [comprovante]="dadosComprovante" #comprovanteExemplo></mpc-comprovante>

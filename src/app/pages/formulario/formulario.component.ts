@@ -1,8 +1,9 @@
+import { MpcComprovanteConfig } from './../../shared/components/mpc-comprovante/mpc-comprovante.directive';
 
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { ModalComponent, TipoModal } from '../../shared/components/modal/modal.component';
+import { MpcModalComponent, TipoModal } from '../../shared/components/mpc-modal/mpc-modal.component';
 import { Rotas } from '../../shared/enums/rotas-enum';
 import { FluxoErro } from '../../shared/fluxo-erro';
 import { CommonModule } from '@angular/common';
@@ -10,8 +11,7 @@ import { NavbarComponent } from '../../shared/components/navbar/navbar.component
 import { PrimeiraEtapaComponent } from "./primeira-etapa/primeira-etapa.component";
 import { SegundaEtapaComponent } from './segunda-etapa/segunda-etapa.component';
 import { TerceiraEtapaComponent } from './terceira-etapa/terceira-etapa.component';
-import { ModalComprovanteComponent } from '../../shared/components/modal-comprovante/modal-comprovante.component';
-import { ModalComprovanteConfig } from '../../shared/components/modal-comprovante/modal-comprovante.directive';
+import { MpcComprovanteComponent } from '../../shared/components/mpc-comprovante/mpc-comprovante.component';
 import { InscricaoService } from '../../services/inscricao.service';
 
 // TODO: Remover sessionStorage, trocar por Signals ?
@@ -22,8 +22,8 @@ import { InscricaoService } from '../../services/inscricao.service';
   imports: [
     NavbarComponent,
     CommonModule,
-    ModalComponent,
-    ModalComprovanteComponent,
+    MpcModalComponent,
+    MpcComprovanteComponent,
     PrimeiraEtapaComponent,
     SegundaEtapaComponent,
     TerceiraEtapaComponent
@@ -33,9 +33,10 @@ import { InscricaoService } from '../../services/inscricao.service';
 })
 export class FormularioComponent implements OnInit {
 
-  @ViewChild('modalErro', { static: true }) modalErro!: ModalComponent;
-  @ViewChild('modalSucesso', { static: true }) modalSucesso!: ModalComponent;
-  @ViewChild('comprovante', { static: true }) comprovante!: ModalComprovanteComponent;
+  @ViewChild('modalErro', { static: true }) modalErro!: MpcModalComponent;
+  @ViewChild('modalSucesso', { static: true }) modalSucesso!: MpcModalComponent;
+  @ViewChild('comprovante', { static: true }) comprovante!: MpcComprovanteComponent;
+  dadosComprovante: MpcComprovanteConfig = {} as MpcComprovanteConfig;
 
   etapa: number = 1;
   dadosInscricao: any = {};
@@ -155,7 +156,7 @@ export class FormularioComponent implements OnInit {
             segundoBotao: () => { this.router.navigate([Rotas.HOME]); this.modalSucesso.fecharModal(); }
           }
 
-          this.modalSucesso.abrirModal(MODAL);
+          this.modalSucesso.abrirModal();
         },
         error: (e: HttpErrorResponse) => {
           const erro = this.fluxoErro.construirErro(e, Rotas.HOME);
@@ -218,13 +219,36 @@ export class FormularioComponent implements OnInit {
   }
 
   abrirComprovante(dados: any, sexo: string) {
-    const MODAL: ModalComprovanteConfig = {
-      titulo: 'Comprovante de Inscrição',
-      dados: dados,
-      botao: () => { this.router.navigate([Rotas.HOME]); this.comprovante?.fecharComprovante(); }
+    this.dadosComprovante = {
+      titulo: 'Comprovante de inscrição',
+      dados: {
+        dadosInscricao: {
+          codigoInscricao: dados.codigoInscricao,
+          dataInscricao: dados.dataInscricao,
+          status: dados.status
+        },
+        dadosPessoais: [
+          { label: 'Nome', valor: dados.nome },
+          { label: 'Sexo', valor: sexo === 'M' ? 'Masculino' : 'Feminino' },
+          { label: 'Data de nascimento', valor: dados.dataNasc },
+          { label: 'Celula', valor: dados.celula },
+          { label: 'Endereço', valor: dados.endereco },
+          { label: 'Telefone', valor: dados.telefone },
+          { label: 'Estado civil', valor: dados.estadoCivil },
+          { label: 'Remédios controlados', valor: dados.remediosControlados },
+          { label: 'Alergias', valor: dados.alergias },
+          { label: 'Contatos', valor: this.formatarContatos() }
+        ],
+        dadosPagamento: {
+          formaPagamento: dados.formaPagamento,
+          valor: dados.valor,
+          dataPagamento: dados.dataPagamento,
+          statusPagamento: dados.statusPagamento
+        }
+      }
     }
 
-    this.comprovante?.abrirComprovante(MODAL, sexo);
+    this.comprovante?.abrirComprovante();
   }
 
   handleError(error: any) {
@@ -236,6 +260,6 @@ export class FormularioComponent implements OnInit {
       botao: () => { this.router.navigate([Rotas.HOME]); this.modalErro?.fecharModal() },
     }
 
-    this.modalErro?.abrirModal(MODAL);
+    this.modalErro?.abrirModal();
   }
 }

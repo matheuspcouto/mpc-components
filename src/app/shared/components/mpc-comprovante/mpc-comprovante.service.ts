@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
 @Injectable({ providedIn: 'root' })
-export class ModalComprovanteService {
+export class MpcComprovanteService {
 
   action$ = new Subject<boolean>();
   lastFocusElement: Element | null = null;

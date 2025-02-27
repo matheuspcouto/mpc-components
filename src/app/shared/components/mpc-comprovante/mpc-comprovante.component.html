@@ -1,0 +1,115 @@
+<div *ngIf="exibir && comprovante" class="modal">
+  <div class="tela-inteira">
+    <div class="modal-content">
+      <div class="modal-body">
+        <!-- Imagem, pode ser alterada -->
+        <img src="/img/logo.png" class="modal-image">
+
+        <!-- Título -->
+        <h2 class="modal-title mb-5">{{ comprovante.titulo }}</h2>
+
+        <div *ngIf="dadosInscricao">
+          <h3>Dados da Inscrição</h3>
+
+          <div class="row">
+            <!-- Campo com botão de copiar o código de inscrição, pode ser alterado -->
+            <div class="col-md-4 mb-2" *ngIf="dadosInscricao.codigoInscricao">
+              <h5>Inscrição</h5>
+              <div class="input-group">
+                <p>{{ dadosInscricao.codigoInscricao }}</p>
+                <em (click)="copiarCodigo(dadosInscricao.codigoInscricao)">
+                  <i [class]="isCopiado ? 'bi bi-clipboard-check' : 'bi bi-clipboard'"></i>
+                </em>
+              </div>
+            </div>
+
+            <!-- Campo de status da inscricao, pode ser alterado -->
+            <div class="col-md-4 mb-2" *ngIf="dadosInscricao.status">
+              <h5 class="mb-2">Status</h5>
+              <h5>
+                <span class="badge mb-2" [ngClass]="getBadgeStatusInscricao(dadosInscricao.status)">
+                  {{ getTextoStatusInscricao(dadosInscricao.status) }}
+                </span>
+              </h5>
+            </div>
+
+            <!-- Campo de data de criação, pode ser alterado -->
+            <div class="col-md-4 mb-2" *ngIf="dadosInscricao.dataInscricao">
+              <h5 class="mb-2">Data da Inscrição</h5>
+              <p>{{ formatarData(dadosInscricao.dataInscricao) }}</p>
+            </div>
+
+            <hr>
+          </div>
+        </div>
+
+        <div *ngIf="dadosPessoais">
+          <h3>Dados Pessoais</h3>
+
+          <div class="row">
+            <div *ngFor="let dado of dadosPessoais">
+              <div class="col-md-3 mb-2">
+                <h5 class="mb-2">{{ dado.label }}</h5>
+                <p>{{ dado.valor }}</p>
+              </div>
+            </div>
+
+            <hr>
+          </div>
+        </div>
+
+        <div *ngIf="dadosPagamento">
+          <h3>Dados do Pagamento</h3>
+
+          <div class="row">
+            <div class="col-md-3 mb-2" *ngIf="dadosPagamento.formaPagamento">
+              <h5 class="mb-2">Forma de Pagamento</h5>
+              <p>{{ dadosPagamento.formaPagamento }}</p>
+            </div>
+
+            <div class="col-md-3 mb-2" *ngIf="dadosPagamento.valor">
+              <h5 class="mb-2">Valor</h5>
+              <p>{{ formatarValor(dadosPagamento.valor) }}</p>
+            </div>
+
+            <div class="col-md-3 mb-2" *ngIf="dadosPagamento.statusPagamento">
+              <h5 class="mb-2">Status do Pagamento</h5>
+              <h5>
+                <span class="badge mb-2" [ngClass]="getBadgeStatusPagamento(dadosPagamento.statusPagamento)">
+                  {{ getTextoStatusPagamento(dadosPagamento.statusPagamento) }}
+                </span>
+              </h5>
+            </div>
+
+            <div class="col-md-3 mb-2" *ngIf="dadosPagamento.dataPagamento">
+              <h5 class="mb-2">Data do Pagamento</h5>
+              <p>{{ formatarData(dadosPagamento.dataPagamento) }}</p>
+            </div>
+
+            <hr>
+          </div>
+        </div>
+
+        <!-- Botões -->
+        <div class="modal-buttons">
+
+          <div class="label-info alert alert-warning text-center mt-3"
+            *ngIf="dadosPagamento.statusPagamento == 'A PAGAR' && dadosPagamento.formaPagamento != 'Dinheiro'">
+            <i class="bi bi-exclamation-circle float-left"></i>
+            <p>Solicite o pix/link para pagamento ou envie o comprovante clicando no
+              botão abaixo. </p>
+          </div>
+
+          <mpc-button *ngIf="dadosPagamento.statusPagamento == 'A PAGAR' && dadosPagamento.formaPagamento != 'Dinheiro'"
+            corBotao="btn-success" [texto]="'Solicitar pelo WhatsApp'" [icone]="'bi bi-whatsapp'"
+            (click)="pedirLinkPagamento()">
+          </mpc-button>
+
+          <mpc-button corBotao="btn-outline-secondary" (click)="fecharComprovante()" class="mt-3" [texto]="'Fechar'"
+            [icone]="'bi bi-x-lg'">
+          </mpc-button>
+
+        </div>
+      </div>
+    </div>
+  </div>

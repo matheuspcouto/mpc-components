@@ -2,96 +2,110 @@ import { Component, ViewChild } from '@angular/core';
 import { NavbarComponent } from '../../shared/components/navbar/navbar.component';
 import { ToastrService } from 'ngx-toastr';
 import { LoaderService } from '../../shared/components/loader/loader.service';
-import { ModalComprovanteComponent } from '../../shared/components/modal-comprovante/modal-comprovante.component';
-import { ModalComprovanteConfig } from '../../shared/components/modal-comprovante/modal-comprovante.directive';
-import { ModalComponent, TipoModal } from '../../shared/components/modal/modal.component';
-import { Rotas } from '../../shared/enums/rotas-enum';
-import { FluxoErro } from '../../shared/fluxo-erro';
+import { MpcModalComponent, TipoModal } from '../../shared/components/mpc-modal/mpc-modal.component';
+import { MpcButtonComponent } from '../../shared/components/mpc-button/mpc-button.component';
+import { MpcModalConfig } from '../../shared/components/mpc-modal/mpc-modal.directive';
+import { MpcComprovanteComponent } from '../../shared/components/mpc-comprovante/mpc-comprovante.component';
+import { MpcComprovanteConfig } from '../../shared/components/mpc-comprovante/mpc-comprovante.directive';
 
 @Component({
   selector: 'app-componentes',
-  imports: [NavbarComponent, ModalComponent, ModalComprovanteComponent],
+  imports: [NavbarComponent, MpcModalComponent, MpcComprovanteComponent, MpcButtonComponent],
   templateUrl: './componentes.component.html',
   styleUrl: './componentes.component.css'
 })
 export class ComponentesComponent {
-  erro: any;
-
-  @ViewChild('modal', { static: true }) modal!: ModalComponent;
-  @ViewChild('comprovante', { static: true }) comprovante!: ModalComprovanteComponent;
 
   constructor(private notificationService: ToastrService, private loaderService: LoaderService) { }
 
+  erro: any;
+  @ViewChild('modalExemplo', { static: true }) modalExemplo!: MpcModalComponent;
+  @ViewChild('comprovanteExemplo', { static: true }) comprovanteExemplo!: MpcComprovanteComponent;
+  dadosComprovante: MpcComprovanteConfig = {} as MpcComprovanteConfig;
+
+  abrirModalComprovante() {
+    this.dadosComprovante = {
+      titulo: 'Comprovante de inscrição',
+      dados: {
+        dadosInscricao: {
+          codigoInscricao: '123456',
+          dataInscricao: new Date().toLocaleDateString('pt-BR'),
+          status: 'ATIVO',
+        },
+        dadosPessoais: [
+          { label: 'Nome', valor: 'Fulano de Tal' },
+          { label: 'CPF', valor: '123.456.789-00' },
+          { label: 'E-mail', valor: 'fulano@example.com' },
+        ],
+        dadosPagamento: {
+          formaPagamento: 'Cartão de Crédito',
+          valor: 100.00,
+          statusPagamento: 'A PAGAR'
+        },
+      }
+    };
+
+    this.comprovanteExemplo?.abrirComprovante();
+  }
+
   abrirModalConfirmacao() {
-    const MODAL = {
+    const modalConfirmacao: MpcModalConfig = {
       titulo: 'Modal de Confirmação',
-      tipoModal: TipoModal.CONFIRMACAO,
       texto: 'Este é um modal de confirmação',
-      textoBotao: 'OK',
+      tipoModal: TipoModal.CONFIRMACAO,
       botao: () => { return true; },
+      textoBotao: 'OK',
+      segundoBotao: () => { this.modalExemplo?.fecharModal(); },
       textoSegundoBotao: 'Fechar',
-      segundoBotao: () => { this.modal?.fecharModal(); },
     }
 
-    this.modal?.abrirModal(MODAL);
+    this.modalExemplo.modal = modalConfirmacao;
+    this.modalExemplo?.abrirModal();
   }
 
   abrirModalSucesso() {
-    const MODAL = {
+    const modalSucesso: MpcModalConfig = {
       titulo: 'Modal de Sucesso',
+      texto: 'Parabéns',
       tipoModal: TipoModal.SUCESSO,
-      texto: 'Parabéns, você conseguiu realizar uma ação com sucesso',
-      textoBotao: 'OK',
       botao: () => { return true; },
+      textoBotao: 'OK',
+      segundoBotao: () => { this.modalExemplo?.fecharModal(); },
       textoSegundoBotao: 'Fechar',
-      segundoBotao: () => { this.modal?.fecharModal(); },
     }
 
-    this.modal?.abrirModal(MODAL);
+    this.modalExemplo.modal = modalSucesso;
+    this.modalExemplo?.abrirModal();
   }
 
-  abrirModalAviso() {
-    const MODAL = {
+  abrirModalAlerta() {
+    const modalAlerta: MpcModalConfig = {
       titulo: 'Modal de Alerta',
-      tipoModal: TipoModal.AVISO,
       texto: 'Este é um modal de alerta',
-      textoBotao: 'OK',
+      tipoModal: TipoModal.ALERTA,
       botao: () => { return true; },
+      textoBotao: 'OK',
+      segundoBotao: () => { this.modalExemplo?.fecharModal(); },
       textoSegundoBotao: 'Fechar',
-      segundoBotao: () => { this.modal?.fecharModal(); },
     }
-    this.modal?.abrirModal(MODAL);
-  }
 
-  abrirModalComprovante() {
-    const MODAL = {
-      dados: {
-        id: '123456',
-        nome: 'Fulano de Tal',
-        telefone: '11999999999',
-        dataCriacao: '2021-10-10',
-        formaPagamento: 'Pix',
-        valor: 100,
-        status: 'A PAGAR'
-      },
-      titulo: 'Comprovante de Inscrição',
-    } as ModalComprovanteConfig;
-
-    this.comprovante?.abrirComprovante(MODAL, 'M');
+    this.modalExemplo.modal = modalAlerta;
+    this.modalExemplo?.abrirModal();
   }
 
   abrirModalErro() {
-    this.erro = new FluxoErro().construirErro({}, Rotas.HOME);
-
-    const MODAL = {
-      titulo: this.erro.titulo,
+    const modalErro: MpcModalConfig = {
+      titulo: 'Modal de Erro',
+      texto: 'Este é um modal de erro',
       tipoModal: TipoModal.ERRO,
-      texto: this.erro.mensagem,
+      botao: () => this.modalExemplo?.fecharModal(),
       textoBotao: 'OK',
-      botao: () => this.modal?.fecharModal(),
+      // Não é necessário passar o segundo botão
+      // O modal de erro já possui um botão de copiar o erro
     }
 
-    this.modal?.abrirModal(MODAL);
+    this.modalExemplo.modal = modalErro;
+    this.modalExemplo?.abrirModal();
   }
 
   abrirLoading() {
@@ -104,6 +118,10 @@ export class ComponentesComponent {
     this.notificationService.error('Notificação de erro', 'Título da notificação');
     this.notificationService.warning('Notificação de alerta', 'Título da notificação');
     this.notificationService.info('Notificação de informação', 'Título da notificação');
+  }
+
+  alert(texto: string) {
+    alert(texto);
   }
 
 }

@@ -71,9 +71,9 @@
             <label class="p-3" *ngIf="!inscricoesHomensEncerradas">
               <input type="radio" formControlName="sexo" value="Masculino" (change)="filtrarCelulas()" /> Masculino
             </label>
-            <!-- <label class="p-3" *ngIf="!inscricoesMulheresEncerradas">
+            <label class="p-3" *ngIf="!inscricoesMulheresEncerradas">
               <input type="radio" formControlName="sexo" value="Feminino" (change)="filtrarCelulas()" /> Feminino
-            </label> -->
+            </label>
           </div>
         </div>
 
@@ -198,4 +198,4 @@
 
 </form>
 
-<modal #modalErro></modal>
+<mpc-modal #modalErro></mpc-modal>
