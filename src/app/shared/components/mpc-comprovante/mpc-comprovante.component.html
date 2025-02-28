@@ -47,15 +47,13 @@
           <h3>Dados Pessoais</h3>
 
           <div class="row">
-            <div *ngFor="let dado of dadosPessoais">
-              <div class="col-md-3 mb-2">
-                <h5 class="mb-2">{{ dado.label }}</h5>
-                <p>{{ dado.valor }}</p>
-              </div>
+            <div class="col-md-3 mb-2" *ngFor="let dado of dadosPessoais">
+              <h5 class="mb-2">{{ dado.label }}</h5>
+              <p>{{ dado.valor }}</p>
             </div>
-
-            <hr>
           </div>
+
+          <hr>
         </div>
 
         <div *ngIf="dadosPagamento">

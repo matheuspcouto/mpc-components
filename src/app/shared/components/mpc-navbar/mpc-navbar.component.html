@@ -1,0 +1,121 @@
+<!-- ======= Header Desktop ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center header-desktop">
+  <div class="container d-flex align-items-center justify-content-between">
+
+    <!-- Logo -->
+    <a routerLink="/" class="logo d-flex align-items-center me-auto me-lg-0">
+      <img src="/img/logo.png">
+    </a>
+    <!-- Fim do logo -->
+
+    <nav id="navbar" class="navbar">
+      <ul>
+
+        <div *ngFor="let aba of abas; let i = index">
+
+          <!-- Aba de menu -->
+          <li *ngIf="aba.ativo && !aba.subMenus">
+            <a routerLinkActive="active show" [routerLinkActiveOptions]="{exact: true}" [routerLink]="aba.rota"
+              *ngIf="!aba.subMenus">
+              {{ aba.titulo }}
+            </a>
+          </li>
+          <!-- Fim da aba de menu -->
+
+          <!-- Abas que possuem submenus -->
+          <li class="dropdown" *ngIf="aba.ativo && aba.subMenus">
+            <a class="dropdown-toggle" routerLinkActive="active show" [routerLinkActiveOptions]="{exact: true}"
+              [routerLink]="aba.rota" data-bs-toggle="dropdown">
+              {{ aba.titulo }}
+            </a>
+
+            <ul class="dropdown-menu" *ngIf="aba.subMenus">
+              <li *ngFor="let sub of aba.subMenus">
+                <a class="dropdown-item" *ngIf="sub.ativo && sub.rota" [routerLink]="sub.rota">
+                  {{ sub.titulo }}
+                </a>
+                <a class="dropdown-item" *ngIf="sub.ativo && sub.fragment" (click)="navigate(aba.rota, sub.fragment)">
+                  {{ sub.titulo }}
+                </a>
+              </li>
+            </ul>
+          </li>
+          <!-- Fim das abas que possuem submenus -->
+
+        </div>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+<!-- ======= End Header ======= -->
+
+<!-- ======= Header Mobile ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center header-mobile">
+  <div class="container d-flex align-items-center justify-content-center" data-backdrop="static">
+
+    <!-- Logo -->
+    <a routerLink="/" class="logo d-flex align-items-center me-auto me-lg-0">
+      <img src="/img/logo.png">
+    </a>
+    <!-- Fim do logo -->
+
+    <!-- Botão Hamburguer lateral -->
+    <button type="button" (click)="isClicado = !isClicado" class="mobile-nav-toggle mobile-nav-show"
+      [ngClass]="!isClicado ? 'bi bi-list' : 'bi bi-x'" data-bs-toggle="offcanvas"
+      data-bs-target="#menuLateral"></button>
+    <!-- Fim do botão Hamburguer lateral -->
+
+    <!-- Menu Lateral -->
+    <div class="offcanvas offcanvas-end" data-bs-backdrop="static" id="menuLateral">
+      <div class="offcanvas-header mb-5"></div>
+      <div class="offcanvas-body">
+        <ul>
+
+          <div *ngFor="let aba of abas; let i = index">
+            <li *ngIf="aba.ativo && !aba.subMenus">
+              <a routerLinkActive="active show" [routerLinkActiveOptions]="{exact: true}" [routerLink]="aba.rota"
+                *ngIf="!aba.subMenus">
+                <i [class]="aba.icone"></i> {{ aba.titulo }}
+              </a>
+            </li>
+
+            <!-- Abas que possuem submenus -->
+            <li class="dropdown" *ngIf="aba.ativo && aba.subMenus">
+              <a class="dropdown-toggle" [routerLink]="aba.rota" routerLinkActive="active show"
+                [routerLinkActiveOptions]="{exact: true}" data-bs-toggle="dropdown">
+                <i [class]="aba.icone"></i> {{ aba.titulo }}
+              </a>
+
+              <ul class="dropdown-menu" *ngIf="aba.subMenus">
+                <li *ngFor="let sub of aba.subMenus">
+                  <a class="dropdown-item" *ngIf="sub.ativo && sub.rota" [routerLink]="sub.rota">
+                    {{ sub.titulo }}
+                  </a>
+                  <a class="dropdown-item" *ngIf="sub.ativo && sub.fragment" (click)="navigate(aba.rota, sub.fragment)">
+                    {{ sub.titulo }}
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <!-- Fim das abas que possuem submenus -->
+          </div>
+
+        </ul>
+      </div>
+      <!-- Rodapé do Menu Lateral -->
+      <div class="offcanvas-footer text-center">
+        <hr>
+        <h4 class="mb-3">Siga-nos</h4>
+        <div class="social-links">
+          <a href="https://www.instagram.com/matheuspcouto/" target="_blank"><i class="bi bi-instagram"></i></a>
+          <a href="https://matheuspcouto.github.io/" target="_blank"><i class="bi bi-person"></i></a>
+        </div>
+      </div>
+      <!-- Fim do Rodapé do Menu Lateral -->
+    </div>
+    <!-- Fim do Menu Lateral -->
+
+  </div>
+</header>
+<!-- ======= End Header Mobile ======= -->

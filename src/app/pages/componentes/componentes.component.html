@@ -1,4 +1,4 @@
-<navbar></navbar>
+<mpc-navbar></mpc-navbar>
 
 <!-- ======= Capa Section ======= -->
 <section id="capa" class="capa d-flex align-items-center bg-image">
@@ -75,6 +75,45 @@
   </section>
   <!-- ======= MpcButton ======= -->
 
+  <!-- ======= MpcLoader ======= -->
+  <section id="loader" class="section-components bg-color-primary text-color-white">
+    <div class="container">
+
+      <div class="section-header">
+        <h2 class="text-color-white">experimente o</h2>
+        <p>MPC <span>Loader</span></p>
+      </div>
+
+      <h5 class="text-color-white">
+        O <code>mpc-loader</code> é um componente que exibe uma animação de carregamento enquanto o conteúdo da página
+        está sendo
+        carregado a cada requisição HTTP. Pode ser colocado em qualquer lugar da sua página, mas
+        caso deseje utilizar para todas as páginas do projeto, incluá-o no arquivo <code>app.component.html</code>.
+      </h5>
+
+      <h5 class="text-color-white">
+        Veja como é a implementação deste componente no arquivo <code>.html</code> no exemplo abaixo.
+
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+          <pre class="chroma bg-color-white text-color-primary">
+              <code class="language-html" data-lang="html">
+              &lt;mpc-loader&gt;&lt;/mpc-loader&gt;
+              </code>
+            </pre>
+        </div>
+      </h5>
+
+      <div class="col-md-12 mb-3 d-flex justify-content-center">
+        <mpc-button [disabled]="false" (click)="abrirLoading()" [corBotao]="'btn-info'"
+          [icone]="'bi bi-arrow-clockwise'" [posicaoIcone]="'esquerda'" [tabIndex]="0" [texto]="'Abrir Loader'">
+        </mpc-button>
+      </div>
+
+    </div>
+
+  </section>
+  <!-- ======= MpcLoader ======= -->
+
   <!-- ======= MpcModal ======= -->
   <section id="modais" class="section-components">
     <div class="container">
@@ -115,16 +154,16 @@
         </ul>
       </h5>
 
+      <div class="col-md-12 mb-3 d-flex justify-content-center">
+        <pre class="chroma">
+          <code class="language-html mb-2 text-center" data-lang="javascript">
+            &commat;ViewChild('modalExemplo', &lcub; static: true &rcub;) modalExemplo!: MpcModalComponent;
+          </code>
+        </pre>
+      </div>
+
       <div class="row mb-5">
         <div class="col-lg-6">
-
-          <div class="col-md-12 mb-3 d-flex justify-content-center">
-            <pre class="chroma">
-              <code class="language-html mb-2" data-lang="html">
-                &commat;ViewChild('modalExemplo', &lcub; static: true &rcub;) modalExemplo!: MpcModalComponent;
-              </code>
-            </pre>
-          </div>
           <div class="col-md-12 mb-3 d-flex justify-content-center">
             <pre class="chroma">
               <code>
@@ -151,14 +190,6 @@
             </mpc-button>
           </div>
 
-
-          <div class="col-md-12 mb-3 d-flex justify-content-center">
-            <pre class="chroma">
-              <code class="language-html mb-2" data-lang="html">
-                &commat;ViewChild('modalExemplo', &lcub; static: true &rcub;) modalExemplo!: MpcModalComponent;
-              </code>
-            </pre>
-          </div>
           <div class="col-md-12 mb-3 d-flex justify-content-center">
             <pre class="chroma">
               <code>
@@ -190,13 +221,6 @@
 
           <div class="col-md-12 mb-3 d-flex justify-content-center">
             <pre class="chroma">
-              <code class="language-html mb-2" data-lang="html">
-                &commat;ViewChild('modalExemplo', &lcub; static: true &rcub;) modalExemplo!: MpcModalComponent;
-              </code>
-            </pre>
-          </div>
-          <div class="col-md-12 mb-3 d-flex justify-content-center">
-            <pre class="chroma">
               <code>
                 abrirModalAlerta() &lcub;
                   const modalAlerta: ModalConfig = &lcub;
@@ -222,13 +246,6 @@
             </mpc-button>
           </div>
 
-          <div class="col-md-12 mb-3 d-flex justify-content-center">
-            <pre class="chroma">
-              <code class="language-html mb-2" data-lang="html">
-                &commat;ViewChild('modalExemplo', &lcub; static: true &rcub;) modalExemplo!: MpcModalComponent;
-              </code>
-            </pre>
-          </div>
           <div class="col-md-12 mb-3 d-flex justify-content-center">
             <pre class="chroma">
               <code>
@@ -270,46 +287,47 @@
   </section>
   <!-- ======= MpcModal ======= -->
 
-  <!-- ======= Notificações ======= -->
-  <section id="notificacoes" class="section-components bg-color-primary text-color-white">
+  <!-- ======= MpcPageHeader ======= -->
+  <section id="page-header" class="section-components bg-color-primary text-color-white">
     <div class="container">
 
       <div class="section-header">
-        <h2 class="text-color-white">experimente as</h2>
-        <p><span>Notificações</span> & Loader </p>
+        <h2 class="text-color-white">experimente o</h2>
+        <p>MPC <span>Page Header</span></p>
       </div>
 
       <h5 class="text-color-white">
-        As notificações do MyComponents são geradas pelo componente "NotificationService", da biblioteca "ngx-toastr".
+        O <code>mpc-loader</code> é um componente que exibe uma animação de carregamento enquanto o conteúdo da página
+        está sendo
+        carregado a cada requisição HTTP. Pode ser colocado em qualquer lugar da sua página, mas
+        caso deseje utilizar para todas as páginas do projeto, incluá-o no arquivo <code>app.component.html</code>.
       </h5>
 
       <h5 class="text-color-white">
-        O Loader é gerado pelo componente "LoaderService", localizado no diretório "src/app/shared/components/loader".
+        Veja como é a implementação deste componente no arquivo <code>.html</code> no exemplo abaixo.
+
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+          <pre class="chroma bg-color-white text-color-primary">
+                <code class="language-html" data-lang="html">
+                &lt;mpc-loader&gt;&lt;/mpc-loader&gt;
+                </code>
+              </pre>
+        </div>
       </h5>
 
-      <div class="row">
-        <div class="col-md-12 mb-3 d-flex justify-content-center">
-          <button class="btn btn-light" (click)="abrirLoading()" tabindex="0">
-            <i class="bi bi-arrow-clockwise"></i>
-            <span>Loader</span>
-          </button>
-        </div>
-
-        <div class="col-md-12 mb-3 d-flex justify-content-center">
-          <button class="btn btn-light" (click)="mostrarNotificacao()" tabindex="0">
-            <i class="bi bi-info-circle"></i>
-            <span>Notificação</span>
-          </button>
-        </div>
+      <div class="col-md-12 mb-3 d-flex justify-content-center">
+        <mpc-button [disabled]="false" (click)="abrirLoading()" [corBotao]="'btn-info'"
+          [icone]="'bi bi-arrow-clockwise'" [posicaoIcone]="'esquerda'" [tabIndex]="0" [texto]="'Abrir Loader'">
+        </mpc-button>
       </div>
 
     </div>
 
   </section>
-  <!-- ======= Notificações ======= -->
+  <!-- ======= MpcPageHeader ======= -->
 
   <!-- ======= MpcComprovante ======= -->
-  <section id="comprovantes" class="section-components">
+  <section id="comprovante" class="section-components">
     <div class="container">
 
       <div class="section-header">
@@ -396,6 +414,38 @@
 
   </section>
   <!-- ======= MpcComprovante ======= -->
+
+  <!-- ======= MpcFooter ======= -->
+  <section id="footer" class="section-components bg-color-primary text-color-white">
+    <div class="container">
+
+      <div class="section-header">
+        <h2 class="text-color-white">experimente o</h2>
+        <p>MPC <span>Footer</span></p>
+      </div>
+
+      <h5 class="text-color-white">
+        O <code>mpc-footer</code> é um componente que exibe o rodapé da página, com informações sobre a empresa ou
+        organização, links úteis e informações de contato. Pode ser colocado em qualquer página, mas
+        caso deseje utilizar para todas as páginas do projeto, incluá-o no arquivo <code>app.component.html</code>.
+      </h5>
+
+      <h5 class="text-color-white">
+        Veja como é a implementação deste componente no arquivo <code>.html</code> no exemplo abaixo.
+
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+          <pre class="chroma bg-color-white text-color-primary">
+              <code class="language-html" data-lang="html">
+              &lt;mpc-footer&gt;&lt;/mpc-footer&gt;
+              </code>
+            </pre>
+        </div>
+      </h5>
+    </div>
+
+    <hr>
+  </section>
+  <!-- ======= Loader ======= -->
 
 </main>
 

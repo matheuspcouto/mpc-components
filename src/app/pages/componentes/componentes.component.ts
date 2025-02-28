@@ -1,22 +1,22 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavbarComponent } from '../../shared/components/navbar/navbar.component';
+import { MpcNavbarComponent } from '../../shared/components/mpc-navbar/mpc-navbar.component';
 import { ToastrService } from 'ngx-toastr';
-import { LoaderService } from '../../shared/components/loader/loader.service';
 import { MpcModalComponent, TipoModal } from '../../shared/components/mpc-modal/mpc-modal.component';
 import { MpcButtonComponent } from '../../shared/components/mpc-button/mpc-button.component';
 import { MpcModalConfig } from '../../shared/components/mpc-modal/mpc-modal.directive';
 import { MpcComprovanteComponent } from '../../shared/components/mpc-comprovante/mpc-comprovante.component';
 import { MpcComprovanteConfig } from '../../shared/components/mpc-comprovante/mpc-comprovante.directive';
+import { MpcLoaderService } from '../../shared/components/mpc-loader/mpc-loader.service';
 
 @Component({
   selector: 'app-componentes',
-  imports: [NavbarComponent, MpcModalComponent, MpcComprovanteComponent, MpcButtonComponent],
+  imports: [MpcNavbarComponent, MpcModalComponent, MpcComprovanteComponent, MpcButtonComponent],
   templateUrl: './componentes.component.html',
   styleUrl: './componentes.component.css'
 })
 export class ComponentesComponent {
 
-  constructor(private notificationService: ToastrService, private loaderService: LoaderService) { }
+  constructor(private notificationService: ToastrService, private mpcLoaderService: MpcLoaderService) { }
 
   erro: any;
   @ViewChild('modalExemplo', { static: true }) modalExemplo!: MpcModalComponent;
@@ -109,8 +109,8 @@ export class ComponentesComponent {
   }
 
   abrirLoading() {
-    this.loaderService.showLoader();
-    setTimeout(() => this.loaderService.hideLoader(), 5000);
+    this.mpcLoaderService.show();
+    setTimeout(() => this.mpcLoaderService.hide(), 5000);
   }
 
   mostrarNotificacao() {

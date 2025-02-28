@@ -8,7 +8,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideEnvironmentNgxMask } from 'ngx-mask';
 import { provideToastr } from 'ngx-toastr';
 import { SiteAtivoGuard } from './guards/site-ativo.guard';
-import { LoaderInterceptor } from './shared/components/loader/loader.interceptor';
+import { MpcLoaderInterceptor } from './shared/components/mpc-loader/mpc-loader.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,7 +23,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptorsFromDi(), withFetch()),
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: LoaderInterceptor,
+      useClass: MpcLoaderInterceptor,
       multi: true
     }
   ]

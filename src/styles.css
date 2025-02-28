@@ -7,7 +7,7 @@
 :root {
   /* Fontes */
   --font-titulo: 'Potential', sans-serif;
-  --font-padrao: "Raleway", sans-serif;
+  --font-padrao: "Poppins", sans-serif;
   --font-secundaria: "Inter", sans-serif;
 
   /* Cores */
@@ -38,7 +38,7 @@
 }
 
 .bg-color-white {
-  background-color: var(--branco);
+  background-color: var(--branco) !important;
 }
 
 /* Text Colors */
@@ -81,19 +81,6 @@ body {
   color: var(--cor-secundaria);
   overflow: auto !important;
   cursor: default !important;
-}
-
-em {
-  display: flex;
-  position: relative !important;
-  transition: all 0.3s ease-in-out !important;
-  padding-block: 0.5rem !important;
-  padding-inline: 1.25rem !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 10px !important;
-  max-width: 20vh;
-  text-decoration: none;
 }
 
 a {

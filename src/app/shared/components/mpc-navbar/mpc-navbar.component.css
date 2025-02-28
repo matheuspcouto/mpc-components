@@ -43,18 +43,42 @@
 
   .offcanvas {
     max-width: 60%;
+    height: auto;
 
-    & ul {
+    ul {
       list-style: none;
       padding: 0 0 10px 0;
       margin: 0;
       background: var(--branco);
-      overflow-y: auto;
       transition: 0.3s;
+
+      .dropdown-menu {
+        border: 0;
+        padding: 20px 28px;
+        width: 100%;
+        display: none;
+
+        li {
+          margin-bottom: 1rem;
+          color: var(--cor-terciaria) !important;
+
+          &:hover {
+            color: var(--cor-secundaria) !important;
+          }
+        }
+
+        li:before {
+          visibility: hidden;
+        }
+      }
     }
 
-    & a,
-    & a:focus {
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+    a,
+    a:focus {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -68,13 +92,13 @@
       transition: 0.3s;
     }
 
-    & a:hover,
-    & li:hover>a {
+    a:hover,
+    li:hover>a {
       border-color: var(--cor-secundaria) !important;
     }
 
-    & .active,
-    & .active:focus {
+    .active,
+    .active:focus {
       border-color: var(--cor-secundaria);
     }
   }
@@ -170,26 +194,50 @@
 @media screen and (min-width: 992px) {
   .navbar {
     padding: 0;
+    cursor: pointer;
 
-    & ul {
+    ul {
       margin: 0;
-      padding: 0;
+      padding: 5px;
       display: flex;
       list-style: none;
       align-items: center;
+
+      .dropdown-menu {
+        border: 0;
+        padding: 20px 28px;
+        display: none;
+
+        li {
+          margin-bottom: 1rem;
+          color: var(--cor-terciaria) !important;
+
+          &:hover {
+            color: var(--cor-secundaria) !important;
+          }
+        }
+
+        li:before {
+          visibility: hidden;
+        }
+      }
     }
 
-    & li {
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+    li {
       position: relative;
     }
 
-    & ul>div>li {
+    ul>div>li {
       white-space: nowrap;
       padding: 10px 0 10px 28px;
     }
 
-    & a,
-    & a:focus {
+    a,
+    a:focus {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -203,14 +251,14 @@
       position: relative;
     }
 
-    & a i,
-    & a:focus i {
+    a i,
+    a:focus i {
       font-size: 12px;
       line-height: 0;
       margin-left: 5px;
     }
 
-    & a:before {
+    a:before {
       content: "";
       position: absolute;
       width: 100%;
@@ -223,14 +271,14 @@
       transition: all 0.3s ease-in-out 0s;
     }
 
-    & a:hover:before,
+    a:hover:before,
     li:hover>a:before,
     .active:before {
       visibility: visible;
       width: 100%;
     }
 
-    & a:hover,
+    a:hover,
     .active,
     .active:focus,
     li:hover>a {

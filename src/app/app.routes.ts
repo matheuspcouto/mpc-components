@@ -8,6 +8,6 @@ import { ComponentesComponent } from './pages/componentes/componentes.component'
 export const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent, canActivate: [SiteAtivoGuard] },
   { path: 'componentes', component: ComponentesComponent, canActivate: [SiteAtivoGuard] },
-  { path: 'formulario', component: FormularioComponent, canActivate:[SiteAtivoGuard] },
-  { path: 'aguarde', component: AguardeComponent },
+  { path: 'paginas/formulario', component: FormularioComponent, canActivate: [SiteAtivoGuard] },
+  { path: 'paginas/aguarde', component: AguardeComponent },
 ];

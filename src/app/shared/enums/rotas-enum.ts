@@ -1,17 +1,21 @@
 export const Rotas = {
   HOME: "/",
   DOCS: "/documentacao",
-  FORMULARIO: "/formulario",
 
   // Componentes
   COMPONENTES: "/componentes",
-  CARDS: "/componentes/#cards",
-  MODAIS: "/componentes/#modais",
-  LOADER: "/componentes/#loader",
-  NOTIFICACOES: "/componentes/#notificacao",
+  BUTTONS: "buttons",
+  LOADER: "loader",
+  MODAIS: "modais",
+  PAGE_HEADER: "page-header",
+  COMPROVANTE: "comprovante",
+  CARDS: "cards",
+  NAVBAR: "navbar",
+  FOOTER: "footer",
 
   // Paginas
   PAGINAS: "/paginas",
+  FORMULARIO: "/paginas/formulario",
   AGUARDE: "/paginas/aguarde",
   LOGIN: "/paginas/login",
 }

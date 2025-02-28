@@ -7,7 +7,7 @@ import { MpcModalComponent, TipoModal } from '../../shared/components/mpc-modal/
 import { Rotas } from '../../shared/enums/rotas-enum';
 import { FluxoErro } from '../../shared/fluxo-erro';
 import { CommonModule } from '@angular/common';
-import { NavbarComponent } from '../../shared/components/navbar/navbar.component';
+import { MpcNavbarComponent } from '../../shared/components/mpc-navbar/mpc-navbar.component';
 import { PrimeiraEtapaComponent } from "./primeira-etapa/primeira-etapa.component";
 import { SegundaEtapaComponent } from './segunda-etapa/segunda-etapa.component';
 import { TerceiraEtapaComponent } from './terceira-etapa/terceira-etapa.component';
@@ -20,7 +20,7 @@ import { InscricaoService } from '../../services/inscricao.service';
 @Component({
   selector: 'app-formulario',
   imports: [
-    NavbarComponent,
+    MpcNavbarComponent,
     CommonModule,
     MpcModalComponent,
     MpcComprovanteComponent,

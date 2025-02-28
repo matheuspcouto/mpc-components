@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { LoaderComponent } from './shared/components/loader/loader.component';
-import { FooterComponent } from './shared/components/footer/footer.component';
-import { NavbarComponent } from "./shared/components/navbar/navbar.component";
+import { MpcFooterComponent } from './shared/components/mpc-footer/mpc-footer.component';
+import { MpcLoaderComponent } from './shared/components/mpc-loader/mpc-loader.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FooterComponent, LoaderComponent],
+  imports: [RouterOutlet, MpcFooterComponent, MpcLoaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
