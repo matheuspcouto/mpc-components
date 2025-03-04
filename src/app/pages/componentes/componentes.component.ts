@@ -7,6 +7,7 @@ import { MpcModalConfig } from '../../shared/components/mpc-modal/mpc-modal.dire
 import { MpcComprovanteComponent } from '../../shared/components/mpc-comprovante/mpc-comprovante.component';
 import { MpcComprovanteConfig } from '../../shared/components/mpc-comprovante/mpc-comprovante.directive';
 import { MpcLoaderService } from '../../shared/components/mpc-loader/mpc-loader.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-componentes',
@@ -14,14 +15,24 @@ import { MpcLoaderService } from '../../shared/components/mpc-loader/mpc-loader.
   templateUrl: './componentes.component.html',
   styleUrl: './componentes.component.css'
 })
-export class ComponentesComponent {
+export default class ComponentesComponent {
 
-  constructor(private notificationService: ToastrService, private mpcLoaderService: MpcLoaderService) { }
+  constructor(private activatedRoute: ActivatedRoute, private notificationService: ToastrService, private mpcLoaderService: MpcLoaderService) { }
 
   erro: any;
   @ViewChild('modalExemplo', { static: true }) modalExemplo!: MpcModalComponent;
   @ViewChild('comprovanteExemplo', { static: true }) comprovanteExemplo!: MpcComprovanteComponent;
   dadosComprovante: MpcComprovanteConfig = {} as MpcComprovanteConfig;
+
+  ngOnInit() {
+    this.activatedRoute.fragment.subscribe((fragment: string | null) => {
+      if (fragment) this.jumpToSection(fragment);
+    });
+  }
+
+  jumpToSection(section: string | null) {
+    if (section) document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' });
+  }
 
   abrirModalComprovante() {
     this.dadosComprovante = {

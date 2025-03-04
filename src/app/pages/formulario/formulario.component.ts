@@ -31,7 +31,7 @@ import { InscricaoService } from '../../services/inscricao.service';
   templateUrl: './formulario.component.html',
   styleUrls: ['./formulario.component.css'],
 })
-export class FormularioComponent implements OnInit {
+export default class FormularioComponent implements OnInit {
 
   @ViewChild('modalErro', { static: true }) modalErro!: MpcModalComponent;
   @ViewChild('modalSucesso', { static: true }) modalSucesso!: MpcModalComponent;

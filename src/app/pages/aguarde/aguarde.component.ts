@@ -14,7 +14,7 @@ const WINDOW = new InjectionToken<Window>('WindowToken', {
   templateUrl: './aguarde.component.html',
   styleUrls: ['./aguarde.component.css']
 })
-export class AguardeComponent implements AfterViewInit {
+export default class AguardeComponent implements AfterViewInit {
   window = inject(WINDOW);
 
   ngAfterViewInit(): void {

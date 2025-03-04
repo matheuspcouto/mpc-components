@@ -9,4 +9,4 @@ import { MpcNavbarComponent } from '../../shared/components/mpc-navbar/mpc-navba
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent { }
+export default class HomeComponent { }

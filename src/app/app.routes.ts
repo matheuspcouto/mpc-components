@@ -1,13 +1,10 @@
 import { Routes } from '@angular/router';
 import { SiteAtivoGuard } from './guards/site-ativo.guard';
-import { AguardeComponent } from './pages/aguarde/aguarde.component';
-import { FormularioComponent } from './pages/formulario/formulario.component';
-import { HomeComponent } from './pages/home/home.component';
-import { ComponentesComponent } from './pages/componentes/componentes.component';
 
 export const routes: Routes = [
-  { path: '', pathMatch: 'full', component: HomeComponent, canActivate: [SiteAtivoGuard] },
-  { path: 'componentes', component: ComponentesComponent, canActivate: [SiteAtivoGuard] },
-  { path: 'paginas/formulario', component: FormularioComponent, canActivate: [SiteAtivoGuard] },
-  { path: 'paginas/aguarde', component: AguardeComponent },
+  { path: '', pathMatch: 'full', loadComponent: () => import('./pages/home/home.component'), title: 'My Components - Página Inicial', canActivate: [SiteAtivoGuard] },
+  { path: 'componentes', loadComponent: () => import('./pages/componentes/componentes.component'), title: 'My Components - Componentes', canActivate: [SiteAtivoGuard] },
+  { path: 'paginas/formulario', loadComponent: () => import('./pages/formulario/formulario.component'), title: 'My Components - Formulário', canActivate: [SiteAtivoGuard] },
+  { path: 'paginas/aguarde', loadComponent: () => import('./pages/aguarde/aguarde.component'), title: 'My Components - Aguarde'},
+
 ];
