@@ -2,11 +2,11 @@
 
   <div *ngIf="posicaoIcone === 'direita'">
     <span>{{ texto }}</span>
-    <i [ngClass]="icone" class="icon-float-right"></i>
+    <i *ngIf="icone" [ngClass]="icone" class="icon-float-right"></i>
   </div>
 
   <div *ngIf="posicaoIcone === 'esquerda'">
-    <i [ngClass]="icone" class="icon-float-left"></i>
+    <i *ngIf="icone" [ngClass]="icone" class="icon-float-left"></i>
     <span>{{ texto }}</span>
   </div>
 

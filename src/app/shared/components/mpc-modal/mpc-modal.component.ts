@@ -17,6 +17,7 @@ import { Component } from '@angular/core';
 import { MpcModalService } from './mpc-modal.service';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
+import { MpcButtonComponent } from '../mpc-button/mpc-button.component';
 
 enum TamanhoModal {
   TELA_INTEIRA = 'tela-inteira',
@@ -31,7 +32,7 @@ export const TipoModal = {
 }
 @Component({
   selector: 'mpc-modal',
-  imports: [CommonModule],
+  imports: [CommonModule, MpcButtonComponent],
   templateUrl: './mpc-modal.component.html',
   styleUrls: ['./mpc-modal.component.css']
 })

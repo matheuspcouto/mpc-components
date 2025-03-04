@@ -14,14 +14,18 @@
 
       <!-- Botões -->
       <div class="modal-buttons">
-        <button class="btn btn-primary" (click)="botao()">{{ modal.textoBotao }}</button>
-        <button *ngIf="modal.textoSegundoBotao" class="btn btn-link" (click)="segundoBotao()">{{
-          modal.textoSegundoBotao}}
-        </button>
-        <button *ngIf="btnCopiarMensagemErro" class="btn btn-link text-color-primary" (click)="copiarCodigo()">
-          <i [class]="isCopiado ? 'bi bi-clipboard-check' : 'bi bi-clipboard'"></i>
-          Copiar Erro
-        </button>
+        <!-- Botão Principal de Ação -->
+        <mpc-button corBotao="btn-primary" (click)="botao()" [texto]="modal.textoBotao"></mpc-button>
+
+        <!-- Botão Secundário de Ação -->
+        <mpc-button *ngIf="modal.textoSegundoBotao" corBotao="btn-link" (click)="segundoBotao()"
+          [texto]="modal.textoSegundoBotao">
+        </mpc-button>
+
+        <!-- Botão de Copiar Erro caso seja um modal de erro -->
+        <mpc-button *ngIf="btnCopiarMensagemErro" corBotao="btn-link" (click)="copiarCodigo()"
+          [icone]="isCopiado ? 'bi bi-clipboard-check' : 'bi bi-clipboard'" texto="Copiar Erro">
+        </mpc-button>
       </div>
     </div>
   </div>

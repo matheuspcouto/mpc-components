@@ -8,7 +8,7 @@
  * tabIndex {number}: Índice de tabulação do botão.
  * disabled {boolean}: (opcional) Indica se o botão está desabilitado.
  * posicaoIcone {string}: (opcional) Posição do ícone em relação ao texto. Valores possíveis: 'esquerda' ou 'direita'.
- * icone {string}: Ícone do botão.
+ * icone {string}: (opcional) Ícone do botão.
  *
  * Exemplo de utilização:
  * <mpc-button id="botao" texto="Clique aqui" corBotao="btn-primary" tabIndex="0" disabled="false" posicaoIcone="esquerda" icone="bi bi-code-slash"></mpc-button>
@@ -40,5 +40,5 @@ export class MpcButtonComponent {
   @Input() tabIndex: number = 0;
   @Input() disabled?: boolean = false;
   @Input() posicaoIcone?: string = PosicoesIcone.ESQUERDA;
-  @Input() icone: string = '';
+  @Input() icone?: string = '';
 }

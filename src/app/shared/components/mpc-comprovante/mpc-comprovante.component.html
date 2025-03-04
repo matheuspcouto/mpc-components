@@ -87,27 +87,27 @@
             <hr>
           </div>
         </div>
+      </div>
 
-        <!-- Botões -->
-        <div class="modal-buttons">
+      <!-- Botões -->
+      <div class="modal-buttons">
 
-          <div class="label-info alert alert-warning text-center mt-2"
-            *ngIf="dadosPagamento.statusPagamento == 'A PAGAR' && dadosPagamento.formaPagamento != 'Dinheiro'">
-            <i class="bi bi-exclamation-circle float-left"></i>
-            <p>Solicite o pix/link para pagamento ou envie o comprovante clicando no
-              botão abaixo. </p>
-          </div>
-
-          <mpc-button *ngIf="dadosPagamento.statusPagamento == 'A PAGAR' && dadosPagamento.formaPagamento != 'Dinheiro'"
-            corBotao="btn-success" [texto]="'Solicitar pelo WhatsApp'" [icone]="'bi bi-whatsapp'"
-            (click)="pedirLinkPagamento()">
-          </mpc-button>
-
-          <mpc-button corBotao="btn-outline-secondary" (click)="fecharComprovante()" class="mt-3" [texto]="'Fechar'"
-            [icone]="'bi bi-x-lg'">
-          </mpc-button>
-
+        <div class="label-info alert alert-warning text-center mt-2"
+          *ngIf="dadosPagamento.statusPagamento == 'A PAGAR' && dadosPagamento.formaPagamento != 'Dinheiro'">
+          <i class="bi bi-exclamation-circle float-left"></i>
+          <p>Solicite o pix/link para pagamento ou envie o comprovante clicando no
+            botão abaixo. </p>
         </div>
+
+        <mpc-button *ngIf="dadosPagamento.statusPagamento == 'A PAGAR' && dadosPagamento.formaPagamento != 'Dinheiro'"
+          corBotao="btn-success" [texto]="'Solicitar pelo WhatsApp'" [icone]="'bi bi-whatsapp'"
+          (click)="pedirLinkPagamento()">
+        </mpc-button>
+
+        <mpc-button corBotao="btn-outline-secondary" (click)="fecharComprovante()" [texto]="'Fechar'"
+          [icone]="'bi bi-x-lg'">
+        </mpc-button>
+
       </div>
     </div>
   </div>
