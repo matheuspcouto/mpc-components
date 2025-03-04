@@ -6,14 +6,14 @@
         <img src="/img/logo.png" class="modal-image">
 
         <!-- Título -->
-        <h2 class="modal-title mb-5">{{ comprovante.titulo }}</h2>
+        <h2 class="modal-title">{{ comprovante.titulo }}</h2>
 
         <div *ngIf="dadosInscricao">
-          <h3>Dados da Inscrição</h3>
+          <h4>Dados da Inscrição</h4>
 
           <div class="row">
             <!-- Campo com botão de copiar o código de inscrição, pode ser alterado -->
-            <div class="col-md-4 mb-2" *ngIf="dadosInscricao.codigoInscricao">
+            <div class="col-md-4 mb-1" *ngIf="dadosInscricao.codigoInscricao">
               <h5>Inscrição</h5>
               <div class="input-group">
                 <p>{{ dadosInscricao.codigoInscricao }}</p>
@@ -24,18 +24,18 @@
             </div>
 
             <!-- Campo de status da inscricao, pode ser alterado -->
-            <div class="col-md-4 mb-2" *ngIf="dadosInscricao.status">
-              <h5 class="mb-2">Status</h5>
+            <div class="col-md-4 mb-1" *ngIf="dadosInscricao.status">
+              <h5 class="mb-1">Status</h5>
               <h5>
-                <span class="badge mb-2" [ngClass]="getBadgeStatusInscricao(dadosInscricao.status)">
+                <span class="badge mb-1" [ngClass]="getBadgeStatusInscricao(dadosInscricao.status)">
                   {{ getTextoStatusInscricao(dadosInscricao.status) }}
                 </span>
               </h5>
             </div>
 
             <!-- Campo de data de criação, pode ser alterado -->
-            <div class="col-md-4 mb-2" *ngIf="dadosInscricao.dataInscricao">
-              <h5 class="mb-2">Data da Inscrição</h5>
+            <div class="col-md-4 mb-1" *ngIf="dadosInscricao.dataInscricao">
+              <h5 class="mb-1">Data da Inscrição</h5>
               <p>{{ formatarData(dadosInscricao.dataInscricao) }}</p>
             </div>
 
@@ -44,11 +44,11 @@
         </div>
 
         <div *ngIf="dadosPessoais">
-          <h3>Dados Pessoais</h3>
+          <h4>Dados Pessoais</h4>
 
           <div class="row">
-            <div class="col-md-3 mb-2" *ngFor="let dado of dadosPessoais">
-              <h5 class="mb-2">{{ dado.label }}</h5>
+            <div class="col-md-3 mb-1" *ngFor="let dado of dadosPessoais">
+              <h5 class="mb-1">{{ dado.label }}</h5>
               <p>{{ dado.valor }}</p>
             </div>
           </div>
@@ -57,30 +57,30 @@
         </div>
 
         <div *ngIf="dadosPagamento">
-          <h3>Dados do Pagamento</h3>
+          <h4>Dados do Pagamento</h4>
 
           <div class="row">
-            <div class="col-md-3 mb-2" *ngIf="dadosPagamento.formaPagamento">
-              <h5 class="mb-2">Forma de Pagamento</h5>
+            <div class="col-md-3 mb-1" *ngIf="dadosPagamento.formaPagamento">
+              <h5 class="mb-1">Forma de Pagamento</h5>
               <p>{{ dadosPagamento.formaPagamento }}</p>
             </div>
 
-            <div class="col-md-3 mb-2" *ngIf="dadosPagamento.valor">
-              <h5 class="mb-2">Valor</h5>
+            <div class="col-md-3 mb-1" *ngIf="dadosPagamento.valor">
+              <h5 class="mb-1">Valor</h5>
               <p>{{ formatarValor(dadosPagamento.valor) }}</p>
             </div>
 
-            <div class="col-md-3 mb-2" *ngIf="dadosPagamento.statusPagamento">
-              <h5 class="mb-2">Status do Pagamento</h5>
+            <div class="col-md-3 mb-1" *ngIf="dadosPagamento.statusPagamento">
+              <h5 class="mb-1">Status do Pagamento</h5>
               <h5>
-                <span class="badge mb-2" [ngClass]="getBadgeStatusPagamento(dadosPagamento.statusPagamento)">
+                <span class="badge mb-1" [ngClass]="getBadgeStatusPagamento(dadosPagamento.statusPagamento)">
                   {{ getTextoStatusPagamento(dadosPagamento.statusPagamento) }}
                 </span>
               </h5>
             </div>
 
-            <div class="col-md-3 mb-2" *ngIf="dadosPagamento.dataPagamento">
-              <h5 class="mb-2">Data do Pagamento</h5>
+            <div class="col-md-3 mb-1" *ngIf="dadosPagamento.dataPagamento">
+              <h5 class="mb-1">Data do Pagamento</h5>
               <p>{{ formatarData(dadosPagamento.dataPagamento) }}</p>
             </div>
 
@@ -91,7 +91,7 @@
         <!-- Botões -->
         <div class="modal-buttons">
 
-          <div class="label-info alert alert-warning text-center mt-3"
+          <div class="label-info alert alert-warning text-center mt-2"
             *ngIf="dadosPagamento.statusPagamento == 'A PAGAR' && dadosPagamento.formaPagamento != 'Dinheiro'">
             <i class="bi bi-exclamation-circle float-left"></i>
             <p>Solicite o pix/link para pagamento ou envie o comprovante clicando no

@@ -1,3 +1,20 @@
+/* Geral */
+button {
+  max-width: 30vh;
+  min-width: 20vh;
+  box-shadow: none !important;
+}
+
+h5 {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+p {
+  margin-bottom: 0 !important;
+}
+
 .modal {
   display: flex;
   z-index: 9999;
@@ -5,33 +22,6 @@
   transition: opacity 0.3s ease, visibility 0s 0.3s;
   font-family: var(--font-secundaria) !important;
 
-  button {
-    max-width: 30vh;
-    min-width: 20vh;
-    box-shadow: none !important;
-  }
-
-  em {
-    color: var(--cor-secundaria) !important;
-    display: block;
-    font-size: 18px;
-    padding: 0 18px 0 0 !important;
-    margin-left: 15px !important;
-  }
-
-  @media screen and (max-width: 768px) {
-    em {
-      padding: 0 20px !important;
-      height: 30px;
-      margin-left: 10px !important;
-    }
-  }
-
-  .modal-title {
-    text-align: center;
-  }
-
-  /* Estilo para preencher a tela inteira em mobile e centralizar em desktop */
   .tela-inteira {
     display: flex;
     justify-content: center;
@@ -42,95 +32,76 @@
 
     .modal-content {
       background-color: white;
-      border-radius: 10px;
-      padding: 10px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      width: 90%;
-      max-height: 100%;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      /* Garantir que o conteúdo comece no topo */
 
       .modal-body {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        flex-grow: 1;
-        /* Faz com que o corpo do modal ocupe o espaço restante */
-      }
 
-      .modal-image {
-        width: 90%;
-        height: auto;
-        padding: 20px;
-        margin: 0 auto;
-        max-width: 200px;
-      }
-
-      @media (min-width: 769px) {
         .modal-image {
-          width: 100px;
-          height: auto;
-          padding: 0;
+          max-height: 40px;
+          max-width: 40px;
           margin: 0 auto;
         }
-      }
 
-      .modal-title {
-        font-size: 1.5rem;
-        font-weight: bold;
-        margin: 10px 0;
-      }
-
-      h5 {
-        font-size: 1rem;
-        font-weight: bold;
-        margin: 10px 0;
-      }
-
-      .modal-buttons {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        align-items: center;
-        justify-content: flex-end;
-
-        .btn {
-          padding: 10px 20px;
-          font-size: 1rem;
-          border-radius: 50px;
-          cursor: pointer;
-          width: 90%;
+        .modal-title {
+          font-family: var(--font-titulo);
+          text-align: center;
+          font-size: 1.5rem;
+          font-weight: bold;
+          margin: 1rem 0 2rem 0 !important;
         }
-      }
-    }
 
-    @media (min-width: 769px) {
-      .modal-image {
-        width: 100px;
-        height: 100px;
-      }
+        .input-group em {
+          color: var(--cor-secundaria) !important;
+          display: block;
+          font-size: 18px;
+        }
 
-      .modal-content {
-        max-width: 50%;
-        padding: 20px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .modal-content {
-        width: 100%;
-        min-height: 100vh;
-        border-radius: 0;
+        .modal-buttons {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
       }
     }
   }
+}
 
-  @media (min-width: 769px) {
-    .tela-inteira {
+/* Mobile */
+@media screen and (max-width: 768px) {
+  .modal-content {
+    padding: 10px;
+    min-height: 100vh;
+
+    .input-group em {
+      padding: 0 20px !important;
+      height: 30px;
+      margin-left: 10px !important;
+    }
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 769px) {
+  .tela-inteira {
+    padding: 30px;
+
+    .modal-content {
       padding: 30px;
+      border-radius: 10px;
+      max-width: 65%;
+      min-height: 90vh;
+
+      .modal-image {
+        padding: 0;
+      }
+
+      .input-group em {
+        padding: 0 18px 0 0 !important;
+        margin-left: 15px !important;
+      }
     }
   }
 }
