@@ -1,0 +1,29 @@
+/*--------------------------------------------------------------
+# Scroll top button
+--------------------------------------------------------------*/
+.scroll-top {
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  z-index: 999;
+  background: var(--cor-secundaria);
+  width: 44px;
+  height: 44px;
+  border-radius: 50px;
+  border: 0;
+  transition: all 0.4s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  color: var(--branco);
+
+  i {
+    font-size: 24px;
+    line-height: 0;
+  }
+
+  &:hover {
+    color: var(--branco);
+  }
+}

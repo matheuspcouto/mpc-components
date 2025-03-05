@@ -1,0 +1,7 @@
+<ul class="tabs" [tabindex]="tabIndex" [attr.aria-label]="ariaLabel" *ngIf="tabs.length > 0">
+  <li class="nav-item" *ngFor="let tab of tabs; let i = index">
+    <a class="nav-link" [ngClass]="tab.id === tabSelecionada.id ? 'active' : ''" (click)="selecionarTab(tab)">
+      <h4>{{ tab.titulo }}</h4>
+    </a>
+  </li>
+</ul>

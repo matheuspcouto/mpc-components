@@ -1,0 +1,38 @@
+/*--------------------------------------------------------------
+# Tabs Section
+--------------------------------------------------------------*/
+.tabs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-left: 0;
+  list-style: none;
+  color: gray;
+  background-color: transparent;
+  font-family: var(--font-secondary);
+
+  .nav-link {
+    margin: 0 10px;
+    padding: 10px 5px;
+    transition: 0.3s;
+    cursor: pointer;
+    height: 100%;
+    border: 0;
+    border-bottom: 2px solid gray;
+
+    &:hover {
+      color: var(--cor-primaria);
+    }
+
+    h4 {
+      font-size: 18px;
+      font-weight: 400;
+      margin: 0;
+    }
+  }
+
+  .active {
+    color: var(--cor-primaria);
+    border-color: var(--cor-primaria);
+  }
+}

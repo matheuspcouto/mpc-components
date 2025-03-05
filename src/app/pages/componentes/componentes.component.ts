@@ -9,10 +9,15 @@ import { MpcComprovanteConfig } from '../../shared/components/mpc-comprovante/mp
 import { MpcLoaderService } from '../../shared/components/mpc-loader/mpc-loader.service';
 import { ActivatedRoute } from '@angular/router';
 import { MpcCardComponent } from "../../shared/components/mpc-card/mpc-card.component";
+import { MpcTabsComponent } from "../../shared/components/mpc-tabs/mpc-tabs.component";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-componentes',
-  imports: [MpcNavbarComponent, MpcModalComponent, MpcComprovanteComponent, MpcButtonComponent, MpcCardComponent],
+  imports: [
+    MpcNavbarComponent, MpcModalComponent, MpcComprovanteComponent,
+    MpcButtonComponent, MpcCardComponent, MpcTabsComponent, CommonModule
+  ],
   templateUrl: './componentes.component.html',
   styleUrl: './componentes.component.css'
 })
@@ -22,8 +27,20 @@ export default class ComponentesComponent {
 
   erro: any;
   @ViewChild('modalExemplo', { static: true }) modalExemplo!: MpcModalComponent;
+
   @ViewChild('comprovanteExemplo', { static: true }) comprovanteExemplo!: MpcComprovanteComponent;
   dadosComprovante: MpcComprovanteConfig = {} as MpcComprovanteConfig;
+
+  tabs = [
+    { id: 'conteudoTab1', titulo: 'Tab 1' },
+    { id: 'conteudoTab2', titulo: 'Tab 2' },
+    { id: 'conteudoTab3', titulo: 'Tab 3' },
+  ]
+  tabSelecionada: string = 'conteudoTab1';
+
+  selectTab(tab: string) {
+    this.tabSelecionada = tab;
+  }
 
   ngOnInit() {
     this.activatedRoute.fragment.subscribe((fragment: string | null) => {
