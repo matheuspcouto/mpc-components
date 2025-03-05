@@ -53,11 +53,8 @@ export class MpcNavbarComponent {
         { titulo: 'McpButtons', fragment: Rotas.BUTTONS, ativo: true },
         { titulo: 'McpLoader', fragment: Rotas.LOADER, ativo: true },
         { titulo: 'McpModais', fragment: Rotas.MODAIS, ativo: true },
-        { titulo: 'McpPageHeader', fragment: Rotas.PAGE_HEADER, ativo: false },
         { titulo: 'McpComprovante', fragment: Rotas.COMPROVANTE, ativo: true },
-        { titulo: 'McpCards', fragment: Rotas.CARDS, ativo: false },
-        { titulo: 'McpNavbar', fragment: Rotas.NAVBAR, ativo: false },
-        { titulo: 'McpFooter', fragment: Rotas.FOOTER, ativo: true },
+        { titulo: 'McpCards', fragment: Rotas.CARDS, ativo: true },
       ]
     },
     {

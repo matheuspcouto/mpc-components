@@ -1,4 +1,4 @@
-<button [id]="id" class="btn" [ngClass]="corBotao" [disabled]="disabled" [tabindex]="tabIndex">
+<button [id]="id" class="btn" [ngClass]="corBotao" [disabled]="disabled" [tabindex]="tabIndex" [attr.aria-label]="ariaLabel || texto">
 
   <div *ngIf="posicaoIcone === 'direita'">
     <span>{{ texto }}</span>

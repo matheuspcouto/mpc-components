@@ -114,6 +114,80 @@
   </section>
   <!-- ======= MpcLoader ======= -->
 
+  <!-- ======= MpcCard ======= -->
+  <section id="cards" class="section-components">
+    <div class="container">
+
+      <div class="section-header">
+        <h2>experimente os</h2>
+        <p>MPC <span>Cards</span></p>
+      </div>
+
+      <h5>
+        O <code>mpc-card</code> é um componente que permite criar cards personalizados. Os cards são utilizados para
+        exibir informações de forma organizada e atraente, com uma imagem, título, subtítulo e descrição.
+      </h5>
+
+      <h5>
+        Veja como é a implementação deste componente no arquivo <code>.html</code> no exemplo abaixo.
+
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+          <pre class="chroma">
+                  <code class="language-html" data-lang="html">
+                  &lt;mpc-card [titulo]="'Card 1'" [subtitulo]="'Tamanho Extra Pequeno'" [descricao]="'class=card-xs'"
+            [imagem]="'no-image.jpg'" [links]="[&lcub;icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'&rcub;]"
+            [tamanhoCard]="'card-xs'"&gt;
+          &lt;/mpc-card&gt;
+                  </code>
+                </pre>
+        </div>
+
+        <h5>Os parâmetros deste componente são os seguintes:</h5>
+
+        <ul class="text-start mt-3">
+          <li><strong>titulo</strong>: O título do card.</li>
+          <li><strong>subtitulo</strong>: O subtítulo do card.</li>
+          <li><strong>descricao</strong>: A descrição do card.</li>
+          <li><strong>imagem</strong>: A imagem do card. Necessário ter a imagem na pasta "/public/img". Exemplo:
+            'imagem.jpg'.</li>
+          <li><strong>links</strong>: Os links do card. Em formato:
+            <code>[&lcub; icone: 'string', url: 'string' &rcub;]</code>
+          </li>
+          <li><strong>tamanhoCard</strong>: O tamanho do card, que pode ser: <code>XS</code>, <code>SM</code>,
+            <code>MD</code>, <code>LG</code>, <code>XL</code> ou <code>XXL</code>. Padrão: <code>MD</code>.
+          </li>
+          <li><strong>tabIndex</strong>: O tabIndex do card.</li>
+          <li><strong>ariaLabel</strong>: O texto de acessibilidade do componente.</li>
+        </ul>
+      </h5>
+
+      <div class="row justify-content-between">
+
+        <div class="col-lg-4 d-flex justify-content-center mb-3">
+          <mpc-card titulo="Card 1" subtitulo="Tamanho Extra Pequeno" descricao="class=card-xs" imagem="no-image.jpg"
+            [links]="[{icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'}]" tamanhoCard="XS">
+          </mpc-card>
+        </div>
+
+        <div class="col-lg-4 d-flex justify-content-center mb-3">
+          <mpc-card titulo="Card 2" subtitulo="Tamanho Pequeno" descricao="class=card-sm" imagem="no-image.jpg"
+            [links]="[{icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'}]" tamanhoCard="SM">
+          </mpc-card>
+        </div>
+
+        <div class="col-lg-4 d-flex justify-content-center mb-3">
+          <mpc-card titulo="Card 3" subtitulo="Tamanho Médio" descricao="class=card-md" imagem="no-image.jpg"
+            [links]="[{icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'}]" tamanhoCard="MD">
+          </mpc-card>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+  <!-- ======= MpcCard ======= -->
+
   <!-- ======= MpcModal ======= -->
   <section id="modais" class="section-components">
     <div class="container">
@@ -286,45 +360,6 @@
 
   </section>
   <!-- ======= MpcModal ======= -->
-
-  <!-- ======= MpcPageHeader ======= -->
-  <section id="page-header" class="section-components bg-color-primary text-color-white">
-    <div class="container">
-
-      <div class="section-header">
-        <h2 class="text-color-white">experimente o</h2>
-        <p>MPC <span>Page Header</span></p>
-      </div>
-
-      <h5 class="text-color-white">
-        O <code>mpc-loader</code> é um componente que exibe uma animação de carregamento enquanto o conteúdo da página
-        está sendo
-        carregado a cada requisição HTTP. Pode ser colocado em qualquer lugar da sua página, mas
-        caso deseje utilizar para todas as páginas do projeto, incluá-o no arquivo <code>app.component.html</code>.
-      </h5>
-
-      <h5 class="text-color-white">
-        Veja como é a implementação deste componente no arquivo <code>.html</code> no exemplo abaixo.
-
-        <div class="col-md-12 mb-3 d-flex justify-content-center">
-          <pre class="chroma bg-color-white text-color-primary">
-                <code class="language-html" data-lang="html">
-                &lt;mpc-loader&gt;&lt;/mpc-loader&gt;
-                </code>
-              </pre>
-        </div>
-      </h5>
-
-      <div class="col-md-12 mb-3 d-flex justify-content-center">
-        <mpc-button [disabled]="false" (click)="abrirLoading()" [corBotao]="'btn-info'"
-          [icone]="'bi bi-arrow-clockwise'" [posicaoIcone]="'esquerda'" [tabIndex]="0" [texto]="'Abrir Loader'">
-        </mpc-button>
-      </div>
-
-    </div>
-
-  </section>
-  <!-- ======= MpcPageHeader ======= -->
 
   <!-- ======= MpcComprovante ======= -->
   <section id="comprovante" class="section-components">

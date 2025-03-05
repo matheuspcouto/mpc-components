@@ -83,19 +83,19 @@ export class MpcComprovanteComponent {
     }
   }
 
-  getBadgeStatusInscricao(status: string) {
+  getBadgeStatusInscricao(status: string): string | undefined {
     if (status === 'ATIVO') return 'text-bg-success';
     if (status === 'INATIVO') return 'text-bg-danger';
     return;
   }
 
-  getBadgeStatusPagamento(status: string) {
+  getBadgeStatusPagamento(status: string): string | undefined {
     if (status === 'PAGO') return 'text-bg-success';
     if (status === 'A PAGAR') return 'text-bg-danger';
     return;
   }
 
-  getTextoStatusPagamento(status: string) {
+  getTextoStatusPagamento(status: string): string | undefined {
     if (status === 'PAGO') return 'Pagamento realizado';
     if (status === 'A PAGAR') return 'Aguardando pagamento';
     return;
@@ -107,11 +107,11 @@ export class MpcComprovanteComponent {
     return;
   }
 
-  formatarValor(valor: number) {
+  formatarValor(valor: number): string {
     return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   }
 
-  formatarData(data: string) {
+  formatarData(data: string): string {
     const date = new Date(data);
     if (date instanceof Date && !isNaN(date.getTime())) {
       return new Date(date).toLocaleDateString('pt-BR');

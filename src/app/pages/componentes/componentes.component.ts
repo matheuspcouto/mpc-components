@@ -8,10 +8,11 @@ import { MpcComprovanteComponent } from '../../shared/components/mpc-comprovante
 import { MpcComprovanteConfig } from '../../shared/components/mpc-comprovante/mpc-comprovante.directive';
 import { MpcLoaderService } from '../../shared/components/mpc-loader/mpc-loader.service';
 import { ActivatedRoute } from '@angular/router';
+import { MpcCardComponent } from "../../shared/components/mpc-card/mpc-card.component";
 
 @Component({
   selector: 'app-componentes',
-  imports: [MpcNavbarComponent, MpcModalComponent, MpcComprovanteComponent, MpcButtonComponent],
+  imports: [MpcNavbarComponent, MpcModalComponent, MpcComprovanteComponent, MpcButtonComponent, MpcCardComponent],
   templateUrl: './componentes.component.html',
   styleUrl: './componentes.component.css'
 })
