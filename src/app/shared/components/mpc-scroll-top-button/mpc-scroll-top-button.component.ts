@@ -12,7 +12,7 @@
  * @updated 27/02/2025
  */
 
-import { Component, inject, InjectionToken, Input } from '@angular/core';
+import { Component, inject, InjectionToken, Input, OnInit } from '@angular/core';
 
 const WINDOW = new InjectionToken<Window>('WindowToken', {
   factory: () => {
@@ -29,11 +29,22 @@ const WINDOW = new InjectionToken<Window>('WindowToken', {
   templateUrl: './mpc-scroll-top-button.component.html',
   styleUrl: './mpc-scroll-top-button.component.css'
 })
-export class MpcScrollTopButtonComponent {
+export class MpcScrollTopButtonComponent implements OnInit {
 
   @Input() icone: string = '';
 
   window = inject(WINDOW);
+
+  ngOnInit(): void {
+    this.window.addEventListener('scroll', () => {
+      const scrollPosition = this.window.scrollY;
+      const btnScrollTop = document.getElementById('scrollTop');
+
+      if (btnScrollTop) {
+        btnScrollTop.style.visibility = scrollPosition > 300 ? 'visible' : 'hidden';
+      }
+    });
+  }
 
   scrollToTop() {
     this.window.scrollTo({ top: 0, behavior: 'smooth' });
