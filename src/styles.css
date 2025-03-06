@@ -83,6 +83,10 @@ body {
   cursor: default !important;
 }
 
+main {
+  margin-top: 90px !important;
+}
+
 a {
   color: var(--cor-primaria);
   text-decoration: none !important;
@@ -129,8 +133,6 @@ h6 {
 section {
   overflow: hidden;
   padding: 40px 0;
-  scroll-margin-top: 90px;
-  overflow: clip;
 
   h5 {
     font-weight: 400;

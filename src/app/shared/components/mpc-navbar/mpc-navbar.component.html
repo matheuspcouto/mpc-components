@@ -6,41 +6,43 @@
     <a routerLink="/" class="logo" tabindex="0" aria-label="Logo">
       <img src="/img/logo.png">
     </a>
-    <!-- Fim do logo -->
+    <!-- Fim da logo -->
 
     <nav id="navbar" class="navbar">
       <ul>
 
-        <div *ngFor="let aba of abas; let i = index">
+        <div *ngFor="let aba of abas">
 
           <!-- Aba de menu -->
-          <li *ngIf="aba.ativo && !aba.subMenus" tabindex="0" [attr.aria-label]="'Aba ' + aba.titulo">
+          <li *ngIf="aba.ativo && !aba.subRotas" tabindex="0" [attr.aria-label]="'Aba ' + aba.titulo">
             <a routerLinkActive="abaAtiva" [routerLinkActiveOptions]="{exact: true}" [routerLink]="aba.rota"
-              *ngIf="!aba.subMenus">
+              *ngIf="!aba.subRotas">
               {{ aba.titulo }}
             </a>
           </li>
           <!-- Fim da aba de menu -->
 
-          <!-- Abas que possuem submenus -->
-          <li class="dropdown" *ngIf="aba.ativo && aba.subMenus" tabindex="0" [attr.aria-label]="'Aba com submenu ' + aba.titulo">
+          <!-- Abas que possuem subRotas -->
+          <li class="dropdown" *ngIf="aba.ativo && aba.subRotas" tabindex="0"
+            [attr.aria-label]="'Aba com submenu ' + aba.titulo">
             <a class="dropdown-toggle" routerLinkActive="abaAtiva" [routerLinkActiveOptions]="{exact: true}"
               [routerLink]="aba.rota" data-bs-toggle="dropdown">
               {{ aba.titulo }}
             </a>
 
-            <ul class="dropdown-menu" *ngIf="aba.subMenus">
-              <li class="mb-3" *ngFor="let sub of aba.subMenus">
+            <ul class="dropdown-menu" *ngIf="aba.subRotas">
+              <li class="mb-3" *ngFor="let sub of aba.subRotas">
                 <a class="dropdown-item" *ngIf="sub.ativo && sub.rota" [routerLink]="sub.rota">
                   {{ sub.titulo }}
                 </a>
-                <a class="dropdown-item" *ngIf="sub.ativo && sub.fragment" (click)="navigate(aba.rota, sub.fragment)">
+                <a class="dropdown-item" *ngIf="sub.ativo && sub.fragment" [routerLink]="aba.rota"
+                  [fragment]="sub.fragment">
                   {{ sub.titulo }}
                 </a>
               </li>
             </ul>
           </li>
-          <!-- Fim das abas que possuem submenus -->
+          <!-- Fim das abas que possuem subRotas -->
 
         </div>
 
@@ -68,43 +70,42 @@
     <!-- Fim do botão Hamburguer lateral -->
 
     <!-- Menu Lateral -->
-    <div class="offcanvas offcanvas-end" data-bs-backdrop="static" id="menuLateral">
+    <div class="offcanvas offcanvas-end" data-bs-backdrop="static" data-bs-scroll="false" id="menuLateral">
       <div class="offcanvas-body">
         <ul>
 
           <div *ngFor="let aba of abas; let i = index">
 
             <!-- Abas de menu -->
-            <li *ngIf="aba.ativo && !aba.subMenus"  tabindex="0" [attr.aria-label]="'Aba ' + aba.titulo">
+            <li *ngIf="aba.ativo && !aba.subRotas" tabindex="0" [attr.aria-label]="'Aba ' + aba.titulo">
               <a routerLinkActive="abaAtiva" [routerLinkActiveOptions]="{exact: true}" [routerLink]="aba.rota"
-                *ngIf="!aba.subMenus">
+                *ngIf="!aba.subRotas">
                 <i [class]="aba.icone"></i> {{ aba.titulo }}
               </a>
             </li>
             <!-- Fim da aba de menu -->
 
-            <!-- Abas que possuem submenus -->
-            <li *ngIf="aba.ativo && aba.subMenus" tabindex="0" [attr.aria-label]="'Aba com submenu ' + aba.titulo">
-              <a routerLinkActive="abaAtiva"
-                data-bs-toggle="collapse" [attr.data-bs-target]="'#subMenu'+ i">
+            <!-- Abas que possuem subRotas -->
+            <li *ngIf="aba.ativo && aba.subRotas" tabindex="0" [attr.aria-label]="'Aba com submenu ' + aba.titulo">
+              <a routerLinkActive="abaAtiva" data-bs-toggle="collapse" [attr.data-bs-target]="'#subMenu'+ i">
                 <i [class]="aba.icone"></i> {{ aba.titulo }}
                 <em class="bi bi-caret-down-fill"></em>
               </a>
 
               <div class="collapse" [id]="'subMenu' + i">
                 <ul>
-                  <li *ngFor="let sub of aba.subMenus">
+                  <li *ngFor="let sub of aba.subRotas">
                     <a *ngIf="sub.ativo && sub.rota" [routerLink]="sub.rota">
                       {{ sub.titulo }}
                     </a>
-                    <a *ngIf="sub.ativo && sub.fragment" (click)="navigate(aba.rota, sub.fragment)">
+                    <a *ngIf="sub.ativo && sub.fragment" [routerLink]="aba.rota" [fragment]="sub.fragment">
                       {{ sub.titulo }}
                     </a>
                   </li>
                 </ul>
               </div>
             </li>
-            <!-- Fim das abas que possuem submenus -->
+            <!-- Fim das abas que possuem subRotas -->
 
           </div>
 

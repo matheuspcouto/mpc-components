@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, inject, InjectionToken } from '@angular/core';
+import { MpcNavbarComponent } from '../../shared/components/mpc-navbar/mpc-navbar.component';
 
 const WINDOW = new InjectionToken<Window>('WindowToken', {
   factory: () => {
@@ -11,6 +12,7 @@ const WINDOW = new InjectionToken<Window>('WindowToken', {
 
 @Component({
   selector: 'app-aguarde',
+  imports: [ MpcNavbarComponent ],
   templateUrl: './aguarde.component.html',
   styleUrls: ['./aguarde.component.css']
 })

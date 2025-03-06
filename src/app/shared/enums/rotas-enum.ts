@@ -4,14 +4,15 @@ export const Rotas = {
 
   // Componentes
   COMPONENTES: "/componentes",
-  BUTTONS: "buttons",
-  LOADER: "loader",
-  MODAIS: "modais",
-  PAGE_HEADER: "page-header",
-  COMPROVANTE: "comprovante",
-  CARDS: "cards",
-  NAVBAR: "navbar",
-  FOOTER: "footer",
+  BUTTONS: "/componentes/buttons",
+  CARDS: "/componentes/cards",
+  MODAIS: "/componentes/modais",
+  LOADER: "/componentes/loader",
+  NAVBAR: "/componentes/navbar",
+  FOOTER: "/componentes/footer",
+  SCROLLTOP: "/componentes/scrolltop",
+  TABS: "/componentes/tabs",
+  COMPROVANTE: "/componentes/comprovante",
 
   // Paginas
   PAGINAS: "/paginas",
