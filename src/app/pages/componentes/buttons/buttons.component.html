@@ -1,0 +1,82 @@
+<mpc-navbar></mpc-navbar>
+
+<main>
+
+  <!-- ======= MpcButton ======= -->
+  <section id="buttons" class="section-components">
+    <div class="container">
+
+      <div class="section-header">
+        <h2>experimente os</h2>
+        <p>MPC<span> Buttons </span> </p>
+      </div>
+
+      <h5>
+        O <code>mpc-button</code> do MyComponents são baseados no framework Bootstrap, que oferece uma ampla gama de
+        estilos e
+        funcionalidades para botões.
+        Abaixo, você pode ver como utilizar o componente e seus parâmetros.
+      </h5>
+
+      <h5>
+        <ul class="text-start mt-3">
+          <li><strong>id</strong>: (opcional) Um identificador único para o botão.</li>
+          <li><strong>texto</strong>: O texto que será exibido no botão.</li>
+          <li><strong>corBotao</strong>: A classe de cor do botão, que pode ser qualquer uma das classes de botão do
+            Bootstrap. Padrão: <code>btn-primary</code></li>
+          <li><strong>disabled</strong>: (opcional) Um booleano que indica se o botão deve estar desabilitado.</li>
+          <li><strong>posicaoIcone</strong>: (opcional) Define a posição do ícone em relação ao texto, podendo ser
+            <code>esquerda</code> ou <code>direita</code>. Padrão: <code>esquerda</code>.
+          </li>
+          <li><strong>icone</strong>: (opcional) O ícone a ser exibido no botão, utilizando classes do Bootstrap Icons
+            ou a que
+            preferir.
+          </li>
+          <li><strong>tabIndex</strong>: (opcional) O índice de tabulação para acessibilidade.</li>
+          <li><strong>ariaLabel</strong>: (opcional) Uma descrição do botão para acessibilidade.</li>
+        </ul>
+      </h5>
+
+      <div class="mb-5">
+        <h5>No seu arquivo <code>component.ts</code>, importe o componente:</h5>
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+          <pre class="chroma">
+              <code>
+                ```
+                imports: [ MpcButtonComponent ]
+                ```
+              </code>
+          </pre>
+        </div>
+      </div>
+
+      <div class="row mb-5">
+        <h5>No seu arquivo <code>component.html</code>, adicione o seguinte código:</h5>
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+          <pre class="chroma">
+              <code>
+                &lt;mpc-button (click)="" [corBotao]="'btn-info'"
+                [icone]="'bi bi-code-slash'" [posicaoIcone]="'esquerda'" [texto]="'Exemplo de Botão'&gt;
+              &lt;/mpc-button&gt;
+              </code>
+          </pre>
+        </div>
+        <h5>Resultado:</h5>
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+          <mpc-button (click)="alert('Exemplo de Botão')" [corBotao]="'btn-info'" [icone]="'bi bi-code-slash'"
+            [posicaoIcone]="'esquerda'" [texto]="'Exemplo de Botão'">
+          </mpc-button>
+        </div>
+      </div>
+
+      <h5>
+        Para mais informações sobre como utilizar botões no Bootstrap, consulte a <a
+          href="https://getbootstrap.com/docs/5.1/components/buttons/" target="_blank">documentação oficial do Bootstrap
+          sobre botões</a>.
+      </h5>
+
+    </div>
+  </section>
+  <!-- ======= MpcButton ======= -->
+
+</main>

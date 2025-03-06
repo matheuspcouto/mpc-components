@@ -7,10 +7,10 @@ export const Rotas = {
   BUTTONS: "/componentes/buttons",
   CARDS: "/componentes/cards",
   MODAIS: "/componentes/modais",
-  LOADER: "/componentes/loader",
+  LOADERS: "/componentes/loaders",
   NAVBAR: "/componentes/navbar",
   FOOTER: "/componentes/footer",
-  SCROLLTOP: "/componentes/scrolltop",
+  SCROLLTOP: "/componentes/scroll-top-button",
   TABS: "/componentes/tabs",
   COMPROVANTE: "/componentes/comprovante",
 
