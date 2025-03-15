@@ -176,7 +176,6 @@ header {
 
   .navbar {
     padding: 0;
-    cursor: pointer;
 
     ul {
       display: flex;

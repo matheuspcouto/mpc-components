@@ -18,7 +18,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-interface Tab {
+export interface Tab {
   id: string;
   titulo: string;
 }
@@ -35,7 +35,7 @@ export class MpcTabsComponent implements OnInit {
   @Input() tabIndex?: number = 0;
   @Input() ariaLabel?: string = '';
 
-  @Output() tabSelected = new EventEmitter<string>();
+  @Output() tabSelected = new EventEmitter<Tab>();
 
   tabSelecionada!: Tab;
 
@@ -45,6 +45,6 @@ export class MpcTabsComponent implements OnInit {
 
   selecionarTab(tab: Tab) {
     this.tabSelecionada = tab;
-    this.tabSelected.emit(tab.id);
+    this.tabSelected.emit(tab);
   }
 }

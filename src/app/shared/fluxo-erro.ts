@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
 import { Rotas } from "./enums/rotas-enum";
 
 export type Erro = {
