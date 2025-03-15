@@ -11,6 +11,7 @@ import { LoadersComponent } from './pages/componentes/loaders/loaders.component'
 import { ScrollTopButtonComponent } from './pages/componentes/scroll-top-button/scroll-top-button.component';
 import { TabsComponent } from './pages/componentes/tabs/tabs.component';
 import { ComprovanteComponent } from './pages/componentes/comprovante/comprovante.component';
+import { FooterComponent } from './pages/componentes/footer/footer.component';
 
 //TODO: verificar lazy loading com loadComponent e loadChildren
 export const routes: Routes = [
@@ -26,7 +27,7 @@ export const routes: Routes = [
       { path: 'modais', component: ModaisComponent, title: 'Mpc Components - MpcModais', canActivate: [SiteAtivoGuard] },
       { path: 'loaders', component: LoadersComponent, title: 'Mpc Components - MpcLoaders', canActivate: [SiteAtivoGuard] },
       { path: 'navbar', component: NavbarComponent, title: 'Mpc Components - MpcNavbar', canActivate: [SiteAtivoGuard] },
-      { path: 'footer', component: NavbarComponent, title: 'Mpc Components - MpcFooter', canActivate: [SiteAtivoGuard] },
+      { path: 'footer', component: FooterComponent, title: 'Mpc Components - MpcFooter', canActivate: [SiteAtivoGuard] },
       { path: 'scroll-top-button', component: ScrollTopButtonComponent, title: 'Mpc Components - MpcScrollTop', canActivate: [SiteAtivoGuard] },
       { path: 'tabs', component: TabsComponent, title: 'Mpc Components - MpcTabs', canActivate: [SiteAtivoGuard] },
       { path: 'comprovante', component: ComprovanteComponent, title: 'Mpc Components - MpcComprovante', canActivate: [SiteAtivoGuard] },

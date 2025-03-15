@@ -1,1 +1,198 @@
-<p>modais works!</p>
+<mpc-navbar></mpc-navbar>
+
+<main>
+
+  <!-- ======= MpcModal ======= -->
+  <section id="modais" class="section-components">
+    <div class="container">
+
+      <div class="section-header">
+        <h2>experimente os</h2>
+        <p>MPC<span> Modais </span> </p>
+      </div>
+
+      <h5>
+        O componente <code>mpc-modal</code> é baseado na estrutura de modais do Bootstrap, que permite criar janelas
+        modais responsivas e estilizadas. Os modais são utilizados para exibir informações, formulários ou mensagens ao
+        usuário sem sair da página atual. Abaixo, você
+        pode ver como utilizar o componente e seus parâmetros.
+      </h5>
+
+      <h5>
+        <ul class="text-start mt-3">
+          <li><strong>titulo</strong>: O título que será exibido no cabeçalho do modal.</li>
+          <li><strong>texto</strong>: O conteúdo principal que será exibido dentro do modal.</li>
+          <li><strong>tipoModal</strong>: Define o tipo do modal, como confirmação, sucesso, aviso, etc.</li>
+          <li><strong>botao</strong>: A função que será chamada ao clicar no botão principal do modal.</li>
+          <li><strong>textoBotao</strong>: O texto que será exibido no botão principal.</li>
+          <li><strong>segundoBotao</strong>: (opcional) A função que será chamada ao clicar no segundo botão, se houver.
+          </li>
+          <li><strong>textoSegundoBotao</strong>: (opcional) O texto que será exibido no segundo botão, se houver.</li>
+        </ul>
+      </h5>
+
+      <div class="mb-5">
+        <h5>No arquivo <code>seu-component.ts</code>, importe o componente:</h5>
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+          <pre class="chroma">
+              <code>
+                ```
+                imports: [ MpcModalComponent ]
+                ```
+              </code>
+          </pre>
+        </div>
+      </div>
+
+      <div class="mb-5">
+        <h5>Ainda no <code>seu-component.ts</code>, crie uma nova instância do componente que irá receber o código do html.</h5>
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+          <pre class="chroma">
+                <code class="language-html mb-2" data-lang="html">
+                  &commat;ViewChild('modalExemplo', &lcub; static: true &rcub;) modalExemplo!: MpcModalComponent;
+                </code>
+          </pre>
+        </div>
+      </div>
+
+      <h5>
+        No arquivo <code>seu-component.html</code>, adicione o seguinte código:
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+          <pre class="chroma">
+            <code class="language-html" data-lang="html">
+            &lt;mpc-modal #modalExemplo&gt;&lt;/mpc-modal&gt;
+            </code>
+          </pre>
+        </div>
+      </h5>
+
+      <h5>Veja e teste abaixo os tipos de modais disponíveis</h5>
+
+      <div class="row mb-5">
+        <div class="col-lg-6">
+          <div class="col-md-12 mb-3 d-flex justify-content-center">
+            <pre class="chroma">
+              <code>
+                abrirModalSucesso() &lcub;
+                  const modalSucesso: ModalConfig = &lcub;
+                    titulo: 'Modal de Sucesso',
+                    texto: 'Parabéns',
+                    tipoModal: TipoModal.SUCESSO,
+                    botao: () => &lcub; return true; &rcub;,
+                    textoBotao: 'OK',
+                    segundoBotao: () => &lcub; this.modalExemplo?.fecharModal(); &rcub;,
+                    textoSegundoBotao: 'Fechar',
+                  &rcub;
+
+                  this.modalExemplo.modal = modalSucesso;
+                  this.modalExemplo?.abrirModal();
+                &rcub;
+              </code>
+            </pre>
+          </div>
+          <div class="col-md-12 mb-3 d-flex justify-content-center">
+            <mpc-button [disabled]="false" (click)="abrirModalSucesso()" [corBotao]="'btn-success'"
+              [icone]="'bi bi-check-all'" [posicaoIcone]="'esquerda'" [tabIndex]="0" [texto]="'Modal de Sucesso'">
+            </mpc-button>
+          </div>
+
+          <div class="col-md-12 mb-3 d-flex justify-content-center">
+            <pre class="chroma">
+              <code>
+                abrirModalConfirmacao() &lcub;
+                  const modalConfirmacao: ModalConfig = &lcub;
+                  titulo: 'Modal de Confirmação',
+                  texto: 'Este é um modal de confirmação',
+                  tipoModal: TipoModal.CONFIRMACAO,
+                  botao: () => &lcub; return true; &rcub;,
+                  textoBotao: 'OK',
+                  segundoBotao: () => &lcub; this.modalExemplo?.fecharModal(); &rcub;,
+                  textoSegundoBotao: 'Fechar',
+                &rcub;;
+
+                this.modalExemplo.modal = modalConfirmacao;
+                this.modalExemplo?.abrirModal();
+                &rcub;
+              </code>
+            </pre>
+          </div>
+          <div class="col-md-12 mb-3 d-flex justify-content-center">
+            <mpc-button [disabled]="false" (click)="abrirModalConfirmacao()" [corBotao]="'btn-info'"
+              [icone]="'bi bi-question-lg'" [posicaoIcone]="'esquerda'" [tabIndex]="0" [texto]="'Modal de Confirmação'">
+            </mpc-button>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+
+          <div class="col-md-12 mb-3 d-flex justify-content-center">
+            <pre class="chroma">
+              <code>
+                abrirModalAlerta() &lcub;
+                  const modalAlerta: ModalConfig = &lcub;
+                    titulo: 'Modal de Alerta',
+                    texto: 'Este é um modal de alerta',
+                    tipoModal: TipoModal.ALERTA,
+                    botao: () => &lcub; return true; &rcub;,
+                    textoBotao: 'OK',
+                    segundoBotao: () => &lcub; this.modalExemplo?.fecharModal(); &rcub;,
+                    textoSegundoBotao: 'Fechar',
+                  &rcub;
+
+                  this.modalExemplo.modal = modalAlerta;
+                  this.modalExemplo?.abrirModal();
+                &rcub;
+              </code>
+            </pre>
+          </div>
+          <div class="col-md-12 mb-3 d-flex justify-content-center">
+            <mpc-button [disabled]="false" (click)="abrirModalAlerta()" [corBotao]="'btn-warning'"
+              [icone]="'bi bi-exclamation-triangle'" [posicaoIcone]="'esquerda'" [tabIndex]="0"
+              [texto]="'Modal de Alerta'">
+            </mpc-button>
+          </div>
+
+          <div class="col-md-12 mb-3 d-flex justify-content-center">
+            <pre class="chroma">
+              <code>
+                abrirModalErro() &lcub;
+                  const modalErro: ModalConfig = &lcub;
+                    titulo: 'Modal de Erro',
+                    texto: 'Este é um modal de erro',
+                    tipoModal: TipoModal.ERRO,
+                    botao: () => this.modalExemplo?.fecharModal(),
+                    textoBotao: 'OK',
+                    // Não é necessário passar o segundo botão
+                    // O modal de erro já possui um botão de copiar o erro
+                  &rcub;
+
+                  this.modalExemplo.modal = modalErro;
+                  this.modalExemplo?.abrirModal();
+                &rcub;
+              </code>
+            </pre>
+          </div>
+          <div class="col-md-6 mb-3 d-flex justify-content-center">
+            <mpc-button [disabled]="false" (click)="abrirModalErro()" [corBotao]="'btn-danger'" [icone]="'bi bi-bug'"
+              [posicaoIcone]="'esquerda'" [tabIndex]="0" [texto]="'Modal de Erro'">
+            </mpc-button>
+          </div>
+
+        </div>
+
+      </div>
+
+      <h5>
+        Para mais informações sobre como utilizar modais no Bootstrap, consulte a <a
+          href="https://getbootstrap.com/docs/5.1/components/modal/" target="_blank">documentação oficial do Bootstrap
+          sobre modais</a>.
+      </h5>
+
+    </div>
+
+  </section>
+  <!-- ======= MpcModal ======= -->
+
+</main>
+
+<mpc-modal #modalExemplo></mpc-modal>

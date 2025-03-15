@@ -1,1 +1,65 @@
-<p>loaders works!</p>
+<mpc-navbar></mpc-navbar>
+
+<main>
+
+  <!-- ======= MpcLoader ======= -->
+  <section id="loader" class="section-components">
+    <div class="container">
+
+      <div class="section-header">
+        <h2>experimente o</h2>
+        <p>MPC <span>Loader</span></p>
+      </div>
+
+      <h5>
+        O <code>mpc-loader</code> é um componente que exibe uma animação de carregamento enquanto o conteúdo da página
+        está sendo carregado a cada requisição HTTP. Caso deseje utilizar o componente em uma página específica ou em
+        situações que não sejam uma requisição
+        HTTP, incluá-o seguinte código
+        no arquivo <code>seu-component.ts</code>
+      </h5>
+
+      <div class="mb-5">
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+          <pre class="chroma">
+              <code>
+                ```
+                constructor(private mpcLoaderService: MpcLoaderService) &lcub; &rcub;
+
+                abrirLoading() &lcub;
+                  this.mpcLoaderService.show();
+                  // Implemente a lógica entre a abertura e o fechamento do loading
+                  setTimeout(() => this.mpcLoaderService.hide(), 5000);
+                &rcub;
+                ```
+              </code>
+          </pre>
+        </div>
+      </div>
+
+      <h5>
+        Caso deseje utilizar o componente em uma página específica, inclua o seguinte código na sua página, caso deseje
+        utilizar em todas as páginas, inclua o mesmo código no arquivo <code>app.component.html</code>
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+          <pre class="chroma">
+              <code>
+              &lt;mpc-loader&gt;&lt;/mpc-loader&gt;
+              </code>
+            </pre>
+        </div>
+      </h5>
+
+      <h5>Clique no botão abaixo e veja como ficou a implementação.</h5>
+
+      <div class="col-md-12 mb-3 d-flex justify-content-center">
+        <mpc-button [disabled]="false" (click)="abrirLoading()" [corBotao]="'btn-info'"
+          [icone]="'bi bi-arrow-clockwise'" [posicaoIcone]="'esquerda'" [tabIndex]="0" [texto]="'Abrir Loader'">
+        </mpc-button>
+      </div>
+
+    </div>
+
+  </section>
+  <!-- ======= MpcLoader ======= -->
+
+</main>
