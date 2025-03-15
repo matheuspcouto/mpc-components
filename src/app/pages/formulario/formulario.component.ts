@@ -13,6 +13,7 @@ import { SegundaEtapaComponent } from './segunda-etapa/segunda-etapa.component';
 import { TerceiraEtapaComponent } from './terceira-etapa/terceira-etapa.component';
 import { MpcComprovanteComponent } from '../../shared/components/mpc-comprovante/mpc-comprovante.component';
 import { InscricaoService } from '../../services/inscricao.service';
+import { PageHeaderComponent } from "./page-header/page-header.component";
 
 // TODO: Remover sessionStorage, trocar por Signals ?
 // TODO: Otimizar fluxo e verificar campos form
@@ -26,8 +27,9 @@ import { InscricaoService } from '../../services/inscricao.service';
     MpcComprovanteComponent,
     PrimeiraEtapaComponent,
     SegundaEtapaComponent,
-    TerceiraEtapaComponent
-  ],
+    TerceiraEtapaComponent,
+    PageHeaderComponent
+],
   templateUrl: './formulario.component.html',
   styleUrls: ['./formulario.component.css'],
 })
