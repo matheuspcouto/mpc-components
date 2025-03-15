@@ -1,12 +1,3 @@
-.capa {
-  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(/img/home/mountain.jpg);
-  min-height: 30vh !important;
-
-  h2 {
-    font-size: 2rem !important;
-  }
-}
-
 pre {
   background-color: var(--cor-primaria);
   padding: 20px;
@@ -32,7 +23,6 @@ pre {
     width: 100%;
   }
 }
-
 
 .section-components {
   .col-lg-6 {

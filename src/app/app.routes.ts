@@ -15,21 +15,21 @@ import { ComprovanteComponent } from './pages/componentes/comprovante/comprovant
 //TODO: verificar lazy loading com loadComponent e loadChildren
 export const routes: Routes = [
   /*  Rotas para Home */
-  { path: '', pathMatch: 'full', component: HomeComponent, title: 'My Components - Home', canActivate: [SiteAtivoGuard] },
+  { path: '', pathMatch: 'full', component: HomeComponent, title: 'Mpc Components - Home', canActivate: [SiteAtivoGuard] },
 
   /*  Rotas para Componentes */
   {
     path: 'componentes',
     children: [
-      { path: 'buttons', component: ButtonsComponent, title: 'My Components - MpcButtons', canActivate: [SiteAtivoGuard] },
-      { path: 'cards', component: CardsComponent, title: 'My Components - MpcCards', canActivate: [SiteAtivoGuard] },
-      { path: 'modais', component: ModaisComponent, title: 'My Components - MpcModais', canActivate: [SiteAtivoGuard] },
-      { path: 'loaders', component: LoadersComponent, title: 'My Components - MpcLoaders', canActivate: [SiteAtivoGuard] },
-      { path: 'navbar', component: NavbarComponent, title: 'My Components - MpcNavbar', canActivate: [SiteAtivoGuard] },
-      { path: 'footer', component: NavbarComponent, title: 'My Components - MpcFooter', canActivate: [SiteAtivoGuard] },
-      { path: 'scroll-top-button', component: ScrollTopButtonComponent, title: 'My Components - MpcScrollTop', canActivate: [SiteAtivoGuard] },
-      { path: 'tabs', component: TabsComponent, title: 'My Components - MpcTabs', canActivate: [SiteAtivoGuard] },
-      { path: 'comprovante', component: ComprovanteComponent, title: 'My Components - MpcComprovante', canActivate: [SiteAtivoGuard] },
+      { path: 'buttons', component: ButtonsComponent, title: 'Mpc Components - MpcButtons', canActivate: [SiteAtivoGuard] },
+      { path: 'cards', component: CardsComponent, title: 'Mpc Components - MpcCards', canActivate: [SiteAtivoGuard] },
+      { path: 'modais', component: ModaisComponent, title: 'Mpc Components - MpcModais', canActivate: [SiteAtivoGuard] },
+      { path: 'loaders', component: LoadersComponent, title: 'Mpc Components - MpcLoaders', canActivate: [SiteAtivoGuard] },
+      { path: 'navbar', component: NavbarComponent, title: 'Mpc Components - MpcNavbar', canActivate: [SiteAtivoGuard] },
+      { path: 'footer', component: NavbarComponent, title: 'Mpc Components - MpcFooter', canActivate: [SiteAtivoGuard] },
+      { path: 'scroll-top-button', component: ScrollTopButtonComponent, title: 'Mpc Components - MpcScrollTop', canActivate: [SiteAtivoGuard] },
+      { path: 'tabs', component: TabsComponent, title: 'Mpc Components - MpcTabs', canActivate: [SiteAtivoGuard] },
+      { path: 'comprovante', component: ComprovanteComponent, title: 'Mpc Components - MpcComprovante', canActivate: [SiteAtivoGuard] },
     ]
   },
 
@@ -37,8 +37,8 @@ export const routes: Routes = [
   {
     path: 'paginas',
     children: [
-      { path: 'formulario', component: FormularioComponent, title: 'My Components - Formulário', canActivate: [SiteAtivoGuard] },
-      { path: 'aguarde', component: AguardeComponent, title: 'My Components - Aguarde' },
+      { path: 'formulario', component: FormularioComponent, title: 'Mpc Components - Formulário', canActivate: [SiteAtivoGuard] },
+      { path: 'aguarde', component: AguardeComponent, title: 'Mpc Components - Aguarde' },
     ]
   },
 ];

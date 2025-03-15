@@ -1,1 +1,104 @@
-<p>comprovante works!</p>
+<mpc-navbar></mpc-navbar>
+
+<main>
+
+  <!-- ======= MpcComprovante ======= -->
+  <section id="comprovante" class="section-components">
+    <div class="container">
+
+      <div class="section-header">
+        <h2>experimente os</h2>
+        <p>MPC<span> Comprovantes </span> </p>
+      </div>
+
+      <h5>
+        O componente <code>mpc-comprovante</code> é baseado na estrutura de modais do Bootstrap, que permite criar
+        janelas
+        modais responsivas e estilizadas. Os modais são utilizados para exibir informações, formulários ou mensagens ao
+        usuário sem sair da página atual.
+      </h5>
+
+      <div class="mb-5">
+        <h5>No arquivo <code>seu-component.ts</code>, importe o componente:</h5>
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+          <pre class="chroma">
+              <code>
+                ```
+                imports: [ MpcComprovanteComponent ]
+                ```
+              </code>
+          </pre>
+        </div>
+      </div>
+
+      <div class="mb-5">
+        <h5>Ainda no <code>seu-component.ts</code>, crie uma nova instância do comprovante e defina um método de
+          abertura do comprovante com seus parâmetros:</h5>
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+          <pre class="chroma">
+                <code class="language-html mb-2" data-lang="html">
+                  &commat;ViewChild('comprovanteExemplo', &lcub; static: true &rcub;) comprovanteExemplo!: MpcComprovanteComponent;
+                  dadosComprovante: MpcComprovanteConfig = &lcub;&rcub; as MpcComprovanteConfig;
+
+                          abrirModalComprovante() &lcub;
+                            this.dadosComprovante = &lcub;
+                              titulo: 'Comprovante de inscrição',
+                              dados: &lcub;
+                                dadosInscricao: &lcub;
+                                  codigoInscricao: '123456',
+                                  dataInscricao: new Date().toLocaleDateString('pt-BR'),
+                                  status: 'ATIVO',
+                                &rcub;,
+                                dadosPessoais: [
+                                  &lcub; label: 'Nome', valor: 'Fulano de Tal' &rcub;,
+                                  &lcub; label: 'CPF', valor: '123.456.789-00' &rcub;,
+                                  &lcub; label: 'E-mail', valor: 'fulano&commat;example.com' &rcub;,
+                                ],
+                                dadosPagamento: &lcub;
+                                  formaPagamento: 'Cartão de Crédito',
+                                  valor: 100.00,
+                                  statusPagamento: 'A PAGAR'
+                                &rcub;,
+                              &rcub;
+                            &rcub;;
+
+                            this.comprovanteExemplo?.abrirComprovante();
+                          &rcub;
+                </code>
+          </pre>
+        </div>
+      </div>
+
+      <h5>
+        No arquivo <code>seu-component.html</code>, adicione o seguinte código:
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+          <pre class="chroma">
+            <code class="language-html" data-lang="html">
+            &lt;mpc-comprovante [comprovante]="dadosComprovante" #comprovanteExemplo&gt;&lt;/mpc-comprovante&gt;
+            </code>
+          </pre>
+        </div>
+      </h5>
+
+      <h5>Clique no botão abaixo e veja como ficou a implementação.</h5>
+
+      <div class="col-md-12 d-flex justify-content-center mb-5">
+        <mpc-button [disabled]="false" (click)="abrirModalComprovante()" [corBotao]="'btn-outline-secondary'"
+          [icone]="'bi bi-body-text'" [posicaoIcone]="'esquerda'" [tabIndex]="0" [texto]="'Abrir Comprovante'">
+        </mpc-button>
+      </div>
+
+      <h5>
+        Para mais informações sobre como utilizar modais no Bootstrap, consulte a <a
+          href="https://getbootstrap.com/docs/5.1/components/modal/" target="_blank">documentação oficial do Bootstrap
+          sobre modais</a>.
+      </h5>
+
+    </div>
+
+  </section>
+  <!-- ======= MpcComprovante ======= -->
+
+</main>
+
+<mpc-comprovante [comprovante]="dadosComprovante" #comprovanteExemplo></mpc-comprovante>

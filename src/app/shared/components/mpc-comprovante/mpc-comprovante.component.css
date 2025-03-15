@@ -56,6 +56,10 @@ p {
           color: var(--cor-secundaria) !important;
           display: block;
           font-size: 18px;
+
+          &:hover {
+            cursor: pointer;
+          }
         }
       }
 

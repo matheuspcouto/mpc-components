@@ -80,7 +80,6 @@ body {
   font-family: var(--font-padrao);
   color: var(--cor-secundaria);
   overflow: auto !important;
-  cursor: default !important;
 }
 
 main {
@@ -95,15 +94,6 @@ a {
     color: var(--cor-primaria);
     text-decoration: none;
   }
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-secundaria);
 }
 
 /* Media Queries for Desktop & Mobile */
@@ -170,53 +160,6 @@ section {
       span {
         color: var(--cor-secundaria);
       }
-    }
-  }
-}
-
-/*--------------------------------------------------------------
-# Capa Section
---------------------------------------------------------------*/
-.capa {
-  width: 100%;
-  position: relative;
-  min-height: 100vh;
-  padding: 160px 0 60px 0;
-  background-size: cover !important;
-  background-position: center !important;
-
-  span {
-    font-family: var(--font-titulo);
-    color: var(--cor-secundaria);
-    font-size: clamp(1em, 1em + 1vw, 3em);
-    font-weight: 300;
-  }
-
-  h2 {
-    font-size: 64px;
-    font-weight: 700;
-    color: var(--branco) !important;
-    font-family: var(--fonte-padrao) !important;
-  }
-
-  p {
-    color: var(--cor-terciaria);
-    font-size: 30px;
-    font-weight: 400;
-    margin-bottom: 30px;
-  }
-
-  a {
-    color: var(--branco);
-
-    &:hover {
-      color: var(--cor-secundaria);
-    }
-  }
-
-  @media (max-width: 640px) {
-    h2 {
-      font-size: 36px;
     }
   }
 }
