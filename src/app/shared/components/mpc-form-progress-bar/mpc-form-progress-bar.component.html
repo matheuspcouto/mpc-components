@@ -1,0 +1,20 @@
+<!-- Barra de progresso -->
+<div class="progress-container">
+  <div class="step" id="step1">
+    <i [class]="getIconeEtapa(etapa, 1)"></i>
+    <p>Dados Pessoais</p>
+  </div>
+  <div class="step" id="step2">
+    <i [class]="getIconeEtapa(etapa, 2)"></i>
+    <p>Contato</p>
+  </div>
+  <div class="step" id="step3">
+    <i [class]="getIconeEtapa(etapa, 3)"></i>
+    <p>Pagamento</p>
+  </div>
+</div>
+<div class="progress-bar mb-5">
+  <div class="progress-fill" id="progressFill" [style.width.%]="(etapa / 3) * 100"></div>
+</div>
+
+<hr>

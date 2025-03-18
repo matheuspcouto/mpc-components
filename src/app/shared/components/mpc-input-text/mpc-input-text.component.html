@@ -1,0 +1,9 @@
+<div [tabindex]="tabIndex" [attr.aria-label]="ariaLabel" class="form-group">
+  <label class="form-label">{{ required || min ? label + ' *' : label }}</label>
+  <input type="text" class="form-control" [value]="value" (input)="setValue($event)" (blur)="onTouched()"
+    [required]="required" [style]="!isCampoValido() && value.length > 0 ? 'border-color: red' : ''" />
+
+  <div *ngIf="!isCampoValido() && value.length > 0">
+    <p class="text-danger mt-1"> {{ error }} </p>
+  </div>
+</div>
