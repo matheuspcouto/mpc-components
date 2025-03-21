@@ -1,3 +1,22 @@
+/**
+ * @Componente MpcInputRadioComponent
+ * Este componente é responsável por exibir um campo select do tipo radio.
+ *
+ * id {string}: (opcional) Id do campo.
+ * label {string}: Label do campo.
+ * options {RadioOption[]}: Opções do campo.
+ * tabIndex {number}: (opcional) Índice de tabulação do campo.
+ * ariaLabel {string}: (opcional) Label para acessibilidade.
+ * required {boolean}: (opcional) Campo obrigatório.
+ *
+ * Exemplo de utilização:
+ * <mpc-input-radio label="Sexo" [id]="sexo" [tabIndex]="0" [ariaLabel]="Campo de Sexo" [options]="sexos" [required]="true" (valorCampo)="setValorCampo($event)"></mpc-input-radio>
+ *
+ * @author Matheus Pimentel Do Couto
+ * @created 27/02/2025
+ * @updated 27/02/2025
+ */
+
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
@@ -17,7 +36,7 @@ export class MpcInputRadioComponent {
 
   @Input() id?: string;
   @Input() label: string = '';
-  @Input() values: RadioOption[] = [];
+  @Input() options: RadioOption[] = [];
   @Input() tabIndex?: number = 0;
   @Input() ariaLabel?: string;
 
@@ -44,7 +63,7 @@ export class MpcInputRadioComponent {
   }
 
   setValue(option: RadioOption): void {
-    this.values.forEach(v => v.checked = false);
+    this.options.forEach(v => v.checked = false);
     option.checked = true;
     this.value = option;
     this.onChange(this.value);

@@ -4,9 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "mock": "json-server --watch mock/db.json",
+    "start:mock": "npm run start & npm run mock",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
     "serve:ssr:my-components": "node dist/my-components/server/server.mjs"
   },
   "private": true,
@@ -40,11 +40,13 @@
     "@types/jasmine": "~5.1.0",
     "@types/node": "^18.18.0",
     "jasmine-core": "~5.5.0",
+    "json-server": "^1.0.0-beta.3",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "nodemon": "^3.1.9",
     "typescript": "~5.7.2"
   }
 }

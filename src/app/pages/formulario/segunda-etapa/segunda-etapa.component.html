@@ -1,222 +1,34 @@
-<h5 class="card-title text-center mt-3">Contatos</h5>
-<p class="text-center mt-3">
-  Preencha os campos abaixo com pelo menos dois contatos de pessoas próximas a você.
-</p>
-<div class="alert alert-light text-center mb-4">
-  Campos obrigatórios (*)
-</div>
+<h3>Contato</h3>
+<p class="text-muted mb-3">Campos obrigatórios (*)</p>
 
 <form [formGroup]="formGroup">
-  <div class="row mt-5">
+
+  <div class="row">
     <div class="col-md-6 mb-3">
-      <label class="form-label">Nome do Contato 1 (Mãe, Pai e familiares) *</label>
-      <div class="input-group">
-        <input type="text" class="form-control" formControlName="nomeContatoUm"
-          [style]="formGroup.controls['nomeContatoUm'].errors && formGroup.controls['nomeContatoUm'].touched ? 'border-color: red' : ''" />
-      </div>
-      <div class="mb-1"
-        *ngIf="formGroup.controls['nomeContatoUm'].errors && formGroup.controls['nomeContatoUm'].touched">
-        <p *ngIf="formGroup.controls['nomeContatoUm'].errors['required']" class="text-danger"> Campo
-          obrigatório </p>
-      </div>
+      <mpc-input-telefone [required]="true" (valorCampo)="setValorCampo($event, 'telefone')" />
     </div>
 
-    <div class="col-md-2 mb-3">
-      <div class="input-group">
-        <label class="form-label">Parentesco *</label>
-        <div class="input-group">
-          <select class="form-select form-select-md" formControlName="parentescoUm"
-            [style]="formGroup.controls['parentescoUm'].errors && formGroup.controls['parentescoUm'].touched ? 'border-color: red' : ''">
-            <option *ngFor="let parente of parentesco; let i = index" [value]="parente">
-              {{ parente }}
-            </option>
-          </select>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4 mb-3">
-      <label class="form-label">Telefone do Contato 1 *</label>
-      <div class="input-group">
-        <input type="text" class="form-control" formControlName="telefoneContatoUm" [mask]="mascaraTelefone"
-          [style]="formGroup.controls['telefoneContatoUm'].errors && formGroup.controls['telefoneContatoUm'].touched ? 'border-color: red' : ''" />
-
-      </div>
-      <div class="mb-1"
-        *ngIf="formGroup.controls['telefoneContatoUm'].errors && formGroup.controls['telefoneContatoUm'].touched">
-        <p *ngIf="formGroup.controls['telefoneContatoUm'].errors['required']" class="text-danger"> Campo
-          obrigatório
-        </p>
-        <p *ngIf="formGroup.controls['telefoneContatoUm'].errors['formatoInvalido']" class="text-danger"> Telefone
-          inválido
-        </p>
-      </div>
+    <div class="col-md-6 mb-3">
+      <mpc-input-email [required]="true" (valorCampo)="setValorCampo($event, 'email')" />
     </div>
   </div>
 
-  <div class="row mt-3">
-    <div class="col-md-6 mb-3">
-      <label class="form-label">Nome do Contato 2 (Mãe, Pai e familiares) *</label>
-      <div class="input-group">
-        <input type="text" class="form-control" formControlName="nomeContatoDois"
-          [style]="formGroup.controls['nomeContatoDois'].errors && formGroup.controls['nomeContatoDois'].touched ? 'border-color: red' : ''" />
-      </div>
-      <div class="mb-1"
-        *ngIf="formGroup.controls['nomeContatoDois'].errors && formGroup.controls['nomeContatoDois'].touched">
-        <p *ngIf="formGroup.controls['nomeContatoDois'].errors['required']" class="text-danger"> Campo
-          obrigatório </p>
-      </div>
-    </div>
-
-    <div class="col-md-2 mb-3">
-      <div class="input-group">
-        <label class="form-label">Parentesco *</label>
-        <div class="input-group">
-          <select class="form-select form-select-md" formControlName="parentescoDois"
-            [style]="formGroup.controls['parentescoDois'].errors && formGroup.controls['parentescoDois'].touched ? 'border-color: red' : ''">
-            <option *ngFor="let parente of parentesco; let i = index" [value]="parente">
-              {{ parente }}
-            </option>
-          </select>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4 mb-3">
-      <label class="form-label">Telefone do Contato 2 *</label>
-      <div class="input-group">
-        <input type="text" class="form-control" formControlName="telefoneContatoDois" [mask]="mascaraTelefone"
-          [style]="formGroup.controls['telefoneContatoDois'].errors && formGroup.controls['telefoneContatoDois'].touched ? 'border-color: red' : ''" />
-
-      </div>
-      <div class="mb-1"
-        *ngIf="formGroup.controls['telefoneContatoDois'].errors && formGroup.controls['telefoneContatoDois'].touched">
-        <p *ngIf="formGroup.controls['telefoneContatoDois'].errors['required']" class="text-danger"> Campo
-          obrigatório
-        </p>
-        <p *ngIf="formGroup.controls['telefoneContatoDois'].errors['formatoInvalido']" class="text-danger"> Telefone
-          inválido
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="row mt-3" *ngIf="qtdContatos > 2">
-    <div class="col-md-6 mb-3">
-      <label class="form-label">Nome do Contato 3 (Amigos ou Outros familiares) </label>
-      <div class="input-group">
-        <input type="text" class="form-control" formControlName="nomeContatoTres"
-          [style]="formGroup.controls['nomeContatoTres'].errors && formGroup.controls['nomeContatoTres'].touched ? 'border-color: red' : ''" />
-      </div>
-      <div class="mb-1"
-        *ngIf="formGroup.controls['nomeContatoTres'].errors && formGroup.controls['nomeContatoTres'].touched">
-        <p *ngIf="formGroup.controls['nomeContatoTres'].errors['required']" class="text-danger"> Campo
-          obrigatório </p>
-      </div>
-    </div>
-
-    <div class="col-md-2 mb-3">
-      <div class="input-group">
-        <label class="form-label">Parentesco</label>
-        <div class="input-group">
-          <select class="form-select form-select-md" formControlName="parentescoTres"
-            [style]="formGroup.controls['parentescoTres'].errors && formGroup.controls['parentescoTres'].touched ? 'border-color: red' : ''">
-            <option *ngFor="let parente of parentesco; let i = index" [value]="parente">
-              {{ parente }}
-            </option>
-          </select>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4 mb-3">
-      <label class="form-label">Telefone do Contato 3 </label>
-      <div class="input-group">
-        <input type="text" class="form-control" formControlName="telefoneContatoTres" [mask]="mascaraTelefone"
-          [style]="formGroup.controls['telefoneContatoTres'].errors && formGroup.controls['telefoneContatoTres'].touched ? 'border-color: red' : ''" />
-
-      </div>
-      <div class="mb-1"
-        *ngIf="formGroup.controls['telefoneContatoTres'].errors && formGroup.controls['telefoneContatoTres'].touched">
-        <p *ngIf="formGroup.controls['telefoneContatoTres'].errors['required']" class="text-danger"> Campo
-          obrigatório
-        </p>
-        <p *ngIf="formGroup.controls['telefoneContatoTres'].errors['formatoInvalido']" class="text-danger"> Telefone
-          inválido
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="row mt-3" *ngIf="qtdContatos > 3">
-    <div class="col-md-6 mb-3">
-      <label class="form-label">Nome do Contato 4 (Amigos ou Outros familiares) </label>
-      <div class="input-group">
-        <input type="text" class="form-control" formControlName="nomeContatoQuatro"
-          [style]="formGroup.controls['nomeContatoQuatro'].errors && formGroup.controls['nomeContatoQuatro'].touched ? 'border-color: red' : ''" />
-      </div>
-      <div class="mb-1"
-        *ngIf="formGroup.controls['nomeContatoQuatro'].errors && formGroup.controls['nomeContatoQuatro'].touched">
-        <p *ngIf="formGroup.controls['nomeContatoQuatro'].errors['required']" class="text-danger"> Campo
-          obrigatório </p>
-      </div>
-    </div>
-
-    <div class="col-md-2 mb-3">
-      <div class="input-group">
-        <label class="form-label">Parentesco</label>
-        <div class="input-group">
-          <select class="form-select form-select-md" formControlName="parentescoQuatro"
-            [style]="formGroup.controls['parentescoQuatro'].errors && formGroup.controls['parentescoQuatro'].touched ? 'border-color: red' : ''">
-            <option *ngFor="let parente of parentesco; let i = index" [value]="parente">
-              {{ parente }}
-            </option>
-          </select>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4 mb-3">
-      <label class="form-label">Telefone do Contato 4 </label>
-      <div class="input-group">
-        <input type="text" class="form-control" formControlName="telefoneContatoQuatro" [mask]="mascaraTelefone"
-          [style]="formGroup.controls['telefoneContatoQuatro'].errors && formGroup.controls['telefoneContatoQuatro'].touched ? 'border-color: red' : ''" />
-      </div>
-      <div class="mb-1"
-        *ngIf="formGroup.controls['telefoneContatoQuatro'].errors && formGroup.controls['telefoneContatoQuatro'].touched">
-        <p *ngIf="formGroup.controls['telefoneContatoQuatro'].errors['required']" class="text-danger"> Campo
-          obrigatório
-        </p>
-        <p *ngIf="formGroup.controls['telefoneContatoQuatro'].errors['formatoInvalido']" class="text-danger"> Telefone
-          inválido
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="d-flex flex-column mt-3 mb-3 justify-content-center align-items-center">
-    <button class="btn btn-outline-dark mb-3 botoesContato" [disabled]="qtdContatos == 4"
-      (click)="aumentarQtdContatos()">
-      <i class="bi bi-plus-lg"></i>
-      Adicionar Contato
-    </button>
-
-    <button class="btn btn-outline-dark botoesContato" [disabled]="qtdContatos == 2" (click)="diminuirQtdContatos()">
-      <i class="bi bi-trash"></i>
-      Remover Contato
-    </button>
+  <div class="row mb-3">
+    <mpc-input-text label="Endereço" (valorCampo)="setValorCampo($event, 'endereco')" min="10" max="100" />
   </div>
 
 </form>
 
-<div class="row justify-content-between align-items-center mt-5">
-  <button class="btn btn-outline-secondary" (click)="etapaAnterior()">
-    <i class="bi bi-arrow-left"></i>
-    Voltar
-  </button>
+<div class="row mt-5">
 
-  <button class="btn btn-primary" (click)="proximaEtapa()" [disabled]="formGroup.invalid">
-    <i class="bi bi-arrow-right"></i>
-    Próximo
-  </button>
+  <div class="col-md-6 mb-3 div-buttons">
+    <mpc-button (click)="etapaAnterior()" corBotao="btn-outline-secondary" icone="bi bi-arrow-left" texto="Voltar">
+    </mpc-button>
+  </div>
+
+  <div class="col-md-6 mb-3 div-buttons">
+    <mpc-button (click)="proximaEtapa()" corBotao="btn-primary" icone="bi bi-arrow-right" posicaoIcone="direita"
+      texto="Próximo" [disabled]="formGroup.invalid">
+    </mpc-button>
+  </div>
 </div>

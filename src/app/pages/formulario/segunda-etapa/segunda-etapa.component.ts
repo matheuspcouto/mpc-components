@@ -2,11 +2,19 @@ import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgxMaskDirective } from 'ngx-mask';
-import { telefoneValidator, InscricaoValidator } from '../formulario.validator';
+import { MpcButtonComponent } from '../../../shared/components/mpc-button/mpc-button.component';
+import { MpcInputEmailComponent } from '../../../shared/components/mpc-input-email/mpc-input-email.component';
+import { MpcInputTelefoneComponent } from '../../../shared/components/mpc-input-telefone/mpc-input-telefone.component';
+import { MpcInputTextComponent } from '../../../shared/components/mpc-input-text/mpc-input-text.component';
+import { telefoneValidator, InscricaoValidator } from '../inscricao.validator';
 
 @Component({
   selector: 'segunda-etapa',
-  imports: [CommonModule, NgxMaskDirective, FormsModule, ReactiveFormsModule],
+  imports: [
+    CommonModule, FormsModule, ReactiveFormsModule,
+    MpcButtonComponent, MpcInputEmailComponent, MpcInputTelefoneComponent,
+    MpcInputTextComponent
+  ],
   templateUrl: './segunda-etapa.component.html',
   styleUrl: './segunda-etapa.component.css'
 })
@@ -66,22 +74,6 @@ export class SegundaEtapaComponent {
     }
   }
 
-  aumentarQtdContatos() { this.qtdContatos++; }
-
-  diminuirQtdContatos() {
-    this.qtdContatos--;
-
-    if (this.qtdContatos == 3) {
-      this.formGroup.get('nomeContatoQuatro')?.setValue(null);
-      this.formGroup.get('telefoneContatoQuatro')?.setValue(null);
-    }
-
-    if (this.qtdContatos == 2) {
-      this.formGroup.get('nomeContatoTres')?.setValue(null);
-      this.formGroup.get('telefoneContatoTres')?.setValue(null);
-    }
-  }
-
   proximaEtapa() {
     const dados = {
       dados: this.formGroup.value,
@@ -93,6 +85,17 @@ export class SegundaEtapaComponent {
 
   etapaAnterior() {
     this.dados.emit({ proximaEtapa: 1 });
+  }
+
+  setValorCampo(event: any, campo: string): void {
+    if (!event) {
+      this.formGroup.get(campo)?.setErrors({ error: true });
+      return;
+    }
+
+    this.formGroup.get(campo)?.setValue(event);
+
+    console.log(this.formGroup.get(campo)?.value);
   }
 
 }

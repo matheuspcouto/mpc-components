@@ -1,0 +1,27 @@
+{
+  "celulas": [
+    {
+      "nome": "Teste 01",
+      "tipoCelula": "Feminina"
+    },
+    {
+      "nome": "Teste 02",
+      "tipoCelula": "Masculina"
+    },
+    {
+      "nome": "Teste 03",
+      "tipoCelula": "Mista"
+    }
+  ],
+  "inscricoes": [
+    {
+      "nome": "Inscrição 01"
+    },
+    {
+      "nome": "Inscrição 02"
+    },
+    {
+      "nome": "Inscrição 03"
+    }
+  ]
+}

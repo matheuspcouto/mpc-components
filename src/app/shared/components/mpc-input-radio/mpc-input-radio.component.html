@@ -1,10 +1,10 @@
-<div [tabindex]="tabIndex" [attr.aria-label]="ariaLabel" class="form-group" *ngIf="values.length > 0">
+<div [tabindex]="tabIndex" [attr.aria-label]="ariaLabel" class="form-group" *ngIf="options.length > 0">
   <label class="form-label">{{ required ? label + ' *' : label }}</label>
 
   <div class="input-group justify-content-center">
-    <label class="p-3" *ngFor="let value of values">
-      <input type="radio" [value]="value" (change)="setValue(value)" [checked]="value.checked" (blur)="onTouched()"
-        [required]="required" /> {{ value.label }}
+    <label class="p-3" *ngFor="let option of options">
+      <input type="radio" [value]="value" (change)="setValue(option)" [checked]="option.checked" (blur)="onTouched()"
+        [required]="required" /> {{ option.label }}
     </label>
   </div>
 

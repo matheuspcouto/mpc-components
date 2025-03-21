@@ -4,5 +4,5 @@
 
 export const environment = {
   production: false,
-  host_bff: ''
+  apiUrl: 'http://localhost:3000',
 };

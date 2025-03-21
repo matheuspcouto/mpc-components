@@ -66,7 +66,7 @@ export class MpcNavbarComponent {
       icone: 'bi bi-file-earmark-text-fill',
       ativo: true,
       subRotas: [
-        { titulo: 'Formulário', rota: Rotas.FORMULARIO, ativo: true },
+        { titulo: 'Formulário', rota: Rotas.DADOS_PESSOAIS, ativo: true },
         { titulo: 'Aguarde', rota: Rotas.AGUARDE, ativo: true },
         { titulo: 'Login', rota: Rotas.LOGIN, ativo: false },
       ]

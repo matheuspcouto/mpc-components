@@ -1,1 +1,15 @@
-<p>mpc-input-select works!</p>
+<div [tabindex]="tabIndex" [attr.aria-label]="ariaLabel" class="form-group" *ngIf="options.length > 0">
+  <label class="form-label">{{ required ? label + ' *' : label }}</label>
+
+  <div class="input-group">
+    <select class="form-select form-select-md" [style]="!isCampoValido() && value ? 'border-color: red' : ''">
+      <option *ngFor="let option of options" [value]="option" (change)="setValue(option)">
+        {{ option }}
+      </option>
+    </select>
+  </div>
+
+  <div *ngIf="!isCampoValido() && value">
+    <p class="text-danger mt-1"> {{ error }} </p>
+  </div>
+</div>

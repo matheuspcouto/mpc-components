@@ -16,7 +16,12 @@ export const Rotas = {
 
   // Paginas
   PAGINAS: "/paginas",
+
+  // Formulário
   FORMULARIO: "/paginas/formulario",
+  DADOS_PESSOAIS: "/paginas/formulario/dados-pessoais",
+
+  // Outras páginas
   AGUARDE: "/paginas/aguarde",
   LOGIN: "/paginas/login",
 }

@@ -3,7 +3,7 @@ import { SiteAtivoGuard } from './guards/site-ativo.guard';
 import HomeComponent from './pages/home/home.component';
 import { ButtonsComponent } from './pages/componentes/buttons/buttons.component';
 import { NavbarComponent } from './pages/componentes/navbar/navbar.component';
-import FormularioComponent from './pages/formulario/formulario.component';
+import FormularioComponent from './pages/formulario/dados-pessoais/dados-pessoais.component';
 import AguardeComponent from './pages/aguarde/aguarde.component';
 import { CardsComponent } from './pages/componentes/cards/cards.component';
 import { ModaisComponent } from './pages/componentes/modais/modais.component';
@@ -12,6 +12,7 @@ import { ScrollTopButtonComponent } from './pages/componentes/scroll-top-button/
 import { TabsComponent } from './pages/componentes/tabs/tabs.component';
 import { ComprovanteComponent } from './pages/componentes/comprovante/comprovante.component';
 import { FooterComponent } from './pages/componentes/footer/footer.component';
+import DadosPessoaisComponent from './pages/formulario/dados-pessoais/dados-pessoais.component';
 
 //TODO: verificar lazy loading com loadComponent e loadChildren
 export const routes: Routes = [
@@ -38,7 +39,12 @@ export const routes: Routes = [
   {
     path: 'paginas',
     children: [
-      { path: 'formulario', component: FormularioComponent, title: 'Mpc Components - Formulário', canActivate: [SiteAtivoGuard] },
+      {
+        path: 'formulario',
+        children: [
+          { path: 'dados-pessoais', component: DadosPessoaisComponent, title: 'Mpc Components - Formulário' },
+        ]
+      },
       { path: 'aguarde', component: AguardeComponent, title: 'Mpc Components - Aguarde' },
     ]
   },

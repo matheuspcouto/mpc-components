@@ -1,0 +1,24 @@
+.section-inscricoes-encerradas {
+  min-height: 80vh !important;
+  align-items: center;
+  display: flex;
+
+  .div-img-section-inscricoes-encerradas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2.5rem;
+    width: 100%;
+
+    img {
+      width: 150px;
+      height: auto;
+    }
+  }
+
+  p {
+    font-style: italic;
+    text-align: center;
+    color: gray;
+  }
+}

@@ -1,8 +1,4 @@
-button {
-  max-width: 20vh;
-  min-width: 10vh;
-}
-
-.botoesContato {
-  max-width: 30vh !important;
+.div-buttons {
+  display: flex;
+  justify-content: center;
 }
