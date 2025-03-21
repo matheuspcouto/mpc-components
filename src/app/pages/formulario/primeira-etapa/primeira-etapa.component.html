@@ -5,85 +5,35 @@
     Não foi possível trazer as células. Mas não se preocupe, você pode continuar a inscrição.
   </div>
 
-  <h5>Dados Pessoais</h5>
+  <h3>Dados Pessoais</h3>
+  <p class="text-muted mb-3">Campos obrigatórios (*)</p>
 
-  <div class="row mt-3">
+  <div class="row">
     <div class="col-md-6 mb-3">
-      <label class="form-label">Nome *</label>
-      <div class="input-group">
-        <input type="text" class="form-control" formControlName="nome"
-          [style]="formGroup.controls['nome'].errors && formGroup.controls['nome'].touched ? 'border-color: red' : ''" />
-      </div>
-      <div *ngIf="formGroup.controls['nome'].errors && formGroup.controls['nome'].touched">
-        <p *ngIf="formGroup.controls['nome'].errors['required']" class="text-danger"> Campo obrigatório </p>
-      </div>
+      <mpc-input-text label="Nome" (valorCampo)="setValorCampo($event, 'nome')" min="3" max="100" />
     </div>
 
     <div class="col-md-6 mb-3">
-      <label class="form-label">Sobrenome *</label>
-      <div class="input-group">
-        <input id="sobrenome" type="text" class="form-control" formControlName="sobrenome"
-          [style]="formGroup.controls['sobrenome'].errors && formGroup.controls['sobrenome'].touched ? 'border-color: red' : ''" />
-
-      </div>
-      <div class="mb-1" *ngIf="formGroup.controls['sobrenome'].errors && formGroup.controls['sobrenome'].touched">
-        <p *ngIf="formGroup.controls['sobrenome'].errors['required']" class="text-danger"> Campo obrigatório
-        </p>
-      </div>
+      <mpc-input-text label="Sobrenome" (valorCampo)="setValorCampo($event, 'sobrenome')" min="3" max="100" />
     </div>
   </div>
 
   <div class="row mb-3">
-    <label class="form-label">Endereço *</label>
-    <div class="input-group">
-      <input type="text" class="form-control" formControlName="endereco"
-        [style]="formGroup.controls['endereco'].errors && formGroup.controls['endereco'].touched ? 'border-color: red' : ''" />
-    </div>
-    <div class="mb-1" *ngIf="formGroup.controls['endereco'].errors && formGroup.controls['endereco'].touched">
-      <p *ngIf="formGroup.controls['endereco'].errors['required']" class="text-danger"> Campo obrigatório
-      </p>
-      <p *ngIf="formGroup.controls['endereco'].errors['minlength']" class="text-danger"> O endereço precisa ter pelo
-        menos 10 caracteres </p>
-    </div>
+    <mpc-input-text label="Endereço" (valorCampo)="setValorCampo($event, 'endereco')" min="10" max="100" />
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-3">
-      <label class="form-label">Data de Nascimento *</label>
-      <div class="input-group">
-        <input type="date" class="form-control" formControlName="dataNasc" [max]="dataAtual"
-          [style]="formGroup.controls['dataNasc'].errors && formGroup.controls['dataNasc'].touched ? 'border-color: red' : ''" />
-      </div>
-      <div class="mb-1" *ngIf="formGroup.controls['dataNasc'].errors && formGroup.controls['dataNasc'].touched">
-        <p *ngIf="formGroup.controls['dataNasc'].errors['required']" class="text-danger"> Campo obrigatório
-        </p>
-        <p *ngIf="formGroup.controls['dataNasc'].errors['formatoInvalido']" class="text-danger">
-          A data de nascimento não pode ser maior que a data atual
-        </p>
-      </div>
+      <mpc-input-date label="Data de Nascimento" [maxDate]="dataAtual" [required]="true"
+        (valorCampo)="setValorCampo($event, 'dataNasc')" />
     </div>
 
     <div class="col-md-6 mb-3">
-      <div class="input-group">
-        <label class="form-label">Sexo *</label>
-        <div class="input-group justify-content-center">
-          <div>
-            <label class="p-3" *ngIf="!inscricoesHomensEncerradas">
-              <input type="radio" formControlName="sexo" value="Masculino" (change)="filtrarCelulas()" /> Masculino
-            </label>
-            <label class="p-3" *ngIf="!inscricoesMulheresEncerradas">
-              <input type="radio" formControlName="sexo" value="Feminino" (change)="filtrarCelulas()" /> Feminino
-            </label>
-          </div>
-        </div>
-
-        <div class="mb-1" *ngIf="formGroup.controls['sexo'].errors && formGroup.controls['sexo'].touched">
-          <p *ngIf="formGroup.controls['sexo'].errors['required']" class="text-danger"> Campo
-            obrigatório </p>
-        </div>
-      </div>
+      <mpc-input-radio label="Sexo" [required]="true" [values]="sexos" (valorCampo)="setValorCampo($event, 'sexo')" />
     </div>
   </div>
+
+  <!--
 
   <div class="row">
     <div class="col-md-6 mb-3">
@@ -186,7 +136,7 @@
         </div>
       </div>
     </div>
-  </div>
+  -->
 
 
   <div class="d-flex justify-content-center align-items-center mt-5">

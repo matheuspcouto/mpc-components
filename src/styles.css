@@ -20,48 +20,6 @@
   scroll-behavior: smooth;
 }
 
-/* Background Colors */
-.bg-color-primary {
-  background-color: var(--cor-primaria) !important;
-}
-
-.bg-color-secondary {
-  background-color: var(--cor-secundaria) !important;
-}
-
-.bg-color-tertiary {
-  background-color: var(--cor-terciaria) !important;
-}
-
-.bg-color-black {
-  background-color: var(--preto) !important;
-}
-
-.bg-color-white {
-  background-color: var(--branco) !important;
-}
-
-/* Text Colors */
-.text-color-primary {
-  color: var(--cor-primaria) !important;
-}
-
-.text-color-secondary {
-  color: var(--cor-secundaria) !important;
-}
-
-.text-color-tertiary {
-  color: var(--cor-terciaria) !important;
-}
-
-.text-color-black {
-  color: var(--preto) !important;
-}
-
-.text-color-white {
-  color: var(--branco) !important;
-}
-
 /*--------------------------------------------------------------
 # Geral
 --------------------------------------------------------------*/
@@ -80,10 +38,6 @@ body {
   font-family: var(--font-padrao);
   color: var(--cor-secundaria);
   overflow: auto !important;
-}
-
-main {
-  margin-top: 90px !important;
 }
 
 a {
@@ -114,52 +68,5 @@ a {
 
   .desktop {
     display: flex !important;
-  }
-}
-
-/*--------------------------------------------------------------
-# Sections & Section Header
---------------------------------------------------------------*/
-section {
-  overflow: hidden;
-  padding: 40px 0;
-
-  h5 {
-    font-weight: 400;
-    color: var(--cor-terciaria);
-    text-align: center;
-    padding-bottom: 2rem;
-    font-style: italic;
-  }
-
-  .section-bg {
-    background-color: var(--branco);
-  }
-
-  .section-header {
-    text-align: center;
-    padding-bottom: 30px;
-
-    h2 {
-      font-size: 13px;
-      letter-spacing: 1px;
-      font-weight: 400;
-      margin: 0;
-      padding: 0;
-      color: var(--cor-terciaria);
-      text-transform: uppercase;
-      font-family: var(--font-padrao);
-    }
-
-    p {
-      margin: 0;
-      font-size: 48px;
-      font-weight: 400;
-      font-family: var(--fonte-padrao);
-
-      span {
-        color: var(--cor-secundaria);
-      }
-    }
   }
 }

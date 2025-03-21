@@ -13,7 +13,7 @@ import { SegundaEtapaComponent } from './segunda-etapa/segunda-etapa.component';
 import { TerceiraEtapaComponent } from './terceira-etapa/terceira-etapa.component';
 import { MpcComprovanteComponent } from '../../shared/components/mpc-comprovante/mpc-comprovante.component';
 import { InscricaoService } from '../../services/inscricao.service';
-import { PageHeaderComponent } from "./page-header/page-header.component";
+import { MpcFormProgressBarComponent } from '../../shared/components/mpc-form-progress-bar/mpc-form-progress-bar.component';
 
 // TODO: Remover sessionStorage, trocar por Signals ?
 // TODO: Otimizar fluxo e verificar campos form
@@ -28,7 +28,7 @@ import { PageHeaderComponent } from "./page-header/page-header.component";
     PrimeiraEtapaComponent,
     SegundaEtapaComponent,
     TerceiraEtapaComponent,
-    PageHeaderComponent
+    MpcFormProgressBarComponent
 ],
   templateUrl: './formulario.component.html',
   styleUrls: ['./formulario.component.css'],
@@ -78,13 +78,6 @@ export default class FormularioComponent implements OnInit {
     if (this.etapa === 3) {
       this.enviarInscricao();
     }
-  }
-
-  getIconeEtapa(etapa: number, passo: number) {
-    let icon = `bi bi-${passo}-circle-fill`;
-    if (etapa === passo) icon = 'bi bi-three-dots';
-    if (etapa > passo) icon = 'bi bi-check-circle-fill completed';
-    return icon;
   }
 
   listarInscricoesHomens() {

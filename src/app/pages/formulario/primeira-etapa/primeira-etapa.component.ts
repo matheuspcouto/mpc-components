@@ -8,10 +8,13 @@ import { Rotas } from '../../../shared/enums/rotas-enum';
 import { enderecoValidator, InscricaoValidator, telefoneValidator } from '../formulario.validator';
 import { InscricaoService } from '../../../services/inscricao.service';
 import { MpcButtonComponent } from '../../../shared/components/mpc-button/mpc-button.component';
+import { MpcInputTextComponent } from "../../../shared/components/mpc-input-text/mpc-input-text.component";
+import { MpcInputDateComponent } from "../../../shared/components/mpc-input-date/mpc-input-date.component";
+import { RadioOption, MpcInputRadioComponent } from '../../../shared/components/mpc-input-radio/mpc-input-radio.component';
 
 @Component({
   selector: 'primeira-etapa',
-  imports: [CommonModule, MpcModalComponent, NgxMaskDirective, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, MpcModalComponent, NgxMaskDirective, FormsModule, ReactiveFormsModule, MpcInputTextComponent, MpcInputDateComponent, MpcInputRadioComponent],
   templateUrl: './primeira-etapa.component.html',
   styleUrl: './primeira-etapa.component.css'
 })
@@ -20,7 +23,11 @@ export class PrimeiraEtapaComponent {
   estadosCivis = ['Solteiro(a)', 'Casado(a)', 'Divorciado(a)', 'Viúvo(a)'];
   celulas = [];
   celulasDropdown: any = [];
-  dataAtual;
+  sexos: RadioOption[] = [
+    { label: 'Masculino', value: 'M', checked: false },
+    { label: 'Feminino', value: 'F', checked: false }
+  ];
+  dataAtual = new Date().toISOString().split('T')[0];
 
   @Output() dados = new EventEmitter<any>();
   @Input() inscricoesHomensEncerradas = false;
@@ -66,7 +73,7 @@ export class PrimeiraEtapaComponent {
     private inscricaoService: InscricaoService,
   ) {
     this.dataAtual = this.formatarData(new Date());
-    this.listarCelulas();
+    //this.listarCelulas();
 
     if (typeof window !== 'undefined') {
       let dadosInscricao: any = sessionStorage.getItem('dadosInscricao');
@@ -128,6 +135,17 @@ export class PrimeiraEtapaComponent {
     }
 
     this.modalErro?.abrirModal();
+  }
+
+  setValorCampo(event: any, campo: string): void {
+    if (!event) {
+      this.formGroup.get(campo)?.setErrors({ error: true });
+      return;
+    }
+
+    this.formGroup.get(campo)?.setValue(event);
+
+    console.log(this.formGroup.get(campo)?.value);
   }
 
 }

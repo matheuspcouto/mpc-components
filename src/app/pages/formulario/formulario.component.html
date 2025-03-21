@@ -1,33 +1,19 @@
 <mpc-navbar></mpc-navbar>
 
-<div *ngIf="!inscricoesHomensEncerradas || !inscricoesMulheresEncerradas">
+<main>
 
-  <page-header></page-header>
+  <div *ngIf="!inscricoesHomensEncerradas || !inscricoesMulheresEncerradas">
 
-  <main >
+    <section id="inscricao" class="inscricao">
 
-    <section id="inscricao" class="inscricao col-md-12 px-4">
+      <div class="section-header">
+        <h2>preencha seus dados abaixo no</h2>
+        <p>Formulário de <span> Inscrição </span> </p>
+      </div>
+
       <div class="container">
-        <!-- Barra de progresso -->
-        <div class="progress-container">
-          <div class="step" id="step1">
-            <i [class]="getIconeEtapa(etapa, 1)"></i>
-            <p>Dados Pessoais</p>
-          </div>
-          <div class="step" id="step2">
-            <i [class]="getIconeEtapa(etapa, 2)"></i>
-            <p>Contato</p>
-          </div>
-          <div class="step" id="step3">
-            <i [class]="getIconeEtapa(etapa, 3)"></i>
-            <p>Pagamento</p>
-          </div>
-        </div>
-        <div class="progress-bar mb-5">
-          <div class="progress-fill" id="progressFill" [style.width.%]="(etapa / 3) * 100"></div>
-        </div>
 
-        <hr>
+        <mpc-form-progress-bar [etapa]="etapa"></mpc-form-progress-bar>
 
         <div class="alert alert-warning text-center mb-1"
           *ngIf="inscricoesHomensEncerradas && !inscricoesMulheresEncerradas">
@@ -41,11 +27,7 @@
           Atenção! <br> As inscrições para mulheres estão encerradas. Somente inscrições para homens serão realizadas.
         </div>
 
-        <div class="alert alert-light text-center mb-4">
-          Campos obrigatórios (*)
-        </div>
-
-        <div class="row no-gutters">
+        <div class="row">
           <!-- Etapa 1: Dados Pessoais -->
           <div *ngIf="etapa === 1">
             <primeira-etapa (dados)="getDadosPrimeiraEtapa($event)"
@@ -66,31 +48,31 @@
         </div>
       </div>
     </section>
-  </main>
-</div>
-
-<section class="section-inscricoes-encerradas section-bg"
-  *ngIf="inscricoesHomensEncerradas && inscricoesMulheresEncerradas">
-  <div class="container">
-
-    <div class="section-header">
-
-      <div class="col-lg-12 col-md-12 d-flex align-items-center justify-content-center mb-5">
-        <img src="img/modal/atencao.png" width="150px" height="auto">
-      </div>
-
-      <p>Inscrições <span>Encerradas</span> !
-      </p>
-    </div>
-
-    <p class="text-center text-muted" style="font-style: italic;">
-      Infelizmente, as inscrições para o evento foram encerradas, mas não deixe de acompanhar nossas programações <br>
-      pelo instagram da igreja: <a href="https://www.instagram.com/palmasmetodista/" target="_blank">
-        &#64;palmasmetodista </a>
-    </p>
   </div>
 
-</section>
+  <!-- ======= Inscrições Encerradas Section ======= -->
+  <section id="section-inscricoes-encerradas" class="section-inscricoes-encerradas" *ngIf="inscricoesHomensEncerradas && inscricoesMulheresEncerradas">
+    <div class="container">
+
+      <div class="section-header">
+        <div class="div-img-section-inscricoes-encerradas">
+          <img src="img/modal/atencao.png">
+        </div>
+
+        <p>Inscrições <span>Encerradas</span> !</p>
+      </div>
+
+      <p>Infelizmente, as inscrições para este evento foram encerradas, mas não deixe de acompanhar nossas programações
+        <br>
+        pelo instagram da igreja: <a href="https://www.instagram.com/palmasmetodista/" target="_blank">
+          &#64;palmasmetodista </a>
+      </p>
+
+    </div>
+  </section>
+  <!-- ======= End Inscriçoes Encerradas Section ======= -->
+
+</main>
 
 <mpc-modal #modalErro></mpc-modal>
 <mpc-modal #modalSucesso></mpc-modal>

@@ -1,1 +1,28 @@
+.aguarde {
+  .div-img-aguarde {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2.5rem;
+    width: 100%;
 
+    img {
+      width: 250px;
+      height: auto;
+    }
+  }
+
+  p {
+    font-style: italic;
+    text-align: center;
+    color: gray;
+  }
+}
+
+.container {
+  min-height: 100vh !important;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}

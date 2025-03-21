@@ -1,4 +1,47 @@
 /*--------------------------------------------------------------
+# Sections & Section Header
+--------------------------------------------------------------*/
+section {
+  overflow: hidden;
+  padding: 50px 0;
+
+  h5 {
+    font-weight: 400;
+    color: var(--cor-terciaria);
+    text-align: center;
+    padding-bottom: 2rem;
+    font-style: italic;
+  }
+
+  .section-header {
+    text-align: center;
+    padding-bottom: 30px;
+
+    h2 {
+      font-size: 13px;
+      letter-spacing: 1px;
+      font-weight: 400;
+      margin: 0;
+      padding: 0;
+      color: var(--cor-terciaria);
+      text-transform: uppercase;
+      font-family: var(--font-padrao);
+    }
+
+    p {
+      margin: 0;
+      font-size: 48px;
+      font-weight: 400;
+      font-family: var(--fonte-padrao);
+
+      span {
+        color: var(--cor-secundaria);
+      }
+    }
+  }
+}
+
+/*--------------------------------------------------------------
 # descricao Section
 --------------------------------------------------------------*/
 .descricao {
@@ -27,17 +70,8 @@
     h5 {
       padding: 15px 0 0 0;
       margin: 0 0 0 60px;
+      text-align: left;
       color: var(--cor-terciaria);
-    }
-
-    a {
-      font-size: 20px;
-      transition: ease-in-out 0.3s;
-      color: var(--cor-secundaria);
-
-      &:hover {
-        color: var(--cor-primaria);
-      }
     }
   }
 }
@@ -62,6 +96,7 @@
   .texto-capa {
     padding: 30px;
     width: 100%;
+    text-align: center;
 
     h2,
     span {
@@ -96,6 +131,8 @@
     padding: 30px;
     height: 100%;
     border-radius: 5px;
+    display: flex;
+    align-items: center;
 
     .icon {
       display: flex;

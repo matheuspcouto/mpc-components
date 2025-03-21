@@ -1,62 +1,103 @@
+main {
+  margin-top: 90px;
+}
+
+/*--------------------------------------------------------------
+# Section
+--------------------------------------------------------------*/
+section {
+  overflow: hidden;
+  padding: 50px 0;
+
+  .section-components {
+    .col-lg-6 {
+      justify-items: center;
+    }
+
+    h5 {
+      font-weight: 400;
+      color: var(--cor-terciaria);
+      font-size: 18px;
+    }
+
+    li {
+      list-style: none;
+      margin-bottom: 10px;
+    }
+
+    a:hover {
+      color: var(--cor-primaria) !important;
+    }
+  }
+
+  h5 {
+    font-weight: 400;
+    color: var(--cor-terciaria);
+    text-align: center;
+    padding-bottom: 2rem;
+    font-style: italic;
+  }
+
+  .section-header {
+    text-align: center;
+    padding-bottom: 30px;
+
+    h2 {
+      font-size: 13px;
+      letter-spacing: 1px;
+      font-weight: 400;
+      margin: 0;
+      padding: 0;
+      color: var(--cor-terciaria);
+      text-transform: uppercase;
+      font-family: var(--font-padrao);
+    }
+
+    p {
+      margin: 0;
+      font-size: clamp(2rem, 2vw, 2rem);
+      font-weight: 400;
+      font-family: var(--fonte-padrao);
+
+      span {
+        color: var(--cor-secundaria);
+      }
+    }
+  }
+
+}
+
 /*--------------------------------------------------------------
 # inscricao Section
 --------------------------------------------------------------*/
 .inscricao {
   font-family: var(--font-padrao);
   font-weight: 600;
-
-  button {
-    width: 90%;
-    max-width: 20vh;
-    min-width: 10vh;
-  }
-
-  .alert-light {
-    font-style: italic;
-    text-align: left !important;
-    border: 0 !important;
-  }
-
-  .progress-container {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-
-    .step {
-      text-align: center;
-      position: relative;
-      color: var(--preto);
-
-      i {
-        font-size: 24px;
-        color: #999;
-        transition: color 0.3s;
-      }
-
-      .completed {
-        color: #4caf50 !important;
-      }
-    }
-  }
-
-  .progress-bar {
-    width: 100%;
-    height: 5px;
-    background-color: #e0e0e0;
-    border-radius: 5px;
-
-    .progress-fill {
-      height: 100%;
-      background-color: #4caf50;
-      border-radius: 5px;
-      transition: width 0.3s;
-    }
-  }
+  padding-right: 1.5rem !important;
+  padding-left: 1.5rem !important;
 }
 
 .section-inscricoes-encerradas {
-  display: flex;
-  justify-content: center;
+  min-height: 80vh !important;
   align-items: center;
-  height: 80vh;
+  display: flex;
+
+  .div-img-section-inscricoes-encerradas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2.5rem;
+    width: 100%;
+
+    img {
+      width: 150px;
+      height: auto;
+    }
+  }
+
+  p {
+    font-style: italic;
+    text-align: center;
+    color: gray;
+  }
 }
