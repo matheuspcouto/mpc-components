@@ -3,7 +3,7 @@ import { SiteAtivoGuard } from './guards/site-ativo.guard';
 import HomeComponent from './pages/home/home.component';
 import { ButtonsComponent } from './pages/componentes/buttons/buttons.component';
 import { NavbarComponent } from './pages/componentes/navbar/navbar.component';
-import FormularioComponent from './pages/formulario/dados-pessoais/dados-pessoais.component';
+import FormularioComponent from './pages/formulario/1 - dados-pessoais/dados-pessoais.component';
 import AguardeComponent from './pages/aguarde/aguarde.component';
 import { CardsComponent } from './pages/componentes/cards/cards.component';
 import { ModaisComponent } from './pages/componentes/modais/modais.component';
@@ -12,7 +12,10 @@ import { ScrollTopButtonComponent } from './pages/componentes/scroll-top-button/
 import { TabsComponent } from './pages/componentes/tabs/tabs.component';
 import { ComprovanteComponent } from './pages/componentes/comprovante/comprovante.component';
 import { FooterComponent } from './pages/componentes/footer/footer.component';
-import DadosPessoaisComponent from './pages/formulario/dados-pessoais/dados-pessoais.component';
+import DadosPessoaisComponent from './pages/formulario/1 - dados-pessoais/dados-pessoais.component';
+import ContatoComponent from './pages/formulario/2 - contato/contato.component';
+import PagamentoComponent from './pages/formulario/3 - pagamento/pagamento.component';
+import { ConfirmacaoComponent } from './pages/formulario/4 - confirmacao/confirmacao.component';
 
 //TODO: verificar lazy loading com loadComponent e loadChildren
 export const routes: Routes = [
@@ -43,6 +46,9 @@ export const routes: Routes = [
         path: 'formulario',
         children: [
           { path: 'dados-pessoais', component: DadosPessoaisComponent, title: 'Mpc Components - Formulário' },
+          { path: 'contato', component: ContatoComponent, title: 'Mpc Components - Formulário' },
+          { path: 'pagamento', component: PagamentoComponent, title: 'Mpc Components - Formulário' },
+          { path: 'confirmacao', component: ConfirmacaoComponent, title: 'Mpc Components - Formulário' },
         ]
       },
       { path: 'aguarde', component: AguardeComponent, title: 'Mpc Components - Aguarde' },

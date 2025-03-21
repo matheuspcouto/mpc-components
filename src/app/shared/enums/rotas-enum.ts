@@ -20,6 +20,9 @@ export const Rotas = {
   // Formulário
   FORMULARIO: "/paginas/formulario",
   DADOS_PESSOAIS: "/paginas/formulario/dados-pessoais",
+  CONTATO: "/paginas/formulario/contato",
+  PAGAMENTO: "/paginas/formulario/pagamento",
+  CONFIRMACAO: "/paginas/formulario/confirmacao",
 
   // Outras páginas
   AGUARDE: "/paginas/aguarde",

@@ -111,6 +111,7 @@ export default class DadosPessoaisComponent implements OnInit {
   proximaEtapa() {
     if (this.form.invalid) return;
     this.inscricaoService.atualizarDadosInscricao(this.form.value, 2);
+    this.router.navigate([Rotas.CONTATO]);
   }
 
   setValorCampo(event: any, campo: string): void {

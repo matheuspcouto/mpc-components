@@ -8,6 +8,7 @@ main {
 section {
   overflow: hidden;
   padding: 50px 0;
+  margin-top: 90px;
 
   .section-components {
     .col-lg-6 {
@@ -77,27 +78,8 @@ section {
   padding-left: 1.5rem !important;
 }
 
-.section-inscricoes-encerradas {
-  min-height: 80vh !important;
-  align-items: center;
+.div-buttons {
   display: flex;
-
-  .div-img-section-inscricoes-encerradas {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 2.5rem;
-    width: 100%;
-
-    img {
-      width: 150px;
-      height: auto;
-    }
-  }
-
-  p {
-    font-style: italic;
-    text-align: center;
-    color: gray;
-  }
+  justify-content: center;
 }
+

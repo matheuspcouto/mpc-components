@@ -1,0 +1,90 @@
+<div *ngIf="dadosInscricao">
+  <h4>Dados da Inscrição</h4>
+
+  <div class="row">
+    <!-- Campo com botão de copiar o código de inscrição, pode ser alterado -->
+    <div class="col-md-4 mb-1" *ngIf="dadosInscricao.codigoInscricao">
+      <h5>Inscrição</h5>
+      <div class="input-group">
+        <p>{{ dadosInscricao.codigoInscricao }}</p>
+        <!-- <em (click)="copiarCodigo(dadosInscricao.codigoInscricao)">
+          <i [class]="isCopiado ? 'bi bi-clipboard-check' : 'bi bi-clipboard'"></i>
+        </em> -->
+      </div>
+    </div>
+
+    <!-- Campo de status da inscricao, pode ser alterado -->
+    <div class="col-md-4 mb-1" *ngIf="dadosInscricao.status">
+      <h5 class="mb-1">Status</h5>
+      <!-- <h5>
+        <span class="badge mb-1" [ngClass]="getBadgeStatusInscricao(dadosInscricao.status)">
+          {{ getTextoStatusInscricao(dadosInscricao.status) }}
+        </span>
+      </h5> -->
+    </div>
+
+    <!-- Campo de data de criação, pode ser alterado -->
+    <div class="col-md-4 mb-1" *ngIf="dadosInscricao.dataInscricao">
+      <h5 class="mb-1">Data da Inscrição</h5>
+      <p>{{ formatarData(dadosInscricao.dataInscricao) }}</p>
+    </div>
+
+    <hr>
+  </div>
+</div>
+
+<div *ngIf="dadosPessoais">
+  <h4>Dados Pessoais</h4>
+
+  <div class="row">
+    <div class="col-md-3 mb-1" *ngFor="let dado of dadosPessoais">
+      <h5 class="mb-1">{{ dado.label }}</h5>
+      <p>{{ dado.valor }}</p>
+    </div>
+  </div>
+
+  <hr>
+</div>
+
+<div *ngIf="dadosPagamento">
+  <h4>Dados do Pagamento</h4>
+
+  <div class="row">
+    <div class="col-md-3 mb-1" *ngIf="dadosPagamento.formaPagamento">
+      <h5 class="mb-1">Forma de Pagamento</h5>
+      <p>{{ dadosPagamento.formaPagamento }}</p>
+    </div>
+
+    <div class="col-md-3 mb-1" *ngIf="dadosPagamento.valor">
+      <h5 class="mb-1">Valor</h5>
+      <p>{{ formatarValor(dadosPagamento.valor) }}</p>
+    </div>
+
+    <div class="col-md-3 mb-1" *ngIf="dadosPagamento.statusPagamento">
+      <h5 class="mb-1">Status do Pagamento</h5>
+      <!-- <h5>
+        <span class="badge mb-1" [ngClass]="getBadgeStatusPagamento(dadosPagamento.statusPagamento)">
+          {{ getTextoStatusPagamento(dadosPagamento.statusPagamento) }}
+        </span>
+      </h5> -->
+    </div>
+
+    <div class="col-md-3 mb-1" *ngIf="dadosPagamento.dataPagamento">
+      <h5 class="mb-1">Data do Pagamento</h5>
+      <p>{{ formatarData(dadosPagamento.dataPagamento) }}</p>
+    </div>
+
+    <hr>
+  </div>
+</div>
+
+<!-- Botões -->
+<div class="modal-buttons">
+
+  <mpc-button corBotao="btn-success" texto="Confirmar" icone="bi bi-whatsapp" (click)="inscrever()">
+  </mpc-button>
+
+  <mpc-button corBotao="btn-outline-secondary" (click)="voltar()" texto]="Voltar" icone="bi bi-arrow-left">
+  </mpc-button>
+
+</div>

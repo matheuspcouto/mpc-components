@@ -1,0 +1,53 @@
+<mpc-navbar></mpc-navbar>
+
+<section id="inscricao" class="inscricao">
+
+  <div class="section-header">
+    <h2>preencha seus dados abaixo no</h2>
+    <p>Formulário de <span> Inscrição </span> </p>
+  </div>
+
+  <div class="container">
+
+    <mpc-form-progress-bar [etapa]="2"></mpc-form-progress-bar>
+
+    <h3>Contato</h3>
+    <p class="text-muted mb-3">Campos obrigatórios (*)</p>
+
+    <form [formGroup]="form">
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <mpc-input-telefone [required]="true" (valorCampo)="setValorCampo($event, 'telefone')" />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <mpc-input-email [required]="true" (valorCampo)="setValorCampo($event, 'email')" />
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <mpc-input-text label="Endereço" (valorCampo)="setValorCampo($event, 'endereco')" min="10" max="100" />
+      </div>
+
+    </form>
+
+    <div class="row mt-5">
+
+      <div class="col-md-6 mb-3 div-buttons">
+        <mpc-button (click)="etapaAnterior()" corBotao="btn-outline-secondary" icone="bi bi-arrow-left" texto="Voltar">
+        </mpc-button>
+      </div>
+
+      <div class="col-md-6 mb-3 div-buttons">
+        <mpc-button (click)="proximaEtapa()" corBotao="btn-primary" icone="bi bi-arrow-right" posicaoIcone="direita"
+          texto="Próximo" [disabled]="form.invalid">
+        </mpc-button>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<mpc-modal #modalErro></mpc-modal>
