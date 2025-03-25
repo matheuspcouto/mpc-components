@@ -1,9 +1,9 @@
+import { InscricoesEncerradasComponent } from './pages/formulario/inscricoes-encerradas/inscricoes-encerradas.component';
 import { Routes } from '@angular/router';
 import { SiteAtivoGuard } from './guards/site-ativo.guard';
 import HomeComponent from './pages/home/home.component';
 import { ButtonsComponent } from './pages/componentes/buttons/buttons.component';
 import { NavbarComponent } from './pages/componentes/navbar/navbar.component';
-import FormularioComponent from './pages/formulario/1 - dados-pessoais/dados-pessoais.component';
 import AguardeComponent from './pages/aguarde/aguarde.component';
 import { CardsComponent } from './pages/componentes/cards/cards.component';
 import { ModaisComponent } from './pages/componentes/modais/modais.component';
@@ -16,25 +16,26 @@ import DadosPessoaisComponent from './pages/formulario/1 - dados-pessoais/dados-
 import ContatoComponent from './pages/formulario/2 - contato/contato.component';
 import PagamentoComponent from './pages/formulario/3 - pagamento/pagamento.component';
 import { ConfirmacaoComponent } from './pages/formulario/4 - confirmacao/confirmacao.component';
+import { InscricoesEncerradasGuard } from './guards/inscricoes-ativas.guard';
 
 //TODO: verificar lazy loading com loadComponent e loadChildren
 export const routes: Routes = [
   /*  Rotas para Home */
-  { path: '', pathMatch: 'full', component: HomeComponent, title: 'Mpc Components - Home', canActivate: [SiteAtivoGuard] },
+  { path: '', pathMatch: 'full', component: HomeComponent, canActivate: [SiteAtivoGuard] },
 
   /*  Rotas para Componentes */
   {
     path: 'componentes',
     children: [
-      { path: 'buttons', component: ButtonsComponent, title: 'Mpc Components - MpcButtons', canActivate: [SiteAtivoGuard] },
-      { path: 'cards', component: CardsComponent, title: 'Mpc Components - MpcCards', canActivate: [SiteAtivoGuard] },
-      { path: 'modais', component: ModaisComponent, title: 'Mpc Components - MpcModais', canActivate: [SiteAtivoGuard] },
-      { path: 'loaders', component: LoadersComponent, title: 'Mpc Components - MpcLoaders', canActivate: [SiteAtivoGuard] },
-      { path: 'navbar', component: NavbarComponent, title: 'Mpc Components - MpcNavbar', canActivate: [SiteAtivoGuard] },
-      { path: 'footer', component: FooterComponent, title: 'Mpc Components - MpcFooter', canActivate: [SiteAtivoGuard] },
-      { path: 'scroll-top-button', component: ScrollTopButtonComponent, title: 'Mpc Components - MpcScrollTop', canActivate: [SiteAtivoGuard] },
-      { path: 'tabs', component: TabsComponent, title: 'Mpc Components - MpcTabs', canActivate: [SiteAtivoGuard] },
-      { path: 'comprovante', component: ComprovanteComponent, title: 'Mpc Components - MpcComprovante', canActivate: [SiteAtivoGuard] },
+      { path: 'buttons', component: ButtonsComponent, canActivate: [SiteAtivoGuard] },
+      { path: 'cards', component: CardsComponent, canActivate: [SiteAtivoGuard] },
+      { path: 'modais', component: ModaisComponent, canActivate: [SiteAtivoGuard] },
+      { path: 'loaders', component: LoadersComponent, canActivate: [SiteAtivoGuard] },
+      { path: 'navbar', component: NavbarComponent, canActivate: [SiteAtivoGuard] },
+      { path: 'footer', component: FooterComponent, canActivate: [SiteAtivoGuard] },
+      { path: 'scroll-top-button', component: ScrollTopButtonComponent, canActivate: [SiteAtivoGuard] },
+      { path: 'tabs', component: TabsComponent, canActivate: [SiteAtivoGuard] },
+      { path: 'comprovante', component: ComprovanteComponent, canActivate: [SiteAtivoGuard] },
     ]
   },
 
@@ -45,10 +46,11 @@ export const routes: Routes = [
       {
         path: 'formulario',
         children: [
-          { path: 'dados-pessoais', component: DadosPessoaisComponent, title: 'Mpc Components - Formulário' },
-          { path: 'contato', component: ContatoComponent, title: 'Mpc Components - Formulário' },
-          { path: 'pagamento', component: PagamentoComponent, title: 'Mpc Components - Formulário' },
-          { path: 'confirmacao', component: ConfirmacaoComponent, title: 'Mpc Components - Formulário' },
+          { path: 'dados-pessoais', component: DadosPessoaisComponent, canActivate: [SiteAtivoGuard, InscricoesEncerradasGuard] },
+          { path: 'contato', component: ContatoComponent, canActivate: [SiteAtivoGuard, InscricoesEncerradasGuard] },
+          { path: 'pagamento', component: PagamentoComponent, canActivate: [SiteAtivoGuard, InscricoesEncerradasGuard] },
+          { path: 'confirmacao', component: ConfirmacaoComponent, canActivate: [SiteAtivoGuard, InscricoesEncerradasGuard] },
+          { path: 'inscricoes-encerradas', component: InscricoesEncerradasComponent, canActivate: [SiteAtivoGuard] },
         ]
       },
       { path: 'aguarde', component: AguardeComponent, title: 'Mpc Components - Aguarde' },

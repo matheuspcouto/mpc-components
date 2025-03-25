@@ -2,8 +2,8 @@
   <label class="form-label">{{ required ? label + ' *' : label }}</label>
 
   <div class="input-group">
-    <select class="form-select form-select-md" [style]="!isCampoValido() && value ? 'border-color: red' : ''">
-      <option *ngFor="let option of options" [value]="option" (change)="setValue(option)">
+    <select (change)="setValue($event.target)" class="form-select form-select-md" [style]="!isCampoValido() && value ? 'border-color: red' : ''">
+      <option *ngFor="let option of options" [value]="option">
         {{ option }}
       </option>
     </select>

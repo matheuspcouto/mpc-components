@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { MpcModalComponent } from '../../../shared/components/mpc-modal/mpc-modal.component';
+import { MpcModalComponent, TipoModal } from '../../../shared/components/mpc-modal/mpc-modal.component';
 import { Rotas } from '../../../shared/enums/rotas-enum';
-import { FluxoErro } from '../../../shared/fluxo-erro';
 import { CommonModule } from '@angular/common';
 import { MpcNavbarComponent } from '../../../shared/components/mpc-navbar/mpc-navbar.component';
 import { MpcFormProgressBarComponent } from '../../../shared/components/mpc-form-progress-bar/mpc-form-progress-bar.component';
@@ -13,6 +12,7 @@ import { InscricaoService } from '../inscricao.service';
 import { emailValidator, telefoneValidator } from '../inscricao.validator';
 import { MpcInputTelefoneComponent } from '../../../shared/components/mpc-input-telefone/mpc-input-telefone.component';
 import { MpcInputEmailComponent } from '../../../shared/components/mpc-input-email/mpc-input-email.component';
+import { MpcModalConfig } from '../../../shared/components/mpc-modal/mpc-modal.directive';
 
 @Component({
   selector: 'app-contato',
@@ -25,7 +25,9 @@ import { MpcInputEmailComponent } from '../../../shared/components/mpc-input-ema
   templateUrl: './contato.component.html',
   styleUrls: ['./contato.component.css'],
 })
-export default class ContatoComponent {
+export default class ContatoComponent implements OnInit {
+
+  @ViewChild('modalErro', { static: true }) modalErro!: MpcModalComponent;
 
   form = new FormGroup({
     telefone: new FormControl('', telefoneValidator),
@@ -33,11 +35,25 @@ export default class ContatoComponent {
     endereco: new FormControl('', Validators.required)
   });
 
-  constructor(private fluxoErro: FluxoErro, private inscricaoService: InscricaoService, private router: Router) { }
+  constructor(private inscricaoService: InscricaoService, private router: Router) { }
+
+  ngOnInit(): void {
+    this.atualizarForm();
+  }
+
+  atualizarForm() {
+    try {
+      const dadosInscricao = this.inscricaoService.getDadosInscricao();
+      if (dadosInscricao) this.form.patchValue(dadosInscricao);
+    } catch (error) {
+      this.abrirModalErro('Erro', 'Não foi possível carregar os dados da inscrição');
+    }
+  }
 
   proximaEtapa() {
     if (this.form.invalid) return;
     this.inscricaoService.atualizarDadosInscricao(this.form.value, 3);
+    this.router.navigate([Rotas.PAGAMENTO]);
   }
 
   etapaAnterior() {
@@ -52,7 +68,17 @@ export default class ContatoComponent {
     }
 
     this.form.get(campo)?.setValue(event);
+  }
 
-    console.log(this.form.get(campo)?.value);
+  abrirModalErro(titulo: string, texto: string) {
+    const modalErro: MpcModalConfig = {
+      titulo: titulo,
+      texto: texto,
+      tipoModal: TipoModal.ERRO,
+      botao: () => this.modalErro?.fecharModal(),
+      textoBotao: 'OK'
+    }
+
+    this.modalErro?.abrirModal(modalErro);
   }
 }

@@ -1,5 +1,5 @@
 .section-inscricoes-encerradas {
-  min-height: 80vh !important;
+  min-height: 100vh !important;
   align-items: center;
   display: flex;
 
@@ -13,6 +13,17 @@
     img {
       width: 150px;
       height: auto;
+    }
+  }
+
+  .titulo-section {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--cor-primaria);
+
+    span {
+      color: var(--cor-secundaria);
     }
   }
 

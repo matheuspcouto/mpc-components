@@ -43,10 +43,6 @@ export class MpcInputSelectComponent {
   onChange: (value: string) => void = () => { };
   onTouched: () => void = () => { };
 
-  writeValue(value: string): void {
-    this.value = value;
-  }
-
   registerOnChange(fn: (value: string) => void): void {
     this.onChange = fn;
   }
@@ -55,8 +51,8 @@ export class MpcInputSelectComponent {
     this.onTouched = fn;
   }
 
-  setValue(option: string): void {
-    this.value = option;
+  setValue(option: any): void {
+    this.value = option.value as string;
     this.onChange(this.value);
     this.onTouched();
     this.valorCampo.emit(this.value);

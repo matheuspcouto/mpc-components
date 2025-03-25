@@ -1,10 +1,8 @@
 
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { MpcModalComponent, TipoModal } from '../../../shared/components/mpc-modal/mpc-modal.component';
 import { Rotas } from '../../../shared/enums/rotas-enum';
-import { FluxoErro } from '../../../shared/fluxo-erro';
 import { CommonModule } from '@angular/common';
 import { MpcFormProgressBarComponent } from '../../../shared/components/mpc-form-progress-bar/mpc-form-progress-bar.component';
 import { InscricaoService } from '../inscricao.service';
@@ -14,8 +12,8 @@ import { MpcButtonComponent } from '../../../shared/components/mpc-button/mpc-bu
 import { MpcInputDateComponent } from '../../../shared/components/mpc-input-date/mpc-input-date.component';
 import { MpcInputSelectComponent } from '../../../shared/components/mpc-input-select/mpc-input-select.component';
 import { MpcInputTextComponent } from '../../../shared/components/mpc-input-text/mpc-input-text.component';
-import { InscricoesEncerradasComponent } from "../inscricoes-encerradas/inscricoes-encerradas.component";
 import { MpcNavbarComponent } from '../../../shared/components/mpc-navbar/mpc-navbar.component';
+import { MpcModalConfig } from '../../../shared/components/mpc-modal/mpc-modal.directive';
 
 @Component({
   selector: 'app-dados-pessoais',
@@ -23,8 +21,8 @@ import { MpcNavbarComponent } from '../../../shared/components/mpc-navbar/mpc-na
     CommonModule, MpcModalComponent, FormsModule,
     ReactiveFormsModule, MpcInputTextComponent, MpcInputDateComponent,
     MpcInputRadioComponent, MpcButtonComponent, MpcInputSelectComponent,
-    MpcFormProgressBarComponent, MpcNavbarComponent, InscricoesEncerradasComponent
-],
+    MpcFormProgressBarComponent, MpcNavbarComponent
+  ],
   templateUrl: './dados-pessoais.component.html',
   styleUrls: ['./dados-pessoais.component.css'],
 })
@@ -42,8 +40,6 @@ export default class DadosPessoaisComponent implements OnInit {
     { label: 'Feminino', value: 'F', checked: false }
   ];
 
-  qtdVagas = 30;
-  inscricoesEncerradas = false;
   dataAtual = new Date().toISOString().split('T')[0];
 
   form = new FormGroup({
@@ -56,40 +52,38 @@ export default class DadosPessoaisComponent implements OnInit {
   });
 
   constructor(
-    private fluxoErro: FluxoErro,
     private router: Router,
     private inscricaoService: InscricaoService
   ) { }
 
   ngOnInit(): void {
-    this.listarInscricoes();
+    this.atualizarForm();
     this.listarCelulas();
     this.dataAtual = this.formatarData(this.dataAtual);
   }
 
-  listarInscricoes() {
+  atualizarForm() {
     try {
-      this.inscricaoService.listarInscricoes().subscribe({
-        next: (response: any) => {
-          this.inscricoesEncerradas = response.length >= this.qtdVagas;
-        },
-        error: (e: HttpErrorResponse) => {
-          if (e.status === 404) { return }
-          let erro = this.fluxoErro.construirErro(e, Rotas.HOME);
-          this.handleError(erro);
-        },
-      });
+      const dadosInscricao = this.inscricaoService.getDadosInscricao();
+      console.log(dadosInscricao.nome);
+
+      if (dadosInscricao.nome) {
+        this.form.reset();
+        this.form.patchValue(dadosInscricao);
+      }
+
+      this.estadosCivis.unshift('Selecione');
+      this.form.get('estadoCivil')?.setValue('Selecione');
     } catch (error) {
-      error = this.fluxoErro.construirErro(error, Rotas.HOME);
-      this.handleError(error);
-    };
+      this.abrirModalErro('Erro', 'Não foi possível carregar os dados da inscrição');
+    }
   }
 
   listarCelulas() {
     this.inscricaoService.listarCelulas().subscribe({
       next: (response: any) => {
         this.celulas = response;
-        this.filtrarCelulas();
+        if (this.celulas.length > 0) this.filtrarCelulas();
       }
     });
   }
@@ -121,8 +115,6 @@ export default class DadosPessoaisComponent implements OnInit {
     }
 
     this.form.get(campo)?.setValue(event);
-
-    console.log(this.form.get(campo)?.value);
   }
 
   formatarData(data: string): string {
@@ -131,20 +123,20 @@ export default class DadosPessoaisComponent implements OnInit {
       const ano = partes[0];
       const mes = partes[1];
       const dia = partes[2];
-      return `${dia}/${mes}/${ano}`;
+      return `${ano}-${mes}-${dia}`;
     }
     return data;
   }
 
-  handleError(error: any) {
-    const MODAL = {
-      titulo: error.titulo,
+  abrirModalErro(titulo: string, texto: string) {
+    const modalErro: MpcModalConfig = {
+      titulo: titulo,
+      texto: texto,
       tipoModal: TipoModal.ERRO,
-      texto: error.mensagem,
-      textoBotao: 'OK',
-      botao: () => { this.router.navigate([Rotas.HOME]); this.modalErro?.fecharModal() },
+      botao: () => this.modalErro?.fecharModal(),
+      textoBotao: 'OK'
     }
 
-    this.modalErro?.abrirModal();
+    this.modalErro?.abrirModal(modalErro);
   }
 }

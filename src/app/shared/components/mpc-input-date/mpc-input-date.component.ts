@@ -47,11 +47,7 @@ export class MpcInputDateComponent implements OnInit {
   onTouched: () => void = () => { };
 
   ngOnInit(): void {
-    this.value = this.maxDate ? this.getDataFormatada(this.maxDate) : this.getDataFormatada(this.value);
-  }
-
-  writeValue(value: string): void {
-    this.value = value || this.getDataFormatada();
+    this.value = this.maxDate ? this.maxDate : this.getDataHtmlFormatada(this.value);
   }
 
   registerOnChange(fn: (value: string) => void): void {
@@ -93,10 +89,11 @@ export class MpcInputDateComponent implements OnInit {
     return this.required! && !this.value;
   }
 
-  getDataFormatada(date?: string): string {
-    if (!date) return new Date().toISOString().split('T')[0];
-
-    return new Date(date).toISOString().split('T')[0];
+  getDataHtmlFormatada(date: string): string {
+    const ano = date.split('/')[2];
+    const mes = date.split('/')[1];
+    const dia = date.split('/')[0];
+    return `${ano}-${mes}-${dia}`;
   }
 
   formatarData(data: string): string {

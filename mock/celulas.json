@@ -1,0 +1,14 @@
+[
+  {
+    "nome": "Teste 01",
+    "tipoCelula": "Feminina"
+  },
+  {
+    "nome": "Teste 02",
+    "tipoCelula": "Masculina"
+  },
+  {
+    "nome": "Teste 03",
+    "tipoCelula": "Mista"
+  }
+]

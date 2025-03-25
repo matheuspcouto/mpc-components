@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MpcModalComponent } from '../../../shared/components/mpc-modal/mpc-modal.component';
 import { Rotas } from '../../../shared/enums/rotas-enum';
-import { FluxoErro } from '../../../shared/fluxo-erro';
 import { CommonModule } from '@angular/common';
 import { MpcNavbarComponent } from '../../../shared/components/mpc-navbar/mpc-navbar.component';
 import { MpcFormProgressBarComponent } from '../../../shared/components/mpc-form-progress-bar/mpc-form-progress-bar.component';
@@ -29,7 +28,7 @@ export default class PagamentoComponent {
     formaPagamento: new FormControl('', Validators.required)
   });
 
-  constructor(private fluxoErro: FluxoErro, private inscricaoService: InscricaoService, private router: Router) { }
+  constructor(private inscricaoService: InscricaoService, private router: Router) { }
 
   proximaEtapa() {
     if (this.form.invalid) return;

@@ -9,7 +9,7 @@
 
   <div class="container">
 
-    <mpc-form-progress-bar [etapa]="1"></mpc-form-progress-bar>
+    <mpc-form-progress-bar [etapaAtual]="1" [totalEtapas]="3"></mpc-form-progress-bar>
 
     <!-- Alertas -->
     <div class="alert alert-warning text-center mt-1" *ngIf="celulas.length === 0">
@@ -52,12 +52,11 @@
         </div>
       </div>
 
-      <div class="row" *ngIf="celulas.length > 0">
-        <p class="text-center">
-          Caso você já faça parte de uma célula, selecione abaixo.
-        </p>
-        <mpc-input-select label="Célula" [options]="celulasDropdown" [required]="true"
-          (valorCampo)="setValorCampo($event, 'celula')" />
+      <div class="row justify-content-center" *ngIf="celulas.length > 0">
+        <div class="col-md-6">
+          <mpc-input-select label="Célula (caso faça parte, selecione)" [options]="celulasDropdown" [required]="true"
+            (valorCampo)="setValorCampo($event, 'celula')" />
+        </div>
       </div>
 
       <div class="d-flex justify-content-center align-items-center mt-5">
@@ -71,7 +70,5 @@
   </div>
 
 </section>
-
-<inscricoes-encerradas *ngIf="inscricoesEncerradas"></inscricoes-encerradas>
 
 <mpc-modal #modalErro></mpc-modal>

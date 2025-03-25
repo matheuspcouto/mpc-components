@@ -26,8 +26,7 @@ export class ModaisComponent {
       textoSegundoBotao: 'Fechar',
     }
 
-    this.modalExemplo.modal = modalConfirmacao;
-    this.modalExemplo?.abrirModal();
+    this.modalExemplo?.abrirModal(modalConfirmacao);
   }
 
   abrirModalSucesso() {
@@ -41,8 +40,7 @@ export class ModaisComponent {
       textoSegundoBotao: 'Fechar',
     }
 
-    this.modalExemplo.modal = modalSucesso;
-    this.modalExemplo?.abrirModal();
+    this.modalExemplo?.abrirModal(modalSucesso);
   }
 
   abrirModalAlerta() {
@@ -56,8 +54,7 @@ export class ModaisComponent {
       textoSegundoBotao: 'Fechar',
     }
 
-    this.modalExemplo.modal = modalAlerta;
-    this.modalExemplo?.abrirModal();
+    this.modalExemplo?.abrirModal(modalAlerta);
   }
 
   abrirModalErro() {
@@ -71,8 +68,7 @@ export class ModaisComponent {
       // O modal de erro já possui um botão de copiar o erro
     }
 
-    this.modalExemplo.modal = modalErro;
-    this.modalExemplo?.abrirModal();
+    this.modalExemplo?.abrirModal(modalErro);
   }
 
 }

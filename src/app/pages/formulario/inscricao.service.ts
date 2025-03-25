@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import celulas from '../../../../mock/celulas.json';
+import inscricoes from '../../../../mock/inscricoes.json';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +30,7 @@ export class InscricaoService {
     this.dadosInscricaoSubject.next(dadosAtualizados);
 
     this.etapaAtualSubject.next(proximaEtapa);
+    console.log(this.dadosInscricaoSubject.getValue());
   }
 
   getDadosInscricao(): any {
@@ -39,10 +42,22 @@ export class InscricaoService {
   }
 
   listarCelulas(): Observable<any> {
+    // MOCK
+    return Observable.create((observer: any) => {
+      observer.next(celulas);
+      observer.complete();
+    });
+
     return this.http.get<any>(`${this.apiUrl}/celulas`, { headers: this.headers });
   }
 
   listarInscricoes(): Observable<any> {
+    // MOCK
+    return Observable.create((observer: any) => {
+      observer.next(inscricoes);
+      observer.complete();
+    });
+
     return this.http.get<any>(`${this.apiUrl}/inscricoes`, { headers: this.headers });
   }
 
