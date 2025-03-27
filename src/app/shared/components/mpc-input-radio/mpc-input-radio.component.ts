@@ -18,7 +18,7 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 export interface RadioOption {
   label: string;
@@ -32,29 +32,52 @@ export interface RadioOption {
   templateUrl: './mpc-input-radio.component.html',
   styleUrl: './mpc-input-radio.component.css'
 })
-export class MpcInputRadioComponent {
+export class MpcInputRadioComponent implements OnInit {
 
   @Input() id?: string;
   @Input() label: string = '';
   @Input() options: RadioOption[] = [];
   @Input() tabIndex?: number = 0;
   @Input() ariaLabel?: string;
+  @Input() value?: string;
 
   // Validators
   @Input() required?: boolean = false;
 
-  @Output() valorCampo: EventEmitter<String> = new EventEmitter();
+  @Output() valorCampo: EventEmitter<string> = new EventEmitter();
 
-  value?: RadioOption;
-  error: string = '';
-  onChange: (value: RadioOption) => void = () => { };
-  onTouched: () => void = () => { };
+  protected error?: string;
+  protected campoTocado: boolean = false;
 
-  writeValue(value: RadioOption): void {
-    this.value = value;
+  ngOnInit(): void {
+    const optionSelecionada = this.options.find(option => option.checked);
+
+    if (optionSelecionada) {
+      this.valorCampo.emit(optionSelecionada.value);
+    }
   }
 
-  registerOnChange(fn: (value: RadioOption) => void): void {
+  get Label(): string {
+    return this.label.toLowerCase();
+  }
+
+  set Value(option: string) {
+    this.value = option;
+    if (this.isCampoValido()) { this.valorCampo.emit(this.Value); }
+  }
+
+  get Value(): string {
+    return this.value!;
+  }
+
+  onChange: (value: string) => void = () => { };
+  onTouched: () => void = () => { };
+
+  writeValue(value: string): void {
+    this.Value = value;
+  }
+
+  registerOnChange(fn: (value: string) => void): void {
     this.onChange = fn;
   }
 
@@ -65,19 +88,19 @@ export class MpcInputRadioComponent {
   setValue(option: RadioOption): void {
     this.options.forEach(v => v.checked = false);
     option.checked = true;
-    this.value = option;
-    this.onChange(this.value);
+    this.Value = option.value;
+    this.onChange(this.Value);
     this.onTouched();
-    this.valorCampo.emit(this.value.value);
   }
 
   isCampoValido(): boolean {
-    if (this.validaRequired()) { this.error = `O campo ${this.label} é obrigatório`; return false; }
+    if (this.validaRequired()) { this.error = `O campo ${this.Label} é obrigatório`; return false; }
 
+    this.error = undefined;
     return true;
   }
 
   validaRequired(): boolean {
-    return this.required! && !this.value;
+    return this.required! && this.campoTocado && this.Value.length === 0;
   }
 }

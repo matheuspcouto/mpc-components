@@ -4,8 +4,6 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "mock": "json-server --watch mock/db.json",
-    "start:mock": "npm run start & npm run mock",
     "build": "ng build",
     "serve:ssr:my-components": "node dist/my-components/server/server.mjs"
   },

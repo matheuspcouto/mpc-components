@@ -33,6 +33,7 @@ export class MpcInputTextComponent {
   @Input() label: string = '';
   @Input() tabIndex?: number = 0;
   @Input() ariaLabel?: string;
+  @Input() value?: string = '';
 
   // Validators
   @Input() min?: string;
@@ -41,16 +42,30 @@ export class MpcInputTextComponent {
 
   @Output() valorCampo: EventEmitter<string> = new EventEmitter();
 
-  value: string = '';
-  error: string = '';
-  onChange: (value: string) => void = () => { };
+  protected error?: string;
+  protected campoTocado: boolean = false;
+
+  get Label(): string {
+    return this.label.toLowerCase();;
+  }
+
+  set Value(value: string) {
+    this.value = value;
+    if (this.isCampoValido()) { this.valorCampo.emit(this.value); }
+  }
+
+  get Value(): string {
+    return this.value as string;
+  }
+
+  onChange: (value?: string) => void = () => { };
   onTouched: () => void = () => { };
 
   writeValue(value: string): void {
     this.value = value;
   }
 
-  registerOnChange(fn: (value: string) => void): void {
+  registerOnChange(fn: (value?: string) => void): void {
     this.onChange = fn;
   }
 
@@ -59,26 +74,24 @@ export class MpcInputTextComponent {
   }
 
   setValue(event: any): void {
-    this.value = event.target.value;
-    this.onChange(this.value);
+    this.Value = event.target.value as string;
+    this.onChange(this.Value);
     this.onTouched();
-
-    if (this.isCampoValido()) {
-      this.valorCampo.emit(this.value);
-    }
   }
 
   isCampoValido(): boolean {
-    if (this.validaRequired()) { this.error = `O campo ${this.label} é obrigatório`; return false; }
-    if (this.validaMin()) { this.error = `O campo ${this.label} deve ter no mínimo ${this.min} caracteres`; return false; }
-    if (this.validaMax()) { this.error = `O campo ${this.label} deve ter no máximo ${this.max} caracteres`; return false; }
+    if (this.validaRequired()) { this.error = `O campo ${this.Label} é obrigatório`; return false; }
+    if (this.validaMin()) { this.error = `O campo ${this.Label} deve ter no mínimo ${this.min} caracteres`; return false; }
+    if (this.validaMax()) { this.error = `O campo ${this.Label} deve ter no máximo ${this.max} caracteres`; return false; }
+
+    this.error = undefined;
     return true;
   }
 
   validaMin(): boolean {
     if (this.min) {
       let minNumber = parseInt(this.min);
-      return this.value.length < minNumber;
+      return this.Value ? this.Value.length < minNumber : false;
     }
     return false;
   }
@@ -86,12 +99,12 @@ export class MpcInputTextComponent {
   validaMax(): boolean {
     if (this.max) {
       let maxNumber = parseInt(this.max);
-      return this.value.length > maxNumber;
+      return this.Value ? this.Value.length > maxNumber : false;
     }
     return false;
   }
 
   validaRequired(): boolean {
-    return this.required! && this.value.length === 0;
+    return this.campoTocado && this.required! && this.Value.length === 0;
   }
 }

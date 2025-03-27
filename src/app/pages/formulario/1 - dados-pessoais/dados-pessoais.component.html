@@ -25,37 +25,39 @@
 
       <div class="row">
         <div class="col-md-6 mb-3">
-          <mpc-input-text label="Nome" (valorCampo)="setValorCampo($event, 'nome')" min="3" max="100" />
+          <mpc-input-text label="Nome" [value]="form.value.nome" (valorCampo)="form.value.nome = $event"
+            [required]="true" min="3" max="100" />
         </div>
 
         <div class="col-md-6 mb-3">
-          <mpc-input-text label="Sobrenome" (valorCampo)="setValorCampo($event, 'sobrenome')" min="3" max="100" />
+          <mpc-input-text label="Sobrenome" [value]="form.value.sobrenome" (valorCampo)="form.value.sobrenome = $event"
+            [required]="true" min="3" max="100" />
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-6 mb-3">
           <mpc-input-date label="Data de Nascimento" [maxDate]="dataAtual" [required]="true"
-            (valorCampo)="setValorCampo($event, 'dataNasc')" />
+            (valorCampo)="form.value.dataNasc = $event" />
         </div>
 
         <div class="col-md-6 mb-3">
           <mpc-input-select label="Estado Civil" [options]="estadosCivis" [required]="true"
-            (valorCampo)="setValorCampo($event, 'estadoCivil')" />
+            (valorCampo)="form.value.estadoCivil = $event" />
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-6 mb-3">
-          <mpc-input-radio label="Sexo" [required]="true" [options]="sexos"
-            (valorCampo)="setValorCampo($event, 'sexo')" />
+          <mpc-input-radio label="Sexo" [required]="true" [options]="sexos" [value]="form.value.sexo"
+            (valorCampo)="form.value.sexo = $event" />
         </div>
       </div>
 
       <div class="row justify-content-center" *ngIf="celulas.length > 0">
         <div class="col-md-6">
-          <mpc-input-select label="Célula (caso faça parte, selecione)" [options]="celulasDropdown" [required]="true"
-            (valorCampo)="setValorCampo($event, 'celula')" />
+          <mpc-input-select label="Célula (caso faça parte, selecione)" (valorCampo)="form.value.celula = $event"
+            [options]="celulasDropdown" [required]="false" />
         </div>
       </div>
 

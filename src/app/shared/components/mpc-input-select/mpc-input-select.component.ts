@@ -18,18 +18,24 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
+export interface SelectOption {
+  label: string;
+  value: string;
+  selected?: boolean;
+}
 @Component({
   selector: 'mpc-input-select',
   imports: [CommonModule],
   templateUrl: './mpc-input-select.component.html',
   styleUrl: './mpc-input-select.component.css'
 })
-export class MpcInputSelectComponent {
+export class MpcInputSelectComponent implements OnInit {
 
   @Input() id?: string;
   @Input() label: string = '';
-  @Input() options: string[] = [];
+  @Input() options: SelectOption[] = [];
   @Input() tabIndex?: number = 0;
   @Input() ariaLabel?: string;
 
@@ -38,12 +44,37 @@ export class MpcInputSelectComponent {
 
   @Output() valorCampo: EventEmitter<string> = new EventEmitter();
 
-  value?: string;
-  error: string = '';
-  onChange: (value: string) => void = () => { };
+  protected opcaoSelecionada?: SelectOption;
+  protected error?: string;
+  protected campoTocado: boolean = false;
+
+  ngOnInit(): void {
+    const optionSelecionada = this.options.find(option => option.selected);
+
+    if (optionSelecionada) {
+      this.valorCampo.emit(optionSelecionada.value);
+    } else {
+      this.options.unshift({ label: 'Selecione', value: 'Selecione', selected: true });
+    }
+  }
+
+  get Label(): string {
+    return this.label.toLowerCase();
+  }
+
+  set OpcaoSelecionada(option: SelectOption) {
+    this.opcaoSelecionada = option;
+    if (this.isCampoValido()) { this.valorCampo.emit(this.opcaoSelecionada?.value); }
+  }
+
+  get OpcaoSelecionada(): SelectOption {
+    return this.opcaoSelecionada!;
+  }
+
+  onChange: (option: SelectOption) => void = () => { };
   onTouched: () => void = () => { };
 
-  registerOnChange(fn: (value: string) => void): void {
+  registerOnChange(fn: (option: SelectOption) => void): void {
     this.onChange = fn;
   }
 
@@ -52,20 +83,20 @@ export class MpcInputSelectComponent {
   }
 
   setValue(option: any): void {
-    this.value = option.value as string;
-    this.onChange(this.value);
+    this.OpcaoSelecionada = option as SelectOption;
+    this.onChange(this.OpcaoSelecionada);
     this.onTouched();
-    this.valorCampo.emit(this.value);
   }
 
   isCampoValido(): boolean {
-    if (this.validaRequired()) { this.error = `O campo ${this.label} é obrigatório`; return false; }
+    if (this.validaRequired()) { this.error = `O campo ${this.Label} é obrigatório`; return false; }
 
+    this.error = undefined;
     return true;
   }
 
   validaRequired(): boolean {
-    return this.required! && !this.value;
+    return this.required! && this.campoTocado && (this.OpcaoSelecionada && this.OpcaoSelecionada.value == 'Selecione');
   }
 
 }

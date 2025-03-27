@@ -1,12 +1,12 @@
-
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { SelectOption } from './../../../shared/components/mpc-input-select/mpc-input-select.component';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MpcModalComponent, TipoModal } from '../../../shared/components/mpc-modal/mpc-modal.component';
 import { Rotas } from '../../../shared/enums/rotas-enum';
 import { CommonModule } from '@angular/common';
 import { MpcFormProgressBarComponent } from '../../../shared/components/mpc-form-progress-bar/mpc-form-progress-bar.component';
 import { InscricaoService } from '../inscricao.service';
-import { FormGroup, FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Validators, FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { MpcInputRadioComponent, RadioOption } from '../../../shared/components/mpc-input-radio/mpc-input-radio.component';
 import { MpcButtonComponent } from '../../../shared/components/mpc-button/mpc-button.component';
 import { MpcInputDateComponent } from '../../../shared/components/mpc-input-date/mpc-input-date.component';
@@ -14,6 +14,8 @@ import { MpcInputSelectComponent } from '../../../shared/components/mpc-input-se
 import { MpcInputTextComponent } from '../../../shared/components/mpc-input-text/mpc-input-text.component';
 import { MpcNavbarComponent } from '../../../shared/components/mpc-navbar/mpc-navbar.component';
 import { MpcModalConfig } from '../../../shared/components/mpc-modal/mpc-modal.directive';
+import { InscricaoValidator } from '../inscricao.validator';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dados-pessoais',
@@ -28,33 +30,37 @@ import { MpcModalConfig } from '../../../shared/components/mpc-modal/mpc-modal.d
 })
 export default class DadosPessoaisComponent implements OnInit {
 
-  @ViewChild('modalErro', { static: true }) modalErro!: MpcModalComponent;
+  @ViewChild('modalErro', { static: true }) protected modalErro!: MpcModalComponent;
+  private router = inject(Router);
+  private inscricaoService = inject(InscricaoService);
+  private formBuilder = inject(NonNullableFormBuilder);
+  private notificationService = inject(ToastrService);
 
-  estadosCivis = ['Solteiro(a)', 'Casado(a)', 'Divorciado(a)', 'Viúvo(a)'];
+  protected celulas: string[] = [];
+  protected celulasDropdown: SelectOption[] = [];
+  protected dataAtual: string = new Date().toISOString().split('T')[0];
 
-  celulas = [];
-  celulasDropdown: any = [];
+  protected estadosCivis: SelectOption[] = [
+    { label: 'Solteiro(a)', value: 'Solteiro(a)', selected: false },
+    { label: 'Casado(a)', value: 'Casado(a)', selected: false },
+    { label: 'Divorciado(a)', value: 'Divorciado(a)', selected: false },
+    { label: 'Viúvo(a)', value: 'Viúvo(a)', selected: false },
+    { label: 'Separado(a)', value: 'Separado(a)', selected: false }
+  ];
 
-  sexos: RadioOption[] = [
+  protected sexos: RadioOption[] = [
     { label: 'Masculino', value: 'M', checked: false },
     { label: 'Feminino', value: 'F', checked: false }
   ];
 
-  dataAtual = new Date().toISOString().split('T')[0];
-
-  form = new FormGroup({
-    nome: new FormControl('', Validators.required),
-    sobrenome: new FormControl('', Validators.required),
-    celula: new FormControl(''),
-    dataNasc: new FormControl('', Validators.required),
-    sexo: new FormControl('', Validators.required),
-    estadoCivil: new FormControl('', Validators.required),
+  protected form = this.formBuilder.group({
+    nome: ['', Validators.required],
+    sobrenome: ['', Validators.required],
+    celula: [''],
+    dataNasc: ['', Validators.required],
+    sexo: ['', Validators.required],
+    estadoCivil: ['', Validators.required]
   });
-
-  constructor(
-    private router: Router,
-    private inscricaoService: InscricaoService
-  ) { }
 
   ngOnInit(): void {
     this.atualizarForm();
@@ -62,18 +68,14 @@ export default class DadosPessoaisComponent implements OnInit {
     this.dataAtual = this.formatarData(this.dataAtual);
   }
 
-  atualizarForm() {
+  atualizarForm(): void {
     try {
       const dadosInscricao = this.inscricaoService.getDadosInscricao();
-      console.log(dadosInscricao.nome);
 
       if (dadosInscricao.nome) {
         this.form.reset();
         this.form.patchValue(dadosInscricao);
       }
-
-      this.estadosCivis.unshift('Selecione');
-      this.form.get('estadoCivil')?.setValue('Selecione');
     } catch (error) {
       this.abrirModalErro('Erro', 'Não foi possível carregar os dados da inscrição');
     }
@@ -89,32 +91,21 @@ export default class DadosPessoaisComponent implements OnInit {
   }
 
   filtrarCelulas() {
-    let sexo = this.form.get('sexo')?.value;
+    let sexo = this.form.value.sexo;
     sexo = sexo === 'M' ? 'Masculina' : 'Feminina';
 
     this.celulas.forEach((celula: any) => {
       if (celula.tipoCelula === sexo || celula.tipoCelula === 'Mista') {
-        this.celulasDropdown.push(celula.nome);
+        this.celulasDropdown.push({ label: celula.nome, value: celula.nome, selected: false });
       }
     });
-
-    this.celulasDropdown.unshift('Nenhuma');
-    this.form.get('celula')?.setValue('Nenhuma');
   }
 
   proximaEtapa() {
-    if (this.form.invalid) return;
-    this.inscricaoService.atualizarDadosInscricao(this.form.value, 2);
-    this.router.navigate([Rotas.CONTATO]);
-  }
-
-  setValorCampo(event: any, campo: string): void {
-    if (!event) {
-      this.form.get(campo)?.setErrors({ error: true });
-      return;
+    if (this.validarDados()) {
+      this.inscricaoService.atualizarDadosInscricao(this.form.value, 2);
+      this.router.navigate([Rotas.CONTATO]);
     }
-
-    this.form.get(campo)?.setValue(event);
   }
 
   formatarData(data: string): string {
@@ -126,6 +117,15 @@ export default class DadosPessoaisComponent implements OnInit {
       return `${ano}-${mes}-${dia}`;
     }
     return data;
+  }
+
+  validarDados() {
+    let erros: string[] = [];
+    if (this.form.value.estadoCivil === 'Selecione')
+    if (new InscricaoValidator().isValidDataNascimento(this.form.get('dataNasc')?.value))
+
+    if (this.form.value.celula === 'Selecione') this.form.value.celula = undefined;
+    return false;
   }
 
   abrirModalErro(titulo: string, texto: string) {

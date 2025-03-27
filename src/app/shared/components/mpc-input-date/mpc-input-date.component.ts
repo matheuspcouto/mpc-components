@@ -19,7 +19,7 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'mpc-input-date',
@@ -27,12 +27,13 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   templateUrl: './mpc-input-date.component.html',
   styleUrl: './mpc-input-date.component.css'
 })
-export class MpcInputDateComponent implements OnInit {
+export class MpcInputDateComponent {
 
   @Input() id?: string;
   @Input() label: string = '';
   @Input() tabIndex?: number = 0;
   @Input() ariaLabel?: string;
+  @Input() value?: string = "";
 
   // Validators
   @Input() minDate?: string;
@@ -41,14 +42,24 @@ export class MpcInputDateComponent implements OnInit {
 
   @Output() valorCampo: EventEmitter<string> = new EventEmitter();
 
-  value: string = new Date().toISOString().split('T')[0]; // Data atual no formato YYYY-MM-DD
-  error: string = '';
+  protected error?: string = '';
+  protected campoTocado: boolean = false;
+
+  get Label(): string {
+    return this.label.toLowerCase();;
+  }
+
+  set Value(value: string) {
+    this.value = value;
+    if (this.isCampoValido()) { this.valorCampo.emit(this.value); }
+  }
+
+  get Value(): string {
+    return this.value as string;
+  }
+
   onChange: (value: string) => void = () => { };
   onTouched: () => void = () => { };
-
-  ngOnInit(): void {
-    this.value = this.maxDate ? this.maxDate : this.getDataHtmlFormatada(this.value);
-  }
 
   registerOnChange(fn: (value: string) => void): void {
     this.onChange = fn;
@@ -59,34 +70,32 @@ export class MpcInputDateComponent implements OnInit {
   }
 
   setValue(event: any): void {
-    this.value = event.target.value;
-    this.onChange(this.value);
+    this.Value = event.target.value as string;
+    this.onChange(this.Value);
     this.onTouched();
-
-    if (this.isCampoValido()) {
-      this.valorCampo.emit(this.value);
-    }
   }
 
   isCampoValido(): boolean {
-    if (this.validaRequired()) { this.error = `O campo ${this.label} é obrigatório`; return false; }
+    if (this.validaRequired()) { this.error = `O campo ${this.Label} é obrigatório`; return false; }
     if (this.validaMinDate() && this.minDate) { this.error = `A data deve ser maior ou igual a ${this.formatarData(this.minDate)}`; return false; }
     if (this.validaMaxDate() && this.maxDate) { this.error = `A data deve ser menor ou igual a ${this.formatarData(this.maxDate)}`; return false; }
+
+    this.error = undefined;
     return true;
   }
 
   validaMinDate(): boolean {
     if (!this.minDate) return false;
-    return new Date(this.value) < new Date(this.minDate);
+    return new Date(this.Value) < new Date(this.minDate);
   }
 
   validaMaxDate(): boolean {
     if (!this.maxDate) return false;
-    return new Date(this.value) > new Date(this.maxDate);
+    return new Date(this.Value) > new Date(this.maxDate);
   }
 
   validaRequired(): boolean {
-    return this.required! && !this.value;
+    return this.campoTocado && this.required! && this.Value.length === 0;
   }
 
   getDataHtmlFormatada(date: string): string {

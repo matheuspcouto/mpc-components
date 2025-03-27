@@ -38,9 +38,15 @@ export const enderecoValidator = [
   Validators.minLength(10)
 ];
 
+export const dataNascimentoValidator = [
+  Validators.required,
+  Validators.minLength(10)
+];
+
 export class InscricaoValidator {
 
-  isValidDataNascimento(dataNascimento: string) {
+  isValidDataNascimento(dataNascimento: string | undefined | null) {
+    if (!dataNascimento) return false;
     const dataAtual = new Date();
     const dataNascimentoDate = new Date(dataNascimento);
 

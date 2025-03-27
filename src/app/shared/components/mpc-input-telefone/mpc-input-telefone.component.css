@@ -10,3 +10,7 @@ em {
   max-width: 20vh;
   text-decoration: none;
 }
+
+p {
+  font-size: 14px;
+}

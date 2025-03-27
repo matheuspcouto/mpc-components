@@ -1,9 +1,10 @@
 <div [tabindex]="tabIndex" [attr.aria-label]="ariaLabel" class="form-group">
   <label class="form-label">{{ required ? label + ' *' : label }}</label>
   <input type="date" class="form-control" [value]="value" (input)="setValue($event)" [max]="maxDate" [min]="minDate"
-    (blur)="onTouched()" [required]="required" [style]="!isCampoValido() ? 'border-color: red' : ''" />
+    (blur)="onTouched()" (focus)="campoTocado = true; isCampoValido()" [required]="required"
+    [style]="error ? 'border-color: red' : ''" />
 
-  <div *ngIf="!isCampoValido()">
+  <div *ngIf="error">
     <p class="text-danger mt-1"> {{ error }} </p>
   </div>
 </div>
