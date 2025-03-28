@@ -17,7 +17,7 @@
     <form [formGroup]="form">
 
       <div class="row">
-        <mpc-input-select label="Forma de Pagamento" [required]="true" (valorCampo)="setValorCampo($event, 'formaPagamento')" [options]="formasPagamento" />
+        <mpc-input-select label="Forma de Pagamento" [required]="true" (valor)="setvalor($event, 'formaPagamento')" [options]="formasPagamento" />
       </div>
 
     </form>

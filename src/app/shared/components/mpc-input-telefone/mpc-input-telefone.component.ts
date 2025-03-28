@@ -9,7 +9,7 @@
  * required {boolean}: (opcional) Campo obrigatório.
  *
  * Exemplo de utilização:
- * <mpc-input-telefone label="Telefone" [id]="telefone" [tabIndex]="0" [ariaLabel]="Campo de Telefone" [required]="true" (valorCampo)="setValorCampo($event)"></mpc-input-telefone>
+ * <mpc-input-telefone label="Telefone" [id]="telefone" [tabIndex]="0" [ariaLabel]="Campo de Telefone" [required]="true" (valor)="setvalor($event)"></mpc-input-telefone>
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
@@ -18,9 +18,9 @@
 
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ValidationErrors } from '@angular/forms';
 import { NgxMaskDirective } from 'ngx-mask';
 
-// TODO: Adicionar coódigo do país e melhorar a validação do telefone
 @Component({
   selector: 'mpc-input-telefone',
   imports: [CommonModule, NgxMaskDirective],
@@ -38,10 +38,22 @@ export class MpcInputTelefoneComponent {
   regexTelefone: any = /^\(?(?:[14689][1-9]|2[12478]|3[1234578]|5[1345]|7[134579])\)? ?(?:[2-8]|9[1-9])[0-9]{3}\-?[0-9]{4}$/;
   mascara: string = '(00) 00000-0000';
 
-  @Output() valorCampo: EventEmitter<string> = new EventEmitter();
+  @Output() valor: EventEmitter<string> = new EventEmitter();
+  @Output() error: EventEmitter<ValidationErrors> = new EventEmitter();
 
-  value: string = '';
-  error: string = '';
+  protected value?: string = '';
+  protected errorMessage?: string;
+  protected campoTocado: boolean = false;
+
+  set Value(value: string) {
+    this.value = value;
+    if (this.isCampoValido()) { this.valor.emit(this.removerCaracteresEspeciais(this.value)); }
+  }
+
+  get Value(): string {
+    return this.value as string;
+  }
+
   onChange: (value: string) => void = () => { };
   onTouched: () => void = () => { };
 
@@ -58,45 +70,39 @@ export class MpcInputTelefoneComponent {
   }
 
   setValue(event: any): void {
-    this.value = event.target.value;
-    this.onChange(this.value);
+    this.Value = event.target.value;
+    this.onChange(this.Value);
     this.onTouched();
-
-    if (this.isCampoValido()) {
-      this.value = this.formatarTelefone(this.value);
-      this.valorCampo.emit(this.value);
-    }
   }
 
   isCampoValido(): boolean {
-    if (this.validaRequired()) { this.error = `O campo telefone é obrigatório`; return false; }
-    if (this.validaRegex()) { this.error = `O campo telefone não está em um formato válido. Tente (00) 00000-0000`; return false; }
+    if (this.validaRequired()) {
+      this.errorMessage = `O campo telefone é obrigatório`;
+      this.error.emit({ required: true });
+      return false;
+    }
+
+    if (this.validaRegex()) {
+      this.errorMessage = `O campo telefone não está em um formato válido. Tente (00) 00000-0000`;
+      this.error.emit({ regex: true });
+      return false;
+    }
+
+    this.errorMessage = undefined;
     return true;
   }
 
   validaRegex(): boolean {
-    return !new RegExp(this.regexTelefone).test(this.value);
+    return !new RegExp(this.regexTelefone).test(this.Value);
   }
 
   validaRequired(): boolean {
-    return this.required! && this.value.length === 0;
+    return this.required! && this.Value.length === 0;
   }
 
-  formatarTelefone(telefone: string): string {
-    // Remover caracteres não numéricos
-    const numeroLimpo = telefone.replace(/\D/g, '');
-
-    // Verificar se o número possui DDD
-    if (numeroLimpo.length === 11) {
-      // Formatar telefone com DDD
-      return numeroLimpo.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
-    } else if (numeroLimpo.length === 10) {
-      // Formatar telefone sem DDD
-      return numeroLimpo.replace(/(\d{5})(\d{4})/, '$1-$2');
-    } else {
-      // Retornar a string original se não for um número válido
-      return telefone;
-    }
+  removerCaracteresEspeciais(telefone: string): string {
+    // Remove todos os caracteres não numéricos (espaços, parênteses, traços, etc.)
+    return telefone.replace(/\D/g, '');
   }
 
 }

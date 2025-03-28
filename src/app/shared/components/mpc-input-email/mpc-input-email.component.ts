@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ValidationErrors } from '@angular/forms';
 
 @Component({
   selector: 'mpc-input-email',
@@ -17,10 +18,22 @@ export class MpcInputEmailComponent {
   @Input() required?: boolean = false;
   regexEmail: any = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
-  @Output() valorCampo: EventEmitter<string> = new EventEmitter();
+  @Output() valor: EventEmitter<string> = new EventEmitter();
+  @Output() error: EventEmitter<ValidationErrors> = new EventEmitter();
 
-  value: string = '';
-  error: string = '';
+  protected value?: string = '';
+  protected errorMessage?: string;
+  protected campoTocado: boolean = false;
+
+  set Value(value: string) {
+    this.value = value;
+    if (this.isCampoValido()) { this.valor.emit(this.value); }
+  }
+
+  get Value(): string {
+    return this.value as string;
+  }
+
   onChange: (value: string) => void = () => { };
   onTouched: () => void = () => { };
 
@@ -37,27 +50,34 @@ export class MpcInputEmailComponent {
   }
 
   setValue(event: any): void {
-    this.value = event.target.value;
-    this.onChange(this.value);
+    this.Value = event.target.value;
+    this.onChange(this.Value);
     this.onTouched();
-
-    if (this.isCampoValido()) {
-      this.valorCampo.emit(this.value);
-    }
   }
 
   isCampoValido(): boolean {
-    if (this.validaRequired()) { this.error = `O campo e-mail é obrigatório`; return false; }
-    if (this.validaRegex()) { this.error = `O campo e-mail não está em um formato válido`; return false; }
+    if (this.validaRequired()) {
+      this.errorMessage = `O campo e-mail é obrigatório`;
+      this.error.emit({ required: true });
+      return false;
+    }
+
+    if (this.validaRegex()) {
+      this.errorMessage = `O campo e-mail não está em um formato válido`;
+      this.error.emit({ regex: true });
+      return false;
+    }
+
+    this.errorMessage = undefined;
     return true;
   }
 
   validaRegex(): boolean {
-    return !new RegExp(this.regexEmail).test(this.value);
+    return !new RegExp(this.regexEmail).test(this.Value);
   }
 
   validaRequired(): boolean {
-    return this.required! && this.value.length === 0;
+    return this.required! && this.Value.length === 0;
   }
 
 }

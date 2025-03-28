@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import celulas from '../../../../mock/celulas.json';
 import inscricoes from '../../../../mock/inscricoes.json';
 
 @Injectable({
@@ -41,16 +40,6 @@ export class InscricaoService {
     return this.etapaAtualSubject.getValue();
   }
 
-  listarCelulas(): Observable<any> {
-    // MOCK
-    return Observable.create((observer: any) => {
-      observer.next(celulas);
-      observer.complete();
-    });
-
-    return this.http.get<any>(`${this.apiUrl}/celulas`, { headers: this.headers });
-  }
-
   listarInscricoes(): Observable<any> {
     // MOCK
     return Observable.create((observer: any) => {
@@ -65,5 +54,9 @@ export class InscricaoService {
     const requestBody = JSON.stringify(body);
     const headersWithSexo = this.headers.append('sexo', sexo);
     return this.http.post<any>(`${this.apiUrl}/inscricao`, requestBody, { headers: headersWithSexo });
+  }
+
+  pesquisarCep(cep: string): Observable<any> {
+    return this.http.get<any>(`https://viacep.com.br/ws/${cep}/json/`);
   }
 }

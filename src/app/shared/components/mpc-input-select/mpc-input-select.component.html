@@ -3,14 +3,14 @@
 
   <div class="input-group">
     <select (change)="setValue($event.target)" class="form-select form-select-md"
-       [style]="error ? 'border-color: red' : ''" (focus)="campoTocado = true; isCampoValido()">
-      <option *ngFor="let option of options" [value]="option.value" [selected]="option.selected">
+       [style]="errorMessage ? 'border-color: red' : ''" (focus)="campoTocado = true; isCampoValido()">
+      <option *ngFor="let option of options" [selected]="option.selected">
         {{ option.label }}
       </option>
     </select>
   </div>
 
-  <div *ngIf="error">
-    <p class="text-danger mt-1"> {{ error }} </p>
+  <div *ngIf="errorMessage">
+    <p class="text-danger mt-1"> {{ errorMessage }} </p>
   </div>
 </div>

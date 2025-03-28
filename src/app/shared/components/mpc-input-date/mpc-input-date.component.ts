@@ -11,7 +11,7 @@
  * required {boolean}: (opcional) Indica se o campo é obrigatório.
  *
  * Exemplo de utilização:
- * <mpc-input-date label="Data de Nascimento" [minDate]="minDate" [maxDate]="maxDate" [required]="true" [tabIndex]="1" [ariaLabel]="ariaLabel" (valorCampo)="setValorCampo($event)"></mpc-input-date>
+ * <mpc-input-date label="Data de Nascimento" [minDate]="minDate" [maxDate]="maxDate" [required]="true" [tabIndex]="1" [ariaLabel]="ariaLabel" (valor)="setvalor($event)"></mpc-input-date>
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
@@ -20,6 +20,7 @@
 
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ValidationErrors } from '@angular/forms';
 
 @Component({
   selector: 'mpc-input-date',
@@ -40,9 +41,10 @@ export class MpcInputDateComponent {
   @Input() maxDate?: string;
   @Input() required?: boolean = false;
 
-  @Output() valorCampo: EventEmitter<string> = new EventEmitter();
+  @Output() valor: EventEmitter<string> = new EventEmitter();
+  @Output() error: EventEmitter<ValidationErrors> = new EventEmitter();
 
-  protected error?: string = '';
+  protected errorMessage?: string = '';
   protected campoTocado: boolean = false;
 
   get Label(): string {
@@ -51,7 +53,7 @@ export class MpcInputDateComponent {
 
   set Value(value: string) {
     this.value = value;
-    if (this.isCampoValido()) { this.valorCampo.emit(this.value); }
+    if (this.isCampoValido()) { this.valor.emit(this.value); }
   }
 
   get Value(): string {
@@ -76,11 +78,25 @@ export class MpcInputDateComponent {
   }
 
   isCampoValido(): boolean {
-    if (this.validaRequired()) { this.error = `O campo ${this.Label} é obrigatório`; return false; }
-    if (this.validaMinDate() && this.minDate) { this.error = `A data deve ser maior ou igual a ${this.formatarData(this.minDate)}`; return false; }
-    if (this.validaMaxDate() && this.maxDate) { this.error = `A data deve ser menor ou igual a ${this.formatarData(this.maxDate)}`; return false; }
+    if (this.validaRequired()) {
+      this.errorMessage = `O campo ${this.Label} é obrigatório`;
+      this.error.emit({ 'required': true });
+      return false;
+    }
 
-    this.error = undefined;
+    if (this.validaMinDate() && this.minDate) {
+      this.errorMessage = `A data deve ser maior ou igual a ${this.formatarData(this.minDate)}`;
+      this.error.emit({ 'minDate': true });
+      return false;
+    }
+
+    if (this.validaMaxDate() && this.maxDate) {
+      this.errorMessage = `A data deve ser menor ou igual a ${this.formatarData(this.maxDate)}`;
+      this.error.emit({ 'maxDate': true });
+      return false;
+    }
+
+    this.errorMessage = undefined;
     return true;
   }
 

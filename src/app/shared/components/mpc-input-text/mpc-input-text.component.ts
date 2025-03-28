@@ -11,7 +11,7 @@
  * required {boolean}: (opcional) Campo obrigatório.
  *
  * Exemplo de utilização:
- * <mpc-input-text label="Nome" [id]="nome" [tabIndex]="1" [ariaLabel]="Nome" min="3" max="20" [required]="true" (valorCampo)="setValorCampo($event)"></mpc-input-text>
+ * <mpc-input-text label="Nome" [id]="nome" [tabIndex]="1" [ariaLabel]="Nome" min="3" max="20" [required]="true" (valor)="setvalor($event)"></mpc-input-text>
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
@@ -20,6 +20,7 @@
 
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ValidationErrors } from '@angular/forms';
 
 @Component({
   selector: 'mpc-input-text',
@@ -40,9 +41,10 @@ export class MpcInputTextComponent {
   @Input() max?: string;
   @Input() required?: boolean = false;
 
-  @Output() valorCampo: EventEmitter<string> = new EventEmitter();
+  @Output() valor: EventEmitter<string> = new EventEmitter();
+  @Output() error: EventEmitter<ValidationErrors> = new EventEmitter();
 
-  protected error?: string;
+  protected errorMessage?: string;
   protected campoTocado: boolean = false;
 
   get Label(): string {
@@ -51,7 +53,7 @@ export class MpcInputTextComponent {
 
   set Value(value: string) {
     this.value = value;
-    if (this.isCampoValido()) { this.valorCampo.emit(this.value); }
+    if (this.isCampoValido()) { this.valor.emit(this.value); }
   }
 
   get Value(): string {
@@ -80,11 +82,25 @@ export class MpcInputTextComponent {
   }
 
   isCampoValido(): boolean {
-    if (this.validaRequired()) { this.error = `O campo ${this.Label} é obrigatório`; return false; }
-    if (this.validaMin()) { this.error = `O campo ${this.Label} deve ter no mínimo ${this.min} caracteres`; return false; }
-    if (this.validaMax()) { this.error = `O campo ${this.Label} deve ter no máximo ${this.max} caracteres`; return false; }
+    if (this.validaRequired()) {
+      this.errorMessage = `O campo ${this.Label} é obrigatório`;
+      this.error.emit({ required: true });
+      return false;
+    }
 
-    this.error = undefined;
+    if (this.validaMin()) {
+      this.errorMessage = `O campo ${this.Label} deve ter no mínimo ${this.min} caracteres`;
+      this.error.emit({ min: true });
+      return false;
+    }
+
+    if (this.validaMax()) {
+      this.errorMessage = `O campo ${this.Label} deve ter no máximo ${this.max} caracteres`;
+      this.error.emit({ max: true });
+      return false;
+    }
+
+    this.errorMessage = undefined;
     return true;
   }
 

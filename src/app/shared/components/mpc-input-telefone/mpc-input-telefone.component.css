@@ -1,14 +1,32 @@
-em {
+input {
+  width: 100%;
+  padding-right: 2.5rem;
+  /* Espaço para o ícone */
+  box-sizing: border-box;
+}
+
+.validation-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
-  position: relative !important;
-  transition: all 0.3s ease-in-out !important;
-  padding-block: 0.5rem !important;
-  padding-inline: 1.25rem !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 10px !important;
-  max-width: 20vh;
-  text-decoration: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  outline: none;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.valid-icon {
+  color: green;
+}
+
+.invalid-icon {
+  color: red;
 }
 
 p {

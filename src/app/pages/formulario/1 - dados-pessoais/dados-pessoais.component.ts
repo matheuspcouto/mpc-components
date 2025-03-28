@@ -30,14 +30,12 @@ import { ToastrService } from 'ngx-toastr';
 })
 export default class DadosPessoaisComponent implements OnInit {
 
-  @ViewChild('modalErro', { static: true }) protected modalErro!: MpcModalComponent;
   private router = inject(Router);
   private inscricaoService = inject(InscricaoService);
   private formBuilder = inject(NonNullableFormBuilder);
   private notificationService = inject(ToastrService);
 
-  protected celulas: string[] = [];
-  protected celulasDropdown: SelectOption[] = [];
+  @ViewChild('modalErro', { static: true }) protected modalErro!: MpcModalComponent;
   protected dataAtual: string = new Date().toISOString().split('T')[0];
 
   protected estadosCivis: SelectOption[] = [
@@ -53,10 +51,10 @@ export default class DadosPessoaisComponent implements OnInit {
     { label: 'Feminino', value: 'F', checked: false }
   ];
 
+  // TODO: Campo de CPF/CNPJ e idade
   protected form = this.formBuilder.group({
     nome: ['', Validators.required],
     sobrenome: ['', Validators.required],
-    celula: [''],
     dataNasc: ['', Validators.required],
     sexo: ['', Validators.required],
     estadoCivil: ['', Validators.required]
@@ -64,7 +62,6 @@ export default class DadosPessoaisComponent implements OnInit {
 
   ngOnInit(): void {
     this.atualizarForm();
-    this.listarCelulas();
     this.dataAtual = this.formatarData(this.dataAtual);
   }
 
@@ -74,31 +71,34 @@ export default class DadosPessoaisComponent implements OnInit {
 
       if (dadosInscricao.nome) {
         this.form.reset();
-        this.form.patchValue(dadosInscricao);
+
+        this.form.patchValue({
+          nome: dadosInscricao.nome,
+          sobrenome: dadosInscricao.sobrenome,
+          dataNasc: dadosInscricao.dataNasc,
+        });
+
+        if (dadosInscricao.sexo) {
+          this.sexos.forEach(sexo => {
+            if (sexo.value === dadosInscricao.sexo) {
+              sexo.checked = true;
+              this.form.patchValue({ sexo: sexo.value });
+            }
+          });
+        }
+
+        if (dadosInscricao.estadoCivil) {
+          this.estadosCivis.forEach(estadoCivil => {
+            if (estadoCivil.value === dadosInscricao.estadoCivil) {
+              estadoCivil.selected = true;
+              this.form.patchValue({ estadoCivil: estadoCivil.value });
+            }
+          });
+        }
       }
     } catch (error) {
       this.abrirModalErro('Erro', 'Não foi possível carregar os dados da inscrição');
     }
-  }
-
-  listarCelulas() {
-    this.inscricaoService.listarCelulas().subscribe({
-      next: (response: any) => {
-        this.celulas = response;
-        if (this.celulas.length > 0) this.filtrarCelulas();
-      }
-    });
-  }
-
-  filtrarCelulas() {
-    let sexo = this.form.value.sexo;
-    sexo = sexo === 'M' ? 'Masculina' : 'Feminina';
-
-    this.celulas.forEach((celula: any) => {
-      if (celula.tipoCelula === sexo || celula.tipoCelula === 'Mista') {
-        this.celulasDropdown.push({ label: celula.nome, value: celula.nome, selected: false });
-      }
-    });
   }
 
   proximaEtapa() {
@@ -120,12 +120,22 @@ export default class DadosPessoaisComponent implements OnInit {
   }
 
   validarDados() {
-    let erros: string[] = [];
-    if (this.form.value.estadoCivil === 'Selecione')
-    if (new InscricaoValidator().isValidDataNascimento(this.form.get('dataNasc')?.value))
+    if (this.form.invalid) {
+      this.notificationService.error('Preencha todos os campos obrigatórios corretamente!');
+      return false;
+    }
 
-    if (this.form.value.celula === 'Selecione') this.form.value.celula = undefined;
-    return false;
+    let erros: string[] = [];
+
+    if (this.form.value.estadoCivil === 'Selecione') erros.push('Estado Civil deve ser selecionado');
+    if (!new InscricaoValidator().isValidDataNascimento(this.form.value.dataNasc)) erros.push('Data de Nascimento deve ser menor que a data atual')
+
+    if (erros.length > 0) {
+      erros.forEach(erro => this.notificationService.error(erro));
+      return false;
+    }
+
+    return true;
   }
 
   abrirModalErro(titulo: string, texto: string) {

@@ -18,16 +18,65 @@
 
       <div class="row">
         <div class="col-md-6 mb-3">
-          <mpc-input-telefone [required]="true" (valorCampo)="setValorCampo($event, 'telefone')" />
+          <mpc-input-telefone [required]="true" (valor)="form.controls.telefone.setValue($event)"
+            (error)="form.controls.telefone.setErrors($event)" />
         </div>
 
         <div class="col-md-6 mb-3">
-          <mpc-input-email [required]="true" (valorCampo)="setValorCampo($event, 'email')" />
+          <mpc-input-email [required]="true" (valor)="form.controls.email.setValue($event)"
+            (error)="form.controls.email.setErrors($event)" />
         </div>
       </div>
 
-      <div class="row mb-3">
-        <mpc-input-text label="Endereço" (valorCampo)="setValorCampo($event, 'endereco')" min="10" max="100" />
+      <div class="row mb-3 align-items-center justify-content-between">
+        <!-- TODO: criar mpc-input-pesquisa-cep
+         <div class="col-md-6">
+          <mpc-input-text label="CEP" min="8" max="8" [required]="true" [value]="form.value.cep"
+            (valor)="form.controls.cep.setValue($event)" (error)="form.controls.cep.setErrors($event)" />
+        </div>
+
+        <div class="col-md-6">
+          <mpc-button corBotao="btn-outline-secondary" icone="bi bi-search" (click)="pequisarCep(form.value.cep)" />
+        </div> -->
+      </div>
+
+      <div class="row">
+
+        <div class="col-md-4 mb-3">
+          <mpc-input-text label="Cidade" [value]="form.value.cidade"
+            (valor)="form.controls.cidade.setValue($event)" (error)="form.controls.cidade.setErrors($event)" />
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <mpc-input-text label="Estado" [value]="form.value.estado"
+            (valor)="form.controls.estado.setValue($event)" (error)="form.controls.estado.setErrors($event)" />
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <mpc-input-text label="Bairro" [value]="form.value.bairro"
+            (valor)="form.controls.bairro.setValue($event)" (error)="form.controls.bairro.setErrors($event)" />
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-md-10 mb-3">
+          <mpc-input-text label="Logradouro" [value]="form.value.logradouro"
+            (valor)="form.controls.logradouro.setValue($event)" (error)="form.controls.logradouro.setErrors($event)" />
+        </div>
+
+        <div class="col-md-2 mb-3">
+          <!-- TODO: criar mpc-input-number -->
+          <mpc-input-text label="Número" min="1" max="99999" [value]="form.value.numero"
+            (valor)="form.controls.numero.setValue($event)" (error)="form.controls.numero.setErrors($event)" />
+        </div>
+
+      </div>
+
+      <div class="row">
+        <mpc-input-text label="Complemento" max="30" [value]="form.value.complemento"
+          (valor)="form.controls.complemento.setValue($event)" (error)="form.controls.complemento.setErrors($event)" />
       </div>
 
     </form>

@@ -10,7 +10,7 @@
  * required {boolean}: (opcional) Campo obrigatório.
  *
  * Exemplo de utilização:
- * <mpc-input-radio label="Sexo" [id]="sexo" [tabIndex]="0" [ariaLabel]="Campo de Sexo" [options]="sexos" [required]="true" (valorCampo)="setValorCampo($event)"></mpc-input-radio>
+ * <mpc-input-radio label="Sexo" [id]="sexo" [tabIndex]="0" [ariaLabel]="Campo de Sexo" [options]="sexos" [required]="true" (valor)="setvalor($event)"></mpc-input-radio>
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
@@ -19,6 +19,7 @@
 
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ValidationErrors } from '@angular/forms';
 
 export interface RadioOption {
   label: string;
@@ -39,21 +40,22 @@ export class MpcInputRadioComponent implements OnInit {
   @Input() options: RadioOption[] = [];
   @Input() tabIndex?: number = 0;
   @Input() ariaLabel?: string;
-  @Input() value?: string;
 
   // Validators
   @Input() required?: boolean = false;
 
-  @Output() valorCampo: EventEmitter<string> = new EventEmitter();
+  @Output() valor: EventEmitter<string> = new EventEmitter();
+  @Output() error: EventEmitter<ValidationErrors> = new EventEmitter();
 
-  protected error?: string;
+  protected opcaoSelecionada?: RadioOption;
+  protected errorMessage?: string;
   protected campoTocado: boolean = false;
 
   ngOnInit(): void {
     const optionSelecionada = this.options.find(option => option.checked);
 
     if (optionSelecionada) {
-      this.valorCampo.emit(optionSelecionada.value);
+      this.valor.emit(optionSelecionada.value);
     }
   }
 
@@ -61,23 +63,23 @@ export class MpcInputRadioComponent implements OnInit {
     return this.label.toLowerCase();
   }
 
-  set Value(option: string) {
-    this.value = option;
-    if (this.isCampoValido()) { this.valorCampo.emit(this.Value); }
+  set OpcaoSelecionada(option: RadioOption) {
+    this.opcaoSelecionada = option;
+    if (this.isCampoValido()) { this.valor.emit(this.OpcaoSelecionada.value); }
   }
 
-  get Value(): string {
-    return this.value!;
+  get OpcaoSelecionada(): RadioOption {
+    return this.opcaoSelecionada!;
   }
 
-  onChange: (value: string) => void = () => { };
+  onChange: (option: RadioOption) => void = () => { };
   onTouched: () => void = () => { };
 
-  writeValue(value: string): void {
-    this.Value = value;
+  writeValue(option: RadioOption): void {
+    this.OpcaoSelecionada = option;
   }
 
-  registerOnChange(fn: (value: string) => void): void {
+  registerOnChange(fn: (value: RadioOption) => void): void {
     this.onChange = fn;
   }
 
@@ -88,19 +90,23 @@ export class MpcInputRadioComponent implements OnInit {
   setValue(option: RadioOption): void {
     this.options.forEach(v => v.checked = false);
     option.checked = true;
-    this.Value = option.value;
-    this.onChange(this.Value);
+    this.OpcaoSelecionada = option;
+    this.onChange(this.OpcaoSelecionada);
     this.onTouched();
   }
 
   isCampoValido(): boolean {
-    if (this.validaRequired()) { this.error = `O campo ${this.Label} é obrigatório`; return false; }
+    if (this.validaRequired()) {
+      this.errorMessage = `O campo ${this.Label} é obrigatório`;
+      this.error.emit({ 'required': true });
+      return false;
+    }
 
-    this.error = undefined;
+    this.errorMessage = undefined;
     return true;
   }
 
   validaRequired(): boolean {
-    return this.required! && this.campoTocado && this.Value.length === 0;
+    return this.required! && this.campoTocado && !this.OpcaoSelecionada;
   }
 }

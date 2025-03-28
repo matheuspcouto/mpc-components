@@ -12,9 +12,9 @@
     <mpc-form-progress-bar [etapaAtual]="1" [totalEtapas]="3"></mpc-form-progress-bar>
 
     <!-- Alertas -->
-    <div class="alert alert-warning text-center mt-1" *ngIf="celulas.length === 0">
+    <div class="alert alert-warning text-center mt-1">
       <i class="bi bi-exclamation-circle float-left"></i>
-      Não foi possível trazer as células. Mas não se preocupe, você pode continuar a inscrição.
+      Alerta de exemplo do formulário.
     </div>
     <!-- Alertas -->
 
@@ -25,12 +25,13 @@
 
       <div class="row">
         <div class="col-md-6 mb-3">
-          <mpc-input-text label="Nome" [value]="form.value.nome" (valorCampo)="form.value.nome = $event"
-            [required]="true" min="3" max="100" />
+          <mpc-input-text label="Nome" [value]="form.value.nome" (valor)="form.controls.nome.setValue($event)"
+            (error)="form.controls.nome.setErrors($event)" [required]="true" min="3" max="100" />
         </div>
 
         <div class="col-md-6 mb-3">
-          <mpc-input-text label="Sobrenome" [value]="form.value.sobrenome" (valorCampo)="form.value.sobrenome = $event"
+          <mpc-input-text label="Sobrenome" [value]="form.value.sobrenome"
+            (valor)="form.controls.sobrenome.setValue($event)" (error)="form.controls.sobrenome.setErrors($event)"
             [required]="true" min="3" max="100" />
         </div>
       </div>
@@ -38,26 +39,21 @@
       <div class="row">
         <div class="col-md-6 mb-3">
           <mpc-input-date label="Data de Nascimento" [maxDate]="dataAtual" [required]="true"
-            (valorCampo)="form.value.dataNasc = $event" />
+            [value]="form.value.dataNasc" (valor)="form.controls.dataNasc.setValue($event)"
+            (error)="form.controls.dataNasc.setErrors($event)" />
         </div>
 
         <div class="col-md-6 mb-3">
           <mpc-input-select label="Estado Civil" [options]="estadosCivis" [required]="true"
-            (valorCampo)="form.value.estadoCivil = $event" />
+            (valor)="form.controls.estadoCivil.setValue($event)"
+            (error)="form.controls.estadoCivil.setErrors($event)" />
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-6 mb-3">
-          <mpc-input-radio label="Sexo" [required]="true" [options]="sexos" [value]="form.value.sexo"
-            (valorCampo)="form.value.sexo = $event" />
-        </div>
-      </div>
-
-      <div class="row justify-content-center" *ngIf="celulas.length > 0">
-        <div class="col-md-6">
-          <mpc-input-select label="Célula (caso faça parte, selecione)" (valorCampo)="form.value.celula = $event"
-            [options]="celulasDropdown" [required]="false" />
+          <mpc-input-radio label="Sexo" [required]="true" [options]="sexos"
+            (valor)="form.controls.sexo.setValue($event)" (error)="form.controls.sexo.setErrors($event)" />
         </div>
       </div>
 

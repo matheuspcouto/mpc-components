@@ -50,7 +50,7 @@ export class InscricaoValidator {
     const dataAtual = new Date();
     const dataNascimentoDate = new Date(dataNascimento);
 
-    return dataNascimentoDate < dataAtual;
+    return dataNascimentoDate.getTime() < dataAtual.getTime();
   }
 
   isValidTelefone(telefone: string) {

@@ -3,12 +3,12 @@
 
   <div class="input-group">
     <label class="p-3" *ngFor="let option of options">
-      <input (focus)="campoTocado = true; isCampoValido()" type="radio" [value]="value" (change)="setValue(option)" [checked]="option.checked" (blur)="onTouched()"
+      <input (focus)="campoTocado = true; isCampoValido()" type="radio" (change)="setValue(option)" [checked]="option.checked" (blur)="onTouched()"
         [required]="required" /> {{ option.label }}
     </label>
   </div>
 
-  <div *ngIf="error">
-    <p class="text-danger mt-1"> {{ error }} </p>
+  <div *ngIf="errorMessage">
+    <p class="text-danger mt-1"> {{ errorMessage }} </p>
   </div>
 </div>

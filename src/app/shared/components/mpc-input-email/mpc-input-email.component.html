@@ -3,16 +3,17 @@
 
   <div class="input-group">
     <input [id]="id" type="email" class="form-control" [value]="value" (input)="setValue($event)" (blur)="onTouched()"
-      [required]="required" [style]="!isCampoValido() && value.length > 0 ? 'border-color: red' : ''" />
+      [required]="required" [style]="errorMessage ? 'border-color: red' : ''"
+      (focus)="campoTocado = true; isCampoValido()" />
 
-    <div *ngIf="value.length > 0">
-      <em [style]="!isCampoValido() ? 'color: red;' : 'color: green'">
-        <i [class]="!isCampoValido() ? 'bi bi-exclamation-circle' : 'bi bi-check-lg'"></i>
-      </em>
+    <div *ngIf="campoTocado" class="validation-icon">
+      <i class="bi bi-check-circle-fill valid-icon" *ngIf="!errorMessage"></i>
+      <i class="bi bi-x-circle-fill invalid-icon" *ngIf="errorMessage"></i>
     </div>
+
   </div>
 
-  <div *ngIf="!isCampoValido() && value.length > 0">
-    <p class="text-danger mt-1"> {{ error }} </p>
+  <div *ngIf="errorMessage">
+    <p class="text-danger mt-1"> {{ errorMessage }} </p>
   </div>
 </div>

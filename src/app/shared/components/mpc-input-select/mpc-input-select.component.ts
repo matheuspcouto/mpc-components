@@ -10,7 +10,7 @@
  * required {boolean}: (opcional) Campo obrigatório.
  *
  * Exemplo de utilização:
- * <mpc-input-select label="Estado Civil" [id]="estado-civil" [tabIndex]="0" [ariaLabel]="Campo de Estado Civil" [options]="estadosCivis" [required]="true" (valorCampo)="setValorCampo($event)"></mpc-input-select>
+ * <mpc-input-select label="Estado Civil" [id]="estado-civil" [tabIndex]="0" [ariaLabel]="Campo de Estado Civil" [options]="estadosCivis" [required]="true" (valor)="setvalor($event)"></mpc-input-select>
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
@@ -19,6 +19,7 @@
 
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ValidationErrors } from '@angular/forms';
 
 export interface SelectOption {
   label: string;
@@ -42,17 +43,18 @@ export class MpcInputSelectComponent implements OnInit {
   // Validators
   @Input() required?: boolean = false;
 
-  @Output() valorCampo: EventEmitter<string> = new EventEmitter();
+  @Output() valor: EventEmitter<string> = new EventEmitter();
+  @Output() error: EventEmitter<ValidationErrors> = new EventEmitter();
 
   protected opcaoSelecionada?: SelectOption;
-  protected error?: string;
+  protected errorMessage?: string;
   protected campoTocado: boolean = false;
 
   ngOnInit(): void {
     const optionSelecionada = this.options.find(option => option.selected);
 
     if (optionSelecionada) {
-      this.valorCampo.emit(optionSelecionada.value);
+      this.valor.emit(optionSelecionada.value);
     } else {
       this.options.unshift({ label: 'Selecione', value: 'Selecione', selected: true });
     }
@@ -64,7 +66,7 @@ export class MpcInputSelectComponent implements OnInit {
 
   set OpcaoSelecionada(option: SelectOption) {
     this.opcaoSelecionada = option;
-    if (this.isCampoValido()) { this.valorCampo.emit(this.opcaoSelecionada?.value); }
+    if (this.isCampoValido()) { this.valor.emit(this.opcaoSelecionada?.value); }
   }
 
   get OpcaoSelecionada(): SelectOption {
@@ -89,9 +91,13 @@ export class MpcInputSelectComponent implements OnInit {
   }
 
   isCampoValido(): boolean {
-    if (this.validaRequired()) { this.error = `O campo ${this.Label} é obrigatório`; return false; }
+    if (this.validaRequired()) {
+      this.errorMessage = `O campo ${this.Label} é obrigatório`;
+      this.error.emit({ 'required': true });
+      return false;
+    }
 
-    this.error = undefined;
+    this.errorMessage = undefined;
     return true;
   }
 

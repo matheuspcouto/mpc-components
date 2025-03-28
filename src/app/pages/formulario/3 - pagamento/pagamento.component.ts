@@ -1,3 +1,4 @@
+import { SelectOption } from './../../../shared/components/mpc-input-select/mpc-input-select.component';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MpcModalComponent } from '../../../shared/components/mpc-modal/mpc-modal.component';
@@ -22,7 +23,11 @@ import { InscricaoService } from '../inscricao.service';
 })
 export default class PagamentoComponent {
 
-  formasPagamento = ['Cartão', 'Pix', 'Dinheiro'];
+  formasPagamento: SelectOption[] = [
+    { label: 'Cartão', value: 'Cartão', selected: false },
+    { label: 'Pix', value: 'Pix', selected: false },
+    { label: 'Dinheiro', value: 'Dinheiro', selected: false }
+  ];
 
   form = new FormGroup({
     formaPagamento: new FormControl('', Validators.required)
@@ -41,7 +46,7 @@ export default class PagamentoComponent {
     this.router.navigate([Rotas.CONTATO]);
   }
 
-  setValorCampo(event: any, campo: string): void {
+  setvalor(event: any, campo: string): void {
     if (!event) {
       this.form.get(campo)?.setErrors({ error: true });
       return;

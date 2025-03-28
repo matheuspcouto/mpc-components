@@ -2,9 +2,9 @@
   <label class="form-label">{{ required ? label + ' *' : label }}</label>
   <input type="date" class="form-control" [value]="value" (input)="setValue($event)" [max]="maxDate" [min]="minDate"
     (blur)="onTouched()" (focus)="campoTocado = true; isCampoValido()" [required]="required"
-    [style]="error ? 'border-color: red' : ''" />
+    [style]="errorMessage ? 'border-color: red' : ''" />
 
-  <div *ngIf="error">
-    <p class="text-danger mt-1"> {{ error }} </p>
+  <div *ngIf="errorMessage">
+    <p class="text-danger mt-1"> {{ errorMessage }} </p>
   </div>
 </div>
