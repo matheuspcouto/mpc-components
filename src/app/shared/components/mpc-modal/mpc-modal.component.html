@@ -18,14 +18,17 @@
         <mpc-button corBotao="btn-primary" (click)="botao()" [texto]="modal.textoBotao"></mpc-button>
 
         <!-- Botão Secundário de Ação -->
-        <mpc-button *ngIf="modal.textoSegundoBotao" corBotao="btn-link" (click)="segundoBotao()"
-          [texto]="modal.textoSegundoBotao">
+        @if (modal.textoSegundoBotao) {
+        <mpc-button corBotao="btn-link" (click)="segundoBotao()" [texto]="modal.textoSegundoBotao">
         </mpc-button>
+        }
 
         <!-- Botão de Copiar Erro caso seja um modal de erro -->
-        <mpc-button *ngIf="btnCopiarMensagemErro" corBotao="btn-link" (click)="copiarCodigo()"
+        @if (btnCopiarMensagemErro) {
+        <mpc-button corBotao="btn-link" (click)="copiarCodigo()"
           [icone]="isCopiado ? 'bi bi-clipboard-check' : 'bi bi-clipboard'" texto="Copiar Erro">
         </mpc-button>
+        }
       </div>
     </div>
   </div>

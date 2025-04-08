@@ -2,14 +2,11 @@
  * @Componente MpcButtonComponent
  * Este componente é responsável por exibir um botão com texto e/ou ícone.
  *
- * id {string}: (opcional) ID do botão.
  * texto {string}: Texto do botão.
  * corBotao {string}: Cor do botão.
  * disabled {boolean}: (opcional) Indica se o botão está desabilitado.
  * posicaoIcone {string}: (opcional) Posição do ícone em relação ao texto. Valores possíveis: 'esquerda' ou 'direita'.
  * icone {string}: (opcional) Ícone do botão.
- * tabIndex {number}: (opcional) Índice de tabulação do botão.
- * ariaLabel {string}: (opcional) Rótulo de acessibilidade do botão.
  *
  * Exemplo de utilização:
  * <mpc-button id="botao" texto="Clique aqui" corBotao="btn-primary" tabIndex="0" disabled="false" posicaoIcone="esquerda" icone="bi bi-code-slash"></mpc-button>
@@ -20,7 +17,8 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { AccessibilityInputs } from '../../core/accessibility-inputs';
 
 enum PosicoesIcone {
   ESQUERDA = 'esquerda',
@@ -33,14 +31,11 @@ enum PosicoesIcone {
   templateUrl: './mpc-button.component.html',
   styleUrl: './mpc-button.component.css'
 })
-export class MpcButtonComponent {
+export class MpcButtonComponent extends AccessibilityInputs {
 
-  @Input() id?: string = '';
-  @Input() texto: string = '';
-  @Input() corBotao: string = 'btn-primary';
-  @Input() disabled?: boolean = false;
-  @Input() posicaoIcone?: string = PosicoesIcone.ESQUERDA;
-  @Input() icone?: string = '';
-  @Input() tabIndex?: number = 0;
-  @Input() ariaLabel?: string = '';
+  texto = input.required<string>();
+  corBotao = input.required<string>();
+  disabled = input<boolean>(false);
+  posicaoIcone = input<string>(PosicoesIcone.DIREITA);
+  icone = input<string>('');
 }

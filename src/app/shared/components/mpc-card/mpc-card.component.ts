@@ -8,11 +8,9 @@
  * imagem {string}: Imagem do card.
  * links {CardLinks[]}: (opcional) Links do card.
  * tamanhoCard {string}: (opcional) Tamanho do card. Valores possíveis: 'XS', 'SM', 'MD', 'LG', 'XL', 'XXL'.
- * tabIndex {number}: (opcional) Índice de tabulação do card.
- * ariaLabel {string}: (opcional) Rótulo de acessibilidade do card.
  *
  * Exemplo de utilização:
- * <mpc-card titulo="Título do card" subtitulo="Subtítulo do card" descricao="Descrição do card" imagem="imagem.jpg" [links]="[]" tamanhoCard="MD"></mpc-card>
+ * <mpc-card titulo="Título do Card" subtitulo="Subtítulo do Card" descricao="Descrição do Card" imagem="imagem.jpg" [links]="[{url: 'https://www.example.com', icone: 'bi bi-link'}]" tamanhoCard="MD"></mpc-card>
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
@@ -20,7 +18,8 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { AccessibilityInputs } from '../../core/accessibility-inputs';
 
 interface CardLinks {
   url: string;
@@ -42,21 +41,20 @@ const TamanhoCards = new Map<string, string>([
   templateUrl: './mpc-card.component.html',
   styleUrl: './mpc-card.component.css'
 })
-export class MpcCardComponent {
-  @Input() titulo: string = '';
-  @Input() subtitulo?: string = '';
-  @Input() descricao?: string = '';
-  @Input() imagem: string = '';
-  @Input() links?: CardLinks[] = [];
-  @Input() tamanhoCard: string = TamanhoCards.get('MD')!;
-  @Input() tabIndex?: number = 0;
-  @Input() ariaLabel?: string = '';
+export class MpcCardComponent extends AccessibilityInputs {
+
+  titulo = input.required<string>();
+  subtitulo = input<string>('');
+  descricao = input<string>('');
+  imagem = input.required<string>();
+  links = input<CardLinks[]>([]);
+  tamanhoCard = input<string>(TamanhoCards.get('MD')!);
 
   getImagemCard(): string {
-    return this.imagem ? `img/${this.imagem}` : 'img/no-image.jpg';
+    return this.imagem ? `img/${this.imagem()}` : 'img/no-image.jpg';
   }
 
   getTamanhoCard(): string {
-    return TamanhoCards.get(this.tamanhoCard) || TamanhoCards.get('MD')!;
+    return TamanhoCards.get(this.tamanhoCard()) || TamanhoCards.get('MD')!;
   }
 }

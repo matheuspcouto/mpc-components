@@ -1,3 +1,4 @@
+import { inject, input } from '@angular/core';
 /**
  * @Componente MpcComprovanteComponent
  * Este componente é responsável por exibir um modal de comprovante com informações detalhadas.
@@ -33,25 +34,43 @@ import { Component, Input } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { MpcComprovanteService } from './mpc-comprovante.service';
-import { MpcComprovanteConfig } from './mpc-comprovante.directive';
 import { MpcButtonComponent } from "../mpc-button/mpc-button.component";
+
+export interface MpcComprovanteConfig {
+  titulo: string,
+  dados: {
+    dadosInscricao: {
+      codigoInscricao: string,
+      dataInscricao: string,
+      status?: string,
+    },
+    dadosPessoais:  { label: string, valor: string }[]
+    dadosPagamento: {
+      formaPagamento: string,
+      valor: number,
+      statusPagamento?: string,
+      dataPagamento?: string,
+    }
+  }
+}
 
 @Component({
   selector: 'mpc-comprovante',
-  imports: [CommonModule, MpcButtonComponent],
+  imports: [MpcButtonComponent, CommonModule ],
   templateUrl: './mpc-comprovante.component.html',
   styleUrls: ['./mpc-comprovante.component.css']
 })
 export class MpcComprovanteComponent {
-  exibir: boolean = false;
-  isCopiado: boolean = false;
-  dadosInscricao: any = [];
-  dadosPessoais: any = [];
-  dadosPagamento: any = [];
+  protected exibir: boolean = false;
+  protected isCopiado: boolean = false;
+  protected dadosInscricao: any = [];
+  protected dadosPessoais: any = [];
+  protected dadosPagamento: any = [];
 
   @Input() comprovante!: MpcComprovanteConfig;
 
-  constructor(private comprovanteService: MpcComprovanteService, private notificationService: ToastrService) { };
+  private comprovanteService = inject(MpcComprovanteService);
+  private notificationService = inject(ToastrService);
 
   fecharComprovante() { this.comprovanteService.hide(); this.exibir = false; this.isCopiado = false; }
 

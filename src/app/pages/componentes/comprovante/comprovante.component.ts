@@ -1,8 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { MpcNavbarComponent } from '../../../shared/components/mpc-navbar/mpc-navbar.component';
 import { MpcButtonComponent } from '../../../shared/components/mpc-button/mpc-button.component';
-import { MpcComprovanteComponent } from '../../../shared/components/mpc-comprovante/mpc-comprovante.component';
-import { MpcComprovanteConfig } from '../../../shared/components/mpc-comprovante/mpc-comprovante.directive';
+import { MpcComprovanteComponent, MpcComprovanteConfig } from '../../../shared/components/mpc-comprovante/mpc-comprovante.component';
 
 @Component({
   selector: 'app-comprovante',
