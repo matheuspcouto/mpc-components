@@ -6,6 +6,8 @@
  * label {string}: Label do campo.
  * tabIndex {number}: (opcional) Índice de tabulação do campo.
  * ariaLabel {string}: (opcional) Label para acessibilidade.
+ * value {string}: (opcional) Valor do campo.
+ * readonly {boolean}: (opcional) Campo somente leitura.
  * min {string}: (opcional) Número mínimo de caracteres.
  * max {string}: (opcional) Número máximo de caracteres.
  * required {boolean}: (opcional) Campo obrigatório.
@@ -35,6 +37,7 @@ export class MpcInputTextComponent {
   @Input() tabIndex?: number = 0;
   @Input() ariaLabel?: string;
   @Input() value?: string = '';
+  @Input() readonly?: boolean = false;
 
   // Validators
   @Input() min?: string;

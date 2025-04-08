@@ -28,33 +28,25 @@
         </div>
       </div>
 
-      <div class="row mb-3 align-items-center justify-content-between">
-        <!-- TODO: criar mpc-input-pesquisa-cep
-         <div class="col-md-6">
-          <mpc-input-text label="CEP" min="8" max="8" [required]="true" [value]="form.value.cep"
-            (valor)="form.controls.cep.setValue($event)" (error)="form.controls.cep.setErrors($event)" />
-        </div>
-
-        <div class="col-md-6">
-          <mpc-button corBotao="btn-outline-secondary" icone="bi bi-search" (click)="pequisarCep(form.value.cep)" />
-        </div> -->
+      <div class="col-md-6 mb-3 align-items-center justify-content-between">
+        <mpc-input-pesquisa-cep [value]="form.value.cep" (valor)="definirEnderecoPorCep($event)" />
       </div>
 
       <div class="row">
 
         <div class="col-md-4 mb-3">
-          <mpc-input-text label="Cidade" [value]="form.value.cidade"
-            (valor)="form.controls.cidade.setValue($event)" (error)="form.controls.cidade.setErrors($event)" />
+          <mpc-input-text label="Cidade" [value]="form.value.cidade" (valor)="form.controls.cidade.setValue($event)"
+            (error)="form.controls.cidade.setErrors($event)" />
         </div>
 
         <div class="col-md-4 mb-3">
-          <mpc-input-text label="Estado" [value]="form.value.estado"
-            (valor)="form.controls.estado.setValue($event)" (error)="form.controls.estado.setErrors($event)" />
+          <mpc-input-text label="Estado" [value]="form.value.estado" (valor)="form.controls.estado.setValue($event)"
+            (error)="form.controls.estado.setErrors($event)" />
         </div>
 
         <div class="col-md-4 mb-3">
-          <mpc-input-text label="Bairro" [value]="form.value.bairro"
-            (valor)="form.controls.bairro.setValue($event)" (error)="form.controls.bairro.setErrors($event)" />
+          <mpc-input-text label="Bairro" [value]="form.value.bairro" (valor)="form.controls.bairro.setValue($event)"
+            (error)="form.controls.bairro.setErrors($event)" />
         </div>
 
       </div>
@@ -62,8 +54,8 @@
       <div class="row">
 
         <div class="col-md-10 mb-3">
-          <mpc-input-text label="Logradouro" [value]="form.value.logradouro"
-            (valor)="form.controls.logradouro.setValue($event)" (error)="form.controls.logradouro.setErrors($event)" />
+          <mpc-input-text label="Rua" [value]="form.value.rua"
+            (valor)="form.controls.rua.setValue($event)" (error)="form.controls.rua.setErrors($event)" />
         </div>
 
         <div class="col-md-2 mb-3">

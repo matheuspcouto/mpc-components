@@ -1,5 +1,5 @@
 <div [tabindex]="tabIndex" [attr.aria-label]="ariaLabel" class="form-group">
-  <label class="form-label">DDD + Telefone {{ required ? ' *' : '' }}</label>
+  <label class="form-label">Telefone {{ required ? ' *' : '' }}</label>
 
   <div class="input-group">
     <input [id]="id" type="tel" class="form-control col-md-4" [value]="value" (input)="setValue($event)"

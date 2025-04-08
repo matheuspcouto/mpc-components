@@ -14,6 +14,7 @@ import { MpcInputTelefoneComponent } from '../../../shared/components/mpc-input-
 import { MpcInputEmailComponent } from '../../../shared/components/mpc-input-email/mpc-input-email.component';
 import { MpcModalConfig } from '../../../shared/components/mpc-modal/mpc-modal.directive';
 import { ToastrService } from 'ngx-toastr';
+import { Endereco, MpcInputPesquisaCepComponent } from "../../../shared/components/mpc-input-pesquisa-cep/mpc-input-pesquisa-cep.component";
 
 @Component({
   selector: 'app-contato',
@@ -21,7 +22,8 @@ import { ToastrService } from 'ngx-toastr';
     CommonModule, MpcModalComponent, FormsModule,
     ReactiveFormsModule, MpcInputTextComponent, MpcInputTelefoneComponent,
     MpcButtonComponent, MpcNavbarComponent, MpcFormProgressBarComponent,
-    MpcInputEmailComponent
+    MpcInputEmailComponent,
+    MpcInputPesquisaCepComponent
   ],
   templateUrl: './contato.component.html',
   styleUrls: ['./contato.component.css'],
@@ -38,7 +40,7 @@ export default class ContatoComponent implements OnInit {
   protected form = this.formBuilder.group({
     telefone: ['', telefoneValidator],
     email: ['', emailValidator],
-    logradouro: ['', Validators.required],
+    rua: ['', Validators.required],
     numero: ['', Validators.required],
     bairro: ['', Validators.required],
     cidade: ['', Validators.required],
@@ -61,7 +63,7 @@ export default class ContatoComponent implements OnInit {
         this.form.patchValue({
           telefone: dadosInscricao.telefone,
           email: dadosInscricao.email,
-          logradouro: dadosInscricao.logradouro,
+          rua: dadosInscricao.rua,
           numero: dadosInscricao.numero,
           bairro: dadosInscricao.bairro,
           cidade: dadosInscricao.cidade,
@@ -101,26 +103,13 @@ export default class ContatoComponent implements OnInit {
     this.modalErro?.abrirModal(modalErro);
   }
 
-  pequisarCep(cep: string | undefined): void {
-    if (!cep) {
-      this.abrirModalErro('Erro', 'O CEP deve conter 8 dígitos');
-      return;
-    }
-
-    this.inscricaoService.pesquisarCep(cep).subscribe({
-      next: (response) => {
-        this.form.patchValue({
-          logradouro: response.logradouro,
-          bairro: response.bairro,
-          cidade: response.localidade,
-          estado: response.uf,
-          numero: response.unidade,
-          cep: response.cep
-        });
-      },
-      error: () => {
-        this.abrirModalErro('Erro', 'Não foi possível encontrar o endereço');
-      }
+  definirEnderecoPorCep(endereco: Endereco): void {
+    this.form.patchValue({
+      rua: endereco.rua,
+      bairro: endereco.bairro,
+      cidade: endereco.cidade,
+      estado: endereco.estado,
+      cep: endereco.cep
     });
   }
 }

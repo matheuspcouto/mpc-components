@@ -1,0 +1,17 @@
+<div [tabindex]="tabIndex" [attr.aria-label]="ariaLabel" class="input-group">
+  <label class="form-label">CEP</label>
+  <div class="input-group">
+    <input type="text" class="form-control col-md-3" [value]="value" (input)="setValue($event)" (blur)="onTouched()" [mask]="mascara" />
+    <div class="col-md-1">
+      <button class="btn btn-primary ms-3" (click)="pequisarCep(value)" [disabled]="value?.length === 0">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </div>
+
+  @if (errorMessage) {
+  <div>
+    <p class="text-danger mt-1"> {{ errorMessage }} </p>
+  </div>
+  }
+</div>

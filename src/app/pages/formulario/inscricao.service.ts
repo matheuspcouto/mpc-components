@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from '../../../environments/environment';
@@ -21,7 +21,7 @@ export class InscricaoService {
 
   private headers = new HttpHeaders({ 'Content-Type': 'application/json;charset=UTF-8' });
 
-  constructor(private http: HttpClient) { }
+  private http = inject(HttpClient);
 
   atualizarDadosInscricao(novosDados: any, proximaEtapa: number): void {
     const dadosAtuais = this.dadosInscricaoSubject.getValue();
@@ -54,9 +54,5 @@ export class InscricaoService {
     const requestBody = JSON.stringify(body);
     const headersWithSexo = this.headers.append('sexo', sexo);
     return this.http.post<any>(`${this.apiUrl}/inscricao`, requestBody, { headers: headersWithSexo });
-  }
-
-  pesquisarCep(cep: string): Observable<any> {
-    return this.http.get<any>(`https://viacep.com.br/ws/${cep}/json/`);
   }
 }
