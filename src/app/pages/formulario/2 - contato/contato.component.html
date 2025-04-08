@@ -59,7 +59,6 @@
         </div>
 
         <div class="col-md-2 mb-3">
-          <!-- TODO: criar mpc-input-number -->
           <mpc-input-text label="Número" min="1" max="99999" [value]="form.value.numero"
             (valor)="form.controls.numero.setValue($event)" (error)="form.controls.numero.setErrors($event)" />
         </div>
@@ -67,7 +66,7 @@
       </div>
 
       <div class="row">
-        <mpc-input-text label="Complemento" max="30" [value]="form.value.complemento"
+        <mpc-input-text label="Complemento" max="50" [value]="form.value.complemento"
           (valor)="form.controls.complemento.setValue($event)" (error)="form.controls.complemento.setErrors($event)" />
       </div>
 

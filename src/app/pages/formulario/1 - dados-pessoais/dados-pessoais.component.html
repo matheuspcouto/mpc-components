@@ -37,16 +37,21 @@
       </div>
 
       <div class="row">
-        <div class="col-md-6 mb-3">
+        <div class="col-md-4 mb-3">
           <mpc-input-date label="Data de Nascimento" [maxDate]="dataAtual" [required]="true"
             [value]="form.value.dataNasc" (valor)="form.controls.dataNasc.setValue($event)"
             (error)="form.controls.dataNasc.setErrors($event)" />
         </div>
 
-        <div class="col-md-6 mb-3">
-          <mpc-input-select label="Estado Civil" [options]="estadosCivis" [required]="true"
-            (valor)="form.controls.estadoCivil.setValue($event)"
-            (error)="form.controls.estadoCivil.setErrors($event)" />
+        <div class="col-md-4 mb-3">
+          <mpc-input-number label="Idade" [required]="true" [value]="form.value.idade"
+            (valor)="form.controls.idade.setValue($event)" (error)="form.controls.idade.setErrors($event)" min="1"
+            max="99" [readonly]="false" />
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <mpc-input-cpfcnpj [required]="true" [value]="form.value.cpfCnpj" (valor)="form.controls.cpfCnpj.setValue($event)"
+            (error)="form.controls.cpfCnpj.setErrors($event)" />
         </div>
       </div>
 
@@ -54,6 +59,12 @@
         <div class="col-md-6 mb-3">
           <mpc-input-radio label="Sexo" [required]="true" [options]="sexos"
             (valor)="form.controls.sexo.setValue($event)" (error)="form.controls.sexo.setErrors($event)" />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <mpc-input-select label="Estado Civil" [options]="estadosCivis" [required]="true"
+            (valor)="form.controls.estadoCivil.setValue($event)"
+            (error)="form.controls.estadoCivil.setErrors($event)" />
         </div>
       </div>
 

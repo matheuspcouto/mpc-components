@@ -16,6 +16,8 @@ import { MpcNavbarComponent } from '../../../shared/components/mpc-navbar/mpc-na
 import { MpcModalConfig } from '../../../shared/components/mpc-modal/mpc-modal.directive';
 import { InscricaoValidator } from '../inscricao.validator';
 import { ToastrService } from 'ngx-toastr';
+import { MpcInputNumberComponent } from '../../../shared/components/mpc-input-number/mpc-input-number.component';
+import { MpcInputCpfcnpjComponent } from "../../../shared/components/mpc-input-cpfcnpj/mpc-input-cpfcnpj.component";
 
 @Component({
   selector: 'app-dados-pessoais',
@@ -23,8 +25,9 @@ import { ToastrService } from 'ngx-toastr';
     CommonModule, MpcModalComponent, FormsModule,
     ReactiveFormsModule, MpcInputTextComponent, MpcInputDateComponent,
     MpcInputRadioComponent, MpcButtonComponent, MpcInputSelectComponent,
-    MpcFormProgressBarComponent, MpcNavbarComponent
-  ],
+    MpcFormProgressBarComponent, MpcNavbarComponent, MpcInputNumberComponent,
+    MpcInputCpfcnpjComponent
+],
   templateUrl: './dados-pessoais.component.html',
   styleUrls: ['./dados-pessoais.component.css'],
 })
@@ -51,13 +54,14 @@ export default class DadosPessoaisComponent implements OnInit {
     { label: 'Feminino', value: 'F', checked: false }
   ];
 
-  // TODO: Campo de CPF/CNPJ e idade
   protected form = this.formBuilder.group({
     nome: ['', Validators.required],
     sobrenome: ['', Validators.required],
     dataNasc: ['', Validators.required],
     sexo: ['', Validators.required],
-    estadoCivil: ['', Validators.required]
+    estadoCivil: ['', Validators.required],
+    idade: [0, Validators.required],
+    cpfCnpj: ['', Validators.required],
   });
 
   ngOnInit(): void {
@@ -76,6 +80,8 @@ export default class DadosPessoaisComponent implements OnInit {
           nome: dadosInscricao.nome,
           sobrenome: dadosInscricao.sobrenome,
           dataNasc: dadosInscricao.dataNasc,
+          idade: dadosInscricao.idade,
+          cpfCnpj: dadosInscricao.cpfCnpj,
         });
 
         if (dadosInscricao.sexo) {
