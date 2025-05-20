@@ -1,13 +1,13 @@
 <button [id]="id()" type="button" class="btn" [ngClass]="corBotao()" [disabled]="disabled()" [tabindex]="tabIndex()"
   [attr.aria-label]="ariaLabel() || texto()">
 
-  @if (icone() && posicaoIcone() === 'direita') {
+  @if (icone() && posicaoIcone() === 'esquerda') {
   <i class="icon-float-right" [ngClass]="icone()"></i>
   }
 
   <span>{{ texto() }}</span>
 
-  @if (icone() && posicaoIcone() === 'esquerda') {
+  @if (icone() && posicaoIcone() === 'direita') {
   <i class="icon-float-left" [ngClass]="icone()"></i>
   }
 

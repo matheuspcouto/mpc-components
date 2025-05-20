@@ -21,8 +21,7 @@ import { MpcInputCpfcnpjComponent } from "../../../shared/components/mpc-input-c
 
 @Component({
   selector: 'app-dados-pessoais',
-  imports: [
-    CommonModule, MpcModalComponent, FormsModule,
+  imports: [ MpcModalComponent, FormsModule,
     ReactiveFormsModule, MpcInputTextComponent, MpcInputDateComponent,
     MpcInputRadioComponent, MpcButtonComponent, MpcInputSelectComponent,
     MpcFormProgressBarComponent, MpcNavbarComponent, MpcInputNumberComponent,
@@ -60,7 +59,7 @@ export default class DadosPessoaisComponent implements OnInit {
     dataNasc: ['', Validators.required],
     sexo: ['', Validators.required],
     estadoCivil: ['', Validators.required],
-    idade: [0, Validators.required],
+    idade: [0, Validators.min(1)],
     cpfCnpj: ['', Validators.required],
   });
 

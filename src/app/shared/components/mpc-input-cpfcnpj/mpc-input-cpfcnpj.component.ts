@@ -73,7 +73,7 @@ export class MpcInputCpfcnpjComponent extends AccessibilityInputs {
   }
 
   setValue(event: any): void {
-    this.Value = event.target.value;
+    this.Value = event.target.value as string;
     this.onChange(this.Value);
     this.onTouched();
     this.atualizarMascara();
