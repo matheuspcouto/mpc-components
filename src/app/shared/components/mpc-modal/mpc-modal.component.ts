@@ -32,18 +32,18 @@ export const TipoModal = {
 }
 @Component({
   selector: 'mpc-modal',
-  imports: [CommonModule, MpcButtonComponent],
+  imports: [MpcButtonComponent],
   templateUrl: './mpc-modal.component.html',
   styleUrls: ['./mpc-modal.component.css']
 })
 export class MpcModalComponent {
-  exibirModal: boolean = false;
-  botao: () => void = () => { };
-  segundoBotao: () => void = () => { };
-  btnCopiarMensagemErro: any;
-  isCopiado: boolean = false;
-  isTelaInteira: boolean = false;
-  modal!: MpcModalConfig;
+  protected exibirModal: boolean = false;
+  protected botao: () => void = () => { };
+  protected segundoBotao: () => void = () => { };
+  protected btnCopiarMensagemErro: any;
+  protected isCopiado: boolean = false;
+  protected isTelaInteira: boolean = false;
+  protected modal!: MpcModalConfig;
 
   constructor(private modalService: MpcModalService, private notificationService: ToastrService) { };
 

@@ -5,7 +5,7 @@ import { PageHeaderHomeComponent } from './page-header-home/page-header-home.com
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, MpcNavbarComponent, PageHeaderHomeComponent],
+  imports: [MpcNavbarComponent, PageHeaderHomeComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

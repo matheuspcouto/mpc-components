@@ -1,5 +1,29 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+/**
+ * @Componente MpcInputNumberComponent
+ * Este componente é responsável por exibir um campo de entrada de numero.
+ *
+ * id {string}: (opcional) Id do campo.
+ * label {string}: Label do campo.
+ * tabIndex {number}: (opcional) Índice de tabulação do campo.
+ * ariaLabel {string}: (opcional) Label para acessibilidade.
+ * min {string}: (opcional) Valor mínimo permitido.
+ * max {string}: (opcional) Valor máximo permitido.
+ * required {boolean}: (opcional) Indica se o campo é obrigatório.
+ * disabled {boolean}: (opcional) Indica se o campo está desabilitado.
+ * readonly {boolean}: (opcional) Indica se o campo é somente leitura.
+ * value {number}: (opcional) Valor inicial do campo.
+ *
+ * Exemplo de utilização:
+ * <mpc-input-number label="Idade" [min]="0" [max]="100" [required]="true" [tabIndex]="1" [ariaLabel]="ariaLabel" (valor)="setvalor($event)"></mpc-input-number>
+ *
+ * @author Matheus Pimentel Do Couto
+ * @created 27/02/2025
+ * @updated 27/02/2025
+ */
+
+import { Component, EventEmitter, input, Input, Output } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
+import { AccessibilityInputs } from '../../core/accessibility-inputs';
 
 @Component({
   selector: 'mpc-input-number',
@@ -7,29 +31,24 @@ import { ValidationErrors } from '@angular/forms';
   templateUrl: './mpc-input-number.component.html',
   styleUrl: './mpc-input-number.component.css'
 })
-export class MpcInputNumberComponent {
+export class MpcInputNumberComponent extends AccessibilityInputs {
 
-  @Input() id?: string;
-  @Input() label: string = '';
-  @Input() tabIndex?: number = 0;
-  @Input() ariaLabel?: string;
+  public label = input.required<string>();
+  public readonly = input<boolean>(false);
+  public disabled = input<boolean>(false);
+
   @Input() value?: number = 0;
-  @Input() readonly?: boolean = false;
 
   // Validators
-  @Input() min?: string;
-  @Input() max?: string;
-  @Input() required?: boolean = false;
+  public min = input<string>('');
+  public max = input<string>('');
+  public required = input<boolean>(false);
 
   @Output() valor: EventEmitter<number> = new EventEmitter();
   @Output() error: EventEmitter<ValidationErrors> = new EventEmitter();
 
   protected errorMessage?: string;
   protected campoTocado: boolean = false;
-
-  get Label(): string {
-    return this.label.toLowerCase();;
-  }
 
   set Value(value: number) {
     this.value = value;
@@ -63,19 +82,19 @@ export class MpcInputNumberComponent {
 
   isCampoValido(): boolean {
     if (this.validaRequired()) {
-      this.errorMessage = `O campo ${this.Label} é obrigatório`;
+      this.errorMessage = `O campo ${this.label()} é obrigatório`;
       this.error.emit({ required: true });
       return false;
     }
 
     if (this.validaMin()) {
-      this.errorMessage = `O valor mínimo para o campo ${this.Label} é ${this.min}`;
+      this.errorMessage = `O valor mínimo para o campo ${this.label()} é ${this.min()}`;
       this.error.emit({ min: true });
       return false;
     }
 
     if (this.validaMax()) {
-      this.errorMessage = `O valor máximo para o campo ${this.Label} é ${this.max}`;
+      this.errorMessage = `O valor máximo para o campo ${this.label()} é ${this.max()}`;
       this.error.emit({ max: true });
       return false;
     }
@@ -86,7 +105,7 @@ export class MpcInputNumberComponent {
 
   validaMin(): boolean {
     if (this.min) {
-      let minNumber = parseInt(this.min);
+      let minNumber = parseInt(this.min());
       return this.Value ? this.Value < minNumber : false;
     }
     return false;
@@ -94,7 +113,7 @@ export class MpcInputNumberComponent {
 
   validaMax(): boolean {
     if (this.max) {
-      let maxNumber = parseInt(this.max);
+      let maxNumber = parseInt(this.max());
       return this.Value ? this.Value > maxNumber : false;
     }
     return false;

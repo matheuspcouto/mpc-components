@@ -7,9 +7,11 @@
  * tabIndex {number}: (opcional) Índice de tabulação do campo.
  * ariaLabel {string}: (opcional) Label para acessibilidade.
  * required {boolean}: (opcional) Campo obrigatório.
+ * disabled {boolean}: (opcional) Indica se o campo está desabilitado.
+ * readonly {boolean}: (opcional) Indica se o campo é somente leitura.
  *
  * Exemplo de utilização:
- * <mpc-input-telefone label="Telefone" [id]="telefone" [tabIndex]="0" [ariaLabel]="Campo de Telefone" [required]="true" (valor)="setvalor($event)"></mpc-input-telefone>
+ * <mpc-input-telefone label="Telefone" [required]="true" [tabIndex]="1" [ariaLabel]="ariaLabel" (valor)="setvalor($event)"></mpc-input-telefone>
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
@@ -17,24 +19,23 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, input, Output } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
 import { NgxMaskDirective } from 'ngx-mask';
+import { AccessibilityInputs } from '../../core/accessibility-inputs';
 
 @Component({
   selector: 'mpc-input-telefone',
-  imports: [CommonModule, NgxMaskDirective],
+  imports: [NgxMaskDirective],
   templateUrl: './mpc-input-telefone.component.html',
   styleUrl: './mpc-input-telefone.component.css'
 })
-export class MpcInputTelefoneComponent {
-
-  @Input() id?: string;
-  @Input() tabIndex?: number = 0;
-  @Input() ariaLabel?: string;
+export class MpcInputTelefoneComponent extends AccessibilityInputs {
 
   // Validators
-  @Input() required?: boolean = false;
+  public required = input<boolean>(false);
+  public disabled = input<boolean>(false);
+  public readonly = input<boolean>(false);
   regexTelefone: any = /^\(?(?:[14689][1-9]|2[12478]|3[1234578]|5[1345]|7[134579])\)? ?(?:[2-8]|9[1-9])[0-9]{3}\-?[0-9]{4}$/;
   mascara: string = '(00) 00000-0000';
 

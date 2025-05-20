@@ -20,5 +20,5 @@ import { Component } from '@angular/core';
 })
 export class MpcFooterComponent {
 
-  anoAtual = new Date().getFullYear();
+  protected anoAtual = new Date().getFullYear();
 }

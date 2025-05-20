@@ -1,13 +1,14 @@
 /**
- * @Componente GeneralComponents
- * Este componente é responsável por exibir um botão com texto e/ou ícone.
+ * @Componente AcessibilityInputs
+ * @description
+ * Esta class é responsável por fornecer propriedades de acessibilidade para os componentes.
  *
  * id {string}: (opcional) ID do botão.
  * tabIndex {number}: (opcional) Índice de tabulação do botão.
  * ariaLabel {string}: (opcional) Rótulo de acessibilidade do botão.
  *
  * Exemplo de utilização:
- * SeuComponent extends GeneralComponents
+ * SeuComponent extends AcessibilityInputs
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025

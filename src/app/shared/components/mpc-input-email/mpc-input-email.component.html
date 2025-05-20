@@ -1,19 +1,20 @@
-<div [tabindex]="tabIndex" [attr.aria-label]="ariaLabel" class="form-group">
-  <label class="form-label">E-mail {{ required ? ' *' : '' }}</label>
+<div [tabindex]="tabIndex()" [attr.aria-label]="ariaLabel()" class="form-group">
+  <label class="form-label">E-mail {{ required() ? ' *' : '' }}</label>
 
   <div class="input-group">
-    <input [id]="id" type="email" class="form-control" [value]="value" (input)="setValue($event)" (blur)="onTouched()"
-      [required]="required" [style]="errorMessage ? 'border-color: red' : ''"
-      (focus)="campoTocado = true; isCampoValido()" />
+    <input [id]="id()" type="email" class="form-control" [value]="value" (input)="setValue($event)" (blur)="onTouched()"
+      [required]="required()" [disabled]="disabled()" [readOnly]="readonly()"
+      [style]="errorMessage ? 'border-color: red' : ''" (focus)="campoTocado = true; isCampoValido()" />
 
-    <div *ngIf="campoTocado" class="validation-icon">
-      <i class="bi bi-check-circle-fill valid-icon" *ngIf="!errorMessage"></i>
-      <i class="bi bi-x-circle-fill invalid-icon" *ngIf="errorMessage"></i>
+    @if (campoTocado) {
+    <div class="validation-icon">
+      @if (!errorMessage) { <i class="bi bi-check-circle-fill valid-icon"></i> }
+      @else { <i class="bi bi-x-circle-fill invalid-icon"></i> }
     </div>
-
+    }
   </div>
 
-  <div *ngIf="errorMessage">
-    <p class="text-danger mt-1"> {{ errorMessage }} </p>
-  </div>
+  @if (errorMessage) {
+  <p class="text-danger mt-1"> {{ errorMessage }} </p>
+  }
 </div>

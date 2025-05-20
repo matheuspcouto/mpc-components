@@ -43,12 +43,12 @@ const TamanhoCards = new Map<string, string>([
 })
 export class MpcCardComponent extends AccessibilityInputs {
 
-  titulo = input.required<string>();
-  subtitulo = input<string>('');
-  descricao = input<string>('');
-  imagem = input.required<string>();
-  links = input<CardLinks[]>([]);
-  tamanhoCard = input<string>(TamanhoCards.get('MD')!);
+  public titulo = input.required<string>();
+  public subtitulo = input<string>('');
+  public descricao = input<string>('');
+  public imagem = input.required<string>();
+  public links = input<CardLinks[]>([]);
+  public tamanhoCard = input<string>(TamanhoCards.get('MD')!);
 
   getImagemCard(): string {
     return this.imagem ? `img/${this.imagem()}` : 'img/no-image.jpg';

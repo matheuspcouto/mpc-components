@@ -1,9 +1,12 @@
-<div *ngIf="exibirModal && modal" class="modal" tabindex="0" aria-label="Modal">
-  <div [ngClass]="isTelaInteira ? 'tela-inteira' : 'metade-tela'">
+@if (exibirModal && modal) {
+<div class="modal" tabindex="0" aria-label="Modal">
+  <div [class]="isTelaInteira ? 'tela-inteira' : 'metade-tela'">
     <div class="modal-content">
       <div class="modal-body">
         <!-- Imagem -->
-        <img *ngIf="modal.imagem && isTelaInteira" [src]="'img/modal/' + modal.imagem" class="modal-image">
+        @if (modal.imagem && isTelaInteira) {
+        <img [src]="'img/modal/' + modal.imagem" class="modal-image">
+        }
 
         <!-- Título -->
         <h2 class="modal-title" tabindex="0" [attr.aria-label]="modal.titulo">{{ modal.titulo }}</h2>
@@ -33,3 +36,4 @@
     </div>
   </div>
 </div>
+}

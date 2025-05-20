@@ -17,6 +17,7 @@
 
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AccessibilityInputs } from '../../core/accessibility-inputs';
 
 export interface Tab {
   id: string;
@@ -29,21 +30,19 @@ export interface Tab {
   templateUrl: './mpc-tabs.component.html',
   styleUrl: './mpc-tabs.component.css'
 })
-export class MpcTabsComponent implements OnInit {
+export class MpcTabsComponent extends AccessibilityInputs implements OnInit {
 
   @Input() tabs: Tab[] = [];
-  @Input() tabIndex?: number = 0;
-  @Input() ariaLabel?: string = '';
 
   @Output() tabSelected = new EventEmitter<Tab>();
 
-  tabSelecionada!: Tab;
+  protected tabSelecionada!: Tab;
 
   ngOnInit(): void {
     this.tabSelecionada = this.tabs.length > 0 ? this.tabs[0] : { id: '', titulo: '' };
   }
 
-  selecionarTab(tab: Tab) {
+  selecionarTab(tab: Tab): void {
     this.tabSelecionada = tab;
     this.tabSelected.emit(tab);
   }

@@ -1,16 +1,22 @@
-<div [tabindex]="tabIndex" [attr.aria-label]="ariaLabel" class="form-group" *ngIf="options.length > 0">
-  <label class="form-label">{{ required ? label + ' *' : label }}</label>
+@if (options.length > 0) {
+<div [tabindex]="tabIndex()" [attr.aria-label]="ariaLabel()" class="form-group">
+  <label class="form-label">{{ required() ? label() + ' *' : label() }}</label>
 
   <div class="input-group">
-    <select (change)="setValue($event.target)" class="form-select form-select-md"
-       [style]="errorMessage ? 'border-color: red' : ''" (focus)="campoTocado = true; isCampoValido()">
-      <option *ngFor="let option of options" [selected]="option.selected">
+    <select [id]="id()" (change)="setValue($event.target)" class="form-select form-select-md" [disabled]="disabled()"
+      [style]="errorMessage ? 'border-color: red' : ''" (focus)="campoTocado = true; isCampoValido()">
+      @for (option of options; track $index) {
+      <option [selected]="option.selected">
         {{ option.label }}
       </option>
+      }
     </select>
   </div>
 
-  <div *ngIf="errorMessage">
-    <p class="text-danger mt-1"> {{ errorMessage }} </p>
-  </div>
+
+  @if (errorMessage) {
+  <p class="text-danger mt-1"> {{ errorMessage }} </p>
+  }
+
 </div>
+}

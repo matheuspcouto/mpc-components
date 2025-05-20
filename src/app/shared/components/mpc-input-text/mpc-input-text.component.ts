@@ -8,51 +8,46 @@
  * ariaLabel {string}: (opcional) Label para acessibilidade.
  * value {string}: (opcional) Valor do campo.
  * readonly {boolean}: (opcional) Campo somente leitura.
+ * disabled {boolean}: (opcional) Indica se o campo está desabilitado.
  * min {string}: (opcional) Número mínimo de caracteres.
  * max {string}: (opcional) Número máximo de caracteres.
  * required {boolean}: (opcional) Campo obrigatório.
  *
  * Exemplo de utilização:
- * <mpc-input-text label="Nome" [id]="nome" [tabIndex]="1" [ariaLabel]="Nome" min="3" max="20" [required]="true" (valor)="setvalor($event)"></mpc-input-text>
+ * <mpc-input-text label="Nome" [required]="true" [tabIndex]="1" [ariaLabel]="ariaLabel" (valor)="setvalor($event)"></mpc-input-text>
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
  * @updated 27/02/2025
  */
 
-import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, input, Input, Output } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
+import { AccessibilityInputs } from '../../core/accessibility-inputs';
 
 @Component({
   selector: 'mpc-input-text',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './mpc-input-text.component.html',
   styleUrl: './mpc-input-text.component.css'
 })
-export class MpcInputTextComponent {
+export class MpcInputTextComponent extends AccessibilityInputs {
 
-  @Input() id?: string;
-  @Input() label: string = '';
-  @Input() tabIndex?: number = 0;
-  @Input() ariaLabel?: string;
+  public label = input.required<string>();
+  public readonly = input<boolean>(false);
+  public disabled = input<boolean>(false);
   @Input() value?: string = '';
-  @Input() readonly?: boolean = false;
 
   // Validators
-  @Input() min?: string;
-  @Input() max?: string;
-  @Input() required?: boolean = false;
+  public required = input<boolean>(false);
+  public min = input<string>('');
+  public max = input<string>('');
 
   @Output() valor: EventEmitter<string> = new EventEmitter();
   @Output() error: EventEmitter<ValidationErrors> = new EventEmitter();
 
   protected errorMessage?: string;
   protected campoTocado: boolean = false;
-
-  get Label(): string {
-    return this.label.toLowerCase();;
-  }
 
   set Value(value: string) {
     this.value = value;
@@ -86,19 +81,19 @@ export class MpcInputTextComponent {
 
   isCampoValido(): boolean {
     if (this.validaRequired()) {
-      this.errorMessage = `O campo ${this.Label} é obrigatório`;
+      this.errorMessage = `O campo ${this.label()} é obrigatório`;
       this.error.emit({ required: true });
       return false;
     }
 
     if (this.validaMin()) {
-      this.errorMessage = `O campo ${this.Label} deve ter no mínimo ${this.min} caracteres`;
+      this.errorMessage = `O campo ${this.label()} deve ter no mínimo ${this.min()} caracteres`;
       this.error.emit({ min: true });
       return false;
     }
 
     if (this.validaMax()) {
-      this.errorMessage = `O campo ${this.Label} deve ter no máximo ${this.max} caracteres`;
+      this.errorMessage = `O campo ${this.label()} deve ter no máximo ${this.max()} caracteres`;
       this.error.emit({ max: true });
       return false;
     }
@@ -109,7 +104,7 @@ export class MpcInputTextComponent {
 
   validaMin(): boolean {
     if (this.min) {
-      let minNumber = parseInt(this.min);
+      let minNumber = parseInt(this.min());
       return this.Value ? this.Value.length < minNumber : false;
     }
     return false;
@@ -117,7 +112,7 @@ export class MpcInputTextComponent {
 
   validaMax(): boolean {
     if (this.max) {
-      let maxNumber = parseInt(this.max);
+      let maxNumber = parseInt(this.max());
       return this.Value ? this.Value.length > maxNumber : false;
     }
     return false;

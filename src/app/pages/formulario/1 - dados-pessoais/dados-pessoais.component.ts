@@ -1,4 +1,4 @@
-import { SelectOption } from './../../../shared/components/mpc-input-select/mpc-input-select.component';
+import { SelectOption } from '../../../shared/components/mpc-input-select/mpc-input-select.component';
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MpcModalComponent, TipoModal } from '../../../shared/components/mpc-modal/mpc-modal.component';

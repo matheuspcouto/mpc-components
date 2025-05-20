@@ -4,22 +4,23 @@
  *
  * id {string}: (opcional) Id do campo.
  * label {string}: Label do campo.
+ * disabled {boolean}: (opcional) Indica se o campo está desabilitado.
  * options {string[]}: Opções do campo.
  * tabIndex {number}: (opcional) Índice de tabulação do campo.
  * ariaLabel {string}: (opcional) Label para acessibilidade.
  * required {boolean}: (opcional) Campo obrigatório.
  *
  * Exemplo de utilização:
- * <mpc-input-select label="Estado Civil" [id]="estado-civil" [tabIndex]="0" [ariaLabel]="Campo de Estado Civil" [options]="estadosCivis" [required]="true" (valor)="setvalor($event)"></mpc-input-select>
+ * <mpc-input-select label="Sexo" [options]="options" [required]="true" [tabIndex]="1" [ariaLabel]="ariaLabel" (valor)="setvalor($event)"></mpc-input-select>
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
  * @updated 27/02/2025
  */
 
-import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, input, Input, OnInit, Output } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
+import { AccessibilityInputs } from '../../core/accessibility-inputs';
 
 export interface SelectOption {
   label: string;
@@ -28,20 +29,19 @@ export interface SelectOption {
 }
 @Component({
   selector: 'mpc-input-select',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './mpc-input-select.component.html',
   styleUrl: './mpc-input-select.component.css'
 })
-export class MpcInputSelectComponent implements OnInit {
+export class MpcInputSelectComponent extends AccessibilityInputs implements OnInit {
 
-  @Input() id?: string;
-  @Input() label: string = '';
+  public label = input.required<string>();
+  public disabled = input<boolean>(false);
+
   @Input() options: SelectOption[] = [];
-  @Input() tabIndex?: number = 0;
-  @Input() ariaLabel?: string;
 
   // Validators
-  @Input() required?: boolean = false;
+  public required = input<boolean>(false);
 
   @Output() valor: EventEmitter<string> = new EventEmitter();
   @Output() error: EventEmitter<ValidationErrors> = new EventEmitter();
@@ -58,10 +58,6 @@ export class MpcInputSelectComponent implements OnInit {
     } else {
       this.options.unshift({ label: 'Selecione', value: 'Selecione', selected: true });
     }
-  }
-
-  get Label(): string {
-    return this.label.toLowerCase();
   }
 
   set OpcaoSelecionada(option: SelectOption) {
@@ -92,7 +88,7 @@ export class MpcInputSelectComponent implements OnInit {
 
   isCampoValido(): boolean {
     if (this.validaRequired()) {
-      this.errorMessage = `O campo ${this.Label} é obrigatório`;
+      this.errorMessage = `O campo ${this.label()} é obrigatório`;
       this.error.emit({ 'required': true });
       return false;
     }

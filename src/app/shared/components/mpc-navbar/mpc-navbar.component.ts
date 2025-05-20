@@ -40,7 +40,7 @@ interface NavbarConfig {
 })
 export class MpcNavbarComponent {
 
-  abas: NavbarConfig[] = [
+  protected abas: NavbarConfig[] = [
     { titulo: 'Home', rota: Rotas.HOME, icone: 'bi bi-house-fill', ativo: true },
     { titulo: 'Documentação', rota: Rotas.DOCS, icone: 'bi bi-book-fill', ativo: true },
     {

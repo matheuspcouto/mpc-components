@@ -1,22 +1,40 @@
-import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+/**
+ * @Componente MpcInputEmailComponent
+ * Este componente é responsável por exibir um campo de entrada de e-mail.
+ *
+ * id {string}: (opcional) Id do campo.
+ * tabIndex {number}: (opcional) Índice de tabulação do campo.
+ * ariaLabel {string}: (opcional) Label para acessibilidade.
+ * required {boolean}: (opcional) Indica se o campo é obrigatório.
+ * disabled {boolean}: (opcional) Indica se o campo está desabilitado.
+ * readonly {boolean}: (opcional) Indica se o campo é somente leitura.
+ *
+ * Exemplo de utilização:
+ * <mpc-input-email [required]="true" [tabIndex]="1" [ariaLabel]="ariaLabel" (valor)="setvalor($event)"></mpc-input-email>
+ *
+ * @author Matheus Pimentel Do Couto
+ * @created 27/02/2025
+ * @updated 27/02/2025
+ */
+
+import { Component, EventEmitter, input, Output } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
+import { AccessibilityInputs } from '../../core/accessibility-inputs';
 
 @Component({
   selector: 'mpc-input-email',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './mpc-input-email.component.html',
   styleUrl: './mpc-input-email.component.css'
 })
-export class MpcInputEmailComponent {
+export class MpcInputEmailComponent extends AccessibilityInputs {
 
-  @Input() id?: string;
-  @Input() tabIndex?: number = 0;
-  @Input() ariaLabel?: string;
+  public disabled = input<boolean>(false);
+  public readonly = input<boolean>(false);
 
   // Validators
-  @Input() required?: boolean = false;
-  regexEmail: any = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+  public required = input<boolean>(false);
+  private regexEmail: any = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
   @Output() valor: EventEmitter<string> = new EventEmitter();
   @Output() error: EventEmitter<ValidationErrors> = new EventEmitter();

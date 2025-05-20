@@ -1,6 +1,24 @@
+/**
+ * @Componente MpcInputPesquisaCepComponent
+ * Este componente é responsável por exibir um campo de pesquisa de CEP.
+ *
+ * id {string}: (opcional) Id do campo.
+ * tabIndex {number}: (opcional) Índice de tabulação do campo.
+ * ariaLabel {string}: (opcional) Label para acessibilidade.
+ * value {number}: (opcional) Valor inicial do campo.
+ *
+ * Exemplo de utilização:
+ * <mpc-input-pesquisa-cep [value]="cep" [tabIndex]="1" [ariaLabel]="ariaLabel" (valor)="setvalor($event)"></mpc-input-pesquisa-cep>
+ *
+ * @author Matheus Pimentel Do Couto
+ * @created 27/02/2025
+ * @updated 27/02/2025
+ */
+
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { NgxMaskDirective } from 'ngx-mask';
+import { AccessibilityInputs } from '../../core/accessibility-inputs';
 
 export interface Endereco {
   rua: string;
@@ -16,10 +34,8 @@ export interface Endereco {
   templateUrl: './mpc-input-pesquisa-cep.component.html',
   styleUrl: './mpc-input-pesquisa-cep.component.css'
 })
-export class MpcInputPesquisaCepComponent {
+export class MpcInputPesquisaCepComponent extends AccessibilityInputs {
 
-  @Input() tabIndex?: number = 0;
-  @Input() ariaLabel?: string;
   @Input() value?: string = '';
 
   @Output() valor: EventEmitter<Endereco> = new EventEmitter();

@@ -4,22 +4,24 @@
  *
  * id {string}: (opcional) Id do campo.
  * label {string}: Label do campo.
+ * readonly {boolean}: (opcional) Indica se o campo é somente leitura.
+ * disabled {boolean}: (opcional) Indica se o campo está desabilitado.
  * options {RadioOption[]}: Opções do campo.
  * tabIndex {number}: (opcional) Índice de tabulação do campo.
  * ariaLabel {string}: (opcional) Label para acessibilidade.
  * required {boolean}: (opcional) Campo obrigatório.
  *
  * Exemplo de utilização:
- * <mpc-input-radio label="Sexo" [id]="sexo" [tabIndex]="0" [ariaLabel]="Campo de Sexo" [options]="sexos" [required]="true" (valor)="setvalor($event)"></mpc-input-radio>
+ * <mpc-input-radio label="Sexo" [options]="options" [required]="true" [tabIndex]="1" [ariaLabel]="ariaLabel" (valor)="setvalor($event)"></mpc-input-radio>
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
  * @updated 27/02/2025
  */
 
-import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, input, Input, OnInit, Output } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
+import { AccessibilityInputs } from '../../core/accessibility-inputs';
 
 export interface RadioOption {
   label: string;
@@ -29,20 +31,19 @@ export interface RadioOption {
 
 @Component({
   selector: 'mpc-input-radio',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './mpc-input-radio.component.html',
   styleUrl: './mpc-input-radio.component.css'
 })
-export class MpcInputRadioComponent implements OnInit {
+export class MpcInputRadioComponent extends AccessibilityInputs implements OnInit {
 
-  @Input() id?: string;
-  @Input() label: string = '';
+  public label = input.required<string>();
+  protected readonly = input<boolean>(false);
+  protected disabled = input<boolean>(false);
   @Input() options: RadioOption[] = [];
-  @Input() tabIndex?: number = 0;
-  @Input() ariaLabel?: string;
 
   // Validators
-  @Input() required?: boolean = false;
+  public required = input<boolean>(false);
 
   @Output() valor: EventEmitter<string> = new EventEmitter();
   @Output() error: EventEmitter<ValidationErrors> = new EventEmitter();
@@ -57,10 +58,6 @@ export class MpcInputRadioComponent implements OnInit {
     if (optionSelecionada) {
       this.valor.emit(optionSelecionada.value);
     }
-  }
-
-  get Label(): string {
-    return this.label.toLowerCase();
   }
 
   set OpcaoSelecionada(option: RadioOption) {
@@ -97,7 +94,7 @@ export class MpcInputRadioComponent implements OnInit {
 
   isCampoValido(): boolean {
     if (this.validaRequired()) {
-      this.errorMessage = `O campo ${this.Label} é obrigatório`;
+      this.errorMessage = `O campo ${this.label()} é obrigatório`;
       this.error.emit({ 'required': true });
       return false;
     }

@@ -11,40 +11,51 @@
     <nav id="navbar" class="navbar">
       <ul>
 
-        <div *ngFor="let aba of abas">
+        @for (aba of abas; track $index) {
 
-          <!-- Aba de menu -->
-          <li *ngIf="aba.ativo && !aba.subRotas" tabindex="0" [attr.aria-label]="'Aba ' + aba.titulo">
-            <a routerLinkActive="abaAtiva" [routerLinkActiveOptions]="{exact: true}" [routerLink]="aba.rota"
-              *ngIf="!aba.subRotas">
-              {{ aba.titulo }}
-            </a>
-          </li>
-          <!-- Fim da aba de menu -->
+        <!-- Aba de menu -->
+        @if (aba.ativo && !aba.subRotas) {
+        <li tabindex="0" [attr.aria-label]="'Aba ' + aba.titulo">
+          @if (!aba.subRotas) {
+          <a routerLinkActive="abaAtiva" [routerLinkActiveOptions]="{exact: true}" [routerLink]="aba.rota">
+            {{ aba.titulo }}
+          </a>
+          }
 
-          <!-- Abas que possuem subRotas -->
-          <li class="dropdown" *ngIf="aba.ativo && aba.subRotas" tabindex="0"
-            [attr.aria-label]="'Aba com submenu ' + aba.titulo">
-            <a class="dropdown-toggle" routerLinkActive="abaAtiva" [routerLinkActiveOptions]="{exact: true}"
-              [routerLink]="aba.rota" data-bs-toggle="dropdown">
-              {{ aba.titulo }}
-            </a>
+        </li>
+        }
+        <!-- Fim da aba de menu -->
 
-            <ul class="dropdown-menu" *ngIf="aba.subRotas">
-              <li class="mb-3" *ngFor="let sub of aba.subRotas">
-                <a class="dropdown-item" *ngIf="sub.ativo && sub.rota" [routerLink]="sub.rota">
-                  {{ sub.titulo }}
-                </a>
-                <a class="dropdown-item" *ngIf="sub.ativo && sub.fragment" [routerLink]="aba.rota"
-                  [fragment]="sub.fragment">
-                  {{ sub.titulo }}
-                </a>
-              </li>
-            </ul>
-          </li>
-          <!-- Fim das abas que possuem subRotas -->
+        <!-- Abas que possuem subRotas -->
+        @if (aba.ativo && aba.subRotas) {
+        <li class="dropdown" tabindex="0" [attr.aria-label]="'Aba com submenu ' + aba.titulo">
+          <a class="dropdown-toggle" routerLinkActive="abaAtiva" [routerLinkActiveOptions]="{exact: true}"
+            [routerLink]="aba.rota" data-bs-toggle="dropdown">
+            {{ aba.titulo }}
+          </a>
 
-        </div>
+          @if (aba.subRotas) {
+          <ul class="dropdown-menu">
+            @for (sub of aba.subRotas; track $index) {
+            <li class="mb-3">
+              @if (sub.ativo && sub.rota) {
+              <a class="dropdown-item" [routerLink]="sub.rota"> {{ sub.titulo }} </a>
+              }
+
+              @if (sub.ativo && sub.fragment) {
+              <a class="dropdown-item" [routerLink]="aba.rota" [fragment]="sub.fragment">
+                {{ sub.titulo }}
+              </a>
+              }
+            </li>
+            }
+          </ul>
+          }
+        </li>
+        }
+
+        <!-- Fim das abas que possuem subRotas -->
+        }
 
       </ul>
     </nav>
@@ -74,40 +85,47 @@
       <div class="offcanvas-body">
         <ul>
 
-          <div *ngFor="let aba of abas; let i = index">
+          @for (aba of abas; track $index) {
 
-            <!-- Abas de menu -->
-            <li *ngIf="aba.ativo && !aba.subRotas" tabindex="0" [attr.aria-label]="'Aba ' + aba.titulo">
-              <a routerLinkActive="abaAtiva" [routerLinkActiveOptions]="{exact: true}" [routerLink]="aba.rota"
-                *ngIf="!aba.subRotas">
-                <i [class]="aba.icone"></i> {{ aba.titulo }}
-              </a>
-            </li>
-            <!-- Fim da aba de menu -->
+          <!-- Abas de menu -->
+          @if (aba.ativo && !aba.subRotas) {
+          <li tabindex="0" [attr.aria-label]="'Aba ' + aba.titulo">
+            @if (!aba.subRotas) {
+            <a routerLinkActive="abaAtiva" [routerLinkActiveOptions]="{exact: true}" [routerLink]="aba.rota">
+              <i [class]="aba.icone"></i> {{ aba.titulo }}
+            </a>
+            }
+          </li>
+          }
+          <!-- Fim da aba de menu -->
 
-            <!-- Abas que possuem subRotas -->
-            <li *ngIf="aba.ativo && aba.subRotas" tabindex="0" [attr.aria-label]="'Aba com submenu ' + aba.titulo">
-              <a routerLinkActive="abaAtiva" data-bs-toggle="collapse" [attr.data-bs-target]="'#subMenu'+ i">
-                <i [class]="aba.icone"></i> {{ aba.titulo }}
-                <em class="bi bi-caret-down-fill"></em>
-              </a>
+          <!-- Abas que possuem subRotas -->
+          @if (aba.ativo && aba.subRotas) {
+          <li tabindex="0" [attr.aria-label]="'Aba com submenu ' + aba.titulo">
+            <a routerLinkActive="abaAtiva" data-bs-toggle="collapse" [attr.data-bs-target]="'#subMenu'+ $index">
+              <i [class]="aba.icone"></i> {{ aba.titulo }}
+              <em class="bi bi-caret-down-fill"></em>
+            </a>
 
-              <div class="collapse" [id]="'subMenu' + i">
-                <ul>
-                  <li *ngFor="let sub of aba.subRotas">
-                    <a *ngIf="sub.ativo && sub.rota" [routerLink]="sub.rota">
-                      {{ sub.titulo }}
-                    </a>
-                    <a *ngIf="sub.ativo && sub.fragment" [routerLink]="aba.rota" [fragment]="sub.fragment">
-                      {{ sub.titulo }}
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <!-- Fim das abas que possuem subRotas -->
+            <div class="collapse" [id]="'subMenu' + $index">
+              <ul>
+                @for (sub of aba.subRotas; track $index) {
+                <li>
+                  @if (sub.ativo && sub.rota) {
+                  <a [routerLink]="sub.rota"> {{ sub.titulo }} </a>
+                  }
 
-          </div>
+                  @if (sub.ativo && sub.fragment) {
+                  <a [routerLink]="aba.rota" [fragment]="sub.fragment"> {{ sub.titulo }} </a>
+                  }
+                </li>
+                }
+              </ul>
+            </div>
+          </li>
+          }
+          <!-- Fim das abas que possuem subRotas -->
+          }
 
         </ul>
       </div>

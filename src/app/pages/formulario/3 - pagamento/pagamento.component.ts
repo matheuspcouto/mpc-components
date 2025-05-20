@@ -1,4 +1,4 @@
-import { SelectOption } from './../../../shared/components/mpc-input-select/mpc-input-select.component';
+import { SelectOption } from '../../../shared/components/mpc-input-select/mpc-input-select.component';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MpcModalComponent } from '../../../shared/components/mpc-modal/mpc-modal.component';

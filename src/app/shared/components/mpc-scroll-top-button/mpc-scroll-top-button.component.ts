@@ -33,7 +33,7 @@ export class MpcScrollTopButtonComponent implements OnInit {
 
   @Input() icone: string = '';
 
-  window = inject(WINDOW);
+  private window = inject(WINDOW);
 
   ngOnInit(): void {
     this.window.addEventListener('scroll', () => {
@@ -46,7 +46,7 @@ export class MpcScrollTopButtonComponent implements OnInit {
     });
   }
 
-  scrollToTop() {
+  scrollToTop(): void {
     this.window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }

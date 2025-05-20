@@ -17,7 +17,7 @@ const WINDOW = new InjectionToken<Window>('WindowToken', {
   styleUrls: ['./aguarde.component.css']
 })
 export default class AguardeComponent implements AfterViewInit {
-  window = inject(WINDOW);
+  private window = inject(WINDOW);
 
   ngAfterViewInit(): void {
     this.window.scrollTo(0, 0);
