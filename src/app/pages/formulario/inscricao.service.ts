@@ -46,11 +46,22 @@ export class InscricaoService {
       observer.next(inscricoes);
       observer.complete();
     });
+    //
 
     return this.http.get<any>(`${this.apiUrl}/inscricoes`, { headers: this.headers });
   }
 
   inscrever(body: any, sexo: string): Observable<any> {
+    // MOCK
+    return Observable.create((observer: any) => {
+      setTimeout(() => {
+        observer.next({ status: "OK", message: "Inscrição realizada com sucesso!" });
+        observer.complete();
+      }, 2000)
+    });
+    //
+
+
     const requestBody = JSON.stringify(body);
     const headersWithSexo = this.headers.append('sexo', sexo);
     return this.http.post<any>(`${this.apiUrl}/inscricao`, requestBody, { headers: headersWithSexo });

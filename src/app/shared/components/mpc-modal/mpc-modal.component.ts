@@ -50,6 +50,8 @@ export class MpcModalComponent {
   fecharModal() { this.modalService.hide(); this.exibirModal = false; this.isCopiado = false; }
 
   abrirModal(modalConfig: MpcModalConfig) {
+    console.log(modalConfig);
+
     this.modal = modalConfig;
 
     this.isTelaInteira = this.modal.tipoModal.tamanho === TamanhoModal.TELA_INTEIRA;

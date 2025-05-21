@@ -30,7 +30,7 @@ import { AccessibilityInputs } from '../../core/accessibility-inputs';
 })
 export class MpcInputCpfcnpjComponent extends AccessibilityInputs {
 
-  @Input() value?: string = '';
+  @Input() value?: string;
   public disabled = input<boolean>(false);
   public readonly = input<boolean>(false);
 
@@ -48,7 +48,7 @@ export class MpcInputCpfcnpjComponent extends AccessibilityInputs {
 
   set Value(value: string) {
     this.value = value;
-    if (this.isCampoValido()) { this.valor.emit(this.value); }
+    if (this.isCampoValido()) { this.valor.emit(this.value.replace(/\D/g, '')); }
   }
 
   get Value(): string {

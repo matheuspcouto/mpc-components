@@ -1,90 +1,113 @@
-<div *ngIf="dadosInscricao">
-  <h4>Dados da Inscrição</h4>
+<mpc-navbar></mpc-navbar>
 
-  <div class="row">
-    <!-- Campo com botão de copiar o código de inscrição, pode ser alterado -->
-    <div class="col-md-4 mb-1" *ngIf="dadosInscricao.codigoInscricao">
-      <h5>Inscrição</h5>
-      <div class="input-group">
-        <p>{{ dadosInscricao.codigoInscricao }}</p>
-        <!-- <em (click)="copiarCodigo(dadosInscricao.codigoInscricao)">
-          <i [class]="isCopiado ? 'bi bi-clipboard-check' : 'bi bi-clipboard'"></i>
-        </em> -->
+@if (dadosInscricao) {
+<section id="inscricao" class="inscricao">
+
+  <div class="section-header">
+    <h2>agora é só</h2>
+    <p>Confirmar os <span> Dados </span> </p>
+  </div>
+
+  <div class="container">
+
+    <h4>Dados Pessoais</h4>
+
+    <div class="row">
+      <div class="col-md-3 mb-1">
+        <h5 class="mb-1">Nome</h5>
+        <p>{{ formatarNomeCompleto() }}</p>
       </div>
     </div>
 
-    <!-- Campo de status da inscricao, pode ser alterado -->
-    <div class="col-md-4 mb-1" *ngIf="dadosInscricao.status">
-      <h5 class="mb-1">Status</h5>
-      <!-- <h5>
-        <span class="badge mb-1" [ngClass]="getBadgeStatusInscricao(dadosInscricao.status)">
-          {{ getTextoStatusInscricao(dadosInscricao.status) }}
-        </span>
-      </h5> -->
+    <div class="row">
+      <div class="col-md-6 mb-1">
+        <h5 class="mb-1">Data de Nascimento</h5>
+        <p>{{ formatarData(dadosInscricao.dataNasc) }}</p>
+      </div>
+
+      <div class="col-md-6 mb-1">
+        <h5 class="mb-1">Idade</h5>
+        <p>{{ dadosInscricao.idade }}</p>
+      </div>
     </div>
 
-    <!-- Campo de data de criação, pode ser alterado -->
-    <div class="col-md-4 mb-1" *ngIf="dadosInscricao.dataInscricao">
-      <h5 class="mb-1">Data da Inscrição</h5>
-      <p>{{ formatarData(dadosInscricao.dataInscricao) }}</p>
-    </div>
+    <div class="row">
+      <div class="col-md-4 mb-1">
+        <h5 class="mb-1">CPF/CNPJ</h5>
+        <p>{{ formatarCpfCnpj() }}</p>
+      </div>
 
-    <hr>
-  </div>
-</div>
+      <div class="col-md-4 mb-1">
+        <h5 class="mb-1">Sexo</h5>
+        <p>{{ getSexo() }}</p>
+      </div>
 
-<div *ngIf="dadosPessoais">
-  <h4>Dados Pessoais</h4>
-
-  <div class="row">
-    <div class="col-md-3 mb-1" *ngFor="let dado of dadosPessoais">
-      <h5 class="mb-1">{{ dado.label }}</h5>
-      <p>{{ dado.valor }}</p>
-    </div>
-  </div>
-
-  <hr>
-</div>
-
-<div *ngIf="dadosPagamento">
-  <h4>Dados do Pagamento</h4>
-
-  <div class="row">
-    <div class="col-md-3 mb-1" *ngIf="dadosPagamento.formaPagamento">
-      <h5 class="mb-1">Forma de Pagamento</h5>
-      <p>{{ dadosPagamento.formaPagamento }}</p>
-    </div>
-
-    <div class="col-md-3 mb-1" *ngIf="dadosPagamento.valor">
-      <h5 class="mb-1">Valor</h5>
-      <p>{{ formatarValor(dadosPagamento.valor) }}</p>
-    </div>
-
-    <div class="col-md-3 mb-1" *ngIf="dadosPagamento.statusPagamento">
-      <h5 class="mb-1">Status do Pagamento</h5>
-      <!-- <h5>
-        <span class="badge mb-1" [ngClass]="getBadgeStatusPagamento(dadosPagamento.statusPagamento)">
-          {{ getTextoStatusPagamento(dadosPagamento.statusPagamento) }}
-        </span>
-      </h5> -->
-    </div>
-
-    <div class="col-md-3 mb-1" *ngIf="dadosPagamento.dataPagamento">
-      <h5 class="mb-1">Data do Pagamento</h5>
-      <p>{{ formatarData(dadosPagamento.dataPagamento) }}</p>
+      <div class="col-md-4 mb-1">
+        <h5 class="mb-1">Estado Civil</h5>
+        <p>{{ dadosInscricao.estadoCivil }}</p>
+      </div>
     </div>
 
     <hr>
+
+    <h4>Dados de Contato</h4>
+
+    <div class="row">
+      <div class="col-md-6 mb-1">
+        <h5 class="mb-1">Telefone</h5>
+        <p>{{ formatarTelefone() }}</p>
+      </div>
+
+      <div class="col-md-6 mb-1">
+        <h5 class="mb-1">E-mail</h5>
+        <p>{{ dadosInscricao.email }}</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 mb-1">
+        <h5 class="mb-1">Endereço</h5>
+        <p>{{ formatarEndereco() }}</p>
+      </div>
+    </div>
+
+    <hr>
+
+    <h4>Dados de Pagamento</h4>
+
+    <div class="row">
+      <div class="col-md-6 mb-1">
+        <h5 class="mb-1">Valor</h5>
+        <p>{{ formatarValor(dadosInscricao.valor) }}</p>
+      </div>
+
+      <div class="col-md-6 mb-1">
+        <h5 class="mb-1">Forma de Pagamento</h5>
+        <p>{{ dadosInscricao.formaPagamento }}</p>
+      </div>
+    </div>
+
+    <!-- Botões -->
+    <div class="row mt-5">
+      <div class="col-md-6 mb-3 div-buttons">
+        <mpc-button (click)="inscrever()" corBotao="btn-success" icone="bi bi-send" posicaoIcone="direita"
+          texto="Inscrever-se">
+        </mpc-button>
+      </div>
+
+      <div class="col-md-6 mb-3 div-buttons">
+        <mpc-button (click)="voltar()" corBotao="btn-outline-secondary" icone="bi bi-arrow-left" texto="Voltar"
+          posicaoIcone="esquerda">
+        </mpc-button>
+      </div>
+    </div>
+
   </div>
-</div>
 
-<!-- Botões -->
-<div class="modal-buttons">
+</section>
 
-  <mpc-button corBotao="btn-success" texto="Confirmar" icone="bi bi-whatsapp" (click)="inscrever()">
-  </mpc-button>
 
-  <mpc-button corBotao="btn-outline-secondary" (click)="voltar()" texto="Voltar" icone="bi bi-arrow-left">
-  </mpc-button>
-
-</div>
+<mpc-modal #modalSucesso></mpc-modal>
+<mpc-modal #modalErro></mpc-modal>
+<mpc-comprovante [comprovante]="dadosComprovante" #comprovanteExemplo></mpc-comprovante>
+}

@@ -17,20 +17,23 @@
     <form [formGroup]="form">
 
       <div class="row">
-        <mpc-input-select label="Forma de Pagamento" [required]="true" (valor)="setvalor($event, 'formaPagamento')" [options]="formasPagamento" />
+        <mpc-input-select label="Forma de Pagamento" [required]="true"
+          (error)="form.controls.formaPagamento.setErrors($event)"
+          (valor)="form.controls.formaPagamento.setValue($event)" [options]="formasPagamento" />
       </div>
 
     </form>
 
     <div class="row mt-5">
-       <div class="col-md-6 mb-3 div-buttons">
+      <div class="col-md-6 mb-3 div-buttons">
         <mpc-button (click)="proximaEtapa()" corBotao="btn-success" icone="bi bi-send" posicaoIcone="direita"
           texto="Finalizar" [disabled]="form.invalid">
         </mpc-button>
       </div>
 
       <div class="col-md-6 mb-3 div-buttons">
-        <mpc-button (click)="etapaAnterior()" corBotao="btn-outline-secondary" icone="bi bi-arrow-left" texto="Voltar" posicaoIcone="esquerda">
+        <mpc-button (click)="etapaAnterior()" corBotao="btn-outline-secondary" icone="bi bi-arrow-left" texto="Voltar"
+          posicaoIcone="esquerda">
         </mpc-button>
       </div>
     </div>

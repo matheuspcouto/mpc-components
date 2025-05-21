@@ -1,12 +1,12 @@
 import { SelectOption } from '../../../shared/components/mpc-input-select/mpc-input-select.component';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { MpcModalComponent } from '../../../shared/components/mpc-modal/mpc-modal.component';
 import { Rotas } from '../../../shared/enums/rotas-enum';
 import { CommonModule } from '@angular/common';
 import { MpcNavbarComponent } from '../../../shared/components/mpc-navbar/mpc-navbar.component';
 import { MpcFormProgressBarComponent } from '../../../shared/components/mpc-form-progress-bar/mpc-form-progress-bar.component';
-import { FormGroup, FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Validators, FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { MpcButtonComponent } from '../../../shared/components/mpc-button/mpc-button.component';
 import { MpcInputSelectComponent } from '../../../shared/components/mpc-input-select/mpc-input-select.component';
 import { InscricaoService } from '../inscricao.service';
@@ -14,7 +14,7 @@ import { InscricaoService } from '../inscricao.service';
 @Component({
   selector: 'app-pagamento',
   imports: [
-    CommonModule, MpcModalComponent, FormsModule,
+    MpcModalComponent, FormsModule,
     ReactiveFormsModule, MpcButtonComponent, MpcInputSelectComponent,
     MpcNavbarComponent, MpcFormProgressBarComponent
   ],
@@ -23,17 +23,19 @@ import { InscricaoService } from '../inscricao.service';
 })
 export default class PagamentoComponent {
 
+  private formBuilder = inject(NonNullableFormBuilder);
+  private router = inject(Router);
+  private inscricaoService = inject(InscricaoService);
+
   formasPagamento: SelectOption[] = [
     { label: 'Cartão', value: 'Cartão', selected: false },
     { label: 'Pix', value: 'Pix', selected: false },
     { label: 'Dinheiro', value: 'Dinheiro', selected: false }
   ];
 
-  form = new FormGroup({
-    formaPagamento: new FormControl('', Validators.required)
+  protected form = this.formBuilder.group({
+    formaPagamento: ['', Validators.required],
   });
-
-  constructor(private inscricaoService: InscricaoService, private router: Router) { }
 
   proximaEtapa() {
     if (this.form.invalid) return;

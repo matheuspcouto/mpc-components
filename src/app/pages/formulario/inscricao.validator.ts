@@ -1,12 +1,6 @@
 import { Validators } from '@angular/forms';
 import { PhoneNumberUtil } from 'google-libphonenumber';
 
-export interface ErroForm {
-  tipoErro: string;
-  controleErro?: string;
-  mensagemErro: string;
-}
-
 const regexEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 export const emailValidator = [
   Validators.email,

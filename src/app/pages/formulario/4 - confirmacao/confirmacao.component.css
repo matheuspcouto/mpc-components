@@ -1,0 +1,87 @@
+main {
+  margin-top: 90px;
+}
+
+/*--------------------------------------------------------------
+# Section
+--------------------------------------------------------------*/
+section {
+  overflow: hidden;
+  padding: 50px 0;
+  margin-top: 90px;
+
+  .section-header {
+    text-align: center;
+    padding-bottom: 30px;
+
+    h2 {
+      font-size: 13px;
+      letter-spacing: 1px;
+      font-weight: 400;
+      margin: 0;
+      padding: 0;
+      color: var(--cor-terciaria);
+      text-transform: uppercase;
+      font-family: var(--font-padrao);
+    }
+
+    p {
+      margin: 0;
+      font-size: clamp(2rem, 2vw, 2rem);
+      font-weight: 400;
+      font-family: var(--fonte-padrao);
+
+      span {
+        color: var(--cor-secundaria);
+      }
+    }
+  }
+
+}
+
+/*--------------------------------------------------------------
+# inscricao Section
+--------------------------------------------------------------*/
+.inscricao {
+  font-family: var(--font-padrao);
+  font-weight: 600;
+  padding-right: 1.5rem !important;
+  padding-left: 1.5rem !important;
+}
+
+.div-buttons {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 0.5rem;
+}
+
+
+/*--------------------------------------------------------------
+# Geral
+--------------------------------------------------------------*/
+
+button {
+  max-width: 30vh;
+  min-width: 20vh;
+  box-shadow: none !important;
+}
+
+h4 {
+  font-size: 1.5rem;
+  padding: 0.5rem 0;
+}
+
+.container {
+  h5 {
+    font-size: 18px;
+    color: var(--cor-terciaria);
+    padding: 1rem 0;
+  }
+
+  p {
+    margin-bottom: 0 !important;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: var(--font-secundaria) !important;
+  }
+}

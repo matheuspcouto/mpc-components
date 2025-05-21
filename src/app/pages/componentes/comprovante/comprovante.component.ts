@@ -5,7 +5,7 @@ import { MpcComprovanteComponent, MpcComprovanteConfig } from '../../../shared/c
 
 @Component({
   selector: 'app-comprovante',
-  imports: [ MpcButtonComponent, MpcNavbarComponent, MpcComprovanteComponent ],
+  imports: [MpcButtonComponent, MpcNavbarComponent, MpcComprovanteComponent],
   templateUrl: './comprovante.component.html',
   styleUrl: './comprovante.component.css'
 })
@@ -15,28 +15,28 @@ export class ComprovanteComponent {
   dadosComprovante: MpcComprovanteConfig = {} as MpcComprovanteConfig;
 
   abrirModalComprovante() {
-      this.dadosComprovante = {
-        titulo: 'Comprovante de inscrição',
-        dados: {
-          dadosInscricao: {
-            codigoInscricao: '123456',
-            dataInscricao: new Date().toLocaleDateString('pt-BR'),
-            status: 'ATIVO',
-          },
-          dadosPessoais: [
-            { label: 'Nome', valor: 'Fulano de Tal' },
-            { label: 'CPF', valor: '123.456.789-00' },
-            { label: 'E-mail', valor: 'fulano@example.com' },
-          ],
-          dadosPagamento: {
-            formaPagamento: 'Cartão de Crédito',
-            valor: 100.00,
-            statusPagamento: 'A PAGAR'
-          },
-        }
-      };
+    this.dadosComprovante = {
+      titulo: 'Comprovante de inscrição',
+      dados: {
+        dadosInscricao: {
+          codigoInscricao: '123456',
+          dataInscricao: new Date().toLocaleDateString('pt-BR'),
+          status: 'ATIVO',
+        },
+        dadosPessoais: [
+          { label: 'Nome', valor: 'Fulano de Tal' },
+          { label: 'CPF', valor: '123.456.789-00' },
+          { label: 'E-mail', valor: 'fulano@example.com' },
+        ],
+        dadosPagamento: {
+          formaPagamento: 'Cartão de Crédito',
+          valor: 100.00,
+          statusPagamento: 'A PAGAR'
+        },
+      }
+    };
 
-      this.comprovanteExemplo?.abrirComprovante();
-    }
+    this.comprovanteExemplo?.abrirComprovante();
+  }
 
 }
