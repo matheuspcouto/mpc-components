@@ -43,8 +43,6 @@ section {
 # inscricao Section
 --------------------------------------------------------------*/
 .inscricao {
-  font-family: var(--font-padrao);
-  font-weight: 600;
   padding-right: 1.5rem !important;
   padding-left: 1.5rem !important;
 }
@@ -73,15 +71,12 @@ h4 {
 
 .container {
   h5 {
-    font-size: 18px;
-    color: var(--cor-terciaria);
-    padding: 1rem 0;
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 5px 0;
   }
 
   p {
     margin-bottom: 0 !important;
-    font-size: 18px;
-    font-weight: 500;
-    font-family: var(--font-secundaria) !important;
   }
 }

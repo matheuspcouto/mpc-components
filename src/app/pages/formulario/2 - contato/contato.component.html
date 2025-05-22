@@ -29,24 +29,25 @@
       </div>
 
       <div class="col-md-6 mb-3 align-items-center justify-content-between">
-        <mpc-input-pesquisa-cep [value]="form.value.cep" (valor)="definirEnderecoPorCep($event)" />
+        <mpc-input-pesquisa-cep [value]="form.value.cep" [required]="true" (valor)="definirEnderecoPorCep($event)"
+          (error)="form.controls.cep.setErrors($event)" />
       </div>
 
       <div class="row">
 
         <div class="col-md-4 mb-3">
-          <mpc-input-text label="Cidade" [value]="form.value.cidade" (valor)="form.controls.cidade.setValue($event)"
-            (error)="form.controls.cidade.setErrors($event)" />
+          <mpc-input-text label="Cidade" [readonly]="true" [value]="form.value.cidade"
+            (valor)="form.controls.cidade.setValue($event)" (error)="form.controls.cidade.setErrors($event)" />
         </div>
 
         <div class="col-md-4 mb-3">
-          <mpc-input-text label="Estado" [value]="form.value.estado" (valor)="form.controls.estado.setValue($event)"
-            (error)="form.controls.estado.setErrors($event)" />
+          <mpc-input-text label="Estado" [readonly]="true" [value]="form.value.estado"
+            (valor)="form.controls.estado.setValue($event)" (error)="form.controls.estado.setErrors($event)" />
         </div>
 
         <div class="col-md-4 mb-3">
-          <mpc-input-text label="Bairro" [value]="form.value.bairro" (valor)="form.controls.bairro.setValue($event)"
-            (error)="form.controls.bairro.setErrors($event)" />
+          <mpc-input-text label="Bairro" [readonly]="true" [value]="form.value.bairro"
+            (valor)="form.controls.bairro.setValue($event)" (error)="form.controls.bairro.setErrors($event)" />
         </div>
 
       </div>
@@ -54,12 +55,12 @@
       <div class="row">
 
         <div class="col-md-10 mb-3">
-          <mpc-input-text label="Rua" [value]="form.value.rua"
+          <mpc-input-text label="Rua" [value]="form.value.rua" [readonly]="true"
             (valor)="form.controls.rua.setValue($event)" (error)="form.controls.rua.setErrors($event)" />
         </div>
 
         <div class="col-md-2 mb-3">
-          <mpc-input-text label="Número" min="1" max="99999" [value]="form.value.numero"
+          <mpc-input-text label="Número (caso não possua, digite 0)" min="1" max="4" [value]="form.value.numero"
             (valor)="form.controls.numero.setValue($event)" (error)="form.controls.numero.setErrors($event)" />
         </div>
 
@@ -73,14 +74,15 @@
     </form>
 
     <div class="row mt-5">
-       <div class="col-md-6 mb-3 div-buttons">
+      <div class="col-md-6 mb-3 div-buttons">
         <mpc-button (click)="proximaEtapa()" corBotao="btn-primary" icone="bi bi-arrow-right" posicaoIcone="direita"
           texto="Próximo" [disabled]="form.invalid">
         </mpc-button>
       </div>
 
       <div class="col-md-6 mb-3 div-buttons">
-        <mpc-button (click)="etapaAnterior()" corBotao="btn-outline-secondary" icone="bi bi-arrow-left" texto="Voltar" posicaoIcone="esquerda">
+        <mpc-button (click)="etapaAnterior()" corBotao="btn-outline-secondary" icone="bi bi-arrow-left" texto="Voltar"
+          posicaoIcone="esquerda">
         </mpc-button>
       </div>
     </div>

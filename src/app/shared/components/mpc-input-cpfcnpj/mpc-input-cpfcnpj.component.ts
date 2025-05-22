@@ -84,6 +84,8 @@ export class MpcInputCpfcnpjComponent extends AccessibilityInputs {
   }
 
   isCampoValido(): boolean {
+    if (this.readonly() || this.disabled()) { return true; }
+
     if (this.validaRequired()) {
       this.errorMessage = `O campo CPF/CNPJ é obrigatório`;
       this.error.emit({ required: true });

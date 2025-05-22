@@ -33,4 +33,8 @@ export class InscricoesEncerradasGuard implements CanActivate {
       })
     );
   }
+
+  etapaCorreta(): boolean {
+    return true;
+  }
 }

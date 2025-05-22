@@ -74,6 +74,8 @@ export class MpcInputEmailComponent extends AccessibilityInputs {
   }
 
   isCampoValido(): boolean {
+    if (this.readonly() || this.disabled()) { return true; }
+
     if (this.validaRequired()) {
       this.errorMessage = `O campo e-mail é obrigatório`;
       this.error.emit({ required: true });
@@ -95,7 +97,7 @@ export class MpcInputEmailComponent extends AccessibilityInputs {
   }
 
   validaRequired(): boolean {
-    return this.required! && this.Value.length === 0;
+    return this.required()! && this.Value.length === 0;
   }
 
 }

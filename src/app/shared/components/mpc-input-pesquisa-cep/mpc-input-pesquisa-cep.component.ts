@@ -16,9 +16,10 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, input, Input, Output } from '@angular/core';
 import { NgxMaskDirective } from 'ngx-mask';
 import { AccessibilityInputs } from '../../core/accessibility-inputs';
+import { ValidationErrors } from '@angular/forms';
 
 export interface Endereco {
   rua: string;
@@ -39,7 +40,10 @@ export class MpcInputPesquisaCepComponent extends AccessibilityInputs {
   @Input() value?: string = '';
 
   @Output() valor: EventEmitter<Endereco> = new EventEmitter();
+  @Output() error: EventEmitter<ValidationErrors> = new EventEmitter();
 
+  public required = input<boolean>(false);
+  protected campoTocado: boolean = false;
   private regexCEP: any = /^\d{5}-?\d{3}$/;
   protected mascara: string = '00000-000';
 
@@ -74,11 +78,19 @@ export class MpcInputPesquisaCepComponent extends AccessibilityInputs {
     this.Value = event.target.value as string;
     this.onChange(this.Value);
     this.onTouched();
+    this.isCampoValido();
   }
 
   isCampoValido(): boolean {
+    if (this.validaRequired()) {
+      this.errorMessage = `O campo CEP é obrigatório`;
+       this.error.emit({ required: true });
+      return false;
+    }
+
     if (this.validaRegex()) {
       this.errorMessage = `O campo CEP deve conter 8 dígitos`;
+       this.error.emit({ regex: true });
       return false;
     }
 
@@ -90,15 +102,14 @@ export class MpcInputPesquisaCepComponent extends AccessibilityInputs {
     return !new RegExp(this.regexCEP).test(this.Value);
   }
 
-  removerCaracteresEspeciais(cep: string): string {
-    // Remove todos os caracteres não numéricos (espaços, parênteses, traços, etc.)
-    return cep.replace(/\D/g, '');
+  validaRequired(): boolean {
+    return this.campoTocado && this.required()! && this.Value.length === 0;
   }
 
   pequisarCep(cep: string | undefined): void {
 
     if (!this.isCampoValido()) return;
-    cep = this.removerCaracteresEspeciais(cep as string);
+    cep = (cep as string).replace(/\D/g, '');;
 
     this.http.get<any>(`https://viacep.com.br/ws/${cep}/json/`).subscribe({
       next: (response) => {

@@ -29,28 +29,7 @@ export class ConfirmacaoComponent implements OnInit {
   dadosInscricao: any;
 
   ngOnInit(): void {
-    let mock = {
-      "formaPagamento": "Cartão",
-      "telefone": "63992014337",
-      "email": "matheuspcouto70@gmail.com",
-      "rua": "Quadra ALC NO 33 Área HM 13",
-      "numero": "0",
-      "bairro": "Plano Diretor Norte",
-      "cidade": "Palmas",
-      "estado": "Tocantins",
-      "cep": "77001-659",
-      "complemento": "Residencial Brisas Do Lago Ap 202 Bloco C",
-      "nome": "Matheus Pimentel",
-      "sobrenome": "Do Couto",
-      "dataNasc": "2000-05-23",
-      "sexo": "M",
-      "estadoCivil": "Casado(a)",
-      "idade": "24",
-      "cpfCnpj": "04886126162",
-      "valor": 1000
-    }
-    //this.dadosInscricao = this.inscricaoService.getDadosInscricao();
-    this.dadosInscricao = mock;
+    this.dadosInscricao = this.inscricaoService.getDadosInscricao();
   }
 
   formatarNomeCompleto(): string {
@@ -83,6 +62,8 @@ export class ConfirmacaoComponent implements OnInit {
   }
 
   formatarData(data: string): string {
+    console.log(data);
+
     const date = new Date(data);
     if (date instanceof Date && !isNaN(date.getTime())) {
       return new Date(date).toLocaleDateString('pt-BR');
@@ -133,7 +114,6 @@ export class ConfirmacaoComponent implements OnInit {
     }
 
     // MOCK
-    this.abrirModalErro('Erro', 'Não foi possível concluir a inscrição');
     this.abrirModalSucesso();
     //
     return;
@@ -157,7 +137,7 @@ export class ConfirmacaoComponent implements OnInit {
       titulo: 'Inscrição realizada com sucesso',
       texto: 'Sua inscrição foi realizada com sucesso, você pode acessar o comprovante de inscrição clicando no botão abaixo.',
       tipoModal: TipoModal.SUCESSO,
-      botao: () => { this.abrirModalComprovante(); this.modalSucesso?.fecharModal(); },
+      botao: () => { this.abrirModalComprovante(); },
       textoBotao: 'Abrir comprovante',
       segundoBotao: () => { this.modalSucesso?.fecharModal(); },
       textoSegundoBotao: 'Fechar',
@@ -167,6 +147,8 @@ export class ConfirmacaoComponent implements OnInit {
   }
 
   abrirModalComprovante() {
+    this.modalSucesso?.fecharModal();
+
     this.dadosComprovante = {
       titulo: 'Comprovante de inscrição',
       dados: {

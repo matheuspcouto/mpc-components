@@ -12,7 +12,7 @@ export class Inscricao {
   email?: string;
   endereco?: string;
   formaPagamento?: string;
-  valor?: number;
+  valor: number = 100.00;
   dataInscricao?: string;
   status?: string;
 }

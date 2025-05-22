@@ -47,15 +47,4 @@ export default class PagamentoComponent {
     this.inscricaoService.atualizarDadosInscricao(this.form.value, 2);
     this.router.navigate([Rotas.CONTATO]);
   }
-
-  setvalor(event: any, campo: string): void {
-    if (!event) {
-      this.form.get(campo)?.setErrors({ error: true });
-      return;
-    }
-
-    this.form.get(campo)?.setValue(event);
-
-    console.log(this.form.get(campo)?.value);
-  }
 }

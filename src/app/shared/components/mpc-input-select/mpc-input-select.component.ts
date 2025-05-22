@@ -87,6 +87,8 @@ export class MpcInputSelectComponent extends AccessibilityInputs implements OnIn
   }
 
   isCampoValido(): boolean {
+    if (!this.disabled()) { return true; }
+
     if (this.validaRequired()) {
       this.errorMessage = `O campo ${this.label()} é obrigatório`;
       this.error.emit({ 'required': true });
@@ -98,7 +100,7 @@ export class MpcInputSelectComponent extends AccessibilityInputs implements OnIn
   }
 
   validaRequired(): boolean {
-    return this.required! && this.campoTocado && (this.OpcaoSelecionada && this.OpcaoSelecionada.value == 'Selecione');
+    return this.required()! && this.campoTocado && (this.OpcaoSelecionada && this.OpcaoSelecionada.value == 'Selecione');
   }
 
 }

@@ -93,6 +93,8 @@ export class MpcInputRadioComponent extends AccessibilityInputs implements OnIni
   }
 
   isCampoValido(): boolean {
+    if (this.readonly() || this.disabled()) { return true; }
+
     if (this.validaRequired()) {
       this.errorMessage = `O campo ${this.label()} é obrigatório`;
       this.error.emit({ 'required': true });
@@ -104,6 +106,6 @@ export class MpcInputRadioComponent extends AccessibilityInputs implements OnIni
   }
 
   validaRequired(): boolean {
-    return this.required! && this.campoTocado && !this.OpcaoSelecionada;
+    return this.required()! && this.campoTocado && !this.OpcaoSelecionada;
   }
 }

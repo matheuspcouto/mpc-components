@@ -80,6 +80,8 @@ export class MpcInputTextComponent extends AccessibilityInputs {
   }
 
   isCampoValido(): boolean {
+    if (this.readonly() || this.disabled()) { return true; }
+
     if (this.validaRequired()) {
       this.errorMessage = `O campo ${this.label()} é obrigatório`;
       this.error.emit({ required: true });
@@ -119,6 +121,6 @@ export class MpcInputTextComponent extends AccessibilityInputs {
   }
 
   validaRequired(): boolean {
-    return this.campoTocado && this.required! && this.Value.length === 0;
+    return this.campoTocado && (this.required()! || this.min().length > 0) && this.Value.length === 0;
   }
 }

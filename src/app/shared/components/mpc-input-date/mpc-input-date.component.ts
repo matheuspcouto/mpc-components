@@ -75,6 +75,8 @@ export class MpcInputDateComponent extends AccessibilityInputs {
   }
 
   isCampoValido(): boolean {
+    if (this.readonly() || this.disabled()) { return true; }
+
     if (this.validaRequired()) {
       this.errorMessage = `O campo ${this.label()} é obrigatório`;
       this.error.emit({ 'required': true });

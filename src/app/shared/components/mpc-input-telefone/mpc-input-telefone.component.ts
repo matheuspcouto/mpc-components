@@ -48,7 +48,7 @@ export class MpcInputTelefoneComponent extends AccessibilityInputs {
 
   set Value(value: string) {
     this.value = value;
-    if (this.isCampoValido()) { this.valor.emit(this.removerCaracteresEspeciais(this.value)); }
+    if (this.isCampoValido()) { this.valor.emit(this.value.replace(/\D/g, '')); }
   }
 
   get Value(): string {
@@ -77,6 +77,8 @@ export class MpcInputTelefoneComponent extends AccessibilityInputs {
   }
 
   isCampoValido(): boolean {
+    if (this.readonly() || this.disabled()) { return true; }
+
     if (this.validaRequired()) {
       this.errorMessage = `O campo telefone é obrigatório`;
       this.error.emit({ required: true });
@@ -98,7 +100,7 @@ export class MpcInputTelefoneComponent extends AccessibilityInputs {
   }
 
   validaRequired(): boolean {
-    return this.required! && this.Value.length === 0;
+    return this.required()! && this.Value.length === 0;
   }
 
   removerCaracteresEspeciais(telefone: string): string {
