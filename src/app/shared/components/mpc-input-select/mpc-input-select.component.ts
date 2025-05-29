@@ -62,7 +62,6 @@ export class MpcInputSelectComponent extends AccessibilityInputs implements OnIn
 
       // Se o campo é obrigatório, emite erro imediatamente
       if (this.required()) {
-        this.errorMessage = `O campo ${this.label()} é obrigatório`;
         this.error.emit({ required: true });
       }
     } else {

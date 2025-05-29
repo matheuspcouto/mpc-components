@@ -66,4 +66,45 @@ export class InscricaoService {
     const headersWithSexo = this.headers.append('sexo', sexo);
     return this.http.post<any>(`${this.apiUrl}/inscricao`, requestBody, { headers: headersWithSexo });
   }
+
+  /**
+ * @description Verifica se todos os campos obrigatórios de dados pessoais estão preenchidos
+ * @returns {boolean} true se todos os dados pessoais estão completos, false caso contrário
+ */
+  isDadosPessoaisCompletos(): boolean {
+    const dados = this.getDadosInscricao();
+    return !!(dados.nome && dados.dataNasc && dados.sexo && dados.estadoCivil && dados.cpfCnpj);
+  }
+
+  /**
+   * @description Verifica se todos os campos obrigatórios de contato estão preenchidos
+   * @returns {boolean} true se todos os dados de contato estão completos, false caso contrário
+   */
+  isContatoCompleto(): boolean {
+    const dados = this.getDadosInscricao();
+    return !!(dados.telefone && dados.email && dados.cep);
+  }
+
+  /**
+   * @description Verifica se todos os campos obrigatórios de pagamento estão preenchidos
+   * @returns {boolean} true se todos os dados de pagamento estão completos, false caso contrário
+   */
+  isPagamentoCompleto(): boolean {
+    const dados = this.getDadosInscricao();
+    return !!(dados.formaPagamento && dados.valor);
+  }
+
+  /**
+   * @description Verifica se a inscrição está completamente preenchida (todos os dados obrigatórios)
+   * @returns {boolean} true se a inscrição está completa, false caso contrário
+   * @example
+   * const inscricao = new Inscricao();
+   * inscricao.inicializarDadosPessoais('João', 'Silva', '1990-01-01', 'M', 'Solteiro', 33, '12345678901')
+   *         .inicializarContato('11999999999', 'joao@email.com', 'Rua das Flores, 123')
+   *         .inicializarPagamento('Cartão de Crédito', 150.00);
+   * const completa = inscricao.isInscricaoCompleta(); // Retorna: true
+   */
+  isInscricaoCompleta(): boolean {
+    return this.isDadosPessoaisCompletos() && this.isContatoCompleto() && this.isPagamentoCompleto();
+  }
 }

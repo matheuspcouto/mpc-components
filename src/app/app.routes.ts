@@ -16,7 +16,7 @@ import DadosPessoaisComponent from './pages/formulario/1 - dados-pessoais/dados-
 import ContatoComponent from './pages/formulario/2 - contato/contato.component';
 import PagamentoComponent from './pages/formulario/3 - pagamento/pagamento.component';
 import { ConfirmacaoComponent } from './pages/formulario/4 - confirmacao/confirmacao.component';
-import { InscricoesEncerradasGuard } from './guards/inscricoes-ativas.guard';
+import { InscricoesGuard } from './guards/inscricoes.guard';
 
 //TODO: verificar lazy loading com loadComponent e loadChildren
 export const routes: Routes = [
@@ -46,10 +46,10 @@ export const routes: Routes = [
       {
         path: 'formulario',
         children: [
-          { path: 'dados-pessoais', component: DadosPessoaisComponent, canActivate: [SiteAtivoGuard, InscricoesEncerradasGuard] },
-          { path: 'contato', component: ContatoComponent, canActivate: [SiteAtivoGuard, InscricoesEncerradasGuard] },
-          { path: 'pagamento', component: PagamentoComponent, canActivate: [SiteAtivoGuard, InscricoesEncerradasGuard] },
-          { path: 'confirmacao', component: ConfirmacaoComponent, canActivate: [SiteAtivoGuard, InscricoesEncerradasGuard] },
+          { path: 'dados-pessoais', component: DadosPessoaisComponent, canActivate: [SiteAtivoGuard, InscricoesGuard] },
+          { path: 'contato', component: ContatoComponent, canActivate: [SiteAtivoGuard, InscricoesGuard] },
+          { path: 'pagamento', component: PagamentoComponent, canActivate: [SiteAtivoGuard, InscricoesGuard] },
+          { path: 'confirmacao', component: ConfirmacaoComponent, canActivate: [SiteAtivoGuard, InscricoesGuard] },
           { path: 'inscricoes-encerradas', component: InscricoesEncerradasComponent, canActivate: [SiteAtivoGuard] },
         ]
       },

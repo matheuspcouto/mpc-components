@@ -21,6 +21,7 @@ import { Component, EventEmitter, input, Output } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
 import { AccessibilityInputs } from '../../core/accessibility-inputs';
 
+// TODO: Corrigir recuperação de Dados
 @Component({
   selector: 'mpc-input-email',
   imports: [],

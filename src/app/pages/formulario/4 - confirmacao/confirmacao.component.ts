@@ -26,106 +26,58 @@ export class ConfirmacaoComponent implements OnInit {
   @ViewChild('comprovanteExemplo', { static: true }) comprovanteExemplo!: MpcComprovanteComponent;
   dadosComprovante: MpcComprovanteConfig = {} as MpcComprovanteConfig;
 
-  dadosInscricao: any;
+  dadosInscricao = new Inscricao();
 
   ngOnInit(): void {
-    this.dadosInscricao = this.inscricaoService.getDadosInscricao();
+    const dados = this.inscricaoService.getDadosInscricao();
+
+    this.dadosInscricao.inicializarDadosPessoais(dados);
+    this.dadosInscricao.inicializarContato(dados);
+    this.dadosInscricao.inicializarPagamento(dados);
   }
 
-  formatarNomeCompleto(): string {
-    return `${this.dadosInscricao.nome.trim()} ${this.dadosInscricao.sobrenome.trim()}`;
-  }
-
-  formatarEndereco(): string {
-    let endereco: string = '';
-
-    if (this.dadosInscricao.rua)
-      endereco = `${this.dadosInscricao.rua.trim()}`;
-    if (this.dadosInscricao.numero)
-      endereco += `, ${this.dadosInscricao.numero.trim()}`;
-    if (this.dadosInscricao.complemento)
-      endereco += `, ${this.dadosInscricao.complemento.trim()}`;
-    if (this.dadosInscricao.bairro)
-      endereco += `, ${this.dadosInscricao.bairro.trim()}`;
-    if (this.dadosInscricao.cidade)
-      endereco += `, ${this.dadosInscricao.cidade.trim()}`;
-    if (this.dadosInscricao.estado)
-      endereco += `, ${this.dadosInscricao.estado.trim()}`;
-    if (this.dadosInscricao.cep)
-      endereco += ` - CEP: ${this.dadosInscricao.cep.trim()}`;
-
-    return endereco;
-  }
-
-  formatarValor(valor: number): string {
+  formatarValor(valor: any): string {
     return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   }
 
   formatarData(data: string): string {
-    console.log(data);
+    if (!data || data.trim() === '') {
+      return '';
+    }
 
     const date = new Date(data);
-    if (date instanceof Date && !isNaN(date.getTime())) {
-      return new Date(date).toLocaleDateString('pt-BR');
+
+    if (isNaN(date.getTime())) {
+      const dataLimpa = data.substring(0, 10);
+      if (dataLimpa.includes('-') && dataLimpa.length === 10) {
+        const [ano, mes, dia] = dataLimpa.split('-');
+        return `${dia}/${mes}/${ano}`;
+      }
+      return data; // Retorna original se não conseguir formatar
     }
 
-    return data.substring(0, 10);
+    return date.toLocaleDateString('pt-BR');
   }
 
-  formatarTelefone(): string {
-    const telefone = this.dadosInscricao.telefone.replace(/\D/g, '');
-    if (telefone.length === 11) {
-      return `(${telefone.substring(0, 2)}) ${telefone.substring(2, 7)}-${telefone.substring(7)}`;
-    } else if (telefone.length === 10) {
-      return `(${telefone.substring(0, 2)}) ${telefone.substring(2, 6)}-${telefone.substring(6)}`;
-    }
-    return telefone;
-  }
-
-  formatarCpfCnpj(): string {
-    const cpfCnpj = this.dadosInscricao.cpfCnpj.replace(/\D/g, '');
-    if (cpfCnpj.length === 11) {
-      return `${cpfCnpj.substring(0, 3)}.${cpfCnpj.substring(3, 6)}.${cpfCnpj.substring(6, 9)}-${cpfCnpj.substring(9)}`;
-    } else if (cpfCnpj.length === 14) {
-      return `${cpfCnpj.substring(0, 2)}.${cpfCnpj.substring(2, 5)}.${cpfCnpj.substring(5, 8)}/${cpfCnpj.substring(8, 12)}-${cpfCnpj.substring(12)}`;
-    }
-    return cpfCnpj;
-  }
 
   getSexo(): string {
     return this.dadosInscricao.sexo === 'M' ? 'Masculino' : 'Feminino';
   }
 
   inscrever() {
-    const inscricao: Inscricao = {
-      nome: this.formatarNomeCompleto(),
-      dataNasc: this.formatarData(this.dadosInscricao.dataNasc),
-      sexo: this.dadosInscricao.sexo,
-      idade: this.dadosInscricao.idade,
-      cpfCnpj: this.formatarCpfCnpj(),
-      telefone: this.formatarTelefone(),
-      email: this.dadosInscricao.email,
-      estadoCivil: this.dadosInscricao.estadoCivil,
-      endereco: this.formatarEndereco(),
-      valor: this.dadosInscricao.valor,
-      formaPagamento: this.dadosInscricao.formaPagamento,
-      dataInscricao: new Date().toISOString(),
-      status: 'ATIVO'
-    }
-
     // MOCK
     this.abrirModalSucesso();
     //
     return;
 
-    this.inscricaoService.inscrever(inscricao, this.dadosInscricao.sexo).subscribe({
-      next: (response) => {
-        this.abrirModalSucesso();
-      },
-      error: () => {
-        this.abrirModalErro('Erro', 'Não foi possível concluir a inscrição');
-      }
-    });
+    /*  this.inscricaoService.inscrever(inscricao, this.dadosInscricao.sexo).subscribe({
+       next: (response) => {
+         this.abrirModalSucesso();
+       },
+       error: () => {
+         this.abrirModalErro('Erro', 'Não foi possível concluir a inscrição');
+       }
+     }); */
   }
 
   voltar() {
@@ -158,19 +110,19 @@ export class ConfirmacaoComponent implements OnInit {
           status: 'ATIVO',
         },
         dadosPessoais: [
-          { label: 'Nome', valor: this.formatarNomeCompleto() },
-          { label: 'Data de Nascimento', valor: this.formatarData(this.dadosInscricao.dataNasc) },
-          { label: 'Idade', valor: this.dadosInscricao.idade },
-          { label: 'CPF/CNPJ', valor: this.formatarCpfCnpj() },
+          { label: 'Nome', valor: this.dadosInscricao.nome || '' },
+          { label: 'Data de Nascimento', valor: this.dadosInscricao.dataNasc || '' },
+          { label: 'Idade', valor: String(this.dadosInscricao.idade) || '' },
+          { label: 'CPF/CNPJ', valor: this.dadosInscricao.cpfCnpj || '' },
           { label: 'Sexo', valor: this.getSexo() },
-          { label: 'Estado Civil', valor: this.dadosInscricao.estadoCivil },
-          { label: 'Telefone', valor: this.formatarTelefone() },
-          { label: 'E-mail', valor: this.dadosInscricao.email },
-          { label: 'Endereço', valor: this.formatarEndereco() },
+          { label: 'Estado Civil', valor: this.dadosInscricao.estadoCivil || '' },
+          { label: 'Telefone', valor: this.dadosInscricao.telefone || '' },
+          { label: 'E-mail', valor: this.dadosInscricao.email || '' },
+          { label: 'Endereço', valor: this.dadosInscricao.endereco || '' },
         ],
         dadosPagamento: {
-          formaPagamento: this.dadosInscricao.formaPagamento,
-          valor: this.dadosInscricao.valor,
+          formaPagamento: this.dadosInscricao.formaPagamento || '',
+          valor: this.dadosInscricao.valor || 0.00,
           statusPagamento: 'A PAGAR'
         },
       }

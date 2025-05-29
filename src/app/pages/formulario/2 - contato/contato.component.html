@@ -60,7 +60,7 @@
         </div>
 
         <div class="col-md-2 mb-3">
-          <mpc-input-text label="Número (caso não possua, digite 0)" min="1" max="4" [value]="form.value.numero"
+          <mpc-input-text label="Número/Lote" [value]="form.value.numero"
             (valor)="form.controls.numero.setValue($event)" (error)="form.controls.numero.setErrors($event)" />
         </div>
 

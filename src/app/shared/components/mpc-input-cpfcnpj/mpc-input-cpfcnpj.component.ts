@@ -22,6 +22,7 @@ import { ValidationErrors } from '@angular/forms';
 import { NgxMaskDirective } from 'ngx-mask';
 import { AccessibilityInputs } from '../../core/accessibility-inputs';
 
+// TODO: Corrigir recuperação de Dados
 @Component({
   selector: 'mpc-input-cpfcnpj',
   imports: [NgxMaskDirective],
@@ -36,7 +37,7 @@ export class MpcInputCpfcnpjComponent extends AccessibilityInputs {
 
   // Validators
   public required = input<boolean>(false);
-  private mascaraCPF: string = '000.000.000-00';
+  private mascaraCPF: string = '000.000.000-009';
   private mascaraCNPJ: string = '00.000.000/0000-00';
   protected mascara: string = this.mascaraCPF;
 
@@ -48,16 +49,11 @@ export class MpcInputCpfcnpjComponent extends AccessibilityInputs {
 
   set Value(value: string) {
     this.value = value;
-    this.atualizarMascara();
-    if (this.isCampoValido()) {
-      // Emite o valor sem caracteres especiais
-      const valorLimpo = this.value ? this.value.replace(/\D/g, '') : '';
-      this.valor.emit(valorLimpo);
-    }
+    if (this.isCampoValido()) { this.valor.emit(this.value.replace(/\D/g, '')); }
   }
 
   get Value(): string {
-    return this.value || '';
+    return this.value as string;
   }
 
   onChange: (value: string) => void = () => { };
@@ -65,7 +61,6 @@ export class MpcInputCpfcnpjComponent extends AccessibilityInputs {
 
   writeValue(value: string): void {
     this.value = value;
-    this.atualizarMascara();
   }
 
   registerOnChange(fn: (value: string) => void): void {
@@ -77,21 +72,14 @@ export class MpcInputCpfcnpjComponent extends AccessibilityInputs {
   }
 
   setValue(event: any): void {
-    const inputValue = event.target.value as string;
-    this.Value = inputValue;
-
-    // Para o ControlValueAccessor, emite o valor limpo
-    const valorLimpo = inputValue ? inputValue.replace(/\D/g, '') : '';
-    this.onChange(valorLimpo);
+    this.Value = event.target.value as string;
+    this.onChange(this.Value);
     this.onTouched();
+    this.atualizarMascara();
   }
 
   atualizarMascara(): void {
-    if (!this.Value || this.Value.length === 0) {
-      this.mascara = this.mascaraCPF;
-      return;
-    }
-
+    if (!this.Value || this.Value.length === 0) return;
     const valorSemCaracteresEspeciais = this.Value.replace(/\D/g, '');
     this.mascara = valorSemCaracteresEspeciais.length > 11 ? this.mascaraCNPJ : this.mascaraCPF;
   }
@@ -105,7 +93,7 @@ export class MpcInputCpfcnpjComponent extends AccessibilityInputs {
       return false;
     }
 
-    if (this.Value && this.Value.length > 0 && !this.isValidCpfOrCnpj()) {
+    if (!this.isValidCpfOrCnpj()) {
       this.errorMessage = `O formato do CPF/CNPJ não é válido`;
       this.error.emit({ regex: true });
       return false;
@@ -116,13 +104,11 @@ export class MpcInputCpfcnpjComponent extends AccessibilityInputs {
   }
 
   validaRequired(): boolean {
-    const valorLimpo = this.Value ? this.Value.replace(/\D/g, '') : '';
-    return this.required() && (!valorLimpo || valorLimpo.length === 0);
+    return this.required() && (!this.Value || this.Value.length === 0);
   }
 
   isValidCPF(): boolean {
-    const valorLimpo = this.Value ? this.Value.replace(/\D/g, '') : '';
-    let cpf = valorLimpo;
+    let cpf = this.Value.replace(/\D/g, '');
 
     if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) {
       return false;
@@ -148,8 +134,7 @@ export class MpcInputCpfcnpjComponent extends AccessibilityInputs {
   }
 
   isValidCNPJ(): boolean {
-    const valorLimpo = this.Value ? this.Value.replace(/\D/g, '') : '';
-    let cnpj = valorLimpo;
+    let cnpj = this.Value.replace(/\D/g, '');
 
     if (cnpj.length !== 14 || /^(\d)\1+$/.test(cnpj)) {
       return false;
@@ -175,11 +160,14 @@ export class MpcInputCpfcnpjComponent extends AccessibilityInputs {
   }
 
   isValidCpfOrCnpj(): boolean {
-    const valorLimpo = this.Value ? this.Value.replace(/\D/g, '') : '';
+    const valorLimpo = this.Value.replace(/\D/g, '');
     if (valorLimpo.length <= 11) {
       return this.isValidCPF();
     } else {
       return this.isValidCNPJ();
     }
   }
+
+
+
 }

@@ -18,12 +18,12 @@
  * @updated 27/02/2025
  */
 
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, input, Output } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
 import { NgxMaskDirective } from 'ngx-mask';
 import { AccessibilityInputs } from '../../core/accessibility-inputs';
 
+// TODO: Corrigir recuperação de Dados
 @Component({
   selector: 'mpc-input-telefone',
   imports: [NgxMaskDirective],

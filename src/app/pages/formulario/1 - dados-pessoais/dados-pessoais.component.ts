@@ -70,7 +70,7 @@ export default class DadosPessoaisComponent implements OnInit {
     try {
       const dadosInscricao = this.inscricaoService.getDadosInscricao();
 
-      if (dadosInscricao.nome) {
+      if (this.inscricaoService.isDadosPessoaisCompletos()) {
         this.form.reset();
 
         this.form.patchValue({

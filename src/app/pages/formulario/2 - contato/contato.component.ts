@@ -57,7 +57,7 @@ export default class ContatoComponent implements OnInit {
     try {
       const dadosInscricao = this.inscricaoService.getDadosInscricao();
 
-      if (dadosInscricao.telefone) {
+      if (this.inscricaoService.isContatoCompleto()) {
         this.form.reset();
 
         this.form.patchValue({

@@ -17,17 +17,22 @@
     <form [formGroup]="form">
 
       <!-- Alertas -->
-      @if (form.value.formaPagamento === "Cartão") {}
+      @if (form.value.formaPagamento === "Cartão") {
       <div class="alert alert-warning text-center mt-1">
         <i class="bi bi-exclamation-circle float-left"></i>
         Para pagamento via cartão, há um acréscimo ao valor referente a taxa da maquininha.
       </div>
+      }
       <!-- Alertas -->
+
+      <div class="row mb-3">
+        <mpc-input-text label="Valor" [readonly]="true" [value]="formatarValor(form.value.valor)" />
+      </div>
 
       <div class="row">
         <mpc-input-select label="Forma de Pagamento" [required]="true"
-          (error)="form.controls.formaPagamento.setErrors($event)"
-          (valor)="form.controls.formaPagamento.setValue($event)" [options]="formasPagamento" />
+          (error)="form.controls.formaPagamento.setErrors($event)" (valor)="atualizarFormaPagamento($event)"
+          [options]="formasPagamento" />
       </div>
 
     </form>
