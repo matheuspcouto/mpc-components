@@ -5,11 +5,13 @@
   <div class="input-group">
     <select [id]="id()" (change)="setValue($event.target)" class="form-select form-select-md" [disabled]="disabled()"
       [style]="errorMessage ? 'border-color: red' : ''" (focus)="campoTocado = true; isCampoValido()">
+
       @for (option of options; track $index) {
       <option [selected]="option.selected">
         {{ option.label }}
       </option>
       }
+
     </select>
   </div>
 

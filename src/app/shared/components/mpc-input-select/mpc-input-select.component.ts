@@ -27,6 +27,7 @@ export interface SelectOption {
   value: string;
   selected?: boolean;
 }
+
 @Component({
   selector: 'mpc-input-select',
   imports: [],
@@ -51,18 +52,32 @@ export class MpcInputSelectComponent extends AccessibilityInputs implements OnIn
   protected campoTocado: boolean = false;
 
   ngOnInit(): void {
-    const optionSelecionada = this.options.find(option => option.selected);
+    this.opcaoSelecionada = this.options.find(option => option.selected);
 
-    if (optionSelecionada) {
-      this.valor.emit(optionSelecionada.value);
+    // Se não há opção selecionada, adiciona a opção "Selecione"
+    if (!this.opcaoSelecionada) {
+      const opcaoSelecione: SelectOption = { label: 'Selecione', value: '', selected: true };
+      this.options.unshift(opcaoSelecione);
+      this.opcaoSelecionada = opcaoSelecione;
+
+      // Se o campo é obrigatório, emite erro imediatamente
+      if (this.required()) {
+        this.errorMessage = `O campo ${this.label()} é obrigatório`;
+        this.error.emit({ required: true });
+      }
     } else {
-      this.options.unshift({ label: 'Selecione', value: 'Selecione', selected: true });
+      // Se há uma opção selecionada, emite o valor
+      this.valor.emit(this.opcaoSelecionada.value);
     }
   }
 
   set OpcaoSelecionada(option: SelectOption) {
     this.opcaoSelecionada = option;
-    if (this.isCampoValido()) { this.valor.emit(this.opcaoSelecionada?.value); }
+    this.campoTocado = true;
+
+    if (this.isCampoValido()) {
+      this.valor.emit(this.opcaoSelecionada?.value);
+    }
   }
 
   get OpcaoSelecionada(): SelectOption {
@@ -87,7 +102,9 @@ export class MpcInputSelectComponent extends AccessibilityInputs implements OnIn
   }
 
   isCampoValido(): boolean {
-    if (!this.disabled()) { return true; }
+    if (this.disabled()) {
+      return true;
+    }
 
     if (this.validaRequired()) {
       this.errorMessage = `O campo ${this.label()} é obrigatório`;
@@ -96,11 +113,14 @@ export class MpcInputSelectComponent extends AccessibilityInputs implements OnIn
     }
 
     this.errorMessage = undefined;
+    this.error.emit({});
     return true;
   }
 
   validaRequired(): boolean {
-    return this.required()! && this.campoTocado && (this.OpcaoSelecionada && this.OpcaoSelecionada.value == 'Selecione');
+    return this.required() && this.campoTocado &&
+      (!this.OpcaoSelecionada ||
+        this.OpcaoSelecionada.value === '' ||
+        this.OpcaoSelecionada.value === 'Selecione');
   }
-
 }
