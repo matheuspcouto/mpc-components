@@ -1,0 +1,34 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <img src="assets/img/logo.png" class="logo">
+      <h1 class="title">Mpc Components</h1>
+      <p class="subtitle mt-3">Bem-vindo! Faça login para continuar.</p>
+    </div>
+
+    <form class="login-form" [formGroup]="form">
+      <div class="form-group">
+        <mpc-input-email [id]="'email'" [tabIndex]="1" [ariaLabel]="'Digite seu e-mail'" [required]="true"
+          (valor)="form.controls.email.setValue($event)" (error)="form.controls.email.setErrors($event)">
+        </mpc-input-email>
+      </div>
+
+      <div class="form-group">
+        <mpc-input-senha [id]="'password'" label="Senha" [tabIndex]="2" [ariaLabel]="'Digite sua senha'"
+          [required]="true" (valor)="form.controls.senha.setValue($event)"
+          (error)="form.controls.senha.setErrors($event)">
+        </mpc-input-senha>
+      </div>
+
+      <div class="form-actions">
+        <mpc-button (click)="login()" corBotao="btn-primary" icone="bi bi-box-arrow-in-right" posicaoIcone="direita"
+          texto="Entrar" [disabled]="form.invalid">
+        </mpc-button>
+
+        <mpc-button (click)="login()" corBotao="btn-link" texto="Cadastrar-se">
+        </mpc-button>
+      </div>
+
+    </form>
+  </div>
+</div>
