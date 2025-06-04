@@ -13,3 +13,8 @@ import { MpcScrollTopButtonComponent } from "./shared/components/mpc-scroll-top-
 export class AppComponent {
   title = 'my-components';
 }
+
+
+// TODO: Tela de Login
+// TODO: Tela de Cadastro
+// TODO: Arquivos yml

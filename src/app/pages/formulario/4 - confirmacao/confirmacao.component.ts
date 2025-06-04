@@ -65,19 +65,14 @@ export class ConfirmacaoComponent implements OnInit {
   }
 
   inscrever() {
-    // MOCK
-    this.abrirModalSucesso();
-    //
-    return;
-
-    /*  this.inscricaoService.inscrever(inscricao, this.dadosInscricao.sexo).subscribe({
-       next: (response) => {
-         this.abrirModalSucesso();
-       },
-       error: () => {
-         this.abrirModalErro('Erro', 'Não foi possível concluir a inscrição');
-       }
-     }); */
+    this.inscricaoService.inscrever(this.dadosInscricao, this.dadosInscricao.sexo as string).subscribe({
+      next: (response: any) => {
+        this.abrirModalSucesso();
+      },
+      error: (error: any) => {
+        this.abrirModalErro('Não foi possível realizar a inscrição, tente novamente mais tarde.', error);
+      }
+    });
   }
 
   voltar() {

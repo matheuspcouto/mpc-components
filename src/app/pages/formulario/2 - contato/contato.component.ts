@@ -41,7 +41,7 @@ export default class ContatoComponent implements OnInit {
     telefone: ['', telefoneValidator],
     email: ['', emailValidator],
     rua: ['', Validators.required],
-    numero: ['', Validators.required],
+    numero: [''],
     bairro: ['', Validators.required],
     cidade: ['', Validators.required],
     estado: ['', Validators.required],
