@@ -31,39 +31,7 @@ export class InscricoesGuard implements CanActivate {
         }
 
         return true;
-
-        // Verifica se a etapa atual está correta
-        //return this.verificarEtapaCorreta();
       })
     );
-  }
-
-  private verificarEtapaCorreta(): boolean {
-    const etapaAtual = this.inscricaoService.getEtapaAtual();
-
-    console.log('Etapa atual:', etapaAtual);
-    console.log('Dados pessoais completos:', this.inscricaoService.isDadosPessoaisCompletos());
-    console.log('Contato completo:', this.inscricaoService.isContatoCompleto());
-    console.log('Pagamento completo:', this.inscricaoService.isPagamentoCompleto());
-
-    if (etapaAtual > 1 && !this.inscricaoService.isDadosPessoaisCompletos()) {
-      this.router.navigate([Rotas.DADOS_PESSOAIS]);
-      return false;
-    }
-
-    if (etapaAtual > 2 && !this.inscricaoService.isContatoCompleto()) {
-      this.router.navigate([Rotas.CONTATO]);
-      return false;
-    }
-
-    if (etapaAtual > 3 && !this.inscricaoService.isPagamentoCompleto()) {
-      this.router.navigate([Rotas.PAGAMENTO]);
-      return false;
-    }
-
-
-
-
-    return true;
   }
 }
