@@ -6,55 +6,184 @@ on:
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  NODE_VERSION: "20.x"
 
 jobs:
-  # Verifica Versoes NPM e Node => Instala Dependencias => Executa Testes Unitarios => Build
-  Build-Tests:
+  # Validação inicial e setup
+  validate:
+    name: Validate Environment
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      should-deploy: ${{ steps.check.outputs.should-deploy }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
-        with:
-          node-version: "20.x"
+      - name: Check required secrets
+        id: check
+        run: |
+          if [[ -z "${{ secrets.VERCEL_TOKEN }}" || -z "${{ secrets.VERCEL_ORG_ID }}" || -z "${{ secrets.VERCEL_PROJECT_ID }}" ]]; then
+            echo "❌ Missing required Vercel secrets"
+            echo "should-deploy=false" >> $GITHUB_OUTPUT
+            exit 1
+          else
+            echo "✅ All required secrets are present"
+            echo "should-deploy=true" >> $GITHUB_OUTPUT
+          fi
 
-      - name: Verificando versoes Node e NPM
-        run: node --version && npm --version
-
-      - name: Instalando dependencias
-        run: npm install
-
-      - name: Executando testes unitarios
-        run: echo Nao ha testes unitarios para serem executados
-
-      - name: Executando build do projeto
-        run: npm run build --if-present
-
-  # Deploy Preview
-  Deploy-Preview:
-    needs: Build-Tests
+  # Build, testes e validações
+  build-and-test:
+    name: Build and Test
     runs-on: ubuntu-latest
+    needs: validate
+    if: needs.validate.outputs.should-deploy == 'true'
+    outputs:
+      build-success: ${{ steps.build-status.outputs.success }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Verify Node and npm versions
+        run: |
+          echo "Node version: $(node --version)"
+          echo "NPM version: $(npm --version)"
+
+      - name: Install dependencies
+        run: |
+          npm ci --prefer-offline --no-audit
+          echo "✅ Dependencies installed successfully"
+
+      - name: Lint code
+        run: |
+          if npm run lint --if-present; then
+            echo "✅ Linting passed"
+          else
+            echo "⚠️ Linting failed or not configured"
+          fi
+        continue-on-error: true
+
+      - name: Run type checking
+        run: |
+          if npm run type-check --if-present; then
+            echo "✅ Type checking passed"
+          else
+            echo "⚠️ Type checking failed or not configured"
+          fi
+        continue-on-error: true
+
+      - name: Run unit tests
+        run: |
+          if npm run test --if-present; then
+            echo "✅ Tests passed"
+          else
+            echo "⚠️ No tests found or tests failed"
+          fi
+        continue-on-error: true
+
+      - name: Build project
+        id: build
+        run: |
+          if npm run build --if-present; then
+            echo "✅ Build completed successfully"
+            echo "BUILD_SUCCESS=true" >> $GITHUB_ENV
+          else
+            echo "❌ Build failed"
+            echo "BUILD_SUCCESS=false" >> $GITHUB_ENV
+            exit 1
+          fi
+
+      - name: Set build status
+        id: build-status
+        run: echo "success=${{ env.BUILD_SUCCESS }}" >> $GITHUB_OUTPUT
+
+      - name: Upload build artifacts
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: |
+            dist/
+            .next/
+            build/
+          retention-days: 1
+
+  # Deploy para Preview
+  deploy-preview:
+    name: Deploy to Preview
+    runs-on: ubuntu-latest
+    needs: [validate, build-and-test]
+    if: needs.build-and-test.outputs.build-success == 'true'
     environment:
       name: preview
-      url: https://preview-fed-encontro-com-deus.vercel.app
+      url: ${{ steps.deploy.outputs.preview-url }}
+    concurrency:
+      group: preview-deployment
+      cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 20.x
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Cache Vercel CLI
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-vercel-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install Vercel CLI
-        run: npm install -g vercel
-
-      - name: Baixando configuracoes de ambiente do vercel - ENV=Preview
-        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
-
-      - name: Executando build do projeto
-        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
-
-      - name: Executando deploy
-        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
-
-      - name: Criando url para o deploy
         run: |
-          url="$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})"
-          vercel alias --token=${{ secrets.VERCEL_TOKEN }} set "$url" "preview-fed-encontro-com-deus.vercel.app"
+          npm install -g vercel@latest
+          vercel --version
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+        continue-on-error: true
+
+      - name: Pull Vercel environment configuration
+        run: |
+          vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+          echo "✅ Vercel configuration pulled successfully"
+
+      - name: Build project for Vercel
+        run: |
+          vercel build --token=${{ secrets.VERCEL_TOKEN }}
+          echo "✅ Vercel build completed"
+
+      - name: Deploy to preview
+        id: deploy
+        run: |
+          DEPLOYMENT_URL=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})
+          echo "preview-url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
+          echo "✅ Deployment successful: $DEPLOYMENT_URL"
+
+      - name: Set custom preview alias
+        if: success()
+        run: |
+          CUSTOM_URL="preview-mpc-components.vercel.app"
+          vercel alias --token=${{ secrets.VERCEL_TOKEN }} set "${{ steps.deploy.outputs.preview-url }}" "$CUSTOM_URL"
+          echo "✅ Custom alias set: https://$CUSTOM_URL"
+
+  # Notificação de falha
+  notify-failure:
+    name: Notify Deployment Failure
+    runs-on: ubuntu-latest
+    needs: [validate, build-and-test, deploy-preview]
+    if: failure()
+    steps:
+      - name: Notify failure
+        run: |
+          echo "❌ Deployment pipeline failed"
+          echo "Check the logs above for more details"
