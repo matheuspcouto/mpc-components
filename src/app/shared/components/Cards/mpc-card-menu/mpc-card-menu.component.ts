@@ -16,7 +16,7 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { Component, Input, input } from '@angular/core';
 
 @Component({
   selector: 'mpc-card-menu',
@@ -26,10 +26,10 @@ import { Component, input } from '@angular/core';
 })
 export class MpcCardMenuComponent {
 
-  public titulo = input.required<string>();
-  public descricao = input<string>('');
-  public icone = input<string>('');
-  public acao? = input<Function>();
+  @Input() titulo: string = '';
+  @Input() descricao: string = '';
+  @Input() icone: string = '';
+  @Input() acao: Function | undefined;
 
   onClick() {
     if (!this.acao) return;

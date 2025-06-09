@@ -16,7 +16,7 @@
  * @updated 27/02/2025
  */
 
-import { Component, input } from '@angular/core';
+import { Component, Input, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AccessibilityInputs } from '../../../core/accessibility-inputs';
 
@@ -33,13 +33,13 @@ interface CardLinks {
 })
 export class MpcCardHorizontalComponent extends AccessibilityInputs {
 
-  public titulo = input.required<string>();
-  public subtitulo = input<string>('');
-  public descricao = input<string>('');
-  public imagem = input.required<string>();
-  public links = input<CardLinks[]>([]);
+  @Input() titulo: string = '';
+  @Input() subtitulo: string = '';
+  @Input() descricao: string = '';
+  @Input() imagem: string = '';
+  @Input() links: CardLinks[] = [];
 
   getImagemCard(): string {
-    return this.imagem ? `${this.imagem()}` : 'no-image.jpg';
+    return this.imagem ? `${this.imagem}` : 'no-image.jpg';
   }
 }

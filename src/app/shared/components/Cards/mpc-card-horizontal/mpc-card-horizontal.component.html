@@ -6,20 +6,20 @@
   </div>
   <div class="col-md-7">
     <div class="card-content">
-      <h2>{{ titulo() }}</h2>
+      <h2>{{ titulo }}</h2>
       <div class="barra-titulo"></div>
       <h4 class="text-muted mt-4 text-left">
-        {{ subtitulo() }} <br>
+        {{ subtitulo }} <br>
       </h4>
       <p class="mt-4 text-left">
-        {{ descricao() }} <br>
+        {{ descricao }} <br>
       </p>
     </div>
     <div class="card-button-horizontal">
       <div class="mt-2 mb-2 justify-content-start">
-        @if (links()) {
+        @if (links) {
 
-        @for (link of links(); track $index) {
+        @for (link of links; track $index) {
         <a tabindex="0" [attr.aria-label]="'Link para ' + link.url" [href]="link.url" target="_blank">
           <i [class]="link.icone"></i>
         </a>

@@ -18,7 +18,7 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { Component, Input, input } from '@angular/core';
 import { AccessibilityInputs } from '../../../core/accessibility-inputs';
 
 interface CardLinks {
@@ -44,18 +44,18 @@ const TamanhoCards = new Map<string, string>([
 })
 export class MpcCardVerticalComponent extends AccessibilityInputs {
 
-  public titulo = input.required<string>();
-  public subtitulo = input<string>('');
-  public descricao = input<string>('');
-  public imagem = input.required<string>();
-  public links = input<CardLinks[]>([]);
-  public tamanhoCard = input<string>(TamanhoCards.get('MD')!);
+  @Input() titulo: string = '';
+  @Input() subtitulo: string = '';
+  @Input() descricao: string = '';
+  @Input() imagem: string = '';
+  @Input() links: CardLinks[] = [];
+  @Input() tamanhoCard: string = 'MD';
 
   getImagemCard(): string {
-    return this.imagem ? `${this.imagem()}` : 'no-image.jpg';
+    return this.imagem ? `${this.imagem}` : 'no-image.jpg';
   }
 
   getTamanhoCard(): string {
-    return TamanhoCards.get(this.tamanhoCard()) || TamanhoCards.get('MD')!;
+    return TamanhoCards.get(this.tamanhoCard) || TamanhoCards.get('MD')!;
   }
 }
