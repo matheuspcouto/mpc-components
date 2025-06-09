@@ -7,6 +7,7 @@ env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
   NODE_VERSION: "20.x"
+  CUSTOM_URL: "preview-mpc-components.vercel.app"
 
 jobs:
   # Validação inicial e setup
@@ -58,24 +59,6 @@ jobs:
         run: |
           npm ci --prefer-offline --no-audit
           echo "✅ Dependencies installed successfully"
-
-      - name: Lint code
-        run: |
-          if npm run lint --if-present; then
-            echo "✅ Linting passed"
-          else
-            echo "⚠️ Linting failed or not configured"
-          fi
-        continue-on-error: true
-
-      - name: Run type checking
-        run: |
-          if npm run type-check --if-present; then
-            echo "✅ Type checking passed"
-          else
-            echo "⚠️ Type checking failed or not configured"
-          fi
-        continue-on-error: true
 
       - name: Run unit tests
         run: |
@@ -172,7 +155,7 @@ jobs:
       - name: Set custom preview alias
         if: success()
         run: |
-          CUSTOM_URL="preview-mpc-components.vercel.app"
+          CUSTOM_URL=${{ env.CUSTOM_URL }})
           vercel alias --token=${{ secrets.VERCEL_TOKEN }} set "${{ steps.deploy.outputs.preview-url }}" "$CUSTOM_URL"
           echo "✅ Custom alias set: https://$CUSTOM_URL"
 

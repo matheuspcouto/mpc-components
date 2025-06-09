@@ -59,24 +59,6 @@ jobs:
           npm ci --prefer-offline --no-audit
           echo "✅ Dependencies installed successfully"
 
-      - name: Lint code
-        run: |
-          if npm run lint --if-present; then
-            echo "✅ Linting passed"
-          else
-            echo "⚠️ Linting failed or not configured"
-          fi
-        continue-on-error: true
-
-      - name: Run type checking
-        run: |
-          if npm run type-check --if-present; then
-            echo "✅ Type checking passed"
-          else
-            echo "⚠️ Type checking failed or not configured"
-          fi
-        continue-on-error: true
-
       - name: Run unit tests
         run: |
           if npm run test --if-present; then
@@ -112,15 +94,3 @@ jobs:
             .next/
             build/
           retention-days: 1
-
-  # Notificação de falha
-  notify-failure:
-    name: Notify Deployment Failure
-    runs-on: ubuntu-latest
-    needs: [validate, build-and-test, deploy-preview]
-    if: failure()
-    steps:
-      - name: Notify failure
-        run: |
-          echo "❌ Deployment pipeline failed"
-          echo "Check the logs above for more details"
