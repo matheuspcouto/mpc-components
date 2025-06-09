@@ -80,7 +80,7 @@ section {
 # Capa Meio Section
 --------------------------------------------------------------*/
 .capa-meio {
-  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(/img/home/mountain.jpg);
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(/assets/img/home/mountain.jpg);
   background-size: cover;
   background-position: center;
   padding: 100px 0;

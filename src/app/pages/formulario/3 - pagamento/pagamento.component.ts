@@ -1,4 +1,4 @@
-import { SelectOption } from '../../../shared/components/mpc-input-select/mpc-input-select.component';
+import { SelectOption } from '../../../shared/components/Inputs/mpc-input-select/mpc-input-select.component';
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { MpcModalComponent } from '../../../shared/components/mpc-modal/mpc-modal.component';
@@ -7,9 +7,9 @@ import { MpcNavbarComponent } from '../../../shared/components/mpc-navbar/mpc-na
 import { MpcFormProgressBarComponent } from '../../../shared/components/mpc-form-progress-bar/mpc-form-progress-bar.component';
 import { Validators, FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { MpcButtonComponent } from '../../../shared/components/mpc-button/mpc-button.component';
-import { MpcInputSelectComponent } from '../../../shared/components/mpc-input-select/mpc-input-select.component';
+import { MpcInputSelectComponent } from '../../../shared/components/Inputs/mpc-input-select/mpc-input-select.component';
 import { InscricaoService } from '../inscricao.service';
-import { MpcInputTextComponent } from '../../../shared/components/mpc-input-text/mpc-input-text.component';
+import { MpcInputTextComponent } from '../../../shared/components/Inputs/mpc-input-text/mpc-input-text.component';
 
 @Component({
   selector: 'app-pagamento',

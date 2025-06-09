@@ -27,6 +27,13 @@
   }
 }
 
+.btn-link {
+  border: none !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+  color: #2b7fda !important;
+}
+
 @media screen and (min-width: 769px) {
   .btn {
     max-width: 30vh;

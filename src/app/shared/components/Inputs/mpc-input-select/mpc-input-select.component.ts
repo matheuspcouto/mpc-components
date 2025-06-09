@@ -20,7 +20,7 @@
 
 import { Component, EventEmitter, input, Input, OnInit, Output } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
-import { AccessibilityInputs } from '../../core/accessibility-inputs';
+import { AccessibilityInputs } from '../../../core/accessibility-inputs';
 
 export interface SelectOption {
   label: string;

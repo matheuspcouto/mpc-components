@@ -1,6 +1,6 @@
 /**
- * @Componente MpcInputEmailComponent
- * Este componente é responsável por exibir um campo de entrada de e-mail.
+ * @Componente MpcInputSenhaComponent
+ * Este componente é responsável por exibir um campo de entrada de senha.
  *
  * id {string}: (opcional) Id do campo.
  * tabIndex {number}: (opcional) Índice de tabulação do campo.
@@ -10,7 +10,7 @@
  * readonly {boolean}: (opcional) Indica se o campo é somente leitura.
  *
  * Exemplo de utilização:
- * <mpc-input-email [required]="true" [tabIndex]="1" [ariaLabel]="ariaLabel" (valor)="setvalor($event)"></mpc-input-email>
+ * <mpc-input-senha [required]="true" [tabIndex]="1" [ariaLabel]="ariaLabel" (valor)="setvalor($event)"></mpc-input-senha>
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
@@ -19,23 +19,23 @@
 
 import { Component, EventEmitter, input, Output } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
-import { AccessibilityInputs } from '../../core/accessibility-inputs';
+import { AccessibilityInputs } from '../../../core/accessibility-inputs';
 
 // TODO: Corrigir recuperação de Dados
 @Component({
-  selector: 'mpc-input-email',
+  selector: 'mpc-input-senha',
   imports: [],
-  templateUrl: './mpc-input-email.component.html',
-  styleUrl: './mpc-input-email.component.css'
+  templateUrl: './mpc-input-senha.component.html',
+  styleUrl: './mpc-input-senha.component.css'
 })
-export class MpcInputEmailComponent extends AccessibilityInputs {
+export class MpcInputSenhaComponent extends AccessibilityInputs {
 
   public disabled = input<boolean>(false);
   public readonly = input<boolean>(false);
 
   // Validators
   public required = input<boolean>(false);
-  private regexEmail: any = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+  public regexSenha = input<string>('');
 
   @Output() valor: EventEmitter<string> = new EventEmitter();
   @Output() error: EventEmitter<ValidationErrors> = new EventEmitter();
@@ -43,6 +43,7 @@ export class MpcInputEmailComponent extends AccessibilityInputs {
   protected value?: string = '';
   protected errorMessage?: string;
   protected campoTocado: boolean = false;
+  protected ocultarSenha: boolean = true;
 
   set Value(value: string) {
     this.value = value;
@@ -78,13 +79,13 @@ export class MpcInputEmailComponent extends AccessibilityInputs {
     if (this.readonly() || this.disabled()) { return true; }
 
     if (this.validaRequired()) {
-      this.errorMessage = `O campo e-mail é obrigatório`;
+      this.errorMessage = `O campo senha é obrigatório`;
       this.error.emit({ required: true });
       return false;
     }
 
     if (this.validaRegex()) {
-      this.errorMessage = `O campo e-mail não está em um formato válido`;
+      this.errorMessage = `A senha não está em um formato válido`;
       this.error.emit({ regex: true });
       return false;
     }
@@ -94,7 +95,7 @@ export class MpcInputEmailComponent extends AccessibilityInputs {
   }
 
   validaRegex(): boolean {
-    return !new RegExp(this.regexEmail).test(this.Value);
+    return !new RegExp(this.regexSenha()).test(this.Value);
   }
 
   validaRequired(): boolean {

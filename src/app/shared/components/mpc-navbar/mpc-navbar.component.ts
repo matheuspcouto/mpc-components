@@ -68,7 +68,7 @@ export class MpcNavbarComponent {
       subRotas: [
         { titulo: 'Formulário', rota: Rotas.DADOS_PESSOAIS, ativo: true },
         { titulo: 'Aguarde', rota: Rotas.AGUARDE, ativo: true },
-        { titulo: 'Login', rota: Rotas.LOGIN, ativo: false },
+        { titulo: 'Login', rota: Rotas.LOGIN, ativo: true },
       ]
     },
   ];

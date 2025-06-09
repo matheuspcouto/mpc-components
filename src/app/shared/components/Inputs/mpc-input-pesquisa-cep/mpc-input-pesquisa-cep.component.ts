@@ -18,7 +18,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, inject, input, Input, Output } from '@angular/core';
 import { NgxMaskDirective } from 'ngx-mask';
-import { AccessibilityInputs } from '../../core/accessibility-inputs';
+import { AccessibilityInputs } from '../../../core/accessibility-inputs';
 import { ValidationErrors } from '@angular/forms';
 
 export interface Endereco {

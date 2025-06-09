@@ -20,7 +20,7 @@
 import { Component, EventEmitter, Input, input, Output } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
 import { NgxMaskDirective } from 'ngx-mask';
-import { AccessibilityInputs } from '../../core/accessibility-inputs';
+import { AccessibilityInputs } from '../../../core/accessibility-inputs';
 
 // TODO: Corrigir recuperação de Dados
 @Component({
@@ -48,8 +48,8 @@ export class MpcInputCpfcnpjComponent extends AccessibilityInputs {
   protected campoTocado: boolean = false;
 
   set Value(value: string) {
-    this.value = value;
-    if (this.isCampoValido()) { this.valor.emit(this.value.replace(/\D/g, '')); }
+    this.value = value.replace(/\D/g, '');
+    if (this.isCampoValido()) { this.valor.emit(this.value); }
   }
 
   get Value(): string {
@@ -167,7 +167,4 @@ export class MpcInputCpfcnpjComponent extends AccessibilityInputs {
       return this.isValidCNPJ();
     }
   }
-
-
-
 }

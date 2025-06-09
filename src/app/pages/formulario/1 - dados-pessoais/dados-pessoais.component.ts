@@ -1,4 +1,4 @@
-import { SelectOption } from '../../../shared/components/mpc-input-select/mpc-input-select.component';
+import { SelectOption } from '../../../shared/components/Inputs/mpc-input-select/mpc-input-select.component';
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MpcModalComponent, TipoModal } from '../../../shared/components/mpc-modal/mpc-modal.component';
@@ -6,16 +6,16 @@ import { Rotas } from '../../../shared/enums/rotas-enum';
 import { MpcFormProgressBarComponent } from '../../../shared/components/mpc-form-progress-bar/mpc-form-progress-bar.component';
 import { InscricaoService } from '../inscricao.service';
 import { Validators, FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
-import { MpcInputRadioComponent, RadioOption } from '../../../shared/components/mpc-input-radio/mpc-input-radio.component';
+import { MpcInputRadioComponent, RadioOption } from '../../../shared/components/Inputs/mpc-input-radio/mpc-input-radio.component';
 import { MpcButtonComponent } from '../../../shared/components/mpc-button/mpc-button.component';
-import { MpcInputDateComponent } from '../../../shared/components/mpc-input-date/mpc-input-date.component';
-import { MpcInputSelectComponent } from '../../../shared/components/mpc-input-select/mpc-input-select.component';
-import { MpcInputTextComponent } from '../../../shared/components/mpc-input-text/mpc-input-text.component';
+import { MpcInputDateComponent } from '../../../shared/components/Inputs/mpc-input-date/mpc-input-date.component';
+import { MpcInputSelectComponent } from '../../../shared/components/Inputs/mpc-input-select/mpc-input-select.component';
+import { MpcInputTextComponent } from '../../../shared/components/Inputs/mpc-input-text/mpc-input-text.component';
 import { MpcNavbarComponent } from '../../../shared/components/mpc-navbar/mpc-navbar.component';
 import { MpcModalConfig } from '../../../shared/components/mpc-modal/mpc-modal.directive';
 import { ToastrService } from 'ngx-toastr';
-import { MpcInputNumberComponent } from '../../../shared/components/mpc-input-number/mpc-input-number.component';
-import { MpcInputCpfcnpjComponent } from "../../../shared/components/mpc-input-cpfcnpj/mpc-input-cpfcnpj.component";
+import { MpcInputNumberComponent } from '../../../shared/components/Inputs/mpc-input-number/mpc-input-number.component';
+import { MpcInputCpfcnpjComponent } from "../../../shared/components/Inputs/mpc-input-cpfcnpj/mpc-input-cpfcnpj.component";
 
 @Component({
   selector: 'app-dados-pessoais',

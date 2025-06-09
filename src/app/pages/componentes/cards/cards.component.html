@@ -12,7 +12,8 @@
       </div>
 
       <h5>
-        O <code>mpc-card</code> MpcComponents são baseados no framework Bootstrap, sendo um componente que permite criar
+        O <code>mpc-card-vertical</code> MpcComponents são baseados no framework Bootstrap, sendo um componente que
+        permite criar
         cards personalizados. Os cards são utilizados para
         exibir informações de forma organizada e atraente, com uma imagem, título, subtítulo e descrição. Abaixo, você
         pode ver como utilizar o componente e seus parâmetros.
@@ -55,10 +56,10 @@
         <div class="col-md-12 mb-3 d-flex justify-content-center">
           <pre class="chroma">
                 <code class="language-html" data-lang="html">
-                &lt;mpc-card [titulo]="'Card 1'" [subtitulo]="'Tamanho Extra Pequeno'" [descricao]="'class=card-xs'"
-          [imagem]="'no-image.jpg'" [links]="[&lcub;icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'&rcub;]"
+                &lt;mpc-card-vertical [titulo]="'Card 1'" [subtitulo]="'Tamanho Extra Pequeno'" [descricao]="'class=card-xs'"
+          [imagem]="'/assets/img/no-image.jpg'" [links]="[&lcub;icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'&rcub;]"
           [tamanhoCard]="'card-xs'"&gt;
-        &lt;/mpc-card&gt;
+        &lt;/mpc-card-vertical&gt;
                 </code>
         </pre>
         </div>
@@ -67,22 +68,30 @@
       <div class="row justify-content-between mb-5">
 
         <div class="col-lg-4 d-flex justify-content-center mb-3">
-          <mpc-card titulo="Card 1" subtitulo="Tamanho Extra Pequeno" descricao="class=card-xs" imagem="no-image.jpg"
+          <mpc-card-vertical titulo="Card 1" subtitulo="Tamanho Extra Pequeno" descricao="class=card-xs"
+            imagem="/assets/img/no-image.jpg"
             [links]="[{icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'}]" tamanhoCard="XS">
-          </mpc-card>
+          </mpc-card-vertical>
         </div>
 
         <div class="col-lg-4 d-flex justify-content-center mb-3">
-          <mpc-card titulo="Card 2" subtitulo="Tamanho Pequeno" descricao="class=card-sm" imagem="no-image.jpg"
+          <mpc-card-vertical titulo="Card 2" subtitulo="Tamanho Pequeno" descricao="class=card-sm"
+            imagem="/assets/img/no-image.jpg"
             [links]="[{icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'}]" tamanhoCard="SM">
-          </mpc-card>
+          </mpc-card-vertical>
         </div>
 
         <div class="col-lg-4 d-flex justify-content-center mb-3">
-          <mpc-card titulo="Card 3" subtitulo="Tamanho Médio" descricao="class=card-md" imagem="no-image.jpg"
+          <mpc-card-vertical titulo="Card 3" subtitulo="Tamanho Médio" descricao="class=card-md"
+            imagem="/assets/img/no-image.jpg"
             [links]="[{icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'}]" tamanhoCard="MD">
-          </mpc-card>
+          </mpc-card-vertical>
         </div>
+
+        <mpc-card-horizontal titulo="Card 4" subtitulo="Card Horizontal"
+          descricao="Este card tem tamanho fixo, ideal para usar em telas desktops." imagem="/assets/img/no-image.jpg"
+          [links]="[{icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'}]">
+        </mpc-card-horizontal>
 
       </div>
 

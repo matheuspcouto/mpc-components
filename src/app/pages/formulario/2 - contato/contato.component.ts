@@ -7,14 +7,14 @@ import { MpcNavbarComponent } from '../../../shared/components/mpc-navbar/mpc-na
 import { MpcFormProgressBarComponent } from '../../../shared/components/mpc-form-progress-bar/mpc-form-progress-bar.component';
 import { Validators, FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { MpcButtonComponent } from '../../../shared/components/mpc-button/mpc-button.component';
-import { MpcInputTextComponent } from '../../../shared/components/mpc-input-text/mpc-input-text.component';
+import { MpcInputTextComponent } from '../../../shared/components/Inputs/mpc-input-text/mpc-input-text.component';
 import { InscricaoService } from '../inscricao.service';
 import { emailValidator, telefoneValidator } from '../inscricao.validator';
-import { MpcInputTelefoneComponent } from '../../../shared/components/mpc-input-telefone/mpc-input-telefone.component';
-import { MpcInputEmailComponent } from '../../../shared/components/mpc-input-email/mpc-input-email.component';
+import { MpcInputTelefoneComponent } from '../../../shared/components/Inputs/mpc-input-telefone/mpc-input-telefone.component';
+import { MpcInputEmailComponent } from '../../../shared/components/Inputs/mpc-input-email/mpc-input-email.component';
 import { MpcModalConfig } from '../../../shared/components/mpc-modal/mpc-modal.directive';
 import { ToastrService } from 'ngx-toastr';
-import { Endereco, MpcInputPesquisaCepComponent } from "../../../shared/components/mpc-input-pesquisa-cep/mpc-input-pesquisa-cep.component";
+import { Endereco, MpcInputPesquisaCepComponent } from "../../../shared/components/Inputs/mpc-input-pesquisa-cep/mpc-input-pesquisa-cep.component";
 
 @Component({
   selector: 'app-contato',

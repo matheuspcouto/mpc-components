@@ -22,7 +22,7 @@
 
 import { Component, EventEmitter, input, Input, Output } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
-import { AccessibilityInputs } from '../../core/accessibility-inputs';
+import { AccessibilityInputs } from '../../../core/accessibility-inputs';
 
 @Component({
   selector: 'mpc-input-date',

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { MpcCardComponent } from '../../../shared/components/mpc-card/mpc-card.component';
+import { MpcCardVerticalComponent } from '../../../shared/components/Cards/mpc-card-vertical/mpc-card-vertical.component';
 import { MpcNavbarComponent } from '../../../shared/components/mpc-navbar/mpc-navbar.component';
+import { MpcCardHorizontalComponent } from "../../../shared/components/Cards/mpc-card-horizontal/mpc-card-horizontal.component";
 
 @Component({
   selector: 'app-cards',
-  imports: [ MpcCardComponent, MpcNavbarComponent],
+  imports: [MpcCardVerticalComponent, MpcNavbarComponent, MpcCardHorizontalComponent],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.css'
 })

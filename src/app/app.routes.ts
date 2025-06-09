@@ -71,6 +71,11 @@ export const routes: Routes = [
     path: 'paginas',
     children: [
       {
+        path: 'login',
+        loadComponent: () => import('./pages/login/login.component').then(c => c.default),
+        title: 'Mpc Components - Login'
+      },
+      {
         path: 'formulario',
         children: [
           {
