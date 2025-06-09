@@ -13,10 +13,9 @@
  */
 
 import { MpcModalConfig } from './mpc-modal.directive';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MpcModalService } from './mpc-modal.service';
 import { ToastrService } from 'ngx-toastr';
-import { CommonModule } from '@angular/common';
 import { MpcButtonComponent } from '../mpc-button/mpc-button.component';
 
 enum TamanhoModal {
@@ -45,7 +44,8 @@ export class MpcModalComponent {
   protected isTelaInteira: boolean = false;
   protected modal!: MpcModalConfig;
 
-  constructor(private modalService: MpcModalService, private notificationService: ToastrService) { };
+ private modalService = inject(MpcModalService);
+ private notificationService = inject(ToastrService);
 
   fecharModal() { this.modalService.hide(); this.exibirModal = false; this.isCopiado = false; }
 

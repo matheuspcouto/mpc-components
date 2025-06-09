@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Validators, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MpcInputTextComponent } from '../../shared/components/Inputs/mpc-input-text/mpc-input-text.component';
 import { MpcInputEmailComponent } from '../../shared/components/Inputs/mpc-input-email/mpc-input-email.component';
 import { MpcButtonComponent } from '../../shared/components/mpc-button/mpc-button.component';
 import { MpcInputSenhaComponent } from '../../shared/components/Inputs/mpc-input-senha/mpc-input-senha.component';
@@ -20,7 +19,6 @@ import { MpcInputSenhaComponent } from '../../shared/components/Inputs/mpc-input
 export default class LoginComponent {
 
   private formBuilder = inject(NonNullableFormBuilder);
-  private router = inject(Router);
 
   protected form = this.formBuilder.group({
     email: ['', Validators.required],

@@ -1,7 +1,7 @@
-<div [tabindex]="tabIndex()" [attr.aria-label]="ariaLabel()" class="input-group">
+<div [tabIndex]="tabIndex" [attr.aria-label]="ariaLabel" class="input-group">
   <label class="form-label">CEP</label>
   <div class="input-group">
-    <input [id]="id()" type="text" class="form-control col-md-3" [value]="value" (input)="setValue($event)"
+    <input [id]="id" type="text" class="form-control col-md-3" [value]="value" (input)="setValue($event)"
       (blur)="onTouched()" [mask]="mascara" (focus)="campoTocado = true; isCampoValido()" [required]="required()" />
     <div class="col-md-1">
       <button class="btn btn-primary ms-3" (click)="pequisarCep(value)" [disabled]="value?.length === 0">

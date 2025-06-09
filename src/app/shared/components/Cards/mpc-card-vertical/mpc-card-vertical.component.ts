@@ -18,8 +18,7 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { Component, Input, input } from '@angular/core';
-import { AccessibilityInputs } from '../../../core/accessibility-inputs';
+import { Component, Input } from '@angular/core';
 
 interface CardLinks {
   url: string;
@@ -42,7 +41,12 @@ const TamanhoCards = new Map<string, string>([
   templateUrl: './mpc-card-vertical.component.html',
   styleUrl: './mpc-card-vertical.component.css'
 })
-export class MpcCardVerticalComponent extends AccessibilityInputs {
+export class MpcCardVerticalComponent {
+
+  // Acessibilidade
+  @Input() id: string = '';
+  @Input() tabIndex: number = 0
+  @Input() ariaLabel: string = '';
 
   @Input() titulo: string = '';
   @Input() subtitulo: string = '';

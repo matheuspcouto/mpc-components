@@ -16,9 +16,8 @@
  * @updated 27/02/2025
  */
 
-import { Component, Input, input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AccessibilityInputs } from '../../../core/accessibility-inputs';
 
 interface CardLinks {
   url: string;
@@ -31,7 +30,12 @@ interface CardLinks {
   templateUrl: './mpc-card-horizontal.component.html',
   styleUrl: './mpc-card-horizontal.component.css'
 })
-export class MpcCardHorizontalComponent extends AccessibilityInputs {
+export class MpcCardHorizontalComponent {
+
+  // Acessibilidade
+  @Input() id: string = '';
+  @Input() tabIndex: number = 0
+  @Input() ariaLabel: string = '';
 
   @Input() titulo: string = '';
   @Input() subtitulo: string = '';

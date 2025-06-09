@@ -17,8 +17,7 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { Component, input } from '@angular/core';
-import { AccessibilityInputs } from '../../core/accessibility-inputs';
+import { Component, Input } from '@angular/core';
 
 enum PosicoesIcone {
   ESQUERDA = 'esquerda',
@@ -31,11 +30,16 @@ enum PosicoesIcone {
   templateUrl: './mpc-button.component.html',
   styleUrl: './mpc-button.component.css'
 })
-export class MpcButtonComponent extends AccessibilityInputs {
+export class MpcButtonComponent {
 
-  texto = input.required<string>();
-  corBotao = input.required<string>();
-  disabled = input<boolean>(false);
-  posicaoIcone = input<string>(PosicoesIcone.DIREITA);
-  icone = input<string>('');
+  // Acessibilidade
+  @Input() id: string = '';
+  @Input() tabIndex: number = 0
+  @Input() ariaLabel: string = '';
+
+  @Input() texto: string = '';
+  @Input() corBotao: string = '';
+  @Input() disabled: boolean = false;
+  @Input() posicaoIcone: string = PosicoesIcone.DIREITA;
+  @Input() icone: string = '';
 }

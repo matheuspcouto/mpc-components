@@ -17,7 +17,6 @@
 
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AccessibilityInputs } from '../../core/accessibility-inputs';
 
 export interface Tab {
   id: string;
@@ -30,7 +29,12 @@ export interface Tab {
   templateUrl: './mpc-tabs.component.html',
   styleUrl: './mpc-tabs.component.css'
 })
-export class MpcTabsComponent extends AccessibilityInputs implements OnInit {
+export class MpcTabsComponent implements OnInit {
+
+  // Acessibilidade
+  @Input() id: string = '';
+  @Input() tabIndex: number = 0
+  @Input() ariaLabel: string = '';
 
   @Input() tabs: Tab[] = [];
 

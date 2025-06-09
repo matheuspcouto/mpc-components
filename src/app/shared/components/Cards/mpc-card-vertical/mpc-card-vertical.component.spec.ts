@@ -23,6 +23,9 @@ describe('MpcCardVerticalComponent', () => {
   });
 
   it('deve ter valores padrão', () => {
+    expect(component.id).toBe('');
+    expect(component.tabIndex).toBe(0);
+    expect(component.ariaLabel).toBe('');
     expect(component.titulo).toBe('');
     expect(component.subtitulo).toBe('');
     expect(component.descricao).toBe('');

@@ -1,7 +1,7 @@
-<div [tabindex]="tabIndex()" [attr.aria-label]="ariaLabel()" class="form-group">
+<div [tabIndex]="tabIndex" [attr.aria-label]="ariaLabel" class="form-group">
   <label class="form-label">{{ required() || min() ? label() + ' *' : label() }}</label>
 
-  <input [id]="id()" type="number" class="form-control" [value]="value" (input)="setValue($event)" (blur)="onTouched()"
+  <input [id]="id" type="number" class="form-control" [value]="value" (input)="setValue($event)" (blur)="onTouched()"
     [readOnly]="readonly()" [disabled]="disabled()" (focus)="campoTocado = true; isCampoValido()" [required]="required()"
     [style]="errorMessage ? 'border-color: red' : ''" />
 

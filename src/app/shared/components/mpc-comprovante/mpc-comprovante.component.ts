@@ -85,7 +85,7 @@ export class MpcComprovanteComponent {
     this.exibir = true;
   };
 
-  copiarCodigo(valor: string) {
+  copiarCodigo(valor: string | undefined) {
     if (!valor) return;
     navigator.clipboard.writeText(valor);
     this.isCopiado = true;

@@ -16,7 +16,7 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { Component, Input, input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'mpc-card-menu',
@@ -25,6 +25,11 @@ import { Component, Input, input } from '@angular/core';
   styleUrl: './mpc-card-menu.component.css'
 })
 export class MpcCardMenuComponent {
+
+  // Acessibilidade
+  @Input() id: string = '';
+  @Input() tabIndex: number = 0
+  @Input() ariaLabel: string = '';
 
   @Input() titulo: string = '';
   @Input() descricao: string = '';

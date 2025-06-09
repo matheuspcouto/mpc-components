@@ -1,8 +1,8 @@
-<div [tabindex]="tabIndex()" [attr.aria-label]="ariaLabel()" class="form-group">
+<div [tabIndex]="tabIndex" [attr.aria-label]="ariaLabel" class="form-group">
   <label class="form-label">Telefone {{ required() ? ' *' : '' }}</label>
 
   <div class="input-group">
-    <input [id]="id()" type="tel" class="form-control col-md-4" [value]="value" (input)="setValue($event)"
+    <input [id]="id" type="tel" class="form-control col-md-4" [value]="value" (input)="setValue($event)"
       (blur)="onTouched()" [required]="required()" (focus)="campoTocado = true; isCampoValido()" [disabled]="disabled()"
       [readOnly]="readonly()" [style]="errorMessage ? 'border-color: red' : ''" [mask]="mascara" />
 

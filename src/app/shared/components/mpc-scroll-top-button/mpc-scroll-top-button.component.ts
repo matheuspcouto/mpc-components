@@ -16,10 +16,7 @@ import { Component, inject, InjectionToken, Input, OnInit } from '@angular/core'
 
 const WINDOW = new InjectionToken<Window>('WindowToken', {
   factory: () => {
-    if (typeof window !== 'undefined') {
-      return window
-    }
-    return new Window();
+    return typeof window !== 'undefined' ? window : new Window();
   }
 });
 

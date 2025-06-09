@@ -23,6 +23,9 @@ describe('MpcCardMenuComponent', () => {
   });
 
   it('deve ter valores padrão', () => {
+    expect(component.id).toBe('');
+    expect(component.tabIndex).toBe(0);
+    expect(component.ariaLabel).toBe('');
     expect(component.titulo).toBe('');
     expect(component.descricao).toBe('');
     expect(component.icone).toBe('');

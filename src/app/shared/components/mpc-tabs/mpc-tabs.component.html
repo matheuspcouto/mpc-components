@@ -1,5 +1,5 @@
 @if (tabs.length > 0) {
-<ul [id]="id()" class="tabs" [tabindex]="tabIndex()" [attr.aria-label]="ariaLabel()">
+<ul [id]="id" class="tabs" [tabIndex]="tabIndex" [attr.aria-label]="ariaLabel">
   @for (tab of tabs; track $index) {
   <li class="nav-item">
     <a class="nav-link" [ngClass]="tab.id === tabSelecionada.id ? 'active' : ''" (click)="selecionarTab(tab)">

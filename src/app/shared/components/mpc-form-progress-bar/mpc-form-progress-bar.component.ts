@@ -13,7 +13,7 @@
  * @updated 27/02/2025
  */
 
-import { Component, input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'mpc-form-progress-bar',
@@ -23,6 +23,6 @@ import { Component, input } from '@angular/core';
 })
 export class MpcFormProgressBarComponent {
 
-  public etapaAtual = input<number>(1);
-  public totalEtapas = input<number>(1);
+  @Input() etapaAtual: number = 1;
+  @Input() totalEtapas: number = 1;
 }
