@@ -19,9 +19,8 @@
  * @updated 27/02/2025
  */
 
-import { Component, EventEmitter, input, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
-import { AccessibilityInputs } from '../../../core/accessibility-inputs';
 
 export interface RadioOption {
   label: string;
@@ -35,15 +34,21 @@ export interface RadioOption {
   templateUrl: './mpc-input-radio.component.html',
   styleUrl: './mpc-input-radio.component.css'
 })
-export class MpcInputRadioComponent extends AccessibilityInputs implements OnInit {
+export class MpcInputRadioComponent implements OnInit {
 
-  public label = input.required<string>();
-  protected readonly = input<boolean>(false);
-  protected disabled = input<boolean>(false);
+  // Acessibilidade
+  @Input() id: string = '';
+  @Input() tabIndex: number = 0
+  @Input() ariaLabel: string = '';
+
+  @Input() label: string = '';
+  @Input() readonly: boolean = false;
+  @Input() disabled: boolean = false;
+
   @Input() options: RadioOption[] = [];
 
   // Validators
-  public required = input<boolean>(false);
+  @Input() required: boolean = false;
 
   @Output() valor: EventEmitter<string> = new EventEmitter();
   @Output() error: EventEmitter<ValidationErrors> = new EventEmitter();
@@ -93,10 +98,10 @@ export class MpcInputRadioComponent extends AccessibilityInputs implements OnIni
   }
 
   isCampoValido(): boolean {
-    if (this.readonly() || this.disabled()) { return true; }
+    if (this.readonly || this.disabled) { return true; }
 
     if (this.validaRequired()) {
-      this.errorMessage = `O campo ${this.label()} é obrigatório`;
+      this.errorMessage = `O campo ${this.label} é obrigatório`;
       this.error.emit({ 'required': true });
       return false;
     }
@@ -106,6 +111,6 @@ export class MpcInputRadioComponent extends AccessibilityInputs implements OnIni
   }
 
   validaRequired(): boolean {
-    return this.required()! && this.campoTocado && !this.OpcaoSelecionada;
+    return this.required! && this.campoTocado && !this.OpcaoSelecionada;
   }
 }

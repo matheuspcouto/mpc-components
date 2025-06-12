@@ -21,9 +21,8 @@
  * @updated 27/02/2025
  */
 
-import { Component, EventEmitter, input, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
-import { AccessibilityInputs } from '../../../core/accessibility-inputs';
 
 @Component({
   selector: 'mpc-input-text',
@@ -31,17 +30,23 @@ import { AccessibilityInputs } from '../../../core/accessibility-inputs';
   templateUrl: './mpc-input-text.component.html',
   styleUrl: './mpc-input-text.component.css'
 })
-export class MpcInputTextComponent extends AccessibilityInputs {
+export class MpcInputTextComponent {
 
-  public label = input.required<string>();
-  public readonly = input<boolean>(false);
-  public disabled = input<boolean>(false);
+  // Acessibilidade
+  @Input() id: string = '';
+  @Input() tabIndex: number = 0
+  @Input() ariaLabel: string = '';
+
+  @Input() label: string = '';
+  @Input() readonly: boolean = false;
+  @Input() disabled: boolean = false;
+
   @Input() value?: string = '';
 
   // Validators
-  public required = input<boolean>(false);
-  public min = input<string>('');
-  public max = input<string>('');
+  @Input() required: boolean = false;
+  @Input() min: string = '';
+  @Input() max: string = '';
 
   @Output() valor: EventEmitter<string> = new EventEmitter();
   @Output() error: EventEmitter<ValidationErrors> = new EventEmitter();
@@ -80,22 +85,22 @@ export class MpcInputTextComponent extends AccessibilityInputs {
   }
 
   isCampoValido(): boolean {
-    if (this.readonly() || this.disabled()) { return true; }
+    if (this.readonly || this.disabled) { return true; }
 
     if (this.validaRequired()) {
-      this.errorMessage = `O campo ${this.label()} é obrigatório`;
+      this.errorMessage = `O campo ${this.label} é obrigatório`;
       this.error.emit({ required: true });
       return false;
     }
 
     if (this.validaMin()) {
-      this.errorMessage = `O campo ${this.label()} deve ter no mínimo ${this.min()} caracteres`;
+      this.errorMessage = `O campo ${this.label} deve ter no mínimo ${this.min} caracteres`;
       this.error.emit({ min: true });
       return false;
     }
 
     if (this.validaMax()) {
-      this.errorMessage = `O campo ${this.label()} deve ter no máximo ${this.max()} caracteres`;
+      this.errorMessage = `O campo ${this.label} deve ter no máximo ${this.max} caracteres`;
       this.error.emit({ max: true });
       return false;
     }
@@ -106,7 +111,7 @@ export class MpcInputTextComponent extends AccessibilityInputs {
 
   validaMin(): boolean {
     if (this.min) {
-      let minNumber = parseInt(this.min());
+      let minNumber = parseInt(this.min);
       return this.Value ? this.Value.length < minNumber : false;
     }
     return false;
@@ -114,13 +119,13 @@ export class MpcInputTextComponent extends AccessibilityInputs {
 
   validaMax(): boolean {
     if (this.max) {
-      let maxNumber = parseInt(this.max());
+      let maxNumber = parseInt(this.max);
       return this.Value ? this.Value.length > maxNumber : false;
     }
     return false;
   }
 
   validaRequired(): boolean {
-    return this.campoTocado && (this.required()! || this.min().length > 0) && this.Value.length === 0;
+    return this.campoTocado && (this.required! || this.min.length > 0) && this.Value.length === 0;
   }
 }

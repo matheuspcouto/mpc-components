@@ -17,9 +17,8 @@
  * @updated 27/02/2025
  */
 
-import { Component, EventEmitter, input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
-import { AccessibilityInputs } from '../../../core/accessibility-inputs';
 
 // TODO: Corrigir recuperação de Dados
 @Component({
@@ -28,13 +27,18 @@ import { AccessibilityInputs } from '../../../core/accessibility-inputs';
   templateUrl: './mpc-input-email.component.html',
   styleUrl: './mpc-input-email.component.css'
 })
-export class MpcInputEmailComponent extends AccessibilityInputs {
+export class MpcInputEmailComponent {
 
-  public disabled = input<boolean>(false);
-  public readonly = input<boolean>(false);
+  // Acessibilidade
+  @Input() id: string = '';
+  @Input() tabIndex: number = 0
+  @Input() ariaLabel: string = '';
+
+  @Input() disabled: boolean = false;
+  @Input() readonly: boolean = false;
 
   // Validators
-  public required = input<boolean>(false);
+  @Input() required: boolean = false;
   private regexEmail: any = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
   @Output() valor: EventEmitter<string> = new EventEmitter();
@@ -75,7 +79,7 @@ export class MpcInputEmailComponent extends AccessibilityInputs {
   }
 
   isCampoValido(): boolean {
-    if (this.readonly() || this.disabled()) { return true; }
+    if (this.readonly || this.disabled) { return true; }
 
     if (this.validaRequired()) {
       this.errorMessage = `O campo e-mail é obrigatório`;
@@ -98,7 +102,7 @@ export class MpcInputEmailComponent extends AccessibilityInputs {
   }
 
   validaRequired(): boolean {
-    return this.required()! && this.Value.length === 0;
+    return this.required! && this.Value.length === 0;
   }
 
 }

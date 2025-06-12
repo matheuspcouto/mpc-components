@@ -1,13 +1,13 @@
 @if (options.length > 0) {
 <div [tabIndex]="tabIndex" [attr.aria-label]="ariaLabel" class="form-group">
-  <label class="form-label">{{ required() ? label() + ' *' : label() }}</label>
+  <label class="form-label">{{ required ? label + ' *' : label }}</label>
 
   <div class="input-group">
     @for (option of options; track $index) {
     <label class="p-3">
       <input [id]="id" (focus)="campoTocado = true; isCampoValido()" type="radio" (change)="setValue(option)"
-        [checked]="option.checked" (blur)="onTouched()" [required]="required()" [disabled]="disabled()"
-        [readOnly]="readonly()" /> {{ option.label }}
+        [checked]="option.checked" (blur)="onTouched()" [required]="required" [disabled]="disabled"
+        [readOnly]="readonly" /> {{ option.label }}
     </label>
     }
   </div>

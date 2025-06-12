@@ -17,10 +17,9 @@
  * @updated 27/02/2025
  */
 
-import { Component, EventEmitter, Input, input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
 import { NgxMaskDirective } from 'ngx-mask';
-import { AccessibilityInputs } from '../../../core/accessibility-inputs';
 
 // TODO: Corrigir recuperação de Dados
 @Component({
@@ -29,14 +28,19 @@ import { AccessibilityInputs } from '../../../core/accessibility-inputs';
   templateUrl: './mpc-input-cpfcnpj.component.html',
   styleUrl: './mpc-input-cpfcnpj.component.css'
 })
-export class MpcInputCpfcnpjComponent extends AccessibilityInputs {
+export class MpcInputCpfcnpjComponent {
+
+  // Acessibilidade
+  @Input() id: string = '';
+  @Input() tabIndex: number = 0
+  @Input() ariaLabel: string = '';
 
   @Input() value?: string;
-  public disabled = input<boolean>(false);
-  public readonly = input<boolean>(false);
+  @Input() disabled: boolean = false;
+  @Input() readonly: boolean = false;
 
   // Validators
-  public required = input<boolean>(false);
+  @Input() required: boolean = false;
   private mascaraCPF: string = '000.000.000-009';
   private mascaraCNPJ: string = '00.000.000/0000-00';
   protected mascara: string = this.mascaraCPF;
@@ -85,7 +89,7 @@ export class MpcInputCpfcnpjComponent extends AccessibilityInputs {
   }
 
   isCampoValido(): boolean {
-    if (this.readonly() || this.disabled()) { return true; }
+    if (this.readonly || this.disabled) { return true; }
 
     if (this.validaRequired()) {
       this.errorMessage = `O campo CPF/CNPJ é obrigatório`;
@@ -104,7 +108,7 @@ export class MpcInputCpfcnpjComponent extends AccessibilityInputs {
   }
 
   validaRequired(): boolean {
-    return this.required() && (!this.Value || this.Value.length === 0);
+    return this.required && (!this.Value || this.Value.length === 0);
   }
 
   isValidCPF(): boolean {

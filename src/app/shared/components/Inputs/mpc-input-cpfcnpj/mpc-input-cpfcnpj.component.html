@@ -1,9 +1,9 @@
 <div [tabIndex]="tabIndex" [attr.aria-label]="ariaLabel" class="form-group">
-  <label class="form-label">CPF/CNPJ{{ required() ? ' *' : '' }}</label>
+  <label class="form-label">CPF/CNPJ{{ required ? ' *' : '' }}</label>
 
   <div class="input-group">
     <input [id]="id" type="text" class="form-control" (input)="setValue($event)" (blur)="onTouched()" #input
-      [required]="required()" [style]="errorMessage ? 'border-color: red' : ''" [mask]="mascara" [disabled]="disabled()" [readOnly]="readonly()"
+      [required]="required" [style]="errorMessage ? 'border-color: red' : ''" [mask]="mascara" [disabled]="disabled" [readOnly]="readonly"
       (focus)="campoTocado = true; isCampoValido()" />
 
     @if (campoTocado) {

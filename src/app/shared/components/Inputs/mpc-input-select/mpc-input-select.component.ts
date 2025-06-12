@@ -18,9 +18,8 @@
  * @updated 27/02/2025
  */
 
-import { Component, EventEmitter, input, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
-import { AccessibilityInputs } from '../../../core/accessibility-inputs';
 
 export interface SelectOption {
   label: string;
@@ -34,15 +33,20 @@ export interface SelectOption {
   templateUrl: './mpc-input-select.component.html',
   styleUrl: './mpc-input-select.component.css'
 })
-export class MpcInputSelectComponent extends AccessibilityInputs implements OnInit {
+export class MpcInputSelectComponent implements OnInit {
 
-  public label = input.required<string>();
-  public disabled = input<boolean>(false);
+  // Acessibilidade
+  @Input() id: string = '';
+  @Input() tabIndex: number = 0
+  @Input() ariaLabel: string = '';
+
+  @Input() label: string = '';
+  @Input() disabled: boolean = false;
 
   @Input() options: SelectOption[] = [];
 
   // Validators
-  public required = input<boolean>(false);
+  @Input() required: boolean = false;
 
   @Output() valor: EventEmitter<string> = new EventEmitter();
   @Output() error: EventEmitter<ValidationErrors> = new EventEmitter();
@@ -61,7 +65,7 @@ export class MpcInputSelectComponent extends AccessibilityInputs implements OnIn
       this.opcaoSelecionada = opcaoSelecione;
 
       // Se o campo é obrigatório, emite erro imediatamente
-      if (this.required()) {
+      if (this.required) {
         this.error.emit({ required: true });
       }
     } else {
@@ -101,12 +105,12 @@ export class MpcInputSelectComponent extends AccessibilityInputs implements OnIn
   }
 
   isCampoValido(): boolean {
-    if (this.disabled()) {
+    if (this.disabled) {
       return true;
     }
 
     if (this.validaRequired()) {
-      this.errorMessage = `O campo ${this.label()} é obrigatório`;
+      this.errorMessage = `O campo ${this.label} é obrigatório`;
       this.error.emit({ 'required': true });
       return false;
     }
@@ -117,7 +121,7 @@ export class MpcInputSelectComponent extends AccessibilityInputs implements OnIn
   }
 
   validaRequired(): boolean {
-    return this.required() && this.campoTocado &&
+    return this.required && this.campoTocado &&
       (!this.OpcaoSelecionada ||
         this.OpcaoSelecionada.value === '' ||
         this.OpcaoSelecionada.value === 'Selecione');

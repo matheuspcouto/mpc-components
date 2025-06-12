@@ -1,9 +1,9 @@
 <div [tabIndex]="tabIndex" [attr.aria-label]="ariaLabel" class="form-group">
-  <label class="form-label">E-mail {{ required() ? ' *' : '' }}</label>
+  <label class="form-label">E-mail {{ required ? ' *' : '' }}</label>
 
   <div class="input-group">
     <input [id]="id" type="email" class="form-control" [value]="value" (input)="setValue($event)" (blur)="onTouched()"
-      [required]="required()" [disabled]="disabled()" [readOnly]="readonly()"
+      [required]="required" [disabled]="disabled" [readOnly]="readonly"
       [style]="errorMessage ? 'border-color: red' : ''" (focus)="campoTocado = true; isCampoValido()" />
 
     @if (campoTocado) {

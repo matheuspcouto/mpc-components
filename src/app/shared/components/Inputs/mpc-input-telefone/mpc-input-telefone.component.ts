@@ -18,10 +18,9 @@
  * @updated 27/02/2025
  */
 
-import { Component, EventEmitter, input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, input, Output } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
 import { NgxMaskDirective } from 'ngx-mask';
-import { AccessibilityInputs } from '../../../core/accessibility-inputs';
 
 // TODO: Corrigir recuperação de Dados
 @Component({
@@ -30,12 +29,17 @@ import { AccessibilityInputs } from '../../../core/accessibility-inputs';
   templateUrl: './mpc-input-telefone.component.html',
   styleUrl: './mpc-input-telefone.component.css'
 })
-export class MpcInputTelefoneComponent extends AccessibilityInputs {
+export class MpcInputTelefoneComponent {
+
+  // Acessibilidade
+  @Input() id: string = '';
+  @Input() tabIndex: number = 0
+  @Input() ariaLabel: string = '';
 
   // Validators
-  public required = input<boolean>(false);
-  public disabled = input<boolean>(false);
-  public readonly = input<boolean>(false);
+  @Input() required: boolean = false;
+  @Input() disabled: boolean = false;
+  @Input() readonly: boolean = false;
   regexTelefone: any = /^\(?(?:[14689][1-9]|2[12478]|3[1234578]|5[1345]|7[134579])\)? ?(?:[2-8]|9[1-9])[0-9]{3}\-?[0-9]{4}$/;
   mascara: string = '(00) 00000-0000';
 
@@ -77,7 +81,7 @@ export class MpcInputTelefoneComponent extends AccessibilityInputs {
   }
 
   isCampoValido(): boolean {
-    if (this.readonly() || this.disabled()) { return true; }
+    if (this.readonly || this.disabled) { return true; }
 
     if (this.validaRequired()) {
       this.errorMessage = `O campo telefone é obrigatório`;
@@ -100,12 +104,7 @@ export class MpcInputTelefoneComponent extends AccessibilityInputs {
   }
 
   validaRequired(): boolean {
-    return this.required()! && this.Value.length === 0;
-  }
-
-  removerCaracteresEspeciais(telefone: string): string {
-    // Remove todos os caracteres não numéricos (espaços, parênteses, traços, etc.)
-    return telefone.replace(/\D/g, '');
+    return this.required! && this.Value.length === 0;
   }
 
 }

@@ -16,9 +16,8 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, inject, input, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { NgxMaskDirective } from 'ngx-mask';
-import { AccessibilityInputs } from '../../../core/accessibility-inputs';
 import { ValidationErrors } from '@angular/forms';
 
 export interface Endereco {
@@ -36,14 +35,19 @@ export interface Endereco {
   templateUrl: './mpc-input-pesquisa-cep.component.html',
   styleUrl: './mpc-input-pesquisa-cep.component.css'
 })
-export class MpcInputPesquisaCepComponent extends AccessibilityInputs {
+export class MpcInputPesquisaCepComponent {
+
+  // Acessibilidade
+  @Input() id: string = '';
+  @Input() tabIndex: number = 0
+  @Input() ariaLabel: string = '';
 
   @Input() value?: string = '';
 
   @Output() valor: EventEmitter<Endereco> = new EventEmitter();
   @Output() error: EventEmitter<ValidationErrors> = new EventEmitter();
 
-  public required = input<boolean>(false);
+  @Input() required: boolean = false;
   protected campoTocado: boolean = false;
   private regexCEP: any = /^\d{5}-?\d{3}$/;
   protected mascara: string = '00000-000';
@@ -104,7 +108,7 @@ export class MpcInputPesquisaCepComponent extends AccessibilityInputs {
   }
 
   validaRequired(): boolean {
-    return this.campoTocado && this.required()! && this.Value.length === 0;
+    return this.campoTocado && this.required! && this.Value.length === 0;
   }
 
   pequisarCep(cep: string | undefined): void {

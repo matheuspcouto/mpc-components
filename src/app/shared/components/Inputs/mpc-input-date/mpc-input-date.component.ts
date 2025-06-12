@@ -20,9 +20,8 @@
  * @updated 27/02/2025
  */
 
-import { Component, EventEmitter, input, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
-import { AccessibilityInputs } from '../../../core/accessibility-inputs';
 
 @Component({
   selector: 'mpc-input-date',
@@ -30,17 +29,22 @@ import { AccessibilityInputs } from '../../../core/accessibility-inputs';
   templateUrl: './mpc-input-date.component.html',
   styleUrl: './mpc-input-date.component.css'
 })
-export class MpcInputDateComponent extends AccessibilityInputs {
+export class MpcInputDateComponent {
 
-  public label = input.required<string>();
-  public readonly = input<boolean>(false);
-  public disabled = input<boolean>(false);
-  @Input() value?: string = "";
+  // Acessibilidade
+  @Input() id: string = '';
+  @Input() tabIndex: number = 0
+  @Input() ariaLabel: string = '';
+
+  @Input() value?: string;
+  @Input() label: string = '';
+  @Input() disabled: boolean = false;
+  @Input() readonly: boolean = false;
 
   // Validators
-  public minDate = input<string>('');
-  public maxDate = input<string>('');
-  public required = input<boolean>(false);
+  @Input() required: boolean = false;
+  @Input() minDate: string = '';
+  @Input() maxDate: string = '';
 
   @Output() valor: EventEmitter<string> = new EventEmitter();
   @Output() error: EventEmitter<ValidationErrors> = new EventEmitter();
@@ -75,22 +79,22 @@ export class MpcInputDateComponent extends AccessibilityInputs {
   }
 
   isCampoValido(): boolean {
-    if (this.readonly() || this.disabled()) { return true; }
+    if (this.readonly || this.disabled) { return true; }
 
     if (this.validaRequired()) {
-      this.errorMessage = `O campo ${this.label()} é obrigatório`;
+      this.errorMessage = `O campo ${this.label} é obrigatório`;
       this.error.emit({ 'required': true });
       return false;
     }
 
     if (this.validaMinDate() && this.minDate) {
-      this.errorMessage = `A data deve ser maior ou igual a ${this.formatarData(this.minDate())}`;
+      this.errorMessage = `A data deve ser maior ou igual a ${this.formatarData(this.minDate)}`;
       this.error.emit({ 'minDate': true });
       return false;
     }
 
     if (this.validaMaxDate() && this.maxDate) {
-      this.errorMessage = `A data deve ser menor ou igual a ${this.formatarData(this.maxDate())}`;
+      this.errorMessage = `A data deve ser menor ou igual a ${this.formatarData(this.maxDate)}`;
       this.error.emit({ 'maxDate': true });
       return false;
     }
@@ -101,16 +105,16 @@ export class MpcInputDateComponent extends AccessibilityInputs {
 
   validaMinDate(): boolean {
     if (!this.minDate) return false;
-    return new Date(this.Value) < new Date(this.minDate());
+    return new Date(this.Value) < new Date(this.minDate);
   }
 
   validaMaxDate(): boolean {
     if (!this.maxDate) return false;
-    return new Date(this.Value) > new Date(this.maxDate());
+    return new Date(this.Value) > new Date(this.maxDate);
   }
 
   validaRequired(): boolean {
-    return this.campoTocado && this.required()! && this.Value.length === 0;
+    return this.campoTocado && this.required! && this.Value.length === 0;
   }
 
   getDataHtmlFormatada(date: string): string {
