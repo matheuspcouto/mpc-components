@@ -11,7 +11,7 @@ import { MpcScrollTopButtonComponent } from "./shared/components/mpc-scroll-top-
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'my-components';
+  title = 'mpc-components';
 }
 
 

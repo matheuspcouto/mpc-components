@@ -1,12 +1,12 @@
 {
-  "name": "my-components",
+  "name": "mpc-components",
   "version": "2.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "test": "jest --coverage --no-cache --detectOpenHandles",
-    "serve:ssr:my-components": "node dist/my-components/server/server.mjs"
+    "serve:ssr:mpc-components": "node dist/mpc-components/server/server.mjs"
   },
   "private": true,
   "dependencies": {
