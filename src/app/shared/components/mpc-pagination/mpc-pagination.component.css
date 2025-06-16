@@ -1,0 +1,128 @@
+/* Container principal */
+.mpc-pagination-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.75rem 0;
+
+  /* Informações de paginação */
+  .pagination-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+
+    select {
+      min-width: 70px;
+      width: auto;
+    }
+  }
+
+  /* Navegação de páginas */
+  .pagination-nav {
+    width: 100%;
+    max-width: 600px;
+
+    .pagination-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+
+      /* Botões de navegação (anterior/próximo) */
+      .nav-buttons {
+        display: flex;
+        gap: 0.25rem;
+
+        .btn {
+          border: none !important;
+          border-bottom: 2px solid transparent !important;
+          background-color: transparent !important;
+          color: var(--cor-primaria) !important;
+        }
+      }
+
+      /* Números das páginas */
+      .page-numbers {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+
+        .btn {
+          border: none !important;
+          border-bottom: 2px solid transparent !important;
+          border-radius: 0;
+          background-color: transparent;
+          color: inherit;
+
+          &.active {
+            border-bottom: 2px solid var(--cor-primaria) !important;
+            color: var(--cor-primaria);
+          }
+
+          &:hover {
+            border-bottom: 2px solid var(--cor-primaria) !important;
+            color: var(--cor-primaria);
+          }
+        }
+
+        /* Reticências */
+        .pagination-dots {
+          padding: 0 0.5rem;
+          color: var(--bs-secondary);
+          font-size: 0.875rem;
+        }
+
+        /* Botões pequenos */
+        .btn-sm {
+          --bs-btn-padding-x: 0.5rem;
+          --bs-btn-padding-y: 0.25rem;
+          --bs-btn-font-size: 0.875rem;
+          border: none !important;
+          min-width: 2rem;
+        }
+      }
+    }
+  }
+}
+
+/* Responsividade */
+@media (max-width: 576px) {
+  .mpc-pagination-container {
+    gap: 0.75rem;
+
+    .pagination-info {
+      flex-direction: column;
+      gap: 0.5rem;
+      text-align: center;
+    }
+
+    .pagination-controls {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+
+      .page-numbers {
+        order: -1;
+        width: 100%;
+        justify-content: center;
+      }
+
+      .nav-buttons {
+        flex: 1;
+        justify-content: center;
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .page-numbers .btn {
+    min-width: 1.75rem;
+    padding: 0.25rem;
+  }
+
+  .pagination-dots {
+    padding: 0 0.25rem;
+  }
+}

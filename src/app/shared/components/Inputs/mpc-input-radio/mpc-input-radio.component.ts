@@ -37,9 +37,9 @@ export interface RadioOption {
 export class MpcInputRadioComponent implements OnInit {
 
   // Acessibilidade
-  @Input() id: string = '';
-  @Input() tabIndex: number = 0
-  @Input() ariaLabel: string = '';
+  @Input() id?: string = '';
+  @Input() tabIndex?: number = 0
+  @Input() ariaLabel?: string = '';
 
   @Input() label: string = '';
   @Input() readonly: boolean = false;

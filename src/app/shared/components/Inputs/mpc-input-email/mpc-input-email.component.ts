@@ -30,9 +30,9 @@ import { ValidationErrors } from '@angular/forms';
 export class MpcInputEmailComponent {
 
   // Acessibilidade
-  @Input() id: string = '';
-  @Input() tabIndex: number = 0
-  @Input() ariaLabel: string = '';
+  @Input() id?: string = '';
+  @Input() tabIndex?: number = 0
+  @Input() ariaLabel?: string = '';
 
   @Input() disabled: boolean = false;
   @Input() readonly: boolean = false;

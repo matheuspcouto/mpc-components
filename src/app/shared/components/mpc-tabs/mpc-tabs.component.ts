@@ -32,9 +32,9 @@ export interface Tab {
 export class MpcTabsComponent implements OnInit {
 
   // Acessibilidade
-  @Input() id: string = '';
-  @Input() tabIndex: number = 0
-  @Input() ariaLabel: string = '';
+  @Input() id?: string = '';
+  @Input() tabIndex?: number = 0
+  @Input() ariaLabel?: string = '';
 
   @Input() tabs: Tab[] = [];
 

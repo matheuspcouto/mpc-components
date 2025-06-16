@@ -27,9 +27,9 @@ import { Component, Input } from '@angular/core';
 export class MpcCardMenuComponent {
 
   // Acessibilidade
-  @Input() id: string = '';
-  @Input() tabIndex: number = 0
-  @Input() ariaLabel: string = '';
+  @Input() id?: string = '';
+  @Input() tabIndex?: number = 0
+  @Input() ariaLabel?: string = '';
 
   @Input() titulo: string = '';
   @Input() descricao: string = '';

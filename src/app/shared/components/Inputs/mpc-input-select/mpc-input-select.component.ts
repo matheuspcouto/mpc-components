@@ -36,9 +36,9 @@ export interface SelectOption {
 export class MpcInputSelectComponent implements OnInit {
 
   // Acessibilidade
-  @Input() id: string = '';
-  @Input() tabIndex: number = 0
-  @Input() ariaLabel: string = '';
+  @Input() id?: string = '';
+  @Input() tabIndex?: number = 0
+  @Input() ariaLabel?: string = '';
 
   @Input() label: string = '';
   @Input() disabled: boolean = false;

@@ -33,9 +33,9 @@ interface CardLinks {
 export class MpcCardHorizontalComponent {
 
   // Acessibilidade
-  @Input() id: string = '';
-  @Input() tabIndex: number = 0
-  @Input() ariaLabel: string = '';
+  @Input() id?: string = '';
+  @Input() tabIndex?: number = 0
+  @Input() ariaLabel?: string = '';
 
   @Input() titulo: string = '';
   @Input() subtitulo: string = '';

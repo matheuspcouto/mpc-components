@@ -38,9 +38,9 @@ export interface Endereco {
 export class MpcInputPesquisaCepComponent {
 
   // Acessibilidade
-  @Input() id: string = '';
-  @Input() tabIndex: number = 0
-  @Input() ariaLabel: string = '';
+  @Input() id?: string = '';
+  @Input() tabIndex?: number = 0
+  @Input() ariaLabel?: string = '';
 
   @Input() value?: string = '';
 

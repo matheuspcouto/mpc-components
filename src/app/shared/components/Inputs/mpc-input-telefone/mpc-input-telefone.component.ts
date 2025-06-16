@@ -32,9 +32,9 @@ import { NgxMaskDirective } from 'ngx-mask';
 export class MpcInputTelefoneComponent {
 
   // Acessibilidade
-  @Input() id: string = '';
-  @Input() tabIndex: number = 0
-  @Input() ariaLabel: string = '';
+  @Input() id?: string = '';
+  @Input() tabIndex?: number = 0
+  @Input() ariaLabel?: string = '';
 
   // Validators
   @Input() required: boolean = false;

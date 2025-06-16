@@ -33,9 +33,9 @@ enum PosicoesIcone {
 export class MpcButtonComponent {
 
   // Acessibilidade
-  @Input() id: string = '';
-  @Input() tabIndex: number = 0
-  @Input() ariaLabel: string = '';
+  @Input() id?: string = '';
+  @Input() tabIndex?: number = 0
+  @Input() ariaLabel?: string = '';
 
   @Input() texto: string = '';
   @Input() corBotao: string = '';

@@ -13,6 +13,7 @@ export const Rotas = {
   SCROLLTOP: "/componentes/scroll-top-button",
   TABS: "/componentes/tabs",
   COMPROVANTE: "/componentes/comprovante",
+  PAGINACAO: "/componentes/paginacao",
 
   // Paginas
   PAGINAS: "/paginas",

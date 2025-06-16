@@ -32,9 +32,9 @@ import { ValidationErrors } from '@angular/forms';
 export class MpcInputDateComponent {
 
   // Acessibilidade
-  @Input() id: string = '';
-  @Input() tabIndex: number = 0
-  @Input() ariaLabel: string = '';
+  @Input() id?: string = '';
+  @Input() tabIndex?: number = 0
+  @Input() ariaLabel?: string = '';
 
   @Input() value?: string;
   @Input() label: string = '';

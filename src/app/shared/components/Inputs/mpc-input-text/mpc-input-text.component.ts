@@ -33,9 +33,9 @@ import { ValidationErrors } from '@angular/forms';
 export class MpcInputTextComponent {
 
   // Acessibilidade
-  @Input() id: string = '';
-  @Input() tabIndex: number = 0
-  @Input() ariaLabel: string = '';
+  @Input() id?: string = '';
+  @Input() tabIndex?: number = 0
+  @Input() ariaLabel?: string = '';
 
   @Input() label: string = '';
   @Input() readonly: boolean = false;

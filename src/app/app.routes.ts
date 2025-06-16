@@ -63,6 +63,11 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/componentes/comprovante/comprovante.component').then(c => c.ComprovanteComponent),
         canActivate: [SiteAtivoGuard]
       },
+      {
+        path: 'paginacao',
+        loadComponent: () => import('./pages/componentes/paginacao/paginacao.component').then(c => c.PaginacaoComponent),
+        canActivate: [SiteAtivoGuard]
+      }
     ]
   },
 
