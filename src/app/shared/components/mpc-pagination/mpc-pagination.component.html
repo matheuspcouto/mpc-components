@@ -1,6 +1,7 @@
 <div class="mpc-pagination-container" [attr.id]="id" [attr.aria-label]="ariaLabel">
 
   <!-- Informações compactas -->
+  @if (primeiroItem && ultimoItem && totalItens) {
   <div class="pagination-info">
     <span class="text-muted small">
       {{ primeiroItem }} - {{ ultimoItem }} de {{ totalItens }}
@@ -15,6 +16,7 @@
     </select>
     }
   </div>
+  }
 
   <!-- Navegação minimalista -->
   @if (totalPaginas > 1) {

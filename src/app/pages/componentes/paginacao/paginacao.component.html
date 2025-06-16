@@ -56,11 +56,11 @@
                   ];
 
                   // Lista filtrada para exibição
-                  itensExibidos: any[] = [];
+                  itensFiltrados: any[] = [];
 
                   // Método para definir os índices da paginação
                   definirIndiceLista(indices: &lcub; inicio: number, fim: number &rcub;) &lcub;
-                    this.itensExibidos = this.itensTotais.slice(indices.inicio, indices.fim);
+                    this.itensFiltrados = this.itensTotais.slice(indices.inicio, indices.fim);
                   &rcub;
                 </code>
           </pre>
@@ -87,6 +87,7 @@
 
       <h5>Veja como ficou a implementação do <code>mpc-pagination</code> abaixo.</h5>
 
+      @if (itensFiltrados.length > 0) {
       <div class="row">
         <div class="col-md-12 d-flex flex-row justify-content-center align-items-center">
           @for (item of itensFiltrados; track $index) {
@@ -94,12 +95,12 @@
           }
         </div>
       </div>
+      }
 
-
-
-
+      @if (itensTotais.length > 0) {
       <mpc-pagination id="mpc-pagination" tabindex="0" ariaLabel="mpc-pagination" [totalItens]="itensTotais.length"
         [mostrarSeletorItensPorPagina]="true" (indices)="definirIndiceLista($event)"></mpc-pagination>
+      }
 
     </div>
 

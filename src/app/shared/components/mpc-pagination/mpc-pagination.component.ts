@@ -14,7 +14,7 @@
  * @updated 27/02/2025
  */
 
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 export interface IndicesPaginacao {
@@ -28,7 +28,7 @@ export interface IndicesPaginacao {
   templateUrl: './mpc-pagination.component.html',
   styleUrl: './mpc-pagination.component.css'
 })
-export class MpcPaginationComponent implements OnInit, OnChanges {
+export class MpcPaginationComponent implements OnInit {
 
   // Acessibilidade
   @Input() id?: string = '';
@@ -57,14 +57,6 @@ export class MpcPaginationComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.calcularPaginacao();
-    this.emitirIndices();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['totalItens'] || changes['itensPorPagina'] || changes['paginaAtual']) {
-      this.calcularPaginacao();
-      this.emitirIndices();
-    }
   }
 
   private calcularPaginacao(): void {
@@ -80,6 +72,7 @@ export class MpcPaginationComponent implements OnInit, OnChanges {
 
     this.calcularPaginasVisiveis();
     this.calcularItensVisiveis();
+    this.emitirIndices();
   }
 
   private calcularPaginasVisiveis(): void {
@@ -121,7 +114,6 @@ export class MpcPaginationComponent implements OnInit, OnChanges {
     if (pagina >= 1 && pagina <= this.totalPaginas && pagina !== this.paginaAtual) {
       this.paginaAtual = pagina;
       this.calcularPaginacao();
-      this.emitirIndices();
     }
   }
 
@@ -145,7 +137,7 @@ export class MpcPaginationComponent implements OnInit, OnChanges {
     }
   }
 
-  aoMudarItensPorPagina(event: Event): void {
+  aoMudarItensPorPagina(event: any): void {
     const target = event.target as HTMLSelectElement;
     const novosItensPorPagina = parseInt(target.value, 10);
 
@@ -153,7 +145,6 @@ export class MpcPaginationComponent implements OnInit, OnChanges {
       this.itensPorPagina = novosItensPorPagina;
       this.paginaAtual = 1; // Resetar para a primeira página
       this.calcularPaginacao();
-      this.emitirIndices();
     }
   }
 
