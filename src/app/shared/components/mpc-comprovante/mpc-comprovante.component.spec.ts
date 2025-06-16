@@ -46,6 +46,12 @@ describe('MpcComprovanteComponent', () => {
       warning: jest.fn()
     } as any;
 
+    // Mock do window.open
+    Object.defineProperty(window, 'open', {
+      value: jest.fn(),
+      writable: true
+    });
+
     await TestBed.configureTestingModule({
       imports: [MpcComprovanteComponent],
       providers: [
@@ -176,7 +182,11 @@ describe('MpcComprovanteComponent', () => {
 
   it('deve pedir o link de pagamento', () => {
     component['dadosInscricao'] = { codigoInscricao: '123456' };
+    const windowOpenSpy = jest.spyOn(window, 'open');
+
     component.pedirLinkPagamento();
+
+    expect(windowOpenSpy).toHaveBeenCalled();
   });
 
   it('getBadgeStatusInscricao deve retornar a classe correta com base no status da inscrição', () => {

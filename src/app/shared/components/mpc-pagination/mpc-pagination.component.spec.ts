@@ -32,16 +32,36 @@ describe('MpcPaginationComponent', () => {
       expect(component['opcoesSeletorItensPorPagina']).toEqual([10, 25, 50, 100]);
     });
 
-    it('deve emitir índices iniciais no ngOnInit', () => {
-      const spy = jest.spyOn(component.indices, 'emit');
-      component.totalItens = 50;
+  });
 
-      component.ngOnInit();
+  describe('ngAfterViewInit', () => {
+    beforeEach(() => {
+      jest.useFakeTimers();
+    });
 
-      expect(spy).toHaveBeenCalledWith({
-        indiceInicial: 0,
-        indiceFinal: 10
-      });
+    afterEach(() => {
+      jest.useRealTimers();
+    });
+
+    it('ngAfterViewInit deve emitir indices após o tempo do setTimeout', () => {
+      // Arrange
+      component.totalItens = 100;
+      component['itensPorPagina'] = 10;
+      component['paginaAtual'] = 1;
+
+      const emitSpy = jest.spyOn(component.indices, 'emit');
+
+      // Act
+      component.ngAfterViewInit();
+
+      // Assert - antes do setTimeout
+      expect(emitSpy).not.toHaveBeenCalled();
+
+      // Simula a passagem do tempo do setTimeout
+      jest.runAllTimers();
+
+      // Assert - após o setTimeout
+      expect(emitSpy).toHaveBeenCalledTimes(1);
     });
   });
 

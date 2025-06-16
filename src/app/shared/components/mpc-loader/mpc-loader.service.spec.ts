@@ -21,6 +21,7 @@ describe('MpcLoaderService', () => {
   });
 
   it('deve ocultar o loader ao chamar hide()', () => {
+    service['apiCount'] = 1;
     service.hide();
   });
 });

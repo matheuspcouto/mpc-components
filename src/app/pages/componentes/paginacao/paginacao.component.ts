@@ -64,12 +64,13 @@ export class PaginacaoComponent {
     { id: 50, nome: 'Item 50' },
   ]
 
-
-  itensFiltrados: any[] = [];
+  indiceInicial: number = 0;
+  indiceFinal: number = 0;
 
   definirIndiceLista(event: any) {
     const { indiceInicial, indiceFinal } = event;
-    this.itensFiltrados = this.itensTotais.slice(indiceInicial, indiceFinal);
+    this.indiceInicial = indiceInicial;
+    this.indiceFinal = indiceFinal;
   }
 
 }

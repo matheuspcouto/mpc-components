@@ -1,4 +1,3 @@
-
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import AguardeComponent from './aguarde.component';
 import { ActivatedRoute } from '@angular/router';
@@ -9,6 +8,12 @@ describe('AguardeComponent', () => {
   let fixture: ComponentFixture<AguardeComponent>;
 
   beforeEach(async () => {
+    // Mock do window.scrollTo
+    Object.defineProperty(window, 'scrollTo', {
+      value: jest.fn(),
+      writable: true
+    });
+
     await TestBed.configureTestingModule({
       imports: [AguardeComponent],
       providers: [
@@ -40,7 +45,7 @@ describe('AguardeComponent', () => {
   });
 
   it('AfterViewInit', () => {
-    const spy = jest.spyOn(component['window'], 'scrollTo');
+    const spy = jest.spyOn(window, 'scrollTo');
     component.ngAfterViewInit();
     expect(spy).toHaveBeenCalledWith(0, 0);
   });

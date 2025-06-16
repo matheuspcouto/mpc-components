@@ -38,4 +38,10 @@ describe('MpcCardMenuComponent', () => {
     button.click();
     expect(spy).toHaveBeenCalled();
   });
+
+  it('deve executar a função de clique quando a ação é definida', () => {
+    component.acao = jest.fn();
+    component.onClick();
+    expect(component.acao).toHaveBeenCalled();
+  });
 });

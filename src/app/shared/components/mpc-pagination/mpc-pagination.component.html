@@ -1,13 +1,14 @@
+@if (totalItens > 0) {
 <div class="mpc-pagination-container" [attr.id]="id" [attr.aria-label]="ariaLabel">
 
   <!-- Informações compactas -->
-  @if (primeiroItem && ultimoItem && totalItens) {
+  @if (primeiroItem && ultimoItem) {
   <div class="pagination-info">
     <span class="text-muted small">
       {{ primeiroItem }} - {{ ultimoItem }} de {{ totalItens }}
     </span>
 
-    @if (totalItens > 0 && mostrarSeletorItensPorPagina) {
+    @if (mostrarSeletorItensPorPagina) {
     <select class="form-select form-select-sm ms-2" [value]="itensPorPagina" (change)="aoMudarItensPorPagina($event)"
       [attr.tabindex]="tabIndex" aria-label="Itens por página">
       @for (opcao of opcoesSeletorItensPorPagina; track opcao) {
@@ -81,3 +82,4 @@
   }
 
 </div>
+}

@@ -87,17 +87,15 @@
 
       <h5>Veja como ficou a implementação do <code>mpc-pagination</code> abaixo.</h5>
 
-      @if (itensFiltrados.length > 0) {
+      @if (itensTotais.length > 0) {
       <div class="row">
         <div class="col-md-12 d-flex flex-row justify-content-center align-items-center">
-          @for (item of itensFiltrados; track $index) {
+          @for (item of itensTotais | slice:indiceInicial:indiceFinal; track $index) {
           <p class="me-3">{{ item.nome }}</p>
           }
         </div>
       </div>
-      }
 
-      @if (itensTotais.length > 0) {
       <mpc-pagination id="mpc-pagination" tabindex="0" ariaLabel="mpc-pagination" [totalItens]="itensTotais.length"
         [mostrarSeletorItensPorPagina]="true" (indices)="definirIndiceLista($event)"></mpc-pagination>
       }

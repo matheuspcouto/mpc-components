@@ -14,7 +14,7 @@
  * @updated 27/02/2025
  */
 
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 export interface IndicesPaginacao {
@@ -28,7 +28,7 @@ export interface IndicesPaginacao {
   templateUrl: './mpc-pagination.component.html',
   styleUrl: './mpc-pagination.component.css'
 })
-export class MpcPaginationComponent implements OnInit {
+export class MpcPaginationComponent implements OnInit, AfterViewInit {
 
   // Acessibilidade
   @Input() id?: string = '';
@@ -59,6 +59,12 @@ export class MpcPaginationComponent implements OnInit {
     this.calcularPaginacao();
   }
 
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.emitirIndices();
+    });
+  }
+
   private calcularPaginacao(): void {
     this.totalPaginas = Math.ceil(this.totalItens / this.itensPorPagina);
 
@@ -72,7 +78,6 @@ export class MpcPaginationComponent implements OnInit {
 
     this.calcularPaginasVisiveis();
     this.calcularItensVisiveis();
-    this.emitirIndices();
   }
 
   private calcularPaginasVisiveis(): void {
@@ -114,6 +119,7 @@ export class MpcPaginationComponent implements OnInit {
     if (pagina >= 1 && pagina <= this.totalPaginas && pagina !== this.paginaAtual) {
       this.paginaAtual = pagina;
       this.calcularPaginacao();
+      this.emitirIndices();
     }
   }
 
@@ -145,6 +151,7 @@ export class MpcPaginationComponent implements OnInit {
       this.itensPorPagina = novosItensPorPagina;
       this.paginaAtual = 1; // Resetar para a primeira página
       this.calcularPaginacao();
+      this.emitirIndices();
     }
   }
 
