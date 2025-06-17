@@ -1,4 +1,4 @@
-name: Deploy on Preview
+name: Deploy on DEV
 
 on:
   workflow_dispatch:
@@ -7,7 +7,7 @@ env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
   NODE_VERSION: "20.x"
-  CUSTOM_URL: "preview-mpc-components.vercel.app"
+  CUSTOM_URL: "develop-mpc-components.vercel.app"
 
 jobs:
   # Validação inicial e setup
@@ -152,7 +152,7 @@ jobs:
           echo "development-url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
           echo "✅ Deployment successful: $DEPLOYMENT_URL"
 
-      - name: Set custom preview alias
+      - name: Set custom dev alias
         if: success()
         run: |
           CUSTOM_URL=${{ env.CUSTOM_URL }})
