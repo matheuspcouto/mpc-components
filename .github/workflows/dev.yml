@@ -96,17 +96,17 @@ jobs:
             build/
           retention-days: 1
 
-  # Deploy para Preview
-  deploy-preview:
-    name: Deploy to Preview
+  # Deploy para DEV
+  deploy-dev:
+    name: Deploy to DEV
     runs-on: ubuntu-latest
     needs: [validate, build-and-test]
     if: needs.build-and-test.outputs.build-success == 'true'
     environment:
-      name: preview
-      url: ${{ steps.deploy.outputs.preview-url }}
+      name: development
+      url: https://${{env.CUSTOM_URL}}
     concurrency:
-      group: preview-deployment
+      group: dev-deployment
       cancel-in-progress: true
     steps:
       - name: Checkout code
@@ -135,9 +135,9 @@ jobs:
           name: build-artifacts
         continue-on-error: true
 
-      - name: Pull Vercel environment configuration
+      - name: Pull Vercel environment DEV configuration
         run: |
-          vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+          vercel pull --yes --environment=development --token=${{ secrets.VERCEL_TOKEN }}
           echo "✅ Vercel configuration pulled successfully"
 
       - name: Build project for Vercel
@@ -145,28 +145,16 @@ jobs:
           vercel build --token=${{ secrets.VERCEL_TOKEN }}
           echo "✅ Vercel build completed"
 
-      - name: Deploy to preview
+      - name: Deploy to DEV
         id: deploy
         run: |
           DEPLOYMENT_URL=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})
-          echo "preview-url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
+          echo "development-url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
           echo "✅ Deployment successful: $DEPLOYMENT_URL"
 
       - name: Set custom preview alias
         if: success()
         run: |
           CUSTOM_URL=${{ env.CUSTOM_URL }})
-          vercel alias --token=${{ secrets.VERCEL_TOKEN }} set "${{ steps.deploy.outputs.preview-url }}" "$CUSTOM_URL"
+          vercel alias --token=${{ secrets.VERCEL_TOKEN }} set "${{ steps.deploy.outputs.development-url }}" "$CUSTOM_URL"
           echo "✅ Custom alias set: https://$CUSTOM_URL"
-
-  # Notificação de falha
-  notify-failure:
-    name: Notify Deployment Failure
-    runs-on: ubuntu-latest
-    needs: [validate, build-and-test, deploy-preview]
-    if: failure()
-    steps:
-      - name: Notify failure
-        run: |
-          echo "❌ Deployment pipeline failed"
-          echo "Check the logs above for more details"
