@@ -139,13 +139,13 @@ jobs:
 
       - name: Build Project for Vercel
         run: |
-          vercel build --token=${{ secrets.VERCEL_TOKEN }}
+          vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
           echo "✅ Vercel build completed"
 
       - name: Deploy to PROD
         id: deploy
         run: |
-          DEPLOYMENT_URL=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})
+          DEPLOYMENT_URL=$(vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }})
           echo "production-url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
           echo "✅ Deployment successful: $DEPLOYMENT_URL"
 
