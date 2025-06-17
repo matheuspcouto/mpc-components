@@ -17,5 +17,4 @@ export class AppComponent {
 
 // TODO: Ajustar Tela de Login
 // TODO: Tela de Cadastro
-// TODO: Testar Arquivos yml
 // TODO: Testes Unitários no Formulário
