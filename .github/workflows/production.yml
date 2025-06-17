@@ -1,4 +1,4 @@
-name: Deploy on Production
+name: Deploy on PROD
 
 on:
   workflow_dispatch:
@@ -18,7 +18,7 @@ jobs:
     outputs:
       should-deploy: ${{ steps.check.outputs.should-deploy }}
     steps:
-      - name: Check required secrets
+      - name: Check Required Vercel Secrets
         id: check
         run: |
           if [[ -z "${{ secrets.VERCEL_TOKEN }}" || -z "${{ secrets.VERCEL_ORG_ID }}" || -z "${{ secrets.VERCEL_PROJECT_ID }}" ]]; then
@@ -39,7 +39,7 @@ jobs:
     outputs:
       build-success: ${{ steps.build-status.outputs.success }}
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -55,12 +55,12 @@ jobs:
           echo "Node version: $(node --version)"
           echo "NPM version: $(npm --version)"
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: |
           npm install --prefer-offline --no-audit
           echo "✅ Dependencies installed successfully"
 
-      - name: Run unit tests
+      - name: Run Unit Tests
         run: |
           if npm run test --if-present; then
             echo "✅ Tests passed"
@@ -69,7 +69,7 @@ jobs:
           fi
         continue-on-error: true
 
-      - name: Build project
+      - name: Build Project
         id: build
         run: |
           if npm run build --if-present; then
@@ -81,11 +81,11 @@ jobs:
             exit 1
           fi
 
-      - name: Set build status
+      - name: Set Build Status
         id: build-status
         run: echo "success=${{ env.BUILD_SUCCESS }}" >> $GITHUB_OUTPUT
 
-      - name: Upload build artifacts
+      - name: Upload Build Artifacts
         if: success()
         uses: actions/upload-artifact@v4
         with:
@@ -96,20 +96,17 @@ jobs:
             build/
           retention-days: 1
 
-  # Deploy para Production
+  # Deploy on PROD
   deploy-production:
-    name: Deploy to Production
+    name: Deploy on PROD
     runs-on: ubuntu-latest
     needs: [validate, build-and-test]
     if: needs.build-and-test.outputs.build-success == 'true'
-    environment:
-      name: production
-      url: ${{ steps.deploy.outputs.production-url }}
     concurrency:
       group: production-deployment
       cancel-in-progress: true
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v4
 
       - name: Setup Node.js
@@ -129,44 +126,32 @@ jobs:
           npm install -g vercel@latest
           vercel --version
 
-      - name: Download build artifacts
+      - name: Download Build Artifacts
         uses: actions/download-artifact@v4
         with:
           name: build-artifacts
         continue-on-error: true
 
-      - name: Pull Vercel environment configuration
+      - name: Pull Vercel Environment Configuration - PROD
         run: |
           vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
           echo "✅ Vercel configuration pulled successfully"
 
-      - name: Build project for Vercel
+      - name: Build Project for Vercel
         run: |
           vercel build --token=${{ secrets.VERCEL_TOKEN }}
           echo "✅ Vercel build completed"
 
-      - name: Deploy to production
+      - name: Deploy to PROD
         id: deploy
         run: |
           DEPLOYMENT_URL=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})
           echo "production-url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
           echo "✅ Deployment successful: $DEPLOYMENT_URL"
 
-      - name: Set custom production alias
+      - name: Set Custom Domain - PROD
         if: success()
         run: |
-          CUSTOM_URL=${{ env.CUSTOM_URL }})
+          CUSTOM_URL=${{ env.CUSTOM_URL }}
           vercel alias --token=${{ secrets.VERCEL_TOKEN }} set "${{ steps.deploy.outputs.production-url }}" "$CUSTOM_URL"
           echo "✅ Custom alias set: https://$CUSTOM_URL"
-
-  # Notificação de falha
-  notify-failure:
-    name: Notify Deployment Failure
-    runs-on: ubuntu-latest
-    needs: [validate, build-and-test, deploy-production]
-    if: failure()
-    steps:
-      - name: Notify failure
-        run: |
-          echo "❌ Deployment pipeline failed"
-          echo "Check the logs above for more details"

@@ -18,7 +18,7 @@ jobs:
     outputs:
       should-deploy: ${{ steps.check.outputs.should-deploy }}
     steps:
-      - name: Check required secrets
+      - name: Check Required Vercel Secrets
         id: check
         run: |
           if [[ -z "${{ secrets.VERCEL_TOKEN }}" || -z "${{ secrets.VERCEL_ORG_ID }}" || -z "${{ secrets.VERCEL_PROJECT_ID }}" ]]; then
@@ -39,7 +39,7 @@ jobs:
     outputs:
       build-success: ${{ steps.build-status.outputs.success }}
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -55,12 +55,12 @@ jobs:
           echo "Node version: $(node --version)"
           echo "NPM version: $(npm --version)"
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: |
           npm install --prefer-offline --no-audit
           echo "✅ Dependencies installed successfully"
 
-      - name: Run unit tests
+      - name: Run Unit Tests
         run: |
           if npm run test --if-present; then
             echo "✅ Tests passed"
@@ -69,7 +69,7 @@ jobs:
           fi
         continue-on-error: true
 
-      - name: Build project
+      - name: Build Project
         id: build
         run: |
           if npm run build --if-present; then
@@ -81,11 +81,11 @@ jobs:
             exit 1
           fi
 
-      - name: Set build status
+      - name: Set Build Status
         id: build-status
         run: echo "success=${{ env.BUILD_SUCCESS }}" >> $GITHUB_OUTPUT
 
-      - name: Upload build artifacts
+      - name: Upload Build Artifacts
         if: success()
         uses: actions/upload-artifact@v4
         with:
@@ -96,9 +96,9 @@ jobs:
             build/
           retention-days: 1
 
-  # Deploy para DEV
+  # Deploy on DEV
   deploy-dev:
-    name: Deploy to DEV
+    name: Deploy on DEV
     runs-on: ubuntu-latest
     needs: [validate, build-and-test]
     if: needs.build-and-test.outputs.build-success == 'true'
@@ -106,7 +106,7 @@ jobs:
       group: dev-deployment
       cancel-in-progress: true
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v4
 
       - name: Setup Node.js
@@ -126,18 +126,18 @@ jobs:
           npm install -g vercel@latest
           vercel --version
 
-      - name: Download build artifacts
+      - name: Download Build Artifacts
         uses: actions/download-artifact@v4
         with:
           name: build-artifacts
         continue-on-error: true
 
-      - name: Pull Vercel environment DEV configuration
+      - name: Pull Vercel Environment Configuration - DEV
         run: |
           vercel pull --yes --environment=development --token=${{ secrets.VERCEL_TOKEN }}
           echo "✅ Vercel configuration pulled successfully"
 
-      - name: Build project for Vercel
+      - name: Build Project for Vercel
         run: |
           vercel build --token=${{ secrets.VERCEL_TOKEN }}
           echo "✅ Vercel build completed"
@@ -149,9 +149,9 @@ jobs:
           echo "development-url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
           echo "✅ Deployment successful: $DEPLOYMENT_URL"
 
-      - name: Set custom dev alias
+      - name: Set Custom Domain - DEV
         if: success()
         run: |
-          CUSTOM_URL=${{ env.CUSTOM_URL }})
+          CUSTOM_URL=${{ env.CUSTOM_URL }}
           vercel alias --token=${{ secrets.VERCEL_TOKEN }} set "${{ steps.deploy.outputs.development-url }}" "$CUSTOM_URL"
           echo "✅ Custom alias set: https://$CUSTOM_URL"

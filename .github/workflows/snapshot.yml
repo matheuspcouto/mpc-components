@@ -17,7 +17,7 @@ jobs:
     outputs:
       should-deploy: ${{ steps.check.outputs.should-deploy }}
     steps:
-      - name: Check required secrets
+      - name: Check Required Vercel Secrets
         id: check
         run: |
           if [[ -z "${{ secrets.VERCEL_TOKEN }}" || -z "${{ secrets.VERCEL_ORG_ID }}" || -z "${{ secrets.VERCEL_PROJECT_ID }}" ]]; then
@@ -38,7 +38,7 @@ jobs:
     outputs:
       build-success: ${{ steps.build-status.outputs.success }}
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -54,12 +54,12 @@ jobs:
           echo "Node version: $(node --version)"
           echo "NPM version: $(npm --version)"
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: |
           npm install --prefer-offline --no-audit
           echo "✅ Dependencies installed successfully"
 
-      - name: Run unit tests
+      - name: Run Unit Tests
         run: |
           if npm run test --if-present; then
             echo "✅ Tests passed"
@@ -68,7 +68,7 @@ jobs:
           fi
         continue-on-error: true
 
-      - name: Build project
+      - name: Build Project
         id: build
         run: |
           if npm run build --if-present; then
@@ -80,11 +80,11 @@ jobs:
             exit 1
           fi
 
-      - name: Set build status
+      - name: Set Build Status
         id: build-status
         run: echo "success=${{ env.BUILD_SUCCESS }}" >> $GITHUB_OUTPUT
 
-      - name: Upload build artifacts
+      - name: Upload Build Artifacts
         if: success()
         uses: actions/upload-artifact@v4
         with:
