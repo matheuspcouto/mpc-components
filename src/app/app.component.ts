@@ -10,11 +10,11 @@ import { MpcScrollTopButtonComponent } from "./shared/components/mpc-scroll-top-
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-  title = 'mpc-components';
-}
+export class AppComponent {}
 
 
 // TODO: Ajustar Tela de Login
 // TODO: Tela de Cadastro
-// TODO: Testes Unitários no Formulário
+// TODO: Cards
+// TODO: Cor de componentes
+// TODO: Testes Unitários no Formulário, Revisar retornos e encapsulamento de metodos

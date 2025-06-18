@@ -12,24 +12,22 @@
       <ul>
 
         @for (aba of abas; track $index) {
-
         <!-- Aba de menu -->
         @if (aba.ativo && !aba.subRotas) {
         <li tabindex="0" [attr.aria-label]="'Aba ' + aba.titulo">
           @if (!aba.subRotas) {
-          <a routerLinkActive="abaAtiva" [routerLinkActiveOptions]="{exact: true}" [routerLink]="aba.rota">
+          <a routerLinkActive="aba-ativa" [routerLinkActiveOptions]="{exact: true}" [routerLink]="aba.rota">
             {{ aba.titulo }}
           </a>
           }
 
         </li>
         }
-        <!-- Fim da aba de menu -->
 
         <!-- Abas que possuem subRotas -->
         @if (aba.ativo && aba.subRotas) {
         <li class="dropdown" tabindex="0" [attr.aria-label]="'Aba com submenu ' + aba.titulo">
-          <a class="dropdown-toggle" routerLinkActive="abaAtiva" [routerLinkActiveOptions]="{exact: true}"
+          <a class="dropdown-toggle" routerLinkActive="aba-ativa" [routerLinkActiveOptions]="{exact: true}"
             [routerLink]="aba.rota" data-bs-toggle="dropdown">
             {{ aba.titulo }}
           </a>
@@ -53,15 +51,25 @@
           }
         </li>
         }
-
         <!-- Fim das abas que possuem subRotas -->
         }
+        <!-- Fim da aba de menu -->
+
+        <!-- Aba de Login -->
+        @if (abaLogin) {
+        <li tabindex="0" [attr.aria-label]="'Entrar / Cadastrar'">
+          <a [routerLink]="abaLogin">
+            Entrar / Cadastrar <i class="bi bi-person ms-2"></i>
+          </a>
+        </li>
+        }
+        <!-- Fim da aba de login -->
 
       </ul>
     </nav>
   </div>
 </header>
-<!-- ======= End Header ======= -->
+<!-- ======= End Header Desktop ======= -->
 
 <!-- ======= Header Mobile ======= -->
 <header class="header-mobile" tabindex="0" aria-label="Barra de Navegação">
@@ -91,7 +99,7 @@
           @if (aba.ativo && !aba.subRotas) {
           <li tabindex="0" [attr.aria-label]="'Aba ' + aba.titulo">
             @if (!aba.subRotas) {
-            <a routerLinkActive="abaAtiva" [routerLinkActiveOptions]="{exact: true}" [routerLink]="aba.rota">
+            <a routerLinkActive="aba-ativa" [routerLinkActiveOptions]="{exact: true}" [routerLink]="aba.rota">
               <i [class]="aba.icone"></i> {{ aba.titulo }}
             </a>
             }
@@ -102,7 +110,7 @@
           <!-- Abas que possuem subRotas -->
           @if (aba.ativo && aba.subRotas) {
           <li tabindex="0" [attr.aria-label]="'Aba com submenu ' + aba.titulo">
-            <a routerLinkActive="abaAtiva" data-bs-toggle="collapse" [attr.data-bs-target]="'#subMenu'+ $index">
+            <a routerLinkActive="aba-ativa" data-bs-toggle="collapse" [attr.data-bs-target]="'#subMenu'+ $index">
               <i [class]="aba.icone"></i> {{ aba.titulo }}
               <em class="bi bi-caret-down-fill"></em>
             </a>
@@ -131,14 +139,14 @@
       </div>
 
       <!-- Rodapé do Menu Lateral -->
+      @if (abaLogin) {
       <div class="offcanvas-footer">
         <hr>
-        <h4 class="mb-3">Siga-nos</h4>
-        <div class="social-links">
-          <a href="https://www.instagram.com/matheuspcouto/" target="_blank"><i class="bi bi-instagram"></i></a>
-          <a href="https://matheuspcouto.github.io/" target="_blank"><i class="bi bi-person"></i></a>
+        <div class="d-flex justify-content-center align-items-center">
+          <a [routerLink]="abaLogin" target="_blank">Entrar / Cadastrar <i class="bi bi-person"></i></a>
         </div>
       </div>
+      }
       <!-- Fim do Rodapé do Menu Lateral -->
 
     </div>

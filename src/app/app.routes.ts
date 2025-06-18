@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import { SiteAtivoGuard } from './guards/site-ativo.guard';
-import { InscricoesGuard } from './guards/inscricoes.guard';
-import { PaginaContatoGuard } from './guards/pagina-contato.guard';
-import { PaginaPagamentoGuard } from './guards/pagina-pagamento.guard';
-import { PaginaConfirmacaoGuard } from './guards/pagina-confirmacao.guard';
+import { SiteAtivoGuard } from './guards/site-ativo/site-ativo.guard';
+import { InscricoesGuard } from './guards/inscricoes/inscricoes.guard';
+import { PaginaContatoGuard } from './guards/pagina-contato/pagina-contato.guard';
+import { PaginaPagamentoGuard } from './guards/pagina-pagamento/pagina-pagamento.guard';
+import { PaginaConfirmacaoGuard } from './guards/pagina-confirmacao/pagina-confirmacao.guard';
 
 export const routes: Routes = [
   /*  Rotas para Home */

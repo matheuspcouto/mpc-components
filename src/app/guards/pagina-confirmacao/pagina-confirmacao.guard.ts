@@ -1,17 +1,15 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { InscricaoService } from '../pages/formulario/inscricao.service';
-import { Rotas } from '../shared/enums/rotas-enum';
+import { InscricaoService } from '../../pages/formulario/inscricao.service';
+import { Rotas } from '../../shared/enums/rotas-enum';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PaginaConfirmacaoGuard implements CanActivate {
 
-  constructor(
-    private inscricaoService: InscricaoService,
-    private router: Router
-  ) { }
+  private inscricaoService = inject(InscricaoService);
+  private router = inject(Router);
 
   canActivate(): boolean {
     return this.verificaAcessoConfirmacao();

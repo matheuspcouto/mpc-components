@@ -1,17 +1,17 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { CanActivate, Router, } from '@angular/router';
-import { Rotas } from '../shared/enums/rotas-enum';
+import { Rotas } from '../../shared/enums/rotas-enum';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SiteAtivoGuard implements CanActivate {
 
-  constructor(private router: Router){};
+  private router = inject(Router);
 
   siteAtivo = true;
 
-  canActivate() {
+  canActivate(): boolean {
 
     if (this.siteAtivo){
        return true;

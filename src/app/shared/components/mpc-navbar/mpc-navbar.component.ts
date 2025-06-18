@@ -5,14 +5,14 @@
  * abas: NavbarConfig[]: Configuração das abas da navbar.
  *
  * Exemplo de utilização:
- * <mpc-navbar></mpc-navbar>
+ * <mpc-navbar abaLogin="/paginas/login"></mpc-navbar>
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
  * @updated 27/02/2025
  */
 
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Rotas } from '../../enums/rotas-enum';
@@ -39,6 +39,8 @@ interface NavbarConfig {
   styleUrls: ['./mpc-navbar.component.css']
 })
 export class MpcNavbarComponent {
+
+  @Input() abaLogin?: string;
 
   protected abas: NavbarConfig[] = [
     { titulo: 'Home', rota: Rotas.HOME, icone: 'bi bi-house-fill', ativo: true },
