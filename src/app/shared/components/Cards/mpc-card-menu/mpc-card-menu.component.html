@@ -1,5 +1,7 @@
 <div [id]="id" [tabIndex]="tabIndex" [attr.aria-label]="ariaLabel" class="card-menu" (click)="onClick()">
-  <i class="icon" [ngClass]="icone"></i>
+  @if (icone) {
+  <i [class]="icone"></i>
+  }
   <div>
     <h3>{{ titulo }}</h3>
     <p>{{ descricao }}</p>

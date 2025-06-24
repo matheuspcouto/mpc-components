@@ -2,17 +2,17 @@
   background: var(--branco);
   padding: 30px;
   height: 100%;
-  border-radius: 10px;
+  border-radius: 5px;
   display: flex;
   align-items: center;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 
-  .icon {
+  i {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 56px;
-    height: 56px;
+    min-width: 56px;
+    min-height: 56px;
     font-size: 24px;
     color: var(--branco);
     background: var(--cor-primaria);
@@ -22,7 +22,7 @@
 
   h3 {
     font-size: 20px;
-    color: var(--cor-primaria);
+    color: var(--cor-terciaria);
     font-weight: 700;
     margin-bottom: 5px;
   }

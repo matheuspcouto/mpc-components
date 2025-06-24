@@ -12,13 +12,8 @@
  * @updated 27/02/2025
  */
 
-import { Component, inject, InjectionToken, Input, OnInit } from '@angular/core';
-
-const WINDOW = new InjectionToken<Window>('WindowToken', {
-  factory: () => {
-    return typeof window !== 'undefined' ? window : new Window();
-  }
-});
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { Component, inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
 
 @Component({
   selector: 'mpc-scroll-top-button',
@@ -30,20 +25,25 @@ export class MpcScrollTopButtonComponent implements OnInit {
 
   @Input() icone: string = '';
 
-  private window = inject(WINDOW);
+  private readonly platformId = inject(PLATFORM_ID);
 
   ngOnInit(): void {
-    this.window.addEventListener('scroll', () => {
-      const scrollPosition = this.window.scrollY;
-      const btnScrollTop = document.getElementById('scrollTop');
+    if (isPlatformBrowser(this.platformId)) {
+      window.addEventListener('scroll', () => {
+        const scrollPosition = window.scrollY;
+        const btnScrollTop = document.getElementById('scrollTop');
 
-      if (btnScrollTop) {
-        btnScrollTop.style.visibility = scrollPosition > 300 ? 'visible' : 'hidden';
-      }
-    });
+        if (btnScrollTop) {
+          btnScrollTop.style.visibility = scrollPosition > 300 ? 'visible' : 'hidden';
+        }
+      });
+    }
+
   }
 
   scrollToTop(): void {
-    this.window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (isPlatformBrowser(this.platformId)) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
 }

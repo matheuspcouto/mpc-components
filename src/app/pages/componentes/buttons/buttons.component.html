@@ -22,11 +22,13 @@
         <ul class="text-start mt-3">
           <li><strong>id</strong>: (opcional) Um identificador único para o botão.</li>
           <li><strong>texto</strong>: O texto que será exibido no botão.</li>
-          <li><strong>corBotao</strong>: A classe de cor do botão, que pode ser qualquer uma das classes de botão do
-            Bootstrap. Padrão: <code>btn-primary</code></li>
+          <li><strong>corFundo</strong>: Cor personalizada para o fundo do botão (hex, rgb, rgba, nome da
+            cor).</li>
+          <li><strong>corTexto</strong>: Cor personalizada para o texto do botão (hex, rgb, rgba, nome da
+            cor).</li>
           <li><strong>disabled</strong>: (opcional) Um booleano que indica se o botão deve estar desabilitado.</li>
           <li><strong>posicaoIcone</strong>: (opcional) Define a posição do ícone em relação ao texto, podendo ser
-            <code>esquerda</code> ou <code>direita</code>. Padrão: <code>esquerda</code>.
+            <code>esquerda</code> ou <code>direita</code>. Padrão: <code>direita</code>.
           </li>
           <li><strong>icone</strong>: (opcional) O ícone a ser exibido no botão, utilizando classes do Bootstrap Icons
             ou a que
@@ -55,24 +57,37 @@
         <div class="col-md-12 mb-3 d-flex justify-content-center">
           <pre class="chroma">
               <code>
-                &lt;mpc-button (click)="" [corBotao]="'btn-info'"
-                [icone]="'bi bi-code-slash'" [posicaoIcone]="'esquerda'" [texto]="'Exemplo de Botão'&gt;
+                &lt;mpc-button (click)="minhaFuncao()"
+                [corFundo]="'#17a2b8'"
+                [corTexto]="'white'"
+                [icone]="'bi bi-code-slash'"
+                [posicaoIcone]="'esquerda'"
+                [texto]="'Exemplo de Botão'"&gt;
               &lt;/mpc-button&gt;
               </code>
           </pre>
         </div>
         <h5>Resultado:</h5>
         <div class="col-md-12 mb-3 d-flex justify-content-center">
-          <mpc-button (click)="alert('Exemplo de Botão')" corBotao="btn-info" icone="bi bi-code-slash"
-            posicaoIcone="esquerda" texto="Exemplo de Botão">
+          <mpc-button (click)="alert('Exemplo de Botão')" [corFundo]="'#149DDD'" [corTexto]="'white'"
+            [icone]="'bi bi-code-slash'" [posicaoIcone]="'esquerda'" [texto]="'Exemplo de Botão'">
           </mpc-button>
         </div>
       </div>
 
-      <h5>
-        Para mais informações sobre como utilizar botões no Bootstrap, consulte a <a
-          href="https://getbootstrap.com/docs/5.1/components/buttons/" target="_blank">documentação oficial do Bootstrap
-          sobre botões</a>.
+      <h5 class="text-start">
+        <strong>Observações importantes:</strong>
+        <ul class="text-start mt-3">
+          <li>O componente utiliza cores personalizadas através das propriedades <code>corFundo</code> e
+            <code>corTexto</code>.
+          </li>
+          <li>A posição padrão do ícone é <code>direita</code>.</li>
+          <li>As cores podem ser definidas em qualquer formato CSS válido (hex, rgb, rgba, nomes de cores).</li>
+          <li>Para eventos de clique, utilize <code>(click)="suaFuncao()"</code>.</li>
+          <li>O componente inclui suporte completo para acessibilidade com <code>tabIndex</code> e
+            <code>ariaLabel</code>.
+          </li>
+        </ul>
       </h5>
 
     </div>

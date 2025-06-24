@@ -21,11 +21,11 @@
       </div>
 
       <div class="form-actions">
-        <mpc-button (click)="login()" corBotao="btn-primary" icone="bi bi-box-arrow-in-right" posicaoIcone="direita"
+        <mpc-button (click)="login()" [corFundo]="'#149DDD'" [corTexto]="'white'" icone="bi bi-box-arrow-in-right" posicaoIcone="direita"
           texto="Entrar" [disabled]="form.invalid">
         </mpc-button>
 
-        <mpc-button (click)="login()" corBotao="btn-link" texto="Cadastrar-se">
+        <mpc-button (click)="login()" [corTexto]="'149DDD'" texto="Cadastrar-se">
         </mpc-button>
       </div>
 

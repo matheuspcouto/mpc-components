@@ -11,16 +11,17 @@
  * <mpc-card-menu icone="bi bi-telephone" titulo="Telefone" descricao="(63) 9 9201-4337"></mpc-card-menu>
  *
  * @author Matheus Pimentel Do Couto
- * @created 27/02/2025
- * @updated 27/02/2025
+ * @created 24/06/2025
+ * @updated 24/06/2025
  */
 
-import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
+// TODO: Atualizar fed-metodista
+// TODO: Adicionar Pagina e exibição
 @Component({
   selector: 'mpc-card-menu',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './mpc-card-menu.component.html',
   styleUrl: './mpc-card-menu.component.css'
 })
@@ -34,7 +35,7 @@ export class MpcCardMenuComponent {
   @Input() titulo: string = '';
   @Input() descricao: string = '';
   @Input() icone: string = '';
-  @Input() acao: Function | undefined;
+  @Input() acao?: Function | undefined;
 
   onClick() {
     if (!this.acao) return;

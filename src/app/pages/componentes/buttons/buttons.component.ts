@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { MpcButtonComponent } from '../../../shared/components/mpc-button/mpc-button.component';
 import { MpcNavbarComponent } from '../../../shared/components/mpc-navbar/mpc-navbar.component';
+import { MpcButtonComponent } from '../../../shared/components/mpc-button/mpc-button.component';
 
 @Component({
   selector: 'app-buttons',

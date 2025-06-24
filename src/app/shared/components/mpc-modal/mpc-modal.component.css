@@ -34,7 +34,7 @@ button {
   }
 
   .modal-content {
-    background-color: white;
+    background-color: var(--branco);
     padding: 30px;
     overflow: hidden;
 
@@ -96,7 +96,7 @@ button {
   .tela-inteira .modal-content {
     width: 450px;
     min-height: 450px;
-    border-radius: 10px;
+    border-radius: 5px;
 
     .modal-body .modal-image {
       width: 100px;
@@ -110,7 +110,7 @@ button {
     .modal-content {
       width: 450px;
       height: 350px;
-      border-radius: 10px;
+      border-radius: 5px;
     }
   }
 }

@@ -39,13 +39,13 @@
 
     <div class="row mt-5">
       <div class="col-md-6 mb-3 div-buttons">
-        <mpc-button (click)="proximaEtapa()" corBotao="btn-success" icone="bi bi-send" posicaoIcone="direita"
+        <mpc-button (click)="proximaEtapa()" [corFundo]="'#149DDD'" [corTexto]="'white'" icone="bi bi-send" posicaoIcone="direita"
           texto="Finalizar" [disabled]="form.invalid">
         </mpc-button>
       </div>
 
       <div class="col-md-6 mb-3 div-buttons">
-        <mpc-button (click)="etapaAnterior()" corBotao="btn-outline-secondary" icone="bi bi-arrow-left" texto="Voltar"
+        <mpc-button (click)="etapaAnterior()" [corFundo]="'#149DDD'" [corTexto]="'white'" icone="bi bi-arrow-left" texto="Voltar"
           posicaoIcone="esquerda">
         </mpc-button>
       </div>

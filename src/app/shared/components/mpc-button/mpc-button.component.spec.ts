@@ -28,10 +28,17 @@ describe('MpcButtonComponent', () => {
     expect(component.tabIndex).toBe(0);
     expect(component.ariaLabel).toBe('');
     expect(component.texto).toBe('');
-    expect(component.corBotao).toBe('');
+    expect(component.corFundo).toBe('');
+    expect(component.corTexto).toBe('');
     expect(component.disabled).toBe(false);
     expect(component.posicaoIcone).toBe('direita');
     expect(component.icone).toBe('');
+  });
+
+  it('estiloPersonalizado', () => {
+    component.corFundo = '#fff';
+    component.corTexto = '#000';
+    expect(component['estiloPersonalizado']).toBeDefined();
   });
 
 });

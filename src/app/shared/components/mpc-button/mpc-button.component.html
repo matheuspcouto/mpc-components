@@ -1,14 +1,12 @@
-<button [id]="id" type="button" class="btn" [ngClass]="corBotao" [disabled]="disabled" [tabindex]="tabIndex"
-  [attr.aria-label]="ariaLabel || texto">
+<button [id]="id" [tabIndex]="tabIndex" [attr.aria-label]="ariaLabel" [disabled]="disabled" class="btn" type="button"
+  [style.background-color]="corFundo" [style.border-color]="corFundo" [style.color]="corTexto">
 
-  @if (icone && posicaoIcone === 'esquerda') {
-  <i class="icon-float-right" [ngClass]="icone"></i>
-  }
+  <span [class.order-lg-1]="posicaoIcone === 'direita'" [class.order-lg-2]="posicaoIcone === 'esquerda'">
+    {{ texto }}
+  </span>
 
-  <span>{{ texto }}</span>
-
-  @if (icone && posicaoIcone === 'direita') {
-  <i class="icon-float-left" [ngClass]="icone"></i>
-  }
+  <i [class]="icone" [class.order-lg-2]="posicaoIcone === 'direita'" [class.order-lg-1]="posicaoIcone === 'esquerda'"
+    [class.icon-float-left]="posicaoIcone === 'direita'">
+  </i>
 
 </button>

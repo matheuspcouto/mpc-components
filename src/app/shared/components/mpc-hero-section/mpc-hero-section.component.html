@@ -1,0 +1,12 @@
+<section [id]="id" class="hero-section" [style.background-image]="getBackgroundImage()">
+  <div class="container">
+    <div class="content">
+      <h2 data-aos="fade-up" [attr.tabindex]="tabIndex" [attr.aria-label]="ariaLabel">
+        {{ titulo }}
+        @if (subtitulo) {
+        <br> <span>{{ subtitulo }}</span>
+        }
+      </h2>
+    </div>
+  </div>
+</section>

@@ -91,7 +91,7 @@
             </pre>
           </div>
           <div class="col-md-12 mb-3 d-flex justify-content-center">
-            <mpc-button (click)="abrirModalSucesso()" corBotao="btn-success" icone="bi bi-check-all"
+            <mpc-button (click)="abrirModalSucesso()" [corFundo]="'green'" [corTexto]="'white'" icone="bi bi-check-all"
               posicaoIcone="esquerda" [tabIndex]="0" texto="Modal de Sucesso">
             </mpc-button>
           </div>
@@ -116,7 +116,7 @@
             </pre>
           </div>
           <div class="col-md-12 mb-3 d-flex justify-content-center">
-            <mpc-button (click)="abrirModalConfirmacao()" corBotao="btn-info" icone="bi bi-question-lg"
+            <mpc-button (click)="abrirModalConfirmacao()" [corTexto]="'black'" icone="bi bi-question-lg"
               posicaoIcone="esquerda" [tabIndex]="0" texto="Modal de Confirmação">
             </mpc-button>
           </div>
@@ -144,7 +144,7 @@
             </pre>
           </div>
           <div class="col-md-12 mb-3 d-flex justify-content-center">
-            <mpc-button (click)="abrirModalAlerta()" corBotao="btn-warning" icone="bi bi-exclamation-triangle"
+            <mpc-button (click)="abrirModalAlerta()" [corFundo]="'yellow'" [corTexto]="'black'" icone="bi bi-exclamation-triangle"
               posicaoIcone="esquerda" [tabIndex]="0" texto="Modal de Alerta">
             </mpc-button>
           </div>
@@ -169,7 +169,7 @@
             </pre>
           </div>
           <div class="col-md-12 mb-3 d-flex justify-content-center">
-            <mpc-button (click)="abrirModalErro()" corBotao="btn-danger" icone="bi bi-bug" posicaoIcone="esquerda"
+            <mpc-button (click)="abrirModalErro()" [corFundo]="'red'" [corTexto]="'white'" icone="bi bi-bug" posicaoIcone="esquerda"
               [tabIndex]="0" texto="Modal de Erro">
             </mpc-button>
           </div>

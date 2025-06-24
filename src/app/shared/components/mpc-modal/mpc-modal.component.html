@@ -5,7 +5,7 @@
       <div class="modal-body">
         <!-- Imagem -->
         @if (modal.imagem && isTelaInteira) {
-        <img [src]="'img/modal/' + modal.imagem" class="modal-image">
+        <img [src]="modal.imagem" class="modal-image">
         }
 
         <!-- Título -->
@@ -18,17 +18,17 @@
       <!-- Botões -->
       <div class="modal-buttons">
         <!-- Botão Principal de Ação -->
-        <mpc-button corBotao="btn-primary" (click)="botao()" [texto]="modal.textoBotao"></mpc-button>
+        <mpc-button corFundo="#0E2749" corTexto="#fff" (click)="botao()" [texto]="modal.textoBotao"></mpc-button>
 
         <!-- Botão Secundário de Ação -->
         @if (modal.textoSegundoBotao) {
-        <mpc-button corBotao="btn-link" (click)="segundoBotao()" [texto]="modal.textoSegundoBotao">
+        <mpc-button corFundo="#fff" corTexto="#000" (click)="segundoBotao()" [texto]="modal.textoSegundoBotao">
         </mpc-button>
         }
 
         <!-- Botão de Copiar Erro caso seja um modal de erro -->
         @if (btnCopiarMensagemErro) {
-        <mpc-button corBotao="btn-link" (click)="copiarCodigo()"
+        <mpc-button corFundo="#fff" corTexto="#000" (click)="copiarCodigo()"
           [icone]="isCopiado ? 'bi bi-clipboard-check' : 'bi bi-clipboard'" texto="Copiar Erro">
         </mpc-button>
         }

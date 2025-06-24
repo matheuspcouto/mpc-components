@@ -39,7 +39,7 @@
           border: none !important;
           border-bottom: 2px solid transparent !important;
           background-color: transparent !important;
-          color: var(--cor-primaria) !important;
+          color: var(--cor-primaria) !important; /* Cor do texto */
         }
       }
 
@@ -58,12 +58,12 @@
 
           &.active {
             border-bottom: 2px solid var(--cor-primaria) !important;
-            color: var(--cor-primaria);
+            color: var(--cor-primaria); /* Cor do texto quando ativo */
           }
 
           &:hover {
             border-bottom: 2px solid var(--cor-primaria) !important;
-            color: var(--cor-primaria);
+            color: var(--cor-primaria); /* Cor do texto quando hover */
           }
         }
 
@@ -88,6 +88,12 @@
 }
 
 /* Responsividade */
+@media screen and (max-width: 991.98px) {
+  .pagination-nav {
+    width: auto !important;
+  }
+}
+
 @media (max-width: 576px) {
   .mpc-pagination-container {
     gap: 0.75rem;

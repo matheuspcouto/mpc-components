@@ -12,7 +12,7 @@
       </div>
 
       <h5>
-        O <code>mpc-card-vertical</code> MpcComponents são baseados no framework Bootstrap, sendo um componente que
+        O <code>mpc-card</code> MpcComponents são baseados no framework Bootstrap, sendo um componente que
         permite criar
         cards personalizados. Os cards são utilizados para
         exibir informações de forma organizada e atraente, com uma imagem, título, subtítulo e descrição. Abaixo, você
@@ -23,16 +23,17 @@
         <ul class="text-start mt-3">
           <li><strong>titulo</strong>: O título do card.</li>
           <li><strong>subtitulo</strong>: O subtítulo do card.</li>
-          <li><strong>descricao</strong>: A descrição do card.</li>
-          <li><strong>imagem</strong>: A imagem do card. Necessário ter a imagem na pasta "/public/img". Exemplo:
-            'imagem.jpg'.</li>
+          <li><strong>descricaoUm</strong>: A primeira descrição do card.</li>
+          <li><strong>descricaoDois</strong>: A segunda descrição do card.</li>
+          <li><strong>imagem</strong>: A imagem do card. Necessário ter a imagem na pasta "/assets/img". Exemplo:
+            '/assets/img/imagem.jpg'.</li>
           <li><strong>links</strong>: (opcional) Os links do card. Em formato:
             <code>[&lcub; icone: 'string', url: 'string' &rcub;]</code>
           </li>
-          <li><strong>tamanhoCard</strong>: (opcional) O tamanho do card, que pode ser: <code>XS</code>,
-            <code>SM</code>,
-            <code>MD</code>, <code>LG</code>, <code>XL</code> ou <code>XXL</code>. Padrão: <code>MD</code>.
+          <li><strong>layout</strong>: (opcional) O layout do card, que pode ser: <code>vertical</code> ou
+            <code>horizontal</code>. Padrão: <code>vertical</code>.
           </li>
+          <li><strong>id</strong>: (opcional) O ID do card.</li>
           <li><strong>tabIndex</strong>: (opcional) O tabIndex do card.</li>
           <li><strong>ariaLabel</strong>: (opcional) O texto de acessibilidade do componente.</li>
         </ul>
@@ -56,10 +57,15 @@
         <div class="col-md-12 mb-3 d-flex justify-content-center">
           <pre class="chroma">
                 <code class="language-html" data-lang="html">
-                &lt;mpc-card-vertical [titulo]="'Card 1'" [subtitulo]="'Tamanho Extra Pequeno'" [descricao]="'class=card-xs'"
-          [imagem]="'/assets/img/no-image.jpg'" [links]="[&lcub;icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'&rcub;]"
-          [tamanhoCard]="'card-xs'"&gt;
-        &lt;/mpc-card-vertical&gt;
+                &lt;mpc-card
+          titulo="Card 1"
+          subtitulo="Tamanho Vertical"
+          descricaoUm="Primeira descrição do card"
+          descricaoDois="Segunda descrição do card"
+          imagem="/assets/img/no-image.jpg"
+          [links]="[&lcub;icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'&rcub;]"
+          layout="vertical"&gt;
+        &lt;/mpc-card&gt;
                 </code>
         </pre>
         </div>
@@ -67,31 +73,35 @@
 
       <div class="row justify-content-between mb-5">
 
-        <div class="col-lg-4 d-flex justify-content-center mb-3">
-          <mpc-card-vertical titulo="Card 1" subtitulo="Tamanho Extra Pequeno" descricao="class=card-xs"
-            imagem="/assets/img/no-image.jpg"
-            [links]="[{icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'}]" tamanhoCard="XS">
-          </mpc-card-vertical>
+        <div class="col-lg-4 d-flex justify-content-center mb-5">
+          <mpc-card titulo="Card 1" subtitulo="Layout Vertical" descricaoUm="Este é um card com layout vertical"
+            descricaoDois="Ideal para exibir informações em formato de coluna" imagem="/assets/img/no-image.jpg"
+            [links]="[{icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'}]" layout="vertical">
+          </mpc-card>
         </div>
 
-        <div class="col-lg-4 d-flex justify-content-center mb-3">
-          <mpc-card-vertical titulo="Card 2" subtitulo="Tamanho Pequeno" descricao="class=card-sm"
-            imagem="/assets/img/no-image.jpg"
-            [links]="[{icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'}]" tamanhoCard="SM">
-          </mpc-card-vertical>
+        <div class="col-lg-4 d-flex justify-content-center mb-5">
+          <mpc-card titulo="Card 2" subtitulo="Com Links" descricaoUm="Este card possui múltiplos links"
+            descricaoDois="Você pode adicionar quantos links precisar" imagem="/assets/img/no-image.jpg" [links]="[
+              {icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'},
+              {icone: 'bi bi-github', url: 'https://github.com/matheuspcouto'}
+            ]" layout="vertical">
+          </mpc-card>
         </div>
 
-        <div class="col-lg-4 d-flex justify-content-center mb-3">
-          <mpc-card-vertical titulo="Card 3" subtitulo="Tamanho Médio" descricao="class=card-md"
-            imagem="/assets/img/no-image.jpg"
-            [links]="[{icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'}]" tamanhoCard="MD">
-          </mpc-card-vertical>
+        <div class="col-lg-4 d-flex justify-content-center mb-5">
+          <mpc-card titulo="Card 5" subtitulo="Sem Links" descricaoUm="Este card não possui links"
+            descricaoDois="Apenas informações básicas" imagem="/assets/img/no-image.jpg" layout="vertical">
+          </mpc-card>
         </div>
 
-        <mpc-card-horizontal titulo="Card 4" subtitulo="Card Horizontal"
-          descricao="Este card tem tamanho fixo, ideal para usar em telas desktops." imagem="/assets/img/no-image.jpg"
-          [links]="[{icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'}]">
-        </mpc-card-horizontal>
+        <div class="col-12 d-flex justify-content-center mb-5">
+          <mpc-card titulo="Card 4" subtitulo="Layout Horizontal" layout="horizontal"
+            descricaoUm="Este card tem layout horizontal, ideal para exibir informações em telas desktop."
+            imagem="/assets/img/no-image.jpg"
+            [links]="[{icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'}]">
+          </mpc-card>
+        </div>
 
       </div>
 

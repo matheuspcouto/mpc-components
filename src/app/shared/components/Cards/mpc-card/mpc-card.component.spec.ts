@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MpcCardHorizontalComponent } from './mpc-card-horizontal.component';
+import { MpcCardComponent } from './mpc-card.component';
 
-describe('MpcCardHorizontalComponent', () => {
-  let component: MpcCardHorizontalComponent;
-  let fixture: ComponentFixture<MpcCardHorizontalComponent>;
+describe('MpcCardComponent', () => {
+  let component: MpcCardComponent;
+  let fixture: ComponentFixture<MpcCardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MpcCardHorizontalComponent]
+      imports: [MpcCardComponent]
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MpcCardHorizontalComponent);
+    fixture = TestBed.createComponent(MpcCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -28,8 +28,10 @@ describe('MpcCardHorizontalComponent', () => {
     expect(component.ariaLabel).toBe('');
     expect(component.titulo).toBe('');
     expect(component.subtitulo).toBe('');
-    expect(component.descricao).toBe('');
+    expect(component.descricaoUm).toBe('');
+    expect(component.descricaoDois).toBe('');
     expect(component.imagem).toBe('');
+    expect(component.layout).toBe('vertical');
     expect(component.links).toEqual([]);
   });
 
@@ -42,13 +44,13 @@ describe('MpcCardHorizontalComponent', () => {
     expect(img.src).toContain('imagem-teste.jpg');
   });
 
-  it('deve retornar imagem padrão quando nenhuma imagem é fornecida', () => {
-    component.imagem = '';
-    expect(component.getImagemCard()).toBe('no-image.jpg');
+  it('deve retornar o layout vertical correto', () => {
+    component.layout = 'vertical';
+    expect(component['isVertical']).toBeTruthy();
   });
 
-  it('deve retornar a imagem fornecida quando a imagem está definida', () => {
-    component.imagem = 'imagem-personalizada.jpg';
-    expect(component.getImagemCard()).toBe('imagem-personalizada.jpg');
+  it('deve retornar o layout horizontal correto', () => {
+    component.layout = 'horizontal';
+    expect(component['isHorizontal']).toBeTruthy();
   });
 });

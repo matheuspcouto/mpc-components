@@ -83,7 +83,7 @@
 
     <!-- Botão Hamburguer lateral -->
     <button type="button" (click)="isClicado = !isClicado" class="mobile-nav-toggle mobile-nav-show"
-      [ngClass]="!isClicado ? 'bi bi-list' : 'bi bi-x'" data-bs-toggle="offcanvas" data-bs-target="#menuLateral"
+      [class]="!isClicado ? 'bi bi-list' : 'bi bi-x'" data-bs-toggle="offcanvas" data-bs-target="#menuLateral"
       tabindex="0" [attr.aria-label]="!isClicado ? 'Abrir Menu Lateral' : 'Fechar Menu Lateral'">
     </button>
     <!-- Fim do botão Hamburguer lateral -->

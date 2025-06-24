@@ -4,7 +4,7 @@
     <div class="modal-content">
       <div class="modal-body">
         <!-- Imagem, pode ser alterada -->
-        <img src="/img/logo.png" class="modal-image">
+        <img src="assets/img/logo.png" class="modal-image">
 
         <!-- Título -->
         <h2 class="modal-title" tabindex="0">{{ comprovante.titulo }}</h2>
@@ -15,7 +15,8 @@
         <div class="row">
           <!-- Campo com botão de copiar o código de inscrição, pode ser alterado -->
           @if (dadosInscricao.codigoInscricao) {
-          <div class="col-md-4 mb-1" tabindex="0" [attr.aria-label]="'Código de Inscrição: ' + dadosInscricao.codigoInscricao">
+          <div class="col-md-4 mb-1" tabindex="0"
+            [attr.aria-label]="'Código de Inscrição: ' + dadosInscricao.codigoInscricao">
             <h5>Inscrição</h5>
             <div class="input-group">
               <p>{{ dadosInscricao.codigoInscricao }}</p>
@@ -28,10 +29,11 @@
 
           <!-- Campo de status da inscricao, pode ser alterado -->
           @if (dadosInscricao.status) {
-          <div class="col-md-4 mb-1" tabindex="0" [attr.aria-label]="'Status: ' + getTextoStatusInscricao(dadosInscricao.status)">
+          <div class="col-md-4 mb-1" tabindex="0"
+            [attr.aria-label]="'Status: ' + getTextoStatusInscricao(dadosInscricao.status)">
             <h5 class="mb-1">Status</h5>
             <h5>
-              <span class="badge mb-1" [ngClass]="getBadgeStatusInscricao(dadosInscricao.status)">
+              <span [class]="'badge mb-1' + getBadgeStatusInscricao(dadosInscricao.status)">
                 {{ getTextoStatusInscricao(dadosInscricao.status) }}
               </span>
             </h5>
@@ -40,7 +42,8 @@
 
           <!-- Campo de data de criação, pode ser alterado -->
           @if (dadosInscricao.dataInscricao) {
-          <div class="col-md-4 mb-1" tabindex="0" [attr.aria-label]="'Data da Inscrição: ' + formatarData(dadosInscricao.dataInscricao)">
+          <div class="col-md-4 mb-1" tabindex="0"
+            [attr.aria-label]="'Data da Inscrição: ' + formatarData(dadosInscricao.dataInscricao)">
             <h5 class="mb-1">Data da Inscrição</h5>
             <p>{{ formatarData(dadosInscricao.dataInscricao) }}</p>
           </div>
@@ -70,7 +73,8 @@
 
         <div class="row">
           @if (dadosPagamento.formaPagamento) {
-          <div class="col-md-3 mb-1" tabindex="0" [attr.aria-label]="'Forma de Pagamento: ' + dadosPagamento.formaPagamento">
+          <div class="col-md-3 mb-1" tabindex="0"
+            [attr.aria-label]="'Forma de Pagamento: ' + dadosPagamento.formaPagamento">
             <h5 class="mb-1">Forma de Pagamento</h5>
             <p>{{ dadosPagamento.formaPagamento }}</p>
           </div>
@@ -84,10 +88,11 @@
           }
 
           @if (dadosPagamento.statusPagamento) {
-          <div class="col-md-3 mb-1" tabindex="0" [attr.aria-label]="'Status do Pagamento: ' + dadosPagamento.statusPagamento">
+          <div class="col-md-3 mb-1" tabindex="0"
+            [attr.aria-label]="'Status do Pagamento: ' + dadosPagamento.statusPagamento">
             <h5 class="mb-1">Status do Pagamento</h5>
             <h5>
-              <span class="badge mb-1" [ngClass]="getBadgeStatusPagamento(dadosPagamento.statusPagamento)">
+              <span [class]="'badge mb-1' + getBadgeStatusPagamento(dadosInscricao.statusPagamento)">
                 {{ getTextoStatusPagamento(dadosPagamento.statusPagamento) }}
               </span>
             </h5>
@@ -95,7 +100,8 @@
           }
 
           @if (dadosPagamento.dataPagamento) {
-          <div class="col-md-3 mb-1" tabindex="0" [attr.aria-label]="'Data do Pagamento: ' + formatarData(dadosPagamento.dataPagamento)">
+          <div class="col-md-3 mb-1" tabindex="0"
+            [attr.aria-label]="'Data do Pagamento: ' + formatarData(dadosPagamento.dataPagamento)">
             <h5 class="mb-1">Data do Pagamento</h5>
             <p>{{ formatarData(dadosPagamento.dataPagamento) }}</p>
           </div>
@@ -116,12 +122,12 @@
             botão abaixo. </p>
         </div>
 
-        <mpc-button corBotao="btn-success" texto="Solicitar pelo WhatsApp" icone="bi bi-whatsapp"
+        <mpc-button corFundo="green" corTexto="white" texto="Solicitar pelo WhatsApp" icone="bi bi-whatsapp"
           (click)="pedirLinkPagamento()">
         </mpc-button>
         }
 
-        <mpc-button corBotao="btn-outline-secondary" (click)="fecharComprovante()" texto="Fechar" icone="bi bi-x-lg">
+        <mpc-button corTexto="#0E2749" (click)="fecharComprovante()" texto="Fechar" icone="bi bi-x-lg">
         </mpc-button>
 
       </div>

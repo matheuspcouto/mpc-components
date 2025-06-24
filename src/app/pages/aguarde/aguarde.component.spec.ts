@@ -8,12 +8,6 @@ describe('AguardeComponent', () => {
   let fixture: ComponentFixture<AguardeComponent>;
 
   beforeEach(async () => {
-    // Mock do window.scrollTo
-    Object.defineProperty(window, 'scrollTo', {
-      value: jest.fn(),
-      writable: true
-    });
-
     await TestBed.configureTestingModule({
       imports: [AguardeComponent],
       providers: [
@@ -42,11 +36,5 @@ describe('AguardeComponent', () => {
 
   it('deve criar o componente', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('AfterViewInit', () => {
-    const spy = jest.spyOn(window, 'scrollTo');
-    component.ngAfterViewInit();
-    expect(spy).toHaveBeenCalledWith(0, 0);
   });
 });

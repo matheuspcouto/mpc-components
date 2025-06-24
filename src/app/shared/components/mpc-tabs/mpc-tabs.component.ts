@@ -23,6 +23,7 @@ export interface Tab {
   titulo: string;
 }
 
+// TODO: Atualizar fed-metodista
 @Component({
   selector: 'mpc-tabs',
   imports: [CommonModule],
@@ -44,6 +45,7 @@ export class MpcTabsComponent implements OnInit {
 
   ngOnInit(): void {
     this.tabSelecionada = this.tabs.length > 0 ? this.tabs[0] : { id: '', titulo: '' };
+    this.selecionarTab(this.tabSelecionada);
   }
 
   selecionarTab(tab: Tab): void {

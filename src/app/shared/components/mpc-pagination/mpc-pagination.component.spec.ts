@@ -34,6 +34,12 @@ describe('MpcPaginationComponent', () => {
 
   });
 
+  describe('ngOnChanges', () => {
+    it('deve atualizar a paginacao', () => {
+      component.ngOnChanges();
+    });
+  });
+
   describe('ngAfterViewInit', () => {
     beforeEach(() => {
       jest.useFakeTimers();

@@ -10,25 +10,25 @@
  * <mpc-pagination id="mpc-pagination" tabindex="0" ariaLabel="mpc-pagination" [totalItens]="itensTeste.length" (indices)="definirIndiceLista($event)"></mpc-pagination>
  *
  * @author Matheus Pimentel Do Couto
- * @created 27/02/2025
- * @updated 27/02/2025
+ * @created 24/06/2025
+ * @updated 24/06/2025
  */
 
-import { Component, Input, Output, EventEmitter, OnInit, AfterViewInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Input, Output, EventEmitter, OnInit, AfterViewInit, OnChanges } from '@angular/core';
 
 export interface IndicesPaginacao {
   indiceInicial: number;
   indiceFinal: number;
 }
 
+// TODO: Atualizar fed-metodista
 @Component({
   selector: 'mpc-pagination',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './mpc-pagination.component.html',
   styleUrl: './mpc-pagination.component.css'
 })
-export class MpcPaginationComponent implements OnInit, AfterViewInit {
+export class MpcPaginationComponent implements OnInit, AfterViewInit, OnChanges {
 
   // Acessibilidade
   @Input() id?: string = '';
@@ -63,6 +63,11 @@ export class MpcPaginationComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       this.emitirIndices();
     });
+  }
+
+  ngOnChanges(): void {
+    this.calcularPaginacao();
+    this.emitirIndices();
   }
 
   private calcularPaginacao(): void {

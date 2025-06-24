@@ -25,9 +25,9 @@ enum TamanhoModal {
 
 export const TipoModal = {
   CONFIRMACAO: { tamanho: TamanhoModal.METADE_TELA },
-  ALERTA: { tamanho: TamanhoModal.TELA_INTEIRA, imagem: 'atencao.png' },
-  ERRO: { tamanho: TamanhoModal.TELA_INTEIRA, imagem: 'error.png' },
-  SUCESSO: { tamanho: TamanhoModal.TELA_INTEIRA, imagem: 'success.png' }
+  ALERTA: { tamanho: TamanhoModal.TELA_INTEIRA, imagem: 'assets/img/modal/atencao.png' },
+  ERRO: { tamanho: TamanhoModal.TELA_INTEIRA, imagem: 'assets/img/modal/error.png' },
+  SUCESSO: { tamanho: TamanhoModal.TELA_INTEIRA, imagem: 'assets/img/modal/success.png' }
 }
 @Component({
   selector: 'mpc-modal',

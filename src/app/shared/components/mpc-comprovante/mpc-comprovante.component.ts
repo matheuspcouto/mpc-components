@@ -56,7 +56,7 @@ export interface MpcComprovanteConfig {
 
 @Component({
   selector: 'mpc-comprovante',
-  imports: [MpcButtonComponent, CommonModule ],
+  imports: [ MpcButtonComponent ],
   templateUrl: './mpc-comprovante.component.html',
   styleUrls: ['./mpc-comprovante.component.css']
 })
