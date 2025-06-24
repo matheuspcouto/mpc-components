@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
-import { InscricaoService } from '../inscricao.service';
+import { InscricaoService } from '../service/inscricao.service';
 import { Router } from '@angular/router';
 import { MpcButtonComponent } from '../../../shared/components/mpc-button/mpc-button.component';
 import { MpcNavbarComponent } from '../../../shared/components/mpc-navbar/mpc-navbar.component';
@@ -7,7 +7,7 @@ import { MpcComprovanteComponent, MpcComprovanteConfig } from '../../../shared/c
 import { MpcModalComponent, TipoModal } from '../../../shared/components/mpc-modal/mpc-modal.component';
 import { MpcModalConfig } from '../../../shared/components/mpc-modal/mpc-modal.directive';
 import { Rotas } from '../../../shared/enums/rotas-enum';
-import { Inscricao } from '../inscricao.model';
+import { Inscricao } from '../model/inscricao.model';
 
 @Component({
   selector: 'app-confirmacao',
@@ -17,16 +17,16 @@ import { Inscricao } from '../inscricao.model';
 })
 export class ConfirmacaoComponent implements OnInit {
 
-  private router = inject(Router);
-  private inscricaoService = inject(InscricaoService);
+  private readonly router = inject(Router);
+  private readonly inscricaoService = inject(InscricaoService);
 
-  @ViewChild('modalErro', { static: true }) modalErro!: MpcModalComponent;
-  @ViewChild('modalSucesso', { static: true }) modalSucesso!: MpcModalComponent;
+  @ViewChild('modalErro', { static: true }) private modalErro!: MpcModalComponent;
+  @ViewChild('modalSucesso', { static: true }) private modalSucesso!: MpcModalComponent;
 
-  @ViewChild('comprovanteExemplo', { static: true }) comprovanteExemplo!: MpcComprovanteComponent;
-  dadosComprovante: MpcComprovanteConfig = {} as MpcComprovanteConfig;
+  @ViewChild('comprovanteExemplo', { static: true }) private comprovanteExemplo!: MpcComprovanteComponent;
+  protected dadosComprovante: MpcComprovanteConfig = {} as MpcComprovanteConfig;
 
-  dadosInscricao = new Inscricao();
+  protected dadosInscricao = new Inscricao();
 
   ngOnInit(): void {
     const dados = this.inscricaoService.getDadosInscricao();
@@ -36,35 +36,15 @@ export class ConfirmacaoComponent implements OnInit {
     this.dadosInscricao.inicializarPagamento(dados);
   }
 
-  formatarValor(valor: any): string {
+  protected formatarValor(valor: any): string {
     return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   }
 
-  formatarData(data: string): string {
-    if (!data || data.trim() === '') {
-      return '';
-    }
-
-    const date = new Date(data);
-
-    if (isNaN(date.getTime())) {
-      const dataLimpa = data.substring(0, 10);
-      if (dataLimpa.includes('-') && dataLimpa.length === 10) {
-        const [ano, mes, dia] = dataLimpa.split('-');
-        return `${dia}/${mes}/${ano}`;
-      }
-      return data; // Retorna original se não conseguir formatar
-    }
-
-    return date.toLocaleDateString('pt-BR');
-  }
-
-
-  getSexo(): string {
+  protected getSexo(): string {
     return this.dadosInscricao.sexo === 'M' ? 'Masculino' : 'Feminino';
   }
 
-  inscrever() {
+  protected inscrever(): void {
     this.inscricaoService.inscrever(this.dadosInscricao, this.dadosInscricao.sexo as string).subscribe({
       next: (response: any) => {
         this.abrirModalSucesso();
@@ -75,11 +55,11 @@ export class ConfirmacaoComponent implements OnInit {
     });
   }
 
-  voltar() {
+  protected voltar(): void {
     this.router.navigate([Rotas.PAGAMENTO]);
   }
 
-  abrirModalSucesso() {
+  private abrirModalSucesso(): void {
     const modalSucesso: MpcModalConfig = {
       titulo: 'Inscrição realizada com sucesso',
       texto: 'Sua inscrição foi realizada com sucesso, você pode acessar o comprovante de inscrição clicando no botão abaixo.',
@@ -93,7 +73,7 @@ export class ConfirmacaoComponent implements OnInit {
     this.modalSucesso?.abrirModal(modalSucesso);
   }
 
-  abrirModalComprovante() {
+  private abrirModalComprovante(): void {
     this.modalSucesso?.fecharModal();
 
     this.dadosComprovante = {
@@ -126,7 +106,7 @@ export class ConfirmacaoComponent implements OnInit {
     this.comprovanteExemplo?.abrirComprovante();
   }
 
-  abrirModalErro(titulo: string, texto: string): void {
+  private abrirModalErro(titulo: string, texto: string): void {
     const modalErro: MpcModalConfig = {
       titulo: titulo,
       texto: texto,

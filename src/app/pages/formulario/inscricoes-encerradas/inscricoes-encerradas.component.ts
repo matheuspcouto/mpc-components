@@ -7,6 +7,4 @@ import { MpcNavbarComponent } from "../../../shared/components/mpc-navbar/mpc-na
   templateUrl: './inscricoes-encerradas.component.html',
   styleUrl: './inscricoes-encerradas.component.css'
 })
-export class InscricoesEncerradasComponent {
-
-}
+export class InscricoesEncerradasComponent {}

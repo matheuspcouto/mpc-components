@@ -16,4 +16,3 @@ export class AppComponent {}
 // TODO: Ajustar Tela de Login
 // TODO: Tela de Cadastro
 // TODO: Cor de componentes
-// TODO: Testes Unitários no Formulário, Revisar retornos e encapsulamento de metodos

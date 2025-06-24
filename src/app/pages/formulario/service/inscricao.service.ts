@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { environment } from '../../../environments/environment';
-import inscricoes from '../../../../mock/inscricoes.json';
+import { environment } from '../../../../environments/environment';
+import inscricoes from '../../../../../mock/inscricoes.json';
 
 @Injectable({
   providedIn: 'root'

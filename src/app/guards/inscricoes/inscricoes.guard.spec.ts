@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { InscricoesGuard } from './inscricoes.guard';
-import { InscricaoService } from '../../pages/formulario/inscricao.service';
+import { InscricaoService } from '../../pages/formulario/service/inscricao.service';
 
 describe('InscricoesGuard', () => {
   let guard: InscricoesGuard;

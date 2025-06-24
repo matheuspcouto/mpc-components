@@ -8,8 +8,8 @@ import { MpcFormProgressBarComponent } from '../../../shared/components/mpc-form
 import { Validators, FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { MpcButtonComponent } from '../../../shared/components/mpc-button/mpc-button.component';
 import { MpcInputTextComponent } from '../../../shared/components/Inputs/mpc-input-text/mpc-input-text.component';
-import { InscricaoService } from '../inscricao.service';
-import { emailValidator, telefoneValidator } from '../inscricao.validator';
+import { InscricaoService } from '../service/inscricao.service';
+import { emailValidator, telefoneValidator } from '../model/inscricao.validator';
 import { MpcInputTelefoneComponent } from '../../../shared/components/Inputs/mpc-input-telefone/mpc-input-telefone.component';
 import { MpcInputEmailComponent } from '../../../shared/components/Inputs/mpc-input-email/mpc-input-email.component';
 import { MpcModalConfig } from '../../../shared/components/mpc-modal/mpc-modal.directive';
@@ -30,10 +30,10 @@ import { Endereco, MpcInputPesquisaCepComponent } from "../../../shared/componen
 })
 export default class ContatoComponent implements OnInit {
 
-  private router = inject(Router);
-  private inscricaoService = inject(InscricaoService);
-  private formBuilder = inject(NonNullableFormBuilder);
-  private notificationService = inject(ToastrService);
+  private readonly router = inject(Router);
+  private readonly inscricaoService = inject(InscricaoService);
+  private readonly formBuilder = inject(NonNullableFormBuilder);
+  private readonly notificationService = inject(ToastrService);
 
   @ViewChild('modalErro', { static: true }) protected modalErro!: MpcModalComponent;
 
@@ -53,7 +53,7 @@ export default class ContatoComponent implements OnInit {
     this.atualizarForm();
   }
 
-  atualizarForm(): void {
+  private atualizarForm(): void {
     try {
       const dadosInscricao = this.inscricaoService.getDadosInscricao();
 
@@ -77,7 +77,7 @@ export default class ContatoComponent implements OnInit {
     }
   }
 
-  proximaEtapa(): void {
+  protected proximaEtapa(): void {
     if (this.form.invalid) {
       this.notificationService.error('Preencha todos os campos obrigatórios corretamente!');
       return;
@@ -86,12 +86,12 @@ export default class ContatoComponent implements OnInit {
     this.router.navigate([Rotas.PAGAMENTO]);
   }
 
-  etapaAnterior(): void {
+  protected etapaAnterior(): void {
     this.inscricaoService.atualizarDadosInscricao(this.form.value, 1);
     this.router.navigate([Rotas.DADOS_PESSOAIS]);
   }
 
-  abrirModalErro(titulo: string, texto: string): void {
+  private abrirModalErro(titulo: string, texto: string): void {
     const modalErro: MpcModalConfig = {
       titulo: titulo,
       texto: texto,
@@ -103,7 +103,7 @@ export default class ContatoComponent implements OnInit {
     this.modalErro?.abrirModal(modalErro);
   }
 
-  definirEnderecoPorCep(endereco: Endereco): void {
+  protected definirEnderecoPorCep(endereco: Endereco): void {
     this.form.patchValue({
       rua: endereco.rua,
       bairro: endereco.bairro,

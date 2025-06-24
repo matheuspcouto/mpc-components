@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { MpcModalComponent, TipoModal } from '../../../shared/components/mpc-modal/mpc-modal.component';
 import { Rotas } from '../../../shared/enums/rotas-enum';
 import { MpcFormProgressBarComponent } from '../../../shared/components/mpc-form-progress-bar/mpc-form-progress-bar.component';
-import { InscricaoService } from '../inscricao.service';
+import { InscricaoService } from '../service/inscricao.service';
 import { Validators, FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { MpcInputRadioComponent, RadioOption } from '../../../shared/components/Inputs/mpc-input-radio/mpc-input-radio.component';
 import { MpcButtonComponent } from '../../../shared/components/mpc-button/mpc-button.component';
@@ -30,10 +30,10 @@ import { MpcInputCpfcnpjComponent } from "../../../shared/components/Inputs/mpc-
 })
 export default class DadosPessoaisComponent implements OnInit {
 
-  private router = inject(Router);
-  private inscricaoService = inject(InscricaoService);
-  private formBuilder = inject(NonNullableFormBuilder);
-  private notificationService = inject(ToastrService);
+  private readonly router = inject(Router);
+  private readonly inscricaoService = inject(InscricaoService);
+  private readonly formBuilder = inject(NonNullableFormBuilder);
+  private readonly notificationService = inject(ToastrService);
 
   @ViewChild('modalErro', { static: true }) protected modalErro!: MpcModalComponent;
   protected dataAtual: string = new Date().toISOString().split('T')[0];
@@ -66,7 +66,7 @@ export default class DadosPessoaisComponent implements OnInit {
     this.dataAtual = this.formatarData(this.dataAtual);
   }
 
-  atualizarForm(): void {
+  private atualizarForm(): void {
     try {
       const dadosInscricao = this.inscricaoService.getDadosInscricao();
 
@@ -104,7 +104,7 @@ export default class DadosPessoaisComponent implements OnInit {
     }
   }
 
-  proximaEtapa() {
+  protected proximaEtapa(): void {
     if (this.form.invalid) {
       this.notificationService.error('Preencha todos os campos obrigatórios corretamente!');
     } else {
@@ -113,7 +113,7 @@ export default class DadosPessoaisComponent implements OnInit {
     }
   }
 
-  formatarData(data: string): string {
+  private formatarData(data: string): string {
     const partes = data.split('-');
     if (partes.length === 3) {
       const ano = partes[0];
@@ -124,7 +124,7 @@ export default class DadosPessoaisComponent implements OnInit {
     return data;
   }
 
-  abrirModalErro(titulo: string, texto: string) {
+  private abrirModalErro(titulo: string, texto: string): void {
     const modalErro: MpcModalConfig = {
       titulo: titulo,
       texto: texto,

@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { PaginaConfirmacaoGuard } from './pagina-confirmacao.guard';
-import { InscricaoService } from '../../pages/formulario/inscricao.service';
+import { InscricaoService } from '../../pages/formulario/service/inscricao.service';
 
 describe('PaginaConfirmacaoGuard', () => {
   let guard: PaginaConfirmacaoGuard;

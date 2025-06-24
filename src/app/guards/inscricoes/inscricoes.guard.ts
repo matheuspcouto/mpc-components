@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { InscricaoService } from '../../pages/formulario/inscricao.service';
+import { InscricaoService } from '../../pages/formulario/service/inscricao.service';
 import { Rotas } from '../../shared/enums/rotas-enum';
 import { Observable, map } from 'rxjs';
 

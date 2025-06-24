@@ -8,7 +8,7 @@ import { MpcFormProgressBarComponent } from '../../../shared/components/mpc-form
 import { Validators, FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { MpcButtonComponent } from '../../../shared/components/mpc-button/mpc-button.component';
 import { MpcInputSelectComponent } from '../../../shared/components/Inputs/mpc-input-select/mpc-input-select.component';
-import { InscricaoService } from '../inscricao.service';
+import { InscricaoService } from '../service/inscricao.service';
 import { MpcInputTextComponent } from '../../../shared/components/Inputs/mpc-input-text/mpc-input-text.component';
 
 @Component({
@@ -23,11 +23,11 @@ import { MpcInputTextComponent } from '../../../shared/components/Inputs/mpc-inp
 })
 export default class PagamentoComponent {
 
-  private formBuilder = inject(NonNullableFormBuilder);
-  private router = inject(Router);
-  private inscricaoService = inject(InscricaoService);
+  private readonly formBuilder = inject(NonNullableFormBuilder);
+  private readonly router = inject(Router);
+  private readonly inscricaoService = inject(InscricaoService);
 
-  formasPagamento: SelectOption[] = [
+  protected formasPagamento: SelectOption[] = [
     { label: 'Cartão', value: 'Cartão', selected: false },
     { label: 'Pix', value: 'Pix', selected: false },
     { label: 'Dinheiro', value: 'Dinheiro', selected: false }
@@ -38,29 +38,29 @@ export default class PagamentoComponent {
     valor: [100, Validators.required]
   });
 
-  calcularValorTotal() {
+  private calcularValorTotal(): void {
     const valorNormal = 100.00;
     const valorComTaxa = valorNormal as number * 1.05;
     const valorTotal = this.form.value.formaPagamento === 'Cartão' ? valorComTaxa : valorNormal;
     this.form.patchValue({ valor: valorTotal });
   }
 
-  atualizarFormaPagamento(formaPagamento: any) {
+  protected atualizarFormaPagamento(formaPagamento: any): void {
     this.form.patchValue({ formaPagamento });
     this.calcularValorTotal();
   }
 
-  formatarValor(valor: any): string {
+  protected formatarValor(valor: any): string {
     return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   }
 
-  proximaEtapa() {
+  protected proximaEtapa(): void {
     if (this.form.invalid) return;
     this.inscricaoService.atualizarDadosInscricao(this.form.value, 4);
     this.router.navigate([Rotas.CONFIRMACAO]);
   }
 
-  etapaAnterior() {
+  protected etapaAnterior(): void {
     this.inscricaoService.atualizarDadosInscricao(this.form.value, 2);
     this.router.navigate([Rotas.CONTATO]);
   }
