@@ -3,7 +3,7 @@
 
   <div class="input-group">
     <input [id]="id" type="tel" class="form-control col-md-4" [value]="value" (input)="setValue($event)"
-      (blur)="onTouched()" [required]="required" (focus)="campoTocado = true; isCampoValido()" [disabled]="disabled"
+      (blur)="onBlur()" [required]="required" (focus)="onFocus()" [disabled]="disabled"
       [readOnly]="readonly" [style]="errorMessage ? 'border-color: red' : ''" [mask]="mascara" />
 
     @if (campoTocado) {

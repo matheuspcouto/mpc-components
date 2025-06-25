@@ -64,6 +64,16 @@ export class MpcInputDateComponent {
   onChange: (value: string) => void = () => { };
   onTouched: () => void = () => { };
 
+  public onBlur(): void {
+    this.onTouched();
+    this.isCampoValido();
+  }
+
+  public onFocus(): void {
+    this.campoTocado = true;
+    this.isCampoValido();
+  }
+
   registerOnChange(fn: (value: string) => void): void {
     this.onChange = fn;
   }

@@ -2,9 +2,9 @@
   <label class="form-label">CPF/CNPJ{{ required ? ' *' : '' }}</label>
 
   <div class="input-group">
-    <input [id]="id" type="text" class="form-control" (input)="setValue($event)" (blur)="onTouched()" #input
-      [required]="required" [style]="errorMessage ? 'border-color: red' : ''" [mask]="mascara" [disabled]="disabled" [readOnly]="readonly"
-      (focus)="campoTocado = true; isCampoValido()" />
+    <input [id]="id" type="text" class="form-control" [value]="value" (input)="setValue($event)" (blur)="onBlur()"
+      [required]="required" [style]="errorMessage ? 'border-color: red' : ''" [mask]="mascara" [disabled]="disabled"
+      [readOnly]="readonly" (focus)="onFocus()" />
 
     @if (campoTocado) {
     <div class="validation-icon">

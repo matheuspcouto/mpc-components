@@ -67,6 +67,16 @@ export class MpcInputPesquisaCepComponent {
   onChange: (value?: string) => void = () => { };
   onTouched: () => void = () => { };
 
+  protected onBlur(): void {
+    this.onTouched();
+    this.isCampoValido();
+  }
+
+  protected onFocus(): void {
+    this.campoTocado = true;
+    this.isCampoValido();
+  }
+
   writeValue(value: string): void {
     this.value = value;
   }
@@ -89,13 +99,13 @@ export class MpcInputPesquisaCepComponent {
   isCampoValido(): boolean {
     if (this.validaRequired()) {
       this.errorMessage = `O campo CEP é obrigatório`;
-       this.error.emit({ required: true });
+      this.error.emit({ required: true });
       return false;
     }
 
     if (this.validaRegex()) {
       this.errorMessage = `O campo CEP deve conter 8 dígitos`;
-       this.error.emit({ regex: true });
+      this.error.emit({ regex: true });
       return false;
     }
 

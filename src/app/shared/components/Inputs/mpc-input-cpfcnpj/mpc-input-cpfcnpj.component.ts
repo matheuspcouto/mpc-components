@@ -41,12 +41,12 @@ export class MpcInputCpfcnpjComponent {
 
   // Validators
   @Input() required: boolean = false;
-  private mascaraCPF: string = '000.000.000-009';
-  private mascaraCNPJ: string = '00.000.000/0000-00';
+  private readonly mascaraCPF: string = '000.000.000-009';
+  private readonly mascaraCNPJ: string = '00.000.000/0000-00';
   protected mascara: string = this.mascaraCPF;
 
-  @Output() valor: EventEmitter<string> = new EventEmitter();
-  @Output() error: EventEmitter<ValidationErrors> = new EventEmitter();
+  @Output() valor: EventEmitter<string> = new EventEmitter<string>();
+  @Output() error: EventEmitter<ValidationErrors> = new EventEmitter<ValidationErrors>();
 
   protected errorMessage?: string;
   protected campoTocado: boolean = false;
@@ -58,6 +58,16 @@ export class MpcInputCpfcnpjComponent {
 
   get Value(): string {
     return this.value as string;
+  }
+
+  protected onBlur(): void {
+    this.onTouched();
+    this.isCampoValido();
+  }
+
+  protected onFocus(): void {
+    this.campoTocado = true;
+    this.isCampoValido();
   }
 
   onChange: (value: string) => void = () => { };
@@ -75,21 +85,23 @@ export class MpcInputCpfcnpjComponent {
     this.onTouched = fn;
   }
 
-  setValue(event: any): void {
-    this.Value = event.target.value as string;
-    this.onChange(this.Value);
+  protected setValue(event: any): void {
+    this.value = event.target.value as string;
+    this.onChange(this.value);
     this.onTouched();
     this.atualizarMascara();
   }
 
-  atualizarMascara(): void {
-    if (!this.Value || this.Value.length === 0) return;
-    const valorSemCaracteresEspeciais = this.Value.replace(/\D/g, '');
+  private atualizarMascara(): void {
+    if (!this.value || this.value.length === 0) return;
+    const valorSemCaracteresEspeciais = this.value.replace(/\D/g, '');
     this.mascara = valorSemCaracteresEspeciais.length > 11 ? this.mascaraCNPJ : this.mascaraCPF;
   }
 
-  isCampoValido(): boolean {
-    if (this.readonly || this.disabled) { return true; }
+  private isCampoValido(): boolean {
+    if (this.readonly || this.disabled) {
+      return true;
+    }
 
     if (this.validaRequired()) {
       this.errorMessage = `O campo CPF/CNPJ é obrigatório`;
@@ -107,23 +119,23 @@ export class MpcInputCpfcnpjComponent {
     return true;
   }
 
-  validaRequired(): boolean {
-    return this.required && (!this.Value || this.Value.length === 0);
+  private validaRequired(): boolean {
+    return this.required && (!this.value || this.value.length === 0);
   }
 
-  isValidCPF(): boolean {
-    let cpf = this.Value.replace(/\D/g, '');
+  private isValidCPF(): boolean {
+    const cpf: string = this.Value.replace(/\D/g, '');
 
     if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) {
       return false;
     }
 
-    let sum = 0;
+    let sum: number = 0;
     for (let i = 0; i < 9; i++) {
       sum += parseInt(cpf.charAt(i)) * (10 - i);
     }
 
-    let firstDigit = (sum * 10) % 11;
+    let firstDigit: number = (sum * 10) % 11;
     if (firstDigit === 10 || firstDigit === 11) firstDigit = 0;
     if (firstDigit !== parseInt(cpf.charAt(9))) return false;
 
@@ -132,39 +144,39 @@ export class MpcInputCpfcnpjComponent {
       sum += parseInt(cpf.charAt(i)) * (11 - i);
     }
 
-    let secondDigit = (sum * 10) % 11;
+    let secondDigit: number = (sum * 10) % 11;
     if (secondDigit === 10 || secondDigit === 11) secondDigit = 0;
     return secondDigit === parseInt(cpf.charAt(10));
   }
 
-  isValidCNPJ(): boolean {
-    let cnpj = this.Value.replace(/\D/g, '');
+  private isValidCNPJ(): boolean {
+    const cnpj: string = this.Value.replace(/\D/g, '');
 
     if (cnpj.length !== 14 || /^(\d)\1+$/.test(cnpj)) {
       return false;
     }
 
-    const calc = (base: number[]) => {
-      let sum = 0;
-      const factors = base.length === 12 ? [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
+    const calc = (base: number[]): number => {
+      let sum: number = 0;
+      const factors: number[] = base.length === 12 ? [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
         : [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
       for (let i = 0; i < base.length; i++) {
         sum += base[i] * factors[i];
       }
-      const result = sum % 11;
+      const result: number = sum % 11;
       return result < 2 ? 0 : 11 - result;
     };
 
-    const numbers = cnpj.split('').map(Number);
-    const base = numbers.slice(0, 12);
-    const digit1 = calc(base);
-    const digit2 = calc([...base, digit1]);
+    const numbers: number[] = cnpj.split('').map(Number);
+    const base: number[] = numbers.slice(0, 12);
+    const digit1: number = calc(base);
+    const digit2: number = calc([...base, digit1]);
 
     return digit1 === numbers[12] && digit2 === numbers[13];
   }
 
-  isValidCpfOrCnpj(): boolean {
-    const valorLimpo = this.Value.replace(/\D/g, '');
+  private isValidCpfOrCnpj(): boolean {
+    const valorLimpo: string = this.Value.replace(/\D/g, '');
     if (valorLimpo.length <= 11) {
       return this.isValidCPF();
     } else {

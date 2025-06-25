@@ -4,7 +4,7 @@
 
   <div class="input-group">
     <select [id]="id" (change)="setValue($event.target)" class="form-select form-select-md" [disabled]="disabled"
-      [style]="errorMessage ? 'border-color: red' : ''" (focus)="campoTocado = true; isCampoValido()">
+      [style]="errorMessage ? 'border-color: red' : ''" (focus)="onFocus()">
 
       @for (option of options; track $index) {
       <option [selected]="option.selected">

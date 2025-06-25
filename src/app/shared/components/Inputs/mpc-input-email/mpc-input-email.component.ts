@@ -60,6 +60,16 @@ export class MpcInputEmailComponent {
   onChange: (value: string) => void = () => { };
   onTouched: () => void = () => { };
 
+  public onBlur(): void {
+    this.onTouched();
+    this.isCampoValido();
+  }
+
+  public onFocus(): void {
+    this.campoTocado = true;
+    this.isCampoValido();
+  }
+
   writeValue(value: string): void {
     this.value = value;
   }
