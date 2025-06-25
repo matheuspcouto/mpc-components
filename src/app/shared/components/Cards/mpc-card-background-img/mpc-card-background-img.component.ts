@@ -18,7 +18,6 @@
 import { Component, Input } from '@angular/core';
 
 // TODO: Adicionar Pagina e exibição
-// TODO: Atualizar fed-metodista
 @Component({
   selector: 'mpc-card-background-img',
   imports: [],

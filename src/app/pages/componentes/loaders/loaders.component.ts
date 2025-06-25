@@ -5,7 +5,7 @@ import { MpcLoaderService } from '../../../shared/components/mpc-loader/mpc-load
 
 @Component({
   selector: 'app-loaders',
-  imports: [MpcButtonComponent, MpcNavbarComponent ],
+  imports: [ MpcButtonComponent, MpcNavbarComponent ],
   templateUrl: './loaders.component.html',
   styleUrl: './loaders.component.css'
 })
@@ -15,7 +15,6 @@ export class LoadersComponent {
 
   abrirLoading() {
     this.mpcLoaderService.show();
-    // Implemente a lógica entre a abertura e o fechamento do loading
     setTimeout(() => this.mpcLoaderService.hide(), 5000);
   }
 

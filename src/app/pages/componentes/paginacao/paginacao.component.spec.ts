@@ -29,10 +29,16 @@ describe('PaginacaoComponent', () => {
 
     fixture = TestBed.createComponent(PaginacaoComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('deve criar o componente', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('deve definir indices iniciais da listagem', () => {
+    const event = { indiceInicial: 0, indiceFinal: 10 };
+    component.definirIndiceLista(event);
+    expect(component.indiceInicial).toBe(0);
+    expect(component.indiceFinal).toBe(10);
   });
 });

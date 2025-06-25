@@ -35,4 +35,9 @@ describe('LoadersComponent', () => {
   it('deve criar o componente', () => {
     expect(component).toBeTruthy();
   });
+
+  it('deve abrir o loading', () => {
+    component.abrirLoading();
+    expect(component['mpcLoaderService'].isLoading$).toBeTruthy();
+  });
 });

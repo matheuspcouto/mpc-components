@@ -18,14 +18,14 @@ import { MpcInputSenhaComponent } from '../../shared/components/Inputs/mpc-input
 })
 export default class LoginComponent {
 
-  private formBuilder = inject(NonNullableFormBuilder);
+  private readonly formBuilder = inject(NonNullableFormBuilder);
 
   protected form = this.formBuilder.group({
     email: ['', Validators.required],
     senha: ['', Validators.required]
   });
 
-  login(): void {
+  protected login(): void {
     if (this.form.valid) {
       const { email, senha } = this.form.value;
 

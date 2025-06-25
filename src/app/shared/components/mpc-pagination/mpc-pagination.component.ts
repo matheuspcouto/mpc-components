@@ -21,7 +21,6 @@ export interface IndicesPaginacao {
   indiceFinal: number;
 }
 
-// TODO: Atualizar fed-metodista
 @Component({
   selector: 'mpc-pagination',
   imports: [],

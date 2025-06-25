@@ -25,7 +25,6 @@ enum PosicoesIcone {
   DIREITA = 'direita',
 }
 
-// TODO: Atualizar fed-metodista-palmas
 @Component({
   selector: 'mpc-button',
   imports: [],

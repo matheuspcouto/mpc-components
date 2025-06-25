@@ -24,7 +24,6 @@ export interface CardLinks {
   icone: string;
 }
 
-// TODO: Atualizar fed-metodista
 @Component({
   selector: 'mpc-card',
   imports: [],

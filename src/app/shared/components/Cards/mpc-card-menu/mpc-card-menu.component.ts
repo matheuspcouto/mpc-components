@@ -17,7 +17,6 @@
 
 import { Component, Input } from '@angular/core';
 
-// TODO: Atualizar fed-metodista
 // TODO: Adicionar Pagina e exibição
 @Component({
   selector: 'mpc-card-menu',

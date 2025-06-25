@@ -32,7 +32,6 @@ interface NavbarConfig {
   subRotas?: SubRotaConfig[]
 }
 
-// TODO: Atualizar fed-metodista
 @Component({
   selector: 'mpc-navbar',
   imports: [RouterLink, RouterLinkActive],

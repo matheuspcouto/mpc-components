@@ -39,4 +39,9 @@ describe('ComprovanteComponent', () => {
   it('deve criar o componente', () => {
     expect(component).toBeTruthy();
   });
+
+  it('deve abrir o modal de comprovante', () => {
+    component.abrirModalComprovante();
+    expect(component.dadosComprovante).toBeDefined();
+  });
 });

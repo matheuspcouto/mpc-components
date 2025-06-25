@@ -11,11 +11,10 @@
  * <mpc-tabs [tabs]="tabs" [tabIndex]="0" ariaLabel="Tabs" (tabSelected)="selecionarTab($event)"></mpc-tabs>
  *
  * @author Matheus Pimentel Do Couto
- * @created 27/02/2025
- * @updated 27/02/2025
+ * @created 25/06/2025
+ * @updated 25/06/2025
  */
 
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 export interface Tab {
@@ -23,10 +22,9 @@ export interface Tab {
   titulo: string;
 }
 
-// TODO: Atualizar fed-metodista
 @Component({
   selector: 'mpc-tabs',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './mpc-tabs.component.html',
   styleUrl: './mpc-tabs.component.css'
 })

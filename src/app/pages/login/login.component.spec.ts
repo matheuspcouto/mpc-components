@@ -29,4 +29,15 @@ describe('LoginComponent', () => {
   it('deve criar o componente', () => {
     expect(component).toBeTruthy();
   });
+
+  it('deve fazer login', () => {
+    component['form'].patchValue({
+      email: 'teste@teste.com',
+      senha: '123456'
+    })
+
+    component['login']();
+
+    expect(component['form'].valid).toBeTruthy();
+  });
 });
