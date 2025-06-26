@@ -41,7 +41,7 @@ export class MpcInputTextComponent {
   @Input() readonly?: boolean = false;
   @Input() disabled?: boolean = false;
 
-  @Input() value?: string = '';
+  @Input() value?: string;
 
   // Validators
   @Input() min?: string = '';
@@ -53,47 +53,17 @@ export class MpcInputTextComponent {
   protected errorMessage?: string;
   protected campoTocado: boolean = false;
 
-  set Value(value: string) {
-    this.value = value;
-    if (this.isCampoValido(this.value)) { this.valor.emit(this.value); }
-  }
-
-  get Value(): string {
-    return this.value as string;
-  }
-
-  protected onBlur(): void {
-    this.onTouched();
-    this.isCampoValido(this.Value);
-  }
-
   protected onFocus(): void {
     this.campoTocado = true;
-    this.isCampoValido(this.Value);
-  }
-
-  onChange: (value?: string) => void = () => { };
-  onTouched: () => void = () => { };
-
-  writeValue(value: string): void {
-    this.value = value;
-  }
-
-  registerOnChange(fn: (value?: string) => void): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
+    this.isCampoValido(this.value);
   }
 
   protected setValue(event: any): void {
-    this.Value = event.target.value as string;
-    this.onChange(this.Value);
-    this.onTouched();
+    this.value = event.target.value as string;
+    if (this.isCampoValido(this.value)) { this.valor.emit(this.value); }
   }
 
-  private isCampoValido(value: string): boolean {
+  private isCampoValido(value: string | undefined): boolean {
     if (this.readonly || this.disabled) { return true; }
 
     if (this.validaMin(value)) {
@@ -112,19 +82,17 @@ export class MpcInputTextComponent {
     return true;
   }
 
-  private validaMin(value: string): boolean {
-    if (this.min) {
-      let minNumber = parseInt(this.min);
-      return value ? value.length < minNumber : false;
-    }
-    return false;
+  private validaMin(value: string | undefined): boolean {
+    if (!this.min) return false;
+    if (!value) return true;
+    let minNumber = parseInt(this.min);
+    return value.length < minNumber;
   }
 
-  private validaMax(value: string): boolean {
-    if (this.max) {
-      let maxNumber = parseInt(this.max);
-      return value ? value.length > maxNumber : false;
-    }
-    return false;
+  private validaMax(value: string | undefined): boolean {
+    if (!this.max) return false;
+    if (!value) return true;
+    let maxNumber = parseInt(this.max);
+    return value.length > maxNumber;
   }
 }

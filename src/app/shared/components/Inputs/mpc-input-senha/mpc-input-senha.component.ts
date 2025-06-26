@@ -22,7 +22,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
 
-// TODO: Corrigir recuperação de Dados
 @Component({
   selector: 'mpc-input-senha',
   imports: [],
@@ -46,53 +45,23 @@ export class MpcInputSenhaComponent {
   @Output() valor: EventEmitter<string> = new EventEmitter();
   @Output() error: EventEmitter<ValidationErrors> = new EventEmitter();
 
-  @Input() value?: string = '';
+  @Input() value?: string;
 
   protected errorMessage?: string;
   protected campoTocado: boolean = false;
   protected ocultarSenha: boolean = true;
 
-  set Value(value: string) {
-    this.value = value;
-    if (this.isCampoValido(this.value)) { this.valor.emit(this.value); }
-  }
-
-  get Value(): string {
-    return this.value as string;
-  }
-
-  onChange: (value: string) => void = () => { };
-  onTouched: () => void = () => { };
-
-  public onBlur(): void {
-    this.onTouched();
-    this.isCampoValido(this.Value);
-  }
-
-  public onFocus(): void {
+  protected onFocus(): void {
     this.campoTocado = true;
-    this.isCampoValido(this.Value);
-  }
-
-  writeValue(value: string): void {
-    this.value = value;
-  }
-
-  registerOnChange(fn: (value: string) => void): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
+    this.isCampoValido(this.value);
   }
 
   protected setValue(event: any): void {
-    this.Value = event.target.value;
-    this.onChange(this.Value);
-    this.onTouched();
+    this.value = event.target.value;
+    if (this.isCampoValido(this.value)) { this.valor.emit(this.value); }
   }
 
-  private isCampoValido(value: string): boolean {
+  private isCampoValido(value: string | undefined): boolean {
     if (this.readonly || this.disabled) { return true; }
 
     if (this.validaRequired(value)) {
@@ -111,13 +80,16 @@ export class MpcInputSenhaComponent {
     return true;
   }
 
-  private validaRegex(value: string): boolean {
+  private validaRegex(value: string | undefined): boolean {
     if (!this.regexSenha) return false;
+    if (!value) return true;
     return this.regexSenha.length > 0 && !new RegExp(this.regexSenha).test(value);
   }
 
-  private validaRequired(value: string): boolean {
-    return this.required! && value.length === 0;
+  private validaRequired(value: string | undefined): boolean {
+    if (!this.required) return false;
+    if (!value) return true;
+    return this.required && value.length === 0;
   }
 
 }

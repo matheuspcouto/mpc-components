@@ -3,7 +3,7 @@
 
   <div class="input-group">
     <input [id]="id" [type]="ocultarSenha ? 'password' : 'text'" class="form-control" [value]="value"
-      (input)="setValue($event)" (blur)="onBlur()" [required]="required" [disabled]="disabled" [readOnly]="readonly"
+      (input)="setValue($event)" [required]="required" [disabled]="disabled" [readOnly]="readonly"
       [style]="errorMessage ? 'border-color: red' : ''" (focus)="onFocus()" />
 
     <div class="validation-icon">

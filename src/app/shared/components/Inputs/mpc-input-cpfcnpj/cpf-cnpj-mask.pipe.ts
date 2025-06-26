@@ -8,10 +8,11 @@
  * Exemplo de utilização:
  * {{ '12345678901' | cpfCnpjMask }}
  * {{ documento | cpfCnpjMask }}
+ * this.cpfCnpjMaskPipe.transform(documento);
  *
  * @author Matheus Pimentel Do Couto
- * @created 27/02/2025
- * @updated 27/02/2025
+ * @created 26/06/2025
+ * @updated 26/06/2025
  */
 
 import { Pipe, PipeTransform } from '@angular/core';
@@ -29,10 +30,6 @@ export class CpfCnpjMaskPipe implements PipeTransform {
 
     // Remove todos os caracteres não numéricos
     const valorLimpo = value.toString().replace(/\D/g, '');
-
-    if (valorLimpo.length === 0) {
-      return '';
-    }
 
     // Determina se é CPF ou CNPJ baseado no tamanho
     if (valorLimpo.length <= 11) {
@@ -63,16 +60,6 @@ export class CpfCnpjMaskPipe implements PipeTransform {
     const cnpj = valor.substring(0, 14);
 
     // Aplica a máscara progressivamente conforme o usuário digita
-    if (cnpj.length <= 2) {
-      return cnpj;
-    } else if (cnpj.length <= 5) {
-      return `${cnpj.substring(0, 2)}.${cnpj.substring(2)}`;
-    } else if (cnpj.length <= 8) {
-      return `${cnpj.substring(0, 2)}.${cnpj.substring(2, 5)}.${cnpj.substring(5)}`;
-    } else if (cnpj.length <= 12) {
-      return `${cnpj.substring(0, 2)}.${cnpj.substring(2, 5)}.${cnpj.substring(5, 8)}/${cnpj.substring(8)}`;
-    } else {
-      return `${cnpj.substring(0, 2)}.${cnpj.substring(2, 5)}.${cnpj.substring(5, 8)}/${cnpj.substring(8, 12)}-${cnpj.substring(12)}`;
-    }
+    return `${cnpj.substring(0, 2)}.${cnpj.substring(2, 5)}.${cnpj.substring(5, 8)}/${cnpj.substring(8, 12)}-${cnpj.substring(12)}`;
   }
 }

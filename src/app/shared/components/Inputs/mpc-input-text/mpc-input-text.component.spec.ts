@@ -27,7 +27,7 @@ describe('MpcInputTextComponent', () => {
       expect(component.label).toBe('');
       expect(component.readonly).toBe(false);
       expect(component.disabled).toBe(false);
-      expect(component.value).toBe('');
+      expect(component.value).toBeUndefined();
       expect(component.min).toBe('');
       expect(component.max).toBe('');
     });
@@ -55,199 +55,186 @@ describe('MpcInputTextComponent', () => {
     });
   });
 
-  describe('getter e setter Value', () => {
-    it('deve definir e obter valor através do setter/getter', () => {
-      const spyIsCampoValido = jest.spyOn(component as any, 'isCampoValido').mockReturnValue(true);
-      const spyEmit = jest.spyOn(component.valor, 'emit');
+  describe('onFocus', () => {
+    it('deve marcar campo como tocado e validar', () => {
+      const spyIsCampoValido = jest.spyOn(component as any, 'isCampoValido');
 
-      component.Value = 'novo valor';
-
-      expect(component.Value).toBe('novo valor');
-      expect(component.value).toBe('novo valor');
-      expect(spyIsCampoValido).toHaveBeenCalled();
-      expect(spyEmit).toHaveBeenCalledWith('novo valor');
-    });
-
-    it('não deve emitir valor quando campo é inválido', () => {
-      const spyIsCampoValido = jest.spyOn(component as any, 'isCampoValido').mockReturnValue(false);
-      const spyEmit = jest.spyOn(component.valor, 'emit');
-
-      component.Value = 'valor inválido';
-
-      expect(component.Value).toBe('valor inválido');
-      expect(spyIsCampoValido).toHaveBeenCalled();
-      expect(spyEmit).not.toHaveBeenCalled();
-    });
-  });
-
-  describe('métodos de controle de formulário', () => {
-    it('deve escrever valor através de writeValue', () => {
-      component.writeValue('valor escrito');
-      expect(component.value).toBe('valor escrito');
-    });
-
-    it('deve registrar função onChange', () => {
-      const mockFn = jest.fn();
-      component.registerOnChange(mockFn);
-      expect(component.onChange).toBe(mockFn);
-    });
-
-    it('deve registrar função onTouched', () => {
-      const mockFn = jest.fn();
-      component.registerOnTouched(mockFn);
-      expect(component.onTouched).toBe(mockFn);
-    });
-
-    it('deve chamar onBlur', () => {
-      component['onBlur']();
-    });
-
-    it('deve chamar onFocus', () => {
       component['onFocus']();
+
       expect(component['campoTocado']).toBe(true);
+      expect(spyIsCampoValido).toHaveBeenCalledWith(component.value);
     });
   });
 
   describe('setValue', () => {
-    it('deve definir valor e chamar callbacks', () => {
-      const spyOnChange = jest.spyOn(component as any, 'onChange');
-      const spyOnTouched = jest.spyOn(component as any, 'onTouched');
-      const mockEvent = { target: { value: 'valor do evento' } };
+    it('deve definir valor e emitir quando campo é válido', () => {
+      const mockEvent = { target: { value: 'valor teste' } };
+      const spyIsCampoValido = jest.spyOn(component as any, 'isCampoValido').mockReturnValue(true);
+      const spyEmitValor = jest.spyOn(component.valor, 'emit');
 
       component['setValue'](mockEvent);
 
-      expect(component.Value).toBe('valor do evento');
-      expect(spyOnChange).toHaveBeenCalledWith('valor do evento');
-      expect(spyOnTouched).toHaveBeenCalled();
+      expect(component.value).toBe('valor teste');
+      expect(spyIsCampoValido).toHaveBeenCalledWith('valor teste');
+      expect(spyEmitValor).toHaveBeenCalledWith('valor teste');
+    });
+
+    it('deve definir valor mas não emitir quando campo é inválido', () => {
+      const mockEvent = { target: { value: 'ab' } };
+      const spyIsCampoValido = jest.spyOn(component as any, 'isCampoValido').mockReturnValue(false);
+      const spyEmitValor = jest.spyOn(component.valor, 'emit');
+
+      component['setValue'](mockEvent);
+
+      expect(component.value).toBe('ab');
+      expect(spyIsCampoValido).toHaveBeenCalledWith('ab');
+      expect(spyEmitValor).not.toHaveBeenCalled();
     });
   });
 
-  describe('validações', () => {
-    describe('isCampoValido', () => {
-      it('deve retornar true quando campo é readonly', () => {
-        component.readonly = true;
-        expect(component['isCampoValido'](component.Value)).toBe(true);
-      });
+  describe('isCampoValido', () => {
+    it('deve retornar true quando campo é readonly', () => {
+      component.readonly = true;
 
-      it('deve retornar true quando campo é disabled', () => {
-        component.disabled = true;
-        expect(component['isCampoValido'](component.Value)).toBe(true);
-      });
+      const resultado = component['isCampoValido']('qualquer valor');
 
-      it('deve retornar false quando validação min falha', () => {
-        const spyValidaMin = jest.spyOn(component as any, 'validaMin').mockReturnValue(true);
-        const spyEmit = jest.spyOn(component.error, 'emit');
-        component.label = 'Nome';
-        component.min = '5';
-
-        const resultado = component['isCampoValido'](component.Value);
-
-        expect(resultado).toBe(false);
-        expect(component['errorMessage']).toBe('O campo Nome deve ter no mínimo 5 caracteres');
-        expect(spyEmit).toHaveBeenCalledWith({ min: true });
-        expect(spyValidaMin).toHaveBeenCalled();
-      });
-
-      it('deve retornar false quando validação max falha', () => {
-        const spyValidaMin = jest.spyOn(component as any, 'validaMin').mockReturnValue(false);
-        const spyValidaMax = jest.spyOn(component as any, 'validaMax').mockReturnValue(true);
-        const spyEmit = jest.spyOn(component.error, 'emit');
-        component.label = 'Nome';
-        component.max = '10';
-
-        const resultado = component['isCampoValido'](component.Value);
-
-        expect(resultado).toBe(false);
-        expect(component['errorMessage']).toBe('O campo Nome deve ter no máximo 10 caracteres');
-        expect(spyEmit).toHaveBeenCalledWith({ max: true });
-        expect(spyValidaMin).toHaveBeenCalled();
-        expect(spyValidaMax).toHaveBeenCalled();
-      });
-
-      it('deve retornar true quando todas as validações passam', () => {
-        const spyValidaMin = jest.spyOn(component as any, 'validaMin').mockReturnValue(false);
-        const spyValidaMax = jest.spyOn(component as any, 'validaMax').mockReturnValue(false);
-
-        const resultado = component['isCampoValido'](component.Value);
-
-        expect(resultado).toBe(true);
-        expect(component['errorMessage']).toBeUndefined();
-        expect(spyValidaMin).toHaveBeenCalled();
-        expect(spyValidaMax).toHaveBeenCalled();
-      });
+      expect(resultado).toBe(true);
     });
 
-    describe('validaMin', () => {
-      it('deve retornar false quando min não está definido', () => {
-        component.min = '';
-        expect(component['validaMin'](component.Value)).toBe(false);
-      });
+    it('deve retornar true quando campo é disabled', () => {
+      component.disabled = true;
 
-      it('deve retornar false quando valor não está definido', () => {
-        component.min = '5';
-        component.value = undefined;
-        expect(component['validaMin'](component.Value)).toBe(false);
-      });
+      const resultado = component['isCampoValido']('qualquer valor');
 
-      it('deve retornar true quando valor é menor que mínimo', () => {
-        component.min = '5';
-        component.value = 'abc';
-        expect(component['validaMin'](component.Value)).toBe(true);
-      });
-
-      it('deve retornar false quando valor atende ao mínimo', () => {
-        component.min = '3';
-        component.value = 'abc';
-        expect(component['validaMin'](component.Value)).toBe(false);
-      });
-
-      it('deve retornar false quando valor é maior que mínimo', () => {
-        component.min = '3';
-        component.value = 'abcd';
-        expect(component['validaMin'](component.Value)).toBe(false);
-      });
+      expect(resultado).toBe(true);
     });
 
-    describe('validaMax', () => {
-      it('deve retornar false quando max não está definido', () => {
-        component.max = '';
-        expect(component['validaMax'](component.Value)).toBe(false);
-      });
+    it('deve retornar false e emitir erro quando validação min falha', () => {
+      const spyValidaMin = jest.spyOn(component as any, 'validaMin').mockReturnValue(true);
+      const spyValidaMax = jest.spyOn(component as any, 'validaMax').mockReturnValue(false);
+      const spyEmitError = jest.spyOn(component.error, 'emit');
+      component.label = 'Nome';
+      component.min = '5';
 
-      it('deve retornar false quando valor não está definido', () => {
-        component.max = '5';
-        component.value = undefined;
-        expect(component['validaMax'](component.Value)).toBe(false);
-      });
+      const resultado = component['isCampoValido']('abc');
 
-      it('deve retornar true quando valor é maior que máximo', () => {
-        component.max = '3';
-        component.value = 'abcd';
-        expect(component['validaMax'](component.Value)).toBe(true);
-      });
+      expect(resultado).toBe(false);
+      expect(component['errorMessage']).toBe('O campo Nome deve ter no mínimo 5 caracteres');
+      expect(spyEmitError).toHaveBeenCalledWith({ min: true });
+      expect(spyValidaMin).toHaveBeenCalledWith('abc');
+      expect(spyValidaMax).not.toHaveBeenCalled();
+    });
 
-      it('deve retornar false quando valor atende ao máximo', () => {
-        component.max = '5';
-        component.value = 'abcde';
-        expect(component['validaMax'](component.Value)).toBe(false);
-      });
+    it('deve retornar false e emitir erro quando validação max falha', () => {
+      const spyValidaMin = jest.spyOn(component as any, 'validaMin').mockReturnValue(false);
+      const spyValidaMax = jest.spyOn(component as any, 'validaMax').mockReturnValue(true);
+      const spyEmitError = jest.spyOn(component.error, 'emit');
+      component.label = 'Nome';
+      component.max = '3';
 
-      it('deve retornar false quando valor é menor que máximo', () => {
-        component.max = '5';
-        component.value = 'abc';
-        expect(component['validaMax'](component.Value)).toBe(false);
-      });
+      const resultado = component['isCampoValido']('abcdef');
+
+      expect(resultado).toBe(false);
+      expect(component['errorMessage']).toBe('O campo Nome deve ter no máximo 3 caracteres');
+      expect(spyEmitError).toHaveBeenCalledWith({ max: true });
+      expect(spyValidaMin).toHaveBeenCalledWith('abcdef');
+      expect(spyValidaMax).toHaveBeenCalledWith('abcdef');
+    });
+
+    it('deve retornar true quando todas as validações passam', () => {
+      const spyValidaMin = jest.spyOn(component as any, 'validaMin').mockReturnValue(false);
+      const spyValidaMax = jest.spyOn(component as any, 'validaMax').mockReturnValue(false);
+
+      const resultado = component['isCampoValido']('valor válido');
+
+      expect(resultado).toBe(true);
+      expect(component['errorMessage']).toBeUndefined();
+      expect(spyValidaMin).toHaveBeenCalledWith('valor válido');
+      expect(spyValidaMax).toHaveBeenCalledWith('valor válido');
     });
   });
 
-  describe('eventos de saída', () => {
-    it('deve emitir valor quando campo é válido', () => {
-      const spyEmit = jest.spyOn(component.valor, 'emit');
-      jest.spyOn(component as any, 'isCampoValido').mockReturnValue(true);
+  describe('validaMin', () => {
+    it('deve retornar false quando min não está definido', () => {
+      component.min = '';
 
-      component.Value = 'valor válido';
+      const resultado = component['validaMin']('qualquer valor');
 
-      expect(spyEmit).toHaveBeenCalledWith('valor válido');
+      expect(resultado).toBe(false);
+    });
+
+    it('deve retornar true quando valor não está definido e min está definido', () => {
+      component.min = '5';
+
+      const resultado = component['validaMin'](undefined);
+
+      expect(resultado).toBe(true);
+    });
+
+    it('deve retornar true quando valor é menor que mínimo', () => {
+      component.min = '5';
+
+      const resultado = component['validaMin']('abc');
+
+      expect(resultado).toBe(true);
+    });
+
+    it('deve retornar false quando valor atende ao mínimo exato', () => {
+      component.min = '3';
+
+      const resultado = component['validaMin']('abc');
+
+      expect(resultado).toBe(false);
+    });
+
+    it('deve retornar false quando valor é maior que mínimo', () => {
+      component.min = '3';
+
+      const resultado = component['validaMin']('abcdef');
+
+      expect(resultado).toBe(false);
+    });
+  });
+
+  describe('validaMax', () => {
+    it('deve retornar false quando max não está definido', () => {
+      component.max = '';
+
+      const resultado = component['validaMax']('qualquer valor');
+
+      expect(resultado).toBe(false);
+    });
+
+    it('deve retornar true quando valor não está definido e max está definido', () => {
+      component.max = '5';
+
+      const resultado = component['validaMax'](undefined);
+
+      expect(resultado).toBe(true);
+    });
+
+    it('deve retornar true quando valor é maior que máximo', () => {
+      component.max = '3';
+
+      const resultado = component['validaMax']('abcdef');
+
+      expect(resultado).toBe(true);
+    });
+
+    it('deve retornar false quando valor atende ao máximo exato', () => {
+      component.max = '5';
+
+      const resultado = component['validaMax']('abcde');
+
+      expect(resultado).toBe(false);
+    });
+
+    it('deve retornar false quando valor é menor que máximo', () => {
+      component.max = '5';
+
+      const resultado = component['validaMax']('abc');
+
+      expect(resultado).toBe(false);
     });
   });
 });

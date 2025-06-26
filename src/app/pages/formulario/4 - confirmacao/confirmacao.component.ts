@@ -48,6 +48,7 @@ export class ConfirmacaoComponent implements OnInit {
     this.inscricaoService.inscrever(this.dadosInscricao, this.dadosInscricao.sexo as string).subscribe({
       next: (response: any) => {
         this.abrirModalSucesso();
+        this.router.navigate([Rotas.HOME]);
       },
       error: (error: any) => {
         this.abrirModalErro('Não foi possível realizar a inscrição, tente novamente mais tarde.', error);

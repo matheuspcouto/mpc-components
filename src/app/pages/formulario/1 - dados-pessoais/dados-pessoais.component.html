@@ -37,9 +37,9 @@
         </div>
 
         <div class="col-md-4 mb-3">
-          <mpc-input-number label="Idade" [required]="true" [value]="form.value.idade"
-            (valor)="form.controls.idade.setValue($event)" (error)="form.controls.idade.setErrors($event)" min="1"
-            max="99" [readonly]="false" />
+          <mpc-input-number label="Idade" [value]="form.value.idade"
+            (valor)="form.controls.idade.setValue($event)" (error)="form.controls.idade.setErrors($event)" [min]="1"
+            [max]="99" [readonly]="false" />
         </div>
 
         <div class="col-md-4 mb-3">

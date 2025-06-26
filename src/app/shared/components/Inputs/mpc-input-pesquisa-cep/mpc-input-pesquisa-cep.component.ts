@@ -17,8 +17,8 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { NgxMaskDirective } from 'ngx-mask';
 import { ValidationErrors } from '@angular/forms';
+import { CepMaskPipe } from './cep-mask.pipe';
 
 export interface Endereco {
   rua: string;
@@ -28,10 +28,11 @@ export interface Endereco {
   cep: string;
 }
 
-// TODO: Corrigir recuperação de Dados
+export const REGEX_CEP = /^\d{5}-?\d{3}$/;
+
 @Component({
   selector: 'mpc-input-pesquisa-cep',
-  imports: [NgxMaskDirective],
+  imports: [],
   templateUrl: './mpc-input-pesquisa-cep.component.html',
   styleUrl: './mpc-input-pesquisa-cep.component.css'
 })
@@ -42,7 +43,7 @@ export class MpcInputPesquisaCepComponent {
   @Input() tabIndex?: number = 0
   @Input() ariaLabel?: string = '';
 
-  @Input() value?: string = '';
+  @Input() value?: string;
 
   @Output() valor: EventEmitter<Endereco> = new EventEmitter();
   @Output() error: EventEmitter<ValidationErrors> = new EventEmitter();
@@ -50,56 +51,27 @@ export class MpcInputPesquisaCepComponent {
   // Validators
   @Input() required?: boolean = false;
 
-  protected campoTocado: boolean = false;
-  private regexCEP: any = /^\d{5}-?\d{3}$/;
-  protected readonly mascara: string = '00000-000';
-
   protected errorMessage?: string;
+  protected campoTocado: boolean = false;
 
-  private http = inject(HttpClient);
+  private readonly http = inject(HttpClient);
+  private readonly cepMaskPipe = new CepMaskPipe();
 
-  set Value(value: string) {
-    this.value = value;
-    if (this.isCampoValido(this.value)) { this.pequisarCep(this.value); }
-  }
-
-  get Value(): string {
-    return this.value as string;
-  }
-
-  onChange: (value?: string) => void = () => { };
-  onTouched: () => void = () => { };
-
-  protected onBlur(): void {
-    this.onTouched();
-    this.isCampoValido(this.Value);
+  get valorFormatado(): string {
+    return this.cepMaskPipe.transform(this.value);
   }
 
   protected onFocus(): void {
     this.campoTocado = true;
-    this.isCampoValido(this.Value);
-  }
-
-  writeValue(value: string): void {
-    this.value = value;
-  }
-
-  registerOnChange(fn: (value?: string) => void): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
+    this.isCampoValido(this.value);
   }
 
   protected setValue(event: any): void {
-    this.Value = event.target.value as string;
-    this.onChange(this.Value);
-    this.onTouched();
-    this.isCampoValido(this.Value);
+    this.value = event.target.value as string;
+    if (this.isCampoValido(this.value)) { this.pequisarCep(this.value); }
   }
 
-  private isCampoValido(value: string): boolean {
+  private isCampoValido(value: string | undefined): boolean {
     if (this.validaRequired(value)) {
       this.errorMessage = `O campo CEP é obrigatório`;
       this.error.emit({ required: true });
@@ -116,17 +88,21 @@ export class MpcInputPesquisaCepComponent {
     return true;
   }
 
-  private validaRegex(value: string): boolean {
-    return !new RegExp(this.regexCEP).test(value);
+  private validaRegex(value: string | undefined): boolean {
+    if (!value) return true;
+    return !new RegExp(REGEX_CEP).test(value);
   }
 
-  private validaRequired(value: string): boolean {
-    return this.campoTocado && this.required! && value.length === 0;
+  private validaRequired(value: string | undefined): boolean {
+    if (!this.required) return false;
+    if (!value) return true;
+    return this.campoTocado && this.required && value.length === 0;
   }
 
   private pequisarCep(cep: string | undefined): void {
 
-    cep = (cep as string).replace(/\D/g, '');;
+    if (!cep) return;
+    cep = cep.replace(/\D/g, '');;
 
     this.http.get<any>(`https://viacep.com.br/ws/${cep}/json/`).subscribe({
       next: (response) => {

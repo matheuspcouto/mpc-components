@@ -1,8 +1,8 @@
 <div [tabIndex]="tabIndex" [attr.aria-label]="ariaLabel" class="input-group">
-  <label class="form-label">CEP</label>
+  <label class="form-label">CEP {{ required ? '*': ''}}</label>
   <div class="input-group">
-    <input [id]="id" type="text" class="form-control" [value]="value" (input)="setValue($event)" (blur)="onBlur()"
-      [mask]="mascara" (focus)="onFocus()" [required]="required" />
+    <input [id]="id" type="text" class="form-control" [value]="value" (input)="setValue($event)" (focus)="onFocus()"
+      [required]="required" />
   </div>
 
   @if (errorMessage) {

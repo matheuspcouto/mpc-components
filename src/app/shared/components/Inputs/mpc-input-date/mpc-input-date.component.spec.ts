@@ -58,212 +58,250 @@ describe('MpcInputDateComponent', () => {
     });
   });
 
-  describe('Getter e Setter Value', () => {
-    it('deve definir e obter valor através do setter/getter', () => {
-      const valorTeste = '2023-01-01';
-      component.Value = valorTeste;
-      expect(component.Value).toBe(valorTeste);
+  describe('Método onFocus', () => {
+    it('deve marcar campo como tocado e validar', () => {
+      jest.spyOn(component as any, 'isCampoValido');
+
+      component['onFocus']();
+
+      expect(component['campoTocado']).toBe(true);
+      expect(component['isCampoValido']).toHaveBeenCalledWith(component.value);
     });
+  });
 
-    it('deve emitir valor quando campo é válido', () => {
-      jest.spyOn(component.valor, 'emit');
+  describe('Método setValue', () => {
+    it('deve definir valor e emitir quando campo é válido', () => {
+      const mockEvent = { target: { value: '2023-01-01' } };
       jest.spyOn(component as any, 'isCampoValido').mockReturnValue(true);
+      jest.spyOn(component.valor, 'emit');
 
-      component.Value = '2023-01-01';
+      component['setValue'](mockEvent);
 
+      expect(component.value).toBe('2023-01-01');
       expect(component.valor.emit).toHaveBeenCalledWith('2023-01-01');
     });
 
-    it('não deve emitir valor quando campo é inválido', () => {
-      jest.spyOn(component.valor, 'emit');
+    it('deve definir valor mas não emitir quando campo é inválido', () => {
+      const mockEvent = { target: { value: '2023-01-01' } };
       jest.spyOn(component as any, 'isCampoValido').mockReturnValue(false);
+      jest.spyOn(component.valor, 'emit');
 
-      component.Value = '2023-01-01';
+      component['setValue'](mockEvent);
 
+      expect(component.value).toBe('2023-01-01');
       expect(component.valor.emit).not.toHaveBeenCalled();
     });
   });
 
-  describe('Métodos de ControlValueAccessor', () => {
-    it('deve registrar função onChange', () => {
-      const mockFn = jest.fn();
-      component.registerOnChange(mockFn);
-      expect(component.onChange).toBe(mockFn);
+  describe('Validação isCampoValido', () => {
+    it('deve retornar true quando campo é readonly', () => {
+      component.readonly = true;
+
+      const resultado = component['isCampoValido']('2023-01-01');
+
+      expect(resultado).toBe(true);
     });
 
-    it('deve registrar função onTouched', () => {
-      const mockFn = jest.fn();
-      component.registerOnTouched(mockFn);
-      expect(component.onTouched).toBe(mockFn);
+    it('deve retornar true quando campo é disabled', () => {
+      component.disabled = true;
+
+      const resultado = component['isCampoValido']('2023-01-01');
+
+      expect(resultado).toBe(true);
     });
 
-    it('deve chamar onBlur', () => {
-      component['onBlur']();
+    it('deve retornar false e emitir erro quando campo obrigatório está vazio', () => {
+      jest.spyOn(component.error, 'emit');
+      component.required = true;
+      component['campoTocado'] = true;
+      component.label = 'Data';
+
+      const resultado = component['isCampoValido']('');
+
+      expect(resultado).toBe(false);
+      expect(component['errorMessage']).toBe('O campo Data é obrigatório');
+      expect(component.error.emit).toHaveBeenCalledWith({ 'required': true });
     });
 
-    it('deve chamar onFocus', () => {
-      component['onFocus']();
-      expect(component['campoTocado']).toBe(true);
+    it('deve retornar false e emitir erro quando data é menor que minDate', () => {
+      jest.spyOn(component.error, 'emit');
+      component.minDate = '2023-01-01';
+
+      const resultado = component['isCampoValido']('2022-12-31');
+
+      expect(resultado).toBe(false);
+      expect(component['errorMessage']).toBe('A data deve ser maior ou igual a 01/01/2023');
+      expect(component.error.emit).toHaveBeenCalledWith({ 'minDate': true });
+    });
+
+    it('deve retornar false e emitir erro quando data é maior que maxDate', () => {
+      jest.spyOn(component.error, 'emit');
+      component.maxDate = '2023-12-31';
+
+      const resultado = component['isCampoValido']('2024-01-01');
+
+      expect(resultado).toBe(false);
+      expect(component['errorMessage']).toBe('A data deve ser menor ou igual a 31/12/2023');
+      expect(component.error.emit).toHaveBeenCalledWith({ 'maxDate': true });
+    });
+
+    it('deve retornar true quando todas as validações passam', () => {
+      component.required = false;
+      component.minDate = '';
+      component.maxDate = '';
+
+      const resultado = component['isCampoValido']('2023-01-01');
+
+      expect(resultado).toBe(true);
+      expect(component['errorMessage']).toBeUndefined();
     });
   });
 
-  describe('setValue', () => {
-    it('deve definir valor e chamar callbacks', () => {
-      const mockEvent = { target: { value: '2023-01-01' } };
-      jest.spyOn(component as any, 'onChange');
-      jest.spyOn(component as any, 'onTouched');
+  describe('Validação validaMinDate', () => {
+    it('deve retornar false quando minDate não está definido', () => {
+      component.minDate = '';
 
-      component['setValue'](mockEvent);
+      const resultado = component['validaMinDate']('2023-01-01');
 
-      expect(component.Value).toBe('2023-01-01');
-      expect(component.onChange).toHaveBeenCalledWith('2023-01-01');
-      expect(component.onTouched).toHaveBeenCalled();
+      expect(resultado).toBe(false);
+    });
+
+    it('deve retornar true quando valor não está definido e minDate existe', () => {
+      component.minDate = '2023-01-01';
+
+      const resultado = component['validaMinDate']('');
+
+      expect(resultado).toBe(true);
+    });
+
+    it('deve retornar true quando valor é menor que minDate', () => {
+      component.minDate = '2023-01-01';
+
+      const resultado = component['validaMinDate']('2022-12-31');
+
+      expect(resultado).toBe(true);
+    });
+
+    it('deve retornar false quando valor é igual a minDate', () => {
+      component.minDate = '2023-01-01';
+
+      const resultado = component['validaMinDate']('2023-01-01');
+
+      expect(resultado).toBe(false);
+    });
+
+    it('deve retornar false quando valor é maior que minDate', () => {
+      component.minDate = '2023-01-01';
+
+      const resultado = component['validaMinDate']('2023-01-02');
+
+      expect(resultado).toBe(false);
     });
   });
 
-  describe('Validações', () => {
-    describe('isCampoValido', () => {
-      it('deve retornar true quando campo é readonly', () => {
-        component.readonly = true;
-        expect(component['isCampoValido'](component.Value)).toBe(true);
-      });
+  describe('Validação validaMaxDate', () => {
+    it('deve retornar false quando maxDate não está definido', () => {
+      component.maxDate = '';
 
-      it('deve retornar true quando campo é disabled', () => {
-        component.disabled = true;
-        expect(component['isCampoValido'](component.Value)).toBe(true);
-      });
+      const resultado = component['validaMaxDate']('2023-01-01');
 
-      it('deve retornar false e emitir erro quando campo obrigatório está vazio', () => {
-        jest.spyOn(component.error, 'emit');
-        jest.spyOn(component as any, 'validaRequired').mockReturnValue(true);
-        component.label = 'Data';
-
-        const resultado = component['isCampoValido'](component.Value);
-
-        expect(resultado).toBe(false);
-        expect(component['errorMessage']).toBe('O campo Data é obrigatório');
-        expect(component.error.emit).toHaveBeenCalledWith({ 'required': true });
-      });
-
-      it('deve retornar false e emitir erro quando data é menor que minDate', () => {
-        jest.spyOn(component.error, 'emit');
-        jest.spyOn(component as any, 'validaRequired').mockReturnValue(false);
-        jest.spyOn(component as any, 'validaMinDate').mockReturnValue(true);
-        jest.spyOn(component as any, 'formatarData').mockReturnValue('01/01/2020');
-        component.minDate = '2020-01-01';
-
-        const resultado = component['isCampoValido'](component.Value);
-
-        expect(resultado).toBe(false);
-        expect(component['errorMessage']).toBe('A data deve ser maior ou igual a 01/01/2020');
-        expect(component.error.emit).toHaveBeenCalledWith({ 'minDate': true });
-      });
-
-      it('deve retornar false e emitir erro quando data é maior que maxDate', () => {
-        jest.spyOn(component.error, 'emit');
-        jest.spyOn(component as any, 'validaRequired').mockReturnValue(false);
-        jest.spyOn(component as any, 'validaMinDate').mockReturnValue(false);
-        jest.spyOn(component as any, 'validaMaxDate').mockReturnValue(true);
-        jest.spyOn(component as any, 'formatarData').mockReturnValue('31/12/2025');
-        component.maxDate = '2025-12-31';
-
-        const resultado = component['isCampoValido'](component.Value);
-
-        expect(resultado).toBe(false);
-        expect(component['errorMessage']).toBe('A data deve ser menor ou igual a 31/12/2025');
-        expect(component.error.emit).toHaveBeenCalledWith({ 'maxDate': true });
-      });
-
-      it('deve retornar true quando todas as validações passam', () => {
-        jest.spyOn(component as any, 'validaRequired').mockReturnValue(false);
-        jest.spyOn(component as any, 'validaMinDate').mockReturnValue(false);
-        jest.spyOn(component as any, 'validaMaxDate').mockReturnValue(false);
-
-        const resultado = component['isCampoValido'](component.Value);
-
-        expect(resultado).toBe(true);
-        expect(component['errorMessage']).toBeUndefined();
-      });
+      expect(resultado).toBe(false);
     });
 
-    describe('validaMinDate', () => {
-      it('deve retornar false quando minDate não está definido', () => {
-        component.minDate = '';
-        expect(component['validaMinDate'](component.Value)).toBe(false);
-      });
+    it('deve retornar true quando valor não está definido e maxDate existe', () => {
+      component.maxDate = '2023-12-31';
 
-      it('deve retornar true quando valor é menor que minDate', () => {
-        component.minDate = '2023-01-01';
-        component.value = '2022-12-31';
-        expect(component['validaMinDate'](component.Value)).toBe(true);
-      });
+      const resultado = component['validaMaxDate']('');
 
-      it('deve retornar false quando valor é maior ou igual a minDate', () => {
-        component.minDate = '2023-01-01';
-        component.value = '2023-01-01';
-        expect(component['validaMinDate'](component.Value)).toBe(false);
-      });
+      expect(resultado).toBe(true);
     });
 
-    describe('validaMaxDate', () => {
-      it('deve retornar false quando maxDate não está definido', () => {
-        component.maxDate = '';
-        expect(component['validaMaxDate'](component.Value)).toBe(false);
-      });
+    it('deve retornar true quando valor é maior que maxDate', () => {
+      component.maxDate = '2023-12-31';
 
-      it('deve retornar true quando valor é maior que maxDate', () => {
-        component.maxDate = '2023-12-31';
-        component.value = '2024-01-01';
-        expect(component['validaMaxDate'](component.Value)).toBe(true);
-      });
+      const resultado = component['validaMaxDate']('2024-01-01');
 
-      it('deve retornar false quando valor é menor ou igual a maxDate', () => {
-        component.maxDate = '2023-12-31';
-        component.value = '2023-12-31';
-        expect(component['validaMaxDate'](component.Value)).toBe(false);
-      });
+      expect(resultado).toBe(true);
     });
 
-    describe('validaRequired', () => {
-      it('deve retornar true quando campo é obrigatório, tocado e vazio', () => {
-        component['campoTocado'] = true;
-        component.required = true;
-        component.value = '';
-        expect(component['validaRequired'](component.Value)).toBe(true);
-      });
+    it('deve retornar false quando valor é igual a maxDate', () => {
+      component.maxDate = '2023-12-31';
 
-      it('deve retornar false quando campo não é obrigatório', () => {
-        component['campoTocado'] = true;
-        component.required = false;
-        component.value = '';
-        expect(component['validaRequired'](component.Value)).toBe(false);
-      });
+      const resultado = component['validaMaxDate']('2023-12-31');
 
-      it('deve retornar false quando campo não foi tocado', () => {
-        component['campoTocado'] = false;
-        component.required = true;
-        component.value = '';
-        expect(component['validaRequired'](component.Value)).toBe(false);
-      });
+      expect(resultado).toBe(false);
+    });
 
-      it('deve retornar false quando campo tem valor', () => {
-        component['campoTocado'] = true;
-        component.required = true;
-        component.value = '2023-01-01';
-        expect(component['validaRequired'](component.Value)).toBe(false);
-      });
+    it('deve retornar false quando valor é menor que maxDate', () => {
+      component.maxDate = '2023-12-31';
+
+      const resultado = component['validaMaxDate']('2023-12-30');
+
+      expect(resultado).toBe(false);
+    });
+  });
+
+  describe('Validação validaRequired', () => {
+    it('deve retornar false quando campo não é obrigatório', () => {
+      component.required = false;
+      component['campoTocado'] = true;
+
+      const resultado = component['validaRequired']('');
+
+      expect(resultado).toBe(false);
+    });
+
+    it('deve retornar true quando valor não está definido e campo é obrigatório', () => {
+      component.required = true;
+      component['campoTocado'] = true;
+
+      const resultado = component['validaRequired']('');
+
+      expect(resultado).toBe(true);
+    });
+
+    it('deve retornar true quando campo é obrigatório, tocado e valor está vazio', () => {
+      component.required = true;
+      component['campoTocado'] = true;
+
+      const resultado = component['validaRequired']('');
+
+      expect(resultado).toBe(true);
+    });
+
+    it('deve retornar false quando campo tem valor', () => {
+      component.required = true;
+      component['campoTocado'] = true;
+
+      const resultado = component['validaRequired']('2023-01-01');
+
+      expect(resultado).toBe(false);
     });
   });
 
   describe('Formatação de datas', () => {
     it('deve converter data do formato YYYY-MM-DD para DD/MM/YYYY', () => {
       const resultado = component['formatarData']('2023-03-15');
+
       expect(resultado).toBe('15/03/2023');
     });
 
     it('deve converter data com mês e dia de um dígito', () => {
       const resultado = component['formatarData']('2023-1-5');
+
       expect(resultado).toBe('5/1/2023');
+    });
+
+    it('deve retornar string vazia quando data não está definida', () => {
+      const resultado = component['formatarData']('');
+
+      expect(resultado).toBe('');
+    });
+
+    it('deve retornar string vazia quando data é undefined', () => {
+      const resultado = component['formatarData'](undefined);
+
+      expect(resultado).toBe('');
     });
   });
 
@@ -274,11 +312,6 @@ describe('MpcInputDateComponent', () => {
 
     it('deve inicializar campoTocado como false', () => {
       expect(component['campoTocado']).toBe(false);
-    });
-
-    it('deve permitir alterar campoTocado', () => {
-      component['campoTocado'] = true;
-      expect(component['campoTocado']).toBe(true);
     });
   });
 

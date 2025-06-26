@@ -19,11 +19,11 @@
       <div class="row">
         <div class="col-md-6 mb-3">
           <mpc-input-telefone [required]="true" (valor)="form.controls.telefone.setValue($event)"
-            (error)="form.controls.telefone.setErrors($event)" />
+            (error)="form.controls.telefone.setErrors($event)" [value]="form.value.telefone" />
         </div>
 
         <div class="col-md-6 mb-3">
-          <mpc-input-email [required]="true" (valor)="form.controls.email.setValue($event)"
+          <mpc-input-email [required]="true" [value]="form.value.email" (valor)="form.controls.email.setValue($event)"
             (error)="form.controls.email.setErrors($event)" />
         </div>
       </div>

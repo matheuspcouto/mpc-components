@@ -53,43 +53,17 @@ export class MpcInputDateComponent {
   protected errorMessage?: string;
   protected campoTocado: boolean = false;
 
-  set Value(value: string) {
-    this.value = value;
-    if (this.isCampoValido(this.value)) { this.valor.emit(this.value); }
-  }
-
-  get Value(): string {
-    return this.value as string;
-  }
-
-  onChange: (value: string) => void = () => { };
-  onTouched: () => void = () => { };
-
-  protected onBlur(): void {
-    this.onTouched();
-    this.isCampoValido(this.Value);
-  }
-
   protected onFocus(): void {
     this.campoTocado = true;
-    this.isCampoValido(this.Value);
-  }
-
-  registerOnChange(fn: (value: string) => void): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
+    this.isCampoValido(this.value);
   }
 
   protected setValue(event: any): void {
-    this.Value = event.target.value as string;
-    this.onChange(this.Value);
-    this.onTouched();
+    this.value = event.target.value as string;
+    if (this.isCampoValido(this.value)) { this.valor.emit(this.value); }
   }
 
-  private isCampoValido(value: string): boolean {
+  private isCampoValido(value: string | undefined): boolean {
     if (this.readonly || this.disabled) { return true; }
 
     if (this.validaRequired(value)) {
@@ -98,13 +72,13 @@ export class MpcInputDateComponent {
       return false;
     }
 
-    if (this.validaMinDate(value) && this.minDate) {
+    if (this.validaMinDate(value)) {
       this.errorMessage = `A data deve ser maior ou igual a ${this.formatarData(this.minDate)}`;
       this.error.emit({ 'minDate': true });
       return false;
     }
 
-    if (this.validaMaxDate(value) && this.maxDate) {
+    if (this.validaMaxDate(value)) {
       this.errorMessage = `A data deve ser menor ou igual a ${this.formatarData(this.maxDate)}`;
       this.error.emit({ 'maxDate': true });
       return false;
@@ -114,21 +88,26 @@ export class MpcInputDateComponent {
     return true;
   }
 
-  private validaMinDate(value: string): boolean {
+  private validaMinDate(value: string | undefined): boolean {
     if (!this.minDate) return false;
+    if (!value) return true;
     return new Date(value) < new Date(this.minDate);
   }
 
-  private validaMaxDate(value: string): boolean {
+  private validaMaxDate(value: string | undefined): boolean {
     if (!this.maxDate) return false;
+    if (!value) return true;
     return new Date(value) > new Date(this.maxDate);
   }
 
-  private validaRequired(value: string): boolean {
-    return this.campoTocado && this.required! && value.length === 0;
+  private validaRequired(value: string | undefined): boolean {
+    if (!this.required) return false;
+    if (!value) return true;
+    return this.campoTocado && this.required && value.length === 0;
   }
 
-  private formatarData(data: string): string {
+  private formatarData(data: string | undefined): string {
+    if (!data) return '';
     const ano = data.split('-')[0];
     const mes = data.split('-')[1];
     const dia = data.split('-')[2];

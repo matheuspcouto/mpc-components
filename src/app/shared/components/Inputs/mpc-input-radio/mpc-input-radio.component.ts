@@ -65,46 +65,16 @@ export class MpcInputRadioComponent implements OnInit {
     }
   }
 
-  set OpcaoSelecionada(option: RadioOption) {
-    this.opcaoSelecionada = option;
-    if (this.isCampoValido()) { this.valor.emit(this.OpcaoSelecionada.value); }
-  }
-
-  get OpcaoSelecionada(): RadioOption {
-    return this.opcaoSelecionada!;
-  }
-
-  protected onBlur(): void {
-    this.onTouched();
-    this.isCampoValido();
-  }
-
   protected onFocus(): void {
     this.campoTocado = true;
     this.isCampoValido();
   }
 
-  onChange: (option: RadioOption) => void = () => { };
-  onTouched: () => void = () => { };
-
-  writeValue(option: RadioOption): void {
-    this.OpcaoSelecionada = option;
-  }
-
-  registerOnChange(fn: (value: RadioOption) => void): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
-
   protected setValue(option: RadioOption): void {
     this.options.forEach(v => v.checked = false);
     option.checked = true;
-    this.OpcaoSelecionada = option;
-    this.onChange(this.OpcaoSelecionada);
-    this.onTouched();
+    this.opcaoSelecionada = option;
+    if (this.isCampoValido()) { this.valor.emit(this.opcaoSelecionada.value); }
   }
 
   private isCampoValido(): boolean {
@@ -121,6 +91,7 @@ export class MpcInputRadioComponent implements OnInit {
   }
 
   private validaRequired(): boolean {
-    return this.required! && this.campoTocado && !this.OpcaoSelecionada;
+    if (!this.required) return false;
+    return this.required && this.campoTocado && !this.opcaoSelecionada;
   }
 }

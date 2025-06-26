@@ -2,7 +2,7 @@
   <label class="form-label">{{ required ? label + ' *' : label }}</label>
 
   <input [id]="id" type="date" class="form-control" [value]="value" (input)="setValue($event)" [max]="maxDate"
-    [min]="minDate" (blur)="onBlur()" (focus)="onFocus()" [required]="required"
+    [min]="minDate" (focus)="onFocus()" [required]="required"
     [disabled]="disabled" [readOnly]="readonly" [style]="errorMessage ? 'border-color: red' : ''" />
 
   @if (errorMessage) {

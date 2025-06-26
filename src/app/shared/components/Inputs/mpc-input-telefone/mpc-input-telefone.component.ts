@@ -21,12 +21,13 @@
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
-import { NgxMaskDirective } from 'ngx-mask';
+import { TelefoneMaskPipe } from './telefone-mask.pipe';
 
-// TODO: Corrigir recuperação de Dados
+export const REGEX_TELEFONE = /^\(?(?:[14689][1-9]|2[12478]|3[1234578]|5[1345]|7[134579])\)? ?(?:[2-8]|9[1-9])[0-9]{3}\-?[0-9]{4}$/;
+
 @Component({
   selector: 'mpc-input-telefone',
-  imports: [NgxMaskDirective],
+  imports: [],
   templateUrl: './mpc-input-telefone.component.html',
   styleUrl: './mpc-input-telefone.component.css'
 })
@@ -41,58 +42,33 @@ export class MpcInputTelefoneComponent {
   @Input() required?: boolean = false;
   @Input() disabled?: boolean = false;
   @Input() readonly?: boolean = false;
-  regexTelefone: any = /^\(?(?:[14689][1-9]|2[12478]|3[1234578]|5[1345]|7[134579])\)? ?(?:[2-8]|9[1-9])[0-9]{3}\-?[0-9]{4}$/;
 
   @Output() valor: EventEmitter<string> = new EventEmitter();
   @Output() error: EventEmitter<ValidationErrors> = new EventEmitter();
 
-  @Input() value?: string = '';
+  @Input() value?: string;
 
   protected errorMessage?: string;
   protected campoTocado: boolean = false;
-  protected readonly mascara: string = '(00) 00000-0000';
 
-  set Value(value: string) {
-    this.value = value;
-    if (this.isCampoValido(this.value)) { this.valor.emit(this.value.replace(/\D/g, '')); }
-  }
+  private readonly telefoneMaskPipe = new TelefoneMaskPipe();
 
-  get Value(): string {
-    return this.value as string;
-  }
-
-  protected onBlur(): void {
-    this.onTouched();
-    this.isCampoValido(this.Value);
+  get valorFormatado(): string {
+    return this.telefoneMaskPipe.transform(this.value);
   }
 
   protected onFocus(): void {
     this.campoTocado = true;
-    this.isCampoValido(this.Value);
-  }
-
-  onChange: (value: string) => void = () => { };
-  onTouched: () => void = () => { };
-
-  writeValue(value: string): void {
-    this.value = value;
-  }
-
-  registerOnChange(fn: (value: string) => void): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
+    this.isCampoValido(this.value);
   }
 
   protected setValue(event: any): void {
-    this.Value = event.target.value;
-    this.onChange(this.Value);
-    this.onTouched();
+    this.value = event.target.value as string;
+    this.value = this.value.replace(/\D/g, '');
+    if (this.isCampoValido(this.value)) { this.valor.emit(this.value); }
   }
 
-  private isCampoValido(value: string): boolean {
+  private isCampoValido(value: string | undefined): boolean {
     if (this.readonly || this.disabled) { return true; }
 
     if (this.validaRequired(value)) {
@@ -111,12 +87,14 @@ export class MpcInputTelefoneComponent {
     return true;
   }
 
-  private validaRegex(value: string): boolean {
-    return !new RegExp(this.regexTelefone).test(value);
+  private validaRegex(value: string | undefined): boolean {
+    if (!value) return true;
+    return !new RegExp(REGEX_TELEFONE).test(value);
   }
 
-  private validaRequired(value: string): boolean {
-    return this.required! && value.length === 0;
+  private validaRequired(value: string | undefined): boolean {
+    if (!this.required) return false;
+    return this.required && (!value || value.length === 0);
   }
 
 }

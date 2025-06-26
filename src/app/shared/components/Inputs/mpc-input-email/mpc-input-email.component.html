@@ -2,7 +2,7 @@
   <label class="form-label">E-mail {{ required ? ' *' : '' }}</label>
 
   <div class="input-group">
-    <input [id]="id" type="email" class="form-control" [value]="value" (input)="setValue($event)" (blur)="onBlur()"
+    <input [id]="id" type="email" class="form-control" [value]="value" (input)="setValue($event)"
       [required]="required" [disabled]="disabled" [readOnly]="readonly"
       [style]="errorMessage ? 'border-color: red' : ''" (focus)="onFocus()" />
 

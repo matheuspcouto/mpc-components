@@ -37,15 +37,14 @@ export class MpcInputNumberComponent {
   @Input() tabIndex?: number = 0
   @Input() ariaLabel?: string = '';
 
-  @Input() value?: number = 0;
+  @Input() value?: number;
   @Input() label: string = '';
   @Input() disabled?: boolean = false;
   @Input() readonly?: boolean = false;
 
   // Validators
-  @Input() required?: boolean = false;
-  @Input() min?: string = '';
-  @Input() max?: string = '';
+  @Input() min?: number;
+  @Input() max?: number;
 
   @Output() valor: EventEmitter<number> = new EventEmitter();
   @Output() error: EventEmitter<ValidationErrors> = new EventEmitter();
@@ -53,54 +52,18 @@ export class MpcInputNumberComponent {
   protected errorMessage?: string;
   protected campoTocado: boolean = false;
 
-  set Value(value: number) {
-    this.value = value;
-    if (this.isCampoValido(this.value)) { this.valor.emit(this.value); }
-  }
-
-  get Value(): number {
-    return this.value as number;
-  }
-
-  onChange: (value?: number) => void = () => { };
-  onTouched: () => void = () => { };
-
-  protected onBlur(): void {
-    this.onTouched();
-    this.isCampoValido(this.Value);
-  }
-
   protected onFocus(): void {
     this.campoTocado = true;
-    this.isCampoValido(this.Value);
-  }
-
-  writeValue(value: number): void {
-    this.value = value;
-  }
-
-  registerOnChange(fn: (value?: number) => void): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
+    this.isCampoValido(this.value);
   }
 
   protected setValue(event: any): void {
-    this.Value = event.target.value as number;
-    this.onChange(this.Value);
-    this.onTouched();
+    this.value = event.target.value as number;
+    if (this.isCampoValido(this.value)) { this.valor.emit(this.value); }
   }
 
-  private isCampoValido(value: number): boolean {
+  private isCampoValido(value: number | undefined): boolean {
     if (this.readonly || this.disabled) { return true; }
-
-    if (this.validaRequired(value)) {
-      this.errorMessage = `O campo ${this.label} é obrigatório`;
-      this.error.emit({ required: true });
-      return false;
-    }
 
     if (this.validaMin(value)) {
       this.errorMessage = `O valor mínimo para o campo ${this.label} é ${this.min}`;
@@ -118,24 +81,16 @@ export class MpcInputNumberComponent {
     return true;
   }
 
-  private validaMin(value: number): boolean {
-    if (this.min) {
-      let minNumber = parseInt(this.min);
-      return value ? value < minNumber : false;
-    }
-    return false;
+  private validaMin(value: number | undefined): boolean {
+    if (!this.min) return false;
+    if (!value) return true;
+    return value < this.min;
   }
 
-  private validaMax(value: number): boolean {
-    if (this.max) {
-      let maxNumber = parseInt(this.max);
-      return value ? value > maxNumber : false;
-    }
-    return false;
-  }
-
-  private validaRequired(value: number): boolean {
-    return this.campoTocado && this.required! && value === 0;
+  private validaMax(value: number | undefined): boolean {
+    if (!this.max) return false;
+    if (!value) return true;
+    return value > this.max;
   }
 
 }

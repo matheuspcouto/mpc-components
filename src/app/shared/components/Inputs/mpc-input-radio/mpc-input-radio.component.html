@@ -6,7 +6,7 @@
     @for (option of options; track $index) {
     <label class="p-3">
       <input [id]="id" (focus)="onFocus()" type="radio" (change)="setValue(option)"
-        [checked]="option.checked" (blur)="onBlur()" [required]="required" [disabled]="disabled"
+        [checked]="option.checked" [required]="required" [disabled]="disabled"
         [readOnly]="readonly" /> {{ option.label }}
     </label>
     }

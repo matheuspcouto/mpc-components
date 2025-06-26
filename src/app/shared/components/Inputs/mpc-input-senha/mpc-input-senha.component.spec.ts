@@ -51,74 +51,47 @@ describe('MpcInputSenhaComponent', () => {
 
   describe('Propriedades protegidas', () => {
     it('deve inicializar propriedades protegidas com valores padrão', () => {
-      expect(component['value']).toBe('');
+      expect(component['value']).toBeUndefined();
       expect(component['errorMessage']).toBeUndefined();
       expect(component['campoTocado']).toBe(false);
       expect(component['ocultarSenha']).toBe(true);
     });
   });
 
-  describe('Getter e Setter Value', () => {
-    it('deve definir e obter valor através do setter/getter', () => {
-      jest.spyOn(component as any, 'isCampoValido').mockReturnValue(true);
-      jest.spyOn(component.valor, 'emit');
+  describe('onFocus', () => {
+    it('deve marcar campo como tocado e validar campo', () => {
+      jest.spyOn(component as any, 'isCampoValido');
 
-      component.Value = 'minhasenha123';
-
-      expect(component.Value).toBe('minhasenha123');
-      expect(component['isCampoValido']).toHaveBeenCalled();
-      expect(component.valor.emit).toHaveBeenCalledWith('minhasenha123');
-    });
-
-    it('não deve emitir valor quando campo é inválido', () => {
-      jest.spyOn(component as any, 'isCampoValido').mockReturnValue(false);
-      jest.spyOn(component.valor, 'emit');
-
-      component.Value = '';
-
-      expect(component.valor.emit).not.toHaveBeenCalled();
-    });
-  });
-
-  describe('ControlValueAccessor', () => {
-    it('deve implementar writeValue', () => {
-      component.writeValue('novasenha');
-      expect(component['value']).toBe('novasenha');
-    });
-
-    it('deve implementar registerOnChange', () => {
-      const mockFn = jest.fn();
-      component.registerOnChange(mockFn);
-      expect(component.onChange).toBe(mockFn);
-    });
-
-    it('deve implementar registerOnTouched', () => {
-      const mockFn = jest.fn();
-      component.registerOnTouched(mockFn);
-      expect(component.onTouched).toBe(mockFn);
-    });
-
-    it('deve chamar onBlur', () => {
-      component['onBlur']();
-    });
-
-    it('deve chamar onFocus', () => {
       component['onFocus']();
+
       expect(component['campoTocado']).toBe(true);
+      expect(component['isCampoValido']).toHaveBeenCalledWith(component['value']);
     });
   });
 
   describe('setValue', () => {
-    it('deve definir valor e chamar callbacks', () => {
-      const spyOnChange = jest.spyOn(component, 'onChange');
-      const spyOnTouched = jest.spyOn(component, 'onTouched');
+    it('deve definir valor e emitir quando campo é válido', () => {
       const mockEvent = { target: { value: 'senha123' } };
+      jest.spyOn(component as any, 'isCampoValido').mockReturnValue(true);
+      jest.spyOn(component.valor, 'emit');
 
       component['setValue'](mockEvent);
 
-      expect(component.Value).toBe('senha123');
-      expect(spyOnChange).toHaveBeenCalledWith('senha123');
-      expect(spyOnTouched).toHaveBeenCalled();
+      expect(component['value']).toBe('senha123');
+      expect(component['isCampoValido']).toHaveBeenCalledWith('senha123');
+      expect(component.valor.emit).toHaveBeenCalledWith('senha123');
+    });
+
+    it('deve definir valor mas não emitir quando campo é inválido', () => {
+      const mockEvent = { target: { value: 'senha123' } };
+      jest.spyOn(component as any, 'isCampoValido').mockReturnValue(false);
+      jest.spyOn(component.valor, 'emit');
+
+      component['setValue'](mockEvent);
+
+      expect(component['value']).toBe('senha123');
+      expect(component['isCampoValido']).toHaveBeenCalledWith('senha123');
+      expect(component.valor.emit).not.toHaveBeenCalled();
     });
   });
 
@@ -126,20 +99,36 @@ describe('MpcInputSenhaComponent', () => {
     describe('isCampoValido', () => {
       it('deve retornar true quando campo é readonly', () => {
         component.readonly = true;
-        expect(component['isCampoValido'](component.Value)).toBe(true);
+
+        const resultado = component['isCampoValido']('qualquervalor');
+
+        expect(resultado).toBe(true);
       });
 
       it('deve retornar true quando campo é disabled', () => {
         component.disabled = true;
-        expect(component['isCampoValido'](component.Value)).toBe(true);
+
+        const resultado = component['isCampoValido']('qualquervalor');
+
+        expect(resultado).toBe(true);
       });
 
       it('deve retornar false quando required e valor vazio', () => {
         component.required = true;
-        component['value'] = '';
         jest.spyOn(component.error, 'emit');
 
-        const resultado = component['isCampoValido'](component.Value);
+        const resultado = component['isCampoValido']('');
+
+        expect(resultado).toBe(false);
+        expect(component['errorMessage']).toBe('O campo senha é obrigatório');
+        expect(component.error.emit).toHaveBeenCalledWith({ required: true });
+      });
+
+      it('deve retornar false quando required e valor undefined', () => {
+        component.required = true;
+        jest.spyOn(component.error, 'emit');
+
+        const resultado = component['isCampoValido'](undefined);
 
         expect(resultado).toBe(false);
         expect(component['errorMessage']).toBe('O campo senha é obrigatório');
@@ -148,10 +137,9 @@ describe('MpcInputSenhaComponent', () => {
 
       it('deve retornar false quando regex não é atendido', () => {
         component.regexSenha = '^(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$';
-        component['value'] = 'senhafraca';
         jest.spyOn(component.error, 'emit');
 
-        const resultado = component['isCampoValido'](component.Value);
+        const resultado = component['isCampoValido']('senhafraca');
 
         expect(resultado).toBe(false);
         expect(component['errorMessage']).toBe('A senha não está em um formato válido');
@@ -161,9 +149,8 @@ describe('MpcInputSenhaComponent', () => {
       it('deve retornar true quando todas as validações passam', () => {
         component.required = true;
         component.regexSenha = '^(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$';
-        component['value'] = 'SenhaForte123';
 
-        const resultado = component['isCampoValido'](component.Value);
+        const resultado = component['isCampoValido']('SenhaForte123');
 
         expect(resultado).toBe(true);
         expect(component['errorMessage']).toBeUndefined();
@@ -172,86 +159,117 @@ describe('MpcInputSenhaComponent', () => {
       it('deve priorizar validação required sobre regex', () => {
         component.required = true;
         component.regexSenha = '^(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$';
-        component['value'] = '';
         jest.spyOn(component.error, 'emit');
 
-        const resultado = component['isCampoValido'](component.Value);
+        const resultado = component['isCampoValido']('');
 
         expect(resultado).toBe(false);
         expect(component['errorMessage']).toBe('O campo senha é obrigatório');
         expect(component.error.emit).toHaveBeenCalledWith({ required: true });
+      });
+
+      it('deve limpar errorMessage quando campo é válido', () => {
+        component['errorMessage'] = 'Erro anterior';
+        component.required = false;
+        component.regexSenha = '';
+
+        const resultado = component['isCampoValido']('senhavalida');
+
+        expect(resultado).toBe(true);
+        expect(component['errorMessage']).toBeUndefined();
       });
     });
 
     describe('validaRequired', () => {
       it('deve retornar true quando required e valor vazio', () => {
         component.required = true;
-        component['value'] = '';
-        expect(component['validaRequired'](component.Value)).toBe(true);
+
+        const resultado = component['validaRequired']('');
+
+        expect(resultado).toBe(true);
+      });
+
+      it('deve retornar true quando required e valor undefined', () => {
+        component.required = true;
+
+        const resultado = component['validaRequired'](undefined);
+
+        expect(resultado).toBe(true);
       });
 
       it('deve retornar false quando required e valor preenchido', () => {
         component.required = true;
-        component['value'] = 'senha123';
-        expect(component['validaRequired'](component.Value)).toBe(false);
+
+        const resultado = component['validaRequired']('senha123');
+
+        expect(resultado).toBe(false);
       });
 
       it('deve retornar false quando não required', () => {
         component.required = false;
-        component['value'] = '';
-        expect(component['validaRequired'](component.Value)).toBe(false);
+
+        const resultado = component['validaRequired']('');
+
+        expect(resultado).toBe(false);
+      });
+
+      it('deve retornar false quando required é undefined', () => {
+        component.required = undefined;
+
+        const resultado = component['validaRequired']('');
+
+        expect(resultado).toBe(false);
       });
     });
 
     describe('validaRegex', () => {
       it('deve retornar true quando valor não atende regex', () => {
         component.regexSenha = '^(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$';
-        component['value'] = 'senhafraca';
-        expect(component['validaRegex'](component.Value)).toBe(true);
+
+        const resultado = component['validaRegex']('senhafraca');
+
+        expect(resultado).toBe(true);
       });
 
       it('deve retornar false quando valor atende regex', () => {
         component.regexSenha = '^(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$';
-        component['value'] = 'SenhaForte123';
-        expect(component['validaRegex'](component.Value)).toBe(false);
+
+        const resultado = component['validaRegex']('SenhaForte123');
+
+        expect(resultado).toBe(false);
       });
 
       it('deve retornar false quando regex está vazio', () => {
         component.regexSenha = '';
-        component['value'] = 'qualquersenha';
-        expect(component['validaRegex'](component.Value)).toBe(false);
+
+        const resultado = component['validaRegex']('qualquersenha');
+
+        expect(resultado).toBe(false);
       });
-    });
-  });
 
-  describe('EventEmitters', () => {
-    it('deve emitir valor quando campo válido', () => {
-      jest.spyOn(component.valor, 'emit');
-      jest.spyOn(component as any, 'isCampoValido').mockReturnValue(true);
+      it('deve retornar false quando regex é undefined', () => {
+        component.regexSenha = undefined;
 
-      component.Value = 'senha123';
+        const resultado = component['validaRegex']('qualquersenha');
 
-      expect(component.valor.emit).toHaveBeenCalledWith('senha123');
-    });
+        expect(resultado).toBe(false);
+      });
 
-    it('deve emitir erro de required', () => {
-      jest.spyOn(component.error, 'emit');
-      component.required = true;
-      component['value'] = '';
+      it('deve retornar true quando valor é undefined e regex existe', () => {
+        component.regexSenha = '^(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$';
 
-      component['isCampoValido'](component.Value);
+        const resultado = component['validaRegex'](undefined);
 
-      expect(component.error.emit).toHaveBeenCalledWith({ required: true });
-    });
+        expect(resultado).toBe(true);
+      });
 
-    it('deve emitir erro de regex', () => {
-      jest.spyOn(component.error, 'emit');
-      component.regexSenha = '^(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$';
-      component['value'] = 'senhafraca';
+      it('deve retornar true quando valor é vazio e regex existe', () => {
+        component.regexSenha = '^(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$';
 
-      component['isCampoValido'](component.Value);
+        const resultado = component['validaRegex']('');
 
-      expect(component.error.emit).toHaveBeenCalledWith({ regex: true });
+        expect(resultado).toBe(true);
+      });
     });
   });
 });

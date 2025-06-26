@@ -52,6 +52,7 @@ export class MpcInputSelectComponent implements OnInit {
   @Output() error: EventEmitter<ValidationErrors> = new EventEmitter();
 
   protected opcaoSelecionada?: SelectOption;
+
   protected errorMessage?: string;
   protected campoTocado: boolean = false;
 
@@ -74,50 +75,18 @@ export class MpcInputSelectComponent implements OnInit {
     }
   }
 
-  set OpcaoSelecionada(option: SelectOption) {
-    this.opcaoSelecionada = option;
-    this.campoTocado = true;
-
-    if (this.isCampoValido()) {
-      this.valor.emit(this.opcaoSelecionada?.value);
-    }
-  }
-
-  get OpcaoSelecionada(): SelectOption {
-    return this.opcaoSelecionada!;
-  }
-
-  protected onBlur(): void {
-    this.onTouched();
-    this.isCampoValido();
-  }
-
   protected onFocus(): void {
     this.campoTocado = true;
     this.isCampoValido();
   }
 
-  onChange: (option: SelectOption) => void = () => { };
-  onTouched: () => void = () => { };
-
-  registerOnChange(fn: (option: SelectOption) => void): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
-
   setValue(option: any): void {
-    this.OpcaoSelecionada = option as SelectOption;
-    this.onChange(this.OpcaoSelecionada);
-    this.onTouched();
+    this.opcaoSelecionada = option as SelectOption;
+    if (this.isCampoValido()) { this.valor.emit(this.opcaoSelecionada?.value) }
   }
 
   private isCampoValido(): boolean {
-    if (this.disabled) {
-      return true;
-    }
+    if (this.disabled) return true;
 
     if (this.validaRequired()) {
       this.errorMessage = `O campo ${this.label} é obrigatório`;
@@ -126,14 +95,15 @@ export class MpcInputSelectComponent implements OnInit {
     }
 
     this.errorMessage = undefined;
-    this.error.emit({});
+    this.error.emit({ required : true });
     return true;
   }
 
   private validaRequired(): boolean {
-    return this.required! && this.campoTocado &&
-      (!this.OpcaoSelecionada ||
-        this.OpcaoSelecionada.value === '' ||
-        this.OpcaoSelecionada.value === 'Selecione');
+    if (!this.required) return false;
+    return this.required && this.campoTocado &&
+      (!this.opcaoSelecionada ||
+        this.opcaoSelecionada.value === '' ||
+        this.opcaoSelecionada.value === 'Selecione');
   }
 }

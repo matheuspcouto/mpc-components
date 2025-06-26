@@ -18,25 +18,24 @@
  * @updated 27/02/2025
  */
 
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
 import { CpfCnpjMaskPipe } from './cpf-cnpj-mask.pipe';
 
-// TODO: Corrigir recuperação de Dados
 @Component({
   selector: 'mpc-input-cpfcnpj',
   imports: [],
   templateUrl: './mpc-input-cpfcnpj.component.html',
   styleUrl: './mpc-input-cpfcnpj.component.css'
 })
-export class MpcInputCpfcnpjComponent implements OnChanges {
+export class MpcInputCpfcnpjComponent {
 
   // Acessibilidade
   @Input() id?: string = '';
   @Input() tabIndex?: number = 0
   @Input() ariaLabel?: string = '';
 
-  @Input() value?: string = '';
+  @Input() value?: string;
   @Input() disabled?: boolean = false;
   @Input() readonly?: boolean = false;
 
@@ -51,22 +50,8 @@ export class MpcInputCpfcnpjComponent implements OnChanges {
 
   private readonly cpfCnpjMaskPipe = new CpfCnpjMaskPipe();
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['value']) {
-      this.value = changes['value'].currentValue;
-      if (this.value) {
-        this.isCampoValido(this.value);
-      }
-    }
-  }
-
   get valorFormatado(): string {
     return this.cpfCnpjMaskPipe.transform(this.value);
-  }
-
-  protected onBlur(): void {
-    this.onTouched();
-    this.isCampoValido(this.value);
   }
 
   protected onFocus(): void {
@@ -74,26 +59,10 @@ export class MpcInputCpfcnpjComponent implements OnChanges {
     this.isCampoValido(this.value);
   }
 
-  onChange: (value: string) => void = () => { };
-  onTouched: () => void = () => { };
-
-  writeValue(value: string): void {
-    this.value = value;
-  }
-
-  registerOnChange(fn: (value: string) => void): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
-
   protected setValue(event: any): void {
     this.value = event.target.value as string;
-    this.onChange(this.value);
-    this.onTouched();
-    if (this.isCampoValido(this.value)) { this.valor.emit(this.value.replace(/\D/g, '')); }
+    this.value = this.value.replace(/\D/g, '');
+    if (this.isCampoValido(this.value)) { this.valor.emit(this.value); }
   }
 
   private isCampoValido(value: string | undefined): boolean {
@@ -174,7 +143,7 @@ export class MpcInputCpfcnpjComponent implements OnChanges {
   }
 
   private isValidCpfOrCnpj(value: string | undefined): boolean {
-    if (value && value.length !== 11) {
+    if (value && value.length <= 11) {
       return this.isValidCPF(value);
     } else {
       return this.isValidCNPJ(value);

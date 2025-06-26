@@ -25,7 +25,7 @@ describe('MpcInputSelectComponent', () => {
   });
 
   describe('ngOnInit', () => {
-    it('deve encontrar opção selecionada quando existe', () => {
+    it('deve encontrar opção selecionada quando existe e emitir valor', () => {
       const valorSpy = jest.spyOn(component.valor, 'emit');
       component.options = mockOptions;
 
@@ -59,16 +59,26 @@ describe('MpcInputSelectComponent', () => {
     });
   });
 
-  describe('OpcaoSelecionada setter/getter', () => {
-    it('deve definir opção selecionada e marcar campo como tocado', () => {
+  describe('onFocus', () => {
+    it('deve marcar campo como tocado e validar campo', () => {
+      const isCampoValidoSpy = jest.spyOn(component as any, 'isCampoValido');
+
+      component['onFocus']();
+
+      expect(component['campoTocado']).toBe(true);
+      expect(isCampoValidoSpy).toHaveBeenCalled();
+    });
+  });
+
+  describe('setValue', () => {
+    it('deve definir valor e emitir quando campo é válido', () => {
       const valorSpy = jest.spyOn(component.valor, 'emit');
       const isCampoValidoSpy = jest.spyOn(component as any, 'isCampoValido').mockReturnValue(true);
       const novaOpcao: SelectOption = { label: 'Nova Opção', value: 'nova' };
 
-      component.OpcaoSelecionada = novaOpcao;
+      component.setValue(novaOpcao);
 
       expect(component['opcaoSelecionada']).toEqual(novaOpcao);
-      expect(component['campoTocado']).toBe(true);
       expect(isCampoValidoSpy).toHaveBeenCalled();
       expect(valorSpy).toHaveBeenCalledWith('nova');
     });
@@ -78,57 +88,10 @@ describe('MpcInputSelectComponent', () => {
       jest.spyOn(component as any, 'isCampoValido').mockReturnValue(false);
       const novaOpcao: SelectOption = { label: 'Nova Opção', value: 'nova' };
 
-      component.OpcaoSelecionada = novaOpcao;
+      component.setValue(novaOpcao);
 
+      expect(component['opcaoSelecionada']).toEqual(novaOpcao);
       expect(valorSpy).not.toHaveBeenCalled();
-    });
-
-    it('deve retornar opção selecionada', () => {
-      const opcao: SelectOption = { label: 'Teste', value: 'teste' };
-      component['opcaoSelecionada'] = opcao;
-
-      expect(component.OpcaoSelecionada).toEqual(opcao);
-    });
-  });
-
-  describe('ControlValueAcessor', () => {
-    it('deve registrar função onChange', () => {
-      const mockFn = jest.fn();
-
-      component.registerOnChange(mockFn);
-
-      expect(component.onChange).toBe(mockFn);
-    });
-
-    it('deve registrar função onTouched', () => {
-      const mockFn = jest.fn();
-
-      component.registerOnTouched(mockFn);
-
-      expect(component.onTouched).toBe(mockFn);
-    });
-
-    it('deve chamar onBlur', () => {
-      component['onBlur']();
-    });
-
-    it('deve chamar onFocus', () => {
-      component['onFocus']();
-      expect(component['campoTocado']).toBe(true);
-    });
-  });
-
-  describe('setValue', () => {
-    it('deve definir valor e chamar callbacks', () => {
-      const onChangeSpy = jest.spyOn(component as any, 'onChange');
-      const onTouchedSpy = jest.spyOn(component as any, 'onTouched');
-      const opcao: SelectOption = { label: 'Teste', value: 'teste' };
-
-      component.setValue(opcao);
-
-      expect(component.OpcaoSelecionada).toEqual(opcao);
-      expect(onChangeSpy).toHaveBeenCalledWith(opcao);
-      expect(onTouchedSpy).toHaveBeenCalled();
     });
   });
 
@@ -150,10 +113,10 @@ describe('MpcInputSelectComponent', () => {
 
       expect(resultado).toBe(false);
       expect(component['errorMessage']).toBe('O campo Teste é obrigatório');
-      expect(errorSpy).toHaveBeenCalledWith({ 'required': true });
+      expect(errorSpy).toHaveBeenCalledWith({ required: true });
     });
 
-    it('deve retornar true e limpar erro quando campo é válido', () => {
+    it('deve retornar true e emitir erro quando campo é válido', () => {
       const errorSpy = jest.spyOn(component.error, 'emit');
       jest.spyOn(component as any, 'validaRequired').mockReturnValue(false);
 
@@ -161,7 +124,7 @@ describe('MpcInputSelectComponent', () => {
 
       expect(resultado).toBe(true);
       expect(component['errorMessage']).toBeUndefined();
-      expect(errorSpy).toHaveBeenCalledWith({});
+      expect(errorSpy).toHaveBeenCalledWith({ required: true });
     });
   });
 

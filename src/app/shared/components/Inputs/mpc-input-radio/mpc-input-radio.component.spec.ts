@@ -47,15 +47,30 @@ describe('MpcInputRadioComponent', () => {
     });
   });
 
-  describe('OpcaoSelecionada setter/getter', () => {
-    it('deve definir e retornar opção selecionada', () => {
+  describe('onFocus', () => {
+    it('deve marcar campo como tocado e validar campo', () => {
+      const spyIsCampoValido = jest.spyOn(component as any, 'isCampoValido');
+
+      component['onFocus']();
+
+      expect(component['campoTocado']).toBe(true);
+      expect(spyIsCampoValido).toHaveBeenCalled();
+    });
+  });
+
+  describe('setValue', () => {
+    it('deve definir valor da opção, desmarcar outras opções e emitir valor quando campo é válido', () => {
       const opcao = mockOptions[0];
       const spyIsCampoValido = jest.spyOn(component as any, 'isCampoValido').mockReturnValue(true);
       const spyEmit = jest.spyOn(component.valor, 'emit');
+      component.options = [...mockOptions];
 
-      component.OpcaoSelecionada = opcao;
+      component['setValue'](opcao);
 
-      expect(component.OpcaoSelecionada).toBe(opcao);
+      expect(component.options[0].checked).toBe(true);
+      expect(component.options[1].checked).toBe(false);
+      expect(component.options[2].checked).toBe(false);
+      expect(component['opcaoSelecionada']).toBe(opcao);
       expect(spyIsCampoValido).toHaveBeenCalled();
       expect(spyEmit).toHaveBeenCalledWith('M');
     });
@@ -64,67 +79,13 @@ describe('MpcInputRadioComponent', () => {
       const opcao = mockOptions[0];
       const spyIsCampoValido = jest.spyOn(component as any, 'isCampoValido').mockReturnValue(false);
       const spyEmit = jest.spyOn(component.valor, 'emit');
-
-      component.OpcaoSelecionada = opcao;
-
-      expect(spyEmit).not.toHaveBeenCalled();
-    });
-  });
-
-  describe('writeValue', () => {
-    it('deve definir opção selecionada através do writeValue', () => {
-      const opcao = mockOptions[1];
-      const spyOpcaoSelecionada = jest.spyOn(component as any, 'OpcaoSelecionada', 'set');
-
-      component.writeValue(opcao);
-
-      expect(spyOpcaoSelecionada).toHaveBeenCalledWith(opcao);
-    });
-  });
-
-  describe('ControlValueAccessor', () => {
-    it('deve registrar função onChange', () => {
-      const mockFn = jest.fn();
-
-      component.registerOnChange(mockFn);
-
-      expect(component.onChange).toBe(mockFn);
-    });
-
-    it('deve registrar função onTouched', () => {
-      const mockFn = jest.fn();
-
-      component.registerOnTouched(mockFn);
-
-      expect(component.onTouched).toBe(mockFn);
-    });
-
-    it('deve chamar onBlur', () => {
-      component['onBlur']();
-    });
-
-    it('deve chamar onFocus', () => {
-      component['onFocus']();
-      expect(component['campoTocado']).toBe(true);
-    });
-  });
-
-  describe('setValue', () => {
-    it('deve definir valor da opção e chamar callbacks', () => {
-      const opcao = mockOptions[0];
-      const spyOnChange = jest.spyOn(component as any, 'onChange');
-      const spyOnTouched = jest.spyOn(component as any, 'onTouched');
-      const spyOpcaoSelecionada = jest.spyOn(component as any, 'OpcaoSelecionada', 'set');
       component.options = [...mockOptions];
 
       component['setValue'](opcao);
 
       expect(component.options[0].checked).toBe(true);
-      expect(component.options[1].checked).toBe(false);
-      expect(component.options[2].checked).toBe(false);
-      expect(spyOpcaoSelecionada).toHaveBeenCalledWith(opcao);
-      expect(spyOnChange).toHaveBeenCalledWith(opcao);
-      expect(spyOnTouched).toHaveBeenCalled();
+      expect(component['opcaoSelecionada']).toBe(opcao);
+      expect(spyEmit).not.toHaveBeenCalled();
     });
   });
 
