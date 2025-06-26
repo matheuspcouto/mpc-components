@@ -18,18 +18,18 @@
  * @updated 27/02/2025
  */
 
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
-import { NgxMaskDirective } from 'ngx-mask';
+import { CpfCnpjMaskPipe } from './cpf-cnpj-mask.pipe';
 
 // TODO: Corrigir recuperação de Dados
 @Component({
   selector: 'mpc-input-cpfcnpj',
-  imports: [NgxMaskDirective],
+  imports: [],
   templateUrl: './mpc-input-cpfcnpj.component.html',
   styleUrl: './mpc-input-cpfcnpj.component.css'
 })
-export class MpcInputCpfcnpjComponent {
+export class MpcInputCpfcnpjComponent implements OnChanges {
 
   // Acessibilidade
   @Input() id?: string = '';
@@ -42,9 +42,6 @@ export class MpcInputCpfcnpjComponent {
 
   // Validators
   @Input() required: boolean = false;
-  private readonly mascaraCPF: string = '000.000.000-009';
-  private readonly mascaraCNPJ: string = '00.000.000/0000-00';
-  protected mascara: string = this.mascaraCPF;
 
   @Output() valor: EventEmitter<string> = new EventEmitter<string>();
   @Output() error: EventEmitter<ValidationErrors> = new EventEmitter<ValidationErrors>();
@@ -52,23 +49,29 @@ export class MpcInputCpfcnpjComponent {
   protected errorMessage?: string;
   protected campoTocado: boolean = false;
 
-  set Value(value: string) {
-    this.value = value.replace(/\D/g, '') || '';
-    if (this.isCampoValido(this.value)) { this.valor.emit(this.value); }
+  private readonly cpfCnpjMaskPipe = new CpfCnpjMaskPipe();
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['value']) {
+      this.value = changes['value'].currentValue;
+      if (this.value) {
+        this.isCampoValido(this.value);
+      }
+    }
   }
 
-  get Value(): string {
-    return this.value as string;
+  get valorFormatado(): string {
+    return this.cpfCnpjMaskPipe.transform(this.value);
   }
 
   protected onBlur(): void {
     this.onTouched();
-    this.isCampoValido(this.Value);
+    this.isCampoValido(this.value);
   }
 
   protected onFocus(): void {
     this.campoTocado = true;
-    this.isCampoValido(this.Value);
+    this.isCampoValido(this.value);
   }
 
   onChange: (value: string) => void = () => { };
@@ -87,19 +90,13 @@ export class MpcInputCpfcnpjComponent {
   }
 
   protected setValue(event: any): void {
-    this.Value = event.target.value as string;
-    this.onChange(this.Value);
+    this.value = event.target.value as string;
+    this.onChange(this.value);
     this.onTouched();
-    this.atualizarMascara();
+    if (this.isCampoValido(this.value)) { this.valor.emit(this.value.replace(/\D/g, '')); }
   }
 
-  private atualizarMascara(): void {
-    if (!this.value || this.value.length === 0) return;
-    const valorSemCaracteresEspeciais = this.value.replace(/\D/g, '');
-    this.mascara = valorSemCaracteresEspeciais.length > 11 ? this.mascaraCNPJ : this.mascaraCPF;
-  }
-
-  private isCampoValido(value: string): boolean {
+  private isCampoValido(value: string | undefined): boolean {
     if (this.readonly || this.disabled) {
       return true;
     }
@@ -110,7 +107,7 @@ export class MpcInputCpfcnpjComponent {
       return false;
     }
 
-    if (!this.isValidCpfOrCnpj()) {
+    if (!this.isValidCpfOrCnpj(value)) {
       this.errorMessage = `O formato do CPF/CNPJ não é válido`;
       this.error.emit({ regex: true });
       return false;
@@ -120,12 +117,12 @@ export class MpcInputCpfcnpjComponent {
     return true;
   }
 
-  private validaRequired(value: string): boolean {
+  private validaRequired(value: string | undefined): boolean {
     return this.required && (!value || value.length === 0);
   }
 
-  private isValidCPF(): boolean {
-    const cpf: string = this.Value.replace(/\D/g, '');
+  private isValidCPF(cpf: string | undefined): boolean {
+    cpf = cpf ? cpf.replace(/\D/g, '') : '';
 
     if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) {
       return false;
@@ -150,8 +147,8 @@ export class MpcInputCpfcnpjComponent {
     return secondDigit === parseInt(cpf.charAt(10));
   }
 
-  private isValidCNPJ(): boolean {
-    const cnpj: string = this.Value.replace(/\D/g, '');
+  private isValidCNPJ(cnpj: string | undefined): boolean {
+    cnpj = cnpj ? cnpj.replace(/[^\d]+/g, '') : '';
 
     if (cnpj.length !== 14 || /^(\d)\1+$/.test(cnpj)) {
       return false;
@@ -176,12 +173,11 @@ export class MpcInputCpfcnpjComponent {
     return digit1 === numbers[12] && digit2 === numbers[13];
   }
 
-  private isValidCpfOrCnpj(): boolean {
-    const valorLimpo: string = this.Value.replace(/\D/g, '');
-    if (valorLimpo.length <= 11) {
-      return this.isValidCPF();
+  private isValidCpfOrCnpj(value: string | undefined): boolean {
+    if (value && value.length !== 11) {
+      return this.isValidCPF(value);
     } else {
-      return this.isValidCNPJ();
+      return this.isValidCNPJ(value);
     }
   }
 }

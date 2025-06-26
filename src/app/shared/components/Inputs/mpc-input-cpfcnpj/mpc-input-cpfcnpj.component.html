@@ -2,8 +2,8 @@
   <label class="form-label">CPF/CNPJ{{ required ? ' *' : '' }}</label>
 
   <div class="input-group">
-    <input [id]="id" type="text" class="form-control" [value]="value" (input)="setValue($event)" (blur)="onBlur()"
-      [required]="required" [style]="errorMessage ? 'border-color: red' : ''" [mask]="mascara" [disabled]="disabled"
+    <input [id]="id" type="text" class="form-control" [value]="valorFormatado" (input)="setValue($event)" (blur)="onBlur()"
+      [required]="required" [style]="errorMessage ? 'border-color: red' : ''" [disabled]="disabled"
       [readOnly]="readonly" (focus)="onFocus()" />
 
     @if (campoTocado) {
