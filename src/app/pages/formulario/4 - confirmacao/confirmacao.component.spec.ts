@@ -97,6 +97,17 @@ describe('ConfirmacaoComponent', () => {
       expect(mockInscricaoService.getDadosInscricao).toHaveBeenCalled();
       expect(component['dadosInscricao']).toBeInstanceOf(Inscricao);
     });
+
+    it('voltar para a rota anterior ao clicar no botão', () => {
+      const mockRouter = {
+        navigate: jest.fn()
+      } as any;
+
+      component['router'] = mockRouter;
+      component['voltar']();
+
+      expect(mockRouter.navigate).toHaveBeenCalled();
+    });
   });
 
   describe('formatarValor', () => {

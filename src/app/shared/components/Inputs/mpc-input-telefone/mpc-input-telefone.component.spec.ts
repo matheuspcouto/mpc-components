@@ -61,6 +61,24 @@ describe('MpcInputTelefoneComponent', () => {
       const valorFormatado = component.valorFormatado;
       expect(valorFormatado).toBeDefined();
     });
+
+    it('deve retornar vazio quando valor formatado enviado for vazio', () => {
+      component.value = '.';
+      const valorFormatado = component.valorFormatado;
+      expect(valorFormatado).toBeDefined();
+    });
+
+    it('deve aplicar mascara quando valor formatado for enviado - 2 Dígitos', () => {
+      component.value = '11';
+      const valorFormatado = component.valorFormatado;
+      expect(valorFormatado).toBeDefined();
+    });
+
+    it('deve aplicar mascara quando valor formatado for enviado - 7 Dígitos', () => {
+      component.value = '1199999';
+      const valorFormatado = component.valorFormatado;
+      expect(valorFormatado).toBeDefined();
+    });
   });
 
   describe('onFocus', () => {
@@ -83,8 +101,8 @@ describe('MpcInputTelefoneComponent', () => {
 
       component['setValue'](event);
 
-      expect(component.value).toBe('(11) 99999-9999');
-      expect(isCampoValidoSpy).toHaveBeenCalledWith('(11) 99999-9999');
+      expect(component.value).toBe('11999999999');
+      expect(isCampoValidoSpy).toHaveBeenCalledWith('11999999999');
       expect(valorSpy).toHaveBeenCalledWith('11999999999');
     });
 

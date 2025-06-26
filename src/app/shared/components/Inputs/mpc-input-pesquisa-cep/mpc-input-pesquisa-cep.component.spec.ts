@@ -3,7 +3,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { MpcInputPesquisaCepComponent, Endereco } from './mpc-input-pesquisa-cep.component';
 
 describe('MpcInputPesquisaCepComponent', () => {
-  let componente: MpcInputPesquisaCepComponent;
+  let component: MpcInputPesquisaCepComponent;
   let fixture: ComponentFixture<MpcInputPesquisaCepComponent>;
   let httpMock: HttpTestingController;
 
@@ -16,66 +16,84 @@ describe('MpcInputPesquisaCepComponent', () => {
     }).compileComponents();
 
     fixture = TestBed.createComponent(MpcInputPesquisaCepComponent);
-    componente = fixture.componentInstance;
+    component = fixture.componentInstance;
     httpMock = TestBed.inject(HttpTestingController);
     fixture.detectChanges();
   });
 
   describe('Inicialização', () => {
-    it('deve criar o componente', () => {
-      expect(componente).toBeTruthy();
+    it('deve criar o component', () => {
+      expect(component).toBeTruthy();
     });
 
     it('deve inicializar com valores padrão', () => {
-      expect(componente.id).toBe('');
-      expect(componente.tabIndex).toBe(0);
-      expect(componente.ariaLabel).toBe('');
-      expect(componente.value).toBeUndefined();
-      expect(componente.required).toBe(false);
+      expect(component.id).toBe('');
+      expect(component.tabIndex).toBe(0);
+      expect(component.ariaLabel).toBe('');
+      expect(component.value).toBeUndefined();
+      expect(component.required).toBe(false);
     });
   });
 
   describe('Getter valorFormatado', () => {
     it('deve retornar valor formatado através do pipe', () => {
-      componente.value = '12345678';
-      const valorFormatado = componente.valorFormatado;
+      component.value = '12345678';
+      const valorFormatado = component.valorFormatado;
+      expect(valorFormatado).toBeDefined();
+    });
+
+    it('deve retornar valor formatado para valor undefined', () => {
+      component.value = undefined;
+      const valorFormatado = component.valorFormatado;
+      expect(valorFormatado).toBeDefined();
+    });
+
+    it('deve retornar vazio quando valor formatado enviado for vazio', () => {
+      component.value = '.';
+      const valorFormatado = component.valorFormatado;
+      expect(valorFormatado).toBeDefined();
+    });
+
+    it('deve aplicar mascara quando valor formatado for enviado - 5 Dígitos', () => {
+      component.value = '12345';
+      const valorFormatado = component.valorFormatado;
       expect(valorFormatado).toBeDefined();
     });
   });
 
   describe('Eventos de Foco', () => {
     it('deve marcar campo como tocado e validar no onFocus', () => {
-      const spyValidacao = jest.spyOn(componente as any, 'isCampoValido');
-      componente.value = '12345-678';
+      const spyValidacao = jest.spyOn(component as any, 'isCampoValido');
+      component.value = '12345-678';
 
-      componente['onFocus']();
+      component['onFocus']();
 
-      expect(componente['campoTocado']).toBe(true);
+      expect(component['campoTocado']).toBe(true);
       expect(spyValidacao).toHaveBeenCalledWith('12345-678');
     });
   });
 
   describe('setValue', () => {
     it('deve definir valor, validar e chamar pesquisarCep quando válido', () => {
-      const spyValidacao = jest.spyOn(componente as any, 'isCampoValido').mockReturnValue(true);
-      const spyPesquisar = jest.spyOn(componente as any, 'pequisarCep');
+      const spyValidacao = jest.spyOn(component as any, 'isCampoValido').mockReturnValue(true);
+      const spyPesquisar = jest.spyOn(component as any, 'pequisarCep');
       const event = { target: { value: '12345-678' } };
 
-      componente['setValue'](event);
+      component['setValue'](event);
 
-      expect(componente.value).toBe('12345-678');
+      expect(component.value).toBe('12345-678');
       expect(spyValidacao).toHaveBeenCalledWith('12345-678');
       expect(spyPesquisar).toHaveBeenCalledWith('12345-678');
     });
 
     it('deve definir valor e validar mas não chamar pesquisarCep quando inválido', () => {
-      const spyValidacao = jest.spyOn(componente as any, 'isCampoValido').mockReturnValue(false);
-      const spyPesquisar = jest.spyOn(componente as any, 'pequisarCep');
+      const spyValidacao = jest.spyOn(component as any, 'isCampoValido').mockReturnValue(false);
+      const spyPesquisar = jest.spyOn(component as any, 'pequisarCep');
       const event = { target: { value: '123' } };
 
-      componente['setValue'](event);
+      component['setValue'](event);
 
-      expect(componente.value).toBe('123');
+      expect(component.value).toBe('123');
       expect(spyValidacao).toHaveBeenCalledWith('123');
       expect(spyPesquisar).not.toHaveBeenCalled();
     });
@@ -83,81 +101,81 @@ describe('MpcInputPesquisaCepComponent', () => {
 
   describe('Validações', () => {
     beforeEach(() => {
-      componente['campoTocado'] = true;
+      component['campoTocado'] = true;
     });
 
     it('deve retornar erro quando campo obrigatório está vazio', () => {
-      componente.required = true;
-      const spyError = jest.spyOn(componente.error, 'emit');
+      component.required = true;
+      const spyError = jest.spyOn(component.error, 'emit');
 
-      const resultado = componente['isCampoValido']('');
+      const resultado = component['isCampoValido']('');
 
       expect(resultado).toBe(false);
-      expect(componente['errorMessage']).toBe('O campo CEP é obrigatório');
+      expect(component['errorMessage']).toBe('O campo CEP é obrigatório');
       expect(spyError).toHaveBeenCalledWith({ required: true });
     });
 
     it('deve retornar erro quando CEP não atende regex', () => {
-      const spyError = jest.spyOn(componente.error, 'emit');
+      const spyError = jest.spyOn(component.error, 'emit');
 
-      const resultado = componente['isCampoValido']('123');
+      const resultado = component['isCampoValido']('123');
 
       expect(resultado).toBe(false);
-      expect(componente['errorMessage']).toBe('O campo CEP deve conter 8 dígitos');
+      expect(component['errorMessage']).toBe('O campo CEP deve conter 8 dígitos');
       expect(spyError).toHaveBeenCalledWith({ regex: true });
     });
 
     it('deve retornar true para CEP válido', () => {
-      const spyError = jest.spyOn(componente.error, 'emit');
+      const spyError = jest.spyOn(component.error, 'emit');
 
-      const resultado = componente['isCampoValido']('12345-678');
+      const resultado = component['isCampoValido']('12345-678');
 
       expect(resultado).toBe(true);
-      expect(componente['errorMessage']).toBeUndefined();
+      expect(component['errorMessage']).toBeUndefined();
       expect(spyError).not.toHaveBeenCalled();
     });
   });
 
   describe('Validação de Regex', () => {
     it('deve validar regex corretamente', () => {
-      expect(componente['validaRegex']('12345-678')).toBe(false); // válido
-      expect(componente['validaRegex']('12345678')).toBe(false);  // válido
-      expect(componente['validaRegex']('123')).toBe(true);        // inválido
-      expect(componente['validaRegex']('abcde-fgh')).toBe(true);  // inválido
-      expect(componente['validaRegex'](undefined)).toBe(true);    // inválido
-      expect(componente['validaRegex']('')).toBe(true);           // inválido
+      expect(component['validaRegex']('12345-678')).toBe(false); // válido
+      expect(component['validaRegex']('12345678')).toBe(false);  // válido
+      expect(component['validaRegex']('123')).toBe(true);        // inválido
+      expect(component['validaRegex']('abcde-fgh')).toBe(true);  // inválido
+      expect(component['validaRegex'](undefined)).toBe(true);    // inválido
+      expect(component['validaRegex']('')).toBe(true);           // inválido
     });
   });
 
   describe('Validação de Campo Obrigatório', () => {
     it('deve retornar false quando campo não é obrigatório', () => {
-      componente.required = false;
-      expect(componente['validaRequired']('')).toBe(false);
-      expect(componente['validaRequired']('12345')).toBe(false);
+      component.required = false;
+      expect(component['validaRequired']('')).toBe(false);
+      expect(component['validaRequired']('12345')).toBe(false);
     });
 
     it('deve retornar true quando campo é obrigatório e está vazio', () => {
-      componente.required = true;
-      expect(componente['validaRequired']('')).toBe(true);
-      expect(componente['validaRequired'](undefined)).toBe(true);
+      component.required = true;
+      expect(component['validaRequired']('')).toBe(true);
+      expect(component['validaRequired'](undefined)).toBe(true);
     });
 
     it('deve retornar true quando campo é obrigatório, tocado e vazio', () => {
-      componente.required = true;
-      componente['campoTocado'] = true;
-      expect(componente['validaRequired']('')).toBe(true);
+      component.required = true;
+      component['campoTocado'] = true;
+      expect(component['validaRequired']('')).toBe(true);
     });
 
     it('deve retornar false quando campo é obrigatório mas tem valor', () => {
-      componente.required = true;
-      componente['campoTocado'] = true;
-      expect(componente['validaRequired']('12345')).toBe(false);
+      component.required = true;
+      component['campoTocado'] = true;
+      expect(component['validaRequired']('12345')).toBe(false);
     });
   });
 
   describe('Pesquisa de CEP', () => {
     it('deve pesquisar CEP com sucesso e emitir endereco', () => {
-      const spyValor = jest.spyOn(componente.valor, 'emit');
+      const spyValor = jest.spyOn(component.valor, 'emit');
       const mockResponse = {
         logradouro: 'Rua Teste',
         bairro: 'Bairro Teste',
@@ -166,7 +184,7 @@ describe('MpcInputPesquisaCepComponent', () => {
         cep: '12345-678'
       };
 
-      componente['pequisarCep']('12345-678');
+      component['pequisarCep']('12345-678');
 
       const req = httpMock.expectOne('https://viacep.com.br/ws/12345678/json/');
       expect(req.request.method).toBe('GET');
@@ -186,25 +204,25 @@ describe('MpcInputPesquisaCepComponent', () => {
     it('deve tratar erro quando CEP não é encontrado na resposta', () => {
       const mockResponse = { erro: true };
 
-      componente['pequisarCep']('12345-678');
+      component['pequisarCep']('12345-678');
 
       const req = httpMock.expectOne('https://viacep.com.br/ws/12345678/json/');
       req.flush(mockResponse);
 
-      expect(componente['errorMessage']).toBe('CEP não encontrado');
+      expect(component['errorMessage']).toBe('CEP não encontrado');
     });
 
     it('deve tratar erro de requisição HTTP', () => {
-      componente['pequisarCep']('12345-678');
+      component['pequisarCep']('12345-678');
 
       const req = httpMock.expectOne('https://viacep.com.br/ws/12345678/json/');
       req.error(new ErrorEvent('Erro de rede'));
 
-      expect(componente['errorMessage']).toBe('CEP não encontrado');
+      expect(component['errorMessage']).toBe('CEP não encontrado');
     });
 
     it('deve remover caracteres não numéricos do CEP antes da pesquisa', () => {
-      componente['pequisarCep']('12345-678');
+      component['pequisarCep']('12345-678');
 
       const req = httpMock.expectOne('https://viacep.com.br/ws/12345678/json/');
       expect(req.request.url).toContain('12345678');
@@ -212,17 +230,17 @@ describe('MpcInputPesquisaCepComponent', () => {
     });
 
     it('deve retornar early quando CEP é undefined', () => {
-      const spyHttp = jest.spyOn(componente['http'], 'get');
+      const spyHttp = jest.spyOn(component['http'], 'get');
 
-      componente['pequisarCep'](undefined);
+      component['pequisarCep'](undefined);
 
       expect(spyHttp).not.toHaveBeenCalled();
     });
 
     it('deve retornar early quando CEP é vazio', () => {
-      const spyHttp = jest.spyOn(componente['http'], 'get');
+      const spyHttp = jest.spyOn(component['http'], 'get');
 
-      componente['pequisarCep']('');
+      component['pequisarCep']('');
 
       expect(spyHttp).not.toHaveBeenCalled();
     });
@@ -231,27 +249,27 @@ describe('MpcInputPesquisaCepComponent', () => {
   describe('Casos Extremos', () => {
     it('deve lidar com valor undefined no setter de value', () => {
       expect(() => {
-        componente.value = undefined;
+        component.value = undefined;
       }).not.toThrow();
-      expect(componente.value).toBeUndefined();
+      expect(component.value).toBeUndefined();
     });
 
     it('deve lidar com event.target.value undefined no setValue', () => {
       const event = { target: { value: undefined } };
       expect(() => {
-        componente['setValue'](event);
+        component['setValue'](event);
       }).not.toThrow();
-      expect(componente.value).toBeUndefined();
+      expect(component.value).toBeUndefined();
     });
 
     it('deve lidar com validação quando campo não foi tocado', () => {
-      componente['campoTocado'] = false;
-      componente.required = true;
+      component['campoTocado'] = false;
+      component.required = true;
 
-      const resultado = componente['isCampoValido']('');
+      const resultado = component['isCampoValido']('');
 
       expect(resultado).toBe(false);
-      expect(componente['errorMessage']).toBe('O campo CEP é obrigatório');
+      expect(component['errorMessage']).toBe('O campo CEP é obrigatório');
     });
   });
 });

@@ -1,25 +1,25 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ModaisComponent } from './modais.component';
+import { MpcModalComponent, TipoModal } from '../../../shared/components/mpc-modal/mpc-modal.component';
 import { MpcNavbarComponent } from '../../../shared/components/mpc-navbar/mpc-navbar.component';
-import { MpcModalComponent } from '../../../shared/components/mpc-modal/mpc-modal.component';
 import { MpcButtonComponent } from '../../../shared/components/mpc-button/mpc-button.component';
+import { provideToastr } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
-import { ToastrModule } from 'ngx-toastr';
 
 describe('ModaisComponent', () => {
   let component: ModaisComponent;
   let fixture: ComponentFixture<ModaisComponent>;
+  let mockModal: jest.Mocked<MpcModalComponent>;
 
   beforeEach(async () => {
+    const modalSpy = {
+      abrirModal: jest.fn(),
+      fecharModal: jest.fn()
+    } as jest.Mocked<Partial<MpcModalComponent>>;
+
     await TestBed.configureTestingModule({
-      imports: [
-        ModaisComponent,
-        MpcNavbarComponent,
-        MpcModalComponent,
-        MpcButtonComponent,
-        ToastrModule.forRoot()
-      ],
+      imports: [ModaisComponent, MpcModalComponent, MpcNavbarComponent, MpcButtonComponent],
       providers: [
         {
           provide: ActivatedRoute,
@@ -32,12 +32,15 @@ describe('ModaisComponent', () => {
               data: {}
             }
           }
-        }
+        },
+        provideToastr()
       ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ModaisComponent);
     component = fixture.componentInstance;
+    mockModal = modalSpy as jest.Mocked<MpcModalComponent>;
+    component.modalExemplo = mockModal;
     fixture.detectChanges();
   });
 
@@ -45,33 +48,153 @@ describe('ModaisComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('deve abrir o modal de confirmação', () => {
-    const abrirModalConfirmacaoSpy = jest.spyOn(component, 'abrirModalConfirmacao');
-    component.abrirModalConfirmacao();
-    expect(abrirModalConfirmacaoSpy).toHaveBeenCalled();
+  it('deve inicializar a propriedade erro como undefined', () => {
+    expect(component.erro).toBeUndefined();
   });
 
-  it('deve abrir o modal de sucesso', () => {
-    const abrirModalSucessoSpy = jest.spyOn(component, 'abrirModalSucesso');
-    component.abrirModalSucesso();
-    expect(abrirModalSucessoSpy).toHaveBeenCalled();
+  describe('abrirModalConfirmacao', () => {
+    it('deve abrir modal de confirmação com configuração correta', () => {
+      component.abrirModalConfirmacao();
+
+      expect(mockModal.abrirModal).toHaveBeenCalled();
+    });
+
+    it('deve retornar true quando botao é executado', () => {
+      component.abrirModalConfirmacao();
+      const chamada = mockModal.abrirModal.mock.calls[0];
+      const config = chamada[0];
+      let resultado;
+
+      if (config.botao) {
+        resultado = config.botao();
+      }
+
+      expect(resultado).toBeDefined();
+    });
+
+    it('deve chamar fecharModal quando segundoBotao é executado', () => {
+      component.abrirModalConfirmacao();
+      const chamada = mockModal.abrirModal.mock.calls[0];
+      const config = chamada[0];
+
+      if (config.segundoBotao) {
+        config.segundoBotao();
+      }
+
+      expect(mockModal.fecharModal).toHaveBeenCalled();
+    });
   });
 
-  it('deve abrir o modal de alerta', () => {
-    const abrirModalAlertaSpy = jest.spyOn(component, 'abrirModalAlerta');
-    component.abrirModalAlerta();
-    expect(abrirModalAlertaSpy).toHaveBeenCalled();
+  describe('abrirModalSucesso', () => {
+    it('deve abrir modal de sucesso com configuração correta', () => {
+      component.abrirModalSucesso();
+
+      expect(mockModal.abrirModal).toHaveBeenCalled();
+    });
+
+    it('deve retornar true quando botao é executado', () => {
+      component.abrirModalSucesso();
+      const chamada = mockModal.abrirModal.mock.calls[0];
+      const config = chamada[0];
+      let resultado;
+
+      if (config.botao) {
+        resultado = config.botao();
+      }
+
+      expect(resultado).toBeDefined();
+    });
+
+    it('deve chamar fecharModal quando segundoBotao é executado', () => {
+      component.abrirModalSucesso();
+      const chamada = mockModal.abrirModal.mock.calls[0];
+      const config = chamada[0];
+
+      if (config.segundoBotao) {
+        config.segundoBotao();
+      }
+
+      expect(mockModal.fecharModal).toHaveBeenCalled();
+    });
   });
 
-  it('deve abrir o modal de erro', () => {
-    const abrirModalErroSpy = jest.spyOn(component, 'abrirModalErro');
-    component.abrirModalErro();
-    expect(abrirModalErroSpy).toHaveBeenCalled();
+  describe('abrirModalAlerta', () => {
+    it('deve abrir modal de alerta com configuração correta', () => {
+      component.abrirModalAlerta();
+
+      expect(mockModal.abrirModal).toHaveBeenCalled();
+    });
+
+    it('deve retornar true quando botao é executado', () => {
+      component.abrirModalAlerta();
+      const chamada = mockModal.abrirModal.mock.calls[0];
+      const config = chamada[0];
+      let resultado;
+
+      if (config.botao) {
+        resultado = config.botao();
+      }
+
+      expect(resultado).toBeDefined();
+    });
+
+    it('deve chamar fecharModal quando segundoBotao é executado', () => {
+      component.abrirModalAlerta();
+      const chamada = mockModal.abrirModal.mock.calls[0];
+      const config = chamada[0];
+
+      if (config.segundoBotao) {
+        config.segundoBotao();
+      }
+
+      expect(mockModal.fecharModal).toHaveBeenCalled();
+    });
   });
 
-  it('deve fechar o modal', () => {
-    const fecharModalSpy = jest.spyOn(component.modalExemplo, 'fecharModal');
-    component.modalExemplo.fecharModal();
-    expect(fecharModalSpy).toHaveBeenCalled();
+  describe('abrirModalErro', () => {
+    it('deve abrir modal de erro com configuração correta', () => {
+      component.abrirModalErro();
+
+      expect(mockModal.abrirModal).toHaveBeenCalled();
+    });
+
+    it('deve chamar fecharModal quando botao é executado', () => {
+      component.abrirModalErro();
+      const chamada = mockModal.abrirModal.mock.calls[0];
+      const config = chamada[0];
+
+      if (config.botao) {
+        config.botao();
+      }
+      expect(mockModal.fecharModal).toHaveBeenCalled();
+    });
+
+    it('não deve ter segundoBotao nem textoSegundoBotao', () => {
+      component.abrirModalErro();
+      const chamada = mockModal.abrirModal.mock.calls[0];
+      const config = chamada[0];
+
+      expect(config.segundoBotao).toBeUndefined();
+      expect(config.textoSegundoBotao).toBeUndefined();
+    });
+  });
+
+  describe('modalExemplo ViewChild', () => {
+    it('deve ter modalExemplo definido como ViewChild', () => {
+      expect(component.modalExemplo).toBeDefined();
+    });
+
+    it('deve chamar abrirModal com operador de navegação segura', () => {
+      component.modalExemplo = null as any;
+
+      expect(() => component.abrirModalConfirmacao()).not.toThrow();
+      expect(() => component.abrirModalSucesso()).not.toThrow();
+      expect(() => component.abrirModalAlerta()).not.toThrow();
+      expect(() => component.abrirModalErro()).not.toThrow();
+    });
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 });

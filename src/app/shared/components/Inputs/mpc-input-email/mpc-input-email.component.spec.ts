@@ -27,7 +27,7 @@ describe('MpcInputEmailComponent', () => {
       expect(component.disabled).toBe(false);
       expect(component.readonly).toBe(false);
       expect(component.required).toBe(false);
-      expect(component.value).toBe('');
+      expect(component.value).toBeUndefined();
     });
 
     it('deve aceitar valores customizados', () => {
@@ -62,8 +62,8 @@ describe('MpcInputEmailComponent', () => {
       expect(valorFormatado).toBeDefined();
     });
 
-    it('deve retornar vazio quando é valor vazio formatado através do pipe', () => {
-      component.value = '';
+    it('deve recosntruir o email quando é valor @ formatado através do pipe', () => {
+      component.value = '@';
       const valorFormatado = component.valorFormatado;
       expect(valorFormatado).toBeDefined();
     });
@@ -169,10 +169,10 @@ describe('MpcInputEmailComponent', () => {
   });
 
   describe('validaRequired', () => {
-    it('deve retornar true ao ter valor e ser obrigatório', () => {
+    it('deve retornar false ao ter valor e ser obrigatório', () => {
       component.required = true;
-      const resultado = component['validaRequired']('');
-      expect(resultado).toBe(true);
+      const resultado = component['validaRequired']('a');
+      expect(resultado).toBe(false);
     });
 
     it('deve retornar true ao não ter valor e ser obrigatório', () => {

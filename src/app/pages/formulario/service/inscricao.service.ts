@@ -29,7 +29,6 @@ export class InscricaoService {
     this.dadosInscricaoSubject.next(dadosAtualizados);
 
     this.etapaAtualSubject.next(proximaEtapa);
-    console.log(this.dadosInscricaoSubject.getValue());
   }
 
   getDadosInscricao(): any {
@@ -48,7 +47,8 @@ export class InscricaoService {
     });
     //
 
-    return this.http.get<any>(`${this.apiUrl}/inscricoes`, { headers: this.headers });
+    // Implementação Real
+    // return this.http.get<any>(`${this.apiUrl}/inscricoes`, { headers: this.headers });
   }
 
   inscrever(body: any, sexo: string): Observable<any> {
@@ -61,10 +61,10 @@ export class InscricaoService {
     });
     //
 
-
-    const requestBody = JSON.stringify(body);
+    // Implementação Real
+    /* const requestBody = JSON.stringify(body);
     const headersWithSexo = this.headers.append('sexo', sexo);
-    return this.http.post<any>(`${this.apiUrl}/inscricao`, requestBody, { headers: headersWithSexo });
+    return this.http.post<any>(`${this.apiUrl}/inscricao`, requestBody, { headers: headersWithSexo }); */
   }
 
   /**

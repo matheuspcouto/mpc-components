@@ -17,7 +17,7 @@ import { Inscricao } from '../model/inscricao.model';
 })
 export class ConfirmacaoComponent implements OnInit {
 
-  private readonly router = inject(Router);
+  private router = inject(Router);
   private readonly inscricaoService = inject(InscricaoService);
 
   @ViewChild('modalErro', { static: true }) private modalErro!: MpcModalComponent;
@@ -88,7 +88,7 @@ export class ConfirmacaoComponent implements OnInit {
         dadosPessoais: [
           { label: 'Nome', valor: this.dadosInscricao.nome || '' },
           { label: 'Data de Nascimento', valor: this.dadosInscricao.dataNasc || '' },
-          { label: 'Idade', valor: String(this.dadosInscricao.idade) || '' },
+          { label: 'Idade', valor: String(this.dadosInscricao.idade)},
           { label: 'CPF/CNPJ', valor: this.dadosInscricao.cpfCnpj || '' },
           { label: 'Sexo', valor: this.getSexo() },
           { label: 'Estado Civil', valor: this.dadosInscricao.estadoCivil || '' },
