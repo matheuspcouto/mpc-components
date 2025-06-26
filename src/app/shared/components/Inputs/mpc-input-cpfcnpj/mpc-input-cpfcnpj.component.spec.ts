@@ -133,17 +133,17 @@ describe('MpcInputCpfcnpjComponent', () => {
 
       it('deve retornar false para valor vazio', () => {
         component.value = '';
-        expect(component['validaRequired']()).toBe(false);
+        expect(component['validaRequired'](component.Value)).toBe(false);
       });
 
       it('deve retornar false para valor undefined', () => {
         component.value = undefined;
-        expect(component['validaRequired']()).toBe(false);
+        expect(component['validaRequired'](component.Value)).toBe(false);
       });
 
       it('deve retornar false para valor preenchido', () => {
         component.value = '12345678901';
-        expect(component['validaRequired']()).toBe(false);
+        expect(component['validaRequired'](component.Value)).toBe(false);
       });
     });
 
@@ -154,58 +154,58 @@ describe('MpcInputCpfcnpjComponent', () => {
 
       it('deve retornar true para string vazia', () => {
         component.value = '';
-        expect(component['validaRequired']()).toBe(true);
+        expect(component['validaRequired'](component.Value)).toBe(true);
       });
 
       it('deve retornar true para undefined', () => {
         component.value = undefined;
-        expect(component['validaRequired']()).toBe(true);
+        expect(component['validaRequired'](component.Value)).toBe(true);
       });
 
       it('deve retornar true para null', () => {
         component.value = null as any;
-        expect(component['validaRequired']()).toBe(true);
+        expect(component['validaRequired'](component.Value)).toBe(true);
       });
 
       it('deve retornar false para CPF válido', () => {
         component.value = '12345678901';
-        expect(component['validaRequired']()).toBe(false);
+        expect(component['validaRequired'](component.Value)).toBe(false);
       });
 
       it('deve retornar false para espaços em branco', () => {
         component.value = '   ';
-        expect(component['validaRequired']()).toBe(false);
+        expect(component['validaRequired'](component.Value)).toBe(false);
       });
 
       it('deve retornar false para um caractere', () => {
         component.value = '1';
-        expect(component['validaRequired']()).toBe(false);
+        expect(component['validaRequired'](component.Value)).toBe(false);
       });
     });
 
     describe('com getter Value mockado', () => {
       it('deve retornar true quando Value é string vazia', () => {
         component.required = true;
-        jest.spyOn(component, 'value', 'get').mockReturnValue('');
-        expect(component['validaRequired']()).toBe(true);
+        jest.spyOn(component, 'Value', 'get').mockReturnValue('');
+        expect(component['validaRequired'](component.Value)).toBe(true);
       });
 
       it('deve retornar false quando Value é string não vazia', () => {
         component.required = true;
-        jest.spyOn(component, 'value', 'get').mockReturnValue('123');
-        expect(component['validaRequired']()).toBe(false);
+        jest.spyOn(component, 'Value', 'get').mockReturnValue('123');
+        expect(component['validaRequired'](component.Value)).toBe(false);
       });
 
       it('deve retornar true quando Value é undefined', () => {
         component.required = true;
-        jest.spyOn(component, 'value', 'get').mockReturnValue(undefined as any);
-        expect(component['validaRequired']()).toBe(true);
+        jest.spyOn(component, 'Value', 'get').mockReturnValue(undefined as any);
+        expect(component['validaRequired'](component.Value)).toBe(true);
       });
 
       it('deve retornar true quando Value é null', () => {
         component.required = true;
-        jest.spyOn(component, 'value', 'get').mockReturnValue(null as any);
-        expect(component['validaRequired']()).toBe(true);
+        jest.spyOn(component, 'Value', 'get').mockReturnValue(null as any);
+        expect(component['validaRequired'](component.Value)).toBe(true);
       });
     });
   });
@@ -218,20 +218,20 @@ describe('MpcInputCpfcnpjComponent', () => {
     it('deve retornar true quando readonly é true', () => {
       component.readonly = true;
       component.value = 'invalid';
-      expect(component['isCampoValido']()).toBeTruthy();
+      expect(component['isCampoValido'](component.Value)).toBeTruthy();
     });
 
     it('deve retornar true quando disabled é true', () => {
       component.disabled = true;
       component.value = 'invalid';
-      expect(component['isCampoValido']()).toBeTruthy();
+      expect(component['isCampoValido'](component.Value)).toBeTruthy();
     });
 
     it('deve validar campo obrigatório vazio', () => {
       component.required = true;
       component.value = '';
 
-      expect(component['isCampoValido']()).toBeFalsy();
+      expect(component['isCampoValido'](component.Value)).toBeFalsy();
       expect(component['errorMessage']).toBe('O campo CPF/CNPJ é obrigatório');
     });
   });
@@ -246,6 +246,15 @@ describe('MpcInputCpfcnpjComponent', () => {
       it('deve definir string vazia', () => {
         component.writeValue('');
         expect(component.value).toBe('');
+      });
+
+      it('deve chamar onBlur', () => {
+        component['onBlur']();
+      });
+
+      it('deve chamar onFocus', () => {
+        component['onFocus']();
+        expect(component['campoTocado']).toBe(true);
       });
     });
 

@@ -8,16 +8,18 @@
  * required {boolean}: (opcional) Indica se o campo é obrigatório.
  * disabled {boolean}: (opcional) Indica se o campo está desabilitado.
  * readonly {boolean}: (opcional) Indica se o campo é somente leitura.
+ * regexSenha {string}: (opcional) Regex para validação da senha.
+ * value {string}: Valor inicial do campo.
  *
  * Exemplo de utilização:
- * <mpc-input-senha [required]="true" [tabIndex]="1" [ariaLabel]="ariaLabel" (valor)="setvalor($event)"></mpc-input-senha>
+ * <mpc-input-senha [value]="value" [required]="true" [tabIndex]="1" [ariaLabel]="ariaLabel" (valor)="setvalor($event)"></mpc-input-senha>
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
  * @updated 27/02/2025
  */
 
-import { Component, EventEmitter, Input, input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
 
 // TODO: Corrigir recuperação de Dados
@@ -34,24 +36,25 @@ export class MpcInputSenhaComponent {
   @Input() tabIndex?: number = 0
   @Input() ariaLabel?: string = '';
 
-  @Input() disabled: boolean = false;
-  @Input() readonly: boolean = false;
+  @Input() disabled?: boolean = false;
+  @Input() readonly?: boolean = false;
 
   // Validators
-  @Input() required: boolean = false;
-  @Input() regexSenha: string = '';
+  @Input() required?: boolean = false;
+  @Input() regexSenha?: string = '';
 
   @Output() valor: EventEmitter<string> = new EventEmitter();
   @Output() error: EventEmitter<ValidationErrors> = new EventEmitter();
 
-  protected value?: string = '';
+  @Input() value?: string = '';
+
   protected errorMessage?: string;
   protected campoTocado: boolean = false;
   protected ocultarSenha: boolean = true;
 
   set Value(value: string) {
     this.value = value;
-    if (this.isCampoValido()) { this.valor.emit(this.value); }
+    if (this.isCampoValido(this.value)) { this.valor.emit(this.value); }
   }
 
   get Value(): string {
@@ -63,12 +66,12 @@ export class MpcInputSenhaComponent {
 
   public onBlur(): void {
     this.onTouched();
-    this.isCampoValido();
+    this.isCampoValido(this.Value);
   }
 
   public onFocus(): void {
     this.campoTocado = true;
-    this.isCampoValido();
+    this.isCampoValido(this.Value);
   }
 
   writeValue(value: string): void {
@@ -83,22 +86,22 @@ export class MpcInputSenhaComponent {
     this.onTouched = fn;
   }
 
-  setValue(event: any): void {
+  protected setValue(event: any): void {
     this.Value = event.target.value;
     this.onChange(this.Value);
     this.onTouched();
   }
 
-  isCampoValido(): boolean {
+  private isCampoValido(value: string): boolean {
     if (this.readonly || this.disabled) { return true; }
 
-    if (this.validaRequired()) {
+    if (this.validaRequired(value)) {
       this.errorMessage = `O campo senha é obrigatório`;
       this.error.emit({ required: true });
       return false;
     }
 
-    if (this.validaRegex()) {
+    if (this.validaRegex(value)) {
       this.errorMessage = `A senha não está em um formato válido`;
       this.error.emit({ regex: true });
       return false;
@@ -108,12 +111,13 @@ export class MpcInputSenhaComponent {
     return true;
   }
 
-  validaRegex(): boolean {
-    return this.regexSenha.length > 0 && !new RegExp(this.regexSenha).test(this.Value);
+  private validaRegex(value: string): boolean {
+    if (!this.regexSenha) return false;
+    return this.regexSenha.length > 0 && !new RegExp(this.regexSenha).test(value);
   }
 
-  validaRequired(): boolean {
-    return this.required! && this.Value.length === 0;
+  private validaRequired(value: string): boolean {
+    return this.required! && value.length === 0;
   }
 
 }

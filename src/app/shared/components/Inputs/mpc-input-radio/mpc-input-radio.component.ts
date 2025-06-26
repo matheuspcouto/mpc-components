@@ -42,13 +42,13 @@ export class MpcInputRadioComponent implements OnInit {
   @Input() ariaLabel?: string = '';
 
   @Input() label: string = '';
-  @Input() readonly: boolean = false;
-  @Input() disabled: boolean = false;
+  @Input() readonly?: boolean = false;
+  @Input() disabled?: boolean = false;
 
   @Input() options: RadioOption[] = [];
 
   // Validators
-  @Input() required: boolean = false;
+  @Input() required?: boolean = false;
 
   @Output() valor: EventEmitter<string> = new EventEmitter();
   @Output() error: EventEmitter<ValidationErrors> = new EventEmitter();
@@ -74,6 +74,16 @@ export class MpcInputRadioComponent implements OnInit {
     return this.opcaoSelecionada!;
   }
 
+  protected onBlur(): void {
+    this.onTouched();
+    this.isCampoValido();
+  }
+
+  protected onFocus(): void {
+    this.campoTocado = true;
+    this.isCampoValido();
+  }
+
   onChange: (option: RadioOption) => void = () => { };
   onTouched: () => void = () => { };
 
@@ -89,7 +99,7 @@ export class MpcInputRadioComponent implements OnInit {
     this.onTouched = fn;
   }
 
-  setValue(option: RadioOption): void {
+  protected setValue(option: RadioOption): void {
     this.options.forEach(v => v.checked = false);
     option.checked = true;
     this.OpcaoSelecionada = option;
@@ -97,7 +107,7 @@ export class MpcInputRadioComponent implements OnInit {
     this.onTouched();
   }
 
-  isCampoValido(): boolean {
+  private isCampoValido(): boolean {
     if (this.readonly || this.disabled) { return true; }
 
     if (this.validaRequired()) {
@@ -110,7 +120,7 @@ export class MpcInputRadioComponent implements OnInit {
     return true;
   }
 
-  validaRequired(): boolean {
+  private validaRequired(): boolean {
     return this.required! && this.campoTocado && !this.OpcaoSelecionada;
   }
 }

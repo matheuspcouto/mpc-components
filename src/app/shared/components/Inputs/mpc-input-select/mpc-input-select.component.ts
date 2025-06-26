@@ -41,12 +41,12 @@ export class MpcInputSelectComponent implements OnInit {
   @Input() ariaLabel?: string = '';
 
   @Input() label: string = '';
-  @Input() disabled: boolean = false;
+  @Input() disabled?: boolean = false;
 
   @Input() options: SelectOption[] = [];
 
   // Validators
-  @Input() required: boolean = false;
+  @Input() required?: boolean = false;
 
   @Output() valor: EventEmitter<string> = new EventEmitter();
   @Output() error: EventEmitter<ValidationErrors> = new EventEmitter();
@@ -87,6 +87,16 @@ export class MpcInputSelectComponent implements OnInit {
     return this.opcaoSelecionada!;
   }
 
+  protected onBlur(): void {
+    this.onTouched();
+    this.isCampoValido();
+  }
+
+  protected onFocus(): void {
+    this.campoTocado = true;
+    this.isCampoValido();
+  }
+
   onChange: (option: SelectOption) => void = () => { };
   onTouched: () => void = () => { };
 
@@ -104,7 +114,7 @@ export class MpcInputSelectComponent implements OnInit {
     this.onTouched();
   }
 
-  isCampoValido(): boolean {
+  private isCampoValido(): boolean {
     if (this.disabled) {
       return true;
     }
@@ -120,8 +130,8 @@ export class MpcInputSelectComponent implements OnInit {
     return true;
   }
 
-  validaRequired(): boolean {
-    return this.required && this.campoTocado &&
+  private validaRequired(): boolean {
+    return this.required! && this.campoTocado &&
       (!this.OpcaoSelecionada ||
         this.OpcaoSelecionada.value === '' ||
         this.OpcaoSelecionada.value === 'Selecione');

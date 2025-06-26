@@ -62,7 +62,7 @@ describe('MpcInputSelectComponent', () => {
   describe('OpcaoSelecionada setter/getter', () => {
     it('deve definir opção selecionada e marcar campo como tocado', () => {
       const valorSpy = jest.spyOn(component.valor, 'emit');
-      const isCampoValidoSpy = jest.spyOn(component, 'isCampoValido').mockReturnValue(true);
+      const isCampoValidoSpy = jest.spyOn(component as any, 'isCampoValido').mockReturnValue(true);
       const novaOpcao: SelectOption = { label: 'Nova Opção', value: 'nova' };
 
       component.OpcaoSelecionada = novaOpcao;
@@ -75,7 +75,7 @@ describe('MpcInputSelectComponent', () => {
 
     it('não deve emitir valor quando campo é inválido', () => {
       const valorSpy = jest.spyOn(component.valor, 'emit');
-      jest.spyOn(component, 'isCampoValido').mockReturnValue(false);
+      jest.spyOn(component as any, 'isCampoValido').mockReturnValue(false);
       const novaOpcao: SelectOption = { label: 'Nova Opção', value: 'nova' };
 
       component.OpcaoSelecionada = novaOpcao;
@@ -91,7 +91,7 @@ describe('MpcInputSelectComponent', () => {
     });
   });
 
-  describe('registerOnChange', () => {
+  describe('ControlValueAcessor', () => {
     it('deve registrar função onChange', () => {
       const mockFn = jest.fn();
 
@@ -99,9 +99,7 @@ describe('MpcInputSelectComponent', () => {
 
       expect(component.onChange).toBe(mockFn);
     });
-  });
 
-  describe('registerOnTouched', () => {
     it('deve registrar função onTouched', () => {
       const mockFn = jest.fn();
 
@@ -109,12 +107,21 @@ describe('MpcInputSelectComponent', () => {
 
       expect(component.onTouched).toBe(mockFn);
     });
+
+    it('deve chamar onBlur', () => {
+      component['onBlur']();
+    });
+
+    it('deve chamar onFocus', () => {
+      component['onFocus']();
+      expect(component['campoTocado']).toBe(true);
+    });
   });
 
   describe('setValue', () => {
     it('deve definir valor e chamar callbacks', () => {
-      const onChangeSpy = jest.spyOn(component, 'onChange');
-      const onTouchedSpy = jest.spyOn(component, 'onTouched');
+      const onChangeSpy = jest.spyOn(component as any, 'onChange');
+      const onTouchedSpy = jest.spyOn(component as any, 'onTouched');
       const opcao: SelectOption = { label: 'Teste', value: 'teste' };
 
       component.setValue(opcao);
@@ -129,17 +136,17 @@ describe('MpcInputSelectComponent', () => {
     it('deve retornar true quando campo está desabilitado', () => {
       component.disabled = true;
 
-      const resultado = component.isCampoValido();
+      const resultado = component['isCampoValido']();
 
       expect(resultado).toBe(true);
     });
 
     it('deve retornar false e emitir erro quando validação required falha', () => {
       const errorSpy = jest.spyOn(component.error, 'emit');
-      jest.spyOn(component, 'validaRequired').mockReturnValue(true);
+      jest.spyOn(component as any, 'validaRequired').mockReturnValue(true);
       component.label = 'Teste';
 
-      const resultado = component.isCampoValido();
+      const resultado = component['isCampoValido']();
 
       expect(resultado).toBe(false);
       expect(component['errorMessage']).toBe('O campo Teste é obrigatório');
@@ -148,9 +155,9 @@ describe('MpcInputSelectComponent', () => {
 
     it('deve retornar true e limpar erro quando campo é válido', () => {
       const errorSpy = jest.spyOn(component.error, 'emit');
-      jest.spyOn(component, 'validaRequired').mockReturnValue(false);
+      jest.spyOn(component as any, 'validaRequired').mockReturnValue(false);
 
-      const resultado = component.isCampoValido();
+      const resultado = component['isCampoValido']();
 
       expect(resultado).toBe(true);
       expect(component['errorMessage']).toBeUndefined();
@@ -167,7 +174,7 @@ describe('MpcInputSelectComponent', () => {
     it('deve retornar true quando opção não está selecionada', () => {
       component['opcaoSelecionada'] = undefined;
 
-      const resultado = component.validaRequired();
+      const resultado = component['validaRequired']();
 
       expect(resultado).toBe(true);
     });
@@ -175,7 +182,7 @@ describe('MpcInputSelectComponent', () => {
     it('deve retornar true quando valor está vazio', () => {
       component['opcaoSelecionada'] = { label: 'Teste', value: '' };
 
-      const resultado = component.validaRequired();
+      const resultado = component['validaRequired']();
 
       expect(resultado).toBe(true);
     });
@@ -183,7 +190,7 @@ describe('MpcInputSelectComponent', () => {
     it('deve retornar true quando valor é "Selecione"', () => {
       component['opcaoSelecionada'] = { label: 'Selecione', value: 'Selecione' };
 
-      const resultado = component.validaRequired();
+      const resultado = component['validaRequired']();
 
       expect(resultado).toBe(true);
     });
@@ -191,7 +198,7 @@ describe('MpcInputSelectComponent', () => {
     it('deve retornar false quando campo não é obrigatório', () => {
       component.required = false;
 
-      const resultado = component.validaRequired();
+      const resultado = component['validaRequired']();
 
       expect(resultado).toBe(false);
     });
@@ -199,7 +206,7 @@ describe('MpcInputSelectComponent', () => {
     it('deve retornar false quando campo não foi tocado', () => {
       component['campoTocado'] = false;
 
-      const resultado = component.validaRequired();
+      const resultado = component['validaRequired']();
 
       expect(resultado).toBe(false);
     });
@@ -207,7 +214,7 @@ describe('MpcInputSelectComponent', () => {
     it('deve retornar false quando opção válida está selecionada', () => {
       component['opcaoSelecionada'] = { label: 'Opção Válida', value: 'valida' };
 
-      const resultado = component.validaRequired();
+      const resultado = component['validaRequired']();
 
       expect(resultado).toBe(false);
     });

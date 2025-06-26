@@ -19,13 +19,13 @@
       <div class="row">
         <div class="col-md-6 mb-3">
           <mpc-input-text label="Nome" [value]="form.value.nome" (valor)="form.controls.nome.setValue($event)"
-            (error)="form.controls.nome.setErrors($event)" [required]="true" min="3" max="100" />
+            (error)="form.controls.nome.setErrors($event)" min="3" max="100" />
         </div>
 
         <div class="col-md-6 mb-3">
           <mpc-input-text label="Sobrenome" [value]="form.value.sobrenome"
             (valor)="form.controls.sobrenome.setValue($event)" (error)="form.controls.sobrenome.setErrors($event)"
-            [required]="true" min="3" max="100" />
+            min="3" max="100" />
         </div>
       </div>
 

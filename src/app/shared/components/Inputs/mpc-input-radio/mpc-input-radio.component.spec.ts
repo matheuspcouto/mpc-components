@@ -50,7 +50,7 @@ describe('MpcInputRadioComponent', () => {
   describe('OpcaoSelecionada setter/getter', () => {
     it('deve definir e retornar opção selecionada', () => {
       const opcao = mockOptions[0];
-      const spyIsCampoValido = jest.spyOn(component, 'isCampoValido').mockReturnValue(true);
+      const spyIsCampoValido = jest.spyOn(component as any, 'isCampoValido').mockReturnValue(true);
       const spyEmit = jest.spyOn(component.valor, 'emit');
 
       component.OpcaoSelecionada = opcao;
@@ -62,7 +62,7 @@ describe('MpcInputRadioComponent', () => {
 
     it('não deve emitir valor quando campo é inválido', () => {
       const opcao = mockOptions[0];
-      const spyIsCampoValido = jest.spyOn(component, 'isCampoValido').mockReturnValue(false);
+      const spyIsCampoValido = jest.spyOn(component as any, 'isCampoValido').mockReturnValue(false);
       const spyEmit = jest.spyOn(component.valor, 'emit');
 
       component.OpcaoSelecionada = opcao;
@@ -74,7 +74,7 @@ describe('MpcInputRadioComponent', () => {
   describe('writeValue', () => {
     it('deve definir opção selecionada através do writeValue', () => {
       const opcao = mockOptions[1];
-      const spyOpcaoSelecionada = jest.spyOn(component, 'OpcaoSelecionada', 'set');
+      const spyOpcaoSelecionada = jest.spyOn(component as any, 'OpcaoSelecionada', 'set');
 
       component.writeValue(opcao);
 
@@ -82,7 +82,7 @@ describe('MpcInputRadioComponent', () => {
     });
   });
 
-  describe('registerOnChange', () => {
+  describe('ControlValueAccessor', () => {
     it('deve registrar função onChange', () => {
       const mockFn = jest.fn();
 
@@ -90,9 +90,7 @@ describe('MpcInputRadioComponent', () => {
 
       expect(component.onChange).toBe(mockFn);
     });
-  });
 
-  describe('registerOnTouched', () => {
     it('deve registrar função onTouched', () => {
       const mockFn = jest.fn();
 
@@ -100,17 +98,26 @@ describe('MpcInputRadioComponent', () => {
 
       expect(component.onTouched).toBe(mockFn);
     });
+
+    it('deve chamar onBlur', () => {
+      component['onBlur']();
+    });
+
+    it('deve chamar onFocus', () => {
+      component['onFocus']();
+      expect(component['campoTocado']).toBe(true);
+    });
   });
 
   describe('setValue', () => {
     it('deve definir valor da opção e chamar callbacks', () => {
       const opcao = mockOptions[0];
-      const spyOnChange = jest.spyOn(component, 'onChange');
-      const spyOnTouched = jest.spyOn(component, 'onTouched');
-      const spyOpcaoSelecionada = jest.spyOn(component, 'OpcaoSelecionada', 'set');
+      const spyOnChange = jest.spyOn(component as any, 'onChange');
+      const spyOnTouched = jest.spyOn(component as any, 'onTouched');
+      const spyOpcaoSelecionada = jest.spyOn(component as any, 'OpcaoSelecionada', 'set');
       component.options = [...mockOptions];
 
-      component.setValue(opcao);
+      component['setValue'](opcao);
 
       expect(component.options[0].checked).toBe(true);
       expect(component.options[1].checked).toBe(false);
@@ -125,7 +132,7 @@ describe('MpcInputRadioComponent', () => {
     it('deve retornar true quando campo é readonly', () => {
       component.readonly = true;
 
-      const resultado = component.isCampoValido();
+      const resultado = component['isCampoValido']();
 
       expect(resultado).toBe(true);
     });
@@ -133,17 +140,17 @@ describe('MpcInputRadioComponent', () => {
     it('deve retornar true quando campo é disabled', () => {
       component.disabled = true;
 
-      const resultado = component.isCampoValido();
+      const resultado = component['isCampoValido']();
 
       expect(resultado).toBe(true);
     });
 
     it('deve retornar false e emitir erro quando validação required falha', () => {
-      const spyValidaRequired = jest.spyOn(component, 'validaRequired').mockReturnValue(true);
+      const spyValidaRequired = jest.spyOn(component as any, 'validaRequired').mockReturnValue(true);
       const spyErrorEmit = jest.spyOn(component.error, 'emit');
       component.label = 'Sexo';
 
-      const resultado = component.isCampoValido();
+      const resultado = component['isCampoValido']();
 
       expect(resultado).toBe(false);
       expect(component['errorMessage']).toBe('O campo Sexo é obrigatório');
@@ -152,9 +159,9 @@ describe('MpcInputRadioComponent', () => {
     });
 
     it('deve retornar true quando todas as validações passam', () => {
-      const spyValidaRequired = jest.spyOn(component, 'validaRequired').mockReturnValue(false);
+      const spyValidaRequired = jest.spyOn(component as any, 'validaRequired').mockReturnValue(false);
 
-      const resultado = component.isCampoValido();
+      const resultado = component['isCampoValido']();
 
       expect(resultado).toBe(true);
       expect(component['errorMessage']).toBeUndefined();
@@ -168,7 +175,7 @@ describe('MpcInputRadioComponent', () => {
       component['campoTocado'] = true;
       component['opcaoSelecionada'] = undefined;
 
-      const resultado = component.validaRequired();
+      const resultado = component['validaRequired']();
 
       expect(resultado).toBe(true);
     });
@@ -178,7 +185,7 @@ describe('MpcInputRadioComponent', () => {
       component['campoTocado'] = true;
       component['opcaoSelecionada'] = undefined;
 
-      const resultado = component.validaRequired();
+      const resultado = component['validaRequired']();
 
       expect(resultado).toBe(false);
     });
@@ -188,7 +195,7 @@ describe('MpcInputRadioComponent', () => {
       component['campoTocado'] = false;
       component['opcaoSelecionada'] = undefined;
 
-      const resultado = component.validaRequired();
+      const resultado = component['validaRequired']();
 
       expect(resultado).toBe(false);
     });
@@ -198,7 +205,7 @@ describe('MpcInputRadioComponent', () => {
       component['campoTocado'] = true;
       component['opcaoSelecionada'] = mockOptions[0];
 
-      const resultado = component.validaRequired();
+      const resultado = component['validaRequired']();
 
       expect(resultado).toBe(false);
     });

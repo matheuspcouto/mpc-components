@@ -11,9 +11,10 @@
  * required {boolean}: (opcional) Indica se o campo é obrigatório.
  * disabled {boolean}: (opcional) Indica se o campo está desabilitado.
  * readonly {boolean}: (opcional) Indica se o campo é somente leitura.
+ * value {string}: Valor inicial do campo.
  *
  * Exemplo de utilização:
- * <mpc-input-date label="Data de Nascimento" [minDate]="minDate" [maxDate]="maxDate" [required]="true" [tabIndex]="1" [ariaLabel]="ariaLabel" (valor)="setvalor($event)"></mpc-input-date>
+ * <mpc-input-date [value]="value" label="Data de Nascimento" [minDate]="minDate" [maxDate]="maxDate" [required]="true" [tabIndex]="1" [ariaLabel]="ariaLabel" (valor)="setvalor($event)"></mpc-input-date>
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
@@ -36,25 +37,25 @@ export class MpcInputDateComponent {
   @Input() tabIndex?: number = 0
   @Input() ariaLabel?: string = '';
 
-  @Input() value?: string;
+  @Input() value?: string = '';
   @Input() label: string = '';
-  @Input() disabled: boolean = false;
-  @Input() readonly: boolean = false;
+  @Input() disabled?: boolean = false;
+  @Input() readonly?: boolean = false;
 
   // Validators
-  @Input() required: boolean = false;
-  @Input() minDate: string = '';
-  @Input() maxDate: string = '';
+  @Input() required?: boolean = false;
+  @Input() minDate?: string = '';
+  @Input() maxDate?: string = '';
 
   @Output() valor: EventEmitter<string> = new EventEmitter();
   @Output() error: EventEmitter<ValidationErrors> = new EventEmitter();
 
-  protected errorMessage?: string = '';
+  protected errorMessage?: string;
   protected campoTocado: boolean = false;
 
   set Value(value: string) {
     this.value = value;
-    if (this.isCampoValido()) { this.valor.emit(this.value); }
+    if (this.isCampoValido(this.value)) { this.valor.emit(this.value); }
   }
 
   get Value(): string {
@@ -64,14 +65,14 @@ export class MpcInputDateComponent {
   onChange: (value: string) => void = () => { };
   onTouched: () => void = () => { };
 
-  public onBlur(): void {
+  protected onBlur(): void {
     this.onTouched();
-    this.isCampoValido();
+    this.isCampoValido(this.Value);
   }
 
-  public onFocus(): void {
+  protected onFocus(): void {
     this.campoTocado = true;
-    this.isCampoValido();
+    this.isCampoValido(this.Value);
   }
 
   registerOnChange(fn: (value: string) => void): void {
@@ -82,28 +83,28 @@ export class MpcInputDateComponent {
     this.onTouched = fn;
   }
 
-  setValue(event: any): void {
+  protected setValue(event: any): void {
     this.Value = event.target.value as string;
     this.onChange(this.Value);
     this.onTouched();
   }
 
-  isCampoValido(): boolean {
+  private isCampoValido(value: string): boolean {
     if (this.readonly || this.disabled) { return true; }
 
-    if (this.validaRequired()) {
+    if (this.validaRequired(value)) {
       this.errorMessage = `O campo ${this.label} é obrigatório`;
       this.error.emit({ 'required': true });
       return false;
     }
 
-    if (this.validaMinDate() && this.minDate) {
+    if (this.validaMinDate(value) && this.minDate) {
       this.errorMessage = `A data deve ser maior ou igual a ${this.formatarData(this.minDate)}`;
       this.error.emit({ 'minDate': true });
       return false;
     }
 
-    if (this.validaMaxDate() && this.maxDate) {
+    if (this.validaMaxDate(value) && this.maxDate) {
       this.errorMessage = `A data deve ser menor ou igual a ${this.formatarData(this.maxDate)}`;
       this.error.emit({ 'maxDate': true });
       return false;
@@ -113,28 +114,21 @@ export class MpcInputDateComponent {
     return true;
   }
 
-  validaMinDate(): boolean {
+  private validaMinDate(value: string): boolean {
     if (!this.minDate) return false;
-    return new Date(this.Value) < new Date(this.minDate);
+    return new Date(value) < new Date(this.minDate);
   }
 
-  validaMaxDate(): boolean {
+  private validaMaxDate(value: string): boolean {
     if (!this.maxDate) return false;
-    return new Date(this.Value) > new Date(this.maxDate);
+    return new Date(value) > new Date(this.maxDate);
   }
 
-  validaRequired(): boolean {
-    return this.campoTocado && this.required! && this.Value.length === 0;
+  private validaRequired(value: string): boolean {
+    return this.campoTocado && this.required! && value.length === 0;
   }
 
-  getDataHtmlFormatada(date: string): string {
-    const ano = date.split('/')[2];
-    const mes = date.split('/')[1];
-    const dia = date.split('/')[0];
-    return `${ano}-${mes}-${dia}`;
-  }
-
-  formatarData(data: string): string {
+  private formatarData(data: string): string {
     const ano = data.split('-')[0];
     const mes = data.split('-')[1];
     const dia = data.split('-')[2];

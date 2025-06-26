@@ -6,7 +6,7 @@
  * label {string}: Label do campo.
  * tabIndex {number}: (opcional) Índice de tabulação do campo.
  * ariaLabel {string}: (opcional) Label para acessibilidade.
- * value {string}: (opcional) Valor do campo.
+ * value {string}: Valor do campo.
  * readonly {boolean}: (opcional) Campo somente leitura.
  * disabled {boolean}: (opcional) Indica se o campo está desabilitado.
  * min {string}: (opcional) Número mínimo de caracteres.
@@ -14,7 +14,7 @@
  * required {boolean}: (opcional) Campo obrigatório.
  *
  * Exemplo de utilização:
- * <mpc-input-text label="Nome" [required]="true" [tabIndex]="1" [ariaLabel]="ariaLabel" (valor)="setvalor($event)"></mpc-input-text>
+ * <mpc-input-text [value]="value" label="Nome" [required]="true" [tabIndex]="1" [ariaLabel]="ariaLabel" (valor)="setvalor($event)"></mpc-input-text>
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
@@ -38,15 +38,14 @@ export class MpcInputTextComponent {
   @Input() ariaLabel?: string = '';
 
   @Input() label: string = '';
-  @Input() readonly: boolean = false;
-  @Input() disabled: boolean = false;
+  @Input() readonly?: boolean = false;
+  @Input() disabled?: boolean = false;
 
   @Input() value?: string = '';
 
   // Validators
-  @Input() required: boolean = false;
-  @Input() min: string = '';
-  @Input() max: string = '';
+  @Input() min?: string = '';
+  @Input() max?: string = '';
 
   @Output() valor: EventEmitter<string> = new EventEmitter();
   @Output() error: EventEmitter<ValidationErrors> = new EventEmitter();
@@ -56,11 +55,21 @@ export class MpcInputTextComponent {
 
   set Value(value: string) {
     this.value = value;
-    if (this.isCampoValido()) { this.valor.emit(this.value); }
+    if (this.isCampoValido(this.value)) { this.valor.emit(this.value); }
   }
 
   get Value(): string {
     return this.value as string;
+  }
+
+  protected onBlur(): void {
+    this.onTouched();
+    this.isCampoValido(this.Value);
+  }
+
+  protected onFocus(): void {
+    this.campoTocado = true;
+    this.isCampoValido(this.Value);
   }
 
   onChange: (value?: string) => void = () => { };
@@ -78,28 +87,22 @@ export class MpcInputTextComponent {
     this.onTouched = fn;
   }
 
-  setValue(event: any): void {
+  protected setValue(event: any): void {
     this.Value = event.target.value as string;
     this.onChange(this.Value);
     this.onTouched();
   }
 
-  isCampoValido(): boolean {
+  private isCampoValido(value: string): boolean {
     if (this.readonly || this.disabled) { return true; }
 
-    if (this.validaRequired()) {
-      this.errorMessage = `O campo ${this.label} é obrigatório`;
-      this.error.emit({ required: true });
-      return false;
-    }
-
-    if (this.validaMin()) {
+    if (this.validaMin(value)) {
       this.errorMessage = `O campo ${this.label} deve ter no mínimo ${this.min} caracteres`;
       this.error.emit({ min: true });
       return false;
     }
 
-    if (this.validaMax()) {
+    if (this.validaMax(value)) {
       this.errorMessage = `O campo ${this.label} deve ter no máximo ${this.max} caracteres`;
       this.error.emit({ max: true });
       return false;
@@ -109,23 +112,19 @@ export class MpcInputTextComponent {
     return true;
   }
 
-  validaMin(): boolean {
+  private validaMin(value: string): boolean {
     if (this.min) {
       let minNumber = parseInt(this.min);
-      return this.Value ? this.Value.length < minNumber : false;
+      return value ? value.length < minNumber : false;
     }
     return false;
   }
 
-  validaMax(): boolean {
+  private validaMax(value: string): boolean {
     if (this.max) {
       let maxNumber = parseInt(this.max);
-      return this.Value ? this.Value.length > maxNumber : false;
+      return value ? value.length > maxNumber : false;
     }
     return false;
-  }
-
-  validaRequired(): boolean {
-    return this.campoTocado && (this.required! || this.min.length > 0) && this.Value.length === 0;
   }
 }

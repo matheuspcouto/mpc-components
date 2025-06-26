@@ -8,9 +8,10 @@
  * required {boolean}: (opcional) Indica se o campo é obrigatório.
  * disabled {boolean}: (opcional) Indica se o campo está desabilitado.
  * readonly {boolean}: (opcional) Indica se o campo é somente leitura.
+ * value {string}: Valor Inicial do campo.
  *
  * Exemplo de utilização:
- * <mpc-input-email [required]="true" [tabIndex]="1" [ariaLabel]="ariaLabel" (valor)="setvalor($event)"></mpc-input-email>
+ * <mpc-input-email [value]="value" [required]="true" [tabIndex]="1" [ariaLabel]="ariaLabel" (valor)="setvalor($event)"></mpc-input-email>
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
@@ -34,23 +35,24 @@ export class MpcInputEmailComponent {
   @Input() tabIndex?: number = 0
   @Input() ariaLabel?: string = '';
 
-  @Input() disabled: boolean = false;
-  @Input() readonly: boolean = false;
+  @Input() disabled?: boolean = false;
+  @Input() readonly?: boolean = false;
 
   // Validators
-  @Input() required: boolean = false;
+  @Input() required?: boolean = false;
   private regexEmail: any = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
   @Output() valor: EventEmitter<string> = new EventEmitter();
   @Output() error: EventEmitter<ValidationErrors> = new EventEmitter();
 
-  protected value?: string = '';
+  @Input() value?: string = '';
+
   protected errorMessage?: string;
   protected campoTocado: boolean = false;
 
   set Value(value: string) {
     this.value = value;
-    if (this.isCampoValido()) { this.valor.emit(this.value); }
+    if (this.isCampoValido(this.value)) { this.valor.emit(this.value); }
   }
 
   get Value(): string {
@@ -60,14 +62,14 @@ export class MpcInputEmailComponent {
   onChange: (value: string) => void = () => { };
   onTouched: () => void = () => { };
 
-  public onBlur(): void {
+  protected onBlur(): void {
     this.onTouched();
-    this.isCampoValido();
+    this.isCampoValido(this.Value);
   }
 
-  public onFocus(): void {
+  protected onFocus(): void {
     this.campoTocado = true;
-    this.isCampoValido();
+    this.isCampoValido(this.Value);
   }
 
   writeValue(value: string): void {
@@ -82,22 +84,22 @@ export class MpcInputEmailComponent {
     this.onTouched = fn;
   }
 
-  setValue(event: any): void {
+  protected setValue(event: any): void {
     this.Value = event.target.value;
     this.onChange(this.Value);
     this.onTouched();
   }
 
-  isCampoValido(): boolean {
+  private isCampoValido(value: string): boolean {
     if (this.readonly || this.disabled) { return true; }
 
-    if (this.validaRequired()) {
+    if (this.validaRequired(value)) {
       this.errorMessage = `O campo e-mail é obrigatório`;
       this.error.emit({ required: true });
       return false;
     }
 
-    if (this.validaRegex()) {
+    if (this.validaRegex(value)) {
       this.errorMessage = `O campo e-mail não está em um formato válido`;
       this.error.emit({ regex: true });
       return false;
@@ -107,12 +109,12 @@ export class MpcInputEmailComponent {
     return true;
   }
 
-  validaRegex(): boolean {
-    return !new RegExp(this.regexEmail).test(this.Value);
+  private validaRegex(value: string): boolean {
+    return !new RegExp(this.regexEmail).test(value);
   }
 
-  validaRequired(): boolean {
-    return this.required! && this.Value.length === 0;
+  private validaRequired(value: string): boolean {
+    return this.required! && value.length === 0;
   }
 
 }

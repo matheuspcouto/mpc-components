@@ -11,10 +11,10 @@
  * required {boolean}: (opcional) Indica se o campo é obrigatório.
  * disabled {boolean}: (opcional) Indica se o campo está desabilitado.
  * readonly {boolean}: (opcional) Indica se o campo é somente leitura.
- * value {number}: (opcional) Valor inicial do campo.
+ * value {number}: Valor inicial do campo.
  *
  * Exemplo de utilização:
- * <mpc-input-number label="Idade" [min]="0" [max]="100" [required]="true" [tabIndex]="1" [ariaLabel]="ariaLabel" (valor)="setvalor($event)"></mpc-input-number>
+ * <mpc-input-number [value]="value" label="Idade" [min]="0" [max]="100" [required]="true" [tabIndex]="1" [ariaLabel]="ariaLabel" (valor)="setvalor($event)"></mpc-input-number>
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
@@ -39,13 +39,13 @@ export class MpcInputNumberComponent {
 
   @Input() value?: number = 0;
   @Input() label: string = '';
-  @Input() disabled: boolean = false;
-  @Input() readonly: boolean = false;
+  @Input() disabled?: boolean = false;
+  @Input() readonly?: boolean = false;
 
   // Validators
-  @Input() required: boolean = false;
-  @Input() min: string = '';
-  @Input() max: string = '';
+  @Input() required?: boolean = false;
+  @Input() min?: string = '';
+  @Input() max?: string = '';
 
   @Output() valor: EventEmitter<number> = new EventEmitter();
   @Output() error: EventEmitter<ValidationErrors> = new EventEmitter();
@@ -55,7 +55,7 @@ export class MpcInputNumberComponent {
 
   set Value(value: number) {
     this.value = value;
-    if (this.isCampoValido()) { this.valor.emit(this.value); }
+    if (this.isCampoValido(this.value)) { this.valor.emit(this.value); }
   }
 
   get Value(): number {
@@ -65,14 +65,14 @@ export class MpcInputNumberComponent {
   onChange: (value?: number) => void = () => { };
   onTouched: () => void = () => { };
 
-  public onBlur(): void {
+  protected onBlur(): void {
     this.onTouched();
-    this.isCampoValido();
+    this.isCampoValido(this.Value);
   }
 
-  public onFocus(): void {
+  protected onFocus(): void {
     this.campoTocado = true;
-    this.isCampoValido();
+    this.isCampoValido(this.Value);
   }
 
   writeValue(value: number): void {
@@ -87,28 +87,28 @@ export class MpcInputNumberComponent {
     this.onTouched = fn;
   }
 
-  setValue(event: any): void {
+  protected setValue(event: any): void {
     this.Value = event.target.value as number;
     this.onChange(this.Value);
     this.onTouched();
   }
 
-  isCampoValido(): boolean {
+  private isCampoValido(value: number): boolean {
     if (this.readonly || this.disabled) { return true; }
 
-    if (this.validaRequired()) {
+    if (this.validaRequired(value)) {
       this.errorMessage = `O campo ${this.label} é obrigatório`;
       this.error.emit({ required: true });
       return false;
     }
 
-    if (this.validaMin()) {
+    if (this.validaMin(value)) {
       this.errorMessage = `O valor mínimo para o campo ${this.label} é ${this.min}`;
       this.error.emit({ min: true });
       return false;
     }
 
-    if (this.validaMax()) {
+    if (this.validaMax(value)) {
       this.errorMessage = `O valor máximo para o campo ${this.label} é ${this.max}`;
       this.error.emit({ max: true });
       return false;
@@ -118,24 +118,24 @@ export class MpcInputNumberComponent {
     return true;
   }
 
-  validaMin(): boolean {
+  private validaMin(value: number): boolean {
     if (this.min) {
       let minNumber = parseInt(this.min);
-      return this.Value ? this.Value < minNumber : false;
+      return value ? value < minNumber : false;
     }
     return false;
   }
 
-  validaMax(): boolean {
+  private validaMax(value: number): boolean {
     if (this.max) {
       let maxNumber = parseInt(this.max);
-      return this.Value ? this.Value > maxNumber : false;
+      return value ? value > maxNumber : false;
     }
     return false;
   }
 
-  validaRequired(): boolean {
-    return this.campoTocado && this.required! && this.Value === 0;
+  private validaRequired(value: number): boolean {
+    return this.campoTocado && this.required! && value === 0;
   }
 
 }

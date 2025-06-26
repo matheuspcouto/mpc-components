@@ -54,7 +54,7 @@ describe('MpcInputTelefoneComponent', () => {
     });
 
     it('deve ter máscara definida', () => {
-      expect(component.mascara).toBe('(00) 00000-0000');
+      expect(component['mascara']).toBe('(00) 00000-0000');
     });
   });
 
@@ -66,7 +66,7 @@ describe('MpcInputTelefoneComponent', () => {
 
     it('deve emitir valor quando válido', () => {
       const valorSpy = jest.spyOn(component.valor, 'emit');
-      const isCampoValidoSpy = jest.spyOn(component, 'isCampoValido').mockReturnValue(true);
+      const isCampoValidoSpy = jest.spyOn(component as any, 'isCampoValido').mockReturnValue(true);
 
       component.Value = '(11) 99999-9999';
 
@@ -76,7 +76,7 @@ describe('MpcInputTelefoneComponent', () => {
 
     it('não deve emitir valor quando inválido', () => {
       const valorSpy = jest.spyOn(component.valor, 'emit');
-      const isCampoValidoSpy = jest.spyOn(component, 'isCampoValido').mockReturnValue(false);
+      const isCampoValidoSpy = jest.spyOn(component as any, 'isCampoValido').mockReturnValue(false);
 
       component.Value = '123';
 
@@ -102,6 +102,15 @@ describe('MpcInputTelefoneComponent', () => {
       component.registerOnTouched(mockFn);
       expect(component.onTouched).toBe(mockFn);
     });
+
+    it('deve chamar onBlur', () => {
+      component['onBlur']();
+    });
+
+    it('deve chamar onFocus', () => {
+      component['onFocus']();
+      expect(component['campoTocado']).toBe(true);
+    });
   });
 
   describe('setValue', () => {
@@ -110,7 +119,7 @@ describe('MpcInputTelefoneComponent', () => {
       const onTouchedSpy = jest.spyOn(component, 'onTouched');
       const event = { target: { value: '(11) 99999-9999' } };
 
-      component.setValue(event);
+      component['setValue'](event);
 
       expect(component.Value).toBe('(11) 99999-9999');
       expect(onChangeSpy).toHaveBeenCalledWith('(11) 99999-9999');
@@ -121,12 +130,13 @@ describe('MpcInputTelefoneComponent', () => {
   describe('isCampoValido', () => {
     it('deve retornar true quando readonly', () => {
       component.readonly = true;
-      expect(component.isCampoValido()).toBe(true);
+      expect(component['isCampoValido'](component.Value)).toBe(true);
     });
 
     it('deve retornar true quando disabled', () => {
       component.disabled = true;
-      expect(component.isCampoValido()).toBe(true);
+      component.Value = '(11) 99999-9999';
+      expect(component['isCampoValido'](component.Value)).toBe(true);
     });
 
     it('deve retornar false quando campo obrigatório está vazio', () => {
@@ -134,7 +144,7 @@ describe('MpcInputTelefoneComponent', () => {
       component.required = true;
       component.Value = '';
 
-      const resultado = component.isCampoValido();
+      const resultado = component['isCampoValido'](component.Value);
 
       expect(resultado).toBe(false);
       expect(component['errorMessage']).toBe('O campo telefone é obrigatório');
@@ -143,10 +153,12 @@ describe('MpcInputTelefoneComponent', () => {
 
     it('deve retornar false quando regex é inválido', () => {
       const errorSpy = jest.spyOn(component.error, 'emit');
-      const validaRequiredSpy = jest.spyOn(component, 'validaRequired').mockReturnValue(false);
-      const validaRegexSpy = jest.spyOn(component, 'validaRegex').mockReturnValue(true);
+      const validaRequiredSpy = jest.spyOn(component as any, 'validaRequired').mockReturnValue(false);
+      const validaRegexSpy = jest.spyOn(component as any, 'validaRegex').mockReturnValue(true);
 
-      const resultado = component.isCampoValido();
+      component.Value = '(11) 99999-99';
+
+      const resultado = component['isCampoValido'](component.Value);
 
       expect(validaRequiredSpy).toHaveBeenCalled();
       expect(validaRegexSpy).toHaveBeenCalled();
@@ -156,10 +168,12 @@ describe('MpcInputTelefoneComponent', () => {
     });
 
     it('deve retornar true quando campo é válido', () => {
-      const validaRequiredSpy = jest.spyOn(component, 'validaRequired').mockReturnValue(false);
-      const validaRegexSpy = jest.spyOn(component, 'validaRegex').mockReturnValue(false);
+      const validaRequiredSpy = jest.spyOn(component as any, 'validaRequired').mockReturnValue(false);
+      const validaRegexSpy = jest.spyOn(component as any, 'validaRegex').mockReturnValue(false);
 
-      const resultado = component.isCampoValido();
+      component.Value = '(11) 99999-9999';
+
+      const resultado = component['isCampoValido'](component.Value);
 
       expect(validaRequiredSpy).toHaveBeenCalled();
       expect(validaRegexSpy).toHaveBeenCalled();
@@ -171,12 +185,12 @@ describe('MpcInputTelefoneComponent', () => {
   describe('validaRegex', () => {
     it('deve retornar false para telefone válido', () => {
       component.Value = '(11) 99999-9999';
-      expect(component.validaRegex()).toBe(false);
+      expect(component['validaRegex'](component.Value)).toBe(false);
     });
 
     it('deve retornar true para telefone inválido', () => {
       component.Value = '123';
-      expect(component.validaRegex()).toBe(true);
+      expect(component['validaRegex'](component.Value)).toBe(true);
     });
 
     it('deve validar diferentes formatos válidos', () => {
@@ -189,7 +203,7 @@ describe('MpcInputTelefoneComponent', () => {
 
       telefonesValidos.forEach(telefone => {
         component.Value = telefone;
-        expect(component.validaRegex()).toBe(false);
+        expect(component['validaRegex'](component.Value)).toBe(false);
       });
     });
 
@@ -203,7 +217,7 @@ describe('MpcInputTelefoneComponent', () => {
 
       telefonesInvalidos.forEach(telefone => {
         component.Value = telefone;
-        expect(component.validaRegex()).toBe(true);
+        expect(component['validaRegex'](component.Value)).toBe(true);
       });
     });
   });
@@ -212,26 +226,26 @@ describe('MpcInputTelefoneComponent', () => {
     it('deve retornar true quando campo é obrigatório e vazio', () => {
       component.required = true;
       component.Value = '';
-      expect(component.validaRequired()).toBe(true);
+      expect(component['validaRequired'](component.Value)).toBe(true);
     });
 
     it('deve retornar false quando campo é obrigatório e preenchido', () => {
       component.required = true;
       component.Value = '(11) 99999-9999';
-      expect(component.validaRequired()).toBe(false);
+      expect(component['validaRequired'](component.Value)).toBe(false);
     });
 
     it('deve retornar false quando campo não é obrigatório', () => {
       component.required = false;
       component.Value = '';
-      expect(component.validaRequired()).toBe(false);
+      expect(component['validaRequired'](component.Value)).toBe(false);
     });
   });
 
   describe('Eventos de saída', () => {
     it('deve emitir valor válido', () => {
       const valorSpy = jest.spyOn(component.valor, 'emit');
-      jest.spyOn(component, 'isCampoValido').mockReturnValue(true);
+      jest.spyOn(component as any, 'isCampoValido').mockReturnValue(true);
 
       component.Value = '(11) 99999-9999';
 
@@ -243,7 +257,7 @@ describe('MpcInputTelefoneComponent', () => {
       component.required = true;
       component.Value = '';
 
-      component.isCampoValido();
+      component['isCampoValido'](component.Value);
 
       expect(errorSpy).toHaveBeenCalledWith({ required: true });
     });

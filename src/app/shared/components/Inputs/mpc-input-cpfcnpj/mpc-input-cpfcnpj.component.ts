@@ -8,9 +8,10 @@
  * required {boolean}: (opcional) Indica se o campo é obrigatório.
  * disabled {boolean}: (opcional) Indica se o campo está desabilitado.
  * readonly {boolean}: (opcional) Indica se o campo é somente leitura.
+ * value {string}: Valor inicial do campo.
  *
  * Exemplo de utilização:
- * <mpc-input-cpfcnpj [required]="true" [tabIndex]="1" [ariaLabel]="ariaLabel" (valor)="setvalor($event)"></mpc-input-cpfcnpj>
+ * <mpc-input-cpfcnpj [required]="true" [tabIndex]="1" [ariaLabel]="ariaLabel" [value]="value" (valor)="setvalor($event)"></mpc-input-cpfcnpj>
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
@@ -35,9 +36,9 @@ export class MpcInputCpfcnpjComponent {
   @Input() tabIndex?: number = 0
   @Input() ariaLabel?: string = '';
 
-  @Input() value?: string;
-  @Input() disabled: boolean = false;
-  @Input() readonly: boolean = false;
+  @Input() value?: string = '';
+  @Input() disabled?: boolean = false;
+  @Input() readonly?: boolean = false;
 
   // Validators
   @Input() required: boolean = false;
@@ -52,8 +53,8 @@ export class MpcInputCpfcnpjComponent {
   protected campoTocado: boolean = false;
 
   set Value(value: string) {
-    this.value = value.replace(/\D/g, '');
-    if (this.isCampoValido()) { this.valor.emit(this.value); }
+    this.value = value.replace(/\D/g, '') || '';
+    if (this.isCampoValido(this.value)) { this.valor.emit(this.value); }
   }
 
   get Value(): string {
@@ -62,12 +63,12 @@ export class MpcInputCpfcnpjComponent {
 
   protected onBlur(): void {
     this.onTouched();
-    this.isCampoValido();
+    this.isCampoValido(this.Value);
   }
 
   protected onFocus(): void {
     this.campoTocado = true;
-    this.isCampoValido();
+    this.isCampoValido(this.Value);
   }
 
   onChange: (value: string) => void = () => { };
@@ -86,8 +87,8 @@ export class MpcInputCpfcnpjComponent {
   }
 
   protected setValue(event: any): void {
-    this.value = event.target.value as string;
-    this.onChange(this.value);
+    this.Value = event.target.value as string;
+    this.onChange(this.Value);
     this.onTouched();
     this.atualizarMascara();
   }
@@ -98,12 +99,12 @@ export class MpcInputCpfcnpjComponent {
     this.mascara = valorSemCaracteresEspeciais.length > 11 ? this.mascaraCNPJ : this.mascaraCPF;
   }
 
-  private isCampoValido(): boolean {
+  private isCampoValido(value: string): boolean {
     if (this.readonly || this.disabled) {
       return true;
     }
 
-    if (this.validaRequired()) {
+    if (this.validaRequired(value)) {
       this.errorMessage = `O campo CPF/CNPJ é obrigatório`;
       this.error.emit({ required: true });
       return false;
@@ -119,8 +120,8 @@ export class MpcInputCpfcnpjComponent {
     return true;
   }
 
-  private validaRequired(): boolean {
-    return this.required && (!this.value || this.value.length === 0);
+  private validaRequired(value: string): boolean {
+    return this.required && (!value || value.length === 0);
   }
 
   private isValidCPF(): boolean {

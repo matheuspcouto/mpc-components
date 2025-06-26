@@ -5,7 +5,7 @@
  * id {string}: (opcional) Id do campo.
  * tabIndex {number}: (opcional) Índice de tabulação do campo.
  * ariaLabel {string}: (opcional) Label para acessibilidade.
- * value {number}: (opcional) Valor inicial do campo.
+ * value {number}: Valor inicial do campo.
  *
  * Exemplo de utilização:
  * <mpc-input-pesquisa-cep [value]="cep" [tabIndex]="1" [ariaLabel]="ariaLabel" (valor)="setvalor($event)"></mpc-input-pesquisa-cep>
@@ -47,10 +47,12 @@ export class MpcInputPesquisaCepComponent {
   @Output() valor: EventEmitter<Endereco> = new EventEmitter();
   @Output() error: EventEmitter<ValidationErrors> = new EventEmitter();
 
-  @Input() required: boolean = false;
+  // Validators
+  @Input() required?: boolean = false;
+
   protected campoTocado: boolean = false;
   private regexCEP: any = /^\d{5}-?\d{3}$/;
-  protected mascara: string = '00000-000';
+  protected readonly mascara: string = '00000-000';
 
   protected errorMessage?: string;
 
@@ -58,6 +60,7 @@ export class MpcInputPesquisaCepComponent {
 
   set Value(value: string) {
     this.value = value;
+    if (this.isCampoValido(this.value)) { this.pequisarCep(this.value); }
   }
 
   get Value(): string {
@@ -69,12 +72,12 @@ export class MpcInputPesquisaCepComponent {
 
   protected onBlur(): void {
     this.onTouched();
-    this.isCampoValido();
+    this.isCampoValido(this.Value);
   }
 
   protected onFocus(): void {
     this.campoTocado = true;
-    this.isCampoValido();
+    this.isCampoValido(this.Value);
   }
 
   writeValue(value: string): void {
@@ -89,21 +92,21 @@ export class MpcInputPesquisaCepComponent {
     this.onTouched = fn;
   }
 
-  setValue(event: any): void {
+  protected setValue(event: any): void {
     this.Value = event.target.value as string;
     this.onChange(this.Value);
     this.onTouched();
-    this.isCampoValido();
+    this.isCampoValido(this.Value);
   }
 
-  isCampoValido(): boolean {
-    if (this.validaRequired()) {
+  private isCampoValido(value: string): boolean {
+    if (this.validaRequired(value)) {
       this.errorMessage = `O campo CEP é obrigatório`;
       this.error.emit({ required: true });
       return false;
     }
 
-    if (this.validaRegex()) {
+    if (this.validaRegex(value)) {
       this.errorMessage = `O campo CEP deve conter 8 dígitos`;
       this.error.emit({ regex: true });
       return false;
@@ -113,17 +116,16 @@ export class MpcInputPesquisaCepComponent {
     return true;
   }
 
-  validaRegex(): boolean {
-    return !new RegExp(this.regexCEP).test(this.Value);
+  private validaRegex(value: string): boolean {
+    return !new RegExp(this.regexCEP).test(value);
   }
 
-  validaRequired(): boolean {
-    return this.campoTocado && this.required! && this.Value.length === 0;
+  private validaRequired(value: string): boolean {
+    return this.campoTocado && this.required! && value.length === 0;
   }
 
-  pequisarCep(cep: string | undefined): void {
+  private pequisarCep(cep: string | undefined): void {
 
-    if (!this.isCampoValido()) return;
     cep = (cep as string).replace(/\D/g, '');;
 
     this.http.get<any>(`https://viacep.com.br/ws/${cep}/json/`).subscribe({

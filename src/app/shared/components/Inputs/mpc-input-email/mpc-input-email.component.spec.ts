@@ -48,7 +48,7 @@ describe('MpcInputEmailComponent', () => {
 
   describe('Getter e Setter Value', () => {
     it('deve definir e obter valor através do setter/getter', () => {
-      const spyIsCampoValido = jest.spyOn(component, 'isCampoValido').mockReturnValue(true);
+      const spyIsCampoValido = jest.spyOn(component as any, 'isCampoValido').mockReturnValue(true);
       const spyEmit = jest.spyOn(component.valor, 'emit');
 
       component.Value = 'test@example.com';
@@ -59,7 +59,7 @@ describe('MpcInputEmailComponent', () => {
     });
 
     it('não deve emitir valor quando campo é inválido', () => {
-      const spyIsCampoValido = jest.spyOn(component, 'isCampoValido').mockReturnValue(false);
+      const spyIsCampoValido = jest.spyOn(component as any, 'isCampoValido').mockReturnValue(false);
       const spyEmit = jest.spyOn(component.valor, 'emit');
 
       component.Value = 'email-invalido';
@@ -87,16 +87,25 @@ describe('MpcInputEmailComponent', () => {
       component.registerOnTouched(mockFn);
       expect(component.onTouched).toBe(mockFn);
     });
+
+    it('deve chamar onBlur', () => {
+      component['onBlur']();
+    });
+
+    it('deve chamar onFocus', () => {
+      component['onFocus']();
+      expect(component['campoTocado']).toBe(true);
+    });
   });
 
   describe('setValue', () => {
     it('deve definir valor e chamar callbacks', () => {
       const spyOnChange = jest.spyOn(component, 'onChange');
       const spyOnTouched = jest.spyOn(component, 'onTouched');
-      const spyIsCampoValido = jest.spyOn(component, 'isCampoValido').mockReturnValue(true);
+      const spyIsCampoValido = jest.spyOn(component as any, 'isCampoValido').mockReturnValue(true);
       const mockEvent = { target: { value: 'test@email.com' } };
 
-      component.setValue(mockEvent);
+      component['setValue'](mockEvent);
 
       expect(component.Value).toBe('test@email.com');
       expect(spyOnChange).toHaveBeenCalledWith('test@email.com');
@@ -108,19 +117,19 @@ describe('MpcInputEmailComponent', () => {
   describe('isCampoValido', () => {
     it('deve retornar true quando campo é readonly', () => {
       component.readonly = true;
-      expect(component.isCampoValido()).toBe(true);
+      expect(component['isCampoValido'](component.Value)).toBe(true);
     });
 
     it('deve retornar true quando campo é disabled', () => {
       component.disabled = true;
-      expect(component.isCampoValido()).toBe(true);
+      expect(component['isCampoValido'](component.Value)).toBe(true);
     });
 
     it('deve retornar false e emitir erro quando required é inválido', () => {
-      const spyValidaRequired = jest.spyOn(component, 'validaRequired').mockReturnValue(true);
+      const spyValidaRequired = jest.spyOn(component as any, 'validaRequired').mockReturnValue(true);
       const spyEmitError = jest.spyOn(component.error, 'emit');
 
-      const resultado = component.isCampoValido();
+      const resultado = component['isCampoValido'](component.Value);
 
       expect(resultado).toBe(false);
       expect(component['errorMessage']).toBe('O campo e-mail é obrigatório');
@@ -129,11 +138,11 @@ describe('MpcInputEmailComponent', () => {
     });
 
     it('deve retornar false e emitir erro quando regex é inválido', () => {
-      const spyValidaRequired = jest.spyOn(component, 'validaRequired').mockReturnValue(false);
-      const spyValidaRegex = jest.spyOn(component, 'validaRegex').mockReturnValue(true);
+      const spyValidaRequired = jest.spyOn(component as any, 'validaRequired').mockReturnValue(false);
+      const spyValidaRegex = jest.spyOn(component as any, 'validaRegex').mockReturnValue(true);
       const spyEmitError = jest.spyOn(component.error, 'emit');
 
-      const resultado = component.isCampoValido();
+      const resultado = component['isCampoValido'](component.Value);
 
       expect(resultado).toBe(false);
       expect(component['errorMessage']).toBe('O campo e-mail não está em um formato válido');
@@ -143,10 +152,10 @@ describe('MpcInputEmailComponent', () => {
     });
 
     it('deve retornar true quando campo é válido', () => {
-      const spyValidaRequired = jest.spyOn(component, 'validaRequired').mockReturnValue(false);
-      const spyValidaRegex = jest.spyOn(component, 'validaRegex').mockReturnValue(false);
+      const spyValidaRequired = jest.spyOn(component as any, 'validaRequired').mockReturnValue(false);
+      const spyValidaRegex = jest.spyOn(component as any, 'validaRegex').mockReturnValue(false);
 
-      const resultado = component.isCampoValido();
+      const resultado = component['isCampoValido'](component.Value);
 
       expect(resultado).toBe(true);
       expect(component['errorMessage']).toBeUndefined();
@@ -162,32 +171,32 @@ describe('MpcInputEmailComponent', () => {
 
     it('deve retornar false para email válido', () => {
       component['Value'] = 'test@example.com';
-      expect(component.validaRegex()).toBe(false);
+      expect(component['validaRegex'](component.Value)).toBe(false);
     });
 
     it('deve retornar true para email inválido sem @', () => {
       component['Value'] = 'emailinvalido';
-      expect(component.validaRegex()).toBe(true);
+      expect(component['validaRegex'](component.Value)).toBe(true);
     });
 
     it('deve retornar true para email inválido sem domínio', () => {
       component['Value'] = 'test@';
-      expect(component.validaRegex()).toBe(true);
+      expect(component['validaRegex'](component.Value)).toBe(true);
     });
 
     it('deve retornar true para email inválido sem extensão', () => {
       component['Value'] = 'test@domain';
-      expect(component.validaRegex()).toBe(true);
+      expect(component['validaRegex'](component.Value)).toBe(true);
     });
 
     it('deve retornar false para email válido com números', () => {
       component['Value'] = 'user123@domain123.com';
-      expect(component.validaRegex()).toBe(false);
+      expect(component['validaRegex'](component.Value)).toBe(false);
     });
 
     it('deve retornar false para email válido com caracteres especiais', () => {
       component['Value'] = 'user.name+tag@example.co.uk';
-      expect(component.validaRegex()).toBe(false);
+      expect(component['validaRegex'](component.Value)).toBe(false);
     });
   });
 
@@ -195,26 +204,26 @@ describe('MpcInputEmailComponent', () => {
     it('deve retornar true quando required é true e valor está vazio', () => {
       component.required = true;
       component['Value'] = '';
-      expect(component.validaRequired()).toBe(true);
+      expect(component['validaRequired'](component.Value)).toBe(true);
     });
 
     it('deve retornar false quando required é true e valor não está vazio', () => {
       component.required = true;
       component['Value'] = 'test@example.com';
-      expect(component.validaRequired()).toBe(false);
+      expect(component['validaRequired'](component.Value)).toBe(false);
     });
 
     it('deve retornar false quando required é false', () => {
       component.required = false;
       component['Value'] = '';
-      expect(component.validaRequired()).toBe(false);
+      expect(component['validaRequired'](component.Value)).toBe(false);
     });
   });
 
   describe('EventEmitters', () => {
     it('deve emitir valor quando campo é válido', () => {
       const spyEmit = jest.spyOn(component.valor, 'emit');
-      jest.spyOn(component, 'isCampoValido').mockReturnValue(true);
+      jest.spyOn(component as any, 'isCampoValido').mockReturnValue(true);
 
       component.Value = 'valid@email.com';
 
@@ -226,7 +235,7 @@ describe('MpcInputEmailComponent', () => {
       component.required = true;
       component['Value'] = '';
 
-      component.isCampoValido();
+      component['isCampoValido'](component.Value);
 
       expect(spyEmit).toHaveBeenCalledWith({ required: true });
     });
