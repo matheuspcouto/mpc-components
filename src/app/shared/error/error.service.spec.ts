@@ -43,8 +43,7 @@ describe('ErrorService', () => {
           status: 400
         }
       };
-      const rotaRetorno = '/teste';
-      service.construirErro(erroMock, rotaRetorno);
+      service.construirErro({ ...erroMock, rotaRetorno: '/teste' });
       expect(service['erro']()).toEqual({
         titulo: ERRO_PADRAO.titulo,
         mensagem: 'Erro de validação - (Código 400)',
@@ -60,7 +59,7 @@ describe('ErrorService', () => {
           status: 500
         }
       };
-      service.construirErro(erroMock, '');
+      service.construirErro({ ...erroMock, rotaRetorno: undefined });
       expect(service['erro']()).toEqual({
         titulo: ERRO_PADRAO.titulo,
         mensagem: 'Erro interno - (Código 500)',
@@ -76,7 +75,7 @@ describe('ErrorService', () => {
           status: 500
         }
       };
-      service.construirErro(erroMock, null as any);
+      service.construirErro({ ...erroMock, rotaRetorno: null });
       expect(service['erro']()).toEqual({
         titulo: ERRO_PADRAO.titulo,
         mensagem: 'Erro interno - (Código 500)',
@@ -92,7 +91,7 @@ describe('ErrorService', () => {
           status: 500
         }
       };
-      service.construirErro(erroMock, undefined as any);
+      service.construirErro({ ...erroMock, rotaRetorno: undefined });
       expect(service['erro']()).toEqual({
         titulo: ERRO_PADRAO.titulo,
         mensagem: 'Erro interno - (Código 500)',
@@ -101,35 +100,23 @@ describe('ErrorService', () => {
       });
     });
 
-    it('deve retornar ERRO_PADRAO quando erro for null', () => {
-      const rotaRetorno = '/teste';
-      service.construirErro(null, rotaRetorno);
-      expect(service['erro']()).toEqual({
-        ...ERRO_PADRAO,
-        rotaRetorno,
-        imagem: ERRO_PADRAO.imagem
-      });
-    });
-
     it('deve retornar ERRO_PADRAO quando erro for undefined', () => {
-      const rotaRetorno = '/teste';
-      service.construirErro(undefined, rotaRetorno);
+      service.construirErro(undefined);
       expect(service['erro']()).toEqual({
         ...ERRO_PADRAO,
-        rotaRetorno,
+        rotaRetorno: ERRO_PADRAO.rotaRetorno,
         imagem: ERRO_PADRAO.imagem
       });
     });
 
     it('deve retornar ERRO_PADRAO quando erro não possuir propriedade error', () => {
       const erroMock = {
-        message: 'Erro sem propriedade error'
+        message: 'Não foi possível realizar a operação, tente novamente e caso o problema persista, entre em contato com o suporte.'
       };
-      const rotaRetorno = '/teste';
-      service.construirErro(erroMock, rotaRetorno);
+      service.construirErro({ ...erroMock, rotaRetorno: '/teste' });
       expect(service['erro']()).toEqual({
         ...ERRO_PADRAO,
-        rotaRetorno,
+        rotaRetorno: '/teste',
         imagem: ERRO_PADRAO.imagem
       });
     });
@@ -138,11 +125,10 @@ describe('ErrorService', () => {
       const erroMock = {
         error: null
       };
-      const rotaRetorno = '/teste';
-      service.construirErro(erroMock, rotaRetorno);
+      service.construirErro({ ...erroMock, rotaRetorno: '/teste' });
       expect(service['erro']()).toEqual({
         ...ERRO_PADRAO,
-        rotaRetorno,
+        rotaRetorno: '/teste',
         imagem: ERRO_PADRAO.imagem
       });
     });
@@ -151,11 +137,10 @@ describe('ErrorService', () => {
       const erroMock = {
         error: undefined
       };
-      const rotaRetorno = '/teste';
-      service.construirErro(erroMock, rotaRetorno);
+      service.construirErro({ ...erroMock, rotaRetorno: '/teste' });
       expect(service['erro']()).toEqual({
         ...ERRO_PADRAO,
-        rotaRetorno,
+        rotaRetorno: '/teste',
         imagem: ERRO_PADRAO.imagem
       });
     });
@@ -166,11 +151,10 @@ describe('ErrorService', () => {
           status: 404
         }
       };
-      const rotaRetorno = '/teste';
-      service.construirErro(erroMock, rotaRetorno);
+      service.construirErro({ ...erroMock, rotaRetorno: '/teste' });
       expect(service['erro']()).toEqual({
         titulo: ERRO_PADRAO.titulo,
-        mensagem: 'undefined - (Código 404)',
+        mensagem: 'Erro desconhecido - (Código 404)',
         rotaRetorno: '/teste',
         imagem: ERRO_PADRAO.imagem
       });
@@ -182,12 +166,11 @@ describe('ErrorService', () => {
           message: 'Erro sem status'
         }
       };
-      const rotaRetorno = '/teste';
-      service.construirErro(erroMock, rotaRetorno);
+      service.construirErro(erroMock);
       expect(service['erro']()).toEqual({
         titulo: ERRO_PADRAO.titulo,
-        mensagem: 'Erro sem status - (Código undefined)',
-        rotaRetorno: '/teste',
+        mensagem: 'Erro sem status - (Código N/A)',
+        rotaRetorno: '/',
         imagem: ERRO_PADRAO.imagem
       });
     });
@@ -199,15 +182,26 @@ describe('ErrorService', () => {
           status: 500
         }
       };
-      service.construirErro(erroMock, '/teste');
+      service.construirErro({ ...erroMock, rotaRetorno: '/teste' });
       expect(routerMock.navigate).toHaveBeenCalledWith([Rotas.ERROR]);
+    });
+
+    it('deve construir erro customizado com todas as propriedades preenchidas', () => {
+      const erroCustomizado = {
+        titulo: 'Erro customizado',
+        mensagem: 'Mensagem customizada',
+        rotaRetorno: '/rota-custom',
+        imagem: 'custom.png'
+      };
+      service.construirErro(erroCustomizado);
+      expect(service['erro']()).toEqual(erroCustomizado);
     });
   });
 
   describe('limparErro', () => {
     it('deve limpar o estado do erro', () => {
       // Primeiro, define um erro
-      service.construirErro({ error: { message: 'Erro', status: 400 } }, '/teste');
+      service.construirErro({ error: { message: 'Erro', status: 400 } });
       expect(service['erro']()).not.toBeNull();
       // Agora limpa
       service.limparErro();

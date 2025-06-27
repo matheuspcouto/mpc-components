@@ -20,14 +20,22 @@ export class PaginaErroComponent {
       error: {
         message: 'Erro de conexão com o servidor',
         status: 500
-      }
+      },
+      titulo: 'Erro de Conexão',
+      rotaRetorno: Rotas.PAGINA_ERRO
     };
 
-    this.errorService.construirErro(erroSimulado, Rotas.PAGINA_ERRO);
+    this.errorService.construirErro(erroSimulado);
   }
 
   simularErroGenerico(): void {
-    this.errorService.construirErro(null, Rotas.PAGINA_ERRO);
+    const erroSimulado = {
+      titulo: "Ops, algo deu errado!",
+      mensagem: "Não foi possível realizar a operação, tente novamente e caso o problema persista, entre em contato com o suporte.",
+      rotaRetorno: Rotas.PAGINA_ERRO
+    };
+
+    this.errorService.construirErro(erroSimulado);
   }
 
   simularErroValidacao(): void {
@@ -35,10 +43,12 @@ export class PaginaErroComponent {
       error: {
         message: 'Dados inválidos fornecidos',
         status: 400
-      }
+      },
+      titulo: 'Erro de Validação',
+      rotaRetorno: Rotas.PAGINA_ERRO
     };
 
-    this.errorService.construirErro(erroValidacao, Rotas.PAGINA_ERRO);
+    this.errorService.construirErro(erroValidacao);
   }
 
   simularErroComImagem(): void {
@@ -46,13 +56,12 @@ export class PaginaErroComponent {
       error: {
         message: 'Erro com imagem personalizada',
         status: 404
-      }
+      },
+      titulo: 'Erro Personalizado',
+      rotaRetorno: Rotas.PAGINA_ERRO,
+      imagem: 'assets/img/modal/atencao.png'
     };
 
-    this.errorService.construirErro(
-      erroSimulado,
-      Rotas.PAGINA_ERRO,
-      'assets/img/modal/atencao.png'
-    );
+    this.errorService.construirErro(erroSimulado);
   }
 } 

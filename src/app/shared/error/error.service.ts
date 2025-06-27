@@ -5,7 +5,7 @@
  *
  * Exemplo de utilização:
  * private errorService = inject(ErrorService);
- * errorService.construirErro(erro, rotaRetorno);
+ * errorService.construirErro(erro);
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/06/2025
@@ -36,27 +36,35 @@ export class ErrorService {
 
   /**
    * Constrói um erro e atualiza o estado
+   * @param erro - Objeto de erro completo do tipo any
    */
-  construirErro(e: any, rotaRetorno: string, imagem?: string): void {
-    let erro: Erro;
+  construirErro(erro: any): void {
+    let erroProcessado: Erro;
 
-    if (e && e.error) {
-      erro = {
-        titulo: ERRO_PADRAO.titulo,
-        mensagem: `${e.error.message} - (Código ${e.error.status})`,
-        rotaRetorno: rotaRetorno || ERRO_PADRAO.rotaRetorno,
-        imagem: imagem || ERRO_PADRAO.imagem,
-      } as Erro;
+    if (erro) {
+      if (erro.error) {
+        // Se o erro tem uma propriedade error (comum em erros HTTP)
+        erroProcessado = {
+          titulo: erro.titulo || ERRO_PADRAO.titulo,
+          mensagem: erro.mensagem || `${erro.error.message || 'Erro desconhecido'} - (Código ${erro.error.status || 'N/A'})`,
+          rotaRetorno: erro.rotaRetorno || ERRO_PADRAO.rotaRetorno,
+          imagem: erro.imagem || ERRO_PADRAO.imagem,
+        } as Erro;
+      } else {
+        // Se é um objeto de erro customizado
+        erroProcessado = {
+          titulo: erro.titulo || ERRO_PADRAO.titulo,
+          mensagem: erro.mensagem || erro.message || ERRO_PADRAO.mensagem,
+          rotaRetorno: erro.rotaRetorno || ERRO_PADRAO.rotaRetorno,
+          imagem: erro.imagem || ERRO_PADRAO.imagem,
+        } as Erro;
+      }
     } else {
-      erro = {
-        ...ERRO_PADRAO,
-        rotaRetorno: rotaRetorno || ERRO_PADRAO.rotaRetorno,
-        imagem: imagem || ERRO_PADRAO.imagem,
-      } as Erro;
+      erroProcessado = ERRO_PADRAO;
     }
 
     // Atualiza o estado do erro
-    this._erro.set(erro);
+    this._erro.set(erroProcessado);
 
     // Navega para a rota de erro
     this.router.navigate([Rotas.ERROR]);

@@ -17,6 +17,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MpcInputNumberComponent } from '../../../shared/components/Inputs/mpc-input-number/mpc-input-number.component';
 import { MpcInputCpfcnpjComponent } from "../../../shared/components/Inputs/mpc-input-cpfcnpj/mpc-input-cpfcnpj.component";
 import { MpcFooterComponent } from '../../../shared/components/mpc-footer/mpc-footer.component';
+import { MpcInputTextAreaComponent } from "../../../shared/components/Inputs/mpc-input-text-area/mpc-input-text-area.component";
 
 @Component({
   selector: 'app-dados-pessoais',
@@ -24,8 +25,7 @@ import { MpcFooterComponent } from '../../../shared/components/mpc-footer/mpc-fo
     ReactiveFormsModule, MpcInputTextComponent, MpcInputDateComponent,
     MpcInputRadioComponent, MpcButtonComponent, MpcInputSelectComponent,
     MpcFormProgressBarComponent, MpcNavbarComponent, MpcInputNumberComponent,
-    MpcInputCpfcnpjComponent, MpcFooterComponent
-  ],
+    MpcInputCpfcnpjComponent, MpcFooterComponent, MpcInputTextAreaComponent],
   templateUrl: './dados-pessoais.component.html',
   styleUrls: ['./dados-pessoais.component.css'],
 })
@@ -60,6 +60,7 @@ export default class DadosPessoaisComponent implements OnInit {
     estadoCivil: ['', Validators.required],
     idade: [0, Validators.min(1)],
     cpfCnpj: ['', Validators.required],
+    descricao: ['']
   });
 
   ngOnInit(): void {
@@ -80,6 +81,7 @@ export default class DadosPessoaisComponent implements OnInit {
           dataNasc: dadosInscricao.dataNasc,
           idade: dadosInscricao.idade,
           cpfCnpj: dadosInscricao.cpfCnpj,
+          descricao: dadosInscricao.descricao
         });
 
         if (dadosInscricao.sexo) {

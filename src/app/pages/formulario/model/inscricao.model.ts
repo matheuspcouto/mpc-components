@@ -2,6 +2,7 @@ export class Inscricao {
   id?: number;
   nome?: string;
   sobrenome?: string;
+  descricao?: string;
   dataNasc?: string;
   sexo?: string;
   estadoCivil?: string;
@@ -34,6 +35,7 @@ export class Inscricao {
     this.estadoCivil = dados.estadoCivil;
     this.idade = dados.idade;
     this.cpfCnpj = this.formatarCpfCnpj(dados.cpfCnpj);
+    this.descricao = dados.descricao;
     return this;
   }
 

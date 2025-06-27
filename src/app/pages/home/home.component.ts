@@ -1,13 +1,20 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { MpcNavbarComponent } from '../../shared/components/mpc-navbar/mpc-navbar.component';
 import { MpcCardMenuComponent } from "../../shared/components/Cards/mpc-card-menu/mpc-card-menu.component";
 import { MpcFooterComponent } from '../../shared/components/mpc-footer/mpc-footer.component';
+import { MpcButtonComponent } from '../../shared/components/mpc-button/mpc-button.component';
 
 @Component({
   selector: 'app-home',
-  imports: [MpcNavbarComponent, MpcCardMenuComponent, MpcFooterComponent],
+  imports: [MpcNavbarComponent, MpcCardMenuComponent, MpcFooterComponent, MpcButtonComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export default class HomeComponent { }
+export default class HomeComponent {
+  private readonly router = inject(Router);
+
+  irParaDocumentacao() {
+    this.router.navigate(['/documentacao']);
+  }
+}

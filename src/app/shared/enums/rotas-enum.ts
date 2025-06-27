@@ -13,7 +13,6 @@ export const Rotas = {
   FOOTER: "/componentes/footer",
   SCROLLTOP: "/componentes/scroll-top-button",
   TABS: "/componentes/tabs",
-  COMPROVANTE: "/componentes/comprovante",
   PAGINACAO: "/componentes/paginacao",
 
   // Paginas
@@ -25,6 +24,7 @@ export const Rotas = {
   CONTATO: "/paginas/formulario/contato",
   PAGAMENTO: "/paginas/formulario/pagamento",
   CONFIRMACAO: "/paginas/formulario/confirmacao",
+  COMPROVANTE: "/paginas/formulario/comprovante",
   INSCRICOES_ENCERRADAS: "/paginas/formulario/inscricoes-encerradas",
 
   // Outras páginas

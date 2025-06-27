@@ -1,5 +1,5 @@
 import { SelectOption } from '../../../shared/components/Inputs/mpc-input-select/mpc-input-select.component';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MpcModalComponent } from '../../../shared/components/mpc-modal/mpc-modal.component';
 import { Rotas } from '../../../shared/enums/rotas-enum';
@@ -11,6 +11,7 @@ import { MpcInputSelectComponent } from '../../../shared/components/Inputs/mpc-i
 import { InscricaoService } from '../service/inscricao.service';
 import { MpcInputTextComponent } from '../../../shared/components/Inputs/mpc-input-text/mpc-input-text.component';
 import { MpcFooterComponent } from '../../../shared/components/mpc-footer/mpc-footer.component';
+import { ErrorService } from '../../../shared/error/error.service';
 
 @Component({
   selector: 'app-pagamento',
@@ -23,11 +24,12 @@ import { MpcFooterComponent } from '../../../shared/components/mpc-footer/mpc-fo
   templateUrl: './pagamento.component.html',
   styleUrls: ['./pagamento.component.css'],
 })
-export default class PagamentoComponent {
+export default class PagamentoComponent implements OnInit {
 
   private readonly formBuilder = inject(NonNullableFormBuilder);
   private readonly router = inject(Router);
   private readonly inscricaoService = inject(InscricaoService);
+  private readonly errorService = inject(ErrorService);
 
   protected formasPagamento: SelectOption[] = [
     { label: 'Cartão', value: 'Cartão', selected: false },
@@ -39,6 +41,32 @@ export default class PagamentoComponent {
     formaPagamento: ['', Validators.required],
     valor: [100, Validators.required]
   });
+
+  ngOnInit(): void {
+    this.atualizarForm()
+  }
+
+  private atualizarForm(): void {
+    try {
+      const dadosInscricao = this.inscricaoService.getDadosInscricao();
+
+      if (this.inscricaoService.isPagamentoCompleto()) {
+        this.form.reset();
+        this.form.patchValue({ valor: dadosInscricao.valor });
+
+        if (dadosInscricao.formaPagamento) {
+          this.formasPagamento.forEach(forma => {
+            if (forma.value === dadosInscricao.formaPagamento) {
+              forma.selected = true;
+              this.form.patchValue({ formaPagamento: forma.value });
+            }
+          });
+        }
+      }
+    } catch (error) {
+      this.errorService.construirErro(error);
+    }
+  }
 
   private calcularValorTotal(): void {
     const valorNormal = 100.00;

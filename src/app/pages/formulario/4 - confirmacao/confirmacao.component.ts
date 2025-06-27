@@ -3,29 +3,26 @@ import { InscricaoService } from '../service/inscricao.service';
 import { Router } from '@angular/router';
 import { MpcButtonComponent } from '../../../shared/components/mpc-button/mpc-button.component';
 import { MpcNavbarComponent } from '../../../shared/components/mpc-navbar/mpc-navbar.component';
-import { MpcComprovanteComponent, MpcComprovanteConfig } from '../../../shared/components/mpc-comprovante/mpc-comprovante.component';
 import { MpcModalComponent, TipoModal } from '../../../shared/components/mpc-modal/mpc-modal.component';
 import { MpcModalConfig } from '../../../shared/components/mpc-modal/mpc-modal.directive';
 import { Rotas } from '../../../shared/enums/rotas-enum';
 import { Inscricao } from '../model/inscricao.model';
 import { MpcFooterComponent } from '../../../shared/components/mpc-footer/mpc-footer.component';
+import { ErrorService } from '../../../shared/error/error.service';
 
 @Component({
   selector: 'app-confirmacao',
-  imports: [MpcButtonComponent, MpcNavbarComponent, MpcComprovanteComponent, MpcModalComponent, MpcFooterComponent],
+  imports: [MpcButtonComponent, MpcNavbarComponent, MpcModalComponent, MpcFooterComponent],
   templateUrl: './confirmacao.component.html',
   styleUrl: './confirmacao.component.css'
 })
 export class ConfirmacaoComponent implements OnInit {
 
-  private router = inject(Router);
+  private readonly router = inject(Router);
   private readonly inscricaoService = inject(InscricaoService);
+  private readonly errorService = inject(ErrorService);
 
-  @ViewChild('modalErro', { static: true }) private modalErro!: MpcModalComponent;
   @ViewChild('modalSucesso', { static: true }) private modalSucesso!: MpcModalComponent;
-
-  @ViewChild('comprovanteExemplo', { static: true }) private comprovanteExemplo!: MpcComprovanteComponent;
-  protected dadosComprovante: MpcComprovanteConfig = {} as MpcComprovanteConfig;
 
   protected dadosInscricao = new Inscricao();
 
@@ -46,13 +43,13 @@ export class ConfirmacaoComponent implements OnInit {
   }
 
   protected inscrever(): void {
-    this.inscricaoService.inscrever(this.dadosInscricao, this.dadosInscricao.sexo as string).subscribe({
-      next: (response: any) => {
+    this.inscricaoService.inscrever(this.dadosInscricao).subscribe({
+      next: (response: Inscricao) => {
+        this.inscricaoService.atualizarDadosInscricao(response, 5);
         this.abrirModalSucesso();
-        this.router.navigate([Rotas.HOME]);
       },
       error: (error: any) => {
-        this.abrirModalErro('Não foi possível realizar a inscrição, tente novamente mais tarde.', error);
+        this.errorService.construirErro(error)
       }
     });
   }
@@ -66,57 +63,12 @@ export class ConfirmacaoComponent implements OnInit {
       titulo: 'Inscrição realizada com sucesso',
       texto: 'Sua inscrição foi realizada com sucesso, você pode acessar o comprovante de inscrição clicando no botão abaixo.',
       tipoModal: TipoModal.SUCESSO,
-      botao: () => { this.abrirModalComprovante(); },
+      botao: () => { this.router.navigate([Rotas.COMPROVANTE]) },
       textoBotao: 'Abrir comprovante',
       segundoBotao: () => { this.modalSucesso?.fecharModal(); },
       textoSegundoBotao: 'Fechar',
     }
 
     this.modalSucesso?.abrirModal(modalSucesso);
-  }
-
-  private abrirModalComprovante(): void {
-    this.modalSucesso?.fecharModal();
-
-    this.dadosComprovante = {
-      titulo: 'Comprovante de inscrição',
-      dados: {
-        dadosInscricao: {
-          codigoInscricao: '123456',
-          dataInscricao: new Date().toLocaleDateString('pt-BR'),
-          status: 'ATIVO',
-        },
-        dadosPessoais: [
-          { label: 'Nome', valor: this.dadosInscricao.nome || '' },
-          { label: 'Data de Nascimento', valor: this.dadosInscricao.dataNasc || '' },
-          { label: 'Idade', valor: String(this.dadosInscricao.idade)},
-          { label: 'CPF/CNPJ', valor: this.dadosInscricao.cpfCnpj || '' },
-          { label: 'Sexo', valor: this.getSexo() },
-          { label: 'Estado Civil', valor: this.dadosInscricao.estadoCivil || '' },
-          { label: 'Telefone', valor: this.dadosInscricao.telefone || '' },
-          { label: 'E-mail', valor: this.dadosInscricao.email || '' },
-          { label: 'Endereço', valor: this.dadosInscricao.endereco || '' },
-        ],
-        dadosPagamento: {
-          formaPagamento: this.dadosInscricao.formaPagamento || '',
-          valor: this.dadosInscricao.valor || 0.00,
-          statusPagamento: 'A PAGAR'
-        },
-      }
-    };
-
-    this.comprovanteExemplo?.abrirComprovante();
-  }
-
-  private abrirModalErro(titulo: string, texto: string): void {
-    const modalErro: MpcModalConfig = {
-      titulo: titulo,
-      texto: texto,
-      tipoModal: TipoModal.ERRO,
-      botao: () => this.modalErro?.fecharModal(),
-      textoBotao: 'OK'
-    }
-
-    this.modalErro?.abrirModal(modalErro);
   }
 }

@@ -1,0 +1,132 @@
+/* Geral */
+button {
+  max-width: 30vh;
+  min-width: 20vh;
+  box-shadow: none !important;
+}
+
+h5 {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+p {
+  margin-bottom: 0 !important;
+}
+
+.comprovante-tela {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  background-color: white;
+  font-family: var(--font-secundaria) !important;
+  overflow-y: auto;
+
+  .comprovante-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    min-height: 100vh;
+    padding: 20px;
+
+    .comprovante-content {
+      background-color: white;
+      width: 100%;
+      max-width: 1200px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+      .comprovante-body {
+        display: flex;
+        flex-direction: column;
+        padding: 30px;
+
+        .comprovante-image {
+          max-height: 40px;
+          max-width: 40px;
+          margin: 0 auto;
+        }
+
+        .comprovante-title {
+          font-family: var(--font-titulo);
+          text-align: center;
+          font-size: 1.5rem;
+          font-weight: bold;
+          margin: 1rem 0 2rem 0 !important;
+        }
+
+        .input-group em {
+          color: var(--cor-secundaria) !important;
+          display: block;
+          font-size: 18px;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+
+      .comprovante-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        padding: 20px 30px 30px 30px;
+      }
+    }
+  }
+}
+
+/* Mobile */
+@media screen and (max-width: 768px) {
+  .comprovante-tela {
+    .comprovante-container {
+      padding: 10px;
+
+      .comprovante-content {
+        .comprovante-body {
+          padding: 20px;
+        }
+
+        .input-group em {
+          padding: 0 20px !important;
+          height: 30px;
+          margin-left: 10px !important;
+        }
+
+        .comprovante-buttons {
+          padding: 20px;
+          margin-bottom: 2rem;
+        }
+      }
+    }
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 769px) {
+  .comprovante-tela {
+    .comprovante-container {
+      padding: 30px;
+
+      .comprovante-content {
+        .comprovante-body {
+          .comprovante-image {
+            padding: 0;
+          }
+
+          .input-group em {
+            padding: 0 18px 0 0 !important;
+            margin-left: 15px !important;
+          }
+        }
+      }
+    }
+  }
+}

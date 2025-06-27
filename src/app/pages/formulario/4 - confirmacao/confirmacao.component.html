@@ -20,6 +20,13 @@
     </div>
 
     <div class="row">
+      <div class="col-md-3 mb-1">
+        <h5 class="mb-1">Descrição</h5>
+        <p>{{ dadosInscricao.descricao }}</p>
+      </div>
+    </div>
+
+    <div class="row">
       <div class="col-md-6 mb-1">
         <h5 class="mb-1">Data de Nascimento</h5>
         <p>{{ dadosInscricao.dataNasc }}</p>
@@ -90,14 +97,14 @@
     <!-- Botões -->
     <div class="row mt-5">
       <div class="col-md-6 mb-3 div-buttons">
-        <mpc-button (click)="inscrever()" [corFundo]="'#149DDD'" [corTexto]="'white'" icone="bi bi-send" posicaoIcone="direita"
-          texto="Inscrever-se">
+        <mpc-button (click)="inscrever()" [corFundo]="'#149DDD'" [corTexto]="'white'" icone="bi bi-send"
+          posicaoIcone="direita" texto="Inscrever-se">
         </mpc-button>
       </div>
 
       <div class="col-md-6 mb-3 div-buttons">
-        <mpc-button (click)="voltar()" [corFundo]="'#149DDD'" [corTexto]="'white'" icone="bi bi-arrow-left" texto="Voltar"
-          posicaoIcone="esquerda">
+        <mpc-button (click)="voltar()" [corFundo]="'#149DDD'" [corTexto]="'white'" icone="bi bi-arrow-left"
+          texto="Voltar" posicaoIcone="esquerda">
         </mpc-button>
       </div>
     </div>
@@ -108,7 +115,5 @@
 }
 
 <mpc-modal #modalSucesso></mpc-modal>
-<mpc-modal #modalErro></mpc-modal>
-<mpc-comprovante [comprovante]="dadosComprovante" #comprovanteExemplo></mpc-comprovante>
 
 <mpc-footer></mpc-footer>

@@ -66,11 +66,6 @@ export const routes: Routes = [
         canActivate: [SiteAtivoGuard]
       },
       {
-        path: 'comprovante',
-        loadComponent: () => import('./pages/componentes/comprovante/comprovante.component').then(c => c.ComprovanteComponent),
-        canActivate: [SiteAtivoGuard]
-      },
-      {
         path: 'paginacao',
         loadComponent: () => import('./pages/componentes/paginacao/paginacao.component').then(c => c.PaginacaoComponent),
         canActivate: [SiteAtivoGuard]
@@ -108,6 +103,11 @@ export const routes: Routes = [
           {
             path: 'confirmacao',
             loadComponent: () => import('./pages/formulario/4 - confirmacao/confirmacao.component').then(c => c.ConfirmacaoComponent),
+            canActivate: [SiteAtivoGuard, InscricoesGuard, PaginaConfirmacaoGuard]
+          },
+          {
+            path: 'comprovante',
+            loadComponent: () => import('./pages/formulario/5 - comprovante/comprovante.component').then(c => c.ComprovanteComponent),
             canActivate: [SiteAtivoGuard, InscricoesGuard, PaginaConfirmacaoGuard]
           },
           {

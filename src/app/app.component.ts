@@ -16,4 +16,3 @@ export class AppComponent {}
 // TODO: Tela de Cadastro
 // TODO: Cor de componentes
 // TODO: Ajuste de botões do formulário e revisão de inputs
-// TODO: Input TextArea

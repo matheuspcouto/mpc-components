@@ -1,0 +1,188 @@
+import { ToastrService } from 'ngx-toastr';
+import { Component, computed, inject, OnInit } from '@angular/core';
+import { InscricaoService } from '../service/inscricao.service';
+import { MpcButtonComponent } from "../../../shared/components/mpc-button/mpc-button.component";
+import { Inscricao } from '../model/inscricao.model';
+import { ErrorService } from '../../../shared/error/error.service';
+import { Rotas } from '../../../shared/enums/rotas-enum';
+
+export interface dadosComprovante {
+  dadosInscricao: {
+    codigoInscricao: string,
+    dataInscricao: string,
+    status: string,
+  },
+  dadosPessoais: { label: string, valor: string }[]
+  dadosPagamento: {
+    formaPagamento: string,
+    valor: number,
+    statusPagamento?: string,
+    dataPagamento?: string,
+  }
+}
+
+@Component({
+  selector: 'comprovante',
+  imports: [MpcButtonComponent],
+  templateUrl: './comprovante.component.html',
+  styleUrls: ['./comprovante.component.css']
+})
+export class ComprovanteComponent implements OnInit {
+  private readonly inscricaoService = inject(InscricaoService);
+  private readonly errorService = inject(ErrorService);
+  private readonly notificationService = inject(ToastrService);
+
+  protected dadosComprovante!: dadosComprovante;
+
+  protected dadosInscricao = computed(() => this.dadosComprovante?.dadosInscricao);
+  protected dadosPessoais = computed(() => this.dadosComprovante?.dadosPessoais);
+  protected dadosPagamento = computed(() => this.dadosComprovante?.dadosPagamento);
+
+  ngOnInit(): void {
+    try {
+      const ID_INSCRICAO = this.inscricaoService.getDadosInscricao().id;
+      this.inscricaoService.detalharInscricao(ID_INSCRICAO).subscribe({
+        next: (response: Inscricao) => {
+          this.dadosComprovante = {
+            dadosPessoais: this.inicializarDadosPessoais(response),
+            dadosInscricao: this.inicializarDadosInscricao(response),
+            dadosPagamento: this.inicializarDadosPagamento(response)
+          };
+        },
+        error: (e: any) => { throw e; }
+      });
+    } catch (error: any) {
+      const erro = {
+        error: {
+          titulo: 'Não foi Possível gerar o seu comprovante! Mas não se preocupe, a inscrição foi realizada com sucesso.',
+          mensagem: error.mensagem || '',
+          rotaRetorno: Rotas.HOME,
+        }
+      }
+      this.errorService.construirErro(erro);
+    }
+  }
+
+  private inicializarDadosInscricao(response: Inscricao): { codigoInscricao: string, dataInscricao: string, status: string } {
+    return {
+      codigoInscricao: response.id?.toString() || '-',
+      dataInscricao: response.dataInscricao || '-',
+      status: response.status || '-'
+    };
+  }
+
+  private inicializarDadosPessoais(response: Inscricao): { label: string, valor: string }[] {
+    const dadosPessoais: { label: string, valor: string }[] = [];
+
+    if (response.nome) {
+      dadosPessoais.push({ label: 'Nome', valor: response.nome });
+    }
+
+    if (response.cpfCnpj) {
+      dadosPessoais.push({ label: 'CPF/CNPJ', valor: response.cpfCnpj });
+    }
+
+    if (response.dataNasc) {
+      dadosPessoais.push({ label: 'Data de Nascimento', valor: this.formatarData(response.dataNasc) });
+    }
+
+    if (response.sexo) {
+      dadosPessoais.push({ label: 'Sexo', valor: response.sexo });
+    }
+
+    if (response.estadoCivil) {
+      dadosPessoais.push({ label: 'Estado Civil', valor: response.estadoCivil });
+    }
+
+    if (response.idade) {
+      dadosPessoais.push({ label: 'Idade', valor: response.idade.toString() });
+    }
+
+    if (response.telefone) {
+      dadosPessoais.push({ label: 'Telefone', valor: response.telefone });
+    }
+
+    if (response.email) {
+      dadosPessoais.push({ label: 'E-mail', valor: response.email });
+    }
+
+    if (response.endereco) {
+      dadosPessoais.push({ label: 'Endereço', valor: response.endereco });
+    }
+
+    return dadosPessoais;
+  }
+
+  private inicializarDadosPagamento(response: Inscricao): { formaPagamento: string, valor: number, statusPagamento?: string, dataPagamento?: string } {
+    return {
+      formaPagamento: response.formaPagamento || '-',
+      valor: response.valor || 0,
+      statusPagamento: response.status === 'ATIVO' ? 'PAGO' : 'A PAGAR',
+      dataPagamento: response.status === 'ATIVO' ? response.dataInscricao : undefined
+    };
+  }
+
+  protected copiarCodigo(valor: string | undefined): void {
+    if (!valor) return;
+    navigator.clipboard.writeText(valor);
+    this.notificationService.info('Copiado para área de transferência', '');
+  }
+
+  protected pedirLinkPagamento(): void {
+    const codigoInscricao = this.dadosInscricao()?.codigoInscricao;
+    if (codigoInscricao) {
+      const telefone = ''; // telefone do responsável pelo pagamento
+      let messageText = `Olá, eu gostaria de obter o pix / link de pagamento da inscrição *${codigoInscricao}* do AAAAA`;
+      let url = `https://api.whatsapp.com/send?phone=55${telefone}&text=${messageText}`;
+      window.open(url);
+    }
+  }
+
+  protected getBadgeStatusInscricao(status: string | undefined): string {
+    if (!status) return '';
+    if (status === 'ATIVO') return 'text-bg-success';
+    if (status === 'INATIVO') return 'text-bg-danger';
+    return '';
+  }
+
+  protected getBadgeStatusPagamento(status: string | undefined): string {
+    if (!status) return '';
+    if (status === 'PAGO') return 'text-bg-success';
+    if (status === 'A PAGAR') return 'text-bg-danger';
+    return '';
+  }
+
+  protected getTextoStatusPagamento(status: string | undefined): string {
+    if (!status) return '';
+    if (status === 'PAGO') return 'Pagamento realizado';
+    if (status === 'A PAGAR') return 'Aguardando pagamento';
+    return '';
+  }
+
+  protected getTextoStatusInscricao(status: string | undefined): string {
+    if (!status) return '';
+    if (status === 'ATIVO') return 'Ativo';
+    if (status === 'INATIVO') return 'Inativo';
+    return '';
+  }
+
+  protected formatarValor(valor: number): string {
+    return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  }
+
+  protected formatarData(data: string | undefined): string {
+    if (!data) return '';
+    const date = new Date(data);
+    if (date instanceof Date && !isNaN(date.getTime())) {
+      return new Date(date).toLocaleDateString('pt-BR');
+    }
+
+    return data.substring(0, 10);
+  }
+
+  protected fecharComprovante(): void {
+    // Implementação para fechar o comprovante
+    // Pode redirecionar para home ou fechar modal
+    window.history.back();
+  }
+}

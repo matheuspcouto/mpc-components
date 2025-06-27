@@ -58,7 +58,6 @@ export class MpcNavbarComponent {
         { titulo: 'Footer', rota: Rotas.FOOTER, ativo: true },
         { titulo: 'Tabs', rota: Rotas.TABS, ativo: true },
         { titulo: 'ScrollTopButton', rota: Rotas.SCROLLTOP, ativo: true },
-        { titulo: 'Comprovante', rota: Rotas.COMPROVANTE, ativo: true },
         { titulo: 'Paginação', rota: Rotas.PAGINACAO, ativo: true },
       ]
     },

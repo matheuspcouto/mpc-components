@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import inscricoes from '../../../../../mock/inscricoes.json';
+import detalhesInscricao from '../../../../../mock/detalhes-inscricao.json';
+import { Inscricao } from '../model/inscricao.model';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +41,20 @@ export class InscricaoService {
     return this.etapaAtualSubject.getValue();
   }
 
-  listarInscricoes(): Observable<any> {
+  detalharInscricao(id: string): Observable<Inscricao> {
+    // MOCK - Retorna o objeto mock do arquivo JSON
+    return Observable.create((observer: any) => {
+      setTimeout(() => {
+        observer.next(detalhesInscricao);
+        observer.complete();
+      }, 1000);
+    });
+
+    // Implementação Real
+    // return this.http.get<any>(`${this.apiUrl}/inscricoes/${codigoInscricao}/detalhes`, { headers: this.headers });
+  }
+
+  listarInscricoes(): Observable<Inscricao[]> {
     // MOCK
     return Observable.create((observer: any) => {
       observer.next(inscricoes);
@@ -51,7 +66,7 @@ export class InscricaoService {
     // return this.http.get<any>(`${this.apiUrl}/inscricoes`, { headers: this.headers });
   }
 
-  inscrever(body: any, sexo: string): Observable<any> {
+  inscrever(body: Inscricao): Observable<Inscricao> {
     // MOCK
     return Observable.create((observer: any) => {
       setTimeout(() => {
