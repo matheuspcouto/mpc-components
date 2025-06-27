@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { MpcInputEmailComponent } from '../../shared/components/Inputs/mpc-input-email/mpc-input-email.component';
 import { MpcButtonComponent } from '../../shared/components/mpc-button/mpc-button.component';
 import { MpcInputSenhaComponent } from '../../shared/components/Inputs/mpc-input-senha/mpc-input-senha.component';
+import { MpcFooterComponent } from '../../shared/components/mpc-footer/mpc-footer.component';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,8 @@ import { MpcInputSenhaComponent } from '../../shared/components/Inputs/mpc-input
     ReactiveFormsModule,
     MpcInputSenhaComponent,
     MpcInputEmailComponent,
-    MpcButtonComponent
+    MpcButtonComponent,
+    MpcFooterComponent
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']

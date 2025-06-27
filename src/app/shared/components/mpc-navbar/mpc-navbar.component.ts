@@ -14,7 +14,6 @@
 
 import { Component, Input } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { CommonModule } from '@angular/common';
 import { Rotas } from '../../enums/rotas-enum';
 
 interface SubRotaConfig {
@@ -72,6 +71,7 @@ export class MpcNavbarComponent {
         { titulo: 'Formulário', rota: Rotas.DADOS_PESSOAIS, ativo: true },
         { titulo: 'Aguarde', rota: Rotas.AGUARDE, ativo: true },
         { titulo: 'Login', rota: Rotas.LOGIN, ativo: true },
+        { titulo: 'Erro', rota: Rotas.PAGINA_ERRO, ativo: true },
       ]
     },
   ];

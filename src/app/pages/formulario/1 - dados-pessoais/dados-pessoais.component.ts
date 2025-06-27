@@ -16,6 +16,7 @@ import { MpcModalConfig } from '../../../shared/components/mpc-modal/mpc-modal.d
 import { ToastrService } from 'ngx-toastr';
 import { MpcInputNumberComponent } from '../../../shared/components/Inputs/mpc-input-number/mpc-input-number.component';
 import { MpcInputCpfcnpjComponent } from "../../../shared/components/Inputs/mpc-input-cpfcnpj/mpc-input-cpfcnpj.component";
+import { MpcFooterComponent } from '../../../shared/components/mpc-footer/mpc-footer.component';
 
 @Component({
   selector: 'app-dados-pessoais',
@@ -23,7 +24,7 @@ import { MpcInputCpfcnpjComponent } from "../../../shared/components/Inputs/mpc-
     ReactiveFormsModule, MpcInputTextComponent, MpcInputDateComponent,
     MpcInputRadioComponent, MpcButtonComponent, MpcInputSelectComponent,
     MpcFormProgressBarComponent, MpcNavbarComponent, MpcInputNumberComponent,
-    MpcInputCpfcnpjComponent
+    MpcInputCpfcnpjComponent, MpcFooterComponent
   ],
   templateUrl: './dados-pessoais.component.html',
   styleUrls: ['./dados-pessoais.component.css'],

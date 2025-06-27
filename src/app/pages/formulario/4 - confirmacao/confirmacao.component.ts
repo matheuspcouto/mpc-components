@@ -8,10 +8,11 @@ import { MpcModalComponent, TipoModal } from '../../../shared/components/mpc-mod
 import { MpcModalConfig } from '../../../shared/components/mpc-modal/mpc-modal.directive';
 import { Rotas } from '../../../shared/enums/rotas-enum';
 import { Inscricao } from '../model/inscricao.model';
+import { MpcFooterComponent } from '../../../shared/components/mpc-footer/mpc-footer.component';
 
 @Component({
   selector: 'app-confirmacao',
-  imports: [MpcButtonComponent, MpcNavbarComponent, MpcComprovanteComponent, MpcModalComponent],
+  imports: [MpcButtonComponent, MpcNavbarComponent, MpcComprovanteComponent, MpcModalComponent, MpcFooterComponent],
   templateUrl: './confirmacao.component.html',
   styleUrl: './confirmacao.component.css'
 })

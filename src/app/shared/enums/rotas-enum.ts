@@ -1,6 +1,7 @@
 export const Rotas = {
   HOME: "/",
   DOCS: "/documentacao",
+  ERROR: "/error",
 
   // Componentes
   COMPONENTES: "/componentes",
@@ -29,4 +30,5 @@ export const Rotas = {
   // Outras páginas
   AGUARDE: "/paginas/aguarde",
   LOGIN: "/paginas/login",
+  PAGINA_ERRO: "/paginas/pagina-erro"
 }

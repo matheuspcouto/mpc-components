@@ -25,6 +25,7 @@ enum PosicoesIcone {
   DIREITA = 'direita',
 }
 
+// Ajustar cor para botão link
 @Component({
   selector: 'mpc-button',
   imports: [],

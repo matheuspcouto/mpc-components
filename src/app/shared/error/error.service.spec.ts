@@ -24,13 +24,19 @@ describe('ErrorService', () => {
         titulo: "Ops, algo deu errado!",
         mensagem: "Não foi possível realizar a operação, tente novamente e caso o problema persista, entre em contato com o suporte.",
         rotaRetorno: Rotas.HOME,
+        imagem: "assets/img/modal/error.png"
       });
     });
   });
 
   describe('construirErro', () => {
+    let routerMock: any;
+    beforeEach(() => {
+      routerMock = { navigate: jest.fn() };
+      (service as any).router = routerMock;
+    });
+
     it('deve retornar erro customizado quando o erro possui propriedade error com message e status', () => {
-      // Arrange
       const erroMock = {
         error: {
           message: 'Erro de validação',
@@ -38,180 +44,174 @@ describe('ErrorService', () => {
         }
       };
       const rotaRetorno = '/teste';
-
-      // Act
-      const resultado = service.construirErro(erroMock, rotaRetorno);
-
-      // Assert
-      expect(resultado).toEqual({
+      service.construirErro(erroMock, rotaRetorno);
+      expect(service['erro']()).toEqual({
         titulo: ERRO_PADRAO.titulo,
         mensagem: 'Erro de validação - (Código 400)',
-        rotaRetorno: '/teste'
+        rotaRetorno: '/teste',
+        imagem: ERRO_PADRAO.imagem
       });
     });
 
     it('deve usar rota padrão quando rotaRetorno não for fornecida', () => {
-      // Arrange
       const erroMock = {
         error: {
           message: 'Erro interno',
           status: 500
         }
       };
-
-      // Act
-      const resultado = service.construirErro(erroMock, '');
-
-      // Assert
-      expect(resultado).toEqual({
+      service.construirErro(erroMock, '');
+      expect(service['erro']()).toEqual({
         titulo: ERRO_PADRAO.titulo,
         mensagem: 'Erro interno - (Código 500)',
-        rotaRetorno: ERRO_PADRAO.rotaRetorno
+        rotaRetorno: ERRO_PADRAO.rotaRetorno,
+        imagem: ERRO_PADRAO.imagem
       });
     });
 
     it('deve usar rota padrão quando rotaRetorno for null', () => {
-      // Arrange
       const erroMock = {
         error: {
           message: 'Erro interno',
           status: 500
         }
       };
-
-      // Act
-      const resultado = service.construirErro(erroMock, null as any);
-
-      // Assert
-      expect(resultado).toEqual({
+      service.construirErro(erroMock, null as any);
+      expect(service['erro']()).toEqual({
         titulo: ERRO_PADRAO.titulo,
         mensagem: 'Erro interno - (Código 500)',
-        rotaRetorno: ERRO_PADRAO.rotaRetorno
+        rotaRetorno: ERRO_PADRAO.rotaRetorno,
+        imagem: ERRO_PADRAO.imagem
       });
     });
 
     it('deve usar rota padrão quando rotaRetorno for undefined', () => {
-      // Arrange
       const erroMock = {
         error: {
           message: 'Erro interno',
           status: 500
         }
       };
-
-      // Act
-      const resultado = service.construirErro(erroMock, undefined as any);
-
-      // Assert
-      expect(resultado).toEqual({
+      service.construirErro(erroMock, undefined as any);
+      expect(service['erro']()).toEqual({
         titulo: ERRO_PADRAO.titulo,
         mensagem: 'Erro interno - (Código 500)',
-        rotaRetorno: ERRO_PADRAO.rotaRetorno
+        rotaRetorno: ERRO_PADRAO.rotaRetorno,
+        imagem: ERRO_PADRAO.imagem
       });
     });
 
     it('deve retornar ERRO_PADRAO quando erro for null', () => {
-      // Arrange
       const rotaRetorno = '/teste';
-
-      // Act
-      const resultado = service.construirErro(null, rotaRetorno);
-
-      // Assert
-      expect(resultado).toEqual(ERRO_PADRAO);
+      service.construirErro(null, rotaRetorno);
+      expect(service['erro']()).toEqual({
+        ...ERRO_PADRAO,
+        rotaRetorno,
+        imagem: ERRO_PADRAO.imagem
+      });
     });
 
     it('deve retornar ERRO_PADRAO quando erro for undefined', () => {
-      // Arrange
       const rotaRetorno = '/teste';
-
-      // Act
-      const resultado = service.construirErro(undefined, rotaRetorno);
-
-      // Assert
-      expect(resultado).toEqual(ERRO_PADRAO);
+      service.construirErro(undefined, rotaRetorno);
+      expect(service['erro']()).toEqual({
+        ...ERRO_PADRAO,
+        rotaRetorno,
+        imagem: ERRO_PADRAO.imagem
+      });
     });
 
     it('deve retornar ERRO_PADRAO quando erro não possuir propriedade error', () => {
-      // Arrange
       const erroMock = {
         message: 'Erro sem propriedade error'
       };
       const rotaRetorno = '/teste';
-
-      // Act
-      const resultado = service.construirErro(erroMock, rotaRetorno);
-
-      // Assert
-      expect(resultado).toEqual(ERRO_PADRAO);
+      service.construirErro(erroMock, rotaRetorno);
+      expect(service['erro']()).toEqual({
+        ...ERRO_PADRAO,
+        rotaRetorno,
+        imagem: ERRO_PADRAO.imagem
+      });
     });
 
     it('deve retornar ERRO_PADRAO quando erro.error for null', () => {
-      // Arrange
       const erroMock = {
         error: null
       };
       const rotaRetorno = '/teste';
-
-      // Act
-      const resultado = service.construirErro(erroMock, rotaRetorno);
-
-      // Assert
-      expect(resultado).toEqual(ERRO_PADRAO);
+      service.construirErro(erroMock, rotaRetorno);
+      expect(service['erro']()).toEqual({
+        ...ERRO_PADRAO,
+        rotaRetorno,
+        imagem: ERRO_PADRAO.imagem
+      });
     });
 
     it('deve retornar ERRO_PADRAO quando erro.error for undefined', () => {
-      // Arrange
       const erroMock = {
         error: undefined
       };
       const rotaRetorno = '/teste';
-
-      // Act
-      const resultado = service.construirErro(erroMock, rotaRetorno);
-
-      // Assert
-      expect(resultado).toEqual(ERRO_PADRAO);
+      service.construirErro(erroMock, rotaRetorno);
+      expect(service['erro']()).toEqual({
+        ...ERRO_PADRAO,
+        rotaRetorno,
+        imagem: ERRO_PADRAO.imagem
+      });
     });
 
     it('deve construir erro mesmo quando error.message for undefined', () => {
-      // Arrange
       const erroMock = {
         error: {
           status: 404
         }
       };
       const rotaRetorno = '/teste';
-
-      // Act
-      const resultado = service.construirErro(erroMock, rotaRetorno);
-
-      // Assert
-      expect(resultado).toEqual({
+      service.construirErro(erroMock, rotaRetorno);
+      expect(service['erro']()).toEqual({
         titulo: ERRO_PADRAO.titulo,
         mensagem: 'undefined - (Código 404)',
-        rotaRetorno: '/teste'
+        rotaRetorno: '/teste',
+        imagem: ERRO_PADRAO.imagem
       });
     });
 
     it('deve construir erro mesmo quando error.status for undefined', () => {
-      // Arrange
       const erroMock = {
         error: {
           message: 'Erro sem status'
         }
       };
       const rotaRetorno = '/teste';
-
-      // Act
-      const resultado = service.construirErro(erroMock, rotaRetorno);
-
-      // Assert
-      expect(resultado).toEqual({
+      service.construirErro(erroMock, rotaRetorno);
+      expect(service['erro']()).toEqual({
         titulo: ERRO_PADRAO.titulo,
         mensagem: 'Erro sem status - (Código undefined)',
-        rotaRetorno: '/teste'
+        rotaRetorno: '/teste',
+        imagem: ERRO_PADRAO.imagem
       });
+    });
+
+    it('deve navegar para a rota de erro ao construir um erro', () => {
+      const erroMock = {
+        error: {
+          message: 'Erro de navegação',
+          status: 500
+        }
+      };
+      service.construirErro(erroMock, '/teste');
+      expect(routerMock.navigate).toHaveBeenCalledWith([Rotas.ERROR]);
+    });
+  });
+
+  describe('limparErro', () => {
+    it('deve limpar o estado do erro', () => {
+      // Primeiro, define um erro
+      service.construirErro({ error: { message: 'Erro', status: 400 } }, '/teste');
+      expect(service['erro']()).not.toBeNull();
+      // Agora limpa
+      service.limparErro();
+      expect(service['erro']()).toBeNull();
     });
   });
 });

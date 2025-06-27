@@ -15,6 +15,7 @@ import { MpcInputEmailComponent } from '../../../shared/components/Inputs/mpc-in
 import { MpcModalConfig } from '../../../shared/components/mpc-modal/mpc-modal.directive';
 import { ToastrService } from 'ngx-toastr';
 import { Endereco, MpcInputPesquisaCepComponent } from "../../../shared/components/Inputs/mpc-input-pesquisa-cep/mpc-input-pesquisa-cep.component";
+import { MpcFooterComponent } from '../../../shared/components/mpc-footer/mpc-footer.component';
 
 @Component({
   selector: 'app-contato',
@@ -23,7 +24,8 @@ import { Endereco, MpcInputPesquisaCepComponent } from "../../../shared/componen
     ReactiveFormsModule, MpcInputTextComponent, MpcInputTelefoneComponent,
     MpcButtonComponent, MpcNavbarComponent, MpcFormProgressBarComponent,
     MpcInputEmailComponent,
-    MpcInputPesquisaCepComponent
+    MpcInputPesquisaCepComponent,
+    MpcFooterComponent
   ],
   templateUrl: './contato.component.html',
   styleUrls: ['./contato.component.css'],

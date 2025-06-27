@@ -3,10 +3,11 @@ import { MpcNavbarComponent } from '../../../shared/components/mpc-navbar/mpc-na
 import { MpcButtonComponent } from '../../../shared/components/mpc-button/mpc-button.component';
 import { MpcModalComponent, TipoModal } from '../../../shared/components/mpc-modal/mpc-modal.component';
 import { MpcModalConfig } from '../../../shared/components/mpc-modal/mpc-modal.directive';
+import { MpcFooterComponent } from '../../../shared/components/mpc-footer/mpc-footer.component';
 
 @Component({
   selector: 'app-modais',
-  imports: [MpcNavbarComponent, MpcModalComponent, MpcButtonComponent],
+  imports: [MpcNavbarComponent, MpcModalComponent, MpcButtonComponent, MpcFooterComponent],
   templateUrl: './modais.component.html',
   styleUrl: './modais.component.css'
 })

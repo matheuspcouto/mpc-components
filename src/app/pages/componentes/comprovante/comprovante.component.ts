@@ -2,10 +2,11 @@ import { Component, ViewChild } from '@angular/core';
 import { MpcNavbarComponent } from '../../../shared/components/mpc-navbar/mpc-navbar.component';
 import { MpcButtonComponent } from '../../../shared/components/mpc-button/mpc-button.component';
 import { MpcComprovanteComponent, MpcComprovanteConfig } from '../../../shared/components/mpc-comprovante/mpc-comprovante.component';
+import { MpcFooterComponent } from '../../../shared/components/mpc-footer/mpc-footer.component';
 
 @Component({
   selector: 'app-comprovante',
-  imports: [MpcButtonComponent, MpcNavbarComponent, MpcComprovanteComponent],
+  imports: [MpcButtonComponent, MpcNavbarComponent, MpcComprovanteComponent, MpcFooterComponent],
   templateUrl: './comprovante.component.html',
   styleUrl: './comprovante.component.css'
 })

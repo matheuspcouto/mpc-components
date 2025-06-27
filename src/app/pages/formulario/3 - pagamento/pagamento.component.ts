@@ -10,13 +10,15 @@ import { MpcButtonComponent } from '../../../shared/components/mpc-button/mpc-bu
 import { MpcInputSelectComponent } from '../../../shared/components/Inputs/mpc-input-select/mpc-input-select.component';
 import { InscricaoService } from '../service/inscricao.service';
 import { MpcInputTextComponent } from '../../../shared/components/Inputs/mpc-input-text/mpc-input-text.component';
+import { MpcFooterComponent } from '../../../shared/components/mpc-footer/mpc-footer.component';
 
 @Component({
   selector: 'app-pagamento',
   imports: [
     MpcModalComponent, FormsModule,
     ReactiveFormsModule, MpcButtonComponent, MpcInputSelectComponent,
-    MpcNavbarComponent, MpcFormProgressBarComponent, MpcInputTextComponent
+    MpcNavbarComponent, MpcFormProgressBarComponent, MpcInputTextComponent,
+    MpcFooterComponent
   ],
   templateUrl: './pagamento.component.html',
   styleUrls: ['./pagamento.component.css'],

@@ -1,0 +1,96 @@
+<mpc-navbar abaLogin="/paginas/login"></mpc-navbar>
+
+<main>
+  <!-- ======= ErrorComponent ======= -->
+  <section id="error-screen" class="section-components">
+    <div class="container">
+
+      <div class="section-header">
+        <h2>experimente o</h2>
+        <p>MPC<span> Error Component </span> </p>
+      </div>
+
+      <h5>
+        O componente <code>mpc-error</code> é responsável por exibir uma tela de erro completa com informações
+        detalhadas.
+        Utiliza Signal para gerenciar o estado do erro automaticamente através do ErrorService.
+        A tela é exibida quando um erro é construído pelo service e oferece duas opções:
+        voltar para uma rota específica ou copiar a mensagem de erro para a área de transferência.
+        Suporta imagens personalizadas para diferentes tipos de erro.
+      </h5>
+
+      <h5>
+        <ul class="text-start mt-3">
+          <li><strong>Gerenciamento de Estado</strong>: Utiliza Signal para compartilhar o estado do erro entre service
+            e componente.</li>
+          <li><strong>Exibição Automática</strong>: A tela é exibida automaticamente quando um erro é construído pelo
+            ErrorService.</li>
+          <li><strong>Imagens Personalizadas</strong>: Suporte a imagens personalizadas para diferentes tipos de erro.
+          </li>
+          <li><strong>Navegação</strong>: O botão "Voltar" redireciona para a rota especificada no objeto de erro.</li>
+          <li><strong>Cópia de Mensagem</strong>: O botão "Copiar Mensagem" copia o título e descrição do erro para a
+            área de transferência.</li>
+          <li><strong>Responsivo</strong>: A tela se adapta a diferentes tamanhos de dispositivo.</li>
+        </ul>
+      </h5>
+
+      <div class="mb-5">
+        <h5>Para usar o componente, importe e use o ErrorService:</h5>
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+          <pre class="chroma">
+              <code>
+                ```
+                // No componente
+                private errorService = inject(ErrorService);
+                
+                // Com imagem padrão
+                this.errorService.construirErro(erro, rotaRetorno);
+                
+                // Com imagem personalizada
+                this.errorService.construirErro(erro, rotaRetorno, 'caminho/para/imagem.png');
+                ```
+              </code>
+          </pre>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <h5>Exemplo de uso do componente (será exibido automaticamente quando um erro for construído):</h5>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <h5>Teste os diferentes tipos de erro:</h5>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-3 px-5 py-3 justify-content-center align-items-center d-flex">
+          <mpc-button corFundo="#dc3545" corTexto="#fff" icone="bi bi-bug" posicaoIcone="esquerda"
+            (click)="simularErroDetalhado()" texto="Erro Detalhado">
+          </mpc-button>
+        </div>
+        <div class="col-lg-3 px-5 py-3 justify-content-center align-items-center d-flex">
+          <mpc-button corFundo="#ffc107" corTexto="#000" icone="bi bi-bug" posicaoIcone="esquerda"
+            (click)="simularErroGenerico()" texto="Erro Genérico">
+          </mpc-button>
+        </div>
+        <div class="col-lg-3 px-5 py-3 justify-content-center align-items-center d-flex">
+          <mpc-button corFundo="#17a2b8" corTexto="#fff" icone="bi bi-bug" posicaoIcone="esquerda"
+            (click)="simularErroValidacao()" texto="Erro de Validação">
+          </mpc-button>
+        </div>
+        <div class="col-lg-3 px-5 py-3 justify-content-center align-items-center d-flex">
+          <mpc-button corFundo="#fd7e14" corTexto="#fff" icone="bi bi-bug" posicaoIcone="esquerda"
+            (click)="simularErroComImagem()" texto="Erro + Imagem">
+          </mpc-button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<mpc-footer></mpc-footer>

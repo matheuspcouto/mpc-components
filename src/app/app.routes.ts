@@ -14,6 +14,13 @@ export const routes: Routes = [
     canActivate: [SiteAtivoGuard]
   },
 
+  /*  Rotas para Error */
+  {
+    path: 'error',
+    loadComponent: () => import('./shared/error/error.component').then(c => c.ErrorComponent),
+    canActivate: [SiteAtivoGuard]
+  },
+
   /*  Rotas para Componentes */
   {
     path: 'componentes',
@@ -115,6 +122,11 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/aguarde/aguarde.component').then(c => c.default),
         title: 'Mpc Components - Aguarde'
       },
+      {
+        path: 'pagina-erro',
+        loadComponent: () => import('./pages/pagina-erro/pagina-erro.component').then(c => c.PaginaErroComponent),
+        canActivate: [SiteAtivoGuard]
+      }
     ]
   },
 ];
