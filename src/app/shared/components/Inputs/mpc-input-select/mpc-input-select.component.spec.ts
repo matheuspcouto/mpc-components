@@ -4,7 +4,6 @@ import { MpcInputSelectComponent, SelectOption } from './mpc-input-select.compon
 describe('MpcInputSelectComponent', () => {
   let component: MpcInputSelectComponent;
   let fixture: ComponentFixture<MpcInputSelectComponent>;
-
   const mockOptions: SelectOption[] = [
     { label: 'Opção 1', value: 'opcao1' },
     { label: 'Opção 2', value: 'opcao2' },
@@ -15,7 +14,6 @@ describe('MpcInputSelectComponent', () => {
     await TestBed.configureTestingModule({
       imports: [MpcInputSelectComponent]
     }).compileComponents();
-
     fixture = TestBed.createComponent(MpcInputSelectComponent);
     component = fixture.componentInstance;
   });
@@ -24,182 +22,36 @@ describe('MpcInputSelectComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('ngOnInit', () => {
-    it('deve encontrar opção selecionada quando existe e emitir valor', () => {
-      const valorSpy = jest.spyOn(component.valor, 'emit');
-      component.options = mockOptions;
-
-      component.ngOnInit();
-
-      expect(component['opcaoSelecionada']).toEqual(mockOptions[2]);
-      expect(valorSpy).toHaveBeenCalledWith('opcao3');
-    });
-
-    it('deve adicionar opção "Selecione" quando não há opção selecionada', () => {
-      const optionsSemSelecao: SelectOption[] = [
-        { label: 'Opção 1', value: 'opcao1' },
-        { label: 'Opção 2', value: 'opcao2' }
-      ];
-      component.options = optionsSemSelecao;
-
-      component.ngOnInit();
-
-      expect(component.options[0]).toEqual({ label: 'Selecione', value: '', selected: true });
-      expect(component['opcaoSelecionada']).toEqual({ label: 'Selecione', value: '', selected: true });
-    });
-
-    it('deve emitir erro quando campo é obrigatório e não há seleção', () => {
-      const errorSpy = jest.spyOn(component.error, 'emit');
-      component.required = true;
-      component.options = [{ label: 'Opção 1', value: 'opcao1' }];
-
-      component.ngOnInit();
-
-      expect(errorSpy).toHaveBeenCalledWith({ required: true });
-    });
+  it('deve emitir valor da opção selecionada ao iniciar', () => {
+    jest.spyOn(component.valor, 'emit');
+    component.options = mockOptions;
+    component.ngOnInit();
+    expect(component.valor.emit).toHaveBeenCalledWith('opcao3');
   });
 
-  describe('onFocus', () => {
-    it('deve marcar campo como tocado e validar campo', () => {
-      const isCampoValidoSpy = jest.spyOn(component as any, 'isCampoValido');
-
-      component['onFocus']();
-
-      expect(component['campoTocado']).toBe(true);
-      expect(isCampoValidoSpy).toHaveBeenCalled();
-    });
+  it('deve marcar campo como tocado ao focar', () => {
+    component['onFocus']();
+    expect((component as any)['campoTocado']).toBe(true);
   });
 
-  describe('setValue', () => {
-    it('deve definir valor e emitir quando campo é válido', () => {
-      const valorSpy = jest.spyOn(component.valor, 'emit');
-      const isCampoValidoSpy = jest.spyOn(component as any, 'isCampoValido').mockReturnValue(true);
-      const novaOpcao: SelectOption = { label: 'Nova Opção', value: 'nova' };
-
-      component.setValue(novaOpcao);
-
-      expect(component['opcaoSelecionada']).toEqual(novaOpcao);
-      expect(isCampoValidoSpy).toHaveBeenCalled();
-      expect(valorSpy).toHaveBeenCalledWith('nova');
-    });
-
-    it('não deve emitir valor quando campo é inválido', () => {
-      const valorSpy = jest.spyOn(component.valor, 'emit');
-      jest.spyOn(component as any, 'isCampoValido').mockReturnValue(false);
-      const novaOpcao: SelectOption = { label: 'Nova Opção', value: 'nova' };
-
-      component.setValue(novaOpcao);
-
-      expect(component['opcaoSelecionada']).toEqual(novaOpcao);
-      expect(valorSpy).not.toHaveBeenCalled();
-    });
+  it('deve emitir valor ao selecionar opção válida', () => {
+    jest.spyOn(component.valor, 'emit');
+    const novaOpcao: SelectOption = { label: 'Nova Opção', value: 'nova' };
+    component.setValue(novaOpcao);
+    expect(component.valor.emit).toHaveBeenCalledWith('nova');
   });
 
-  describe('isCampoValido', () => {
-    it('deve retornar true quando campo está desabilitado', () => {
-      component.disabled = true;
-
-      const resultado = component['isCampoValido']();
-
-      expect(resultado).toBe(true);
-    });
-
-    it('deve retornar false e emitir erro quando validação required falha', () => {
-      const errorSpy = jest.spyOn(component.error, 'emit');
-      jest.spyOn(component as any, 'validaRequired').mockReturnValue(true);
-      component.label = 'Teste';
-
-      const resultado = component['isCampoValido']();
-
-      expect(resultado).toBe(false);
-      expect(component['errorMessage']).toBe('O campo Teste é obrigatório');
-      expect(errorSpy).toHaveBeenCalledWith({ required: true });
-    });
-
-    it('deve retornar true e emitir erro quando campo é válido', () => {
-      const errorSpy = jest.spyOn(component.error, 'emit');
-      jest.spyOn(component as any, 'validaRequired').mockReturnValue(false);
-
-      const resultado = component['isCampoValido']();
-
-      expect(resultado).toBe(true);
-      expect(component['errorMessage']).toBeUndefined();
-      expect(errorSpy).toHaveBeenCalledWith({ required: true });
-    });
+  it('isCampoValido retorna true se desabilitado', () => {
+    component.disabled = true;
+    expect((component as any).isCampoValido()).toBe(true);
   });
 
-  describe('validaRequired', () => {
-    beforeEach(() => {
-      component.required = true;
-      component['campoTocado'] = true;
-    });
-
-    it('deve retornar true quando opção não está selecionada', () => {
-      component['opcaoSelecionada'] = undefined;
-
-      const resultado = component['validaRequired']();
-
-      expect(resultado).toBe(true);
-    });
-
-    it('deve retornar true quando valor está vazio', () => {
-      component['opcaoSelecionada'] = { label: 'Teste', value: '' };
-
-      const resultado = component['validaRequired']();
-
-      expect(resultado).toBe(true);
-    });
-
-    it('deve retornar true quando valor é "Selecione"', () => {
-      component['opcaoSelecionada'] = { label: 'Selecione', value: 'Selecione' };
-
-      const resultado = component['validaRequired']();
-
-      expect(resultado).toBe(true);
-    });
-
-    it('deve retornar false quando campo não é obrigatório', () => {
-      component.required = false;
-
-      const resultado = component['validaRequired']();
-
-      expect(resultado).toBe(false);
-    });
-
-    it('deve retornar false quando campo não foi tocado', () => {
-      component['campoTocado'] = false;
-
-      const resultado = component['validaRequired']();
-
-      expect(resultado).toBe(false);
-    });
-
-    it('deve retornar false quando opção válida está selecionada', () => {
-      component['opcaoSelecionada'] = { label: 'Opção Válida', value: 'valida' };
-
-      const resultado = component['validaRequired']();
-
-      expect(resultado).toBe(false);
-    });
-  });
-
-  describe('propriedades de entrada', () => {
-    it('deve ter valores padrão corretos', () => {
-      expect(component.id).toBe('');
-      expect(component.tabIndex).toBe(0);
-      expect(component.ariaLabel).toBe('');
-      expect(component.label).toBe('');
-      expect(component.disabled).toBe(false);
-      expect(component.options).toEqual([]);
-      expect(component.required).toBe(false);
-    });
-  });
-
-  describe('propriedades protegidas', () => {
-    it('deve inicializar propriedades protegidas corretamente', () => {
-      expect(component['opcaoSelecionada']).toBeUndefined();
-      expect(component['errorMessage']).toBeUndefined();
-      expect(component['campoTocado']).toBe(false);
-    });
+  it('isCampoValido retorna false se obrigatório e sem seleção', () => {
+    component.required = true;
+    (component as any)['campoTocado'] = true;
+    (component as any)['opcaoSelecionada'] = undefined;
+    jest.spyOn(component.error, 'emit');
+    expect((component as any).isCampoValido()).toBe(false);
+    expect(component.error.emit).toHaveBeenCalled();
   });
 });

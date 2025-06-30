@@ -13,14 +13,14 @@
 
         <div class="row">
           <!-- Campo com botão de copiar o código de inscrição, pode ser alterado -->
-          @if (dadosInscricao()?.codigoInscricao) {
+          @if (dadosInscricao().codigoInscricao) {
           <div class="col-md-4 mb-1" tabindex="0"
-            [attr.aria-label]="'Código de Inscrição: ' + dadosInscricao()?.codigoInscricao">
+            [attr.aria-label]="'Código de Inscrição: ' + dadosInscricao().codigoInscricao">
             <h5>Inscrição</h5>
             <div class="input-group">
-              <p>{{ dadosInscricao()?.codigoInscricao }}</p>
+              <p>{{ dadosInscricao().codigoInscricao }}</p>
               <em tabindex="0" aria-label="Copiar código, botão"
-                (click)="copiarCodigo(dadosInscricao()?.codigoInscricao)">
+                (click)="copiarCodigo(dadosInscricao().codigoInscricao)">
                 <i class="bi bi-clipboard"></i>
               </em>
             </div>
@@ -28,24 +28,24 @@
           }
 
           <!-- Campo de status da inscricao, pode ser alterado -->
-          @if (dadosInscricao()?.status) {
+          @if (dadosInscricao().status) {
           <div class="col-md-4 mb-1" tabindex="0"
-            [attr.aria-label]="'Status: ' + getTextoStatusInscricao(dadosInscricao()?.status)">
+            [attr.aria-label]="'Status: ' + getTextoStatusInscricao(dadosInscricao().status)">
             <h5 class="mb-1">Status</h5>
             <h5>
-              <span [class]="'badge mb-1' + getBadgeStatusInscricao(dadosInscricao()?.status)">
-                {{ getTextoStatusInscricao(dadosInscricao()?.status) }}
+              <span [class]="'badge mb-1' + getBadgeStatusInscricao(dadosInscricao().status)">
+                {{ getTextoStatusInscricao(dadosInscricao().status) }}
               </span>
             </h5>
           </div>
           }
 
           <!-- Campo de data de criação, pode ser alterado -->
-          @if (dadosInscricao()?.dataInscricao) {
+          @if (dadosInscricao().dataInscricao) {
           <div class="col-md-4 mb-1" tabindex="0"
-            [attr.aria-label]="'Data da Inscrição: ' + formatarData(dadosInscricao()?.dataInscricao)">
+            [attr.aria-label]="'Data da Inscrição: ' + formatarData(dadosInscricao().dataInscricao)">
             <h5 class="mb-1">Data da Inscrição</h5>
-            <p>{{ formatarData(dadosInscricao()?.dataInscricao) }}</p>
+            <p>{{ formatarData(dadosInscricao().dataInscricao) }}</p>
           </div>
           }
 
@@ -72,39 +72,39 @@
         <h4 tabindex="0">Dados do Pagamento</h4>
 
         <div class="row">
-          @if (dadosPagamento()?.formaPagamento) {
+          @if (dadosPagamento().formaPagamento) {
           <div class="col-md-3 mb-1" tabindex="0"
-            [attr.aria-label]="'Forma de Pagamento: ' + dadosPagamento()?.formaPagamento">
+            [attr.aria-label]="'Forma de Pagamento: ' + dadosPagamento().formaPagamento">
             <h5 class="mb-1">Forma de Pagamento</h5>
-            <p>{{ dadosPagamento()?.formaPagamento }}</p>
+            <p>{{ dadosPagamento().formaPagamento }}</p>
           </div>
           }
 
-          @if (dadosPagamento()?.valor) {
+          @if (dadosPagamento().valor) {
           <div class="col-md-3 mb-1" tabindex="0"
-            [attr.aria-label]="'Valor: ' + formatarValor(dadosPagamento()?.valor || 0)">
+            [attr.aria-label]="'Valor: ' + formatarValor(dadosPagamento().valor || 0)">
             <h5 class="mb-1">Valor</h5>
-            <p>{{ formatarValor(dadosPagamento()?.valor || 0) }}</p>
+            <p>{{ formatarValor(dadosPagamento().valor) }}</p>
           </div>
           }
 
-          @if (dadosPagamento()?.statusPagamento) {
+          @if (dadosPagamento().statusPagamento) {
           <div class="col-md-3 mb-1" tabindex="0"
-            [attr.aria-label]="'Status do Pagamento: ' + dadosPagamento()?.statusPagamento">
+            [attr.aria-label]="'Status do Pagamento: ' + dadosPagamento().statusPagamento">
             <h5 class="mb-1">Status do Pagamento</h5>
             <h5>
-              <span [class]="'badge mb-1' + getBadgeStatusPagamento(dadosPagamento()?.statusPagamento)">
-                {{ getTextoStatusPagamento(dadosPagamento()?.statusPagamento) }}
+              <span [class]="'badge mb-1' + getBadgeStatusPagamento(dadosPagamento().statusPagamento)">
+                {{ getTextoStatusPagamento(dadosPagamento().statusPagamento) }}
               </span>
             </h5>
           </div>
           }
 
-          @if (dadosPagamento()?.dataPagamento) {
+          @if (dadosPagamento().dataPagamento) {
           <div class="col-md-3 mb-1" tabindex="0"
-            [attr.aria-label]="'Data do Pagamento: ' + formatarData(dadosPagamento()?.dataPagamento)">
+            [attr.aria-label]="'Data do Pagamento: ' + formatarData(dadosPagamento().dataPagamento)">
             <h5 class="mb-1">Data do Pagamento</h5>
-            <p>{{ formatarData(dadosPagamento()?.dataPagamento) }}</p>
+            <p>{{ formatarData(dadosPagamento().dataPagamento) }}</p>
           </div>
           }
 
@@ -116,7 +116,7 @@
       <!-- Botões -->
       <div class="comprovante-buttons">
 
-        @if (dadosPagamento()?.statusPagamento == 'A PAGAR' && dadosPagamento()?.formaPagamento != 'Dinheiro') {
+        @if (dadosPagamento().statusPagamento == 'A PAGAR' && dadosPagamento().formaPagamento != 'Dinheiro') {
         <div class="label-info alert alert-warning text-center mt-2" tabindex="0">
           <i class="bi bi-exclamation-circle float-left"></i>
           <p>Solicite o pix/link para pagamento ou envie o comprovante clicando no

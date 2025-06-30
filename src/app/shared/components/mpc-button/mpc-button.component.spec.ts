@@ -35,10 +35,4 @@ describe('MpcButtonComponent', () => {
     expect(component.icone).toBe('');
   });
 
-  it('estiloPersonalizado', () => {
-    component.corFundo = '#fff';
-    component.corTexto = '#000';
-    expect(component['estiloPersonalizado']).toBeDefined();
-  });
-
 });

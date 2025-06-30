@@ -32,29 +32,44 @@ export class ComprovanteComponent implements OnInit {
   private readonly errorService = inject(ErrorService);
   private readonly notificationService = inject(ToastrService);
 
-  protected dadosComprovante!: dadosComprovante;
+  protected dadosComprovante: dadosComprovante = {
+    dadosInscricao: {
+      codigoInscricao: '',
+      dataInscricao: '',
+      status: ''
+    },
+    dadosPessoais: [],
+    dadosPagamento: {
+      formaPagamento: '',
+      valor: 0
+    }
+  };
 
-  protected dadosInscricao = computed(() => this.dadosComprovante?.dadosInscricao);
-  protected dadosPessoais = computed(() => this.dadosComprovante?.dadosPessoais);
-  protected dadosPagamento = computed(() => this.dadosComprovante?.dadosPagamento);
+  protected dadosInscricao = computed(() => this.dadosComprovante.dadosInscricao);
+  protected dadosPessoais = computed(() => this.dadosComprovante.dadosPessoais);
+  protected dadosPagamento = computed(() => this.dadosComprovante.dadosPagamento);
 
   ngOnInit(): void {
+    this.detalharInscricao(this.inscricaoService.getDadosInscricao().id);
+  }
+
+  private detalharInscricao(id: string): void {
     try {
-      const ID_INSCRICAO = this.inscricaoService.getDadosInscricao().id;
-      this.inscricaoService.detalharInscricao(ID_INSCRICAO).subscribe({
+      this.inscricaoService.detalharInscricao(id).subscribe({
         next: (response: Inscricao) => {
           this.dadosComprovante = {
             dadosPessoais: this.inicializarDadosPessoais(response),
             dadosInscricao: this.inicializarDadosInscricao(response),
             dadosPagamento: this.inicializarDadosPagamento(response)
           };
+          throw new Error('teste');
         },
         error: (e: any) => { throw e; }
       });
     } catch (error: any) {
       const erro = {
         error: {
-          titulo: 'Não foi Possível gerar o seu comprovante! Mas não se preocupe, a inscrição foi realizada com sucesso.',
+          titulo: 'Não foi possível gerar o seu comprovante! Mas não se preocupe, a inscrição foi realizada com sucesso.',
           mensagem: error.mensagem || '',
           rotaRetorno: Rotas.HOME,
         }

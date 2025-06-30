@@ -38,8 +38,8 @@ export default class PagamentoComponent implements OnInit {
   ];
 
   protected form = this.formBuilder.group({
-    formaPagamento: ['', Validators.required],
-    valor: [100, Validators.required]
+    formaPagamento: [''],
+    valor: [100]
   });
 
   ngOnInit(): void {
@@ -85,13 +85,21 @@ export default class PagamentoComponent implements OnInit {
   }
 
   protected proximaEtapa(): void {
-    if (this.form.invalid) return;
-    this.inscricaoService.atualizarDadosInscricao(this.form.value, 4);
-    this.router.navigate([Rotas.CONFIRMACAO]);
+    try {
+      if (this.form.invalid) return;
+      this.inscricaoService.atualizarDadosInscricao(this.form.value, 4);
+      this.router.navigate([Rotas.CONFIRMACAO]);
+    } catch (error) {
+      this.errorService.construirErro(error);
+    }
   }
 
   protected etapaAnterior(): void {
-    this.inscricaoService.atualizarDadosInscricao(this.form.value, 2);
-    this.router.navigate([Rotas.CONTATO]);
+    try {
+      this.inscricaoService.atualizarDadosInscricao(this.form.value, 2);
+      this.router.navigate([Rotas.CONTATO]);
+    } catch (error) {
+      this.errorService.construirErro(error);
+    }
   }
 }

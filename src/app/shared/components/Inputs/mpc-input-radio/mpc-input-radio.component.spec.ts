@@ -7,8 +7,8 @@ describe('MpcInputRadioComponent', () => {
 
   const mockOptions: RadioOption[] = [
     { label: 'Masculino', value: 'M', checked: false },
-    { label: 'Feminino', value: 'F', checked: false },
-    { label: 'Outro', value: 'O', checked: true }
+    { label: 'Feminino', value: 'F', checked: true },
+    { label: 'Outro', value: 'O', checked: false }
   ];
 
   beforeEach(async () => {
@@ -24,6 +24,52 @@ describe('MpcInputRadioComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('deve emitir valor da opção marcada como checked na inicialização', () => {
+    jest.spyOn(component.valor, 'emit');
+    component.options = mockOptions;
+    component.ngOnInit();
+    expect(component.valor.emit).toHaveBeenCalledWith('F');
+  });
+
+  it('deve marcar campo como tocado ao focar', () => {
+    component['onFocus']();
+    expect((component as any)['campoTocado']).toBe(true);
+  });
+
+  it('deve emitir valor ao selecionar opção válida', () => {
+    jest.spyOn(component.valor, 'emit');
+    component.options = [...mockOptions];
+    component['setValue'](mockOptions[1]);
+    expect(component.valor.emit).toHaveBeenCalledWith('F');
+  });
+
+  it('isCampoValido retorna true se readonly', () => {
+    component.readonly = true;
+    expect((component as any).isCampoValido()).toBe(true);
+  });
+
+  it('isCampoValido retorna false se obrigatório e sem seleção', () => {
+    component.required = true;
+    component.label = 'Sexo';
+    (component as any)['campoTocado'] = true;
+    (component as any)['opcaoSelecionada'] = undefined;
+    jest.spyOn(component.error, 'emit');
+    expect((component as any).isCampoValido()).toBe(false);
+    expect(component.error.emit).toHaveBeenCalled();
+  });
+
+  it('isCampoValido retorna true se válido', () => {
+    jest.spyOn(component as any, 'isCampoObrigatorio').mockReturnValue(false);
+    expect((component as any).isCampoValido()).toBe(true);
+  });
+
+  it('isCampoObrigatorio retorna true se required e sem opção', () => {
+    component.required = true;
+    component['campoTocado'] = true;
+    component['opcaoSelecionada'] = undefined;
+    expect((component as any).isCampoObrigatorio()).toBe(true);
+  });
+
   describe('ngOnInit', () => {
     it('deve emitir valor da opção marcada como checked na inicialização', () => {
       const spyEmit = jest.spyOn(component.valor, 'emit');
@@ -31,7 +77,7 @@ describe('MpcInputRadioComponent', () => {
 
       component.ngOnInit();
 
-      expect(spyEmit).toHaveBeenCalledWith('O');
+      expect(spyEmit).toHaveBeenCalledWith('F');
     });
 
     it('não deve emitir valor quando nenhuma opção está marcada como checked', () => {
@@ -107,7 +153,7 @@ describe('MpcInputRadioComponent', () => {
     });
 
     it('deve retornar false e emitir erro quando validação required falha', () => {
-      const spyValidaRequired = jest.spyOn(component as any, 'validaRequired').mockReturnValue(true);
+      const spyisCampoObrigatorio = jest.spyOn(component as any, 'isCampoObrigatorio').mockReturnValue(true);
       const spyErrorEmit = jest.spyOn(component.error, 'emit');
       component.label = 'Sexo';
 
@@ -116,27 +162,27 @@ describe('MpcInputRadioComponent', () => {
       expect(resultado).toBe(false);
       expect(component['errorMessage']).toBe('O campo Sexo é obrigatório');
       expect(spyErrorEmit).toHaveBeenCalledWith({ 'required': true });
-      expect(spyValidaRequired).toHaveBeenCalled();
+      expect(spyisCampoObrigatorio).toHaveBeenCalled();
     });
 
     it('deve retornar true quando todas as validações passam', () => {
-      const spyValidaRequired = jest.spyOn(component as any, 'validaRequired').mockReturnValue(false);
+      const spyisCampoObrigatorio = jest.spyOn(component as any, 'isCampoObrigatorio').mockReturnValue(false);
 
       const resultado = component['isCampoValido']();
 
       expect(resultado).toBe(true);
       expect(component['errorMessage']).toBeUndefined();
-      expect(spyValidaRequired).toHaveBeenCalled();
+      expect(spyisCampoObrigatorio).toHaveBeenCalled();
     });
   });
 
-  describe('validaRequired', () => {
+  describe('isCampoObrigatorio', () => {
     it('deve retornar true quando campo é obrigatório, tocado e sem opção selecionada', () => {
       component.required = true;
       component['campoTocado'] = true;
       component['opcaoSelecionada'] = undefined;
 
-      const resultado = component['validaRequired']();
+      const resultado = component['isCampoObrigatorio']();
 
       expect(resultado).toBe(true);
     });
@@ -146,7 +192,7 @@ describe('MpcInputRadioComponent', () => {
       component['campoTocado'] = true;
       component['opcaoSelecionada'] = undefined;
 
-      const resultado = component['validaRequired']();
+      const resultado = component['isCampoObrigatorio']();
 
       expect(resultado).toBe(false);
     });
@@ -156,7 +202,7 @@ describe('MpcInputRadioComponent', () => {
       component['campoTocado'] = false;
       component['opcaoSelecionada'] = undefined;
 
-      const resultado = component['validaRequired']();
+      const resultado = component['isCampoObrigatorio']();
 
       expect(resultado).toBe(false);
     });
@@ -166,7 +212,7 @@ describe('MpcInputRadioComponent', () => {
       component['campoTocado'] = true;
       component['opcaoSelecionada'] = mockOptions[0];
 
-      const resultado = component['validaRequired']();
+      const resultado = component['isCampoObrigatorio']();
 
       expect(resultado).toBe(false);
     });

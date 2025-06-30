@@ -9,10 +9,11 @@ import { Rotas } from '../../../shared/enums/rotas-enum';
 import { Inscricao } from '../model/inscricao.model';
 import { MpcFooterComponent } from '../../../shared/components/mpc-footer/mpc-footer.component';
 import { ErrorService } from '../../../shared/error/error.service';
+import { MpcFormProgressBarComponent } from '../../../shared/components/mpc-form-progress-bar/mpc-form-progress-bar.component';
 
 @Component({
   selector: 'app-confirmacao',
-  imports: [MpcButtonComponent, MpcNavbarComponent, MpcModalComponent, MpcFooterComponent],
+  imports: [MpcButtonComponent, MpcNavbarComponent, MpcModalComponent, MpcFooterComponent, MpcFormProgressBarComponent],
   templateUrl: './confirmacao.component.html',
   styleUrl: './confirmacao.component.css'
 })
@@ -43,19 +44,28 @@ export class ConfirmacaoComponent implements OnInit {
   }
 
   protected inscrever(): void {
-    this.inscricaoService.inscrever(this.dadosInscricao).subscribe({
-      next: (response: Inscricao) => {
-        this.inscricaoService.atualizarDadosInscricao(response, 5);
-        this.abrirModalSucesso();
-      },
-      error: (error: any) => {
-        this.errorService.construirErro(error)
-      }
-    });
+    try {
+      this.inscricaoService.inscrever(this.dadosInscricao).subscribe({
+        next: (response: Inscricao) => {
+          this.inscricaoService.atualizarDadosInscricao(response, 5);
+          this.abrirModalSucesso();
+        },
+        error: (error: any) => {
+          throw error;
+        }
+      });
+
+    } catch (error) {
+      this.errorService.construirErro(error);
+    }
   }
 
-  protected voltar(): void {
-    this.router.navigate([Rotas.PAGAMENTO]);
+  protected etapaAnterior(): void {
+    try {
+      this.router.navigate([Rotas.PAGAMENTO]);
+    } catch (error) {
+      this.errorService.construirErro(error);
+    }
   }
 
   private abrirModalSucesso(): void {

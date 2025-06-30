@@ -9,7 +9,7 @@
 
   <div class="container">
 
-    <mpc-form-progress-bar [etapaAtual]="3" [totalEtapas]="3"></mpc-form-progress-bar>
+    <mpc-form-progress-bar [etapaAtual]="3" [totalEtapas]="4"></mpc-form-progress-bar>
 
     <h3>Pagamento</h3>
     <p class="text-muted mb-3">Campos obrigatórios (*)</p>
@@ -26,29 +26,31 @@
       <!-- Alertas -->
 
       <div class="row mb-3">
-        <mpc-input-text label="Valor" [readonly]="true" [value]="formatarValor(form.value.valor)" />
+        <div class="col-12 col-lg-6 mx-auto">
+          <mpc-input-text label="Valor" [readonly]="true" [value]="formatarValor(form.value.valor)" />
+        </div>
       </div>
 
-      <div class="row">
-        <mpc-input-select label="Forma de Pagamento" [required]="true"
-          (error)="form.controls.formaPagamento.setErrors($event)" (valor)="atualizarFormaPagamento($event)"
-          [options]="formasPagamento" />
+      <div class="row mb-3">
+        <div class="col-12 col-lg-6 mx-auto">
+          <mpc-input-select label="Forma de Pagamento" [required]="true"
+            (error)="form.controls.formaPagamento.setErrors($event)" (valor)="atualizarFormaPagamento($event)"
+            [options]="formasPagamento" />
+        </div>
       </div>
 
     </form>
 
-    <div class="row mt-5">
-      <div class="col-md-6 mb-3 div-buttons">
-        <mpc-button (click)="proximaEtapa()" [corFundo]="'#149DDD'" [corTexto]="'white'" icone="bi bi-send" posicaoIcone="direita"
-          texto="Finalizar" [disabled]="form.invalid">
-        </mpc-button>
-      </div>
+    <div class="d-flex justify-content-center align-items-center mt-5">
+      <mpc-button (click)="proximaEtapa()" [corFundo]="'var(--cor-primaria)'" [corTexto]="'white'"
+        icone="bi bi-arrow-right" texto="Próximo" [disabled]="form.invalid">
+      </mpc-button>
+    </div>
 
-      <div class="col-md-6 mb-3 div-buttons">
-        <mpc-button (click)="etapaAnterior()" [corFundo]="'#149DDD'" [corTexto]="'white'" icone="bi bi-arrow-left" texto="Voltar"
-          posicaoIcone="esquerda">
-        </mpc-button>
-      </div>
+    <div class="d-flex justify-content-center align-items-center mt-3">
+      <mpc-button (click)="etapaAnterior()" [corTexto]="'var(--cor-terciaria)'" posicaoIcone="esquerda"
+        icone="bi bi-arrow-left" texto="Voltar para Contato">
+      </mpc-button>
     </div>
 
   </div>

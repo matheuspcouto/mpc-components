@@ -65,14 +65,12 @@ export class MpcInputSelectComponent implements OnInit {
       this.options.unshift(opcaoSelecione);
       this.opcaoSelecionada = opcaoSelecione;
 
-      // Se o campo é obrigatório, emite erro imediatamente
-      if (this.required) {
-        this.error.emit({ required: true });
-      }
     } else {
       // Se há uma opção selecionada, emite o valor
       this.valor.emit(this.opcaoSelecionada.value);
     }
+
+    this.isCampoValido();
   }
 
   protected onFocus(): void {
@@ -88,20 +86,21 @@ export class MpcInputSelectComponent implements OnInit {
   private isCampoValido(): boolean {
     if (this.disabled) return true;
 
-    if (this.validaRequired()) {
-      this.errorMessage = `O campo ${this.label} é obrigatório`;
-      this.error.emit({ 'required': true });
+    if (this.isCampoObrigatorio()) {
+      this.error.emit({ required: true });
+      if (this.campoTocado) {
+        this.errorMessage = `O campo ${this.label} é obrigatório`;
+      }
       return false;
     }
 
     this.errorMessage = undefined;
-    this.error.emit({ required : true });
     return true;
   }
 
-  private validaRequired(): boolean {
+  private isCampoObrigatorio(): boolean {
     if (!this.required) return false;
-    return this.required && this.campoTocado &&
+    return this.required &&
       (!this.opcaoSelecionada ||
         this.opcaoSelecionada.value === '' ||
         this.opcaoSelecionada.value === 'Selecione');

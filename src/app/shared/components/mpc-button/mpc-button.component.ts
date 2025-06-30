@@ -44,23 +44,4 @@ export class MpcButtonComponent {
   @Input() disabled: boolean = false;
   @Input() posicaoIcone: string = PosicoesIcone.DIREITA;
   @Input() icone: string = '';
-
-  /**
-   * Retorna o estilo inline para aplicar as cores personalizadas
-   */
-  protected get estiloPersonalizado(): { [key: string]: string } {
-    const estilos: { [key: string]: string } = {};
-
-    if (this.corFundo && this.corFundo.trim() !== '') {
-      estilos['background-color'] = this.corFundo;
-      // Opcional: ajustar a cor da borda para combinar com o fundo
-      estilos['border-color'] = this.corFundo;
-    }
-
-    if (this.corTexto && this.corTexto.trim() !== '') {
-      estilos['color'] = this.corTexto;
-    }
-
-    return estilos;
-  }
 }

@@ -1,12 +1,11 @@
 <button [id]="id" [tabIndex]="tabIndex" [attr.aria-label]="ariaLabel" [disabled]="disabled" class="btn" type="button"
   [style.background-color]="corFundo" [style.border-color]="corFundo" [style.color]="corTexto">
 
-  <span [class.order-lg-1]="posicaoIcone === 'direita'" [class.order-lg-2]="posicaoIcone === 'esquerda'">
+  <span [class]="posicaoIcone === 'direita' ? 'order-1' : 'order-2'">
     {{ texto }}
   </span>
 
-  <i [class]="icone" [class.order-lg-2]="posicaoIcone === 'direita'" [class.order-lg-1]="posicaoIcone === 'esquerda'"
-    [class.icon-float-left]="posicaoIcone === 'direita'">
+  <i [class]=" icone + ' ' + (posicaoIcone === 'direita' ? 'order-2 icon-float-left': 'order-1 icon-float-right') ">
   </i>
 
 </button>

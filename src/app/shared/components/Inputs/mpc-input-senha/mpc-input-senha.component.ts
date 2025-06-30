@@ -64,7 +64,7 @@ export class MpcInputSenhaComponent {
   private isCampoValido(value: string | undefined): boolean {
     if (this.readonly || this.disabled) { return true; }
 
-    if (this.validaRequired(value)) {
+    if (this.isCampoObrigatorio(value)) {
       this.errorMessage = `O campo senha é obrigatório`;
       this.error.emit({ required: true });
       return false;
@@ -86,7 +86,7 @@ export class MpcInputSenhaComponent {
     return this.regexSenha.length > 0 && !new RegExp(this.regexSenha).test(value);
   }
 
-  private validaRequired(value: string | undefined): boolean {
+  private isCampoObrigatorio(value: string | undefined): boolean {
     if (!this.required) return false;
     if (!value) return true;
     return this.required && value.length === 0;

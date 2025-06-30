@@ -18,7 +18,7 @@
  * @updated 27/02/2025
  */
 
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
 import { CpfCnpjMaskPipe } from './cpf-cnpj-mask.pipe';
 
@@ -28,7 +28,7 @@ import { CpfCnpjMaskPipe } from './cpf-cnpj-mask.pipe';
   templateUrl: './mpc-input-cpfcnpj.component.html',
   styleUrl: './mpc-input-cpfcnpj.component.css'
 })
-export class MpcInputCpfcnpjComponent {
+export class MpcInputCpfcnpjComponent implements OnInit {
 
   // Acessibilidade
   @Input() id?: string = '';
@@ -54,6 +54,10 @@ export class MpcInputCpfcnpjComponent {
     return this.cpfCnpjMaskPipe.transform(this.value);
   }
 
+  ngOnInit(): void {
+    this.isCampoValido(this.value);
+  }
+
   protected onFocus(): void {
     this.campoTocado = true;
     this.isCampoValido(this.value);
@@ -70,15 +74,19 @@ export class MpcInputCpfcnpjComponent {
       return true;
     }
 
-    if (this.validaRequired(value)) {
-      this.errorMessage = `O campo CPF/CNPJ é obrigatório`;
+    if (this.isCampoObrigatorio(value)) {
       this.error.emit({ required: true });
+      if (this.campoTocado) {
+        this.errorMessage = `O campo CPF/CNPJ é obrigatório`;
+      }
       return false;
     }
 
-    if (!this.isValidCpfOrCnpj(value)) {
-      this.errorMessage = `O formato do CPF/CNPJ não é válido`;
+    if (!this.isCpfCnpjValido(value)) {
       this.error.emit({ regex: true });
+      if (this.campoTocado) {
+        this.errorMessage = `O formato do CPF/CNPJ não é válido`;
+      }
       return false;
     }
 
@@ -86,11 +94,11 @@ export class MpcInputCpfcnpjComponent {
     return true;
   }
 
-  private validaRequired(value: string | undefined): boolean {
+  private isCampoObrigatorio(value: string | undefined): boolean {
     return this.required && (!value || value.length === 0);
   }
 
-  private isValidCPF(cpf: string | undefined): boolean {
+  private isCPFValido(cpf: string | undefined): boolean {
     cpf = cpf ? cpf.replace(/\D/g, '') : '';
 
     if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) {
@@ -116,7 +124,7 @@ export class MpcInputCpfcnpjComponent {
     return secondDigit === parseInt(cpf.charAt(10));
   }
 
-  private isValidCNPJ(cnpj: string | undefined): boolean {
+  private isCNPJValido(cnpj: string | undefined): boolean {
     cnpj = cnpj ? cnpj.replace(/[^\d]+/g, '') : '';
 
     if (cnpj.length !== 14 || /^(\d)\1+$/.test(cnpj)) {
@@ -142,11 +150,11 @@ export class MpcInputCpfcnpjComponent {
     return digit1 === numbers[12] && digit2 === numbers[13];
   }
 
-  private isValidCpfOrCnpj(value: string | undefined): boolean {
+  private isCpfCnpjValido(value: string | undefined): boolean {
     if (value && value.length <= 11) {
-      return this.isValidCPF(value);
+      return this.isCPFValido(value);
     } else {
-      return this.isValidCNPJ(value);
+      return this.isCNPJValido(value);
     }
   }
 }

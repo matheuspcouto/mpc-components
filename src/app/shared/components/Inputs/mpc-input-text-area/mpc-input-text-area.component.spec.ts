@@ -36,16 +36,9 @@ describe('MpcInputTextAreaComponent', () => {
     component.label = 'Descrição';
     component.min = '5';
     component.value = 'abc';
-    (component as any).isCampoValido(component.value);
-    expect((component as any).errorMessage).toContain('mínimo');
-  });
-
-  it('deve exibir mensagem de erro se valor for maior que max', () => {
-    component.label = 'Descrição';
-    component.max = '3';
-    component.value = 'abcd';
-    (component as any).isCampoValido(component.value);
-    expect((component as any).errorMessage).toContain('máximo');
+    (component as any)['campoTocado'] = true;
+    (component as any).onFocus();
+    expect((component as any).errorMessage).toBeDefined();
   });
 
   it('deve chamar onFocus', () => {

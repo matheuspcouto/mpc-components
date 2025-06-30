@@ -2,7 +2,7 @@
   <label class="form-label">CEP {{ required ? '*': ''}}</label>
   <div class="input-group">
     <input [id]="id" type="text" class="form-control" [value]="value" (input)="setValue($event)" (focus)="onFocus()"
-      [required]="required" />
+      [required]="required" [attr.maxLength]="9" />
   </div>
 
   @if (errorMessage) {

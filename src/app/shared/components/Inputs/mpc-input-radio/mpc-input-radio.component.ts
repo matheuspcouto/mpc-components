@@ -59,10 +59,12 @@ export class MpcInputRadioComponent implements OnInit {
 
   ngOnInit(): void {
     const optionSelecionada = this.options.find(option => option.checked);
-
     if (optionSelecionada) {
+      this.opcaoSelecionada = optionSelecionada;
       this.valor.emit(optionSelecionada.value);
     }
+
+    this.isCampoValido();
   }
 
   protected onFocus(): void {
@@ -80,9 +82,11 @@ export class MpcInputRadioComponent implements OnInit {
   private isCampoValido(): boolean {
     if (this.readonly || this.disabled) { return true; }
 
-    if (this.validaRequired()) {
-      this.errorMessage = `O campo ${this.label} é obrigatório`;
-      this.error.emit({ 'required': true });
+    if (this.isCampoObrigatorio()) {
+      this.error.emit({ required: true });
+      if (this.campoTocado) {
+        this.errorMessage = `O campo ${this.label} é obrigatório`;
+      }
       return false;
     }
 
@@ -90,8 +94,8 @@ export class MpcInputRadioComponent implements OnInit {
     return true;
   }
 
-  private validaRequired(): boolean {
+  private isCampoObrigatorio(): boolean {
     if (!this.required) return false;
-    return this.required && this.campoTocado && !this.opcaoSelecionada;
+    return this.required && !this.opcaoSelecionada;
   }
 }

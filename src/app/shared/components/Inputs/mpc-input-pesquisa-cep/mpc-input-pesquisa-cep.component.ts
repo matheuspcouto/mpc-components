@@ -16,7 +16,7 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
 import { CepMaskPipe } from './cep-mask.pipe';
 
@@ -36,7 +36,7 @@ export const REGEX_CEP = /^\d{5}-?\d{3}$/;
   templateUrl: './mpc-input-pesquisa-cep.component.html',
   styleUrl: './mpc-input-pesquisa-cep.component.css'
 })
-export class MpcInputPesquisaCepComponent {
+export class MpcInputPesquisaCepComponent implements OnInit {
 
   // Acessibilidade
   @Input() id?: string = '';
@@ -57,6 +57,10 @@ export class MpcInputPesquisaCepComponent {
   private readonly http = inject(HttpClient);
   private readonly cepMaskPipe = new CepMaskPipe();
 
+  ngOnInit(): void {
+    this.isCampoValido(this.value);
+  }
+
   get valorFormatado(): string {
     return this.cepMaskPipe.transform(this.value);
   }
@@ -72,15 +76,19 @@ export class MpcInputPesquisaCepComponent {
   }
 
   private isCampoValido(value: string | undefined): boolean {
-    if (this.validaRequired(value)) {
-      this.errorMessage = `O campo CEP é obrigatório`;
+    if (this.isCampoObrigatorio(value)) {
       this.error.emit({ required: true });
+      if (this.campoTocado) {
+        this.errorMessage = `O campo CEP é obrigatório`;
+      }
       return false;
     }
 
-    if (this.validaRegex(value)) {
-      this.errorMessage = `O campo CEP deve conter 8 dígitos`;
-      this.error.emit({ regex: true });
+    if (this.isCepInvalido(value)) {
+      this.error.emit({ pattern: true });
+      if (this.campoTocado) {
+        this.errorMessage = `O campo CEP deve conter 8 dígitos númericos`;
+      }
       return false;
     }
 
@@ -88,12 +96,12 @@ export class MpcInputPesquisaCepComponent {
     return true;
   }
 
-  private validaRegex(value: string | undefined): boolean {
+  private isCepInvalido(value: string | undefined): boolean {
     if (!value) return true;
     return !new RegExp(REGEX_CEP).test(value);
   }
 
-  private validaRequired(value: string | undefined): boolean {
+  private isCampoObrigatorio(value: string | undefined): boolean {
     if (!this.required) return false;
     if (!value) return true;
     return this.campoTocado && this.required && value.length === 0;
@@ -102,7 +110,7 @@ export class MpcInputPesquisaCepComponent {
   private pequisarCep(cep: string | undefined): void {
 
     if (!cep) return;
-    cep = cep.replace(/\D/g, '');;
+    cep = cep.replace(/\D/g, '');
 
     this.http.get<any>(`https://viacep.com.br/ws/${cep}/json/`).subscribe({
       next: (response) => {

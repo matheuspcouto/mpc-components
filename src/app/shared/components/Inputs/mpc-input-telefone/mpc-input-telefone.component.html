@@ -4,7 +4,7 @@
   <div class="input-group">
     <input [id]="id" type="tel" class="form-control col-md-4" [value]="valorFormatado" (input)="setValue($event)"
       [required]="required" (focus)="onFocus()" [disabled]="disabled" [readOnly]="readonly"
-      [style]="errorMessage ? 'border-color: red' : ''" />
+      [style]="errorMessage ? 'border-color: red' : ''" [attr.maxLength]="15" />
 
     @if (campoTocado) {
     <div class="validation-icon">

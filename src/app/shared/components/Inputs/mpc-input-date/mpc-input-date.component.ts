@@ -21,7 +21,7 @@
  * @updated 27/02/2025
  */
 
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
 
 @Component({
@@ -30,7 +30,7 @@ import { ValidationErrors } from '@angular/forms';
   templateUrl: './mpc-input-date.component.html',
   styleUrl: './mpc-input-date.component.css'
 })
-export class MpcInputDateComponent {
+export class MpcInputDateComponent implements OnInit {
 
   // Acessibilidade
   @Input() id?: string = '';
@@ -53,6 +53,10 @@ export class MpcInputDateComponent {
   protected errorMessage?: string;
   protected campoTocado: boolean = false;
 
+  ngOnInit(): void {
+    this.isCampoValido(this.value);
+  }
+
   protected onFocus(): void {
     this.campoTocado = true;
     this.isCampoValido(this.value);
@@ -66,21 +70,27 @@ export class MpcInputDateComponent {
   private isCampoValido(value: string | undefined): boolean {
     if (this.readonly || this.disabled) { return true; }
 
-    if (this.validaRequired(value)) {
-      this.errorMessage = `O campo ${this.label} é obrigatório`;
+    if (this.isCampoObrigatorio(value)) {
       this.error.emit({ 'required': true });
+      if (this.campoTocado) {
+        this.errorMessage = `O campo ${this.label} é obrigatório`;
+      }
       return false;
     }
 
-    if (this.validaMinDate(value)) {
-      this.errorMessage = `A data deve ser maior ou igual a ${this.formatarData(this.minDate)}`;
+    if (this.isMenorQueDataMinima(value)) {
       this.error.emit({ 'minDate': true });
+      if (this.campoTocado) {
+        this.errorMessage = `A data deve ser maior ou igual a ${this.formatarData(this.minDate)}`;
+      }
       return false;
     }
 
-    if (this.validaMaxDate(value)) {
-      this.errorMessage = `A data deve ser menor ou igual a ${this.formatarData(this.maxDate)}`;
+    if (this.isMaiorQueDataMaxima(value)) {
       this.error.emit({ 'maxDate': true });
+      if (this.campoTocado) {
+        this.errorMessage = `A data deve ser menor ou igual a ${this.formatarData(this.maxDate)}`;
+      }
       return false;
     }
 
@@ -88,22 +98,24 @@ export class MpcInputDateComponent {
     return true;
   }
 
-  private validaMinDate(value: string | undefined): boolean {
+  private isMenorQueDataMinima(value: string | undefined): boolean {
     if (!this.minDate) return false;
+    if (!this.required) return false;
     if (!value) return true;
     return new Date(value) < new Date(this.minDate);
   }
 
-  private validaMaxDate(value: string | undefined): boolean {
+  private isMaiorQueDataMaxima(value: string | undefined): boolean {
     if (!this.maxDate) return false;
+    if (!this.required) return false;
     if (!value) return true;
     return new Date(value) > new Date(this.maxDate);
   }
 
-  private validaRequired(value: string | undefined): boolean {
+  private isCampoObrigatorio(value: string | undefined): boolean {
     if (!this.required) return false;
     if (!value) return true;
-    return this.campoTocado && this.required && value.length === 0;
+    return this.required && value.length === 0;
   }
 
   private formatarData(data: string | undefined): string {

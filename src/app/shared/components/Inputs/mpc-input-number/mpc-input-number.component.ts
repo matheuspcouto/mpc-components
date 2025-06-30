@@ -21,7 +21,7 @@
  * @updated 27/02/2025
  */
 
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
 
 @Component({
@@ -30,7 +30,7 @@ import { ValidationErrors } from '@angular/forms';
   templateUrl: './mpc-input-number.component.html',
   styleUrl: './mpc-input-number.component.css'
 })
-export class MpcInputNumberComponent {
+export class MpcInputNumberComponent implements OnInit {
 
   // Acessibilidade
   @Input() id?: string = '';
@@ -52,6 +52,10 @@ export class MpcInputNumberComponent {
   protected errorMessage?: string;
   protected campoTocado: boolean = false;
 
+  ngOnInit(): void {
+    this.isCampoValido(this.value);
+  }
+
   protected onFocus(): void {
     this.campoTocado = true;
     this.isCampoValido(this.value);
@@ -65,15 +69,19 @@ export class MpcInputNumberComponent {
   private isCampoValido(value: number | undefined): boolean {
     if (this.readonly || this.disabled) { return true; }
 
-    if (this.validaMin(value)) {
-      this.errorMessage = `O valor mínimo para o campo ${this.label} é ${this.min}`;
+    if (this.isMenorQueValorMinimo(value)) {
       this.error.emit({ min: true });
+      if (this.campoTocado) {
+        this.errorMessage = `O valor mínimo para o campo ${this.label} é ${this.min}`;
+      }
       return false;
     }
 
-    if (this.validaMax(value)) {
-      this.errorMessage = `O valor máximo para o campo ${this.label} é ${this.max}`;
+    if (this.isMaiorQueValorMaximo(value)) {
       this.error.emit({ max: true });
+      if (this.campoTocado) {
+        this.errorMessage = `O valor máximo para o campo ${this.label} é ${this.max}`;
+      }
       return false;
     }
 
@@ -81,13 +89,13 @@ export class MpcInputNumberComponent {
     return true;
   }
 
-  private validaMin(value: number | undefined): boolean {
+  private isMenorQueValorMinimo(value: number | undefined): boolean {
     if (!this.min) return false;
     if (!value) return true;
     return value < this.min;
   }
 
-  private validaMax(value: number | undefined): boolean {
+  private isMaiorQueValorMaximo(value: number | undefined): boolean {
     if (!this.max) return false;
     if (!value) return true;
     return value > this.max;

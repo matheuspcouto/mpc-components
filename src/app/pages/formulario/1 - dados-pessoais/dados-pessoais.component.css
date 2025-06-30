@@ -1,14 +1,10 @@
-main {
-  margin-top: 90px;
-}
-
 /*--------------------------------------------------------------
 # Section
 --------------------------------------------------------------*/
 section {
   overflow: hidden;
   padding: 50px 0;
-  margin-top: 90px;
+  margin-top: 70px;
 
   .section-components {
     .col-lg-6 {

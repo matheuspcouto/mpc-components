@@ -88,7 +88,7 @@ describe('ConfirmacaoComponent', () => {
 
     it('voltar para a rota anterior ao clicar no botão', () => {
       const spy = jest.spyOn(router, 'navigate');
-      component['voltar']();
+      component['etapaAnterior']();
       expect(spy).toHaveBeenCalledWith([Rotas.PAGAMENTO]);
     });
   });

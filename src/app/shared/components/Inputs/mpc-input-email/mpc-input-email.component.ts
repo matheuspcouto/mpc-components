@@ -18,7 +18,7 @@
  * @updated 27/02/2025
  */
 
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
 import { EmailMaskPipe } from './email-mask.pipe';
 
@@ -28,7 +28,7 @@ import { EmailMaskPipe } from './email-mask.pipe';
   templateUrl: './mpc-input-email.component.html',
   styleUrl: './mpc-input-email.component.css'
 })
-export class MpcInputEmailComponent {
+export class MpcInputEmailComponent implements OnInit {
 
   // Acessibilidade
   @Input() id?: string = '';
@@ -52,6 +52,10 @@ export class MpcInputEmailComponent {
 
   private readonly emailMaskPipe = new EmailMaskPipe();
 
+  ngOnInit(): void {
+    this.isCampoValido(this.value);
+  }
+
   get valorFormatado(): string {
     return this.emailMaskPipe.transform(this.value);
   }
@@ -69,15 +73,19 @@ export class MpcInputEmailComponent {
   private isCampoValido(value: string | undefined): boolean {
     if (this.readonly || this.disabled) { return true; }
 
-    if (this.validaRequired(value)) {
-      this.errorMessage = `O campo e-mail é obrigatório`;
+    if (this.isCampoObrigatorio(value)) {
       this.error.emit({ required: true });
+      if (this.campoTocado) {
+        this.errorMessage = `O campo e-mail é obrigatório`;
+      }
       return false;
     }
 
-    if (this.validaRegex(value)) {
-      this.errorMessage = `O campo e-mail não está em um formato válido`;
-      this.error.emit({ regex: true });
+    if (this.isEmailInvalido(value)) {
+      this.error.emit({ pattern: true });
+      if (this.campoTocado) {
+        this.errorMessage = `O campo e-mail não está em um formato válido`;
+      }
       return false;
     }
 
@@ -85,12 +93,12 @@ export class MpcInputEmailComponent {
     return true;
   }
 
-  private validaRegex(value: string | undefined): boolean {
+  private isEmailInvalido(value: string | undefined): boolean {
     if (!value) return true;
     return !new RegExp(this.regexEmail).test(value);
   }
 
-  private validaRequired(value: string | undefined): boolean {
+  private isCampoObrigatorio(value: string | undefined): boolean {
     if (!this.required) return false;
     if (!value) return true;
     return this.required && value.length === 0;

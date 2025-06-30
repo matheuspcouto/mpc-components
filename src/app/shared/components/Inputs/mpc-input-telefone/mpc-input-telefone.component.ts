@@ -19,7 +19,7 @@
  * @updated 27/02/2025
  */
 
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
 import { TelefoneMaskPipe } from './telefone-mask.pipe';
 
@@ -31,7 +31,7 @@ export const REGEX_TELEFONE = /^\(?(?:[14689][1-9]|2[12478]|3[1234578]|5[1345]|7
   templateUrl: './mpc-input-telefone.component.html',
   styleUrl: './mpc-input-telefone.component.css'
 })
-export class MpcInputTelefoneComponent {
+export class MpcInputTelefoneComponent implements OnInit {
 
   // Acessibilidade
   @Input() id?: string = '';
@@ -53,6 +53,10 @@ export class MpcInputTelefoneComponent {
 
   private readonly telefoneMaskPipe = new TelefoneMaskPipe();
 
+  ngOnInit(): void {
+    this.isCampoValido(this.value);
+  }
+
   get valorFormatado(): string {
     return this.telefoneMaskPipe.transform(this.value);
   }
@@ -71,15 +75,19 @@ export class MpcInputTelefoneComponent {
   private isCampoValido(value: string | undefined): boolean {
     if (this.readonly || this.disabled) { return true; }
 
-    if (this.validaRequired(value)) {
-      this.errorMessage = `O campo telefone é obrigatório`;
+    if (this.isCampoObrigatorio(value)) {
       this.error.emit({ required: true });
+      if (this.campoTocado) {
+        this.errorMessage = `O campo telefone é obrigatório`;
+      }
       return false;
     }
 
-    if (this.validaRegex(value)) {
-      this.errorMessage = `O campo telefone não está em um formato válido. Tente (00) 00000-0000`;
-      this.error.emit({ regex: true });
+    if (this.isTelefoneInvalido(value)) {
+      this.error.emit({ pattern: true });
+      if (this.campoTocado) {
+        this.errorMessage = `O campo telefone não está em um formato válido. Tente (00) 00000-0000`;
+      }
       return false;
     }
 
@@ -87,12 +95,12 @@ export class MpcInputTelefoneComponent {
     return true;
   }
 
-  private validaRegex(value: string | undefined): boolean {
+  private isTelefoneInvalido(value: string | undefined): boolean {
     if (!value) return true;
     return !new RegExp(REGEX_TELEFONE).test(value);
   }
 
-  private validaRequired(value: string | undefined): boolean {
+  private isCampoObrigatorio(value: string | undefined): boolean {
     if (!this.required) return false;
     return this.required && (!value || value.length === 0);
   }

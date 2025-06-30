@@ -21,7 +21,7 @@
  * @updated 27/02/2025
  */
 
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
 
 @Component({
@@ -30,7 +30,7 @@ import { ValidationErrors } from '@angular/forms';
   templateUrl: './mpc-input-text.component.html',
   styleUrl: './mpc-input-text.component.css'
 })
-export class MpcInputTextComponent {
+export class MpcInputTextComponent implements OnInit {
 
   // Acessibilidade
   @Input() id?: string = '';
@@ -53,6 +53,10 @@ export class MpcInputTextComponent {
   protected errorMessage?: string;
   protected campoTocado: boolean = false;
 
+  ngOnInit(): void {
+    this.isCampoValido(this.value);
+  }
+
   protected onFocus(): void {
     this.campoTocado = true;
     this.isCampoValido(this.value);
@@ -66,15 +70,11 @@ export class MpcInputTextComponent {
   private isCampoValido(value: string | undefined): boolean {
     if (this.readonly || this.disabled) { return true; }
 
-    if (this.validaMin(value)) {
-      this.errorMessage = `O campo ${this.label} deve ter no mínimo ${this.min} caracteres`;
+    if (this.isMenorQueValorMinimo(value)) {
       this.error.emit({ min: true });
-      return false;
-    }
-
-    if (this.validaMax(value)) {
-      this.errorMessage = `O campo ${this.label} deve ter no máximo ${this.max} caracteres`;
-      this.error.emit({ max: true });
+      if (this.campoTocado) {
+        this.errorMessage = `O campo ${this.label} deve ter no mínimo ${this.min} caracteres`;
+      }
       return false;
     }
 
@@ -82,17 +82,10 @@ export class MpcInputTextComponent {
     return true;
   }
 
-  private validaMin(value: string | undefined): boolean {
+  private isMenorQueValorMinimo(value: string | undefined): boolean {
     if (!this.min) return false;
-    if (!value) return true;
-    let minNumber = parseInt(this.min);
-    return value.length < minNumber;
-  }
-
-  private validaMax(value: string | undefined): boolean {
-    if (!this.max) return false;
-    if (!value) return true;
-    let maxNumber = parseInt(this.max);
-    return value.length > maxNumber;
+    if (isNaN(parseInt(this.min))) return false;
+    if (!value || value.length === 0) return true;
+    return value.length < parseInt(this.min);
   }
 }

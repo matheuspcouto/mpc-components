@@ -2,7 +2,8 @@
   <label class="form-label">{{ min ? label + ' *' : label }}</label>
 
   <input type="text" class="form-control" [value]="value" (input)="setValue($event)" [readOnly]="readonly"
-    [disabled]="disabled" [id]="id" (focus)="onFocus()" [style]="errorMessage ? 'border-color: red' : ''" />
+    [disabled]="disabled" [id]="id" (focus)="onFocus()" [attr.maxLength]="max ? max : null"
+    [attr.minLength]="min ? min : null" [style]="errorMessage ? 'border-color: red' : ''" />
 
   @if (errorMessage) {
   <p class="text-danger mt-1"> {{ errorMessage }} </p>

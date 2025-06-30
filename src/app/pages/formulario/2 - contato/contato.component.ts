@@ -1,26 +1,24 @@
-import { Component, inject, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MpcModalComponent, TipoModal } from '../../../shared/components/mpc-modal/mpc-modal.component';
 import { Rotas } from '../../../shared/enums/rotas-enum';
 import { CommonModule } from '@angular/common';
 import { MpcNavbarComponent } from '../../../shared/components/mpc-navbar/mpc-navbar.component';
 import { MpcFormProgressBarComponent } from '../../../shared/components/mpc-form-progress-bar/mpc-form-progress-bar.component';
-import { Validators, FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { MpcButtonComponent } from '../../../shared/components/mpc-button/mpc-button.component';
 import { MpcInputTextComponent } from '../../../shared/components/Inputs/mpc-input-text/mpc-input-text.component';
 import { InscricaoService } from '../service/inscricao.service';
-import { emailValidator, telefoneValidator } from '../model/inscricao.validator';
 import { MpcInputTelefoneComponent } from '../../../shared/components/Inputs/mpc-input-telefone/mpc-input-telefone.component';
 import { MpcInputEmailComponent } from '../../../shared/components/Inputs/mpc-input-email/mpc-input-email.component';
-import { MpcModalConfig } from '../../../shared/components/mpc-modal/mpc-modal.directive';
 import { ToastrService } from 'ngx-toastr';
 import { Endereco, MpcInputPesquisaCepComponent } from "../../../shared/components/Inputs/mpc-input-pesquisa-cep/mpc-input-pesquisa-cep.component";
 import { MpcFooterComponent } from '../../../shared/components/mpc-footer/mpc-footer.component';
+import { ErrorService } from '../../../shared/error/error.service';
 
 @Component({
   selector: 'app-contato',
   imports: [
-    CommonModule, MpcModalComponent, FormsModule,
+    FormsModule,
     ReactiveFormsModule, MpcInputTextComponent, MpcInputTelefoneComponent,
     MpcButtonComponent, MpcNavbarComponent, MpcFormProgressBarComponent,
     MpcInputEmailComponent,
@@ -36,18 +34,17 @@ export default class ContatoComponent implements OnInit {
   private readonly inscricaoService = inject(InscricaoService);
   private readonly formBuilder = inject(NonNullableFormBuilder);
   private readonly notificationService = inject(ToastrService);
-
-  @ViewChild('modalErro', { static: true }) protected modalErro!: MpcModalComponent;
+  private readonly errorService = inject(ErrorService);
 
   protected form = this.formBuilder.group({
-    telefone: ['', telefoneValidator],
-    email: ['', emailValidator],
-    rua: ['', Validators.required],
+    telefone: [''],
+    email: [''],
+    rua: [''],
     numero: [''],
-    bairro: ['', Validators.required],
-    cidade: ['', Validators.required],
-    estado: ['', Validators.required],
-    cep: ['', Validators.required],
+    bairro: [''],
+    cidade: [''],
+    estado: [''],
+    cep: [''],
     complemento: [''],
   });
 
@@ -75,34 +72,30 @@ export default class ContatoComponent implements OnInit {
         });
       }
     } catch (error) {
-      this.abrirModalErro('Erro', 'Não foi possível carregar os dados da inscrição');
+      this.errorService.construirErro(error);
     }
   }
 
   protected proximaEtapa(): void {
-    if (this.form.invalid) {
-      this.notificationService.error('Preencha todos os campos obrigatórios corretamente!');
-      return;
+    try {
+      if (this.form.invalid) {
+        this.notificationService.error('Preencha todos os campos obrigatórios corretamente!');
+      } else {
+        this.inscricaoService.atualizarDadosInscricao(this.form.value, 3);
+        this.router.navigate([Rotas.PAGAMENTO]);
+      }
+    } catch (error) {
+      this.errorService.construirErro(error);
     }
-    this.inscricaoService.atualizarDadosInscricao(this.form.value, 3);
-    this.router.navigate([Rotas.PAGAMENTO]);
   }
 
   protected etapaAnterior(): void {
-    this.inscricaoService.atualizarDadosInscricao(this.form.value, 1);
-    this.router.navigate([Rotas.DADOS_PESSOAIS]);
-  }
-
-  private abrirModalErro(titulo: string, texto: string): void {
-    const modalErro: MpcModalConfig = {
-      titulo: titulo,
-      texto: texto,
-      tipoModal: TipoModal.ERRO,
-      botao: () => this.modalErro?.fecharModal(),
-      textoBotao: 'OK'
+    try {
+      this.inscricaoService.atualizarDadosInscricao(this.form.value, 1);
+      this.router.navigate([Rotas.DADOS_PESSOAIS]);
+    } catch (error) {
+      this.errorService.construirErro(error);
     }
-
-    this.modalErro?.abrirModal(modalErro);
   }
 
   protected definirEnderecoPorCep(endereco: Endereco): void {
