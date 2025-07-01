@@ -22,16 +22,6 @@ describe('MpcScrollTopButtonComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('deve adicionar event listener de scroll no ngOnInit', () => {
-    const addEventListenerSpy = jest.spyOn(window, 'addEventListener');
-
-    component.ngOnInit();
-
-    expect(addEventListenerSpy).toHaveBeenCalled();
-
-    addEventListenerSpy.mockRestore();
-  });
-
   it('deve fazer scroll para o topo com comportamento suave quando scrollToTop for chamado', () => {
     const scrollToSpy = jest.spyOn(window, 'scrollTo').mockImplementation(() => { });
 
@@ -42,33 +32,26 @@ describe('MpcScrollTopButtonComponent', () => {
     scrollToSpy.mockRestore();
   });
 
-  it('deve lidar com evento de scroll e atualizar visibilidade do botão', () => {
-    // Mock da propriedade scrollY
-    Object.defineProperty(window, 'scrollY', {
-      writable: true,
-      configurable: true,
-      value: 0
-    });
+  it('deve alterar a visibilidade do botão conforme o scrollY', () => {
+    document.body.innerHTML = `<button id="scrollTop" style="visibility: hidden"></button>`;
+    const btnScrollTop = document.getElementById('scrollTop');
+    expect(btnScrollTop).not.toBeNull();
 
+    // Espiona addEventListener para capturar o handler
     const addEventListenerSpy = jest.spyOn(window, 'addEventListener');
-
     component.ngOnInit();
-
-    // Obtém a função handler de scroll que foi passada para addEventListener
     const scrollHandler = addEventListenerSpy.mock.calls.find(call => call[0] === 'scroll')?.[1] as Function;
-
     expect(scrollHandler).toBeDefined();
 
-    // Testa o comportamento do scroll se o handler existir
-    if (scrollHandler) {
-      // Simula scroll para baixo
-      Object.defineProperty(window, 'scrollY', { value: 300 });
-      scrollHandler();
+    // Simula scroll > 300
+    Object.defineProperty(window, 'scrollY', { value: 350, configurable: true });
+    scrollHandler();
+    expect(btnScrollTop!.style.visibility).toBe('visible');
 
-      // Simula scroll para o topo
-      Object.defineProperty(window, 'scrollY', { value: 0 });
-      scrollHandler();
-    }
+    // Simula scroll <= 300
+    Object.defineProperty(window, 'scrollY', { value: 100, configurable: true });
+    scrollHandler();
+    expect(btnScrollTop!.style.visibility).toBe('hidden');
 
     addEventListenerSpy.mockRestore();
   });

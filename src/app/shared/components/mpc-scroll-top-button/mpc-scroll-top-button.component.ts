@@ -8,11 +8,11 @@
  * <mpc-scroll-top-button icone="bi bi-arrow-up-short"></mpc-scroll-top-button>
  *
  * @author Matheus Pimentel Do Couto
- * @created 27/02/2025
- * @updated 27/02/2025
+ * @created 01/07/2025
+ * @updated 01/07/2025
  */
 
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import { Component, inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
 
 @Component({

@@ -13,6 +13,8 @@ export class Inscricao {
   endereco?: string;
   formaPagamento?: string;
   valor?: number;
+  statusPagamento?: string;
+  dataPagamento?: string;
   dataInscricao?: string;
   status?: string;
 
@@ -64,7 +66,9 @@ export class Inscricao {
    */
   inicializarPagamento(dados: any): Inscricao {
     this.formaPagamento = dados.formaPagamento;
-    this.valor = dados.valor || 100.00;
+    this.valor = dados.valor;
+    this.statusPagamento = dados.statusPagamento || 'A PAGAR';
+    this.dataPagamento = dados.dataPagamento || undefined;
     return this;
   }
 

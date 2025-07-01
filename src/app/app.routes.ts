@@ -108,7 +108,7 @@ export const routes: Routes = [
           {
             path: 'comprovante',
             loadComponent: () => import('./pages/formulario/5 - comprovante/comprovante.component').then(c => c.ComprovanteComponent),
-            canActivate: [SiteAtivoGuard, InscricoesGuard, PaginaConfirmacaoGuard]
+            canActivate: [SiteAtivoGuard]
           },
           {
             path: 'inscricoes-encerradas',

@@ -70,7 +70,7 @@ export class MpcInputSenhaComponent {
       return false;
     }
 
-    if (this.validaRegex(value)) {
+    if (this.isSenhaInvalida(value)) {
       this.errorMessage = `A senha não está em um formato válido`;
       this.error.emit({ regex: true });
       return false;
@@ -80,7 +80,7 @@ export class MpcInputSenhaComponent {
     return true;
   }
 
-  private validaRegex(value: string | undefined): boolean {
+  private isSenhaInvalida(value: string | undefined): boolean {
     if (!this.regexSenha) return false;
     if (!value) return true;
     return this.regexSenha.length > 0 && !new RegExp(this.regexSenha).test(value);

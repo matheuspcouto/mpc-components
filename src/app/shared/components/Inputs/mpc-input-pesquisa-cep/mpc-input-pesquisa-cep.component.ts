@@ -104,7 +104,7 @@ export class MpcInputPesquisaCepComponent implements OnInit {
   private isCampoObrigatorio(value: string | undefined): boolean {
     if (!this.required) return false;
     if (!value) return true;
-    return this.campoTocado && this.required && value.length === 0;
+    return this.required && value.length === 0;
   }
 
   private pequisarCep(cep: string | undefined): void {

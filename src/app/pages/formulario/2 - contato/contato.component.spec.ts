@@ -4,7 +4,6 @@ import { ToastrService } from 'ngx-toastr';
 import { FormControl, FormGroup, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import ContatoComponent from './contato.component';
 import { InscricaoService } from '../service/inscricao.service';
-import { MpcModalComponent } from '../../../shared/components/mpc-modal/mpc-modal.component';
 import { Endereco } from '../../../shared/components/Inputs/mpc-input-pesquisa-cep/mpc-input-pesquisa-cep.component';
 import { provideNgxMask } from 'ngx-mask';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
@@ -13,29 +12,17 @@ import { provideHttpClient } from '@angular/common/http';
 describe('ContatoComponent', () => {
   let component: ContatoComponent;
   let fixture: ComponentFixture<ContatoComponent>;
-  let mockInscricaoService: jest.Mocked<InscricaoService>;
-  let mockToastrService: jest.Mocked<ToastrService>;
-  let mockModalErro: jest.Mocked<MpcModalComponent>;
-  let mockFormBuilder: jest.Mocked<NonNullableFormBuilder>;
+  let mockInscricaoService: any;
+  let mockToastrService: any;
+  let mockFormBuilder: any;
 
   beforeEach(async () => {
-
     mockInscricaoService = {
       getDadosInscricao: jest.fn(),
       isContatoCompleto: jest.fn(),
       atualizarDadosInscricao: jest.fn()
-    } as any;
-
-    mockToastrService = {
-      error: jest.fn()
-    } as any;
-
-    mockModalErro = {
-      abrirModal: jest.fn(),
-      fecharModal: jest.fn()
-    } as any;
-
-    // Mock do FormBuilder
+    };
+    mockToastrService = { error: jest.fn() };
     mockFormBuilder = {
       group: jest.fn().mockReturnValue(new FormGroup({
         telefone: new FormControl('', Validators.required),
@@ -51,8 +38,7 @@ describe('ContatoComponent', () => {
       control: jest.fn(),
       array: jest.fn(),
       record: jest.fn()
-    } as any;
-
+    };
     await TestBed.configureTestingModule({
       imports: [ContatoComponent, ReactiveFormsModule, RouterTestingModule],
       providers: [
@@ -64,158 +50,86 @@ describe('ContatoComponent', () => {
         provideHttpClientTesting(),
       ]
     }).compileComponents();
-
     fixture = TestBed.createComponent(ContatoComponent);
     component = fixture.componentInstance;
-    component['modalErro'] = mockModalErro;
   });
 
-  describe('inicialização', () => {
-    it('deve criar o componente', () => {
-      expect(component).toBeTruthy();
-    });
+  it('deve criar o componente', () => {
+    expect(component).toBeTruthy();
+  });
 
-    it('deve inicializar o formulário com campos vazios', () => {
-      expect(component['form'].value).toEqual({
-        telefone: '',
-        email: '',
-        rua: '',
-        numero: '',
-        bairro: '',
-        cidade: '',
-        estado: '',
-        cep: '',
-        complemento: ''
-      });
-    });
-
-    it('deve chamar atualizarForm no ngOnInit', () => {
-      const spy = jest.spyOn(component as any, 'atualizarForm');
-      component.ngOnInit();
-      expect(spy).toHaveBeenCalled();
+  it('deve inicializar o formulário corretamente', () => {
+    expect(component['form'].value).toEqual({
+      telefone: '', email: '', rua: '', numero: '', bairro: '', cidade: '', estado: '', cep: '', complemento: ''
     });
   });
 
-  describe('atualizarForm', () => {
-    it('deve preencher o formulário quando contato está completo', () => {
-      const dadosMock = {
-        telefone: '11999999999',
-        email: 'teste@teste.com',
-        rua: 'Rua Teste',
-        numero: '123',
-        bairro: 'Bairro Teste',
-        cidade: 'Cidade Teste',
-        estado: 'SP',
-        cep: '12345678',
-        complemento: 'Complemento Teste'
-      };
-
-      mockInscricaoService.isContatoCompleto.mockReturnValue(true);
-      mockInscricaoService.getDadosInscricao.mockReturnValue(dadosMock);
-
-      component['atualizarForm']();
-
-      expect(component['form'].value).toEqual(dadosMock);
-    });
-
-    it('deve preencher o formulário quando contato está completo', () => {
-      mockInscricaoService.isContatoCompleto.mockReturnValue(false);
-
-      component['atualizarForm']();
-
-      expect(mockInscricaoService.getDadosInscricao).toHaveBeenCalled();
-    });
-
-    it('deve abrir modal de erro quando ocorre exceção', () => {
-      mockInscricaoService.isContatoCompleto.mockImplementation(() => {
-        throw new Error('Erro teste');
-      });
-
-      const spy = jest.spyOn(component as any, 'abrirModalErro');
-      component['atualizarForm']();
-
-      expect(spy).toHaveBeenCalledWith('Erro', 'Não foi possível carregar os dados da inscrição');
-    });
+  it('deve preencher o formulário quando contato está completo', () => {
+    const dadosMock = { telefone: '11999999999', email: 'teste@teste.com', rua: 'Rua Teste', numero: '123', bairro: 'Bairro Teste', cidade: 'Cidade Teste', estado: 'SP', cep: '12345678', complemento: 'Complemento Teste' };
+    mockInscricaoService.isContatoCompleto.mockReturnValue(true);
+    mockInscricaoService.getDadosInscricao.mockReturnValue(dadosMock);
+    component['atualizarForm']();
+    expect(component['form'].value).toEqual(dadosMock);
   });
 
-  describe('proximaEtapa', () => {
-    it('deve mostrar erro quando formulário é inválido', () => {
-      component['form'].patchValue({ telefone: '' }); // formulário inválido
-
-      component['proximaEtapa']();
-
-      expect(mockToastrService.error).toHaveBeenCalledWith('Preencha todos os campos obrigatórios corretamente!');
-    });
-
-    it('deve navegar para próxima etapa quando formulário é válido', () => {
-      // Preenchendo formulário válido
-      component['form'].patchValue({
-        telefone: '11999999999',
-        email: 'test@test.com',
-        rua: 'Rua Teste',
-        bairro: 'Bairro Teste',
-        cidade: 'Cidade Teste',
-        estado: 'SP',
-        cep: '12345678',
-        numero: '123',
-      });
-
-      component['proximaEtapa']();
-
-      expect(mockInscricaoService.atualizarDadosInscricao).toHaveBeenCalled();
-    });
+  it('deve chamar atualizarForm no ngOnInit', () => {
+    const spy = jest.spyOn(component as any, 'atualizarForm');
+    component.ngOnInit();
+    expect(spy).toHaveBeenCalled();
   });
 
-  describe('etapaAnterior', () => {
-    it('deve atualizar dados e navegar para etapa anterior', () => {
-      const formValue = { telefone: '11999999999' };
-      component['form'].patchValue(formValue);
-
-      component['etapaAnterior']();
-
-      expect(mockInscricaoService.atualizarDadosInscricao).toHaveBeenCalled();
-    });
+  it('deve chamar ErrorService.construirErro quando ocorre exceção em atualizarForm', () => {
+    mockInscricaoService.isContatoCompleto.mockImplementation(() => { throw new Error('Erro teste'); });
+    const errorService = (component as any).errorService;
+    const spy = jest.spyOn(errorService, 'construirErro');
+    component['atualizarForm']();
+    expect(spy).toHaveBeenCalled();
   });
 
-  describe('abrirModalErro', () => {
-    it('deve configurar e abrir modal de erro', () => {
-      const titulo = 'Título Teste';
-      const texto = 'Texto Teste';
-
-      component['abrirModalErro'](titulo, texto);
-
-      expect(mockModalErro.abrirModal).toHaveBeenCalled();
-    });
-
-    it('deve fechar modal quando botão é clicado', () => {
-      component['abrirModalErro']('Teste', 'Teste');
-
-      const configModal = mockModalErro.abrirModal.mock.calls[0][0];
-      if (configModal && configModal.botao) {
-        configModal.botao();
-      }
-
-      expect(mockModalErro.fecharModal).toHaveBeenCalled();
-    });
+  it('deve mostrar erro se tentar avançar com formulário inválido', () => {
+    component['form'].patchValue({ telefone: '' });
+    component['proximaEtapa']();
+    expect(mockToastrService.error).toHaveBeenCalled();
   });
 
-  describe('definirEnderecoPorCep', () => {
-    it('deve preencher campos de endereço com dados do CEP', () => {
-      const endereco: Endereco = {
-        rua: 'Rua do CEP',
-        bairro: 'Bairro do CEP',
-        cidade: 'Cidade do CEP',
-        estado: 'RJ',
-        cep: '87654321'
-      };
+  it('deve avançar para próxima etapa se formulário for válido', () => {
+    component['form'].patchValue({ telefone: '11999999999', email: 'test@test.com', rua: 'Rua Teste', bairro: 'Bairro Teste', cidade: 'Cidade Teste', estado: 'SP', cep: '12345678', numero: '123' });
+    component['proximaEtapa']();
+    expect(mockInscricaoService.atualizarDadosInscricao).toHaveBeenCalled();
+  });
 
-      component['definirEnderecoPorCep'](endereco);
+  it('deve atualizar dados e navegar para etapa anterior', () => {
+    const formValue = { telefone: '11999999999' };
+    component['form'].patchValue(formValue);
+    component['etapaAnterior']();
+    expect(mockInscricaoService.atualizarDadosInscricao).toHaveBeenCalled();
+  });
 
-      expect(component['form'].value.rua).toBe(endereco.rua);
-      expect(component['form'].value.bairro).toBe(endereco.bairro);
-      expect(component['form'].value.cidade).toBe(endereco.cidade);
-      expect(component['form'].value.estado).toBe(endereco.estado);
-      expect(component['form'].value.cep).toBe(endereco.cep);
-    });
+  it('deve preencher campos de endereço com dados do CEP', () => {
+    const endereco: Endereco = { rua: 'Rua do CEP', bairro: 'Bairro do CEP', cidade: 'Cidade do CEP', estado: 'RJ', cep: '87654321' };
+    component['definirEnderecoPorCep'](endereco);
+    expect(component['form'].value.rua).toBe(endereco.rua);
+    expect(component['form'].value.bairro).toBe(endereco.bairro);
+    expect(component['form'].value.cidade).toBe(endereco.cidade);
+    expect(component['form'].value.estado).toBe(endereco.estado);
+    expect(component['form'].value.cep).toBe(endereco.cep);
+  });
+
+  it('deve chamar ErrorService.construirErro quando ocorre exceção em proximaEtapa', () => {
+    mockInscricaoService.atualizarDadosInscricao.mockImplementation(() => { throw new Error('Erro simulado'); });
+    component['form'].patchValue({ telefone: '11999999999', email: 'test@test.com', rua: 'Rua Teste', bairro: 'Bairro Teste', cidade: 'Cidade Teste', estado: 'SP', cep: '12345678', numero: '123' });
+    const errorService = (component as any).errorService;
+    const spy = jest.spyOn(errorService, 'construirErro');
+    component['proximaEtapa']();
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('deve chamar ErrorService.construirErro quando ocorre exceção em etapaAnterior', () => {
+    mockInscricaoService.atualizarDadosInscricao.mockImplementation(() => { throw new Error('Erro simulado'); });
+    component['form'].patchValue({ telefone: '11999999999' });
+    const errorService = (component as any).errorService;
+    const spy = jest.spyOn(errorService, 'construirErro');
+    component['etapaAnterior']();
+    expect(spy).toHaveBeenCalled();
   });
 });

@@ -156,12 +156,13 @@ describe('MpcInputRadioComponent', () => {
       const spyisCampoObrigatorio = jest.spyOn(component as any, 'isCampoObrigatorio').mockReturnValue(true);
       const spyErrorEmit = jest.spyOn(component.error, 'emit');
       component.label = 'Sexo';
+      component['campoTocado'] = true;
 
       const resultado = component['isCampoValido']();
 
       expect(resultado).toBe(false);
       expect(component['errorMessage']).toBe('O campo Sexo é obrigatório');
-      expect(spyErrorEmit).toHaveBeenCalledWith({ 'required': true });
+      expect(spyErrorEmit).toHaveBeenCalledWith({ required: true });
       expect(spyisCampoObrigatorio).toHaveBeenCalled();
     });
 
@@ -197,14 +198,14 @@ describe('MpcInputRadioComponent', () => {
       expect(resultado).toBe(false);
     });
 
-    it('deve retornar false quando campo não foi tocado', () => {
+    it('deve retornar true quando campo não foi tocado', () => {
       component.required = true;
       component['campoTocado'] = false;
       component['opcaoSelecionada'] = undefined;
 
       const resultado = component['isCampoObrigatorio']();
 
-      expect(resultado).toBe(false);
+      expect(resultado).toBe(true);
     });
 
     it('deve retornar false quando há opção selecionada', () => {

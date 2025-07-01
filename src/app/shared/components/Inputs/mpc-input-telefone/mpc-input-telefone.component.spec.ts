@@ -27,12 +27,46 @@ describe('MpcInputTelefoneComponent', () => {
   it('deve emitir erro ao valor vazio se required', () => {
     jest.spyOn(component.error, 'emit');
     component.required = true;
+    component['campoTocado'] = true;
     component['setValue']({ target: { value: '' } });
     expect(component.error.emit).toHaveBeenCalled();
   });
 
   it('deve marcar campo como tocado ao focar', () => {
     component['onFocus']();
-    expect((component as any)['campoTocado']).toBe(true);
+    expect(component['campoTocado']).toBe(true);
+  });
+
+  describe('isCampoValido', () => {
+    it('isCampoValido retorna true se disabled é true', () => {
+      component.disabled = true;
+      expect(component['isCampoValido']('(11) 99999-9999')).toBe(true);
+    });
+
+    it('isCampoValido retorna true se readonly é true', () => {
+      component.readonly = true;
+      expect(component['isCampoValido']('(11) 99999-9999')).toBe(true);
+    });
+
+    it('isCampoValido retorna false se valor for vazio e required é true', () => {
+      component.required = true;
+      expect(component['isCampoValido']('')).toBe(false);
+    });
+
+    it('isCampoValido retorna false se valor for inválido', () => {
+      component.required = true;
+      expect(component['isCampoValido']('abc')).toBe(false);
+    });
+
+    it('isCampoValido retorna true se valor for válido', () => {
+      component.required = true;
+      expect(component['isCampoValido']('(11) 99999-9999')).toBe(true);
+    });
+
+    it('isCampoValido retorna false se valor for vazio e required é false', () => {
+      component.required = false;
+      expect(component['isCampoValido']('')).toBe(false);
+    });
+
   });
 });

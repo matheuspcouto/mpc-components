@@ -87,7 +87,6 @@ export class MpcInputTextAreaComponent implements OnInit {
 
   private isMenorQueValorMinimo(value: string | undefined): boolean {
     if (!this.min) return false;
-    if (isNaN(parseInt(this.min))) return false;
     if (!value || value.length === 0) return true;
     return value.length < parseInt(this.min);
   }

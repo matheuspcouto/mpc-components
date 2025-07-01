@@ -15,4 +15,4 @@ export class AppComponent {}
 // TODO: Ajustar Tela de Login
 // TODO: Tela de Cadastro
 // TODO: Cor de componentes
-// TODO: Ajuste de botões do formulário e revisão de inputs
+// TODO: Pagina de exibição de inputs

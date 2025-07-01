@@ -5,8 +5,8 @@
  * Utiliza Signal para receber o estado do erro automaticamente.
  *
  * @author Matheus Pimentel Do Couto
- * @created 27/06/2025
- * @updated 27/06/2025
+ * @created 01/07/2025
+ * @updated 01/07/2025
  */
 
 import { Component, inject, computed } from '@angular/core';
@@ -49,10 +49,9 @@ export class ErrorComponent {
         }
     }
 
-    protected copiarMensagem(): void {
-        const erroAtual = this.erro();
-        if (!erroAtual) return;
-        navigator.clipboard.writeText(erroAtual.mensagem);
+    protected copiarMensagem(mensagem: string | undefined): void {
+        if (!mensagem) return;
+        navigator.clipboard.writeText(mensagem);
         this.isCopiado = true;
         this.notificationService.info('Copiado para área de transferência', '');
         setTimeout(() => { this.isCopiado = false; }, 3000);

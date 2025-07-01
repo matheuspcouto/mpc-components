@@ -64,4 +64,9 @@ describe('MpcInputSenhaComponent', () => {
     component.required = true;
     expect((component as any).isCampoObrigatorio('')).toBe(true);
   });
+
+  it('isSenhaInvalida retorna true se valor for undefined', () => {
+    component.regexSenha = '^(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$';
+    expect(component['isSenhaInvalida'](undefined)).toBe(true);
+  });
 });

@@ -1,5 +1,5 @@
 {
-  "id": 1,
+  "id": 1234567890,
   "nome": "Matheus Pimentel",
   "sobrenome": " Do Couto",
   "descricao": "Desenvolvedor Fullstack",
@@ -13,6 +13,7 @@
   "endereco": "Rua das Flores, 123, Apto 45, Centro, São Paulo, SP - CEP: 01234-567",
   "formaPagamento": "PIX",
   "valor": 150.00,
+  "statusPagamento": "A PAGAR",
   "dataInscricao": "2025-01-15",
   "status": "ATIVO"
 }

@@ -20,7 +20,7 @@
         </mpc-button>
 
         <!-- Botão Copiar Mensagem -->
-        <mpc-button corFundo="#fff" corTexto="#000" (click)="copiarMensagem()"
+        <mpc-button corFundo="#fff" corTexto="#000" (click)="copiarMensagem(erro()?.mensagem)"
           [icone]="isCopiado ? 'bi bi-clipboard-check' : 'bi bi-clipboard'" texto="Copiar">
         </mpc-button>
       </div>

@@ -1,10 +1,11 @@
 import { ToastrService } from 'ngx-toastr';
-import { Component, computed, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { InscricaoService } from '../service/inscricao.service';
 import { MpcButtonComponent } from "../../../shared/components/mpc-button/mpc-button.component";
 import { Inscricao } from '../model/inscricao.model';
 import { ErrorService } from '../../../shared/error/error.service';
 import { Rotas } from '../../../shared/enums/rotas-enum';
+import { Router } from '@angular/router';
 
 export interface dadosComprovante {
   dadosInscricao: {
@@ -31,23 +32,11 @@ export class ComprovanteComponent implements OnInit {
   private readonly inscricaoService = inject(InscricaoService);
   private readonly errorService = inject(ErrorService);
   private readonly notificationService = inject(ToastrService);
+  private readonly router = inject(Router);
 
-  protected dadosComprovante: dadosComprovante = {
-    dadosInscricao: {
-      codigoInscricao: '',
-      dataInscricao: '',
-      status: ''
-    },
-    dadosPessoais: [],
-    dadosPagamento: {
-      formaPagamento: '',
-      valor: 0
-    }
-  };
+  protected dadosComprovante!: dadosComprovante;
 
-  protected dadosInscricao = computed(() => this.dadosComprovante.dadosInscricao);
-  protected dadosPessoais = computed(() => this.dadosComprovante.dadosPessoais);
-  protected dadosPagamento = computed(() => this.dadosComprovante.dadosPagamento);
+  protected isCopiado: boolean = false;
 
   ngOnInit(): void {
     this.detalharInscricao(this.inscricaoService.getDadosInscricao().id);
@@ -62,7 +51,6 @@ export class ComprovanteComponent implements OnInit {
             dadosInscricao: this.inicializarDadosInscricao(response),
             dadosPagamento: this.inicializarDadosPagamento(response)
           };
-          throw new Error('teste');
         },
         error: (e: any) => { throw e; }
       });
@@ -132,19 +120,23 @@ export class ComprovanteComponent implements OnInit {
     return {
       formaPagamento: response.formaPagamento || '-',
       valor: response.valor || 0,
-      statusPagamento: response.status === 'ATIVO' ? 'PAGO' : 'A PAGAR',
-      dataPagamento: response.status === 'ATIVO' ? response.dataInscricao : undefined
+      statusPagamento: response.statusPagamento || 'A PAGAR',
+      dataPagamento: response.dataPagamento || undefined
     };
   }
 
   protected copiarCodigo(valor: string | undefined): void {
     if (!valor) return;
     navigator.clipboard.writeText(valor);
+    this.isCopiado = true;
     this.notificationService.info('Copiado para área de transferência', '');
+    setTimeout(() => {
+      this.isCopiado = false;
+    }, 3000);
   }
 
   protected pedirLinkPagamento(): void {
-    const codigoInscricao = this.dadosInscricao()?.codigoInscricao;
+    const codigoInscricao = this.dadosComprovante.dadosInscricao.codigoInscricao;
     if (codigoInscricao) {
       const telefone = ''; // telefone do responsável pelo pagamento
       let messageText = `Olá, eu gostaria de obter o pix / link de pagamento da inscrição *${codigoInscricao}* do AAAAA`;
@@ -196,8 +188,6 @@ export class ComprovanteComponent implements OnInit {
   }
 
   protected fecharComprovante(): void {
-    // Implementação para fechar o comprovante
-    // Pode redirecionar para home ou fechar modal
-    window.history.back();
+    this.router.navigate([Rotas.HOME]);
   }
 }

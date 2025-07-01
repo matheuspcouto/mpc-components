@@ -50,9 +50,7 @@ export class ConfirmacaoComponent implements OnInit {
           this.inscricaoService.atualizarDadosInscricao(response, 5);
           this.abrirModalSucesso();
         },
-        error: (error: any) => {
-          throw error;
-        }
+        error: (error: any) => { throw error }
       });
 
     } catch (error) {
