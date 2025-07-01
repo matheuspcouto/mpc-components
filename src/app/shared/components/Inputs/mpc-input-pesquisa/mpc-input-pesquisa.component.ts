@@ -38,7 +38,7 @@ export class MpcInputPesquisaComponent implements OnInit {
   @Input() readonly?: boolean = false;
   @Input() label: string = '';
 
-  @Input() acaoPesquisa?: () => void;
+  @Input() acaoPesquisa!: () => void;
 
   // Validators
   @Input() min?: string = '';

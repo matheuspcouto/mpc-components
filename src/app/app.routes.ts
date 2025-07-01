@@ -79,8 +79,7 @@ export const routes: Routes = [
     children: [
       {
         path: 'login',
-        loadComponent: () => import('./pages/login/login.component').then(c => c.default),
-        title: 'Mpc Components - Login'
+        loadComponent: () => import('./pages/login/login.component').then(c => c.default)
       },
       {
         path: 'formulario',
@@ -125,7 +124,6 @@ export const routes: Routes = [
       {
         path: 'aguarde',
         loadComponent: () => import('./pages/aguarde/aguarde.component').then(c => c.default),
-        title: 'Mpc Components - Aguarde'
       },
       {
         path: 'pagina-erro',

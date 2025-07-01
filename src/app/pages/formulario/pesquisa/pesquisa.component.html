@@ -1,12 +1,15 @@
-<mpc-navbar></mpc-navbar>
-<section class="pesquisa-section">
+<mpc-navbar abaLogin="/paginas/login"></mpc-navbar>
+
+<section id="pesquisa" class="pesquisa">
+
   <div class="section-header">
-    <h2>Pesquisar</h2>
-    <p>Utilize o campo abaixo para pesquisar pelo CEP</p>
+    <h2>Utilize o campo abaixo para</h2>
+    <p>Pesquisar <span>Inscrição</span></p>
   </div>
+
   <div class="container">
     <form [formGroup]="form">
-      <mpc-input-pesquisa [value]="form.value.pesquisa" (acaoPesquisa)="pesquisar()" min="10"
+      <mpc-input-pesquisa [value]="form.value.pesquisa" [acaoPesquisa]="pesquisar" min="10"
         label="Pesquisar"></mpc-input-pesquisa>
     </form>
   </div>

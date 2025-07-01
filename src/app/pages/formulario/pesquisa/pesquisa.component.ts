@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, FormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { MpcNavbarComponent } from '../../../shared/components/mpc-navbar/mpc-navbar.component';
 import { MpcFooterComponent } from '../../../shared/components/mpc-footer/mpc-footer.component';
-import { Router } from 'express';
+import { Router } from '@angular/router';
 import { InscricaoService } from '../service/inscricao.service';
 import { Inscricao } from '../model/inscricao.model';
 import { take } from 'rxjs';
@@ -12,7 +12,6 @@ import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-pesquisa',
-    standalone: true,
     imports: [ReactiveFormsModule, FormsModule, MpcNavbarComponent, MpcFooterComponent, MpcInputPesquisaComponent],
     templateUrl: './pesquisa.component.html',
     styleUrls: ['./pesquisa.component.css']
@@ -26,8 +25,7 @@ export class PesquisaComponent {
     protected form = this.formBuilder.group({ pesquisa: [''] });
 
     protected pesquisar(): void {
-        if (!this.form.value.pesquisa) return;
-        this.inscricaoService.detalharInscricao(this.form.value.pesquisa)
+        this.inscricaoService.detalharInscricao(this.form.controls.pesquisa.value)
             .pipe(take(1))
             .subscribe({
                 next: (response: Inscricao) => {
