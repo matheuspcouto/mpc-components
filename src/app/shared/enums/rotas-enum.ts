@@ -24,7 +24,8 @@ export const Rotas = {
   CONTATO: "/paginas/formulario/contato",
   PAGAMENTO: "/paginas/formulario/pagamento",
   CONFIRMACAO: "/paginas/formulario/confirmacao",
-  COMPROVANTE: "/paginas/formulario/comprovante",
+  DETALHES_INSCRICAO: "/paginas/formulario/detalhes-inscricao",
+  PESQUISA: "/paginas/formulario/pesquisa",
   INSCRICOES_ENCERRADAS: "/paginas/formulario/inscricoes-encerradas",
 
   // Outras páginas

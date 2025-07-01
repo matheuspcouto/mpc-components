@@ -25,12 +25,14 @@ export class InscricaoService {
 
   private http = inject(HttpClient);
 
-  atualizarDadosInscricao(novosDados: any, proximaEtapa: number): void {
+  atualizarDadosInscricao(novosDados: any, proximaEtapa?: number): void {
     const dadosAtuais = this.dadosInscricaoSubject.getValue();
     const dadosAtualizados = { ...dadosAtuais, ...novosDados };
     this.dadosInscricaoSubject.next(dadosAtualizados);
 
-    this.etapaAtualSubject.next(proximaEtapa);
+    if (proximaEtapa) {
+      this.etapaAtualSubject.next(proximaEtapa);
+    }
   }
 
   getDadosInscricao(): any {

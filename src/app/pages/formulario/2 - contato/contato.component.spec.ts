@@ -4,10 +4,10 @@ import { ToastrService } from 'ngx-toastr';
 import { FormControl, FormGroup, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import ContatoComponent from './contato.component';
 import { InscricaoService } from '../service/inscricao.service';
-import { Endereco } from '../../../shared/components/Inputs/mpc-input-pesquisa-cep/mpc-input-pesquisa-cep.component';
 import { provideNgxMask } from 'ngx-mask';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
+import { Endereco } from '../../../shared/components/Inputs/mpc-input-busca-cep/mpc-input-busca-cep.component';
 
 describe('ContatoComponent', () => {
   let component: ContatoComponent;

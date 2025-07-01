@@ -1,4 +1,4 @@
-@if (dadosComprovante) {
+@if (dadosDetalhesInscricao) {
 <div class="comprovante-tela">
   <div class="comprovante-container">
     <div class="comprovante-content">
@@ -9,19 +9,19 @@
         <!-- Título -->
         <h3 class="comprovante-title" tabindex="0">Detalhes da Inscrição</h3>
 
-        @if (dadosComprovante.dadosInscricao) {
+        @if (dadosDetalhesInscricao.dadosInscricao) {
         <h4 tabindex="0">Dados da Inscrição</h4>
 
         <div class="row">
           <!-- Campo com botão de copiar o código de inscrição, pode ser alterado -->
-          @if (dadosComprovante.dadosInscricao.codigoInscricao) {
+          @if (dadosDetalhesInscricao.dadosInscricao.codigoInscricao) {
           <div class="col-md-4 mb-1" tabindex="0"
-            [attr.aria-label]="'Código de Inscrição: ' + dadosComprovante.dadosInscricao.codigoInscricao">
+            [attr.aria-label]="'Código de Inscrição: ' + dadosDetalhesInscricao.dadosInscricao.codigoInscricao">
             <h5>Inscrição</h5>
             <div class="input-group">
-              <p>{{ dadosComprovante.dadosInscricao.codigoInscricao }}</p>
+              <p>{{ dadosDetalhesInscricao.dadosInscricao.codigoInscricao }}</p>
               <em tabindex="0" aria-label="Copiar código, botão"
-                (click)="copiarCodigo(dadosComprovante.dadosInscricao.codigoInscricao)">
+                (click)="copiarCodigo(dadosDetalhesInscricao.dadosInscricao.codigoInscricao)">
                 <i [class]="isCopiado ? 'bi bi-clipboard-check' : 'bi bi-clipboard'"></i>
               </em>
             </div>
@@ -29,24 +29,24 @@
           }
 
           <!-- Campo de status da inscricao, pode ser alterado -->
-          @if (dadosComprovante.dadosInscricao.status) {
+          @if (dadosDetalhesInscricao.dadosInscricao.status) {
           <div class="col-md-4 mb-1" tabindex="0"
-            [attr.aria-label]="'Status: ' + getTextoStatusInscricao(dadosComprovante.dadosInscricao.status)">
+            [attr.aria-label]="'Status: ' + getTextoStatusInscricao(dadosDetalhesInscricao.dadosInscricao.status)">
             <h5 class="mb-1">Status</h5>
             <h5>
-              <span [class]="'badge mb-1 ' + getBadgeStatusInscricao(dadosComprovante.dadosInscricao.status)">
-                {{ getTextoStatusInscricao(dadosComprovante.dadosInscricao.status) }}
+              <span [class]="'badge mb-1 ' + getBadgeStatusInscricao(dadosDetalhesInscricao.dadosInscricao.status)">
+                {{ getTextoStatusInscricao(dadosDetalhesInscricao.dadosInscricao.status) }}
               </span>
             </h5>
           </div>
           }
 
           <!-- Campo de data de criação, pode ser alterado -->
-          @if (dadosComprovante.dadosInscricao.dataInscricao) {
+          @if (dadosDetalhesInscricao.dadosInscricao.dataInscricao) {
           <div class="col-md-4 mb-1" tabindex="0"
-            [attr.aria-label]="'Data da Inscrição: ' + formatarData(dadosComprovante.dadosInscricao.dataInscricao)">
+            [attr.aria-label]="'Data da Inscrição: ' + formatarData(dadosDetalhesInscricao.dadosInscricao.dataInscricao)">
             <h5 class="mb-1">Data da Inscrição</h5>
-            <p>{{ formatarData(dadosComprovante.dadosInscricao.dataInscricao) }}</p>
+            <p>{{ formatarData(dadosDetalhesInscricao.dadosInscricao.dataInscricao) }}</p>
           </div>
           }
 
@@ -54,11 +54,11 @@
         </div>
         }
 
-        @if (dadosComprovante.dadosPessoais) {
+        @if (dadosDetalhesInscricao.dadosPessoais) {
         <h4 tabindex="0">Dados Pessoais</h4>
 
         <div class="row">
-          @for (dado of dadosComprovante.dadosPessoais; track $index) {
+          @for (dado of dadosDetalhesInscricao.dadosPessoais; track $index) {
           <div class="col-md-3 mb-1" tabindex="0" [attr.aria-label]="'{{ dado.label }}: ' + dado.valor">
             <h5 class="mb-1">{{ dado.label }}</h5>
             <p>{{ dado.valor }}</p>
@@ -69,43 +69,43 @@
         <hr>
         }
 
-        @if (dadosComprovante.dadosPagamento) {
+        @if (dadosDetalhesInscricao.dadosPagamento) {
         <h4 tabindex="0">Dados do Pagamento</h4>
 
         <div class="row">
-          @if (dadosComprovante.dadosPagamento.formaPagamento) {
+          @if (dadosDetalhesInscricao.dadosPagamento.formaPagamento) {
           <div class="col-md-3 mb-1" tabindex="0"
-            [attr.aria-label]="'Forma de Pagamento: ' + dadosComprovante.dadosPagamento.formaPagamento">
+            [attr.aria-label]="'Forma de Pagamento: ' + dadosDetalhesInscricao.dadosPagamento.formaPagamento">
             <h5 class="mb-1">Forma de Pagamento</h5>
-            <p>{{ dadosComprovante.dadosPagamento.formaPagamento }}</p>
+            <p>{{ dadosDetalhesInscricao.dadosPagamento.formaPagamento }}</p>
           </div>
           }
 
-          @if (dadosComprovante.dadosPagamento.valor) {
+          @if (dadosDetalhesInscricao.dadosPagamento.valor) {
           <div class="col-md-3 mb-1" tabindex="0"
-            [attr.aria-label]="'Valor: ' + formatarValor(dadosComprovante.dadosPagamento.valor || 0)">
+            [attr.aria-label]="'Valor: ' + formatarValor(dadosDetalhesInscricao.dadosPagamento.valor || 0)">
             <h5 class="mb-1">Valor</h5>
-            <p>{{ formatarValor(dadosComprovante.dadosPagamento.valor) }}</p>
+            <p>{{ formatarValor(dadosDetalhesInscricao.dadosPagamento.valor) }}</p>
           </div>
           }
 
-          @if (dadosComprovante.dadosPagamento.statusPagamento) {
+          @if (dadosDetalhesInscricao.dadosPagamento.statusPagamento) {
           <div class="col-md-3 mb-1" tabindex="0"
-            [attr.aria-label]="'Status do Pagamento: ' + dadosComprovante.dadosPagamento.statusPagamento">
+            [attr.aria-label]="'Status do Pagamento: ' + dadosDetalhesInscricao.dadosPagamento.statusPagamento">
             <h5 class="mb-1">Status do Pagamento</h5>
             <h5>
-              <span [class]="'badge mb-1 ' + getBadgeStatusPagamento(dadosComprovante.dadosPagamento.statusPagamento)">
-                {{ getTextoStatusPagamento(dadosComprovante.dadosPagamento.statusPagamento) }}
+              <span [class]="'badge mb-1 ' + getBadgeStatusPagamento(dadosDetalhesInscricao.dadosPagamento.statusPagamento)">
+                {{ getTextoStatusPagamento(dadosDetalhesInscricao.dadosPagamento.statusPagamento) }}
               </span>
             </h5>
           </div>
           }
 
-          @if (dadosComprovante.dadosPagamento.dataPagamento) {
+          @if (dadosDetalhesInscricao.dadosPagamento.dataPagamento) {
           <div class="col-md-3 mb-1" tabindex="0"
-            [attr.aria-label]="'Data do Pagamento: ' + formatarData(dadosComprovante.dadosPagamento.dataPagamento)">
+            [attr.aria-label]="'Data do Pagamento: ' + formatarData(dadosDetalhesInscricao.dadosPagamento.dataPagamento)">
             <h5 class="mb-1">Data do Pagamento</h5>
-            <p>{{ formatarData(dadosComprovante.dadosPagamento.dataPagamento) }}</p>
+            <p>{{ formatarData(dadosDetalhesInscricao.dadosPagamento.dataPagamento) }}</p>
           </div>
           }
 
@@ -117,8 +117,8 @@
       <!-- Botões -->
       <div class="comprovante-buttons">
 
-        @if (dadosComprovante.dadosPagamento.statusPagamento == 'A PAGAR' &&
-        dadosComprovante.dadosPagamento.formaPagamento != 'Dinheiro') {
+        @if (dadosDetalhesInscricao.dadosPagamento.statusPagamento == 'A PAGAR' &&
+        dadosDetalhesInscricao.dadosPagamento.formaPagamento != 'Dinheiro') {
         <div class="label-info alert alert-warning text-center mt-2" tabindex="0">
           <i class="bi bi-exclamation-circle float-left"></i>
           <p>Solicite o pix/link para pagamento ou envie o comprovante clicando no
@@ -130,7 +130,7 @@
         </mpc-button>
         }
 
-        <mpc-button corTexto="#0E2749" (click)="fecharComprovante()" texto="Fechar" icone="bi bi-x-lg">
+        <mpc-button corTexto="#0E2749" (click)="irParaHome()" texto="Ir para Home" icone="bi bi-house">
         </mpc-button>
 
       </div>

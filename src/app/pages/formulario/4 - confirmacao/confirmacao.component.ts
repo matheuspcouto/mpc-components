@@ -10,6 +10,8 @@ import { Inscricao } from '../model/inscricao.model';
 import { MpcFooterComponent } from '../../../shared/components/mpc-footer/mpc-footer.component';
 import { ErrorService } from '../../../shared/error/error.service';
 import { MpcFormProgressBarComponent } from '../../../shared/components/mpc-form-progress-bar/mpc-form-progress-bar.component';
+import { take } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-confirmacao',
@@ -45,13 +47,15 @@ export class ConfirmacaoComponent implements OnInit {
 
   protected inscrever(): void {
     try {
-      this.inscricaoService.inscrever(this.dadosInscricao).subscribe({
-        next: (response: Inscricao) => {
-          this.inscricaoService.atualizarDadosInscricao(response, 5);
-          this.abrirModalSucesso();
-        },
-        error: (error: any) => { throw error }
-      });
+      this.inscricaoService.inscrever(this.dadosInscricao)
+        .pipe(take(1))
+        .subscribe({
+          next: (response: Inscricao) => {
+            this.inscricaoService.atualizarDadosInscricao(response, 5);
+            this.abrirModalSucesso();
+          },
+          error: (error: any) => { throw error }
+        });
 
     } catch (error) {
       this.errorService.construirErro(error);
@@ -69,10 +73,10 @@ export class ConfirmacaoComponent implements OnInit {
   private abrirModalSucesso(): void {
     const modalSucesso: MpcModalConfig = {
       titulo: 'Inscrição realizada com sucesso',
-      texto: 'Sua inscrição foi realizada com sucesso, você pode acessar o comprovante de inscrição clicando no botão abaixo.',
+      texto: 'Sua inscrição foi realizada com sucesso, você pode acessar os detalhes da inscrição clicando no botão abaixo.',
       tipoModal: TipoModal.SUCESSO,
-      botao: () => { this.router.navigate([Rotas.COMPROVANTE]) },
-      textoBotao: 'Abrir comprovante',
+      botao: () => { this.router.navigate([Rotas.DETALHES_INSCRICAO]) },
+      textoBotao: 'Abrir detalhes',
       segundoBotao: () => { this.modalSucesso?.fecharModal(); },
       textoSegundoBotao: 'Fechar',
     }

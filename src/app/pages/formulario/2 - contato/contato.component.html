@@ -29,7 +29,7 @@
       </div>
 
       <div class="col-md-6 mb-3 align-items-center justify-content-between">
-        <mpc-input-pesquisa-cep [value]="form.value.cep" [required]="true" (valor)="definirEnderecoPorCep($event)"
+        <mpc-input-busca-cep [value]="form.value.cep" [required]="true" (valor)="definirEnderecoPorCep($event)"
           (error)="form.controls.cep.setErrors($event)" />
       </div>
 

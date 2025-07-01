@@ -1,0 +1,17 @@
+<div [tabIndex]="tabIndex" [attr.aria-label]="ariaLabel" class="form-group">
+  <label class="form-label">{{ label + (min ? ' *' : '') }}</label>
+
+  <div class="input-group">
+    <input [id]="id" type="text" class="form-control" [value]="value" [attr.minLength]="minLength" [disabled]="disabled"
+      [readOnly]="readonly" [style]="errorMessage ? 'border-color: red' : ''" (focus)="onFocus()" />
+
+    <div class="icon">
+      @if (value && value.length >= minLength) { <i class="bi bi-x-lg" (click)="limparPesquisa()"></i> }
+      @else { <i class="bi bi-search" (click)="pesquisar()"></i> }
+    </div>
+  </div>
+
+  @if (errorMessage) {
+  <p class="text-danger mt-1"> {{ errorMessage }} </p>
+  }
+</div>

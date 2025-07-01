@@ -7,7 +7,7 @@ import { ErrorService } from '../../../shared/error/error.service';
 import { Rotas } from '../../../shared/enums/rotas-enum';
 import { Router } from '@angular/router';
 
-export interface dadosComprovante {
+export interface dadosDetalhesInscricao {
   dadosInscricao: {
     codigoInscricao: string,
     dataInscricao: string,
@@ -23,46 +23,37 @@ export interface dadosComprovante {
 }
 
 @Component({
-  selector: 'comprovante',
+  selector: 'detalhes-inscricao',
   imports: [MpcButtonComponent],
-  templateUrl: './comprovante.component.html',
-  styleUrls: ['./comprovante.component.css']
+  templateUrl: './detalhes-inscricao.component.html',
+  styleUrls: ['./detalhes-inscricao.component.css']
 })
-export class ComprovanteComponent implements OnInit {
+export class DetalhesInscricaoComponent implements OnInit {
   private readonly inscricaoService = inject(InscricaoService);
   private readonly errorService = inject(ErrorService);
   private readonly notificationService = inject(ToastrService);
   private readonly router = inject(Router);
 
-  protected dadosComprovante!: dadosComprovante;
+  protected dadosDetalhesInscricao!: dadosDetalhesInscricao;
 
   protected isCopiado: boolean = false;
 
   ngOnInit(): void {
-    this.detalharInscricao(this.inscricaoService.getDadosInscricao().id);
+    this.detalharInscricao();
   }
 
-  private detalharInscricao(id: string): void {
+  private detalharInscricao(): void {
     try {
-      this.inscricaoService.detalharInscricao(id).subscribe({
-        next: (response: Inscricao) => {
-          this.dadosComprovante = {
-            dadosPessoais: this.inicializarDadosPessoais(response),
-            dadosInscricao: this.inicializarDadosInscricao(response),
-            dadosPagamento: this.inicializarDadosPagamento(response)
-          };
-        },
-        error: (e: any) => { throw e; }
-      });
+      const inscricao = this.inscricaoService.getDadosInscricao();
+      if (!inscricao) { throw new Error('Inscrição não encontrada'); }
+
+      this.dadosDetalhesInscricao = {
+        dadosPessoais: this.inicializarDadosPessoais(inscricao),
+        dadosInscricao: this.inicializarDadosInscricao(inscricao),
+        dadosPagamento: this.inicializarDadosPagamento(inscricao)
+      };
     } catch (error: any) {
-      const erro = {
-        error: {
-          titulo: 'Não foi possível gerar o seu comprovante! Mas não se preocupe, a inscrição foi realizada com sucesso.',
-          mensagem: error.mensagem || '',
-          rotaRetorno: Rotas.HOME,
-        }
-      }
-      this.errorService.construirErro(erro);
+      this.errorService.construirErro(error);
     }
   }
 
@@ -136,7 +127,7 @@ export class ComprovanteComponent implements OnInit {
   }
 
   protected pedirLinkPagamento(): void {
-    const codigoInscricao = this.dadosComprovante.dadosInscricao.codigoInscricao;
+    const codigoInscricao = this.dadosDetalhesInscricao.dadosInscricao.codigoInscricao;
     if (codigoInscricao) {
       const telefone = ''; // telefone do responsável pelo pagamento
       let messageText = `Olá, eu gostaria de obter o pix / link de pagamento da inscrição *${codigoInscricao}* do AAAAA`;
@@ -187,7 +178,7 @@ export class ComprovanteComponent implements OnInit {
     return data.substring(0, 10);
   }
 
-  protected fecharComprovante(): void {
+  protected irParaHome(): void {
     this.router.navigate([Rotas.HOME]);
   }
 }

@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { MpcInputPesquisaCepComponent, Endereco } from './mpc-input-pesquisa-cep.component';
+import { MpcInputBuscaCepComponent } from './mpc-input-busca-cep.component';
 
-describe('MpcInputPesquisaCepComponent', () => {
-  let component: MpcInputPesquisaCepComponent;
-  let fixture: ComponentFixture<MpcInputPesquisaCepComponent>;
+describe('MpcInputBuscaCepComponent', () => {
+  let component: MpcInputBuscaCepComponent;
+  let fixture: ComponentFixture<MpcInputBuscaCepComponent>;
   let httpMock: HttpTestingController;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MpcInputPesquisaCepComponent, HttpClientTestingModule]
+      imports: [MpcInputBuscaCepComponent, HttpClientTestingModule]
     }).compileComponents();
-    fixture = TestBed.createComponent(MpcInputPesquisaCepComponent);
+    fixture = TestBed.createComponent(MpcInputBuscaCepComponent);
     component = fixture.componentInstance;
     httpMock = TestBed.inject(HttpTestingController);
     fixture.detectChanges();

@@ -85,13 +85,13 @@ describe('ConfirmacaoComponent', () => {
     expect(mockModalSucesso.abrirModal).toHaveBeenCalled();
     const configModal = mockModalSucesso.abrirModal.mock.calls[0][0];
     expect(configModal.titulo).toBe('Inscrição realizada com sucesso');
-    expect(configModal.textoBotao).toBe('Abrir comprovante');
+    expect(configModal.textoBotao).toBe('Abrir detalhes');
     expect(configModal.textoSegundoBotao).toBe('Fechar');
     if (configModal.segundoBotao) configModal.segundoBotao();
     expect(mockModalSucesso.fecharModal).toHaveBeenCalled();
     const routerSpy = jest.spyOn(router, 'navigate');
     if (configModal.botao) configModal.botao();
-    expect(routerSpy).toHaveBeenCalledWith([Rotas.COMPROVANTE]);
+    expect(routerSpy).toHaveBeenCalledWith([Rotas.DETALHES_INSCRICAO]);
   });
 
   it('deve chamar inscrever com sucesso', () => {
@@ -104,12 +104,14 @@ describe('ConfirmacaoComponent', () => {
 
   it('deve chamar inscrever e construir erro quando inscrição falha', () => {
     const erro = 'Erro no servidor';
-    mockInscricaoService.inscrever = jest.fn().mockReturnValue({
-      subscribe: ({ next, error }: any) => error(erro)
+    mockInscricaoService.inscrever.mockReturnValue({
+      pipe: () => ({
+        subscribe: ({ next, error }: any) => error(erro)
+      })
     });
     const errorServiceSpy = jest.spyOn((component as any)['errorService'], 'construirErro');
     component['inscrever']();
-    expect(errorServiceSpy).toHaveBeenCalledWith(erro);
+    expect(errorServiceSpy).toHaveBeenCalled();
   });
 
   it('deve chamar ErrorService.construirErro quando ocorre exceção em etapaAnterior', () => {

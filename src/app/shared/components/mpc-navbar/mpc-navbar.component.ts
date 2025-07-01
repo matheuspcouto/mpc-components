@@ -62,12 +62,22 @@ export class MpcNavbarComponent {
       ]
     },
     {
-      titulo: 'Páginas',
-      rota: Rotas.PAGINAS,
+      titulo: 'Formulário',
+      rota: Rotas.FORMULARIO,
       icone: 'bi bi-file-earmark-text-fill',
       ativo: true,
       subRotas: [
-        { titulo: 'Formulário', rota: Rotas.DADOS_PESSOAIS, ativo: true },
+        { titulo: 'Realizar Inscrição (Fluxo)', rota: Rotas.DADOS_PESSOAIS, ativo: true },
+        { titulo: 'Pesquisar Inscrição', rota: Rotas.PESQUISA, ativo: true },
+        { titulo: 'Inscrições Encerradas', rota: Rotas.INSCRICOES_ENCERRADAS, ativo: true },
+      ]
+    },
+    {
+      titulo: 'Páginas Avulsas',
+      rota: Rotas.PAGINAS,
+      icone: 'bi bi-filetype-html',
+      ativo: true,
+      subRotas: [
         { titulo: 'Aguarde', rota: Rotas.AGUARDE, ativo: true },
         { titulo: 'Login', rota: Rotas.LOGIN, ativo: true },
         { titulo: 'Erro', rota: Rotas.PAGINA_ERRO, ativo: true },

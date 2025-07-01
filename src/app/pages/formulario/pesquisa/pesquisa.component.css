@@ -1,0 +1,11 @@
+.pesquisa-section {
+  padding: 2rem 0;
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+} 

@@ -1,0 +1,15 @@
+<mpc-navbar></mpc-navbar>
+<section class="pesquisa-section">
+  <div class="section-header">
+    <h2>Pesquisar</h2>
+    <p>Utilize o campo abaixo para pesquisar pelo CEP</p>
+  </div>
+  <div class="container">
+    <form [formGroup]="form">
+      <mpc-input-pesquisa [value]="form.value.pesquisa" (acaoPesquisa)="pesquisar()" min="10"
+        label="Pesquisar"></mpc-input-pesquisa>
+    </form>
+  </div>
+</section>
+
+<mpc-footer></mpc-footer>

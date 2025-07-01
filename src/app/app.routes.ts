@@ -106,8 +106,13 @@ export const routes: Routes = [
             canActivate: [SiteAtivoGuard, InscricoesGuard, PaginaConfirmacaoGuard]
           },
           {
-            path: 'comprovante',
-            loadComponent: () => import('./pages/formulario/5 - comprovante/comprovante.component').then(c => c.ComprovanteComponent),
+            path: 'detalhes-inscricao',
+            loadComponent: () => import('./pages/formulario/detalhes-inscricao/detalhes-inscricao.component').then(c => c.DetalhesInscricaoComponent),
+            canActivate: [SiteAtivoGuard]
+          },
+          {
+            path: 'pesquisa',
+            loadComponent: () => import('./pages/formulario/pesquisa/pesquisa.component').then(c => c.PesquisaComponent),
             canActivate: [SiteAtivoGuard]
           },
           {

@@ -11,7 +11,7 @@ import { InscricaoService } from '../service/inscricao.service';
 import { MpcInputTelefoneComponent } from '../../../shared/components/Inputs/mpc-input-telefone/mpc-input-telefone.component';
 import { MpcInputEmailComponent } from '../../../shared/components/Inputs/mpc-input-email/mpc-input-email.component';
 import { ToastrService } from 'ngx-toastr';
-import { Endereco, MpcInputPesquisaCepComponent } from "../../../shared/components/Inputs/mpc-input-pesquisa-cep/mpc-input-pesquisa-cep.component";
+import { Endereco, MpcInputBuscaCepComponent } from "../../../shared/components/Inputs/mpc-input-busca-cep/mpc-input-busca-cep.component";
 import { MpcFooterComponent } from '../../../shared/components/mpc-footer/mpc-footer.component';
 import { ErrorService } from '../../../shared/error/error.service';
 
@@ -22,7 +22,7 @@ import { ErrorService } from '../../../shared/error/error.service';
     ReactiveFormsModule, MpcInputTextComponent, MpcInputTelefoneComponent,
     MpcButtonComponent, MpcNavbarComponent, MpcFormProgressBarComponent,
     MpcInputEmailComponent,
-    MpcInputPesquisaCepComponent,
+    MpcInputBuscaCepComponent,
     MpcFooterComponent
   ],
   templateUrl: './contato.component.html',

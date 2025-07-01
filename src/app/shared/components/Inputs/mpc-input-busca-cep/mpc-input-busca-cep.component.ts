@@ -1,6 +1,6 @@
 /**
- * @Componente MpcInputPesquisaCepComponent
- * Este componente é responsável por exibir um campo de pesquisa de CEP.
+ * @Componente MpcInputBuscaCepComponent
+ * Este componente é responsável por exibir um campo de busca de CEP.
  *
  * id {string}: (opcional) Id do campo.
  * tabIndex {number}: (opcional) Índice de tabulação do campo.
@@ -8,7 +8,7 @@
  * value {number}: Valor inicial do campo.
  *
  * Exemplo de utilização:
- * <mpc-input-pesquisa-cep [value]="cep" [tabIndex]="1" [ariaLabel]="ariaLabel" (valor)="setvalor($event)"></mpc-input-pesquisa-cep>
+ * <mpc-input-busca-cep [value]="cep" [tabIndex]="1" [ariaLabel]="ariaLabel" (valor)="setvalor($event)"></mpc-input-busca-cep>
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
@@ -31,12 +31,11 @@ export interface Endereco {
 export const REGEX_CEP = /^\d{5}-?\d{3}$/;
 
 @Component({
-  selector: 'mpc-input-pesquisa-cep',
-  imports: [],
-  templateUrl: './mpc-input-pesquisa-cep.component.html',
-  styleUrl: './mpc-input-pesquisa-cep.component.css'
+  selector: 'mpc-input-busca-cep',
+  templateUrl: './mpc-input-busca-cep.component.html',
+  styleUrls: ['./mpc-input-busca-cep.component.css']
 })
-export class MpcInputPesquisaCepComponent implements OnInit {
+export class MpcInputBuscaCepComponent implements OnInit {
 
   // Acessibilidade
   @Input() id?: string = '';
