@@ -17,7 +17,6 @@
 
 import { Component, Input } from '@angular/core';
 
-// TODO: Adicionar Pagina e exibição
 @Component({
   selector: 'mpc-card-background-img',
   imports: [],

@@ -27,21 +27,13 @@ describe('MpcCardMenuComponent', () => {
     expect(component.tabIndex).toBe(0);
     expect(component.ariaLabel).toBe('');
     expect(component.titulo).toBe('');
-    expect(component.descricao).toBe('');
+    expect(component.descricao).toBe(undefined);
     expect(component.icone).toBe('');
-    expect(component.acao).toBeUndefined();
   });
 
-  it('deve chamar a função de clique quando o botão é clicado', () => {
-    const spy = jest.spyOn(component, 'onClick');
-    const button = fixture.nativeElement.querySelector('div');
-    button.click();
+  it('deve emitir o evento acao ao chamar clique', () => {
+    const spy = jest.spyOn(component.acao, 'emit');
+    (component as any).clique();
     expect(spy).toHaveBeenCalled();
-  });
-
-  it('deve executar a função de clique quando a ação é definida', () => {
-    component.acao = jest.fn();
-    component.onClick();
-    expect(component.acao).toHaveBeenCalled();
   });
 });

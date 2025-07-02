@@ -24,7 +24,6 @@ export interface CardLinks {
   icone: string;
 }
 
-// TODO: Ajustar altura do card
 @Component({
   selector: 'mpc-card',
   imports: [],

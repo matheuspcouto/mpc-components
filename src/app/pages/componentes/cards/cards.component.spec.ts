@@ -36,4 +36,10 @@ describe('CardsComponent', () => {
   it('deve criar o componente', () => {
     expect(component).toBeTruthy();
   });
+
+  it('deve chamar alert ao executar onMenuCardClick', () => {
+    const alertSpy = jest.spyOn(window, 'alert');
+    component.onMenuCardClick();
+    expect(alertSpy).toHaveBeenCalledWith('Ação executada!');
+  });
 });

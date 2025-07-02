@@ -1,9 +1,12 @@
-<div [id]="id" [tabIndex]="tabIndex" [attr.aria-label]="ariaLabel" class="card-menu" (click)="onClick()">
+<div [id]="id" [tabIndex]="tabIndex" [attr.aria-label]="ariaLabel" class="card-menu" (click)="clique()"
+  [style.cursor]="acao ? 'pointer' : 'default'">
   @if (icone) {
   <i [class]="icone"></i>
   }
-  <div>
+  <div class="card-menu-body">
     <h3>{{ titulo }}</h3>
+    @if (descricao) {
     <p>{{ descricao }}</p>
+    }
   </div>
 </div>

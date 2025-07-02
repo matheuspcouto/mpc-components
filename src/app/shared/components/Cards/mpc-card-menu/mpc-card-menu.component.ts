@@ -15,9 +15,8 @@
  * @updated 24/06/2025
  */
 
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-// TODO: Adicionar Pagina e exibição
 @Component({
   selector: 'mpc-card-menu',
   imports: [],
@@ -32,12 +31,12 @@ export class MpcCardMenuComponent {
   @Input() ariaLabel?: string = '';
 
   @Input() titulo: string = '';
-  @Input() descricao: string = '';
+  @Input() descricao?: string;
   @Input() icone: string = '';
-  @Input() acao?: Function | undefined;
 
-  onClick() {
-    if (!this.acao) return;
-    this.acao();
+  @Output() acao = new EventEmitter<void>();
+
+  protected clique(): void {
+    this.acao.emit();
   }
 }

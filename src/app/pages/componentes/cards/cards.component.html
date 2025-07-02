@@ -2,7 +2,7 @@
 
 <main>
 
-  <!-- ======= MpcCard ======= -->
+  <!-- ======= MpcCard INÍCIO ======= -->
   <section id="cards" class="section-components">
     <div class="container">
 
@@ -12,12 +12,50 @@
       </div>
 
       <h5>
-        O <code>mpc-card</code> MpcComponents são baseados no framework Bootstrap, sendo um componente que
-        permite criar
+        Os <code>mpc-card</code> são baseados no framework Bootstrap, sendo componentes que
+        permitem criar
         cards personalizados. Os cards são utilizados para
         exibir informações de forma organizada e atraente, com uma imagem, título, subtítulo e descrição. Abaixo, você
-        pode ver como utilizar o componente e seus parâmetros.
+        pode ver como utilizar os componentes e seus parâmetros.
       </h5>
+
+      <div class="row gy-4 mb-5">
+
+        <div class="col-12 d-flex justify-content-center">
+          <h4>Cards Verticais e Horizontais</h4>
+        </div>
+
+        <div class="col-lg-4">
+          <mpc-card titulo="Card 1" subtitulo="Layout Vertical" descricaoUm="Este é um card com layout vertical"
+            descricaoDois="Ideal para exibir informações em formato de coluna" imagem="/assets/img/no-image.jpg"
+            [links]="[{icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'}]" layout="vertical">
+          </mpc-card>
+        </div>
+
+        <div class="col-lg-4">
+          <mpc-card titulo="Card 2" subtitulo="Com Links" descricaoUm="Este card possui múltiplos links"
+            descricaoDois="Você pode adicionar quantos links precisar" imagem="/assets/img/no-image.jpg" [links]="[
+              {icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'},
+              {icone: 'bi bi-github', url: 'https://github.com/matheuspcouto'}
+            ]" layout="vertical">
+          </mpc-card>
+        </div>
+
+        <div class="col-lg-4">
+          <mpc-card titulo="Card 5" subtitulo="Sem Links" descricaoUm="Este card não possui links"
+            descricaoDois="Apenas informações básicas" imagem="/assets/img/no-image.jpg" layout="vertical">
+          </mpc-card>
+        </div>
+
+        <div class="col-lg-12">
+          <mpc-card titulo="Card 4" subtitulo="Layout Horizontal" layout="horizontal"
+            descricaoUm="Este card tem layout horizontal, ideal para exibir informações em telas desktop."
+            imagem="/assets/img/no-image.jpg"
+            [links]="[{icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'}]">
+          </mpc-card>
+        </div>
+
+      </div>
 
       <h5>
         <ul class="text-start mt-3">
@@ -71,39 +109,90 @@
         </div>
       </h5>
 
-      <div class="row justify-content-between mb-5">
+    </div>
 
-        <div class="col-lg-4 d-flex justify-content-center mb-5">
-          <mpc-card titulo="Card 1" subtitulo="Layout Vertical" descricaoUm="Este é um card com layout vertical"
-            descricaoDois="Ideal para exibir informações em formato de coluna" imagem="/assets/img/no-image.jpg"
-            [links]="[{icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'}]" layout="vertical">
-          </mpc-card>
+  </section>
+  <!-- ======= MpcCard FIM ======= -->
+
+  <!-- ======= MpcCardBackgroundImg INÍCIO ======= -->
+  <section id="cards-background-img" class="section-components">
+    <div class="container">
+
+      <div class="section-header">
+        <h2>Cards com Imagem de Fundo</h2>
+      </div>
+
+      <h5>
+        Os <code>mpc-card-background-img</code> são cards especialmente projetados para exibir informações com uma
+        imagem de
+        fundo, título, subtítulo e descrição.
+      </h5>
+
+      <!-- Cards com Imagem de Fundo -->
+      <div class="row gy-4 mb-5">
+
+        <div class="col-12 d-flex justify-content-center">
+          <h4>Cards com Imagem de Fundo</h4>
         </div>
 
-        <div class="col-lg-4 d-flex justify-content-center mb-5">
-          <mpc-card titulo="Card 2" subtitulo="Com Links" descricaoUm="Este card possui múltiplos links"
-            descricaoDois="Você pode adicionar quantos links precisar" imagem="/assets/img/no-image.jpg" [links]="[
-              {icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'},
-              {icone: 'bi bi-github', url: 'https://github.com/matheuspcouto'}
-            ]" layout="vertical">
-          </mpc-card>
+        <div class="col-lg-6">
+          <mpc-card-background-img titulo="Card 1" subtitulo="com imagem de fundo"
+            descricao="Este é um card com imagem de fundo" imagemFundo="/assets/img/home/mountain.jpg" id="card-bg-1"
+            [tabIndex]="0" ariaLabel="Card 1">
+          </mpc-card-background-img>
         </div>
 
-        <div class="col-lg-4 d-flex justify-content-center mb-5">
-          <mpc-card titulo="Card 5" subtitulo="Sem Links" descricaoUm="Este card não possui links"
-            descricaoDois="Apenas informações básicas" imagem="/assets/img/no-image.jpg" layout="vertical">
-          </mpc-card>
-        </div>
-
-        <div class="col-12 d-flex justify-content-center mb-5">
-          <mpc-card titulo="Card 4" subtitulo="Layout Horizontal" layout="horizontal"
-            descricaoUm="Este card tem layout horizontal, ideal para exibir informações em telas desktop."
-            imagem="/assets/img/no-image.jpg"
-            [links]="[{icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'}]">
-          </mpc-card>
+        <div class="col-lg-6">
+          <mpc-card-background-img titulo="Card 2" subtitulo="com imagem de fundo"
+            descricao="Este é um card com imagem de fundo" imagemFundo="/assets/img/no-image.jpg" id="card-bg-2"
+            [tabIndex]="0" ariaLabel="Card 2">
+          </mpc-card-background-img>
         </div>
 
       </div>
+
+      <h5>
+        O <code>mpc-card-background-img</code> é um card especial para exibir programação ou eventos com imagem de
+        fundo, título, subtítulo e descrição.
+        <ul class="text-start mt-3">
+          <li><strong>titulo</strong>: O título do card.</li>
+          <li><strong>subtitulo</strong>: O subtítulo do card (ex: horário).</li>
+          <li><strong>descricao</strong>: A descrição do card.</li>
+          <li><strong>imagemFundo</strong>: A imagem de fundo do card. Exemplo: '/assets/img/home/mountain.jpg'.</li>
+          <li><strong>id</strong>: (opcional) O ID do card.</li>
+          <li><strong>tabIndex</strong>: (opcional) O tabIndex do card.</li>
+          <li><strong>ariaLabel</strong>: (opcional) O texto de acessibilidade do componente.</li>
+        </ul>
+      </h5>
+      <div class="mb-5">
+        <h5>No arquivo <code>seu-component.ts</code>, importe o componente:</h5>
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+          <pre class="chroma">
+              <code>
+                ```
+                imports: [ MpcCardBackGroundImgComponent ]
+                ```
+              </code>
+          </pre>
+        </div>
+      </div>
+      <h5>
+        No arquivo <code>seu-component.html</code>, adicione o seguinte código:
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+          <pre class="chroma">
+                <code class="language-html" data-lang="html">
+                &lt;mpc-card-background-img
+          titulo="Card 1"
+          subtitulo="com imagem de fundo"
+          descricao="Este é um card com imagem de fundo"
+          imagemFundo="/assets/img/home/mountain.jpg"
+          [tabIndex]="0"
+          ariaLabel="Card 1"&gt;
+        &lt;/mpc-card-background-img&gt;
+                </code>
+        </pre>
+        </div>
+      </h5>
 
       <h5>
         Para mais informações sobre como utilizar cards no Bootstrap, consulte a <a
@@ -114,7 +203,89 @@
     </div>
 
   </section>
-  <!-- ======= MpcCard ======= -->
+  <!-- ======= MpcCardBackgroundImg FIM ======= -->
+
+  <!-- ======= MpcCardMenu INÍCIO ======= -->
+  <section id="cards-menu" class="section-components">
+    <div class="container">
+
+      <div class="section-header">
+        <h2>Cards de Menu</h2>
+      </div>
+
+      <h5>
+        Os <code>mpc-card-menu</code> são cards simples para exibir informações rápidas de menu, como telefone, e-mail
+        ou
+        endereço, com ícone, título e descrição.
+      </h5>
+
+      <div class="row gy-4 mb-5">
+
+        <div class="col-12 d-flex justify-content-center">
+          <h4>Cards de Menu</h4>
+        </div>
+
+        <div class="col-lg-4">
+          <mpc-card-menu icone="bi bi-linkedin" titulo="Linkedin" descricao="https://www.linkedin.com/in/matheuspcouto/"
+            (acao)="onMenuCardClick()"></mpc-card-menu>
+        </div>
+
+        <div class="col-lg-4">
+          <mpc-card-menu icone="bi bi-github" titulo="Github" (acao)="onMenuCardClick()"></mpc-card-menu>
+        </div>
+
+        <div class="col-lg-4">
+          <mpc-card-menu icone="bi bi-instagram" titulo="Instagram" (acao)="onMenuCardClick()"></mpc-card-menu>
+        </div>
+
+      </div>
+
+      <h5>
+        O <code>mpc-card-menu</code> é um card simples para exibir informações rápidas de menu, como telefone, e-mail ou
+        endereço, com ícone, título e descrição.
+        <ul class="text-start mt-3">
+          <li><strong>titulo</strong>: O título do card.</li>
+          <li><strong>descricao</strong>: (opcional) A descrição do card.</li>
+          <li><strong>icone</strong>: O ícone do card (classe do Bootstrap Icons).</li>
+          <li><strong>acao</strong>: (opcional) Função a ser executada ao clicar no card.</li>
+          <li><strong>id</strong>: (opcional) O ID do card.</li>
+          <li><strong>tabIndex</strong>: (opcional) O tabIndex do card.</li>
+          <li><strong>ariaLabel</strong>: (opcional) O texto de acessibilidade do componente.</li>
+        </ul>
+      </h5>
+      <div class="mb-5">
+        <h5>No arquivo <code>seu-component.ts</code>, importe o componente:</h5>
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+          <pre class="chroma">
+              <code>
+                ```ts
+                imports: [ MpcCardMenuComponent ]
+                ```
+              </code>
+          </pre>
+        </div>
+      </div>
+      <h5>
+        No arquivo <code>seu-component.html</code>, adicione o seguinte código:
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+          <pre class="chroma">
+                <code class="language-html" data-lang="html">
+                &lt;mpc-card-menu
+          icone="bi bi-telephone"
+          titulo="Telefone"
+          descricao="(63) 9 9201-4337"
+          (acao)="onMenuCardClick()">&gt;
+        &lt;/mpc-card-menu&gt;
+                </code>
+        </pre>
+        </div>
+      </h5>
+
+    </div>
+
+  </section>
+  <!-- ======= MpcCardMenu FIM ======= -->
+
 </main>
 
 <mpc-footer></mpc-footer>
