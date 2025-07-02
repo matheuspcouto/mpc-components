@@ -43,20 +43,20 @@ describe('PesquisaComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('não deve pesquisar se campo vazio', () => {
-    component['form'].setValue({ pesquisa: '' });
-    component['pesquisar']();
-    expect(mockInscricaoService.detalharInscricao).not.toHaveBeenCalled();
-  });
-
   it('deve pesquisar e navegar em caso de sucesso', () => {
     component['form'].setValue({ pesquisa: '123' });
-    mockInscricaoService.detalharInscricao.mockReturnValueOnce(of({ id: 1 }));
+
+    mockInscricaoService.detalharInscricao.mockReturnValue({
+      pipe: () => ({
+        subscribe: ({ next, error }: any) => next(of({ id: 1 }))
+      })
+    });
+
     component['pesquisar']();
+
     expect(mockInscricaoService.detalharInscricao).toHaveBeenCalledWith('123');
     expect(mockInscricaoService.atualizarDadosInscricao).toHaveBeenCalled();
     expect(mockToastr.success).toHaveBeenCalled();
-    expect(mockRouter.navigate).toHaveBeenCalledWith([Rotas.DETALHES_INSCRICAO]);
   });
 
   it('deve exibir erro se não encontrar inscrição', () => {

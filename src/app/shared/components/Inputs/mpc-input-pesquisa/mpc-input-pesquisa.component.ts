@@ -38,7 +38,7 @@ export class MpcInputPesquisaComponent implements OnInit {
   @Input() readonly?: boolean = false;
   @Input() label: string = '';
 
-  @Input() acaoPesquisa!: () => void;
+  @Output() pesquisarEvent = new EventEmitter<void>();
 
   // Validators
   @Input() min?: string = '';
@@ -59,13 +59,16 @@ export class MpcInputPesquisaComponent implements OnInit {
   }
 
   protected pesquisar(): void {
-    if (this.acaoPesquisa) {
-      this.acaoPesquisa();
-    }
+    this.pesquisarEvent.emit();
   }
 
   protected onFocus(): void {
     this.campoTocado = true;
+    this.isCampoValido(this.value);
+  }
+
+  protected setValue(event: Event): void {
+    this.value = (event.target as HTMLInputElement).value;
     this.isCampoValido(this.value);
   }
 

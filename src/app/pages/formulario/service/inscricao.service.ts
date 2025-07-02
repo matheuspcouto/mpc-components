@@ -49,7 +49,7 @@ export class InscricaoService {
       setTimeout(() => {
         observer.next(detalhesInscricao);
         observer.complete();
-      }, 1000);
+      }, 3000);
     });
 
     // Implementação Real
@@ -74,7 +74,7 @@ export class InscricaoService {
       setTimeout(() => {
         observer.next({ status: "OK", message: "Inscrição realizada com sucesso!" });
         observer.complete();
-      }, 2000)
+      }, 3000)
     });
     //
 

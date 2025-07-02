@@ -26,18 +26,6 @@ describe('MpcInputPesquisaComponent', () => {
     expect(component.minLength).toBe(0);
   });
 
-  it('deve chamar acaoPesquisa se definida', () => {
-    const spy = jest.fn();
-    component.acaoPesquisa = spy;
-    (component as any).pesquisar();
-    expect(spy).toHaveBeenCalled();
-  });
-
-  it('não deve chamar acaoPesquisa se não definida', () => {
-    component.acaoPesquisa = undefined;
-    expect(() => (component as any).pesquisar()).not.toThrow();
-  });
-
   it('deve marcar campo como tocado e validar ao focar', () => {
     jest.spyOn(component as any, 'isCampoValido').mockReturnValue(true);
     (component as any).onFocus();
@@ -92,5 +80,19 @@ describe('MpcInputPesquisaComponent', () => {
     component.min = '5';
     expect((component as any).isMenorQueValorMinimo('1234')).toBeTruthy();
     expect((component as any).isMenorQueValorMinimo('12345')).toBeFalsy();
+  });
+
+  it('deve emitir o evento pesquisarEvent ao chamar pesquisar', () => {
+    const spy = jest.spyOn(component.pesquisarEvent, 'emit');
+    (component as any).pesquisar();
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('deve atualizar o valor e validar ao chamar setValue', () => {
+    const event = { target: { value: 'novo valor' } } as any;
+    const spy = jest.spyOn(component as any, 'isCampoValido');
+    (component as any).setValue(event);
+    expect(component.value).toBe('novo valor');
+    expect(spy).toHaveBeenCalledWith('novo valor');
   });
 });

@@ -2,16 +2,23 @@
   <label class="form-label">{{ label + (min ? ' *' : '') }}</label>
 
   <div class="input-group">
-    <input [id]="id" type="text" class="form-control" [value]="value" [attr.minLength]="minLength" [disabled]="disabled"
-      [readOnly]="readonly" [style]="errorMessage ? 'border-color: red' : ''" (focus)="onFocus()" />
+    <input [id]="id" type="text" class="form-control" [value]="value" (input)="setValue($event)"
+      [attr.minLength]="minLength" [disabled]="disabled" [readOnly]="readonly"
+      [style]="errorMessage ? 'border-color: red' : ''" (focus)="onFocus()"
+      (keydown.enter)="value && value.length >= minLength ? pesquisar() : null" />
 
-    <div class="icon">
-      @if (value && value.length >= minLength) { <i class="bi bi-x-lg" (click)="limparPesquisa()"></i> }
-      @else { <i class="bi bi-search" (click)="pesquisar()"></i> }
+    <div class="icon-limpar" [style.visibility]="value && value.length > 0 ? 'visible' : 'hidden'">
+      <i class="bi bi-x-lg" (click)="limparPesquisa()" style="cursor:pointer" title="Limpar pesquisa"></i>
+    </div>
+
+    <div class="icon-pesquisa">
+      <i class="bi bi-search" [style.opacity]="value && value.length < minLength ? 0.5 : 1"
+        [style.cursor]="value && value.length < minLength ? 'not-allowed' : 'pointer'"
+        (click)="value && value.length >= minLength ? pesquisar() : null" title="Pesquisar"></i>
     </div>
   </div>
 
   @if (errorMessage) {
-  <p class="text-danger mt-1"> {{ errorMessage }} </p>
+  <p class="text-danger mt-1">{{ errorMessage }}</p>
   }
 </div>

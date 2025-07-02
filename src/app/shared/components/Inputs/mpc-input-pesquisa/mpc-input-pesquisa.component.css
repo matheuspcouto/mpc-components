@@ -1,13 +1,30 @@
 input {
   width: 100%;
-  padding-right: 2.5rem;
+  padding-right: 5rem;
   /* Espaço para o ícone */
   box-sizing: border-box;
 }
 
-.icon {
+.icon-pesquisa {
   position: absolute;
   right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  outline: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  z-index: 999;
+}
+
+.icon-limpar {
+  position: absolute;
+  right: 40px;
   top: 50%;
   transform: translateY(-50%);
   display: flex;

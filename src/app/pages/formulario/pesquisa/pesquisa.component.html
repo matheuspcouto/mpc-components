@@ -9,7 +9,7 @@
 
   <div class="container">
     <form [formGroup]="form">
-      <mpc-input-pesquisa [value]="form.value.pesquisa" [acaoPesquisa]="pesquisar" min="10"
+      <mpc-input-pesquisa [value]="form.value.pesquisa" (pesquisarEvent)="pesquisar()" min="3"
         label="Pesquisar"></mpc-input-pesquisa>
     </form>
   </div>
