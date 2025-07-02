@@ -1,0 +1,70 @@
+.card-evento {
+  background: var(--branco);
+  /* Cor de fundo do card */
+  padding: 30px;
+  height: 100%;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+  .card-evento-data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 4rem;
+    min-height: 4rem;
+    background: var(--cor-primaria);
+    /* Cor de fundo da data do card */
+    border-radius: 50%;
+    margin-right: 15px;
+    color: var(--branco);
+    /* Cor de texto da data do card */
+
+    .evento-dia {
+      font-weight: 500;
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    .evento-mes {
+      font-size: 1rem;
+      text-transform: uppercase;
+    }
+  }
+
+  .card-evento-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    h3 {
+      font-size: 18px;
+      color: var(--cor-primaria);
+      /* Cor do título do card */
+      font-weight: 700;
+      margin-bottom: 0;
+    }
+
+    h4 {
+      font-size: 16px;
+      color: var(--cor-primaria);
+      /* Cor do subtítulo do card */
+      font-style: italic;
+      font-weight: 400;
+      margin-top: 0.5rem;
+    }
+
+    p {
+      padding: 0;
+      margin: 0;
+      color: var(--cor-terciaria);
+      /* Cor da descrição do card */
+      line-height: 24px;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+  }
+}
