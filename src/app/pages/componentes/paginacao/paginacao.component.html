@@ -2,108 +2,41 @@
 
 <main>
 
-  <!-- ======= MpcPaginacao ======= -->
-  <section id="paginacao" class="section-components">
+  <!-- ======= MpcPagination INÍCIO ======= -->
+  <section id="paginacao">
     <div class="container">
-
       <div class="section-header">
-        <h2>experimente os</h2>
+        <h2>experimente a</h2>
         <p>MPC <span>Pagination</span></p>
       </div>
-
       <h5>
-        O <code>mpc-pagination</code> é um componente que permite criar paginação personalizada. A paginação é utilizada
-        para
-        dividir grandes conjuntos de dados em páginas menores, facilitando a navegação e melhorando a performance.
-        Abaixo, você
-        pode ver como utilizar o componente e seus parâmetros.
+        <strong>Descrição:</strong> O <code>mpc-pagination</code> é um componente de paginação customizado.
       </h5>
-
       <h5>
+        <strong>Propriedades:</strong>
         <ul class="text-start mt-3">
-          <li><strong>totalItens</strong>: O número total de itens a serem paginados.</li>
-          <li><strong>mostrarSeletorItensPorPagina</strong>: (opcional) Indica se deve mostrar o seletor de itens por
-            página. Padrão: true.</li>
-          <li><strong>tabIndex</strong>: (opcional) O tabIndex do componente.</li>
-          <li><strong>ariaLabel</strong>: (opcional) O texto de acessibilidade do componente.</li>
-          <li><strong>indices</strong>: Evento emitido quando a página é alterada, retorna os índices de início e fim.
-          </li>
+          <li><strong>totalItens</strong>: Total de itens (number).</li>
+          <li><strong>indices</strong>: Evento disparado ao mudar de página.</li>
+          <li><strong>mostrarSeletorItensPorPagina</strong>: (opcional) Seletor de itens por página.</li>
         </ul>
       </h5>
-
+      <div class="mb-3">
+        <h5><strong>Importação no arquivo <code>.ts</code>:</strong></h5>
+        <pre class="chroma"><code>imports: [ MpcPaginationComponent ]</code></pre>
+      </div>
       <div class="mb-5">
-        <h5>No arquivo <code>seu-component.ts</code>, importe o componente:</h5>
-        <div class="col-md-12 mb-3 d-flex justify-content-center">
-          <pre class="chroma">
-              <code>
-                ```
-                imports: [ MpcPaginationComponent ]
-                ```
-              </code>
-          </pre>
+        <h5><strong>Exemplo de uso no arquivo <code>.html</code>:</strong></h5>
+        <pre
+          class="chroma"><code class="language-html" data-lang="html">&lt;mpc-pagination [totalItens]="itensTotais.length" (indices)="definirIndiceLista($event)"&gt;&lt;/mpc-pagination&gt;</code></pre>
+      </div>
+      <div class="row mb-5">
+        <div class="col-12 d-flex justify-content-center">
+          <mpc-pagination [totalItens]="itensTotais.length" (indices)="definirIndiceLista($event)" [mostrarSeletorItensPorPagina]="true"></mpc-pagination>
         </div>
       </div>
-
-      <div class="mb-5">
-        <h5>Ainda no <code>seu-component.ts</code>, crie as propriedades necessárias para controlar a paginação e
-          implemente o método para capturar os índices.</h5>
-        <div class="col-md-12 mb-3 d-flex justify-content-center">
-          <pre class="chroma">
-                <code>
-                  // Lista completa de itens
-                  itensTotais: any[] = [
-                    // seus dados aqui...
-                  ];
-
-                  // Lista filtrada para exibição
-                  itensFiltrados: any[] = [];
-
-                  // Método para definir os índices da paginação
-                  definirIndiceLista(indices: &lcub; inicio: number, fim: number &rcub;) &lcub;
-                    this.itensFiltrados = this.itensTotais.slice(indices.inicio, indices.fim);
-                  &rcub;
-                </code>
-          </pre>
-        </div>
-      </div>
-
-      <h5>
-        No arquivo <code>seu-component.html</code>, adicione o seguinte código:
-        <div class="col-md-12 mb-3 d-flex justify-content-center">
-          <pre class="chroma">
-                <code>
-                  &lt;mpc-pagination
-                    [totalItens]="itensTotais.length"
-                    [mostrarSeletorItensPorPagina]="true"
-                    [itensPorPagina]="10"
-                    [tabIndex]="0"
-                    ariaLabel="Paginação da lista"
-                    (indices)="definirIndiceLista($event)"&gt;
-                  &lt;/mpc-pagination&gt;
-                </code>
-            </pre>
-        </div>
-      </h5>
-
-      <h5>Veja como ficou a implementação do <code>mpc-pagination</code> abaixo.</h5>
-
-      @if (itensTotais.length > 0) {
-      <div class="row">
-        <div class="col-md-12 px-5 text-center justify-content-center align-items-center">
-          @for (item of itensTotais | slice:indiceInicial:indiceFinal; track $index) {
-          <p class="me-3">{{ item.nome }}</p>
-          }
-        </div>
-      </div>
-
-      <mpc-pagination id="mpc-pagination" tabindex="0" ariaLabel="mpc-pagination" [totalItens]="itensTotais.length"
-        [mostrarSeletorItensPorPagina]="true" (indices)="definirIndiceLista($event)"></mpc-pagination>
-      }
-
     </div>
-
   </section>
-  <!-- ======= MpcPaginacao ======= -->
+  <!-- ======= MpcPagination FIM ======= -->
 
 </main>
 

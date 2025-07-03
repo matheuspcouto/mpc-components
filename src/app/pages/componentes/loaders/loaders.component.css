@@ -77,7 +77,6 @@ pre {
   justify-content: center;
   justify-items: center;
   align-items: center;
-  width: 80%;
 
   code {
     width: 100%;
@@ -85,8 +84,4 @@ pre {
   }
 }
 
-@media screen and (max-width: 768px) {
-  pre {
-    width: 100%;
-  }
-}
+

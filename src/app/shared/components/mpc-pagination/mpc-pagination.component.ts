@@ -37,10 +37,10 @@ export class MpcPaginationComponent implements OnInit, AfterViewInit, OnChanges 
   // Configurações de paginação
   @Input() totalItens: number = 0;
   @Input() mostrarSeletorItensPorPagina: boolean = true;
-  itensPorPagina: number = 10;
+  itensPorPagina: number = 5;
   paginaAtual: number = 1;
   maxPaginasVisiveis: number = 5;
-  opcoesSeletorItensPorPagina: number[] = [10, 25, 50, 100];
+  opcoesSeletorItensPorPagina: number[] = [5, 10, 25, 50, 100];
 
   @Output() indices: EventEmitter<IndicesPaginacao> = new EventEmitter();
 

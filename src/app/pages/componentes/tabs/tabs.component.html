@@ -1,99 +1,77 @@
 <mpc-navbar abaLogin="/paginas/login"></mpc-navbar>
 
 <main>
-
-  <!-- ======= MpcTabs ======= -->
-  <section id="tabs" class="section-components">
+  <!-- ======= MpcTabs INÍCIO ======= -->
+  <section id="tabs">
     <div class="container">
-
       <div class="section-header">
         <h2>experimente os</h2>
         <p>MPC <span>Tabs</span></p>
       </div>
-
       <h5>
-        O <code>mpc-tabs</code> é um componente que permite criar tabs personalizados. Os tabs são utilizados para
-        exibir informações de forma organizada e atraente. Abaixo, você
-        pode ver como utilizar o componente e seus parâmetros.
+        <strong>Descrição:</strong> O <code>mpc-tabs</code> é um componente que permite criar tabs personalizados para
+        exibir informações de forma organizada e atraente.
       </h5>
-
       <h5>
+        <strong>Propriedades:</strong>
         <ul class="text-start mt-3">
           <li><strong>tabs</strong>: Os tabs do componente. Formato:
-            <code>[&lcub; id: 'string', titulo: 'string' &rcub;]</code>
+            <code>[&#123; id: 'string', titulo: 'string' &#125;]</code>
           </li>
-          <li><strong>tabIndex</strong>: (opcional) O tabIndex do card.</li>
+          <li><strong>tabIndex</strong>: (opcional) O tabIndex do componente.</li>
           <li><strong>ariaLabel</strong>: (opcional) O texto de acessibilidade do componente.</li>
         </ul>
       </h5>
-
-      <div class="mb-5">
-        <h5>No arquivo <code>seu-component.ts</code>, importe o componente:</h5>
-        <div class="col-md-12 mb-3 d-flex justify-content-center">
-          <pre class="chroma">
-              <code>
-                ```
-                imports: [ MpcTabsComponent ]
-                ```
-              </code>
-          </pre>
-        </div>
+      <div class="mb-3">
+        <h5><strong>Importação no arquivo <code>.ts</code>:</strong></h5>
+        <pre class="chroma"><code>imports: [ MpcTabsComponent ]</code></pre>
       </div>
-
-      <div class="mb-5">
-        <h5>Ainda no <code>seu-component.ts</code>, crie um objeto que irá implementar a interface Tab do componente e
-          irá popular as abas da sua página, e implemente um método de seleção de aba.</h5>
-        <div class="col-md-12 mb-3 d-flex justify-content-center">
-          <pre class="chroma">
-                <code>
-                  tabs: Tab[] = [
-                  &lcub; id: 'conteudoTab1', titulo: 'Tab 1' &rcub;,
-                  &lcub; id: 'conteudoTab2', titulo: 'Tab 2' &rcub;,
-                  &lcub; id: 'conteudoTab3', titulo: 'Tab 3' &rcub;
-                ]
-
-                tabSelecionada: Tab = this.tabs[0];
-
-                selectTab(tab: Tab) &lcub;
-                  this.tabSelecionada = tab;
-                &rcub;
-                </code>
-          </pre>
-        </div>
+      <div class="mb-3">
+        <h5><strong>Exemplo de uso no arquivo <code>.ts</code>:</strong></h5>
+        <pre class="chroma"><code>tabs: Tab[] = [
+  &#123; id: 'conteudoTab1', titulo: 'Tab 1' &#125;,
+  &#123; id: 'conteudoTab2', titulo: 'Tab 2' &#125;,
+  &#123; id: 'conteudoTab3', titulo: 'Tab 3' &#125;
+];
+tabSelecionada: Tab = this.tabs[0];
+selectTab(tab: Tab) &#123;
+  this.tabSelecionada = tab;
+&#125;
+</code></pre>
       </div>
-
-      <h5>
-        No arquivo <code>seu-component.html</code>, adicione o seguinte código:
-        <div class="col-md-12 mb-3 d-flex justify-content-center">
-          <pre class="chroma">
-                <code>
-                  &lt;mpc-tabs [tabs]="tabs" [tabIndex]="0" ariaLabel="Tabs" (tabSelected)="selectTab($event)"&gt;&lt;/mpc-tabs&gt;
-
-                  &lt;div *ngIf="tabSelecionada.id === 'conteudoTab1'" class="d-flex justify-content-center mt-3"&gt; Conteúdo 1 &lt;/div&gt;
-                  &lt;div *ngIf="tabSelecionada.id === 'conteudoTab2'" class="d-flex justify-content-center mt-3"&gt; Conteúdo 2 &lt;/div&gt;
-                  &lt;div *ngIf="tabSelecionada.id === 'conteudoTab3'" class="d-flex justify-content-center mt-3"&gt; Conteúdo 3 &lt;/div&gt;
-                </code>
-            </pre>
-        </div>
-      </h5>
-
-      <h5>Veja como ficou a implementação do <code>mpc-tabs</code> abaixo.</h5>
+      <div class="mb-5">
+        <h5><strong>Exemplo de uso no arquivo <code>.html</code>:</strong></h5>
+        <pre class="chroma"><code class="language-html" data-lang="html">&lt;mpc-tabs [tabs]="tabs" [tabIndex]="0" ariaLabel="Tabs" (tabSelected)="selectTab($event)"&gt;&lt;/mpc-tabs&gt;
+            &lt;!-- Conteúdo 1 --&gt;
+            &#64;if (tabSelecionada.id === 'conteudoTab1') &#123;
+&lt;div class="d-flex justify-content-center mt-3"&gt; Conteúdo 1 &lt;/div&gt;
+&#125;
+            &#64;if (tabSelecionada.id === 'conteudoTab2') &#123;
+&lt;!-- Conteúdo 2 --&gt;
+&lt;div class="d-flex justify-content-center mt-3"&gt; Conteúdo 2 &lt;/div&gt;
+&#125;
+            &#64;if (tabSelecionada.id === 'conteudoTab3') &#123;
+&lt;!-- Conteúdo 3 --&gt;
+&lt;div class="d-flex justify-content-center mt-3"&gt; Conteúdo 3 &lt;/div&gt;
+&#125;
+</code></pre>
+      </div>
 
       <div class="row justify-content-center mb-5">
-
         <mpc-tabs [tabs]="tabs" [tabIndex]="0" ariaLabel="Tabs" (tabSelected)="selectTab($event)"></mpc-tabs>
-
-        <div *ngIf="tabSelecionada.id === 'conteudoTab1'" class="d-flex justify-content-center mt-3">Conteúdo 1</div>
-        <div *ngIf="tabSelecionada.id === 'conteudoTab2'" class="d-flex justify-content-center mt-3">Conteúdo 2</div>
-        <div *ngIf="tabSelecionada.id === 'conteudoTab3'" class="d-flex justify-content-center mt-3">Conteúdo 3</div>
-
+        @if (tabSelecionada.id === 'conteudoTab1') {
+        <div class="d-flex justify-content-center mt-3">Conteúdo 1</div>
+        }
+        @if (tabSelecionada.id === 'conteudoTab2') {
+        <div class="d-flex justify-content-center mt-3">Conteúdo 2</div>
+        }
+        @if (tabSelecionada.id === 'conteudoTab3') {
+        <div class="d-flex justify-content-center mt-3">Conteúdo 3</div>
+        }
       </div>
-
     </div>
-
   </section>
-  <!-- ======= MpcTabs ======= -->
-
+  <!-- ======= MpcTabs FIM ======= -->
 </main>
 
 <mpc-footer></mpc-footer>

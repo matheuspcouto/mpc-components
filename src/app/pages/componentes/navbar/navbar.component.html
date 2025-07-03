@@ -2,53 +2,39 @@
 
 <main>
 
-  <!-- ======= MpcNavbar ======= -->
-  <section id="navbar" class="section-components">
+  <!-- ======= MpcNavbar INÍCIO ======= -->
+  <section id="navbar">
     <div class="container">
-
       <div class="section-header">
         <h2>experimente o</h2>
         <p>MPC <span>Navbar</span></p>
       </div>
-
       <h5>
-        O <code>mpc-navbar</code> é um componente que permite a criação de um menu de navegação. Ele é composto por um
-        menu
-        de navegação com submenus, uma logo e um botão de ação.
+        <strong>Descrição:</strong> O <code>mpc-navbar</code> é um componente de barra de navegação responsiva, baseado no Bootstrap, que facilita a navegação entre as páginas do sistema.
       </h5>
-
       <h5>
-        Para alterar as abas e rotas do navbar, basta alterar as propriedades no <code>mpc-navbar.component.html</code>.
+        <strong>Propriedades:</strong>
+        <ul class="text-start mt-3">
+          <li><strong>abaLogin</strong>: (opcional) Rota para a página de login.</li>
+          <li><strong>itens</strong>: (opcional) Lista de itens de navegação. Exemplo: <code>[&#123; label: 'Home', rota: '/home' &#125;]</code></li>
+        </ul>
       </h5>
-
+      <div class="mb-3">
+        <h5><strong>Importação no arquivo <code>.ts</code>:</strong></h5>
+        <pre class="chroma"><code>imports: [ MpcNavbarComponent ]</code></pre>
+      </div>
       <div class="mb-5">
-        <h5>No arquivo <code>seu-component.ts</code>, importe o componente:</h5>
-        <div class="col-md-12 mb-3 d-flex justify-content-center">
-          <pre class="chroma">
-              <code>
-                ```
-                imports: [ MpcNavbarComponent ]
-                ```
-              </code>
-          </pre>
+        <h5><strong>Exemplo de uso no arquivo <code>.html</code>:</strong></h5>
+        <pre class="chroma"><code class="language-html" data-lang="html">&lt;mpc-navbar abaLogin="/paginas/login" [itens]="[&#123; label: 'Home', rota: '/home' &#125;]"&gt;&lt;/mpc-navbar&gt;</code></pre>
+      </div>
+      <div class="row mb-5">
+        <div class="col-12 d-flex justify-content-center">
+          <mpc-navbar abaLogin="/paginas/login"></mpc-navbar>
         </div>
       </div>
-
-      <h5>
-        No arquivo <code>seu-component.html</code>, adicione o seguinte código:
-        <div class="col-md-12 mb-3 d-flex justify-content-center">
-          <pre class="chroma">
-              <code>
-              &lt;mpc-navbar&gt;&lt;/mpc-navbar&gt;
-              </code>
-            </pre>
-        </div>
-      </h5>
-
-      <h5>Navegue pelo menu desta página para ver implementação do <code>mpc-navbar</code>.</h5>
     </div>
   </section>
-  <!-- ======= MpcNavbar ======= -->
+  <!-- ======= MpcNavbar FIM ======= -->
 
 </main>
 

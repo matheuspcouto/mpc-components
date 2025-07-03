@@ -8,7 +8,6 @@
         <h2>Experimente os</h2>
         <p>MPC <span>Inputs</span></p>
       </div>
-
       <h5>
         <strong>Descrição:</strong> Os <code>mpc-input-*</code> são componentes customizados baseados no Bootstrap para
         entrada de dados, como texto, número, data, e-mail, senha, telefone, CPF/CNPJ, CEP, área de texto, rádio e
@@ -93,11 +92,11 @@ protected form = this.formBuilder.group(&#123;
 &lt;mpc-input-select label="Estado" [options]="estadosCivis" [required]="true" /&gt;
 </code></pre>
       </div>
-
       <div class="row gy-4">
         <div class="col-12 d-flex justify-content-center">
           <h4>Inputs Customizados</h4>
         </div>
+        <!-- Exemplos visuais dos inputs -->
         <div class="col-lg-6">
           <h5>Input de Texto</h5>
           <mpc-input-text label="Nome" [value]="form.value.nome" (valor)="form.controls.nome.setValue($event)"
@@ -155,35 +154,25 @@ protected form = this.formBuilder.group(&#123;
           <mpc-input-busca-cep [value]="form.value.cep" [required]="true" (valor)="definirEnderecoPorCep($event)"
             (error)="form.controls.cep.setErrors($event)" />
         </div>
-
         <div class="row">
-
           <div class="col-lg-4 mb-3">
             <mpc-input-text label="Cidade" [readonly]="true" [value]="form.value.cidade" />
           </div>
-
           <div class="col-lg-4 mb-3">
             <mpc-input-text label="Estado" [readonly]="true" [value]="form.value.estado" />
           </div>
-
           <div class="col-lg-4 mb-3">
             <mpc-input-text label="Bairro" [readonly]="true" [value]="form.value.bairro" />
           </div>
-
         </div>
-
         <div class="row">
-
           <div class="col-lg-8 mb-3">
             <mpc-input-text label="Rua" [value]="form.value.rua" [readonly]="true" />
           </div>
-
           <div class="col-lg-4 mb-3">
             <mpc-input-text label="Número/Lote" [value]="form.value.numero" min="1" />
           </div>
-
         </div>
-
       </div>
     </div>
   </section>

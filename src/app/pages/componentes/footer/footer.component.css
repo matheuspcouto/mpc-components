@@ -7,27 +7,6 @@ section {
   overflow: hidden;
   padding: 50px 0;
 
-  .section-components {
-    .col-lg-6 {
-      justify-items: center;
-    }
-
-    h5 {
-      font-weight: 400;
-      color: var(--cor-terciaria);
-      font-size: 18px;
-    }
-
-    li {
-      list-style: none;
-      margin-bottom: 10px;
-    }
-
-    a:hover {
-      color: var(--cor-primaria) !important;
-    }
-  }
-
   h5 {
     font-weight: 400;
     color: var(--cor-terciaria);
@@ -77,7 +56,6 @@ pre {
   justify-content: center;
   justify-items: center;
   align-items: center;
-  width: 80%;
 
   code {
     width: 100%;
@@ -85,8 +63,4 @@ pre {
   }
 }
 
-@media screen and (max-width: 768px) {
-  pre {
-    width: 100%;
-  }
-}
+

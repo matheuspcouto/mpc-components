@@ -2,97 +2,56 @@
 
 <main>
 
-  <!-- ======= MpcButton ======= -->
-  <section id="buttons" class="section-components">
+  <!-- ======= MpcButton INÍCIO ======= -->
+  <section id="buttons">
     <div class="container">
-
       <div class="section-header">
         <h2>experimente os</h2>
         <p>MPC<span> Buttons </span> </p>
       </div>
-
       <h5>
-        O <code>mpc-button</code> do MpcComponents são baseados no framework Bootstrap, que oferece uma ampla gama de
-        estilos e
-        funcionalidades para botões.
-        Abaixo, você pode ver como utilizar o componente e seus parâmetros.
+        <strong>Descrição:</strong> O <code>mpc-button</code> do MpcComponents é baseado no framework Bootstrap, que oferece uma ampla gama de estilos e funcionalidades para botões.
       </h5>
-
       <h5>
+        <strong>Propriedades:</strong>
         <ul class="text-start mt-3">
-          <li><strong>id</strong>: (opcional) Um identificador único para o botão.</li>
-          <li><strong>texto</strong>: O texto que será exibido no botão.</li>
-          <li><strong>corFundo</strong>: Cor personalizada para o fundo do botão (hex, rgb, rgba, nome da
-            cor).</li>
-          <li><strong>corTexto</strong>: Cor personalizada para o texto do botão (hex, rgb, rgba, nome da
-            cor).</li>
-          <li><strong>disabled</strong>: (opcional) Um booleano que indica se o botão deve estar desabilitado.</li>
-          <li><strong>posicaoIcone</strong>: (opcional) Define a posição do ícone em relação ao texto, podendo ser
-            <code>esquerda</code> ou <code>direita</code>. Padrão: <code>direita</code>.
-          </li>
-          <li><strong>icone</strong>: (opcional) O ícone a ser exibido no botão, utilizando classes do Bootstrap Icons
-            ou a que
-            preferir.
-          </li>
-          <li><strong>tabIndex</strong>: (opcional) O índice de tabulação para acessibilidade.</li>
-          <li><strong>ariaLabel</strong>: (opcional) Uma descrição do botão para acessibilidade.</li>
+          <li><strong>id</strong>: (opcional) Identificador único para o botão.</li>
+          <li><strong>texto</strong>: O texto exibido no botão.</li>
+          <li><strong>corFundo</strong>: Cor personalizada para o fundo do botão (hex, rgb, rgba, nome da cor).</li>
+          <li><strong>corTexto</strong>: Cor personalizada para o texto do botão (hex, rgb, rgba, nome da cor).</li>
+          <li><strong>disabled</strong>: (opcional) Booleano que indica se o botão está desabilitado.</li>
+          <li><strong>posicaoIcone</strong>: (opcional) Define a posição do ícone em relação ao texto: <code>esquerda</code> ou <code>direita</code>. Padrão: <code>direita</code>.</li>
+          <li><strong>icone</strong>: (opcional) Ícone exibido no botão, utilizando classes do Bootstrap Icons ou outra de sua preferência.</li>
+          <li><strong>tabIndex</strong>: (opcional) Índice de tabulação para acessibilidade.</li>
+          <li><strong>ariaLabel</strong>: (opcional) Descrição do botão para acessibilidade.</li>
         </ul>
       </h5>
-
+      <div class="mb-3">
+        <h5><strong>Importação no arquivo <code>.ts</code>:</strong></h5>
+        <pre class="chroma"><code>imports: [ MpcButtonComponent ]</code></pre>
+      </div>
       <div class="mb-5">
-        <h5>No arquivo <code>seu-component.ts</code>, importe o componente:</h5>
-        <div class="col-md-12 mb-3 d-flex justify-content-center">
-          <pre class="chroma">
-              <code>
-                ```
-                imports: [ MpcButtonComponent ]
-                ```
-              </code>
-          </pre>
-        </div>
+        <h5><strong>Exemplo de uso no arquivo <code>.html</code>:</strong></h5>
+        <pre class="chroma"><code class="language-html" data-lang="html">&lt;mpc-button (click)="minhaFuncao()" [corFundo]="'#17a2b8'" [corTexto]="'white'" [icone]="'bi bi-code-slash'" [posicaoIcone]="'esquerda'" [texto]="'Exemplo de Botão'"&gt;&lt;/mpc-button&gt;</code></pre>
       </div>
-
-      <div class="row mb-5">
-        <h5>No arquivo <code>seu-component.html</code>, adicione o seguinte código:</h5>
-        <div class="col-md-12 mb-3 d-flex justify-content-center">
-          <pre class="chroma">
-              <code>
-                &lt;mpc-button (click)="minhaFuncao()"
-                [corFundo]="'#17a2b8'"
-                [corTexto]="'white'"
-                [icone]="'bi bi-code-slash'"
-                [posicaoIcone]="'esquerda'"
-                [texto]="'Exemplo de Botão'"&gt;
-              &lt;/mpc-button&gt;
-              </code>
-          </pre>
-        </div>
-        <h5>Resultado:</h5>
-        <div class="col-md-12 mb-3 d-flex justify-content-center">
-          <mpc-button (click)="alert('Exemplo de Botão')" [corFundo]="'var(--cor-primaria)'" [corTexto]="'white'"
-            [icone]="'bi bi-code-slash'" [posicaoIcone]="'esquerda'" [texto]="'Exemplo de Botão'">
-          </mpc-button>
-        </div>
-      </div>
-
       <h5 class="text-start">
         <strong>Observações importantes:</strong>
         <ul class="text-start mt-3">
-          <li>O componente utiliza cores personalizadas através das propriedades <code>corFundo</code> e
-            <code>corTexto</code>.
-          </li>
+          <li>O componente utiliza cores personalizadas através das propriedades <code>corFundo</code> e <code>corTexto</code>.</li>
           <li>A posição padrão do ícone é <code>direita</code>.</li>
           <li>As cores podem ser definidas em qualquer formato CSS válido (hex, rgb, rgba, nomes de cores).</li>
           <li>Para eventos de clique, utilize <code>(click)="suaFuncao()"</code>.</li>
-          <li>O componente inclui suporte completo para acessibilidade com <code>tabIndex</code> e
-            <code>ariaLabel</code>.
-          </li>
+          <li>O componente inclui suporte completo para acessibilidade com <code>tabIndex</code> e <code>ariaLabel</code>.</li>
         </ul>
       </h5>
-
+      <div class="row mb-5">
+        <div class="col-12 d-flex justify-content-center">
+          <mpc-button (click)="alert('Exemplo de Botão')" [corFundo]="'var(--cor-primaria)'" [corTexto]="'white'" [icone]="'bi bi-code-slash'" [posicaoIcone]="'esquerda'" [texto]="'Exemplo de Botão'"></mpc-button>
+        </div>
+      </div>
     </div>
   </section>
-  <!-- ======= MpcButton ======= -->
+  <!-- ======= MpcButton FIM ======= -->
 
 </main>
 

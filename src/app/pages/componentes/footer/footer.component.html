@@ -2,41 +2,37 @@
 
 <main>
 
-  <!-- ======= MpcFooter ======= -->
-  <section id="footer" class="section-components">
+  <!-- ======= MpcFooter INÍCIO ======= -->
+  <section id="footer">
     <div class="container">
-
       <div class="section-header">
         <h2>experimente o</h2>
         <p>MPC <span>Footer</span></p>
       </div>
-
       <h5>
-        O <code>mpc-footer</code> é um componente que exibe o rodapé da página, com informações sobre a empresa ou
-        organização, links úteis e informações de contato. Pode ser colocado em qualquer página, mas
-        caso deseje utilizar para todas as páginas do projeto, incluá-o no arquivo <code>app.component.html</code>.
+        <strong>Descrição:</strong> O <code>mpc-footer</code> é um componente que exibe o rodapé da página, com
+        informações sobre a empresa ou organização, links úteis e informações de contato. Pode ser colocado em qualquer
+        página, mas caso deseje utilizar para todas as páginas do projeto, inclua-o no arquivo
+        <code>app.component.html</code>.
       </h5>
-
       <h5>
-        Para alterar as informações do rodapé, basta alterar as propriedades no <code>mpc-footer.component.html</code>.
+        <strong>Como alterar:</strong> Para alterar as informações do rodapé, basta alterar as propriedades no
+        <code>mpc-footer.component.html</code>.
       </h5>
-
-      <h5>
-        No arquivo <code>seu-component.html</code>, adicione o seguinte código:
-        <div class="col-md-12 mb-3 d-flex justify-content-center">
-          <pre class="chroma">
-              <code class="language-html" data-lang="html">
-              &lt;mpc-footer&gt;&lt;/mpc-footer&gt;
-              </code>
-            </pre>
-        </div>
-      </h5>
-
+      <div class="mb-3">
+        <h5><strong>Importação no arquivo <code>.ts</code>:</strong></h5>
+        <pre class="chroma"><code>imports: [ MpcFooterComponent ]</code></pre>
+      </div>
+      <div class="mb-5">
+        <h5><strong>Exemplo de uso no arquivo <code>.html</code>:</strong></h5>
+        <pre
+          class="chroma"><code class="language-html" data-lang="html">&lt;mpc-footer&gt;&lt;/mpc-footer&gt;</code></pre>
+      </div>
       <h5>Veja abaixo como fica a implementação do <code>mpc-footer</code> na sua página html.</h5>
     </div>
   </section>
-  <!-- ======= MpcFooter ======= -->
-
-  <mpc-footer></mpc-footer>
+  <!-- ======= MpcFooter FIM ======= -->
 
 </main>
+
+<mpc-footer></mpc-footer>
