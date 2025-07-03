@@ -14,6 +14,7 @@ export const Rotas = {
   SCROLLTOP: "/componentes/scroll-top-button",
   TABS: "/componentes/tabs",
   PAGINACAO: "/componentes/paginacao",
+  INPUTS: "/componentes/inputs",
 
   // Paginas
   PAGINAS: "/paginas",

@@ -15,5 +15,5 @@ export class AppComponent {}
 // TODO: Ajustar Tela de Login
 // TODO: Tela de Cadastro
 // TODO: Cor de componentes
-// TODO: Pagina de exibição de inputs
+// TODO: Limite de cobertura de testes
 
