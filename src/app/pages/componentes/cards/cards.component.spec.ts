@@ -38,6 +38,7 @@ describe('CardsComponent', () => {
   });
 
   it('deve chamar alert ao executar onMenuCardClick', () => {
+    window.alert = jest.fn(); // Mock do alert
     const alertSpy = jest.spyOn(window, 'alert');
     component.onMenuCardClick();
     expect(alertSpy).toHaveBeenCalledWith('Ação executada!');

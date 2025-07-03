@@ -43,21 +43,21 @@ describe('InscricoesGuard', () => {
 
   describe('verificarInscricoesAbertas', () => {
 
-    it('deve permitir acesso quando há vagas', done => {
+    it('deve permitir acesso quando há vagas', () => {
       inscricaoService.listarInscricoes.mockReturnValue(of([]));
       guard.canActivate(criarSnapshot()).subscribe(result => {
         expect(result).toBe(true);
         expect(router.navigate).not.toHaveBeenCalled();
-        done();
       });
     });
 
-    it('deve bloquear acesso quando não há vagas', done => {
+    it('deve bloquear acesso quando não há vagas', () => {
+      guard['qtdVagas'] = 0;
       inscricaoService.listarInscricoes.mockReturnValue(of([{ id: 1 } as any, { id: 2 } as any]));
       guard.canActivate(criarSnapshot()).subscribe(result => {
         expect(result).toBe(false);
         expect(router.navigate).toHaveBeenCalled();
-        done();
+
       });
     });
   });

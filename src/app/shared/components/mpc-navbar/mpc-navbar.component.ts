@@ -60,6 +60,7 @@ export class MpcNavbarComponent {
         { titulo: 'ScrollTopButton', rota: Rotas.SCROLLTOP, ativo: true },
         { titulo: 'Paginação', rota: Rotas.PAGINACAO, ativo: true },
         { titulo: 'Inputs', rota: Rotas.INPUTS, ativo: true },
+        { titulo: 'Page Header', rota: Rotas.PAGE_HEADER, ativo: true },
       ]
     },
     {

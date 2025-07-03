@@ -15,6 +15,7 @@ export const Rotas = {
   TABS: "/componentes/tabs",
   PAGINACAO: "/componentes/paginacao",
   INPUTS: "/componentes/inputs",
+  PAGE_HEADER: "/componentes/page-header",
 
   // Paginas
   PAGINAS: "/paginas",

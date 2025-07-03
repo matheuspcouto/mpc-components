@@ -16,4 +16,6 @@ export class AppComponent {}
 // TODO: Tela de Cadastro
 // TODO: Cor de componentes
 // TODO: Limite de cobertura de testes
+// TODO: Readme.md
+// TODO: padronizar telas de exibição de componentes
 

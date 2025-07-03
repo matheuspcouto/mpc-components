@@ -1,5 +1,5 @@
-/* Estilos base para o componente hero section */
-.hero-section {
+/* Estilos base para o componente page header */
+.page-header {
   display: flex;
   align-items: center;
   width: 100%;
@@ -23,27 +23,10 @@
       font-size: clamp(3em, 3em + 1vw, 4em);
     }
 
-    @media (max-width: 640px) {
-      h2 {
-        font-size: 36px;
-      }
-    }
-
     span {
       color: var(--cor-primaria);
       font-family: var(--font-titulo);
-      font-size: clamp(2em, 2em + 1vw, 4em);
       font-weight: 300;
-    }
-
-    p {
-      color: #4f4f5a;
-      font-weight: 400;
-      margin-bottom: 30px;
-    }
-
-    @media (max-width: 768px) {
-      background-position: center;
     }
   }
 }

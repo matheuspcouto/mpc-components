@@ -1,0 +1,49 @@
+<mpc-navbar abaLogin="/paginas/login"></mpc-navbar>
+
+<mpc-page-header titulo="Page" subtitulo="Header" imagem="/assets/img/home/mountain.jpg" id="header-exemplo"
+  [tabIndex]="0" ariaLabel="Seção principal de destaque">
+</mpc-page-header>
+
+<main>
+  <section id="page-header">
+    <div class="container">
+      <div class="section-header">
+        <h2>experimente a</h2>
+        <p>MPC <span>Page Header</span></p>
+      </div>
+      <h5>
+        <strong>Descrição:</strong> O <code>mpc-page-header</code> exibe uma seção de destaque (hero/capa) com título,
+        subtítulo e imagem de fundo, ideal para páginas principais ou seções de destaque.
+      </h5>
+      <h5>
+        <strong>Propriedades:</strong>
+        <ul class="text-start mt-3">
+          <li><strong>titulo</strong>: O título principal da seção.</li>
+          <li><strong>subtitulo</strong>: (opcional) O subtítulo da seção.</li>
+          <li><strong>imagem</strong>: Caminho da imagem de fundo. Exemplo: '/assets/img/home/mountain.jpg'.</li>
+          <li><strong>id</strong>: (opcional) O ID da seção.</li>
+          <li><strong>tabIndex</strong>: (opcional) O tabIndex da seção.</li>
+          <li><strong>ariaLabel</strong>: (opcional) Texto de acessibilidade do componente.</li>
+        </ul>
+      </h5>
+      <div class="mb-3">
+        <h5><strong>Importação no arquivo <code>.ts</code>:</strong></h5>
+        <pre class="chroma"><code>imports: [ MpcPageHeaderComponent ]</code></pre>
+      </div>
+      <div class="mb-5">
+        <h5><strong>Exemplo de uso no arquivo <code>.html</code> (topo da página):</strong></h5>
+        <pre class="chroma"><code class="language-html" data-lang="html">&lt;mpc-page-header
+  titulo="Page"
+  subtitulo="Header"
+  imagem="/assets/img/home/mountain.jpg"
+  id="header-exemplo"
+  [tabIndex]="0"
+  ariaLabel="Seção principal de destaque"&gt;
+&lt;/mpc-page-header&gt;</code></pre>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<mpc-footer></mpc-footer>

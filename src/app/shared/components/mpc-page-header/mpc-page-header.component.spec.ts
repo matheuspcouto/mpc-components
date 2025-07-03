@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MpcHeroSectionComponent } from './mpc-hero-section.component';
+import { MpcPageHeaderComponent } from './mpc-page-header.component';
 
-describe('MpcHeroSectionComponent', () => {
-  let component: MpcHeroSectionComponent;
-  let fixture: ComponentFixture<MpcHeroSectionComponent>;
+describe('MpcPageHeaderComponent', () => {
+  let component: MpcPageHeaderComponent;
+  let fixture: ComponentFixture<MpcPageHeaderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MpcHeroSectionComponent]
+      imports: [MpcPageHeaderComponent]
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MpcHeroSectionComponent);
+    fixture = TestBed.createComponent(MpcPageHeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

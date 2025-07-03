@@ -9,7 +9,7 @@ import { Observable, map, of } from 'rxjs';
 })
 export class InscricoesGuard implements CanActivate {
 
-  private readonly qtdVagas = 4;
+  private qtdVagas = 4;
 
   private inscricaoService = inject(InscricaoService);
   private router = inject(Router);

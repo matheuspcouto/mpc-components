@@ -71,7 +71,12 @@ export const routes: Routes = [
         path: 'inputs',
         loadComponent: () => import('./pages/componentes/inputs/inputs.component').then(c => c.InputsComponent),
         canActivate: [SiteAtivoGuard]
-      }
+      },
+      {
+        path: 'page-header',
+        loadComponent: () => import('./pages/componentes/page-header/page-header.component').then(c => c.PageHeaderComponent),
+        canActivate: [SiteAtivoGuard]
+      },
     ]
   },
 

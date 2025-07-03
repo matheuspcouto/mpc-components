@@ -1,14 +1,14 @@
 /**
- * @Componente MpcHeroSectionComponent
+ * @Componente MpcPageHeaderComponent
  * Este componente é responsável por exibir uma seção hero/capa com título e subtítulo.
  *
  * titulo {string}: Título principal da seção.
  * subtitulo {string}: (opcional) Subtítulo da seção.
  * id {string}: (opcional) ID da seção.
- * imagem {string}: imagem de fundo do hero.
+ * imagem {string}: imagem de fundo do header.
  *
  * Exemplo de utilização:
- * <mpc-hero-section titulo="Redes &" subtitulo="Células" id="capa" imagem="capa"></mpc-hero-section>
+ * <mpc-page-header titulo="Redes &" subtitulo="Células" id="capa" imagem="capa"></mpc-page-header>
  *
  * @author Matheus Pimentel Do Couto
  * @created 23/06/2025
@@ -17,14 +17,13 @@
 
 import { Component, Input } from '@angular/core';
 
-// TODO: Adicionar Pagina e exibição
 @Component({
-  selector: 'mpc-hero-section',
+  selector: 'mpc-page-header',
   imports: [],
-  templateUrl: './mpc-hero-section.component.html',
-  styleUrl: './mpc-hero-section.component.css'
+  templateUrl: './mpc-page-header.component.html',
+  styleUrl: './mpc-page-header.component.css'
 })
-export class MpcHeroSectionComponent {
+export class MpcPageHeaderComponent {
 
   // Acessibilidade
   @Input() id?: string = '';
