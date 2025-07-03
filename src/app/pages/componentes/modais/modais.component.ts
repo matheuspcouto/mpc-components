@@ -1,13 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
-import { MpcNavbarComponent } from '../../../shared/components/mpc-navbar/mpc-navbar.component';
 import { MpcButtonComponent } from '../../../shared/components/mpc-button/mpc-button.component';
 import { MpcModalComponent, TipoModal } from '../../../shared/components/mpc-modal/mpc-modal.component';
 import { MpcModalConfig } from '../../../shared/components/mpc-modal/mpc-modal.directive';
-import { MpcFooterComponent } from '../../../shared/components/mpc-footer/mpc-footer.component';
 
 @Component({
   selector: 'app-modais',
-  imports: [MpcNavbarComponent, MpcModalComponent, MpcButtonComponent, MpcFooterComponent],
+  imports: [MpcModalComponent, MpcButtonComponent],
   templateUrl: './modais.component.html',
   styleUrl: './modais.component.css'
 })

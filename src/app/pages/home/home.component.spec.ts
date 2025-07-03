@@ -44,18 +44,6 @@ describe('HomeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('deve redirecionar para documentação quando irParaDocumentacao for chamado', () => {
-    // Arrange
-    const rotaEsperada = [Rotas.DOCS];
-    
-    // Act
-    component.irParaDocumentacao();
-    
-    // Assert
-    expect(router.navigate).toHaveBeenCalledWith(rotaEsperada);
-    expect(router.navigate).toHaveBeenCalledTimes(1);
-  });
-
   it('deve ter o router injetado corretamente', () => {
     // Assert
     expect(component).toBeTruthy();

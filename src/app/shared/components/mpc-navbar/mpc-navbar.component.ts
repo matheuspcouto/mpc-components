@@ -5,87 +5,78 @@
  * abas: NavbarConfig[]: Configuração das abas da navbar.
  *
  * Exemplo de utilização:
- * <mpc-navbar abaLogin="/paginas/login"></mpc-navbar>
+ * <mpc-navbar [abas]="abas"></mpc-navbar>
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
  * @updated 27/02/2025
  */
 
-import { Component, Input } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
-import { Rotas } from '../../enums/rotas-enum';
+import { Component, inject, Input, OnInit } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 
-interface SubRotaConfig {
+export interface SubRotaConfig {
   titulo: string,
   fragment?: string,
-  rota?: string,
-  ativo: boolean
+  rota?: string
 }
 
-interface NavbarConfig {
+export interface NavbarConfig {
   titulo: string,
   rota: string,
   icone: string,
-  ativo: boolean,
   subRotas?: SubRotaConfig[]
 }
 
 @Component({
   selector: 'mpc-navbar',
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink],
   templateUrl: './mpc-navbar.component.html',
   styleUrls: ['./mpc-navbar.component.css']
 })
-export class MpcNavbarComponent {
+export class MpcNavbarComponent implements OnInit {
 
-  @Input() abaLogin?: string;
+  @Input() abasInput: NavbarConfig[] = [];
 
-  protected abas: NavbarConfig[] = [
-    { titulo: 'Home', rota: Rotas.HOME, icone: 'bi bi-house-fill', ativo: true },
-    { titulo: 'Documentação', rota: Rotas.DOCS, icone: 'bi bi-book-fill', ativo: true },
-    {
-      titulo: 'Componentes',
-      rota: Rotas.COMPONENTES,
-      icone: 'bi bi-code-slash',
-      ativo: true,
-      subRotas: [
-        { titulo: 'Buttons', rota: Rotas.BUTTONS, ativo: true },
-        { titulo: 'Cards', rota: Rotas.CARDS, ativo: true },
-        { titulo: 'Modais', rota: Rotas.MODAIS, ativo: true },
-        { titulo: 'Loaders', rota: Rotas.LOADERS, ativo: true },
-        { titulo: 'Navbar', rota: Rotas.NAVBAR, ativo: true },
-        { titulo: 'Footer', rota: Rotas.FOOTER, ativo: true },
-        { titulo: 'Tabs', rota: Rotas.TABS, ativo: true },
-        { titulo: 'ScrollTopButton', rota: Rotas.SCROLLTOP, ativo: true },
-        { titulo: 'Paginação', rota: Rotas.PAGINACAO, ativo: true },
-        { titulo: 'Inputs', rota: Rotas.INPUTS, ativo: true },
-        { titulo: 'Page Header', rota: Rotas.PAGE_HEADER, ativo: true },
-      ]
-    },
-    {
-      titulo: 'Formulário',
-      rota: Rotas.FORMULARIO,
-      icone: 'bi bi-file-earmark-text-fill',
-      ativo: true,
-      subRotas: [
-        { titulo: 'Realizar Inscrição (Fluxo)', rota: Rotas.DADOS_PESSOAIS, ativo: true },
-        { titulo: 'Pesquisar Inscrição', rota: Rotas.PESQUISA, ativo: true },
-        { titulo: 'Inscrições Encerradas', rota: Rotas.INSCRICOES_ENCERRADAS, ativo: true },
-      ]
-    },
-    {
-      titulo: 'Páginas Avulsas',
-      rota: Rotas.PAGINAS,
-      icone: 'bi bi-filetype-html',
-      ativo: true,
-      subRotas: [
-        { titulo: 'Aguarde', rota: Rotas.AGUARDE, ativo: true },
-        { titulo: 'Login', rota: Rotas.LOGIN, ativo: true },
-        { titulo: 'Erro', rota: Rotas.PAGINA_ERRO, ativo: true },
-      ]
-    },
-  ];
+  abas: NavbarConfig[] = [];
+
+  abaLogin!: NavbarConfig;
 
   isClicado = false;
+
+  private readonly router = inject(Router);
+
+  ngOnInit(): void {
+    if (this.abasInput) {
+      this.abas = this.abasInput.filter(aba => !this.isAbaLogin(aba)); // Filtra as abas para exibir apenas as que não são de login
+      this.abaLogin = this.abasInput.find(aba => this.isAbaLogin(aba))!; // Encontra a aba de login
+    }
+  }
+
+  isAbaAtiva(aba: NavbarConfig): boolean {
+    const url = this.router.url;
+
+    if (aba.subRotas) {
+      return aba.subRotas.some(sub => url.startsWith(sub.rota || ''));
+    }
+
+    // Tratamento especial para rota home "/"
+    if (aba.rota === '/') {
+      return url === '/' || url === '';
+    }
+
+    return url.startsWith(aba.rota);
+  }
+
+  isSubAbaAtiva(sub: SubRotaConfig): boolean {
+    const url = this.router.url;
+    return !!sub.rota && url.startsWith(sub.rota);
+  }
+
+  isAbaLogin(aba: NavbarConfig): boolean {
+    // Identifica se a aba é de login pelo título ou rota
+    const tituloEhLogin = typeof aba.titulo === 'string' && aba.titulo.toLowerCase().includes('login');
+    const rotaEhLogin = typeof aba.rota === 'string' && aba.rota.toLowerCase().includes('login');
+    return tituloEhLogin || rotaEhLogin;
+  }
 }

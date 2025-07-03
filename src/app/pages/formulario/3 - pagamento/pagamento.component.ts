@@ -3,23 +3,19 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MpcModalComponent } from '../../../shared/components/mpc-modal/mpc-modal.component';
 import { Rotas } from '../../../shared/enums/rotas-enum';
-import { MpcNavbarComponent } from '../../../shared/components/mpc-navbar/mpc-navbar.component';
 import { MpcFormProgressBarComponent } from '../../../shared/components/mpc-form-progress-bar/mpc-form-progress-bar.component';
-import { Validators, FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { MpcButtonComponent } from '../../../shared/components/mpc-button/mpc-button.component';
 import { MpcInputSelectComponent } from '../../../shared/components/Inputs/mpc-input-select/mpc-input-select.component';
 import { InscricaoService } from '../service/inscricao.service';
 import { MpcInputTextComponent } from '../../../shared/components/Inputs/mpc-input-text/mpc-input-text.component';
-import { MpcFooterComponent } from '../../../shared/components/mpc-footer/mpc-footer.component';
 import { ErrorService } from '../../../shared/error/error.service';
 
 @Component({
   selector: 'app-pagamento',
   imports: [
     MpcModalComponent, FormsModule,
-    ReactiveFormsModule, MpcButtonComponent, MpcInputSelectComponent,
-    MpcNavbarComponent, MpcFormProgressBarComponent, MpcInputTextComponent,
-    MpcFooterComponent
+    ReactiveFormsModule, MpcButtonComponent, MpcInputSelectComponent, MpcFormProgressBarComponent, MpcInputTextComponent
   ],
   templateUrl: './pagamento.component.html',
   styleUrls: ['./pagamento.component.css'],

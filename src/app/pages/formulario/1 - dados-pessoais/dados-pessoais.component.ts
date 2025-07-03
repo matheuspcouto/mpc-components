@@ -10,11 +10,9 @@ import { MpcButtonComponent } from '../../../shared/components/mpc-button/mpc-bu
 import { MpcInputDateComponent } from '../../../shared/components/Inputs/mpc-input-date/mpc-input-date.component';
 import { MpcInputSelectComponent } from '../../../shared/components/Inputs/mpc-input-select/mpc-input-select.component';
 import { MpcInputTextComponent } from '../../../shared/components/Inputs/mpc-input-text/mpc-input-text.component';
-import { MpcNavbarComponent } from '../../../shared/components/mpc-navbar/mpc-navbar.component';
 import { ToastrService } from 'ngx-toastr';
 import { MpcInputNumberComponent } from '../../../shared/components/Inputs/mpc-input-number/mpc-input-number.component';
 import { MpcInputCpfcnpjComponent } from "../../../shared/components/Inputs/mpc-input-cpfcnpj/mpc-input-cpfcnpj.component";
-import { MpcFooterComponent } from '../../../shared/components/mpc-footer/mpc-footer.component';
 import { MpcInputTextAreaComponent } from "../../../shared/components/Inputs/mpc-input-text-area/mpc-input-text-area.component";
 import { ErrorService } from '../../../shared/error/error.service';
 
@@ -23,8 +21,8 @@ import { ErrorService } from '../../../shared/error/error.service';
   imports: [FormsModule,
     ReactiveFormsModule, MpcInputTextComponent, MpcInputDateComponent,
     MpcInputRadioComponent, MpcButtonComponent, MpcInputSelectComponent,
-    MpcFormProgressBarComponent, MpcNavbarComponent, MpcInputNumberComponent,
-    MpcInputCpfcnpjComponent, MpcFooterComponent, MpcInputTextAreaComponent],
+    MpcFormProgressBarComponent, MpcInputNumberComponent,
+    MpcInputCpfcnpjComponent, MpcInputTextAreaComponent],
   templateUrl: './dados-pessoais.component.html',
   styleUrls: ['./dados-pessoais.component.css'],
 })

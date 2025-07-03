@@ -1,12 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { MpcNavbarComponent } from '../../../shared/components/mpc-navbar/mpc-navbar.component';
 import { MpcTabsComponent, Tab } from '../../../shared/components/mpc-tabs/mpc-tabs.component';
-import { MpcFooterComponent } from '../../../shared/components/mpc-footer/mpc-footer.component';
 
 @Component({
   selector: 'app-tabs',
-  imports: [ CommonModule, MpcNavbarComponent, MpcTabsComponent, MpcFooterComponent],
+  imports: [ CommonModule, MpcTabsComponent],
   templateUrl: './tabs.component.html',
   styleUrl: './tabs.component.css'
 })

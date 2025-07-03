@@ -2,20 +2,17 @@ import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { InscricaoService } from '../service/inscricao.service';
 import { Router } from '@angular/router';
 import { MpcButtonComponent } from '../../../shared/components/mpc-button/mpc-button.component';
-import { MpcNavbarComponent } from '../../../shared/components/mpc-navbar/mpc-navbar.component';
 import { MpcModalComponent, TipoModal } from '../../../shared/components/mpc-modal/mpc-modal.component';
 import { MpcModalConfig } from '../../../shared/components/mpc-modal/mpc-modal.directive';
 import { Rotas } from '../../../shared/enums/rotas-enum';
 import { Inscricao } from '../model/inscricao.model';
-import { MpcFooterComponent } from '../../../shared/components/mpc-footer/mpc-footer.component';
 import { ErrorService } from '../../../shared/error/error.service';
 import { MpcFormProgressBarComponent } from '../../../shared/components/mpc-form-progress-bar/mpc-form-progress-bar.component';
 import { take } from 'rxjs';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-confirmacao',
-  imports: [MpcButtonComponent, MpcNavbarComponent, MpcModalComponent, MpcFooterComponent, MpcFormProgressBarComponent],
+  imports: [MpcButtonComponent, MpcModalComponent, MpcFormProgressBarComponent],
   templateUrl: './confirmacao.component.html',
   styleUrl: './confirmacao.component.css'
 })

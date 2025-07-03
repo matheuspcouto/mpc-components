@@ -26,10 +26,10 @@ describe('MpcPaginationComponent', () => {
       expect(component.ariaLabel).toBe('Navegação de páginas');
       expect(component.totalItens).toBe(0);
       expect(component.mostrarSeletorItensPorPagina).toBe(true);
-      expect(component['itensPorPagina']).toBe(10);
+      expect(component['itensPorPagina']).toBe(5);
       expect(component['paginaAtual']).toBe(1);
       expect(component['maxPaginasVisiveis']).toBe(5);
-      expect(component['opcoesSeletorItensPorPagina']).toEqual([10, 25, 50, 100]);
+      expect(component['opcoesSeletorItensPorPagina']).toEqual([5, 10, 25, 50, 100]);
     });
 
   });
@@ -190,7 +190,7 @@ describe('MpcPaginationComponent', () => {
 
       component.irParaUltimaPagina();
 
-      expect(component['paginaAtual']).toBe(10);
+      expect(component['paginaAtual']).toBe(20);
     });
 
     it('não deve navegar se já estiver na mesma página', () => {

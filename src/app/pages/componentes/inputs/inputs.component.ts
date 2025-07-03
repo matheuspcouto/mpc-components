@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { MpcNavbarComponent } from '../../../shared/components/mpc-navbar/mpc-navbar.component';
 import { MpcInputTextComponent } from '../../../shared/components/Inputs/mpc-input-text/mpc-input-text.component';
 import { MpcInputNumberComponent } from '../../../shared/components/Inputs/mpc-input-number/mpc-input-number.component';
 import { MpcInputDateComponent } from '../../../shared/components/Inputs/mpc-input-date/mpc-input-date.component';
@@ -12,12 +11,10 @@ import { MpcInputRadioComponent, RadioOption } from '../../../shared/components/
 import { MpcInputSelectComponent, SelectOption } from '../../../shared/components/Inputs/mpc-input-select/mpc-input-select.component';
 import { Endereco, MpcInputBuscaCepComponent } from '../../../shared/components/Inputs/mpc-input-busca-cep/mpc-input-busca-cep.component';
 import { NonNullableFormBuilder } from '@angular/forms';
-import { MpcFooterComponent } from '../../../shared/components/mpc-footer/mpc-footer.component';
 
 @Component({
   selector: 'app-inputs',
   imports: [
-    MpcNavbarComponent,
     MpcInputTextComponent,
     MpcInputNumberComponent,
     MpcInputDateComponent,
@@ -29,7 +26,6 @@ import { MpcFooterComponent } from '../../../shared/components/mpc-footer/mpc-fo
     MpcInputTextAreaComponent,
     MpcInputRadioComponent,
     MpcInputSelectComponent,
-    MpcFooterComponent
   ],
   templateUrl: './inputs.component.html',
   styleUrl: './inputs.component.css'

@@ -1,14 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { MpcNavbarComponent } from '../../shared/components/mpc-navbar/mpc-navbar.component';
 import { MpcButtonComponent } from '../../shared/components/mpc-button/mpc-button.component';
 import { ErrorService } from '../../shared/error/error.service';
 import { Rotas } from '../../shared/enums/rotas-enum';
-import { MpcFooterComponent } from '../../shared/components/mpc-footer/mpc-footer.component';
 
 @Component({
   selector: 'app-pagina-erro',
   standalone: true,
-  imports: [MpcNavbarComponent, MpcButtonComponent, MpcFooterComponent],
+  imports: [MpcButtonComponent],
   templateUrl: './pagina-erro.component.html',
   styleUrl: './pagina-erro.component.css'
 })

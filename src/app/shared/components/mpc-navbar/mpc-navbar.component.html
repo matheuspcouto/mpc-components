@@ -13,42 +13,35 @@
 
         @for (aba of abas; track $index) {
         <!-- Aba de menu -->
-        @if (aba.ativo && !aba.subRotas) {
+        @if (!aba.subRotas) {
         <li tabindex="0" [attr.aria-label]="'Aba ' + aba.titulo">
-          @if (!aba.subRotas) {
-          <a routerLinkActive="aba-ativa" [routerLinkActiveOptions]="{exact: true}" [routerLink]="aba.rota">
+          <a [routerLink]="aba.rota" [class.aba-ativa]="isAbaAtiva(aba)">
             {{ aba.titulo }}
           </a>
-          }
-
         </li>
         }
 
         <!-- Abas que possuem subRotas -->
-        @if (aba.ativo && aba.subRotas) {
+        @if (aba.subRotas) {
         <li class="dropdown" tabindex="0" [attr.aria-label]="'Aba com submenu ' + aba.titulo">
-          <a class="dropdown-toggle" routerLinkActive="aba-ativa" [routerLinkActiveOptions]="{exact: true}"
-            [routerLink]="aba.rota" data-bs-toggle="dropdown">
+          <a class="dropdown-toggle" [routerLink]="aba.rota" [class.aba-ativa]="isAbaAtiva(aba)"
+            data-bs-toggle="dropdown">
             {{ aba.titulo }}
           </a>
 
-          @if (aba.subRotas) {
           <ul class="dropdown-menu">
             @for (sub of aba.subRotas; track $index) {
             <li class="mb-3">
-              @if (sub.ativo && sub.rota) {
-              <a class="dropdown-item" [routerLink]="sub.rota"> {{ sub.titulo }} </a>
-              }
-
-              @if (sub.ativo && sub.fragment) {
-              <a class="dropdown-item" [routerLink]="aba.rota" [fragment]="sub.fragment">
-                {{ sub.titulo }}
+              @if (sub.rota) {
+              <a class="dropdown-item" [routerLink]="sub.rota" [class.aba-ativa]="isSubAbaAtiva(sub)"> {{ sub.titulo }}
               </a>
+              }
+              @if (sub.fragment) {
+              <a class="dropdown-item" [routerLink]="aba.rota" [fragment]="sub.fragment">{{ sub.titulo }}</a>
               }
             </li>
             }
           </ul>
-          }
         </li>
         }
         <!-- Fim das abas que possuem subRotas -->
@@ -57,9 +50,9 @@
 
         <!-- Aba de Login -->
         @if (abaLogin) {
-        <li tabindex="0" [attr.aria-label]="'Entrar / Cadastrar'">
-          <a [routerLink]="abaLogin">
-            Entrar / Cadastrar <i class="bi bi-person ms-2"></i>
+        <li tabindex="0" [attr.aria-label]="abaLogin.titulo">
+          <a [routerLink]="abaLogin.rota">
+            {{ abaLogin.titulo }} <i [class]="abaLogin.icone + ' ms-2'"></i>
           </a>
         </li>
         }
@@ -96,21 +89,19 @@
           @for (aba of abas; track $index) {
 
           <!-- Abas de menu -->
-          @if (aba.ativo && !aba.subRotas) {
+          @if (!aba.subRotas) {
           <li tabindex="0" [attr.aria-label]="'Aba ' + aba.titulo">
-            @if (!aba.subRotas) {
-            <a routerLinkActive="aba-ativa" [routerLinkActiveOptions]="{exact: true}" [routerLink]="aba.rota">
+            <a [routerLink]="aba.rota" [class.aba-ativa]="isAbaAtiva(aba)">
               <i [class]="aba.icone"></i> {{ aba.titulo }}
             </a>
-            }
           </li>
           }
           <!-- Fim da aba de menu -->
 
           <!-- Abas que possuem subRotas -->
-          @if (aba.ativo && aba.subRotas) {
+          @if (aba.subRotas) {
           <li tabindex="0" [attr.aria-label]="'Aba com submenu ' + aba.titulo">
-            <a routerLinkActive="aba-ativa" data-bs-toggle="collapse" [attr.data-bs-target]="'#subMenu'+ $index">
+            <a data-bs-toggle="collapse" [attr.data-bs-target]="'#subMenu'+ $index" [class.aba-ativa]="isAbaAtiva(aba)">
               <i [class]="aba.icone"></i> {{ aba.titulo }}
               <em class="bi bi-caret-down-fill"></em>
             </a>
@@ -119,11 +110,10 @@
               <ul>
                 @for (sub of aba.subRotas; track $index) {
                 <li>
-                  @if (sub.ativo && sub.rota) {
-                  <a [routerLink]="sub.rota"> {{ sub.titulo }} </a>
+                  @if (sub.rota) {
+                  <a [routerLink]="sub.rota" [class.aba-ativa]="isSubAbaAtiva(sub)"> {{ sub.titulo }} </a>
                   }
-
-                  @if (sub.ativo && sub.fragment) {
+                  @if (sub.fragment) {
                   <a [routerLink]="aba.rota" [fragment]="sub.fragment"> {{ sub.titulo }} </a>
                   }
                 </li>
@@ -143,7 +133,7 @@
       <div class="offcanvas-footer">
         <hr>
         <div class="d-flex justify-content-center align-items-center">
-          <a [routerLink]="abaLogin" target="_blank">Entrar / Cadastrar <i class="bi bi-person"></i></a>
+          <a [routerLink]="abaLogin.rota" target="_blank">{{ abaLogin.titulo }} <i [class]="abaLogin.icone"></i></a>
         </div>
       </div>
       }

@@ -1,6 +1,5 @@
 export const Rotas = {
   HOME: "/",
-  DOCS: "/documentacao",
   ERROR: "/error",
 
   // Componentes

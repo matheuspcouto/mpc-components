@@ -1,7 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, FormsModule, NonNullableFormBuilder } from '@angular/forms';
-import { MpcNavbarComponent } from '../../../shared/components/mpc-navbar/mpc-navbar.component';
-import { MpcFooterComponent } from '../../../shared/components/mpc-footer/mpc-footer.component';
 import { Router } from '@angular/router';
 import { InscricaoService } from '../service/inscricao.service';
 import { Inscricao } from '../model/inscricao.model';
@@ -12,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-pesquisa',
-    imports: [ReactiveFormsModule, FormsModule, MpcNavbarComponent, MpcFooterComponent, MpcInputPesquisaComponent],
+    imports: [ReactiveFormsModule, FormsModule, MpcInputPesquisaComponent],
     templateUrl: './pesquisa.component.html',
     styleUrls: ['./pesquisa.component.css']
 })

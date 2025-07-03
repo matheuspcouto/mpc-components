@@ -1,12 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { MpcNavbarComponent } from '../../../shared/components/mpc-navbar/mpc-navbar.component';
 import { MpcPaginationComponent } from "../../../shared/components/mpc-pagination/mpc-pagination.component";
-import { MpcFooterComponent } from '../../../shared/components/mpc-footer/mpc-footer.component';
 
 @Component({
   selector: 'app-paginacao',
-  imports: [CommonModule, MpcNavbarComponent, MpcPaginationComponent, MpcFooterComponent],
+  imports: [CommonModule, MpcPaginationComponent ],
   templateUrl: './paginacao.component.html',
   styleUrl: './paginacao.component.css'
 })

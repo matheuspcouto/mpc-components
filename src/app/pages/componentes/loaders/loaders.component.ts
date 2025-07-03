@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { MpcButtonComponent } from '../../../shared/components/mpc-button/mpc-button.component';
-import { MpcNavbarComponent } from '../../../shared/components/mpc-navbar/mpc-navbar.component';
 import { MpcLoaderService } from '../../../shared/components/mpc-loader/mpc-loader.service';
-import { MpcFooterComponent } from '../../../shared/components/mpc-footer/mpc-footer.component';
 
 @Component({
   selector: 'app-loaders',
-  imports: [ MpcButtonComponent, MpcNavbarComponent, MpcFooterComponent ],
+  imports: [ MpcButtonComponent ],
   templateUrl: './loaders.component.html',
   styleUrl: './loaders.component.css'
 })

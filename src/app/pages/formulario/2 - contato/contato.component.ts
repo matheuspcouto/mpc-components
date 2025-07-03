@@ -1,8 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Rotas } from '../../../shared/enums/rotas-enum';
-import { CommonModule } from '@angular/common';
-import { MpcNavbarComponent } from '../../../shared/components/mpc-navbar/mpc-navbar.component';
 import { MpcFormProgressBarComponent } from '../../../shared/components/mpc-form-progress-bar/mpc-form-progress-bar.component';
 import { FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { MpcButtonComponent } from '../../../shared/components/mpc-button/mpc-button.component';
@@ -12,7 +10,6 @@ import { MpcInputTelefoneComponent } from '../../../shared/components/Inputs/mpc
 import { MpcInputEmailComponent } from '../../../shared/components/Inputs/mpc-input-email/mpc-input-email.component';
 import { ToastrService } from 'ngx-toastr';
 import { Endereco, MpcInputBuscaCepComponent } from "../../../shared/components/Inputs/mpc-input-busca-cep/mpc-input-busca-cep.component";
-import { MpcFooterComponent } from '../../../shared/components/mpc-footer/mpc-footer.component';
 import { ErrorService } from '../../../shared/error/error.service';
 
 @Component({
@@ -20,10 +17,9 @@ import { ErrorService } from '../../../shared/error/error.service';
   imports: [
     FormsModule,
     ReactiveFormsModule, MpcInputTextComponent, MpcInputTelefoneComponent,
-    MpcButtonComponent, MpcNavbarComponent, MpcFormProgressBarComponent,
+    MpcButtonComponent, MpcFormProgressBarComponent,
     MpcInputEmailComponent,
-    MpcInputBuscaCepComponent,
-    MpcFooterComponent
+    MpcInputBuscaCepComponent
   ],
   templateUrl: './contato.component.html',
   styleUrls: ['./contato.component.css'],

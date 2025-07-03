@@ -1,12 +1,16 @@
 /* Geral */
 .error-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
   width: 100vw;
+  height: 100vh;
   background: var(--branco);
   font-family: var(--font-secundaria) !important;
+  z-index: 99999;
 
   .error-container {
     display: flex;
@@ -68,6 +72,7 @@
     flex-direction: column;
     padding: 0;
     box-sizing: border-box;
+    height: 100vh;
 
     .error-body {
       flex: 1 1 auto;
