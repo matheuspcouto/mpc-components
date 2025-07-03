@@ -44,8 +44,8 @@ export class MpcModalComponent {
   protected isTelaInteira: boolean = false;
   protected modal!: MpcModalConfig;
 
- private modalService = inject(MpcModalService);
- private notificationService = inject(ToastrService);
+ private readonly notificationService = inject(ToastrService);
+ private readonly modalService = inject(MpcModalService);
 
   fecharModal() { this.modalService.hide(); this.exibirModal = false; this.isCopiado = false; }
 
