@@ -17,5 +17,4 @@ export class AppComponent {}
 // TODO: Cor de componentes
 // TODO: Pagina de exibição de inputs
 // TODO: Unificar guards
-// TODO: Timeline
 

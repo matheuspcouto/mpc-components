@@ -3,7 +3,7 @@
 <main>
 
   <!-- ======= MpcCard INÍCIO ======= -->
-  <section id="cards" class="section-components">
+  <section id="cards">
     <div class="container">
 
       <div class="section-header">
@@ -51,7 +51,7 @@
 &lt;/mpc-card&gt;</code></pre>
       </div>
 
-      <div class="row gy-4 mb-5">
+      <div class="row gy-4">
 
         <div class="col-12 d-flex justify-content-center">
           <h4>Cards Verticais e Horizontais</h4>
@@ -96,7 +96,7 @@
   <!-- ======= MpcCard FIM ======= -->
 
   <!-- ======= MpcCardBackgroundImg INÍCIO ======= -->
-  <section id=" cards-background-img" class="section-components">
+  <section id="cards-background-img">
     <div class="container">
 
       <div class="section-header">
@@ -138,7 +138,7 @@
       </div>
 
       <!-- Cards com Imagem de Fundo -->
-      <div class="row gy-4 mb-5">
+      <div class="row gy-4">
 
         <div class="col-12 d-flex justify-content-center">
           <h4>Cards com Imagem de Fundo</h4>
@@ -166,7 +166,7 @@
   <!-- ======= MpcCardBackgroundImg FIM ======= -->
 
   <!-- ======= MpcCardMenu INÍCIO ======= -->
-  <section id="cards-menu" class="section-components">
+  <section id="cards-menu">
     <div class="container">
 
       <div class="section-header">
@@ -204,7 +204,7 @@
 &lt;/mpc-card-menu&gt;</code></pre>
       </div>
 
-      <div class="row gy-4 mb-5">
+      <div class="row gy-4">
 
         <div class="col-12 d-flex justify-content-center">
           <h4>Cards de Menu</h4>
@@ -233,32 +233,12 @@
   <!-- ======= MpcCardMenu FIM ======= -->
 
   <!-- ======= MpcCardEvento INÍCIO ======= -->
-  <section id="cards-evento" class="section-components">
+  <section id="cards-evento">
     <div class="container">
 
       <div class="section-header">
         <h2>experimente os</h2>
         <p>Cards de <span>Evento</span></p>
-      </div>
-
-      <div class="row gy-4 mb-5">
-        <div class="col-lg-4">
-          <mpc-card-evento dia="12" mes="JUN" titulo="Evento Especial" subtitulo="Palestra com Convidado"
-            descricao="Participe do nosso evento especial com um palestrante renomado." id="evento-1" [tabIndex]="0"
-            ariaLabel="Evento Especial em 12 de Junho"></mpc-card-evento>
-        </div>
-
-        <div class="col-lg-4">
-          <mpc-card-evento dia="13" mes="MAI" titulo="Evento Especial" subtitulo="Palestra com Convidado"
-            descricao="Participe do nosso evento especial com um palestrante renomado." id="evento-1" [tabIndex]="0"
-            ariaLabel="Evento Especial em 13 de Maio"></mpc-card-evento>
-        </div>
-
-        <div class="col-lg-4">
-          <mpc-card-evento dia="01" mes="JUL" titulo="Evento Especial" subtitulo="Palestra com Convidado"
-            descricao="Participe do nosso evento especial com um palestrante renomado." id="evento-1" [tabIndex]="0"
-            ariaLabel="Evento Especial em 01 de Julho"></mpc-card-evento>
-        </div>
       </div>
 
       <h5>
@@ -294,6 +274,20 @@
   [tabIndex]="0"
   ariaLabel="Evento Especial em 12 de Junho"&gt;
 &lt;/mpc-card-evento&gt;</code></pre>
+      </div>
+
+      <div class="row mb-5">
+
+        <div class="col-12 d-flex justify-content-center">
+          <h4>Cards de Evento</h4>
+        </div>
+
+        @for (i of [1, 2, 3]; track i) {
+        <mpc-card-evento [dia]="i.toString()" mes="JUN" [titulo]="'Card de Evento ' + i" [subtitulo]="'Subtítulo ' + i"
+          [descricao]="'Descrição ' + i" id="evento-1" [tabIndex]="0"
+          [ariaLabel]="'Evento Especial em ' + i + ' de Junho'">
+        </mpc-card-evento>
+        }
       </div>
 
       <!-- ======= MpcCardEvento FIM ======= -->
