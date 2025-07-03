@@ -16,5 +16,4 @@ export class AppComponent {}
 // TODO: Tela de Cadastro
 // TODO: Cor de componentes
 // TODO: Pagina de exibição de inputs
-// TODO: Unificar guards
 

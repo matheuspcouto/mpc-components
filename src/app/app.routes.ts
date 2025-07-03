@@ -1,9 +1,6 @@
 import { Routes } from '@angular/router';
 import { SiteAtivoGuard } from './guards/site-ativo/site-ativo.guard';
 import { InscricoesGuard } from './guards/inscricoes/inscricoes.guard';
-import { PaginaContatoGuard } from './guards/pagina-contato/pagina-contato.guard';
-import { PaginaPagamentoGuard } from './guards/pagina-pagamento/pagina-pagamento.guard';
-import { PaginaConfirmacaoGuard } from './guards/pagina-confirmacao/pagina-confirmacao.guard';
 
 export const routes: Routes = [
   /*  Rotas para Home */
@@ -92,17 +89,20 @@ export const routes: Routes = [
           {
             path: 'contato',
             loadComponent: () => import('./pages/formulario/2 - contato/contato.component').then(c => c.default),
-            canActivate: [SiteAtivoGuard, InscricoesGuard, PaginaContatoGuard]
+            canActivate: [SiteAtivoGuard, InscricoesGuard],
+            data: { etapaMinima: 2, checagem: 'dadosPessoais' }
           },
           {
             path: 'pagamento',
             loadComponent: () => import('./pages/formulario/3 - pagamento/pagamento.component').then(c => c.default),
-            canActivate: [SiteAtivoGuard, InscricoesGuard, PaginaPagamentoGuard]
+            canActivate: [SiteAtivoGuard, InscricoesGuard],
+            data: { etapaMinima: 3, checagem: 'dadosPessoaisEContato' }
           },
           {
             path: 'confirmacao',
             loadComponent: () => import('./pages/formulario/4 - confirmacao/confirmacao.component').then(c => c.ConfirmacaoComponent),
-            canActivate: [SiteAtivoGuard, InscricoesGuard, PaginaConfirmacaoGuard]
+            canActivate: [SiteAtivoGuard, InscricoesGuard],
+            data: { etapaMinima: 4, checagem: 'inscricaoCompleta' }
           },
           {
             path: 'detalhes-inscricao',
