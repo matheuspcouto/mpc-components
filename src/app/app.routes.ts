@@ -7,7 +7,7 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    loadComponent: () => import('./pages/home/home.component').then(c => c.default),
+    loadComponent: () => import('./pages/paginas-avulsas/home/home.component').then(c => c.default),
     canActivate: [SiteAtivoGuard]
   },
 
@@ -93,7 +93,7 @@ export const routes: Routes = [
     children: [
       {
         path: 'login',
-        loadComponent: () => import('./pages/login/login.component').then(c => c.default)
+        loadComponent: () => import('./pages/paginas-avulsas/login/login.component').then(c => c.default)
       },
       {
         path: 'formulario',

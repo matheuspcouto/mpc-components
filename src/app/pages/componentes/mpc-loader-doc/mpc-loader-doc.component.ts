@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MpcButtonDirective } from '../../../shared/directives/mpc-button/mpc-button.directive';
 import { MpcLoaderService } from '../../../shared/components/mpc-loader/mpc-loader.service';
 
@@ -10,7 +10,7 @@ import { MpcLoaderService } from '../../../shared/components/mpc-loader/mpc-load
 })
 export class MpcLoaderDocComponent {
 
-  constructor(private mpcLoaderService: MpcLoaderService) { }
+  private readonly mpcLoaderService = inject(MpcLoaderService);
 
   abrirLoading() {
     this.mpcLoaderService.show();

@@ -15,6 +15,7 @@
 
 import { Component, Input } from '@angular/core';
 
+// TODO: Cores de fundo e texto
 @Component({
   selector: 'mpc-form-progress-bar',
   imports: [],

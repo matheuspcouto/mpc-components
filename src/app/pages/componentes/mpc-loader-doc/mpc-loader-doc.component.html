@@ -10,11 +10,28 @@
       </div>
 
       <h5>
-        O <code>mpc-loader</code> é um componente que exibe uma animação de carregamento enquanto o conteúdo da página
-        está sendo carregado a cada requisição HTTP. Caso deseje utilizar o componente em uma página específica ou em
-        situações que não sejam uma requisição
-        HTTP, incluá-o seguinte código
-        no arquivo <code>seu-component.ts</code>
+        O <code>mpc-loader</code> é um componente standalone que exibe uma animação de carregamento enquanto o conteúdo
+        da página está sendo carregado. Utiliza signals para reatividade (Angular 17+) e não requer CommonModule.
+      </h5>
+
+      <h5>
+        <strong>Características:</strong>
+        <ul class="text-start mt-3">
+          <li>Utiliza signals para reatividade</li>
+          <li>Controle via MpcLoaderService</li>
+          <li>Suporte a múltiplas chamadas simultâneas</li>
+          <li>Customização de cores via inputs</li>
+          <li>Controle automático de contador interno</li>
+        </ul>
+      </h5>
+
+      <h5>
+        Para utilizar o componente em uma página específica ou em situações que não sejam uma requisição
+        HTTP, inclua o seguinte código no arquivo <code>seu-component.ts</code>
+      </h5>
+
+      <h5>
+        <strong>Importação no arquivo <code>.ts</code>:</strong>
       </h5>
 
       <div class="mb-5">
@@ -22,13 +39,7 @@
           <pre class="chroma">
               <code>
                 ```
-                constructor(private mpcLoaderService: MpcLoaderService) &lcub; &rcub;
-
-                abrirLoading() &lcub;
-                  this.mpcLoaderService.show();
-                  // Implemente a lógica entre a abertura e o fechamento do loading
-                  setTimeout(() => this.mpcLoaderService.hide(), 5000);
-                &rcub;
+                imports: [ MpcLoaderComponent ]
                 ```
               </code>
           </pre>
@@ -36,22 +47,83 @@
       </div>
 
       <h5>
-        Caso deseje utilizar o componente em uma página específica, inclua o seguinte código na sua página, caso deseje
-        utilizar em todas as páginas, inclua o mesmo código no arquivo <code>app.component.html</code>
+        <strong>Inicialização do componente e service:</strong>
+      </h5>
+
+      <div class="mb-5">
         <div class="col-md-12 mb-3 d-flex justify-content-center">
           <pre class="chroma">
               <code>
-              &lt;mpc-loader&gt;&lt;/mpc-loader&gt;
+                ```
+                private readonly mpcLoaderService = inject(MpcLoaderService);
+
+                abrirLoading() &#123;
+                  this.mpcLoaderService.show();
+                  // Implemente a lógica entre a abertura e o fechamento do loading
+                  setTimeout(() => this.mpcLoaderService.hide(), 5000);
+                &#125;
+                ```
               </code>
-            </pre>
+          </pre>
         </div>
+      </div>
+
+      <h5>
+        <strong>Inclusão do componente no arquivo <code>seu-component.html</code> (se quiser utilizar na aplicação
+          inteira, inclua no <code>app.component.html</code>):</strong>
+      </h5>
+
+      <div class="mb-5">
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+          <pre class="chroma">
+            <code>
+            ```
+            &lt;mpc-loader backgroundColor="#f5f5f5" color="#007bff"&gt;&lt;/mpc-loader&gt;
+            ```
+            </code>
+          </pre>
+        </div>
+      </div>
+
+      <h5>
+        <strong>Customização de cores:</strong>
+      </h5>
+
+      <div class="mb-5">
+        <div class="col-md-12 mb-3 d-flex justify-content-center">
+          <pre class="chroma">
+            <code>
+            ```
+            &lt;mpc-loader backgroundColor="#f5f5f5" color="#007bff"&gt;&lt;/mpc-loader&gt;
+            ```
+            </code>
+          </pre>
+        </div>
+      </div>
+
+      <h5>
+        <strong>Parâmetros de customização:</strong>
+        <ul class="text-start mt-3">
+          <li><code>backgroundColor</code>: Cor de fundo do loader (ex: "#f5f5f5", "rgba(0,0,0,0.5)", "transparent")</li>
+          <li><code>color</code>: Cor do spinner do loader (ex: "#007bff", "#28a745", "#dc3545")</li>
+        </ul>
+      </h5>
+
+      <h5>
+        <strong>Métodos do MpcLoaderService:</strong>
+        <ul class="text-start mt-3">
+          <li><code>show()</code>: Exibe o loader (incrementa contador interno)</li>
+          <li><code>hide()</code>: Oculta o loader (decrementa contador interno)</li>
+          <li><code>isLoading()</code>: Retorna signal com estado atual do loader</li>
+        </ul>
       </h5>
 
       <h5>Clique no botão abaixo e veja como ficou a implementação.</h5>
 
       <div class="col-md-12 mb-3 d-flex justify-content-center">
-        <button mpcButton [disabled]="false" (click)="abrirLoading()" [style.background-color]="'var(--color-primary)'" [style.color]="'white'"
-          icone="bi bi-arrow-clockwise" posicaoIcone="esquerda" [tabIndex]="0" texto="Abrir Loader">
+        <button mpcButton [disabled]="false" (click)="abrirLoading()" [style.background-color]="'var(--color-primary)'"
+          [style.color]="'white'" icone="bi bi-arrow-clockwise" posicaoIcone="esquerda" [tabIndex]="0"
+          texto="Abrir Loader">
         </button>
       </div>
 
@@ -61,5 +133,3 @@
   <!-- ======= MpcLoader ======= -->
 
 </main>
-
-

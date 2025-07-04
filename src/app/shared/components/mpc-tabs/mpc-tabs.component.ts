@@ -22,6 +22,7 @@ export interface Tab {
   titulo: string;
 }
 
+// TODO: Ajustar cores
 @Component({
   selector: 'mpc-tabs',
   imports: [],

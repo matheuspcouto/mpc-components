@@ -10,11 +10,11 @@ export class MpcLoaderInterceptor implements HttpInterceptor {
   constructor(public loaderService: MpcLoaderService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    this.loaderService.show(); // Show the loader before making the request
+    this.loaderService.show(); // Exibe o loader antes de fazer a requisição
 
     return next.handle(request).pipe(
       finalize(() => {
-        this.loaderService.hide(); // Hide the loader after the response is received
+        this.loaderService.hide(); // Oculta o loader após a resposta ser recebida
       })
     );
   }

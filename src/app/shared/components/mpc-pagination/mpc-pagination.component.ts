@@ -21,6 +21,7 @@ export interface IndicesPaginacao {
   indiceFinal: number;
 }
 
+// TODO: Ajustar cores
 @Component({
   selector: 'mpc-pagination',
   imports: [],
