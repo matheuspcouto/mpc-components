@@ -7,7 +7,8 @@
 
   <div class="container">
 
-    <mpc-form-progress-bar [etapaAtual]="2" [totalEtapas]="4"></mpc-form-progress-bar>
+    <mpc-form-progress-bar [etapaAtual]="2" [totalEtapas]="4" [barColor]="'var(--color-secondary)'"
+      color="'var(--color-tertiary)'"></mpc-form-progress-bar>
 
     <h3>Contato</h3>
     <p class="text-muted mb-3">Campos obrigatórios (*)</p>
@@ -69,21 +70,20 @@
           (valor)="form.controls.complemento.setValue($event)" (error)="form.controls.complemento.setErrors($event)" />
       </div>
 
+      <div class="d-flex justify-content-center align-items-center mt-5">
+        <button mpcButton (click)="proximaEtapa()" class="btn-proximo" icone="bi bi-arrow-right" texto="Próximo"
+          [disabled]="form.invalid">
+        </button>
+      </div>
+
+      <div class="d-flex justify-content-center align-items-center mt-3">
+        <button mpcButton (click)="etapaAnterior()" class="btn-voltar" posicaoIcone="esquerda" icone="bi bi-arrow-left"
+          texto="Voltar para Dados Pessoais">
+        </button>
+      </div>
+
     </form>
-
-    <div class="d-flex justify-content-center align-items-center mt-5">
-      <button mpcButton (click)="proximaEtapa()" [style.background-color]="'var(--color-primary)'" [style.color]="'white'"
-        icone="bi bi-arrow-right" texto="Próximo" [disabled]="form.invalid">
-      </button>
-    </div>
-
-    <div class="d-flex justify-content-center align-items-center mt-3">
-      <button mpcButton (click)="etapaAnterior()" [style.color]="'var(--color-tertiary)'" posicaoIcone="esquerda"
-        icone="bi bi-arrow-left" texto="Voltar para Dados Pessoais">
-      </button>
-    </div>
 
   </div>
 
 </section>
-

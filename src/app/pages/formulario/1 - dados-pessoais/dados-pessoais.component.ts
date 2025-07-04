@@ -67,7 +67,7 @@ export default class DadosPessoaisComponent implements OnInit {
     descricao: ['']
   });
 
-  /**
+  /** TODO: Verificar pq voltar na etapa 1, não está carregando os dados
    * Inicializa o formulário e atualiza os dados se já existirem.
    */
   ngOnInit(): void {

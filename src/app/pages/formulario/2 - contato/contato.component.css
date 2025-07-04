@@ -70,13 +70,24 @@ section {
 .inscricao {
   font-family: var(--font-default);
   font-weight: 600;
-  padding-right: 1.5rem !important;
-  padding-left: 1.5rem !important;
-}
+  padding: 2rem;
+  margin-top: 90px;
 
-.div-buttons {
-  display: flex;
-  justify-content: center;
-  padding-bottom: 0.5rem;
-}
+  form {
+    .btn-proximo {
+      background-color: var(--color-primary);
+      color: white;
 
+      &:disabled {
+        background-color: #5C636A;
+        color: white;
+        cursor: default !important;
+      }
+    }
+
+    .btn-voltar {
+      background-color: transparent !important;
+      color: var(--color-tertiary) !important;
+    }
+  }
+}

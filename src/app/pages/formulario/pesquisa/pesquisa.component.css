@@ -52,6 +52,9 @@ section {
 --------------------------------------------------------------*/
 .container {
   max-width: 600px;
+  font-family: var(--font-default);
+  font-weight: 600;
+  padding: 2rem;
 }
 
 /* Mobile */

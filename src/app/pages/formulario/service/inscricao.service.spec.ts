@@ -73,27 +73,6 @@ describe('InscricaoService', () => {
     expect(service.isInscricaoCompleta()).toBe(true);
   });
 
-  it('deve emitir dados e etapa atualizados via observables', done => {
-    const dadosTeste = { nome: 'João' };
-    service.dadosInscricao$.subscribe(dados => {
-      if (dados.nome) {
-        expect(dados).toEqual(dadosTeste);
-        done();
-      }
-    });
-    service.atualizarDadosInscricao(dadosTeste, 2);
-  });
-
-  it('deve emitir etapa atualizada via observable', done => {
-    service.etapaAtual$.subscribe(etapa => {
-      if (etapa === 3) {
-        expect(etapa).toBe(3);
-        done();
-      }
-    });
-    service.atualizarDadosInscricao({}, 3);
-  });
-
   it('deve detalhar inscrição (mock)', done => {
     service.detalharInscricao('123').subscribe(resultado => {
       expect(resultado).toBeDefined();
@@ -104,5 +83,32 @@ describe('InscricaoService', () => {
   it('deve limpar dados da inscrição', () => {
     service.limparDadosInscricao();
     expect(service.getDadosInscricao()).toEqual({});
+  });
+
+  it('deve retornar dados via signal readonly', () => {
+    const dadosTeste = { nome: 'João' };
+    service.atualizarDadosInscricao(dadosTeste, 2);
+    
+    expect(service.dadosInscricao()).toEqual(dadosTeste);
+    expect(service.etapaAtual()).toBe(2);
+  });
+
+  it('deve verificar inscrição completa via computed signal', () => {
+    expect(service.inscricaoCompleta()).toBe(false);
+    
+    service.atualizarDadosInscricao({ 
+      nome: 'João', 
+      dataNasc: '1990-01-01', 
+      sexo: 'M', 
+      estadoCivil: 'Solteiro', 
+      cpfCnpj: '12345678901', 
+      telefone: '11999999999', 
+      email: 'joao@email.com', 
+      cep: '12345-678', 
+      formaPagamento: 'Cartão', 
+      valor: 100 
+    }, 1);
+    
+    expect(service.inscricaoCompleta()).toBe(true);
   });
 });

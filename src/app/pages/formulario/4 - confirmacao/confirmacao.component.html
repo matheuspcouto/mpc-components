@@ -7,7 +7,8 @@
 
   <div class="container">
 
-    <mpc-form-progress-bar [etapaAtual]="4" [totalEtapas]="4"></mpc-form-progress-bar>
+    <mpc-form-progress-bar [etapaAtual]="4" [totalEtapas]="4" [barColor]="'var(--color-secondary)'"
+      color="'var(--color-tertiary)'"></mpc-form-progress-bar>
 
     <h4>Dados Pessoais</h4>
 
@@ -96,14 +97,13 @@
     </div>
 
     <div class="d-flex justify-content-center align-items-center mt-5">
-      <button mpcButton (click)="inscrever()" [style.background-color]="'var(--color-primary)'" [style.color]="'white'"
-        icone="bi bi-send" texto="Inscrever-se">
+      <button mpcButton (click)="inscrever()" class="btn-inscrever" icone="bi bi-send" texto="Inscrever-se">
       </button>
     </div>
 
     <div class="d-flex justify-content-center align-items-center mt-3">
-      <button mpcButton (click)="etapaAnterior()" [style.color]="'var(--color-tertiary)'" posicaoIcone="esquerda"
-        icone="bi bi-arrow-left" texto="Voltar para Pagamento">
+      <button mpcButton (click)="etapaAnterior()" class="btn-voltar" posicaoIcone="esquerda" icone="bi bi-arrow-left"
+        texto="Voltar para Dados Pessoais">
       </button>
     </div>
 
@@ -112,4 +112,3 @@
 </section>
 
 <mpc-modal #modalSucesso></mpc-modal>
-

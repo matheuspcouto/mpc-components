@@ -13,11 +13,13 @@ h5 {
 
 p {
   margin-bottom: 0 !important;
+  font-weight: 300;
 }
 
 .comprovante-tela {
   background-color: white;
-  font-family: var(--font-secondary) !important;
+  font-family: var(--font-default);
+  font-weight: 600;
   overflow-y: auto;
   margin-top: 70px;
 
@@ -66,6 +68,16 @@ p {
         align-items: center;
         gap: 15px;
         padding: 20px 30px 30px 30px;
+
+        .btn-whatsapp {
+          background-color: green;
+          color: white;
+        }
+
+        .btn-home {
+          background-color: transparent !important;
+          color: var(--color-primary) !important;
+        }
       }
     }
   }
@@ -74,7 +86,6 @@ p {
 /* Mobile */
 @media screen and (max-width: 991.98px) {
   .comprovante-tela {
-    margin-top: 0;
 
     .comprovante-container {
       padding: 10px;

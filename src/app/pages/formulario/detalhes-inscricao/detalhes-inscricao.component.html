@@ -126,12 +126,12 @@
             botão abaixo. </p>
         </div>
 
-        <button mpcButton [style.background-color]="'green'" [style.color]="'white'" texto="Solicitar pelo WhatsApp"
+        <button mpcButton class="btn-whatsapp" texto="Solicitar pelo WhatsApp"
           icone="bi bi-whatsapp" (click)="pedirLinkPagamento()">
         </button>
         }
 
-        <button mpcButton [style.color]="'var(--color-primary)'" (click)="irParaHome()" texto="Ir para Home"
+        <button mpcButton class="btn-home" (click)="irParaHome()" texto="Ir para Home"
           icone="bi bi-house">
         </button>
 
