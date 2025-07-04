@@ -17,7 +17,7 @@ p {
 
 .comprovante-tela {
   background-color: white;
-  font-family: var(--font-secundaria) !important;
+  font-family: var(--font-secondary) !important;
   overflow-y: auto;
 
   .comprovante-container {
@@ -41,7 +41,7 @@ p {
         }
 
         .comprovante-title {
-          font-family: var(--font-titulo);
+          font-family: var(--font-title);
           text-align: center;
           font-size: 1.5rem;
           font-weight: bold;
@@ -49,7 +49,7 @@ p {
         }
 
         .input-group em {
-          color: var(--cor-secundaria) !important;
+          color: var(--color-secondary) !important;
           display: block;
           font-size: 18px;
 

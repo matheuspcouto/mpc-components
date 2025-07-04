@@ -6,12 +6,12 @@
   align-items: stretch;
   flex-direction: column;
   height: 600px;
-  background: var(--branco);
+  background: var(--color-white);
   /* Cor do fundo */
   box-shadow: 0px 0 30px rgba(55, 55, 63, 0.08);
   transition: 0.3s;
   border-radius: 5px;
-  border-bottom: 4px solid var(--cor-primaria);
+  border-bottom: 4px solid var(--color-primary);
   /* Cor da borda inferior */
 
   .card-header {
@@ -36,21 +36,21 @@
       top: 10px;
       border-radius: 5px;
       transition: 0.5s;
-      background: var(--cor-primaria);
+      background: var(--color-primary);
       /* Cor do fundo dos links */
       max-width: 60px;
       z-index: 2;
 
       a {
         transition: color 0.3s;
-        color: var(--branco);
+        color: var(--color-white);
         padding: 10px;
         display: block;
         line-height: 0;
         text-align: center;
 
         &:hover {
-          color: var(--cor-secundaria);
+          color: var(--color-secondary);
           /* Cor do link ao passar o mouse */
         }
       }
@@ -76,12 +76,12 @@
       }
 
       h3 {
-        color: var(--cor-primaria);
+        color: var(--color-primary);
         /* Cor do título */
       }
 
       h4 {
-        color: var(--cor-secundaria);
+        color: var(--color-secondary);
         margin-bottom: 1.5rem;
         /* Cor do subtítulo */
       }
@@ -110,9 +110,9 @@
 .card-horizontal {
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  border-top: 4px solid var(--cor-primaria);
+  border-top: 4px solid var(--color-primary);
   /* Cor da borda superior */
-  border-bottom: 4px solid var(--cor-primaria);
+  border-bottom: 4px solid var(--color-primary);
   /* Cor da borda inferior */
   display: flex;
   flex-direction: row-reverse;
@@ -132,13 +132,13 @@
       height: 3px;
       margin: 10px 0;
       border-radius: 5px;
-      background-color: var(--cor-primaria);
+      background-color: var(--color-primary);
       /* Cor da barra do título */
     }
 
     h5 {
       margin: 1.5rem 0;
-      color: var(--cor-terciaria);
+      color: var(--color-tertiary);
       /* Cor do texto do body */
 
       i {
@@ -155,7 +155,7 @@
       opacity: 1;
       border-radius: 5px;
       transition: 0.5s;
-      background: var(--cor-primaria);
+      background: var(--color-primary);
       /* Cor do fundo dos links */
 
       a {
@@ -166,11 +166,11 @@
         border-radius: 5px;
         text-align: center;
         width: 50px;
-        color: var(--branco);
+        color: var(--color-white);
         /* Cor dos ícones de link */
 
         &:hover {
-          color: var(--cor-secundaria);
+          color: var(--color-secondary);
           /* Cor do link ao passar o mouse */
         }
       }

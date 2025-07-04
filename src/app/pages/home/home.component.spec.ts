@@ -49,4 +49,11 @@ describe('HomeComponent', () => {
     expect(component).toBeTruthy();
     expect(router).toBeDefined();
   });
+
+  it('deve chamar window.open ao executar irParaRepositorio', () => {
+    const spy = jest.spyOn(window, 'open').mockImplementation();
+    component.irParaRepositorio();
+    expect(spy).toHaveBeenCalledWith('https://github.com/matheuspcouto/mpc-components', '_blank');
+    spy.mockRestore();
+  });
 });

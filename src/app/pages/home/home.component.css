@@ -20,13 +20,13 @@
     justify-content: center;
 
     h2 {
-      font-family: var(--font-titulo) !important;
+      font-family: var(--font-title) !important;
       font-size: 64px;
       font-weight: 500;
-      color: var(--branco) !important;
+      color: var(--color-white) !important;
 
       span {
-        color: var(--cor-secundaria);
+        color: var(--color-secondary);
         font-size: clamp(1em, 1em + 1vw, 3em);
       }
     }
@@ -38,7 +38,7 @@
     }
 
     p {
-      color: var(--cor-terciaria);
+      color: var(--color-tertiary);
       font-size: 25px;
       font-weight: 400;
       margin-bottom: 30px;
@@ -51,10 +51,10 @@
     }
 
     a {
-      color: var(--branco);
+      color: var(--color-white);
 
       &:hover {
-        color: var(--cor-secundaria);
+        color: var(--color-secondary);
       }
     }
   }
@@ -82,7 +82,7 @@ section {
 
   h5 {
     font-weight: 400;
-    color: var(--cor-terciaria);
+    color: var(--color-tertiary);
     text-align: center;
     padding-bottom: 2rem;
     font-style: italic;
@@ -98,9 +98,9 @@ section {
       font-weight: 400;
       margin: 0;
       padding: 0;
-      color: var(--cor-terciaria);
+      color: var(--color-tertiary);
       text-transform: uppercase;
-      font-family: var(--font-padrao);
+      font-family: var(--font-default);
     }
 
     p {
@@ -110,7 +110,7 @@ section {
       font-family: var(--fonte-padrao);
 
       span {
-        color: var(--cor-secundaria);
+        color: var(--color-secondary);
       }
     }
   }
@@ -129,7 +129,7 @@ section {
     i {
       display: block;
       font-size: 35px;
-      color: var(--cor-primaria);
+      color: var(--color-primary);
       float: left;
     }
 
@@ -138,15 +138,15 @@ section {
       display: block;
       font-weight: 600;
       margin-left: 60px;
-      font-family: var(--font-secundaria);
-      color: var(--cor-primaria);
+      font-family: var(--font-secondary);
+      color: var(--color-primary);
     }
 
     h5 {
       padding: 15px 0 0 0;
       margin: 0 0 0 60px;
       text-align: left;
-      color: var(--cor-terciaria);
+      color: var(--color-tertiary);
     }
   }
 }
@@ -175,16 +175,16 @@ section {
 
     h2,
     span {
-      font-family: var(--font-titulo) !important;
+      font-family: var(--font-title) !important;
       font-size: 2rem;
     }
 
     span {
-      color: var(--cor-primaria);
+      color: var(--color-primary);
     }
 
     h2 {
-      color: var(--branco);
+      color: var(--color-white);
     }
   }
 }
@@ -193,7 +193,7 @@ section {
 # Contato Section
 --------------------------------------------------------------*/
 .contato {
-  background-color: var(--branco);
+  background-color: var(--color-white);
 
   iframe {
     border-radius: 5px;
@@ -216,15 +216,15 @@ section {
       width: 56px;
       height: 56px;
       font-size: 24px;
-      color: var(--branco);
-      background: var(--cor-primaria);
+      color: var(--color-white);
+      background: var(--color-primary);
       border-radius: 50%;
       margin-right: 15px;
     }
 
     h3 {
       font-size: 20px;
-      color: var(--cor-primaria);
+      color: var(--color-primary);
       font-weight: 700;
       margin-bottom: 5px;
     }
@@ -240,12 +240,12 @@ section {
       a {
         font-size: 24px;
         display: inline-block;
-        color: var(--cor-terciaria);
+        color: var(--color-tertiary);
         margin: 4px 6px 0 0;
         transition: 0.3s;
 
         &:hover {
-          color: var(--cor-primaria);
+          color: var(--color-primary);
         }
       }
     }

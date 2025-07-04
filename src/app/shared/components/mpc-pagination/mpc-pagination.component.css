@@ -39,7 +39,7 @@
           border: none !important;
           border-bottom: 2px solid transparent !important;
           background-color: transparent !important;
-          color: var(--cor-primaria) !important; /* Cor do texto */
+          color: var(--color-primary) !important; /* Cor do texto */
         }
       }
 
@@ -57,13 +57,13 @@
           color: inherit;
 
           &.active {
-            border-bottom: 2px solid var(--cor-primaria) !important;
-            color: var(--cor-primaria); /* Cor do texto quando ativo */
+            border-bottom: 2px solid var(--color-primary) !important;
+            color: var(--color-primary); /* Cor do texto quando ativo */
           }
 
           &:hover {
-            border-bottom: 2px solid var(--cor-primaria) !important;
-            color: var(--cor-primaria); /* Cor do texto quando hover */
+            border-bottom: 2px solid var(--color-primary) !important;
+            color: var(--color-primary); /* Cor do texto quando hover */
           }
         }
 

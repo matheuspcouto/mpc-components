@@ -3,9 +3,9 @@
 --------------------------------------------------------------*/
 footer {
   font-size: 14px;
-  background-color: var(--cor-primaria); /* Cor de fundo */
+  background-color: var(--color-primary); /* Cor de fundo */
   padding: 3rem 10rem;
-  color: var(--branco); /* Cor do texto */
+  color: var(--color-white); /* Cor do texto */
 
   .footer-img {
     display: flex;
@@ -51,7 +51,7 @@ footer {
       height: 40px;
       border-radius: 50%;
       border: 1px solid #7f7f90; /* Cor da borda do link */
-      color: var(--branco); /* Cor do texto do link */
+      color: var(--color-white); /* Cor do texto do link */
       font-size: 16px;
       margin-right: 10px;
       transition: 0.3s;
@@ -60,7 +60,7 @@ footer {
       justify-content: center;
 
       &:hover {
-        border: 1px solid var(--cor-secundaria); /* Cor da borda ao passar o mouse */
+        border: 1px solid var(--color-secondary); /* Cor da borda ao passar o mouse */
       }
     }
   }
@@ -74,8 +74,8 @@ footer {
     a {
       font-size: 18px;
       display: inline-block;
-      background: var(--branco); /* Cor de fundo do link */
-      color: var(--cor-primaria); /* Cor do texto do link */
+      background: var(--color-white); /* Cor de fundo do link */
+      color: var(--color-primary); /* Cor do texto do link */
       line-height: 1;
       padding: 8px 0;
       margin-right: 10px;
@@ -87,8 +87,8 @@ footer {
 
       /* Efeito ao passar o mouse */
       &:hover {
-        background: var(--cor-primaria);
-        color: var(--branco);
+        background: var(--color-primary);
+        color: var(--color-white);
       }
     }
   }

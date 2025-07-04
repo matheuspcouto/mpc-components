@@ -21,7 +21,7 @@
     border-bottom: 2px solid gray;
 
     &:hover {
-      color: var(--cor-primaria);
+      color: var(--color-primary);
     }
 
     h4 {
@@ -32,7 +32,7 @@
   }
 
   .active {
-    color: var(--cor-primaria);
-    border-color: var(--cor-primaria);
+    color: var(--color-primary);
+    border-color: var(--color-primary);
   }
 }

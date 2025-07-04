@@ -1,6 +1,6 @@
 .card-box {
   padding: 1rem;
-  border-left: 2px solid var(--cor-primaria);
+  border-left: 2px solid var(--color-primary);
   /* Cor da borda da timeline */
 
   .card-timeline {
@@ -14,15 +14,15 @@
       border-radius: 50%;
       left: -25px;
       top: 45%;
-      background: var(--branco);
+      background: var(--color-white);
       /* Cor de fundo do separador da timeline */
-      border: 2px solid var(--cor-primaria);
+      border: 2px solid var(--color-primary);
       /* Cor da borda do separador da timeline */
     }
   }
 
   .card-evento {
-    background: var(--branco);
+    background: var(--color-white);
     /* Cor de fundo do card */
     padding: 30px;
     height: 100%;
@@ -38,11 +38,11 @@
       justify-content: center;
       min-width: 4rem;
       min-height: 4rem;
-      background: var(--cor-primaria);
+      background: var(--color-primary);
       /* Cor de fundo da data do card */
       border-radius: 50%;
       margin-right: 15px;
-      color: var(--branco);
+      color: var(--color-white);
       /* Cor de texto da data do card */
 
       .evento-dia {
@@ -65,7 +65,7 @@
 
       h3 {
         font-size: 18px;
-        color: var(--cor-primaria);
+        color: var(--color-primary);
         /* Cor do título do card */
         font-weight: 700;
         margin-bottom: 0;
@@ -73,7 +73,7 @@
 
       h4 {
         font-size: 16px;
-        color: var(--cor-primaria);
+        color: var(--color-primary);
         /* Cor do subtítulo do card */
         font-style: italic;
         font-weight: 400;
@@ -83,7 +83,7 @@
       p {
         padding: 0;
         margin: 0;
-        color: var(--cor-terciaria);
+        color: var(--color-tertiary);
         /* Cor da descrição do card */
         line-height: 24px;
         font-size: 14px;

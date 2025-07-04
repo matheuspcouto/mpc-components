@@ -8,8 +8,8 @@
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background: var(--branco);
-  font-family: var(--font-secundaria) !important;
+  background: var(--color-white);
+  font-family: var(--font-secondary) !important;
   z-index: 99999;
 
   .error-container {
@@ -21,7 +21,7 @@
     padding: 20px;
 
     .error-content {
-      background-color: var(--branco);
+      background-color: var(--color-white);
       padding: 30px;
       overflow: hidden;
       border-radius: 5px;
@@ -102,7 +102,7 @@
       left: 0;
       bottom: 0;
       width: 100vw;
-      background: var(--branco);
+      background: var(--color-white);
       padding: 1.5rem 1rem 2rem 1rem;
       display: flex;
       flex-direction: column;

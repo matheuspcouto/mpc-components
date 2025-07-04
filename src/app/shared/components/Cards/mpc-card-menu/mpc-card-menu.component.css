@@ -1,5 +1,5 @@
 .card-menu {
-  background: var(--branco);
+  background: var(--color-white);
   padding: 30px;
   height: 100%;
   border-radius: 5px;
@@ -14,8 +14,8 @@
     min-width: 56px;
     min-height: 56px;
     font-size: 24px;
-    color: var(--branco);
-    background: var(--cor-primaria);
+    color: var(--color-white);
+    background: var(--color-primary);
     border-radius: 50%;
     margin-right: 15px;
   }
@@ -28,7 +28,7 @@
 
     h3 {
       font-size: 20px;
-      color: var(--cor-terciaria);
+      color: var(--color-tertiary);
       font-weight: 700;
       margin-bottom: 0;
     }

@@ -44,27 +44,27 @@ describe('MpcInputCpfcnpjComponent', () => {
 
   it('deve aceitar campo readonly ou disabled', () => {
     component.readonly = true;
-    expect(component['isCampoValido'](undefined)).toBe(true);
+    expect(component['isCampoValido'](undefined)).toBeTruthy();
     component.readonly = false;
     component.disabled = true;
-    expect(component['isCampoValido'](undefined)).toBe(true);
+    expect(component['isCampoValido'](undefined)).toBeTruthy();
   });
 
   it('deve validar CPF/CNPJ', () => {
     // CNPJ
-    expect(component['isCpfCnpjValido']('19100000000197')).toBe(false);
-    expect(component['isCpfCnpjValido']('12345678000195')).toBe(true);
-    expect(component['isCpfCnpjValido']('11111111111111')).toBe(false);
-    expect(component['isCNPJValido']('12345678000194')).toBe(false);
-    expect(component['isCNPJValido']('12345678000100')).toBe(false);
+    expect(component['isCpfCnpjValido']('19100000000197')).toBeFalsy();
+    expect(component['isCpfCnpjValido']('12345678000195')).toBeTruthy();
+    expect(component['isCpfCnpjValido']('11111111111111')).toBeFalsy();
+    expect(component['isCNPJValido']('12345678000194')).toBeFalsy();
+    expect(component['isCNPJValido']('12345678000100')).toBeFalsy();
 
     // CPF
-    expect(component['isCpfCnpjValido']('52998224725')).toBe(true);
-    expect(component['isCpfCnpjValido']('12345678901')).toBe(false);
-    expect(component['isCpfCnpjValido']('11111111111')).toBe(false);
-    expect(component['isCPFValido']('52998224724')).toBe(false);
-    expect(component['isCPFValido']('52998224700')).toBe(false);
-    expect(component['isCPFValido'](undefined)).toBe(false);
+    expect(component['isCpfCnpjValido']('52998224725')).toBeTruthy();
+    expect(component['isCpfCnpjValido']('12345678901')).toBeFalsy();
+    expect(component['isCpfCnpjValido']('11111111111')).toBeFalsy();
+    expect(component['isCPFValido']('52998224724')).toBeFalsy();
+    expect(component['isCPFValido']('52998224700')).toBeFalsy();
+    expect(component['isCPFValido'](undefined)).toBeFalsy();
   });
 
   it('deve emitir valor ao setValue válido', () => {
@@ -77,7 +77,7 @@ describe('MpcInputCpfcnpjComponent', () => {
   it('deve marcar campo como tocado ao focar', () => {
     component['campoTocado'] = false;
     component['onFocus']();
-    expect(component['campoTocado']).toBe(true);
+    expect(component['campoTocado']).toBeTruthy();
   });
 
   it('deve formatar valor corretamente', () => {

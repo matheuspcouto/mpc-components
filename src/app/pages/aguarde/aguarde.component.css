@@ -16,10 +16,10 @@
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 1rem;
-    color: var(--cor-primaria);
+    color: var(--color-primary);
 
     span {
-      color: var(--cor-secundaria);
+      color: var(--color-secondary);
     }
   }
 

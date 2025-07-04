@@ -16,7 +16,7 @@ section {
 
     h5 {
       font-weight: 400;
-      color: var(--cor-terciaria);
+      color: var(--color-tertiary);
       font-size: 18px;
     }
 
@@ -26,13 +26,13 @@ section {
     }
 
     a:hover {
-      color: var(--cor-primaria) !important;
+      color: var(--color-primary) !important;
     }
   }
 
   h5 {
     font-weight: 400;
-    color: var(--cor-terciaria);
+    color: var(--color-tertiary);
     text-align: center;
     padding-bottom: 2rem;
     font-style: italic;
@@ -48,9 +48,9 @@ section {
       font-weight: 400;
       margin: 0;
       padding: 0;
-      color: var(--cor-terciaria);
+      color: var(--color-tertiary);
       text-transform: uppercase;
-      font-family: var(--font-padrao);
+      font-family: var(--font-default);
     }
 
     p {
@@ -60,7 +60,7 @@ section {
       font-family: var(--fonte-padrao);
 
       span {
-        color: var(--cor-secundaria);
+        color: var(--color-secondary);
       }
     }
   }
@@ -68,11 +68,11 @@ section {
 }
 
 pre {
-  background-color: var(--cor-primaria);
+  background-color: var(--color-primary);
   padding: 20px;
   border-radius: 5px;
   margin-top: 20px;
-  color: var(--branco);
+  color: var(--color-white);
   border-radius: 5px;
   overflow: hidden;
   display: flex;

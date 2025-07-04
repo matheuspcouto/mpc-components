@@ -4,7 +4,7 @@
 * {
   color: #7f7f90 !important;
   /* Cor padrão de texto desabilitado */
-  font-family: var(--font-secundaria) !important;
+  font-family: var(--font-secondary) !important;
   /* Fonte padrão de texto */
 }
 
@@ -23,7 +23,7 @@ header {
   top: 0;
   left: 0;
   right: 0;
-  background: var(--branco);
+  background: var(--color-white);
   /* Cor de fundo da barra de navegação */
   transition: all 0.5s;
   z-index: 99999;
@@ -117,13 +117,13 @@ header {
 
       /* Propriedades de aba ativa */
       .aba-ativa {
-        color: var(--cor-primaria) !important;
-        border-bottom: 2px solid var(--cor-secundaria) !important;
+        color: var(--color-primary) !important;
+        border-bottom: 2px solid var(--color-secondary) !important;
       }
 
       /* Ícones das abas ativas */
       .aba-ativa i {
-        color: var(--cor-primaria) !important;
+        color: var(--color-primary) !important;
       }
     }
 
@@ -146,12 +146,12 @@ header {
         align-items: center;
         justify-content: center;
         width: 100%;
-        color: var(--cor-secundaria) !important;
+        color: var(--color-secondary) !important;
 
         i {
           margin-left: 10px;
           font-weight: 300;
-          color: var(--cor-secundaria) !important;
+          color: var(--color-secondary) !important;
         }
       }
     }
@@ -218,15 +218,15 @@ header {
 
       /* Efeito de hover semelhante a aba ativa*/
       &:hover {
-        color: var(--cor-primaria) !important;
-        border-bottom: 2px solid var(--cor-secundaria) !important;
+        color: var(--color-primary) !important;
+        border-bottom: 2px solid var(--color-secondary) !important;
       }
     }
 
     /* Propriedades de aba ativa */
     .aba-ativa {
-      color: var(--cor-primaria) !important;
-      border-bottom: 2px solid var(--cor-secundaria) !important;
+      color: var(--color-primary) !important;
+      border-bottom: 2px solid var(--color-secondary) !important;
     }
   }
 }

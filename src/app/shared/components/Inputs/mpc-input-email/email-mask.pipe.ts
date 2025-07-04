@@ -31,7 +31,7 @@ export class EmailMaskPipe implements PipeTransform {
       return '';
     }
 
-    // Remove espaços em branco no início e fim
+    // Remove espaços em color-white no início e fim
     const emailLimpo = value.toString().trim();
 
     // Converte para minúsculas para padronização

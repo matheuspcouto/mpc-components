@@ -1,6 +1,6 @@
 .login-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--cor-primaria) 0%, var(--cor-secundaria) 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -29,7 +29,7 @@
       }
 
       .title {
-        font-family: var(--font-titulo);
+        font-family: var(--font-title);
         font-size: 20px;
         font-weight: 700;
         margin: 0 0 8px 0;
@@ -38,7 +38,7 @@
 
       .subtitle {
         font-size: 16px;
-        color: var(--cor-terciaria);
+        color: var(--color-tertiary);
         margin: 0;
         line-height: 1.4;
       }

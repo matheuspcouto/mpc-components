@@ -18,14 +18,14 @@
     h2 {
       font-weight: 700;
       margin-bottom: 20px;
-      color: var(--branco);
+      color: var(--color-white);
       font-family: var(--font-primary);
       font-size: clamp(3em, 3em + 1vw, 4em);
     }
 
     span {
-      color: var(--cor-primaria);
-      font-family: var(--font-titulo);
+      color: var(--color-primary);
+      font-family: var(--font-title);
       font-weight: 300;
     }
   }
