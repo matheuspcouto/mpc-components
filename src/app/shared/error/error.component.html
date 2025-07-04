@@ -16,11 +16,11 @@
       <!-- Botões -->
       <div class="error-footer">
         <!-- Botão Voltar -->
-        <mpc-button corFundo="#0E2749" corTexto="#fff" (click)="voltar()" texto="OK">
+        <mpc-button [cores]="{ backgroundColor: '#0E2749', color: 'white' }" (click)="voltar()" texto="OK">
         </mpc-button>
 
         <!-- Botão Copiar Mensagem -->
-        <mpc-button corFundo="#fff" corTexto="#000" (click)="copiarMensagem(erro()?.mensagem)"
+        <mpc-button [cores]="{ backgroundColor: 'white', color: 'black' }" (click)="copiarMensagem(erro()?.mensagem)"
           [icone]="isCopiado ? 'bi bi-clipboard-check' : 'bi bi-clipboard'" texto="Copiar">
         </mpc-button>
       </div>

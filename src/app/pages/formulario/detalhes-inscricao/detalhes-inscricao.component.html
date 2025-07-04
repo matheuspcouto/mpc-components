@@ -94,7 +94,8 @@
             [attr.aria-label]="'Status do Pagamento: ' + dadosDetalhesInscricao.dadosPagamento.statusPagamento">
             <h5 class="mb-1">Status do Pagamento</h5>
             <h5>
-              <span [class]="'badge mb-1 ' + getBadgeStatusPagamento(dadosDetalhesInscricao.dadosPagamento.statusPagamento)">
+              <span
+                [class]="'badge mb-1 ' + getBadgeStatusPagamento(dadosDetalhesInscricao.dadosPagamento.statusPagamento)">
                 {{ getTextoStatusPagamento(dadosDetalhesInscricao.dadosPagamento.statusPagamento) }}
               </span>
             </h5>
@@ -125,12 +126,13 @@
             botão abaixo. </p>
         </div>
 
-        <mpc-button corFundo="green" corTexto="white" texto="Solicitar pelo WhatsApp" icone="bi bi-whatsapp"
-          (click)="pedirLinkPagamento()">
+        <mpc-button [cores]="{ backgroundColor: 'green', color: 'white' }" texto="Solicitar pelo WhatsApp"
+          icone="bi bi-whatsapp" (click)="pedirLinkPagamento()">
         </mpc-button>
         }
 
-        <mpc-button corTexto="#0E2749" (click)="irParaHome()" texto="Ir para Home" icone="bi bi-house">
+        <mpc-button [cores]="{ color: 'var(--color-primary)' }" (click)="irParaHome()" texto="Ir para Home"
+          icone="bi bi-house">
         </mpc-button>
 
       </div>

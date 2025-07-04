@@ -55,6 +55,13 @@ export class InscricaoService {
   }
 
   /**
+   * Limpa os dados da inscrição.
+   */
+  limparDadosInscricao(): void {
+    this.dadosInscricaoSubject.next({});
+  }
+
+  /**
    * Retorna a etapa atual do formulário.
    */
   getEtapaAtual(): number {
@@ -99,7 +106,7 @@ export class InscricaoService {
     // MOCK
     return Observable.create((observer: any) => {
       setTimeout(() => {
-        observer.next({ status: "OK", message: "Inscrição realizada com sucesso!" });
+        observer.next(detalhesInscricao);
         observer.complete();
       }, 3000)
     });

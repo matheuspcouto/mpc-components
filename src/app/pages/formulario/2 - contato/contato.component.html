@@ -72,13 +72,13 @@
     </form>
 
     <div class="d-flex justify-content-center align-items-center mt-5">
-      <mpc-button (click)="proximaEtapa()" [corFundo]="'var(--color-primary)'" [corTexto]="'white'"
+      <mpc-button (click)="proximaEtapa()" [cores]="{ backgroundColor: 'var(--color-primary)', color: 'white' }"
         icone="bi bi-arrow-right" texto="Próximo" [disabled]="form.invalid">
       </mpc-button>
     </div>
 
     <div class="d-flex justify-content-center align-items-center mt-3">
-      <mpc-button (click)="etapaAnterior()" [corTexto]="'var(--color-tertiary)'" posicaoIcone="esquerda"
+      <mpc-button (click)="etapaAnterior()" [cores]="{ color: 'var(--color-tertiary)' }" posicaoIcone="esquerda"
         icone="bi bi-arrow-left" texto="Voltar para Dados Pessoais">
       </mpc-button>
     </div>

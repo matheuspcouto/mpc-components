@@ -230,6 +230,7 @@ export class DetalhesInscricaoComponent implements OnInit {
    * Redireciona para a página inicial.
    */
   protected irParaHome(): void {
+    this.inscricaoService.limparDadosInscricao();
     this.router.navigate([Rotas.HOME]);
   }
 }

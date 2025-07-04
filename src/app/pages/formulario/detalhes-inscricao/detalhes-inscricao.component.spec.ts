@@ -17,6 +17,7 @@ describe('DetalhesInscricaoComponent', () => {
   beforeEach(async () => {
     mockInscricaoService = {
       getDadosInscricao: jest.fn(),
+      limparDadosInscricao: jest.fn()
     };
     mockToastr = { info: jest.fn() };
     mockErrorService = { construirErro: jest.fn() };

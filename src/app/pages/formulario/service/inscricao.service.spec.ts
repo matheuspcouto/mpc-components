@@ -44,8 +44,7 @@ describe('InscricaoService', () => {
 
   it('deve inscrever com sucesso', done => {
     service.inscrever({ nome: 'João' } as any).subscribe((resultado: any) => {
-      expect(resultado.status).toBe('OK');
-      expect(resultado.message).toBe('Inscrição realizada com sucesso!');
+      expect(resultado).toBeDefined();
       done();
     });
   });
@@ -100,5 +99,10 @@ describe('InscricaoService', () => {
       expect(resultado).toBeDefined();
       done();
     });
+  });
+
+  it('deve limpar dados da inscrição', () => {
+    service.limparDadosInscricao();
+    expect(service.getDadosInscricao()).toEqual({});
   });
 });

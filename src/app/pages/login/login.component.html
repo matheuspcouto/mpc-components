@@ -21,16 +21,14 @@
       </div>
 
       <div class="form-actions">
-        <mpc-button (click)="login()" [corFundo]="'var(--color-primary)'" [corTexto]="'white'" icone="bi bi-box-arrow-in-right" posicaoIcone="direita"
-          texto="Entrar" [disabled]="form.invalid">
+        <mpc-button (click)="login()" [cores]="{ backgroundColor: 'var(--color-primary)', color: 'white' }"
+          icone="bi bi-box-arrow-in-right" posicaoIcone="direita" texto="Entrar" [disabled]="form.invalid">
         </mpc-button>
 
-        <mpc-button (click)="login()" [corTexto]="'149DDD'" texto="Cadastrar-se">
+        <mpc-button (click)="login()" [cores]="{ color: 'var(--color-secondary)' }" texto="Cadastrar-se">
         </mpc-button>
       </div>
 
     </form>
   </div>
 </div>
-
-

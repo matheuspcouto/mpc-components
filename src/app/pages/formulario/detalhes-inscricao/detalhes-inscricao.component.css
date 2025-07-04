@@ -19,6 +19,7 @@ p {
   background-color: white;
   font-family: var(--font-secondary) !important;
   overflow-y: auto;
+  margin-top: 70px;
 
   .comprovante-container {
     display: flex;
@@ -73,6 +74,8 @@ p {
 /* Mobile */
 @media screen and (max-width: 991.98px) {
   .comprovante-tela {
+    margin-top: 0;
+
     .comprovante-container {
       padding: 10px;
 

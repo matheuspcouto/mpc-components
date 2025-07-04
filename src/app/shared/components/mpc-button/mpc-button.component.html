@@ -1,5 +1,5 @@
 <button [id]="id" [tabIndex]="tabIndex" [attr.aria-label]="ariaLabel" [disabled]="disabled" class="btn" type="button"
-  [style.background-color]="corFundo" [style.border-color]="corFundo" [style.color]="corTexto">
+  [ngStyle]="estiloCores">
 
   <span [class]="posicaoIcone === 'direita' ? 'order-1' : 'order-2'">
     {{ texto }}

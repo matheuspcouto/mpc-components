@@ -8,7 +8,8 @@
         <p>MPC<span> Buttons </span> </p>
       </div>
       <h5>
-        <strong>Descrição:</strong> O <code>mpc-button</code> do MpcComponents é baseado no framework Bootstrap, que oferece uma ampla gama de estilos e funcionalidades para botões.
+        <strong>Descrição:</strong> O <code>mpc-button</code> do MpcComponents é baseado no framework Bootstrap, que
+        oferece uma ampla gama de estilos e funcionalidades para botões.
       </h5>
       <h5>
         <strong>Propriedades:</strong>
@@ -18,8 +19,10 @@
           <li><strong>corFundo</strong>: Cor personalizada para o fundo do botão (hex, rgb, rgba, nome da cor).</li>
           <li><strong>corTexto</strong>: Cor personalizada para o texto do botão (hex, rgb, rgba, nome da cor).</li>
           <li><strong>disabled</strong>: (opcional) Booleano que indica se o botão está desabilitado.</li>
-          <li><strong>posicaoIcone</strong>: (opcional) Define a posição do ícone em relação ao texto: <code>esquerda</code> ou <code>direita</code>. Padrão: <code>direita</code>.</li>
-          <li><strong>icone</strong>: (opcional) Ícone exibido no botão, utilizando classes do Bootstrap Icons ou outra de sua preferência.</li>
+          <li><strong>posicaoIcone</strong>: (opcional) Define a posição do ícone em relação ao texto:
+            <code>esquerda</code> ou <code>direita</code>. Padrão: <code>direita</code>.</li>
+          <li><strong>icone</strong>: (opcional) Ícone exibido no botão, utilizando classes do Bootstrap Icons ou outra
+            de sua preferência.</li>
           <li><strong>tabIndex</strong>: (opcional) Índice de tabulação para acessibilidade.</li>
           <li><strong>ariaLabel</strong>: (opcional) Descrição do botão para acessibilidade.</li>
         </ul>
@@ -30,21 +33,26 @@
       </div>
       <div class="mb-5">
         <h5><strong>Exemplo de uso no arquivo <code>.html</code>:</strong></h5>
-        <pre class="chroma"><code class="language-html" data-lang="html">&lt;mpc-button (click)="minhaFuncao()" [corFundo]="'#17a2b8'" [corTexto]="'white'" [icone]="'bi bi-code-slash'" [posicaoIcone]="'esquerda'" [texto]="'Exemplo de Botão'"&gt;&lt;/mpc-button&gt;</code></pre>
+        <pre
+          class="chroma"><code class="language-html" data-lang="html">&lt;mpc-button (click)="minhaFuncao()" [cores]="&#123; backgroundColor: '#0E2749', color: 'white' &#125;" [icone]="'bi bi-code-slash'" [posicaoIcone]="'esquerda'" [texto]="'Exemplo de Botão'"&gt;&lt;/mpc-button&gt;</code></pre>
       </div>
       <h5 class="text-start">
         <strong>Observações importantes:</strong>
         <ul class="text-start mt-3">
-          <li>O componente utiliza cores personalizadas através das propriedades <code>corFundo</code> e <code>corTexto</code>.</li>
+          <li>O componente utiliza cores personalizadas através das propriedades <code>corFundo</code> e
+            <code>corTexto</code>.</li>
           <li>A posição padrão do ícone é <code>direita</code>.</li>
           <li>As cores podem ser definidas em qualquer formato CSS válido (hex, rgb, rgba, nomes de cores).</li>
           <li>Para eventos de clique, utilize <code>(click)="suaFuncao()"</code>.</li>
-          <li>O componente inclui suporte completo para acessibilidade com <code>tabIndex</code> e <code>ariaLabel</code>.</li>
+          <li>O componente inclui suporte completo para acessibilidade com <code>tabIndex</code> e
+            <code>ariaLabel</code>.</li>
         </ul>
       </h5>
       <div class="row mb-5">
         <div class="col-12 d-flex justify-content-center">
-          <mpc-button (click)="alert('Exemplo de Botão')" [corFundo]="'var(--color-primary)'" [corTexto]="'white'" [icone]="'bi bi-code-slash'" [posicaoIcone]="'esquerda'" [texto]="'Exemplo de Botão'"></mpc-button>
+          <mpc-button (click)="alert('Exemplo de Botão')"
+            [cores]="{ backgroundColor: 'var(--color-primary)', color: 'white' }" [icone]="'bi bi-code-slash'"
+            [posicaoIcone]="'esquerda'" [texto]="'Exemplo de Botão'"></mpc-button>
         </div>
       </div>
     </div>
@@ -52,5 +60,3 @@
   <!-- ======= MpcButton FIM ======= -->
 
 </main>
-
-

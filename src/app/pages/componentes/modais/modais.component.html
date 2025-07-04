@@ -53,20 +53,20 @@ abrirModalSucesso() &#123;
       <h5>Veja e teste abaixo os tipos de modais disponíveis</h5>
       <div class="row gy-3 mb-5">
         <div class="col-lg-6 d-flex justify-content-center">
-          <mpc-button (click)="abrirModalSucesso()" [corFundo]="'green'" [corTexto]="'white'" icone="bi bi-check-all"
+          <mpc-button (click)="abrirModalSucesso()" [cores]="{ backgroundColor: 'green', color: 'white' }" icone="bi bi-check-all"
             posicaoIcone="esquerda" [tabIndex]="0" texto="Modal de Sucesso"></mpc-button>
         </div>
         <div class="col-lg-6 d-flex justify-content-center">
-          <mpc-button (click)="abrirModalConfirmacao()" [corTexto]="'white'" [corFundo]="'black'" icone="bi bi-question-lg"
+          <mpc-button (click)="abrirModalConfirmacao()" [cores]="{ backgroundColor: 'black', color: 'white' }" icone="bi bi-question-lg"
             posicaoIcone="esquerda" [tabIndex]="0" texto="Modal de Confirmação"></mpc-button>
         </div>
         <div class="col-lg-6 d-flex justify-content-center">
-          <mpc-button (click)="abrirModalAlerta()" [corFundo]="'yellow'" [corTexto]="'black'"
+          <mpc-button (click)="abrirModalAlerta()" [cores]="{ backgroundColor: 'yellow', color: 'black' }"
             icone="bi bi-exclamation-triangle" posicaoIcone="esquerda" [tabIndex]="0"
             texto="Modal de Alerta"></mpc-button>
         </div>
         <div class="col-lg-6 d-flex justify-content-center">
-          <mpc-button (click)="abrirModalErro()" [corFundo]="'red'" [corTexto]="'white'" icone="bi bi-bug"
+          <mpc-button (click)="abrirModalErro()" [cores]="{ backgroundColor: 'red', color: 'white' }" icone="bi bi-bug"
             posicaoIcone="esquerda" [tabIndex]="0" texto="Modal de Erro"></mpc-button>
         </div>
       </div>

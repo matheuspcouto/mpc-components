@@ -1,10 +1,9 @@
 import { RouterTestingModule } from '@angular/router/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router } from '@angular/router';
-import { of, throwError } from 'rxjs';
+import { of } from 'rxjs';
 import { ConfirmacaoComponent } from './confirmacao.component';
 import { InscricaoService } from '../service/inscricao.service';
-import { MpcModalComponent } from '../../../shared/components/mpc-modal/mpc-modal.component';
 import { Inscricao } from '../model/inscricao.model';
 import { Rotas } from '../../../shared/enums/rotas-enum';
 import { ToastrService } from 'ngx-toastr';

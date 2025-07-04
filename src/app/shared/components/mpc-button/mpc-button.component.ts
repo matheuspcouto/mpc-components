@@ -4,14 +4,13 @@
  *
  * texto {string}: Texto do botão.
  * corBotao {string}: Cor do botão (classe CSS Bootstrap ou similar).
- * corFundo {string}: Cor personalizada para o fundo do botão (hex, rgb, rgba, nome da cor).
- * corTexto {string}: Cor personalizada para o texto do botão (hex, rgb, rgba, nome da cor).
+ * cores {object}: Objeto com as cores do botão. Exemplo: { backgroundColor: '#ff5733', color: '#ffffff' }
  * disabled {boolean}: (opcional) Indica se o botão está desabilitado.
  * posicaoIcone {string}: (opcional) Posição do ícone em relação ao texto. Valores possíveis: 'esquerda' ou 'direita'.
  * icone {string}: (opcional) Ícone do botão.
  *
  * Exemplo de utilização:
- * <mpc-button id="botao" texto="Clique aqui" corBotao="btn-primary" corFundo="#ff5733" corTexto="#ffffff" tabIndex="0" disabled="false" posicaoIcone="esquerda" icone="bi bi-code-slash"></mpc-button>
+ * <mpc-button id="botao" texto="Clique aqui" corBotao="btn-primary" [cores]="{ backgroundColor: '#ff5733', color: '#ffffff' }" tabIndex="0" disabled="false" posicaoIcone="esquerda" icone="bi bi-code-slash"></mpc-button>
  *
  * @author Matheus Pimentel Do Couto
  * @created 24/06/2025
@@ -19,6 +18,7 @@
  */
 
 import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 enum PosicoesIcone {
   ESQUERDA = 'esquerda',
@@ -27,7 +27,7 @@ enum PosicoesIcone {
 
 @Component({
   selector: 'mpc-button',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './mpc-button.component.html',
   styleUrl: './mpc-button.component.css'
 })
@@ -39,9 +39,17 @@ export class MpcButtonComponent {
   @Input() ariaLabel?: string = '';
 
   @Input() texto: string = '';
-  @Input() corFundo: string = '';
-  @Input() corTexto: string = '';
+  @Input() cores?: { backgroundColor?: string, color?: string } = {};
   @Input() disabled: boolean = false;
   @Input() posicaoIcone: string = PosicoesIcone.DIREITA;
   @Input() icone: string = '';
+
+  get estiloCores() {
+    if (!this.cores) return {};
+    return {
+      'background-color': this.cores.backgroundColor || '',
+      'border-color': this.cores.backgroundColor || '',
+      'color': this.cores.color || ''
+    };
+  }
 }
