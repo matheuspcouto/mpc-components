@@ -23,58 +23,65 @@ export const routes: Routes = [
     path: 'componentes',
     children: [
       {
-        path: 'buttons',
-        loadComponent: () => import('./pages/componentes/buttons/buttons.component').then(c => c.ButtonsComponent),
+        path: 'mpc-cards-doc',
+        loadComponent: () => import('./pages/componentes/mpc-cards-doc/mpc-cards-doc.component').then(c => c.MpcCardsDocComponent),
         canActivate: [SiteAtivoGuard]
       },
       {
-        path: 'cards',
-        loadComponent: () => import('./pages/componentes/cards/cards.component').then(c => c.CardsComponent),
+        path: 'mpc-modal-doc',
+        loadComponent: () => import('./pages/componentes/mpc-modal-doc/mpc-modal-doc.component').then(c => c.MpcModalDocComponent),
         canActivate: [SiteAtivoGuard]
       },
       {
-        path: 'modais',
-        loadComponent: () => import('./pages/componentes/modais/modais.component').then(c => c.ModaisComponent),
+        path: 'mpc-loader-doc',
+        loadComponent: () => import('./pages/componentes/mpc-loader-doc/mpc-loader-doc.component').then(c => c.MpcLoaderDocComponent),
         canActivate: [SiteAtivoGuard]
       },
       {
-        path: 'loaders',
-        loadComponent: () => import('./pages/componentes/loaders/loaders.component').then(c => c.LoadersComponent),
+        path: 'mpc-navbar-doc',
+        loadComponent: () => import('./pages/componentes/mpc-navbar-doc/mpc-navbar-doc.component').then(c => c.MpcNavbarDocComponent),
         canActivate: [SiteAtivoGuard]
       },
       {
-        path: 'navbar',
-        loadComponent: () => import('./pages/componentes/navbar/navbar.component').then(c => c.NavbarComponent),
+        path: 'mpc-footer-doc',
+        loadComponent: () => import('./pages/componentes/mpc-footer-doc/mpc-footer-doc.component').then(c => c.MpcFooterDocComponent),
         canActivate: [SiteAtivoGuard]
       },
       {
-        path: 'footer',
-        loadComponent: () => import('./pages/componentes/footer/footer.component').then(c => c.FooterComponent),
+        path: 'mpc-tabs-doc',
+        loadComponent: () => import('./pages/componentes/mpc-tabs-doc/mpc-tabs-doc.component').then(c => c.MpcTabsDocComponent),
         canActivate: [SiteAtivoGuard]
       },
       {
-        path: 'scroll-top-button',
-        loadComponent: () => import('./pages/componentes/scroll-top-button/scroll-top-button.component').then(c => c.ScrollTopButtonComponent),
+        path: 'mpc-pagination-doc',
+        loadComponent: () => import('./pages/componentes/mpc-pagination-doc/mpc-pagination-doc.component').then(c => c.MpcPaginationDocComponent),
         canActivate: [SiteAtivoGuard]
       },
       {
-        path: 'tabs',
-        loadComponent: () => import('./pages/componentes/tabs/tabs.component').then(c => c.TabsComponent),
+        path: 'mpc-inputs-doc',
+        loadComponent: () => import('./pages/componentes/mpc-input-doc/mpc-inputs-doc.component').then(c => c.MpcInputsDocComponent),
         canActivate: [SiteAtivoGuard]
       },
       {
-        path: 'paginacao',
-        loadComponent: () => import('./pages/componentes/paginacao/paginacao.component').then(c => c.PaginacaoComponent),
+        path: 'mpc-page-header-doc',
+        loadComponent: () => import('./pages/componentes/mpc-page-header-doc/mpc-page-header-doc.component').then(c => c.MpcPageHeaderDocComponent),
+        canActivate: [SiteAtivoGuard]
+      },
+    ]
+  },
+
+  /*  Rotas para Diretivas */
+  {
+    path: 'diretivas',
+    children: [
+      {
+        path: 'mpc-btn-float-doc',
+        loadComponent: () => import('./pages/diretivas/mpc-btn-float-doc/mpc-btn-float-doc.component').then(c => c.MpcBtnFloatDocComponent),
         canActivate: [SiteAtivoGuard]
       },
       {
-        path: 'inputs',
-        loadComponent: () => import('./pages/componentes/inputs/inputs.component').then(c => c.InputsComponent),
-        canActivate: [SiteAtivoGuard]
-      },
-      {
-        path: 'page-header',
-        loadComponent: () => import('./pages/componentes/page-header/page-header.component').then(c => c.PageHeaderComponent),
+        path: 'mpc-button-doc',
+        loadComponent: () => import('./pages/diretivas/mpc-button-doc/mpc-button-doc.component').then(c => c.MpcButtonDocComponent),
         canActivate: [SiteAtivoGuard]
       },
     ]
@@ -137,7 +144,7 @@ export const routes: Routes = [
       },
       {
         path: 'pagina-erro',
-        loadComponent: () => import('./pages/pagina-erro/pagina-erro.component').then(c => c.PaginaErroComponent),
+        loadComponent: () => import('./pages/paginas-avulsas/pagina-erro/pagina-erro.component').then(c => c.PaginaErroComponent),
         canActivate: [SiteAtivoGuard]
       }
     ]

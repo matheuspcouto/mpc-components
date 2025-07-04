@@ -4,17 +4,20 @@ export const Rotas = {
 
   // Componentes
   COMPONENTES: "/componentes",
-  BUTTONS: "/componentes/buttons",
-  CARDS: "/componentes/cards",
-  MODAIS: "/componentes/modais",
-  LOADERS: "/componentes/loaders",
-  NAVBAR: "/componentes/navbar",
-  FOOTER: "/componentes/footer",
-  SCROLLTOP: "/componentes/scroll-top-button",
-  TABS: "/componentes/tabs",
-  PAGINACAO: "/componentes/paginacao",
-  INPUTS: "/componentes/inputs",
-  PAGE_HEADER: "/componentes/page-header",
+  CARDS: "/componentes/mpc-cards-doc",
+  MODAIS: "/componentes/mpc-modal-doc",
+  LOADERS: "/componentes/mpc-loader-doc",
+  NAVBAR: "/componentes/mpc-navbar-doc",
+  FOOTER: "/componentes/mpc-footer-doc",
+  TABS: "/componentes/mpc-tabs-doc",
+  PAGINACAO: "/componentes/mpc-pagination-doc",
+  INPUTS: "/componentes/mpc-inputs-doc",
+  PAGE_HEADER: "/componentes/mpc-page-header-doc",
+
+  // Diretivas
+  DIRETIVAS: "/diretivas",
+  BTN_FLOAT: "/diretivas/mpc-btn-float-doc",
+  BUTTONS: "/diretivas/mpc-button-doc",
 
   // Paginas
   PAGINAS: "/paginas",

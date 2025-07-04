@@ -1,18 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MpcLoaderComponent } from './shared/components/mpc-loader/mpc-loader.component';
-import { MpcScrollTopButtonComponent } from "./shared/components/mpc-scroll-top-button/mpc-scroll-top-button.component";
 import { MpcNavbarComponent, NavbarConfig } from "./shared/components/mpc-navbar/mpc-navbar.component";
 import { MpcFooterComponent } from "./shared/components/mpc-footer/mpc-footer.component";
 import { Rotas } from './shared/enums/rotas-enum';
+import { MpcBtnFloatDirective } from './shared/directives/mpc-btn-float/mpc-btn-float.directive';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, MpcLoaderComponent, MpcScrollTopButtonComponent, MpcNavbarComponent, MpcFooterComponent],
+  imports: [RouterOutlet, MpcLoaderComponent, MpcNavbarComponent, MpcFooterComponent, MpcBtnFloatDirective],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   protected abas: NavbarConfig[] = [
     { titulo: 'Login', rota: Rotas.LOGIN, icone: 'bi bi-person-fill' },
@@ -22,17 +23,24 @@ export class AppComponent {
       rota: Rotas.COMPONENTES,
       icone: 'bi bi-code-slash',
       subRotas: [
-        { titulo: 'Buttons', rota: Rotas.BUTTONS },
-        { titulo: 'Cards', rota: Rotas.CARDS },
-        { titulo: 'Modais', rota: Rotas.MODAIS },
-        { titulo: 'Loaders', rota: Rotas.LOADERS },
-        { titulo: 'Navbar', rota: Rotas.NAVBAR },
-        { titulo: 'Footer', rota: Rotas.FOOTER },
-        { titulo: 'Tabs', rota: Rotas.TABS },
-        { titulo: 'ScrollTopButton', rota: Rotas.SCROLLTOP },
-        { titulo: 'Paginação', rota: Rotas.PAGINACAO },
-        { titulo: 'Inputs', rota: Rotas.INPUTS },
-        { titulo: 'Page Header', rota: Rotas.PAGE_HEADER },
+        { titulo: 'mpc-cards', rota: Rotas.CARDS },
+        { titulo: 'mpc-modal', rota: Rotas.MODAIS },
+        { titulo: 'mpc-loader', rota: Rotas.LOADERS },
+        { titulo: 'mpc-navbar', rota: Rotas.NAVBAR },
+        { titulo: 'mpc-footer', rota: Rotas.FOOTER },
+        { titulo: 'mpc-tabs', rota: Rotas.TABS },
+        { titulo: 'mpc-pagination', rota: Rotas.PAGINACAO },
+        { titulo: 'mpc-inputs', rota: Rotas.INPUTS },
+        { titulo: 'mpc-page-header', rota: Rotas.PAGE_HEADER },
+      ]
+    },
+    {
+      titulo: 'Diretivas',
+      rota: Rotas.DIRETIVAS,
+      icone: 'bi bi-code-slash',
+      subRotas: [
+        { titulo: 'mpc-button', rota: Rotas.BUTTONS },
+        { titulo: 'mpc-btn-float', rota: Rotas.BTN_FLOAT },
       ]
     },
     {
@@ -56,6 +64,29 @@ export class AppComponent {
       ]
     },
   ];
+
+  private readonly platformId = inject(PLATFORM_ID);
+
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      window.addEventListener('scroll', () => {
+        const scrollPosition = window.scrollY;
+        const btnScrollTop = document.getElementById('scrollTop');
+
+        if (btnScrollTop) {
+          btnScrollTop.style.visibility = scrollPosition > 300 ? 'visible' : 'hidden';
+        }
+      });
+    }
+
+  }
+
+  protected scrollToTop(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
 }
 
 // TODO: Ajustar Tela de Login

@@ -6,4 +6,6 @@
 
 <mpc-loader></mpc-loader>
 
-<mpc-scroll-top-button icone="bi bi-arrow-up-short"></mpc-scroll-top-button>
+<button mpcBtnFloat id="scrollTop" icone="bi bi-arrow-up-short" [style.background-color]="'var(--color-secondary)'"
+    [style.color]="'white'" (click)="scrollToTop()">
+</button>
