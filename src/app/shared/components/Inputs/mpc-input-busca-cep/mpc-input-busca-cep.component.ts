@@ -12,7 +12,7 @@
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
- * @updated 27/02/2025
+ * @updated 04/07/2025
  */
 
 import { HttpClient } from '@angular/common/http';
@@ -56,24 +56,39 @@ export class MpcInputBuscaCepComponent implements OnInit {
   private readonly http = inject(HttpClient);
   private readonly cepMaskPipe = new CepMaskPipe();
 
+  /**
+   * Inicializa a validação do campo.
+   */
   ngOnInit(): void {
     this.isCampoValido(this.value);
   }
 
+  /**
+   * Retorna o valor formatado do CEP.
+   */
   get valorFormatado(): string {
     return this.cepMaskPipe.transform(this.value);
   }
 
+  /**
+   * Marca o campo como tocado e valida.
+   */
   protected onFocus(): void {
     this.campoTocado = true;
     this.isCampoValido(this.value);
   }
 
+  /**
+   * Atualiza o valor do campo e pesquisa o CEP se válido.
+   */
   protected setValue(event: any): void {
     this.value = event.target.value as string;
     if (this.isCampoValido(this.value)) { this.pequisarCep(this.value); }
   }
 
+  /**
+   * Valida o campo.
+   */
   private isCampoValido(value: string | undefined): boolean {
     if (this.isCampoObrigatorio(value)) {
       this.error.emit({ required: true });
@@ -95,17 +110,26 @@ export class MpcInputBuscaCepComponent implements OnInit {
     return true;
   }
 
+  /**
+   * Verifica se o valor do CEP é inválido.
+   */
   private isCepInvalido(value: string | undefined): boolean {
     if (!value) return true;
     return !new RegExp(REGEX_CEP).test(value);
   }
 
+  /**
+   * Verifica se o campo é obrigatório e está vazio.
+   */
   private isCampoObrigatorio(value: string | undefined): boolean {
     if (!this.required) return false;
     if (!value) return true;
     return this.required && value.length === 0;
   }
 
+  /**
+   * Realiza a pesquisa do CEP na API.
+   */
   private pequisarCep(cep: string | undefined): void {
 
     if (!cep) return;

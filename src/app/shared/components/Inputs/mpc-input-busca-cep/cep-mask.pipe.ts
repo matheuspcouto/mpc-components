@@ -22,6 +22,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class CepMaskPipe implements PipeTransform {
 
+  /**
+   * Aplica a máscara de CEP ao valor informado.
+   */
   transform(value: string | null | undefined): string {
     if (!value) {
       return '';
@@ -37,6 +40,9 @@ export class CepMaskPipe implements PipeTransform {
     return this.aplicarMascaraCEP(valorLimpo);
   }
 
+  /**
+   * Aplica a máscara no formato 00000-000.
+   */
   private aplicarMascaraCEP(valor: string): string {
     // Limita a 8 dígitos para CEP
     const cep = valor.substring(0, 8);

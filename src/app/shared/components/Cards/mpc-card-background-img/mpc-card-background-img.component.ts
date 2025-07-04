@@ -12,7 +12,7 @@
  *
  * @author Matheus Pimentel Do Couto
  * @created 24/06/2025
- * @updated 24/06/2025
+ * @updated 04/07/2025
  */
 
 import { Component, Input } from '@angular/core';
@@ -35,6 +35,10 @@ export class MpcCardBackGroundImgComponent {
   @Input() descricao: string = '';
   @Input() imagemFundo: string = '';
 
+  /**
+   * Retorna o estilo de background-image com gradiente escuro sobre a imagem de fundo.
+   * @returns {string} CSS para background-image
+   */
   getBackgroundImage(): string {
     return `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${this.imagemFundo})`;
   }

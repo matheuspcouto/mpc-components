@@ -6,7 +6,7 @@
  *
  * @author Matheus Pimentel Do Couto
  * @created 01/07/2025
- * @updated 01/07/2025
+ * @updated 04/07/2025
  */
 
 import { Component, inject, computed } from '@angular/core';
@@ -27,13 +27,19 @@ export class ErrorComponent {
     private notificationService = inject(ToastrService);
     private errorService = inject(ErrorService);
 
-    // Computed signal que verifica se há erro para exibir
+    /**
+     * Computed signal que verifica se há erro para exibir.
+     */
     protected readonly exibirErro = computed(() => this.errorService.erro() !== null);
 
-    // Computed signal que retorna o erro atual
+    /**
+     * Computed signal que retorna o erro atual.
+     */
     protected readonly erro = computed(() => this.errorService.erro());
 
-    // Computed signal que retorna a imagem do erro ou imagem padrão
+    /**
+     * Computed signal que retorna a imagem do erro ou imagem padrão.
+     */
     protected readonly imagemErro = computed(() => {
         const erroAtual = this.erro();
         return erroAtual?.imagem || 'assets/img/modal/error.png';
@@ -41,6 +47,9 @@ export class ErrorComponent {
 
     protected isCopiado: boolean = false;
 
+    /**
+     * Navega para a rota de retorno e limpa o erro.
+     */
     protected voltar(): void {
         const erroAtual = this.erro();
         if (erroAtual) {
@@ -49,6 +58,9 @@ export class ErrorComponent {
         }
     }
 
+    /**
+     * Copia a mensagem de erro para a área de transferência e exibe notificação.
+     */
     protected copiarMensagem(mensagem: string | undefined): void {
         if (!mensagem) return;
         navigator.clipboard.writeText(mensagem);

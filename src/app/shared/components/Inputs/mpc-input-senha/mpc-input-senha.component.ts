@@ -16,7 +16,7 @@
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
- * @updated 27/02/2025
+ * @updated 04/07/2025
  */
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
@@ -51,16 +51,25 @@ export class MpcInputSenhaComponent {
   protected campoTocado: boolean = false;
   protected ocultarSenha: boolean = true;
 
+  /**
+   * Marca o campo como tocado e valida.
+   */
   protected onFocus(): void {
     this.campoTocado = true;
     this.isCampoValido(this.value);
   }
 
+  /**
+   * Atualiza o valor do campo e emite se válido.
+   */
   protected setValue(event: any): void {
     this.value = event.target.value;
     if (this.isCampoValido(this.value)) { this.valor.emit(this.value); }
   }
 
+  /**
+   * Valida o campo.
+   */
   private isCampoValido(value: string | undefined): boolean {
     if (this.readonly || this.disabled) { return true; }
 
@@ -80,12 +89,18 @@ export class MpcInputSenhaComponent {
     return true;
   }
 
+  /**
+   * Verifica se a senha é inválida.
+   */
   private isSenhaInvalida(value: string | undefined): boolean {
     if (!this.regexSenha) return false;
     if (!value) return true;
     return this.regexSenha.length > 0 && !new RegExp(this.regexSenha).test(value);
   }
 
+  /**
+   * Verifica se o campo é obrigatório e está vazio.
+   */
   private isCampoObrigatorio(value: string | undefined): boolean {
     if (!this.required) return false;
     if (!value) return true;

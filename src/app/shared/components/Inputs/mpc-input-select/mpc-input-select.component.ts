@@ -15,7 +15,7 @@
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
- * @updated 27/02/2025
+ * @updated 04/07/2025
  */
 
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
@@ -56,6 +56,9 @@ export class MpcInputSelectComponent implements OnInit {
   protected errorMessage?: string;
   protected campoTocado: boolean = false;
 
+  /**
+   * Inicializa o componente e define a opção selecionada.
+   */
   ngOnInit(): void {
     this.opcaoSelecionada = this.options.find(option => option.selected);
 
@@ -73,16 +76,25 @@ export class MpcInputSelectComponent implements OnInit {
     this.isCampoValido();
   }
 
+  /**
+   * Marca o campo como tocado e valida.
+   */
   protected onFocus(): void {
     this.campoTocado = true;
     this.isCampoValido();
   }
 
+  /**
+   * Atualiza a opção selecionada e emite se válido.
+   */
   setValue(option: any): void {
     this.opcaoSelecionada = option as SelectOption;
     if (this.isCampoValido()) { this.valor.emit(this.opcaoSelecionada?.value) }
   }
 
+  /**
+   * Valida o campo.
+   */
   private isCampoValido(): boolean {
     if (this.disabled) return true;
 
@@ -98,6 +110,9 @@ export class MpcInputSelectComponent implements OnInit {
     return true;
   }
 
+  /**
+   * Verifica se o campo é obrigatório e está vazio.
+   */
   private isCampoObrigatorio(): boolean {
     if (!this.required) return false;
     return this.required &&

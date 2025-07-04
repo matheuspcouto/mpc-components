@@ -1,3 +1,11 @@
+/**
+ * @Componente PagamentoComponent
+ * Este componente é responsável por exibir e gerenciar o formulário de pagamento.
+ *
+ * @author Matheus Pimentel Do Couto
+ * @created 27/06/2025
+ * @updated 04/07/2025
+ */
 import { SelectOption } from '../../../shared/components/Inputs/mpc-input-select/mpc-input-select.component';
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -38,10 +46,16 @@ export default class PagamentoComponent implements OnInit {
     valor: [100]
   });
 
+  /**
+   * Inicializa o formulário e atualiza os dados se já existirem.
+   */
   ngOnInit(): void {
     this.atualizarForm()
   }
 
+  /**
+   * Atualiza o formulário com os dados salvos, se existirem.
+   */
   private atualizarForm(): void {
     try {
       const dadosInscricao = this.inscricaoService.getDadosInscricao();
@@ -64,6 +78,9 @@ export default class PagamentoComponent implements OnInit {
     }
   }
 
+  /**
+   * Calcula o valor total de acordo com a forma de pagamento.
+   */
   private calcularValorTotal(): void {
     const valorNormal = 100.00;
     const valorComTaxa = valorNormal as number * 1.05;
@@ -71,15 +88,24 @@ export default class PagamentoComponent implements OnInit {
     this.form.patchValue({ valor: valorTotal });
   }
 
+  /**
+   * Atualiza a forma de pagamento e recalcula o valor.
+   */
   protected atualizarFormaPagamento(formaPagamento: any): void {
     this.form.patchValue({ formaPagamento });
     this.calcularValorTotal();
   }
 
+  /**
+   * Formata o valor para o padrão monetário brasileiro.
+   */
   protected formatarValor(valor: any): string {
     return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   }
 
+  /**
+   * Avança para a próxima etapa do formulário.
+   */
   protected proximaEtapa(): void {
     try {
       if (this.form.invalid) return;
@@ -90,6 +116,9 @@ export default class PagamentoComponent implements OnInit {
     }
   }
 
+  /**
+   * Volta para a etapa anterior do formulário.
+   */
   protected etapaAnterior(): void {
     try {
       this.inscricaoService.atualizarDadosInscricao(this.form.value, 2);

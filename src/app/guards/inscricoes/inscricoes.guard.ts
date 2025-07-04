@@ -4,6 +4,14 @@ import { InscricaoService } from '../../pages/formulario/service/inscricao.servi
 import { Rotas } from '../../shared/enums/rotas-enum';
 import { Observable, map, of } from 'rxjs';
 
+/**
+ * @Guard InscricoesGuard
+ * Este guard é responsável por controlar o acesso às rotas de inscrição, verificando vagas e etapas do formulário.
+ *
+ * @author Matheus Pimentel Do Couto
+ * @created 27/06/2025
+ * @updated 04/07/2025
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -14,6 +22,10 @@ export class InscricoesGuard implements CanActivate {
   private inscricaoService = inject(InscricaoService);
   private router = inject(Router);
 
+  /**
+   * Verifica se a navegação pode ser ativada, checando etapas e vagas.
+   * @param route Rota ativada
+   */
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
     // Se for rota de formulário, faz checagem extra
     const etapaMinima = route.data['etapaMinima'];
@@ -25,6 +37,9 @@ export class InscricoesGuard implements CanActivate {
     return this.verificarInscricoesAbertas();
   }
 
+  /**
+   * Verifica se ainda há vagas disponíveis para inscrição.
+   */
   private verificarInscricoesAbertas(): Observable<boolean> {
     return this.inscricaoService.listarInscricoes().pipe(
       map((response: any) => {
@@ -40,6 +55,11 @@ export class InscricoesGuard implements CanActivate {
     );
   }
 
+  /**
+   * Verifica se o usuário pode acessar determinada etapa do formulário.
+   * @param etapaMinima Etapa mínima exigida
+   * @param checagem Tipo de checagem extra
+   */
   private verificarAcessoFormulario(etapaMinima: number, checagem: string): boolean {
     const etapaAtual = this.inscricaoService.getEtapaAtual();
     if (etapaAtual < etapaMinima) {

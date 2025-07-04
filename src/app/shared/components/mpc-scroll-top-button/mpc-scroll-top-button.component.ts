@@ -1,6 +1,6 @@
 /**
  * @Componente MpcScrollTopButtonComponent
- * Este componente é responsável por exibir um botão que ao ser clicado faz a rolagem da página para o topo.
+ * Este componente exibe um botão para rolar a página ao topo.
  *
  * icone {string}: Ícone do botão.
  *
@@ -8,8 +8,8 @@
  * <mpc-scroll-top-button icone="bi bi-arrow-up-short"></mpc-scroll-top-button>
  *
  * @author Matheus Pimentel Do Couto
- * @created 01/07/2025
- * @updated 01/07/2025
+ * @created 27/02/2025
+ * @updated 04/07/2025
  */
 
 import { isPlatformBrowser } from '@angular/common';

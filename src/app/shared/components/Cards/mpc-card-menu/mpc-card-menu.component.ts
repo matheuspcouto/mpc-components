@@ -12,7 +12,7 @@
  *
  * @author Matheus Pimentel Do Couto
  * @created 24/06/2025
- * @updated 24/06/2025
+ * @updated 04/07/2025
  */
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
@@ -36,6 +36,9 @@ export class MpcCardMenuComponent {
 
   @Output() acao = new EventEmitter<void>();
 
+  /**
+   * Emite o evento de clique do card.
+   */
   protected clique(): void {
     this.acao.emit();
   }

@@ -23,6 +23,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class EmailMaskPipe implements PipeTransform {
 
+  /**
+   * Aplica a máscara de e-mail ao valor informado.
+   */
   transform(value: string | null | undefined): string {
     if (!value) {
       return '';
@@ -40,6 +43,9 @@ export class EmailMaskPipe implements PipeTransform {
     return this.aplicarFormatacaoEmail(emailValidado);
   }
 
+  /**
+   * Aplica formatação visual básica ao e-mail.
+   */
   private aplicarFormatacaoEmail(email: string): string {
     // Se não contém @, retorna como está sendo digitado
     if (!email.includes('@')) {

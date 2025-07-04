@@ -15,7 +15,7 @@
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
- * @updated 27/02/2025
+ * @updated 04/07/2025
  */
 
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
@@ -50,28 +50,46 @@ export class MpcInputPesquisaComponent implements OnInit {
   protected errorMessage?: string;
   protected campoTocado: boolean = false;
 
+  /**
+   * Inicializa a validação do campo.
+   */
   ngOnInit(): void {
     this.isCampoValido(this.value);
   }
 
+  /**
+   * Retorna o valor mínimo como número.
+   */
   get minLength(): number {
     return parseInt(this.min || '0');
   }
 
+  /**
+   * Emite o evento de pesquisa.
+   */
   protected pesquisar(): void {
     this.pesquisarEvent.emit();
   }
 
+  /**
+   * Marca o campo como tocado e valida.
+   */
   protected onFocus(): void {
     this.campoTocado = true;
     this.isCampoValido(this.value);
   }
 
+  /**
+   * Atualiza o valor do campo e valida.
+   */
   protected setValue(event: Event): void {
     this.value = (event.target as HTMLInputElement).value;
     this.isCampoValido(this.value);
   }
 
+  /**
+   * Valida o campo.
+   */
   private isCampoValido(value: string | undefined): boolean {
     if (this.readonly || this.disabled) { return true; }
 
@@ -87,12 +105,18 @@ export class MpcInputPesquisaComponent implements OnInit {
     return true;
   }
 
+  /**
+   * Verifica se o valor é menor que o mínimo.
+   */
   private isMenorQueValorMinimo(value: string | undefined): boolean {
     if (!this.minLength) return false;
     if (!value || value.length === 0) return true;
     return value.length < this.minLength;
   }
 
+  /**
+   * Limpa o valor do campo.
+   */
   protected limparPesquisa(): void {
     this.value = '';
   }

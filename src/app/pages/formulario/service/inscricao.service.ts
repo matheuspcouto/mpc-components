@@ -1,3 +1,12 @@
+/**
+ * @Service InscricaoService
+ * Este service gerencia o fluxo de dados e etapas do formulário de inscrição, além de simular requisições de inscrição.
+ *
+ * @author Matheus Pimentel Do Couto
+ * @created 27/06/2025
+ * @updated 04/07/2025
+ */
+
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
@@ -25,6 +34,9 @@ export class InscricaoService {
 
   private http = inject(HttpClient);
 
+  /**
+   * Atualiza os dados da inscrição e a etapa atual, se informado.
+   */
   atualizarDadosInscricao(novosDados: any, proximaEtapa?: number): void {
     const dadosAtuais = this.dadosInscricaoSubject.getValue();
     const dadosAtualizados = { ...dadosAtuais, ...novosDados };
@@ -35,14 +47,23 @@ export class InscricaoService {
     }
   }
 
+  /**
+   * Retorna os dados atuais da inscrição.
+   */
   getDadosInscricao(): any {
     return this.dadosInscricaoSubject.getValue();
   }
 
+  /**
+   * Retorna a etapa atual do formulário.
+   */
   getEtapaAtual(): number {
     return this.etapaAtualSubject.getValue();
   }
 
+  /**
+   * Detalha uma inscrição pelo id (mock).
+   */
   detalharInscricao(id: string): Observable<Inscricao> {
     // MOCK - Retorna o objeto mock do arquivo JSON
     return Observable.create((observer: any) => {
@@ -56,6 +77,9 @@ export class InscricaoService {
     // return this.http.get<any>(`${this.apiUrl}/inscricoes/${codigoInscricao}/detalhes`, { headers: this.headers });
   }
 
+  /**
+   * Lista todas as inscrições (mock).
+   */
   listarInscricoes(): Observable<Inscricao[]> {
     // MOCK
     return Observable.create((observer: any) => {
@@ -68,6 +92,9 @@ export class InscricaoService {
     // return this.http.get<any>(`${this.apiUrl}/inscricoes`, { headers: this.headers });
   }
 
+  /**
+   * Realiza a inscrição (mock).
+   */
   inscrever(body: Inscricao): Observable<Inscricao> {
     // MOCK
     return Observable.create((observer: any) => {
@@ -85,17 +112,15 @@ export class InscricaoService {
   }
 
   /**
- * @description Verifica se todos os campos obrigatórios de dados pessoais estão preenchidos
- * @returns {boolean} true se todos os dados pessoais estão completos, false caso contrário
- */
+   * Verifica se todos os campos obrigatórios de dados pessoais estão preenchidos.
+   */
   isDadosPessoaisCompletos(): boolean {
     const dados = this.getDadosInscricao();
     return !!(dados.nome && dados.dataNasc && dados.sexo && dados.estadoCivil && dados.cpfCnpj);
   }
 
   /**
-   * @description Verifica se todos os campos obrigatórios de contato estão preenchidos
-   * @returns {boolean} true se todos os dados de contato estão completos, false caso contrário
+   * Verifica se todos os campos obrigatórios de contato estão preenchidos.
    */
   isContatoCompleto(): boolean {
     const dados = this.getDadosInscricao();
@@ -103,8 +128,7 @@ export class InscricaoService {
   }
 
   /**
-   * @description Verifica se todos os campos obrigatórios de pagamento estão preenchidos
-   * @returns {boolean} true se todos os dados de pagamento estão completos, false caso contrário
+   * Verifica se todos os campos obrigatórios de pagamento estão preenchidos.
    */
   isPagamentoCompleto(): boolean {
     const dados = this.getDadosInscricao();
@@ -112,14 +136,7 @@ export class InscricaoService {
   }
 
   /**
-   * @description Verifica se a inscrição está completamente preenchida (todos os dados obrigatórios)
-   * @returns {boolean} true se a inscrição está completa, false caso contrário
-   * @example
-   * const inscricao = new Inscricao();
-   * inscricao.inicializarDadosPessoais('João', 'Silva', '1990-01-01', 'M', 'Solteiro', 33, '12345678901')
-   *         .inicializarContato('11999999999', 'joao@email.com', 'Rua das Flores, 123')
-   *         .inicializarPagamento('Cartão de Crédito', 150.00);
-   * const completa = inscricao.isInscricaoCompleta(); // Retorna: true
+   * Verifica se a inscrição está completamente preenchida.
    */
   isInscricaoCompleta(): boolean {
     return this.isDadosPessoaisCompletos() && this.isContatoCompleto() && this.isPagamentoCompleto();

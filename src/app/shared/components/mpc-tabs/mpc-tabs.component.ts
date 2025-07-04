@@ -11,8 +11,8 @@
  * <mpc-tabs [tabs]="tabs" [tabIndex]="0" ariaLabel="Tabs" (tabSelected)="selecionarTab($event)"></mpc-tabs>
  *
  * @author Matheus Pimentel Do Couto
- * @created 25/06/2025
- * @updated 25/06/2025
+ * @created 27/02/2025
+ * @updated 04/07/2025
  */
 
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';

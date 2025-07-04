@@ -1,6 +1,6 @@
 /**
  * @Componente MpcFooterComponent
- * Este componente é responsável por exibir um footer na tela.
+ * Este componente é responsável por exibir o rodapé da aplicação.
  *
  *
  * Exemplo de utilização:
@@ -8,7 +8,7 @@
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
- * @updated 27/02/2025
+ * @updated 04/07/2025
  */
 
 import { Component } from '@angular/core';

@@ -15,7 +15,7 @@
  *
  * @author Matheus Pimentel Do Couto
  * @created 24/06/2025
- * @updated 24/06/2025
+ * @updated 04/07/2025
  */
 
 import { Component, Input } from '@angular/core';

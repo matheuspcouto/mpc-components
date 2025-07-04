@@ -14,7 +14,7 @@
  *
  * @author Matheus Pimentel Do Couto
  * @created 24/06/2025
- * @updated 24/06/2025
+ * @updated 04/07/2025
  */
 
 import { Component, Input } from '@angular/core';
@@ -45,14 +45,26 @@ export class MpcCardComponent {
   @Input() links: CardLinks[] = [];
   @Input() layout: 'vertical' | 'horizontal' = 'vertical';
 
+  /**
+   * Retorna a URL da imagem do card ou uma imagem padrão caso não exista.
+   * @returns {string} URL da imagem
+   */
   protected getImagemCard(): string {
     return this.imagem ? `${this.imagem}` : 'no-image.jpg';
   }
 
+  /**
+   * Verifica se o layout do card é vertical.
+   * @returns {boolean}
+   */
   protected isVertical(): boolean {
     return this.layout === 'vertical';
   }
 
+  /**
+   * Verifica se o layout do card é horizontal.
+   * @returns {boolean}
+   */
   protected isHorizontal(): boolean {
     return this.layout === 'horizontal';
   }

@@ -1,6 +1,6 @@
 /**
  * @Componente MpcFormProgressBarComponent
- * Este componente é responsável por exibir uma barra de progresso do formulário com etapas.
+ * Este componente é responsável por exibir uma barra de progresso de formulário.
  *
  * etapa {number}: número da etapa atual.
  * totalEtapas {number}: total de etapas do formulário.
@@ -10,7 +10,7 @@
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
- * @updated 27/02/2025
+ * @updated 04/07/2025
  */
 
 import { Component, Input } from '@angular/core';

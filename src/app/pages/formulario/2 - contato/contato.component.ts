@@ -1,3 +1,11 @@
+/**
+ * @Componente ContatoComponent
+ * Este componente é responsável por exibir e gerenciar o formulário de contato.
+ *
+ * @author Matheus Pimentel Do Couto
+ * @created 27/06/2025
+ * @updated 04/07/2025
+ */
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Rotas } from '../../../shared/enums/rotas-enum';
@@ -44,10 +52,16 @@ export default class ContatoComponent implements OnInit {
     complemento: [''],
   });
 
+  /**
+   * Inicializa o formulário e atualiza os dados se já existirem.
+   */
   ngOnInit(): void {
     this.atualizarForm();
   }
 
+  /**
+   * Atualiza o formulário com os dados salvos, se existirem.
+   */
   private atualizarForm(): void {
     try {
       const dadosInscricao = this.inscricaoService.getDadosInscricao();
@@ -72,6 +86,9 @@ export default class ContatoComponent implements OnInit {
     }
   }
 
+  /**
+   * Avança para a próxima etapa do formulário, validando os campos.
+   */
   protected proximaEtapa(): void {
     try {
       if (this.form.invalid) {
@@ -85,6 +102,9 @@ export default class ContatoComponent implements OnInit {
     }
   }
 
+  /**
+   * Volta para a etapa anterior do formulário.
+   */
   protected etapaAnterior(): void {
     try {
       this.inscricaoService.atualizarDadosInscricao(this.form.value, 1);
@@ -94,6 +114,9 @@ export default class ContatoComponent implements OnInit {
     }
   }
 
+  /**
+   * Preenche o endereço no formulário a partir do CEP.
+   */
   protected definirEnderecoPorCep(endereco: Endereco): void {
     this.form.patchValue({
       rua: endereco.rua,

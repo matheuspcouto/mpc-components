@@ -8,6 +8,14 @@ import { Rotas } from '../../../shared/enums/rotas-enum';
 import { MpcInputPesquisaComponent } from '../../../shared/components/Inputs/mpc-input-pesquisa/mpc-input-pesquisa.component';
 import { ToastrService } from 'ngx-toastr';
 
+/**
+ * @Componente PesquisaComponent
+ * Este componente é responsável por exibir e gerenciar a pesquisa de inscrições.
+ *
+ * @author Matheus Pimentel Do Couto
+ * @created 27/06/2025
+ * @updated 04/07/2025
+ */
 @Component({
     selector: 'app-pesquisa',
     imports: [ReactiveFormsModule, FormsModule, MpcInputPesquisaComponent],
@@ -22,6 +30,9 @@ export class PesquisaComponent {
 
     protected form = this.formBuilder.group({ pesquisa: [''] });
 
+    /**
+     * Realiza a pesquisa da inscrição pelo valor do campo.
+     */
     protected pesquisar(): void {
         this.inscricaoService.detalharInscricao(this.form.controls.pesquisa.value)
             .pipe(take(1))

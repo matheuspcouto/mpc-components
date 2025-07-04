@@ -23,6 +23,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class CpfCnpjMaskPipe implements PipeTransform {
 
+  /**
+   * Aplica a máscara de CPF ou CNPJ ao valor informado.
+   */
   transform(value: string | null | undefined): string {
     if (!value) {
       return '';
@@ -39,6 +42,9 @@ export class CpfCnpjMaskPipe implements PipeTransform {
     }
   }
 
+  /**
+   * Aplica a máscara de CPF no formato 000.000.000-00.
+   */
   private aplicarMascaraCPF(valor: string): string {
     // Limita a 11 dígitos para CPF
     const cpf = valor.substring(0, 11);
@@ -55,6 +61,9 @@ export class CpfCnpjMaskPipe implements PipeTransform {
     }
   }
 
+  /**
+   * Aplica a máscara de CNPJ no formato 00.000.000/0000-00.
+   */
   private aplicarMascaraCNPJ(valor: string): string {
     // Limita a 14 dígitos para CNPJ
     const cnpj = valor.substring(0, 14);

@@ -9,7 +9,7 @@
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/06/2025
- * @updated 27/06/2025
+ * @updated 04/07/2025
  */
 
 import { inject, Injectable, signal } from "@angular/core";
@@ -35,8 +35,8 @@ export class ErrorService {
   public readonly erro = this._erro.asReadonly();
 
   /**
-   * Constrói um erro e atualiza o estado
-   * @param erro - Objeto de erro completo do tipo any
+   * Constrói um erro e atualiza o estado.
+   * @param erro Objeto de erro
    */
   construirErro(erro: any): void {
     let erroProcessado: Erro;
@@ -71,7 +71,7 @@ export class ErrorService {
   }
 
   /**
-   * Limpa o estado do erro
+   * Limpa o estado do erro.
    */
   limparErro(): void {
     this._erro.set(null);

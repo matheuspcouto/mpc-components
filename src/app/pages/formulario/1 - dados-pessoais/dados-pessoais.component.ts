@@ -1,3 +1,11 @@
+/**
+ * @Componente DadosPessoaisComponent
+ * Este componente é responsável por exibir e gerenciar o formulário de dados pessoais.
+ *
+ * @author Matheus Pimentel Do Couto
+ * @created 27/06/2025
+ * @updated 04/07/2025
+ */
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Rotas } from '../../../shared/enums/rotas-enum';
@@ -59,11 +67,17 @@ export default class DadosPessoaisComponent implements OnInit {
     descricao: ['']
   });
 
+  /**
+   * Inicializa o formulário e atualiza os dados se já existirem.
+   */
   ngOnInit(): void {
     this.atualizarForm();
     this.dataAtual = this.formatarData(this.dataAtual);
   }
 
+  /**
+   * Atualiza o formulário com os dados salvos, se existirem.
+   */
   private atualizarForm(): void {
     try {
       const dadosInscricao = this.inscricaoService.getDadosInscricao();
@@ -103,6 +117,9 @@ export default class DadosPessoaisComponent implements OnInit {
     }
   }
 
+  /**
+   * Avança para a próxima etapa do formulário, validando os campos.
+   */
   protected proximaEtapa(): void {
     try {
       if (this.form.invalid) {
@@ -116,6 +133,9 @@ export default class DadosPessoaisComponent implements OnInit {
     }
   }
 
+  /**
+   * Formata a data para o padrão yyyy-mm-dd.
+   */
   private formatarData(data: string): string {
     const partes = data.split('-');
     if (partes.length === 3) {

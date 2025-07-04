@@ -1,6 +1,6 @@
 /**
  * @Componente MpcNavbarComponent
- * Este componente é responsável por exibir uma navbar na tela.
+ * Este componente é responsável por exibir a barra de navegação principal.
  *
  * abas: NavbarConfig[]: Configuração das abas da navbar.
  *
@@ -9,7 +9,7 @@
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
- * @updated 27/02/2025
+ * @updated 04/07/2025
  */
 
 import { Component, inject, Input, OnInit } from '@angular/core';

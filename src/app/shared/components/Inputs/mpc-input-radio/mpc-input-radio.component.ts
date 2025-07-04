@@ -16,7 +16,7 @@
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
- * @updated 27/02/2025
+ * @updated 04/07/2025
  */
 
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
@@ -57,6 +57,9 @@ export class MpcInputRadioComponent implements OnInit {
   protected errorMessage?: string;
   protected campoTocado: boolean = false;
 
+  /**
+   * Inicializa o componente e define a opção selecionada.
+   */
   ngOnInit(): void {
     const optionSelecionada = this.options.find(option => option.checked);
     if (optionSelecionada) {
@@ -67,11 +70,17 @@ export class MpcInputRadioComponent implements OnInit {
     this.isCampoValido();
   }
 
+  /**
+   * Marca o campo como tocado e valida.
+   */
   protected onFocus(): void {
     this.campoTocado = true;
     this.isCampoValido();
   }
 
+  /**
+   * Atualiza a opção selecionada e emite se válido.
+   */
   protected setValue(option: RadioOption): void {
     this.options.forEach(v => v.checked = false);
     option.checked = true;
@@ -79,6 +88,9 @@ export class MpcInputRadioComponent implements OnInit {
     if (this.isCampoValido()) { this.valor.emit(this.opcaoSelecionada.value); }
   }
 
+  /**
+   * Valida o campo.
+   */
   private isCampoValido(): boolean {
     if (this.readonly || this.disabled) { return true; }
 
@@ -94,6 +106,9 @@ export class MpcInputRadioComponent implements OnInit {
     return true;
   }
 
+  /**
+   * Verifica se o campo é obrigatório e está vazio.
+   */
   private isCampoObrigatorio(): boolean {
     if (!this.required) return false;
     return this.required && !this.opcaoSelecionada;

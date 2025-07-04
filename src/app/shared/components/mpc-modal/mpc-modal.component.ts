@@ -9,7 +9,7 @@
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
- * @updated 27/02/2025
+ * @updated 04/07/2025
  */
 
 import { MpcModalConfig } from './mpc-modal.directive';
@@ -47,8 +47,15 @@ export class MpcModalComponent {
  private readonly notificationService = inject(ToastrService);
  private readonly modalService = inject(MpcModalService);
 
+  /**
+   * Fecha o modal e reseta os estados internos.
+   */
   fecharModal() { this.modalService.hide(); this.exibirModal = false; this.isCopiado = false; }
 
+  /**
+   * Abre o modal com a configuração informada.
+   * @param modalConfig Configuração do modal
+   */
   abrirModal(modalConfig: MpcModalConfig) {
     this.modal = modalConfig;
 
@@ -67,6 +74,9 @@ export class MpcModalComponent {
     this.exibirModal = true;
   };
 
+  /**
+   * Copia o texto do modal para a área de transferência e exibe notificação.
+   */
   copiarCodigo() {
     navigator.clipboard.writeText(this.modal.texto);
     this.isCopiado = true;

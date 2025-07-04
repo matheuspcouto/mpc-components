@@ -18,7 +18,7 @@
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
- * @updated 27/02/2025
+ * @updated 04/07/2025
  */
 
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
@@ -52,20 +52,32 @@ export class MpcInputNumberComponent implements OnInit {
   protected errorMessage?: string;
   protected campoTocado: boolean = false;
 
+  /**
+   * Inicializa a validação do campo.
+   */
   ngOnInit(): void {
     this.isCampoValido(this.value);
   }
 
+  /**
+   * Marca o campo como tocado e valida.
+   */
   protected onFocus(): void {
     this.campoTocado = true;
     this.isCampoValido(this.value);
   }
 
+  /**
+   * Atualiza o valor do campo e emite se válido.
+   */
   protected setValue(event: any): void {
     this.value = event.target.value as number;
     if (this.isCampoValido(this.value)) { this.valor.emit(this.value); }
   }
 
+  /**
+   * Valida o campo.
+   */
   private isCampoValido(value: number | undefined): boolean {
     if (this.readonly || this.disabled) { return true; }
 
@@ -89,12 +101,18 @@ export class MpcInputNumberComponent implements OnInit {
     return true;
   }
 
+  /**
+   * Verifica se o valor é menor que o mínimo.
+   */
   private isMenorQueValorMinimo(value: number | undefined): boolean {
     if (!this.min) return false;
     if (!value) return true;
     return value < this.min;
   }
 
+  /**
+   * Verifica se o valor é maior que o máximo.
+   */
   private isMaiorQueValorMaximo(value: number | undefined): boolean {
     if (!this.max) return false;
     if (!value) return true;

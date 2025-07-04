@@ -15,7 +15,7 @@
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
- * @updated 27/02/2025
+ * @updated 04/07/2025
  */
 
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
@@ -50,25 +50,40 @@ export class MpcInputCpfcnpjComponent implements OnInit {
 
   private readonly cpfCnpjMaskPipe = new CpfCnpjMaskPipe();
 
+  /**
+   * Retorna o valor formatado do campo.
+   */
   get valorFormatado(): string {
     return this.cpfCnpjMaskPipe.transform(this.value);
   }
 
+  /**
+   * Inicializa a validação do campo.
+   */
   ngOnInit(): void {
     this.isCampoValido(this.value);
   }
 
+  /**
+   * Marca o campo como tocado e valida.
+   */
   protected onFocus(): void {
     this.campoTocado = true;
     this.isCampoValido(this.value);
   }
 
+  /**
+   * Atualiza o valor do campo e emite se válido.
+   */
   protected setValue(event: any): void {
     this.value = event.target.value as string;
     this.value = this.value.replace(/\D/g, '');
     if (this.isCampoValido(this.value)) { this.valor.emit(this.value); }
   }
 
+  /**
+   * Valida o campo.
+   */
   private isCampoValido(value: string | undefined): boolean {
     if (this.readonly || this.disabled) {
       return true;
@@ -94,10 +109,16 @@ export class MpcInputCpfcnpjComponent implements OnInit {
     return true;
   }
 
+  /**
+   * Verifica se o campo é obrigatório e está vazio.
+   */
   private isCampoObrigatorio(value: string | undefined): boolean {
     return this.required && (!value || value.length === 0);
   }
 
+  /**
+   * Valida se o CPF é válido.
+   */
   private isCPFValido(cpf: string | undefined): boolean {
     cpf = cpf ? cpf.replace(/\D/g, '') : '';
 
@@ -124,6 +145,9 @@ export class MpcInputCpfcnpjComponent implements OnInit {
     return secondDigit === parseInt(cpf.charAt(10));
   }
 
+  /**
+   * Valida se o CNPJ é válido.
+   */
   private isCNPJValido(cnpj: string | undefined): boolean {
     cnpj = cnpj ? cnpj.replace(/[^\d]+/g, '') : '';
 
@@ -150,6 +174,9 @@ export class MpcInputCpfcnpjComponent implements OnInit {
     return digit1 === numbers[12] && digit2 === numbers[13];
   }
 
+  /**
+   * Verifica se o valor é um CPF ou CNPJ válido.
+   */
   private isCpfCnpjValido(value: string | undefined): boolean {
     if (value && value.length <= 11) {
       return this.isCPFValido(value);

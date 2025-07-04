@@ -1,3 +1,11 @@
+/**
+ * @Componente ConfirmacaoComponent
+ * Este componente é responsável por exibir e gerenciar a etapa de confirmação do formulário.
+ *
+ * @author Matheus Pimentel Do Couto
+ * @created 27/06/2025
+ * @updated 04/07/2025
+ */
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { InscricaoService } from '../service/inscricao.service';
 import { Router } from '@angular/router';
@@ -26,6 +34,9 @@ export class ConfirmacaoComponent implements OnInit {
 
   protected dadosInscricao = new Inscricao();
 
+  /**
+   * Inicializa os dados da inscrição para exibição.
+   */
   ngOnInit(): void {
     const dados = this.inscricaoService.getDadosInscricao();
 
@@ -34,14 +45,23 @@ export class ConfirmacaoComponent implements OnInit {
     this.dadosInscricao.inicializarPagamento(dados);
   }
 
+  /**
+   * Formata o valor para o padrão monetário brasileiro.
+   */
   protected formatarValor(valor: any): string {
     return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   }
 
+  /**
+   * Retorna o sexo formatado.
+   */
   protected getSexo(): string {
     return this.dadosInscricao.sexo === 'M' ? 'Masculino' : 'Feminino';
   }
 
+  /**
+   * Realiza a inscrição e exibe modal de sucesso.
+   */
   protected inscrever(): void {
     try {
       this.inscricaoService.inscrever(this.dadosInscricao)
@@ -59,6 +79,9 @@ export class ConfirmacaoComponent implements OnInit {
     }
   }
 
+  /**
+   * Volta para a etapa de pagamento.
+   */
   protected etapaAnterior(): void {
     try {
       this.router.navigate([Rotas.PAGAMENTO]);
@@ -67,6 +90,9 @@ export class ConfirmacaoComponent implements OnInit {
     }
   }
 
+  /**
+   * Abre o modal de sucesso após inscrição.
+   */
   private abrirModalSucesso(): void {
     const modalSucesso: MpcModalConfig = {
       titulo: 'Inscrição realizada com sucesso',

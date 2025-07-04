@@ -18,7 +18,7 @@
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
- * @updated 27/02/2025
+ * @updated 04/07/2025
  */
 
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
@@ -53,20 +53,32 @@ export class MpcInputDateComponent implements OnInit {
   protected errorMessage?: string;
   protected campoTocado: boolean = false;
 
+  /**
+   * Inicializa a validação do campo.
+   */
   ngOnInit(): void {
     this.isCampoValido(this.value);
   }
 
+  /**
+   * Marca o campo como tocado e valida.
+   */
   protected onFocus(): void {
     this.campoTocado = true;
     this.isCampoValido(this.value);
   }
 
+  /**
+   * Atualiza o valor do campo e emite se válido.
+   */
   protected setValue(event: any): void {
     this.value = event.target.value as string;
     if (this.isCampoValido(this.value)) { this.valor.emit(this.value); }
   }
 
+  /**
+   * Valida o campo.
+   */
   private isCampoValido(value: string | undefined): boolean {
     if (this.readonly || this.disabled) { return true; }
 
@@ -98,6 +110,9 @@ export class MpcInputDateComponent implements OnInit {
     return true;
   }
 
+  /**
+   * Verifica se a data é menor que a mínima.
+   */
   private isMenorQueDataMinima(value: string | undefined): boolean {
     if (!this.minDate) return false;
     if (!this.required) return false;
@@ -105,6 +120,9 @@ export class MpcInputDateComponent implements OnInit {
     return new Date(value) < new Date(this.minDate);
   }
 
+  /**
+   * Verifica se a data é maior que a máxima.
+   */
   private isMaiorQueDataMaxima(value: string | undefined): boolean {
     if (!this.maxDate) return false;
     if (!this.required) return false;
@@ -112,12 +130,18 @@ export class MpcInputDateComponent implements OnInit {
     return new Date(value) > new Date(this.maxDate);
   }
 
+  /**
+   * Verifica se o campo é obrigatório e está vazio.
+   */
   private isCampoObrigatorio(value: string | undefined): boolean {
     if (!this.required) return false;
     if (!value) return true;
     return this.required && value.length === 0;
   }
 
+  /**
+   * Formata a data para o padrão dd/mm/aaaa.
+   */
   private formatarData(data: string | undefined): string {
     if (!data) return '';
     const ano = data.split('-')[0];

@@ -11,7 +11,7 @@
  *
  * @author Matheus Pimentel Do Couto
  * @created 24/06/2025
- * @updated 24/06/2025
+ * @updated 04/07/2025
  */
 
 import { Component, Input, Output, EventEmitter, OnInit, AfterViewInit, OnChanges } from '@angular/core';
@@ -69,6 +69,9 @@ export class MpcPaginationComponent implements OnInit, AfterViewInit, OnChanges 
     this.emitirIndices();
   }
 
+  /**
+   * Calcula o total de páginas e atualiza as páginas visíveis e itens visíveis.
+   */
   private calcularPaginacao(): void {
     this.totalPaginas = Math.ceil(this.totalItens / this.itensPorPagina);
 
@@ -84,6 +87,9 @@ export class MpcPaginationComponent implements OnInit, AfterViewInit, OnChanges 
     this.calcularItensVisiveis();
   }
 
+  /**
+   * Calcula as páginas visíveis na paginação e define se as reticências devem ser exibidas.
+   */
   private calcularPaginasVisiveis(): void {
     const metade = Math.floor(this.maxPaginasVisiveis / 2);
     let inicio = Math.max(1, this.paginaAtual - metade);
@@ -104,11 +110,17 @@ export class MpcPaginationComponent implements OnInit, AfterViewInit, OnChanges 
     this.mostrarUltimasReticencias = fim < this.totalPaginas - 1;
   }
 
+  /**
+   * Calcula o primeiro e o último item visível na página atual.
+   */
   private calcularItensVisiveis(): void {
     this.primeiroItem = this.totalItens === 0 ? 0 : (this.paginaAtual - 1) * this.itensPorPagina + 1;
     this.ultimoItem = Math.min(this.paginaAtual * this.itensPorPagina, this.totalItens);
   }
 
+  /**
+   * Emite os índices do primeiro e último item visível.
+   */
   private emitirIndices(): void {
     const indiceInicial = (this.paginaAtual - 1) * this.itensPorPagina;
     const indiceFinal = Math.min(this.paginaAtual * this.itensPorPagina, this.totalItens);
@@ -119,6 +131,10 @@ export class MpcPaginationComponent implements OnInit, AfterViewInit, OnChanges 
     });
   }
 
+  /**
+   * Navega para a página informada.
+   * @param pagina Página de destino
+   */
   irParaPagina(pagina: number): void {
     if (pagina >= 1 && pagina <= this.totalPaginas && pagina !== this.paginaAtual) {
       this.paginaAtual = pagina;
@@ -127,26 +143,42 @@ export class MpcPaginationComponent implements OnInit, AfterViewInit, OnChanges 
     }
   }
 
+  /**
+   * Navega para a primeira página.
+   */
   irParaPrimeiraPagina(): void {
     this.irParaPagina(1);
   }
 
+  /**
+   * Navega para a última página.
+   */
   irParaUltimaPagina(): void {
     this.irParaPagina(this.totalPaginas);
   }
 
+  /**
+   * Navega para a página anterior.
+   */
   irParaPaginaAnterior(): void {
     if (this.paginaAtual > 1) {
       this.irParaPagina(this.paginaAtual - 1);
     }
   }
 
+  /**
+   * Navega para a próxima página.
+   */
   irParaProximaPagina(): void {
     if (this.paginaAtual < this.totalPaginas) {
       this.irParaPagina(this.paginaAtual + 1);
     }
   }
 
+  /**
+   * Atualiza o número de itens por página ao selecionar uma nova opção.
+   * @param event Evento de alteração do seletor
+   */
   aoMudarItensPorPagina(event: any): void {
     const target = event.target as HTMLSelectElement;
     const novosItensPorPagina = parseInt(target.value, 10);
@@ -159,19 +191,30 @@ export class MpcPaginationComponent implements OnInit, AfterViewInit, OnChanges 
     }
   }
 
-  // Métodos auxiliares para o template
+  /**
+   * Indica se existe página anterior.
+   */
   get temPaginaAnterior(): boolean {
     return this.paginaAtual > 1;
   }
 
+  /**
+   * Indica se existe próxima página.
+   */
   get temProximaPagina(): boolean {
     return this.paginaAtual < this.totalPaginas;
   }
 
+  /**
+   * Indica se está na primeira página.
+   */
   get ehPrimeiraPagina(): boolean {
     return this.paginaAtual === 1;
   }
 
+  /**
+   * Indica se está na última página.
+   */
   get ehUltimaPagina(): boolean {
     return this.paginaAtual === this.totalPaginas;
   }

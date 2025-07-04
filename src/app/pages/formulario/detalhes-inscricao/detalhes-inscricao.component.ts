@@ -7,6 +7,15 @@ import { ErrorService } from '../../../shared/error/error.service';
 import { Rotas } from '../../../shared/enums/rotas-enum';
 import { Router } from '@angular/router';
 
+/**
+ * @Componente DetalhesInscricaoComponent
+ * Este componente é responsável por exibir os detalhes da inscrição.
+ *
+ * @author Matheus Pimentel Do Couto
+ * @created 27/06/2025
+ * @updated 04/07/2025
+ */
+
 export interface dadosDetalhesInscricao {
   dadosInscricao: {
     codigoInscricao: string,
@@ -38,10 +47,16 @@ export class DetalhesInscricaoComponent implements OnInit {
 
   protected isCopiado: boolean = false;
 
+  /**
+   * Inicializa os detalhes da inscrição ao carregar o componente.
+   */
   ngOnInit(): void {
     this.detalharInscricao();
   }
 
+  /**
+   * Busca e organiza os dados da inscrição.
+   */
   private detalharInscricao(): void {
     try {
       const inscricao = this.inscricaoService.getDadosInscricao();
@@ -57,6 +72,9 @@ export class DetalhesInscricaoComponent implements OnInit {
     }
   }
 
+  /**
+   * Inicializa os dados da inscrição (código, data, status).
+   */
   private inicializarDadosInscricao(response: Inscricao): { codigoInscricao: string, dataInscricao: string, status: string } {
     return {
       codigoInscricao: response.id?.toString() || '-',
@@ -65,6 +83,9 @@ export class DetalhesInscricaoComponent implements OnInit {
     };
   }
 
+  /**
+   * Inicializa os dados pessoais da inscrição.
+   */
   private inicializarDadosPessoais(response: Inscricao): { label: string, valor: string }[] {
     const dadosPessoais: { label: string, valor: string }[] = [];
 
@@ -107,6 +128,9 @@ export class DetalhesInscricaoComponent implements OnInit {
     return dadosPessoais;
   }
 
+  /**
+   * Inicializa os dados de pagamento da inscrição.
+   */
   private inicializarDadosPagamento(response: Inscricao): { formaPagamento: string, valor: number, statusPagamento?: string, dataPagamento?: string } {
     return {
       formaPagamento: response.formaPagamento || '-',
@@ -116,6 +140,9 @@ export class DetalhesInscricaoComponent implements OnInit {
     };
   }
 
+  /**
+   * Copia o código da inscrição para a área de transferência.
+   */
   protected copiarCodigo(valor: string | undefined): void {
     if (!valor) return;
     navigator.clipboard.writeText(valor);
@@ -126,6 +153,9 @@ export class DetalhesInscricaoComponent implements OnInit {
     }, 3000);
   }
 
+  /**
+   * Abre o WhatsApp para solicitar link de pagamento.
+   */
   protected pedirLinkPagamento(): void {
     const codigoInscricao = this.dadosDetalhesInscricao.dadosInscricao.codigoInscricao;
     if (codigoInscricao) {
@@ -136,6 +166,9 @@ export class DetalhesInscricaoComponent implements OnInit {
     }
   }
 
+  /**
+   * Retorna a classe do badge de status da inscrição.
+   */
   protected getBadgeStatusInscricao(status: string | undefined): string {
     if (!status) return '';
     if (status === 'ATIVO') return 'text-bg-success';
@@ -143,6 +176,9 @@ export class DetalhesInscricaoComponent implements OnInit {
     return '';
   }
 
+  /**
+   * Retorna a classe do badge de status do pagamento.
+   */
   protected getBadgeStatusPagamento(status: string | undefined): string {
     if (!status) return '';
     if (status === 'PAGO') return 'text-bg-success';
@@ -150,6 +186,9 @@ export class DetalhesInscricaoComponent implements OnInit {
     return '';
   }
 
+  /**
+   * Retorna o texto do status do pagamento.
+   */
   protected getTextoStatusPagamento(status: string | undefined): string {
     if (!status) return '';
     if (status === 'PAGO') return 'Pagamento realizado';
@@ -157,6 +196,9 @@ export class DetalhesInscricaoComponent implements OnInit {
     return '';
   }
 
+  /**
+   * Retorna o texto do status da inscrição.
+   */
   protected getTextoStatusInscricao(status: string | undefined): string {
     if (!status) return '';
     if (status === 'ATIVO') return 'Ativo';
@@ -164,10 +206,16 @@ export class DetalhesInscricaoComponent implements OnInit {
     return '';
   }
 
+  /**
+   * Formata o valor para o padrão monetário brasileiro.
+   */
   protected formatarValor(valor: number): string {
     return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   }
 
+  /**
+   * Formata a data para o padrão brasileiro.
+   */
   protected formatarData(data: string | undefined): string {
     if (!data) return '';
     const date = new Date(data);
@@ -178,6 +226,9 @@ export class DetalhesInscricaoComponent implements OnInit {
     return data.substring(0, 10);
   }
 
+  /**
+   * Redireciona para a página inicial.
+   */
   protected irParaHome(): void {
     this.router.navigate([Rotas.HOME]);
   }

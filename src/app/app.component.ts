@@ -51,7 +51,7 @@ export class AppComponent {
       icone: 'bi bi-filetype-html',
       subRotas: [
         { titulo: 'Aguarde', rota: Rotas.AGUARDE },
-        { titulo: 'Login', rota: Rotas.LOGIN },
+        /* { titulo: 'Login', rota: Rotas.LOGIN }, */
         { titulo: 'Erro', rota: Rotas.PAGINA_ERRO },
       ]
     },
@@ -62,5 +62,4 @@ export class AppComponent {
 // TODO: Tela de Login com guard e renderizar só o componente de login
 // TODO: Tela de Cadastro
 // TODO: Cor de componentes
-// TODO: Readme.md
 
