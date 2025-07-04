@@ -53,24 +53,24 @@ abrirModalSucesso() &#123;
       <h5>Veja e teste abaixo os tipos de modais disponíveis</h5>
       <div class="row gy-3 mb-5">
         <div class="col-lg-6 d-flex justify-content-center">
-          <mpc-button (click)="abrirModalSucesso()" [cores]="{ backgroundColor: 'green', color: 'white' }" icone="bi bi-check-all"
-            posicaoIcone="esquerda" [tabIndex]="0" texto="Modal de Sucesso"></mpc-button>
+          <button mpcButton (click)="abrirModalSucesso()" [style.background-color]="'green'" [style.color]="'white'" icone="bi bi-check-all"
+            posicaoIcone="esquerda" [tabIndex]="0" texto="Modal de Sucesso"></button>
         </div>
         <div class="col-lg-6 d-flex justify-content-center">
-          <mpc-button (click)="abrirModalConfirmacao()" [cores]="{ backgroundColor: 'black', color: 'white' }" icone="bi bi-question-lg"
-            posicaoIcone="esquerda" [tabIndex]="0" texto="Modal de Confirmação"></mpc-button>
+          <button mpcButton (click)="abrirModalConfirmacao()" [style.background-color]="'black'" [style.color]="'white'" icone="bi bi-question-lg"
+            posicaoIcone="esquerda" [tabIndex]="0" texto="Modal de Confirmação"></button>
         </div>
         <div class="col-lg-6 d-flex justify-content-center">
-          <mpc-button (click)="abrirModalAlerta()" [cores]="{ backgroundColor: 'yellow', color: 'black' }"
+          <button mpcButton (click)="abrirModalAlerta()" [style.background-color]="'yellow'" [style.color]="'black'"
             icone="bi bi-exclamation-triangle" posicaoIcone="esquerda" [tabIndex]="0"
-            texto="Modal de Alerta"></mpc-button>
+            texto="Modal de Alerta"></button>
         </div>
         <div class="col-lg-6 d-flex justify-content-center">
-          <mpc-button (click)="abrirModalErro()" [cores]="{ backgroundColor: 'red', color: 'white' }" icone="bi bi-bug"
-            posicaoIcone="esquerda" [tabIndex]="0" texto="Modal de Erro"></mpc-button>
+          <button mpcButton (click)="abrirModalErro()" [style.background-color]="'red'" [style.color]="'white'" icone="bi bi-bug"
+            posicaoIcone="esquerda" [tabIndex]="0" texto="Modal de Erro"></button>
         </div>
       </div>
-      <h5>
+      <h5>  
         Para mais informações sobre como utilizar modais no Bootstrap, consulte a <a
           href="https://getbootstrap.com/docs/5.1/components/modal/" target="_blank">documentação oficial do Bootstrap
           sobre modais</a>.

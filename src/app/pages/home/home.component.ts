@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { MpcCardMenuComponent } from "../../shared/components/Cards/mpc-card-menu/mpc-card-menu.component";
-import { MpcButtonComponent } from '../../shared/components/mpc-button/mpc-button.component';
+import { MpcButtonDirective } from '../../shared/directives/mpc-button/mpc-button.directive';
 
 @Component({
   selector: 'app-home',
-  imports: [MpcCardMenuComponent, MpcButtonComponent],
+  imports: [MpcCardMenuComponent, MpcButtonDirective],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

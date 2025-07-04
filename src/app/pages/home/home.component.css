@@ -19,6 +19,11 @@
     flex-direction: column;
     justify-content: center;
 
+    .btn-home {
+      background-color: white !important;
+      color: var(--color-primary) !important;
+    }
+
     h2 {
       font-family: var(--font-title) !important;
       font-size: 64px;

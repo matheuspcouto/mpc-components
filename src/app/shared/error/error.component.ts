@@ -12,13 +12,13 @@
 import { Component, inject, computed } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { MpcButtonComponent } from '../components/mpc-button/mpc-button.component';
+import { MpcButtonDirective } from '../directives/mpc-button/mpc-button.directive';
 import { ErrorService } from './error.service';
 
 @Component({
     selector: 'mpc-error',
     standalone: true,
-    imports: [MpcButtonComponent],
+    imports: [MpcButtonDirective],
     templateUrl: './error.component.html',
     styleUrls: ['./error.component.css']
 })

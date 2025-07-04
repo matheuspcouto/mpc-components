@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Validators, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MpcInputEmailComponent } from '../../shared/components/Inputs/mpc-input-email/mpc-input-email.component';
-import { MpcButtonComponent } from '../../shared/components/mpc-button/mpc-button.component';
+import { MpcButtonDirective } from '../../shared/directives/mpc-button/mpc-button.directive';
 import { MpcInputSenhaComponent } from '../../shared/components/Inputs/mpc-input-senha/mpc-input-senha.component';
 
 @Component({
@@ -11,7 +11,7 @@ import { MpcInputSenhaComponent } from '../../shared/components/Inputs/mpc-input
     ReactiveFormsModule,
     MpcInputSenhaComponent,
     MpcInputEmailComponent,
-    MpcButtonComponent
+    MpcButtonDirective
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']

@@ -13,7 +13,7 @@ import { MpcFormProgressBarComponent } from '../../../shared/components/mpc-form
 import { InscricaoService } from '../service/inscricao.service';
 import { FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { MpcInputRadioComponent, RadioOption } from '../../../shared/components/Inputs/mpc-input-radio/mpc-input-radio.component';
-import { MpcButtonComponent } from '../../../shared/components/mpc-button/mpc-button.component';
+import { MpcButtonDirective } from '../../../shared/directives/mpc-button/mpc-button.directive';
 import { MpcInputDateComponent } from '../../../shared/components/Inputs/mpc-input-date/mpc-input-date.component';
 import { MpcInputSelectComponent, SelectOption } from '../../../shared/components/Inputs/mpc-input-select/mpc-input-select.component';
 import { MpcInputTextComponent } from '../../../shared/components/Inputs/mpc-input-text/mpc-input-text.component';
@@ -27,7 +27,7 @@ import { ErrorService } from '../../../shared/error/error.service';
   selector: 'app-dados-pessoais',
   imports: [FormsModule,
     ReactiveFormsModule, MpcInputTextComponent, MpcInputDateComponent,
-    MpcInputRadioComponent, MpcButtonComponent, MpcInputSelectComponent,
+    MpcInputRadioComponent, MpcButtonDirective, MpcInputSelectComponent,
     MpcFormProgressBarComponent, MpcInputNumberComponent,
     MpcInputCpfcnpjComponent, MpcInputTextAreaComponent],
   templateUrl: './dados-pessoais.component.html',

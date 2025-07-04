@@ -1,11 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
-import { MpcButtonComponent } from '../../../shared/components/mpc-button/mpc-button.component';
+import { MpcButtonDirective } from '../../../shared/directives/mpc-button/mpc-button.directive';
 import { MpcModalComponent, TipoModal } from '../../../shared/components/mpc-modal/mpc-modal.component';
 import { MpcModalConfig } from '../../../shared/components/mpc-modal/mpc-modal.directive';
 
 @Component({
   selector: 'app-modais',
-  imports: [MpcModalComponent, MpcButtonComponent],
+  imports: [MpcModalComponent, MpcButtonDirective],
   templateUrl: './modais.component.html',
   styleUrl: './modais.component.css'
 })

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { MpcButtonComponent } from '../../../shared/components/mpc-button/mpc-button.component';
+import { MpcButtonDirective } from '../../../shared/directives/mpc-button/mpc-button.directive';
 
 @Component({
   selector: 'app-buttons',
-  imports: [MpcButtonComponent],
+  imports: [MpcButtonDirective],
   templateUrl: './buttons.component.html',
   styleUrl: './buttons.component.css'
 })

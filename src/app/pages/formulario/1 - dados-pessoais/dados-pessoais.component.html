@@ -67,9 +67,9 @@
       </div>
 
       <div class="d-flex justify-content-center align-items-center mt-5">
-        <mpc-button (click)="proximaEtapa()" [cores]="{ backgroundColor: 'var(--color-primary)', color: 'white' }"
+        <button mpcButton (click)="proximaEtapa()" [style.background-color]="'var(--color-primary)'" [style.color]="'white'"
           icone="bi bi-arrow-right" texto="Próximo" [disabled]="form.invalid">
-        </mpc-button>
+        </button>
       </div>
 
     </form>

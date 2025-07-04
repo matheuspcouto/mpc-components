@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 import { Rotas } from '../../../shared/enums/rotas-enum';
 import { MpcFormProgressBarComponent } from '../../../shared/components/mpc-form-progress-bar/mpc-form-progress-bar.component';
 import { FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
-import { MpcButtonComponent } from '../../../shared/components/mpc-button/mpc-button.component';
+import { MpcButtonDirective } from '../../../shared/directives/mpc-button/mpc-button.directive';
 import { MpcInputTextComponent } from '../../../shared/components/Inputs/mpc-input-text/mpc-input-text.component';
 import { InscricaoService } from '../service/inscricao.service';
 import { MpcInputTelefoneComponent } from '../../../shared/components/Inputs/mpc-input-telefone/mpc-input-telefone.component';
@@ -25,7 +25,7 @@ import { ErrorService } from '../../../shared/error/error.service';
   imports: [
     FormsModule,
     ReactiveFormsModule, MpcInputTextComponent, MpcInputTelefoneComponent,
-    MpcButtonComponent, MpcFormProgressBarComponent,
+    MpcButtonDirective, MpcFormProgressBarComponent,
     MpcInputEmailComponent,
     MpcInputBuscaCepComponent
   ],

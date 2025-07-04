@@ -96,15 +96,15 @@
     </div>
 
     <div class="d-flex justify-content-center align-items-center mt-5">
-      <mpc-button (click)="inscrever()" [cores]="{ backgroundColor: 'var(--color-primary)', color: 'white' }"
+      <button mpcButton (click)="inscrever()" [style.background-color]="'var(--color-primary)'" [style.color]="'white'"
         icone="bi bi-send" texto="Inscrever-se">
-      </mpc-button>
+      </button>
     </div>
 
     <div class="d-flex justify-content-center align-items-center mt-3">
-      <mpc-button (click)="etapaAnterior()" [cores]="{ color: 'var(--color-tertiary)' }" posicaoIcone="esquerda"
+      <button mpcButton (click)="etapaAnterior()" [style.color]="'var(--color-tertiary)'" posicaoIcone="esquerda"
         icone="bi bi-arrow-left" texto="Voltar para Pagamento">
-      </mpc-button>
+      </button>
     </div>
 
   </div>

@@ -1,7 +1,7 @@
 import { ToastrService } from 'ngx-toastr';
 import { Component, inject, OnInit } from '@angular/core';
 import { InscricaoService } from '../service/inscricao.service';
-import { MpcButtonComponent } from "../../../shared/components/mpc-button/mpc-button.component";
+import { MpcButtonDirective } from "../../../shared/directives/mpc-button/mpc-button.directive";
 import { Inscricao } from '../model/inscricao.model';
 import { ErrorService } from '../../../shared/error/error.service';
 import { Rotas } from '../../../shared/enums/rotas-enum';
@@ -33,7 +33,7 @@ export interface dadosDetalhesInscricao {
 
 @Component({
   selector: 'detalhes-inscricao',
-  imports: [MpcButtonComponent],
+  imports: [MpcButtonDirective],
   templateUrl: './detalhes-inscricao.component.html',
   styleUrls: ['./detalhes-inscricao.component.css']
 })

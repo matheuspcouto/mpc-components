@@ -13,7 +13,7 @@ import { MpcModalComponent } from '../../../shared/components/mpc-modal/mpc-moda
 import { Rotas } from '../../../shared/enums/rotas-enum';
 import { MpcFormProgressBarComponent } from '../../../shared/components/mpc-form-progress-bar/mpc-form-progress-bar.component';
 import { FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
-import { MpcButtonComponent } from '../../../shared/components/mpc-button/mpc-button.component';
+import { MpcButtonDirective } from '../../../shared/directives/mpc-button/mpc-button.directive';
 import { MpcInputSelectComponent } from '../../../shared/components/Inputs/mpc-input-select/mpc-input-select.component';
 import { InscricaoService } from '../service/inscricao.service';
 import { MpcInputTextComponent } from '../../../shared/components/Inputs/mpc-input-text/mpc-input-text.component';
@@ -23,7 +23,7 @@ import { ErrorService } from '../../../shared/error/error.service';
   selector: 'app-pagamento',
   imports: [
     MpcModalComponent, FormsModule,
-    ReactiveFormsModule, MpcButtonComponent, MpcInputSelectComponent, MpcFormProgressBarComponent, MpcInputTextComponent
+    ReactiveFormsModule, MpcButtonDirective, MpcInputSelectComponent, MpcFormProgressBarComponent, MpcInputTextComponent
   ],
   templateUrl: './pagamento.component.html',
   styleUrls: ['./pagamento.component.css'],
