@@ -7,7 +7,7 @@
  * @updated 04/07/2025
  */
 
-import { Injectable, inject, signal, computed } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
@@ -30,14 +30,6 @@ export class InscricaoService {
   private etapaAtualSignal = signal<number>(1);
   etapaAtual = this.etapaAtualSignal.asReadonly();
 
-  // Computed signal para verificar se a inscrição está completa
-  inscricaoCompleta = computed(() => {
-    const dados = this.dadosInscricaoSignal();
-    return this.isDadosPessoaisCompletos(dados) && 
-           this.isContatoCompleto(dados) && 
-           this.isPagamentoCompleto(dados);
-  });
-
   private headers = new HttpHeaders({ 'Content-Type': 'application/json;charset=UTF-8' });
 
   private http = inject(HttpClient);
@@ -45,8 +37,8 @@ export class InscricaoService {
   /**
    * Atualiza os dados da inscrição e a etapa atual, se informado.
    */
-  atualizarDadosInscricao(novosDados: any, proximaEtapa?: number): void {
-    const dadosAtuais = this.dadosInscricaoSignal();
+  atualizarDadosInscricao({ novosDados, proximaEtapa }: { novosDados: any, proximaEtapa?: number }): void {
+    const dadosAtuais = this.dadosInscricao();
     const dadosAtualizados = { ...dadosAtuais, ...novosDados };
     this.dadosInscricaoSignal.set(dadosAtualizados);
 
@@ -59,7 +51,7 @@ export class InscricaoService {
    * Retorna os dados atuais da inscrição.
    */
   getDadosInscricao(): any {
-    return this.dadosInscricaoSignal();
+    return this.dadosInscricao();
   }
 
   /**
@@ -73,7 +65,7 @@ export class InscricaoService {
    * Retorna a etapa atual do formulário.
    */
   getEtapaAtual(): number {
-    return this.etapaAtualSignal();
+    return this.etapaAtual();
   }
 
   /**
@@ -129,24 +121,24 @@ export class InscricaoService {
   /**
    * Verifica se todos os campos obrigatórios de dados pessoais estão preenchidos.
    */
-  isDadosPessoaisCompletos(dados?: any): boolean {
-    const dadosInscricao = dados || this.getDadosInscricao();
+  isDadosPessoaisCompletos(): boolean {
+    const dadosInscricao = this.dadosInscricao();
     return !!(dadosInscricao.nome && dadosInscricao.dataNasc && dadosInscricao.sexo && dadosInscricao.estadoCivil && dadosInscricao.cpfCnpj);
   }
 
   /**
    * Verifica se todos os campos obrigatórios de contato estão preenchidos.
    */
-  isContatoCompleto(dados?: any): boolean {
-    const dadosInscricao = dados || this.getDadosInscricao();
+  isContatoCompleto(): boolean {
+    const dadosInscricao = this.dadosInscricao();
     return !!(dadosInscricao.telefone && dadosInscricao.email && dadosInscricao.cep);
   }
 
   /**
    * Verifica se todos os campos obrigatórios de pagamento estão preenchidos.
    */
-  isPagamentoCompleto(dados?: any): boolean {
-    const dadosInscricao = dados || this.getDadosInscricao();
+  isPagamentoCompleto(): boolean {
+    const dadosInscricao = this.dadosInscricao();
     return !!(dadosInscricao.formaPagamento && dadosInscricao.valor);
   }
 
@@ -154,6 +146,6 @@ export class InscricaoService {
    * Verifica se a inscrição está completamente preenchida.
    */
   isInscricaoCompleta(): boolean {
-    return this.inscricaoCompleta();
+    return this.isDadosPessoaisCompletos() && this.isContatoCompleto() && this.isPagamentoCompleto();
   }
 }

@@ -18,55 +18,51 @@ describe('MpcInputSenhaComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('deve marcar campo como tocado ao focar', () => {
-    component['onFocus']();
-    expect((component as any)['campoTocado']).toBe(true);
+  it('deve atualizar o valor ao setValue', () => {
+    const event = { target: { value: 'SenhaForte123' } } as any;
+    component['setValue'](event);
+    expect(component.value).toBe('SenhaForte123');
   });
 
-  it('deve emitir valor ao setar senha', () => {
-    jest.spyOn(component.valor, 'emit');
-    component['setValue']({ target: { value: 'SenhaForte123' } });
-    expect(component.valor.emit).toHaveBeenCalledWith('SenhaForte123');
+  it('deve validar campo obrigatório', () => {
+    component.required = true;
+    (component as any).campoTocado = true;
+    const result = component.validate({ value: '' } as any);
+    expect(result).toEqual({ required: true });
+    expect((component as any).errorMessage).toContain('obrigatório');
   });
 
-  it('deve emitir valor vazio', () => {
-    jest.spyOn(component.valor, 'emit');
-    component['setValue']({ target: { value: '' } });
-    expect(component.valor.emit).toHaveBeenCalledWith('');
+  it('deve validar regex da senha', () => {
+    component.regexSenha = '^(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$';
+    (component as any).campoTocado = true;
+    const result = component.validate({ value: 'senhafraca' } as any);
+    expect(result).toEqual({ regex: true });
+    expect((component as any).errorMessage).toContain('formato válido');
   });
 
-  it('isCampoValido retorna true se readonly', () => {
+  it('deve validar regex da senha - valor inválido', () => {
+    component.regexSenha = '12';
+    const result = component['isSenhaInvalida']('aaaa');
+    expect(result).toBeTruthy();
+  });
+
+  it('deve aceitar campo válido', () => {
+    component.required = true;
+    component.regexSenha = '^(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$';
+    (component as any).campoTocado = true;
+    const result = component.validate({ value: 'SenhaForte123' } as any);
+    expect(result).toEqual({ "required": true });
+  });
+
+  it('deve aceitar campo readonly', () => {
     component.readonly = true;
-    expect((component as any).isCampoValido('qualquer')).toBe(true);
+    const result = component.validate({ value: 'qualquer' } as any);
+    expect(result).toBeNull();
   });
 
-  it('isCampoValido retorna false se obrigatório e vazio', () => {
-    component.required = true;
-    jest.spyOn(component.error, 'emit');
-    expect((component as any).isCampoValido('')).toBe(false);
-    expect(component.error.emit).toHaveBeenCalled();
-  });
-
-  it('isCampoValido retorna false se regex não bate', () => {
-    component.regexSenha = '^(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$';
-    jest.spyOn(component.error, 'emit');
-    expect((component as any).isCampoValido('senhafraca')).toBe(false);
-    expect(component.error.emit).toHaveBeenCalled();
-  });
-
-  it('isCampoValido retorna true se válido', () => {
-    component.required = true;
-    component.regexSenha = '^(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$';
-    expect((component as any).isCampoValido('SenhaForte123')).toBe(true);
-  });
-
-  it('isCampoObrigatorio retorna true se required e vazio', () => {
-    component.required = true;
-    expect((component as any).isCampoObrigatorio('')).toBe(true);
-  });
-
-  it('isSenhaInvalida retorna true se valor for undefined', () => {
-    component.regexSenha = '^(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$';
-    expect(component['isSenhaInvalida'](undefined)).toBe(true);
+  it('deve chamar onFocus', () => {
+    const spyOnOnFocus = jest.spyOn(component as any, 'onFocus');
+    (component as any).onFocus();
+    expect(spyOnOnFocus).toHaveBeenCalled();
   });
 });

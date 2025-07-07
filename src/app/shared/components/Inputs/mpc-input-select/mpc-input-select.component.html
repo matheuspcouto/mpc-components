@@ -4,7 +4,7 @@
 
   <div class="input-group">
     <select [id]="id" (change)="setValue($event.target)" class="form-select form-select-md" [disabled]="disabled"
-      [style]="errorMessage ? 'border-color: red' : ''" (focus)="onFocus()">
+      [style.border-color]="errorMessage ? 'red' : null" (focus)="onFocus()">
 
       @for (option of options; track $index) {
       <option [selected]="option.selected">
@@ -15,10 +15,7 @@
     </select>
   </div>
 
-
-  @if (errorMessage) {
-  <p class="text-danger mt-1"> {{ errorMessage }} </p>
-  }
+  <p class="text-danger mt-1" [style.visibility]="errorMessage ? 'visible' : 'hidden'"> {{ errorMessage }} </p>
 
 </div>
 }

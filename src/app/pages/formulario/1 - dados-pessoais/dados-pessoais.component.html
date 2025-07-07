@@ -17,57 +17,47 @@
 
       <div class="row">
         <div class="col-md-6 mb-3">
-          <mpc-input-text label="Nome" [value]="form.value.nome" (valor)="form.controls.nome.setValue($event)"
-            (error)="form.controls.nome.setErrors($event)" min="3" />
+          <mpc-input-text label="Nome" [min]="3" formControlName="nome" />
         </div>
 
         <div class="col-md-6 mb-3">
-          <mpc-input-text label="Sobrenome" [value]="form.value.sobrenome"
-            (valor)="form.controls.sobrenome.setValue($event)" (error)="form.controls.sobrenome.setErrors($event)"
-            min="3" max="100" />
+          <mpc-input-text label="Sobrenome" [min]="3" [max]="100" formControlName="sobrenome" />
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-4 mb-3">
           <mpc-input-date label="Data de Nascimento" [maxDate]="dataAtual" [required]="true"
-            [value]="form.value.dataNasc" (valor)="form.controls.dataNasc.setValue($event)"
-            (error)="form.controls.dataNasc.setErrors($event)" />
+            formControlName="dataNasc" />
         </div>
 
         <div class="col-md-4 mb-3">
-          <mpc-input-number label="Idade" [value]="form.value.idade" (valor)="form.controls.idade.setValue($event)"
-            (error)="form.controls.idade.setErrors($event)" [min]="1" [max]="99" [readonly]="false" />
+          <mpc-input-number label="Idade" [min]="1" [max]="99" formControlName="idade" />
         </div>
 
         <div class="col-md-4 mb-3">
-          <mpc-input-cpfcnpj [required]="true" [value]="form.value.cpfCnpj"
-            (valor)="form.controls.cpfCnpj.setValue($event)" (error)="form.controls.cpfCnpj.setErrors($event)" />
+          <mpc-input-cpfcnpj [required]="true" formControlName="cpfCnpj" />
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-6 mb-3">
-          <mpc-input-radio label="Sexo" [required]="true" [options]="sexos"
-            (valor)="form.controls.sexo.setValue($event)" (error)="form.controls.sexo.setErrors($event)" />
+          <mpc-input-radio label="Sexo" [required]="true" [options]="sexos" formControlName="sexo" />
         </div>
 
         <div class="col-md-6 mb-3">
           <mpc-input-select label="Estado Civil" [options]="estadosCivis" [required]="true"
-            (valor)="form.controls.estadoCivil.setValue($event)"
-            (error)="form.controls.estadoCivil.setErrors($event)" />
+            formControlName="estadoCivil" />
         </div>
       </div>
 
       <div class="row">
-        <div class="col-md-6 mb-3">
-          <mpc-input-text-area label="Descrição" [value]="form.value.descricao"
-            (valor)="form.controls.descricao.setValue($event)" (error)="form.controls.descricao.setErrors($event)"
-            max="100"></mpc-input-text-area>
+        <div class="col-md-6">
+          <mpc-input-text-area label="Descrição" [max]="100" formControlName="descricao" />
         </div>
       </div>
 
-      <div class="d-flex justify-content-center align-items-center mt-5">
+      <div class="d-flex justify-content-center align-items-center mt-3">
         <button mpcButton (click)="proximaEtapa()" class="btn-proximo" icone="bi bi-arrow-right" texto="Próximo"
           [disabled]="form.invalid">
         </button>

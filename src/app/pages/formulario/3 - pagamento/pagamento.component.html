@@ -26,14 +26,13 @@
 
       <div class="row mb-3">
         <div class="col-12 col-lg-6 mx-auto">
-          <mpc-input-text label="Valor" [readonly]="true" [value]="formatarValor(form.value.valor)" />
+          <h6>Valor: {{ valorFormatado }}</h6>
         </div>
       </div>
 
       <div class="row mb-3">
         <div class="col-12 col-lg-6 mx-auto">
-          <mpc-input-select label="Forma de Pagamento" [required]="true"
-            (error)="form.controls.formaPagamento.setErrors($event)" (valor)="atualizarFormaPagamento($event)"
+          <mpc-input-select label="Forma de Pagamento" [required]="true" formControlName="formaPagamento" (valueChange)="calcularValorTotal()"
             [options]="formasPagamento" />
         </div>
       </div>
@@ -46,7 +45,7 @@
 
       <div class="d-flex justify-content-center align-items-center mt-3">
         <button mpcButton (click)="etapaAnterior()" class="btn-voltar" posicaoIcone="esquerda" icone="bi bi-arrow-left"
-          texto="Voltar para Dados Pessoais">
+          texto="Voltar para Contato">
         </button>
       </div>
 
@@ -55,6 +54,3 @@
   </div>
 
 </section>
-
-<mpc-modal #modalErro></mpc-modal>
-

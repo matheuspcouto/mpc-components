@@ -4,7 +4,7 @@
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/06/2025
- * @updated 04/07/2025
+ * @updated 07/07/2025
  */
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -22,6 +22,7 @@ import { MpcInputNumberComponent } from '../../../shared/components/Inputs/mpc-i
 import { MpcInputCpfcnpjComponent } from "../../../shared/components/Inputs/mpc-input-cpfcnpj/mpc-input-cpfcnpj.component";
 import { MpcInputTextAreaComponent } from "../../../shared/components/Inputs/mpc-input-text-area/mpc-input-text-area.component";
 import { ErrorService } from '../../../shared/error/error.service';
+import { MpcLoaderService } from '../../../shared/components/mpc-loader/mpc-loader.service';
 
 @Component({
   selector: 'app-dados-pessoais',
@@ -35,12 +36,15 @@ import { ErrorService } from '../../../shared/error/error.service';
 })
 export default class DadosPessoaisComponent implements OnInit {
 
+  // Injeções
   private readonly router = inject(Router);
   private readonly inscricaoService = inject(InscricaoService);
   private readonly formBuilder = inject(NonNullableFormBuilder);
   private readonly notificationService = inject(ToastrService);
   private readonly errorService = inject(ErrorService);
+  private readonly loaderService = inject(MpcLoaderService);
 
+  // Variáveis
   protected dataAtual: string = new Date().toISOString().split('T')[0];
 
   protected estadosCivis: SelectOption[] = [
@@ -72,7 +76,6 @@ export default class DadosPessoaisComponent implements OnInit {
    */
   ngOnInit(): void {
     this.atualizarForm();
-    this.dataAtual = this.formatarData(this.dataAtual);
   }
 
   /**
@@ -80,6 +83,7 @@ export default class DadosPessoaisComponent implements OnInit {
    */
   private atualizarForm(): void {
     try {
+      this.loaderService.show();
       const dadosInscricao = this.inscricaoService.getDadosInscricao();
 
       if (this.inscricaoService.isDadosPessoaisCompletos()) {
@@ -91,29 +95,33 @@ export default class DadosPessoaisComponent implements OnInit {
           dataNasc: dadosInscricao.dataNasc,
           idade: dadosInscricao.idade,
           cpfCnpj: dadosInscricao.cpfCnpj,
-          descricao: dadosInscricao.descricao
+          descricao: dadosInscricao.descricao,
         });
 
         if (dadosInscricao.sexo) {
           this.sexos.forEach(sexo => {
             if (sexo.value === dadosInscricao.sexo) {
               sexo.checked = true;
-              this.form.patchValue({ sexo: sexo.value });
+              this.form.controls.sexo.setValue(sexo.value);
             }
           });
         }
-
         if (dadosInscricao.estadoCivil) {
           this.estadosCivis.forEach(estadoCivil => {
             if (estadoCivil.value === dadosInscricao.estadoCivil) {
               estadoCivil.selected = true;
-              this.form.patchValue({ estadoCivil: estadoCivil.value });
+              this.form.controls.estadoCivil.setValue(estadoCivil.value);
             }
           });
         }
+
+        this.dataAtual = this.formatarData(this.dataAtual);
+
       }
     } catch (error) {
       this.errorService.construirErro(error);
+    } finally {
+      this.loaderService.hide();
     }
   }
 
@@ -122,10 +130,12 @@ export default class DadosPessoaisComponent implements OnInit {
    */
   protected proximaEtapa(): void {
     try {
+      this.form.markAllAsTouched();
+
       if (this.form.invalid) {
         this.notificationService.error('Preencha todos os campos obrigatórios corretamente!');
       } else {
-        this.inscricaoService.atualizarDadosInscricao(this.form.value, 2);
+        this.inscricaoService.atualizarDadosInscricao({ novosDados: this.form.value, proximaEtapa: 2 });
         this.router.navigate([Rotas.CONTATO]);
       }
     } catch (error) {

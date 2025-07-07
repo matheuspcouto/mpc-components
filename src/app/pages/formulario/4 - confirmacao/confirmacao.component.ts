@@ -26,12 +26,13 @@ import { take } from 'rxjs';
 })
 export class ConfirmacaoComponent implements OnInit {
 
+  // Injeções
   private readonly router = inject(Router);
   private readonly inscricaoService = inject(InscricaoService);
   private readonly errorService = inject(ErrorService);
 
+  // Variáveis
   @ViewChild('modalSucesso', { static: true }) private modalSucesso!: MpcModalComponent;
-
   protected dadosInscricao = new Inscricao();
 
   /**
@@ -68,7 +69,7 @@ export class ConfirmacaoComponent implements OnInit {
         .pipe(take(1))
         .subscribe({
           next: (response: Inscricao) => {
-            this.inscricaoService.atualizarDadosInscricao(response, 5);
+            this.inscricaoService.atualizarDadosInscricao({ novosDados: response, proximaEtapa: 5 });
             this.abrirModalSucesso();
           },
           error: (error: any) => { throw error }

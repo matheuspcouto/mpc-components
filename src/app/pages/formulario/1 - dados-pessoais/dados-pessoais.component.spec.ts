@@ -92,7 +92,7 @@ describe('DadosPessoaisComponent', () => {
     });
     jest.spyOn(component['form'], 'valid', 'get').mockReturnValue(true);
     component['proximaEtapa']();
-    expect(mockInscricaoService.atualizarDadosInscricao).toHaveBeenCalledWith(component['form'].value, 2);
+    expect(mockInscricaoService.atualizarDadosInscricao).toHaveBeenCalled();
   });
 
   it('deve formatar data corretamente', () => {

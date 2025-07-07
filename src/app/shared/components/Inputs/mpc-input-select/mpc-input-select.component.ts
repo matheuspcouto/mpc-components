@@ -1,25 +1,27 @@
 /**
  * @Componente MpcInputSelectComponent
- * Este componente é responsável por exibir um campo select com uma lista de strings.
+ * Este componente exibe um campo select customizado, integrado ao Angular Forms.
  *
- * id {string}: (opcional) Id do campo.
- * label {string}: Label do campo.
- * disabled {boolean}: (opcional) Indica se o campo está desabilitado.
- * options {string[]}: Opções do campo.
- * tabIndex {number}: (opcional) Índice de tabulação do campo.
- * ariaLabel {string}: (opcional) Label para acessibilidade.
- * required {boolean}: (opcional) Campo obrigatório.
+ * @Input id {string}: (opcional) Id do campo.
+ * @Input label {string}: Label do campo.
+ * @Input tabIndex {number}: (opcional) Índice de tabulação do campo.
+ * @Input ariaLabel {string}: (opcional) Label para acessibilidade.
+ * @Input disabled {boolean}: (opcional) Campo desabilitado.
+ * @Input required {boolean}: (opcional) Campo obrigatório.
+ * @Input options {SelectOption[]}: Lista de opções do select.
  *
- * Exemplo de utilização:
- * <mpc-input-select label="Sexo" [options]="options" [required]="true" [tabIndex]="1" [ariaLabel]="ariaLabel" (valor)="setvalor($event)"></mpc-input-select>
+ * Integração: ControlValueAccessor e Validator (compatível com Reactive Forms e Template Forms)
+ *
+ * Exemplo de uso:
+ * <mpc-input-select [formControl]="control" label="Sexo" [options]="options" [required]="true" [tabIndex]="1" [ariaLabel]="'Sexo'" />
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
- * @updated 04/07/2025
+ * @updated 07/07/2025
  */
 
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ValidationErrors } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output, forwardRef } from '@angular/core';
+import { ValidationErrors, ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, Validator, AbstractControl } from '@angular/forms';
 
 export interface SelectOption {
   label: string;
@@ -27,97 +29,134 @@ export interface SelectOption {
   selected?: boolean;
 }
 
+
+// TODO: Adicionar Selecione
 @Component({
   selector: 'mpc-input-select',
   imports: [],
   templateUrl: './mpc-input-select.component.html',
-  styleUrl: './mpc-input-select.component.css'
+  styleUrl: './mpc-input-select.component.css',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => MpcInputSelectComponent),
+      multi: true
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => MpcInputSelectComponent),
+      multi: true
+    }
+  ]
 })
-export class MpcInputSelectComponent implements OnInit {
+export class MpcInputSelectComponent implements ControlValueAccessor, Validator, OnInit {
 
   // Acessibilidade
-  @Input() id?: string = '';
-  @Input() tabIndex?: number = 0
-  @Input() ariaLabel?: string = '';
-
-  @Input() label: string = '';
-  @Input() disabled?: boolean = false;
-
-  @Input() options: SelectOption[] = [];
+  @Input() id: string = '';
+  @Input() tabIndex: number = 0;
+  @Input() ariaLabel: string = '';
 
   // Validators
-  @Input() required?: boolean = false;
+  @Input() label: string = '';
+  @Input() required: boolean = false;
+  @Input() disabled: boolean = false;
 
-  @Output() valor: EventEmitter<string> = new EventEmitter();
-  @Output() error: EventEmitter<ValidationErrors> = new EventEmitter();
-
+  // Variáveis
+  @Input() options: SelectOption[] = [];
+  public value: string = '';
   protected opcaoSelecionada?: SelectOption;
-
   protected errorMessage?: string;
   protected campoTocado: boolean = false;
 
-  /**
-   * Inicializa o componente e define a opção selecionada.
-   */
-  ngOnInit(): void {
-    this.opcaoSelecionada = this.options.find(option => option.selected);
+  // Outputs
+  @Output() valueChange = new EventEmitter<any>();
 
-    // Se não há opção selecionada, adiciona a opção "Selecione"
-    if (!this.opcaoSelecionada) {
-      const opcaoSelecione: SelectOption = { label: 'Selecione', value: '', selected: true };
-      this.options.unshift(opcaoSelecione);
-      this.opcaoSelecionada = opcaoSelecione;
+  // ControlValueAccessor
+  onChange = (_: any) => { };
+  onTouched = () => { };
 
-    } else {
-      // Se há uma opção selecionada, emite o valor
-      this.valor.emit(this.opcaoSelecionada.value);
-    }
+  writeValue(value: string): void {
+    this.value = value;
+  }
 
-    this.isCampoValido();
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
   }
 
   /**
-   * Marca o campo como tocado e valida.
+   * Inicializa o componente.
+   */
+  ngOnInit(): void {
+    // Cria uma cópia das opções para não modificar o array original
+    let optionsCopy = [...this.options];
+
+    // Verifica se já existe a opção 'Selecione' (label e value)
+    const existeSelecione = optionsCopy.some(
+      option => option.label === 'Selecione' && option.value === ''
+    );
+
+    // Se não existe, adiciona 'Selecione' na primeira posição
+    if (!existeSelecione) {
+      optionsCopy.unshift({ label: 'Selecione', value: '', selected: true });
+    }
+
+    this.options = optionsCopy;
+
+    // Define a opção selecionada baseada no valor atual ou na opção marcada como selected
+    if (this.value) {
+      this.opcaoSelecionada = this.options.find(option => option.value === this.value);
+    } else {
+      this.opcaoSelecionada = this.options.find(option => option.selected) || this.options[0];
+    }
+  }
+
+  /**
+   * Marca o campo como tocado (para exibir mensagens de erro após interação).
    */
   protected onFocus(): void {
     this.campoTocado = true;
-    this.isCampoValido();
+    this.onChange(this.value);
   }
 
   /**
-   * Atualiza a opção selecionada e emite se válido.
+   * Atualiza a opção selecionada e notifica o Angular Forms.
+   * @param option Opção selecionada do select.
    */
   setValue(option: any): void {
-    this.opcaoSelecionada = option as SelectOption;
-    if (this.isCampoValido()) { this.valor.emit(this.opcaoSelecionada?.value) }
+    this.opcaoSelecionada = option;
+    this.value = option.value;
+    this.onChange(this.value);
+    this.onTouched();
+    this.valueChange.emit(this.value);
   }
 
   /**
-   * Valida o campo.
+   * Valida o campo conforme regras de obrigatório.
+   * @param control Controle do formulário.
+   * @returns ValidationErrors|null
    */
-  private isCampoValido(): boolean {
-    if (this.disabled) return true;
-
+  validate(control: AbstractControl): ValidationErrors | null {
+    if (this.disabled) return null;
     if (this.isCampoObrigatorio()) {
-      this.error.emit({ required: true });
       if (this.campoTocado) {
         this.errorMessage = `O campo ${this.label} é obrigatório`;
       }
-      return false;
+      return { required: true };
     }
-
     this.errorMessage = undefined;
-    return true;
+    return null;
   }
 
   /**
    * Verifica se o campo é obrigatório e está vazio.
+   * @returns boolean
    */
   private isCampoObrigatorio(): boolean {
     if (!this.required) return false;
-    return this.required &&
-      (!this.opcaoSelecionada ||
-        this.opcaoSelecionada.value === '' ||
-        this.opcaoSelecionada.value === 'Selecione');
+    return this.required && (!this.opcaoSelecionada || this.opcaoSelecionada.value === '' || this.opcaoSelecionada.value === 'Selecione');
   }
 }

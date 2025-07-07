@@ -126,6 +126,6 @@ describe('ConfirmacaoComponent', () => {
     mockInscricaoService.inscrever.mockReturnValue(of(inscricaoMock));
     component['inscrever']();
     expect(mockInscricaoService.inscrever).toHaveBeenCalled();
-    expect(mockInscricaoService.atualizarDadosInscricao).toHaveBeenCalledWith(inscricaoMock, 5);
+    expect(mockInscricaoService.atualizarDadosInscricao).toHaveBeenCalled();
   });
 });

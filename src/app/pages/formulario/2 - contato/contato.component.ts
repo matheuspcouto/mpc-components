@@ -19,6 +19,7 @@ import { MpcInputEmailComponent } from '../../../shared/components/Inputs/mpc-in
 import { ToastrService } from 'ngx-toastr';
 import { Endereco, MpcInputBuscaCepComponent } from "../../../shared/components/Inputs/mpc-input-busca-cep/mpc-input-busca-cep.component";
 import { ErrorService } from '../../../shared/error/error.service';
+import { MpcLoaderService } from '../../../shared/components/mpc-loader/mpc-loader.service';
 
 @Component({
   selector: 'app-contato',
@@ -34,12 +35,15 @@ import { ErrorService } from '../../../shared/error/error.service';
 })
 export default class ContatoComponent implements OnInit {
 
+  // Injeções
   private readonly router = inject(Router);
   private readonly inscricaoService = inject(InscricaoService);
   private readonly formBuilder = inject(NonNullableFormBuilder);
   private readonly notificationService = inject(ToastrService);
   private readonly errorService = inject(ErrorService);
+  private readonly loaderService = inject(MpcLoaderService);
 
+  // Formulário
   protected form = this.formBuilder.group({
     telefone: [''],
     email: [''],
@@ -64,6 +68,7 @@ export default class ContatoComponent implements OnInit {
    */
   private atualizarForm(): void {
     try {
+      this.loaderService.show();
       const dadosInscricao = this.inscricaoService.getDadosInscricao();
 
       if (this.inscricaoService.isContatoCompleto()) {
@@ -83,6 +88,8 @@ export default class ContatoComponent implements OnInit {
       }
     } catch (error) {
       this.errorService.construirErro(error);
+    } finally {
+      this.loaderService.hide();
     }
   }
 
@@ -94,7 +101,7 @@ export default class ContatoComponent implements OnInit {
       if (this.form.invalid) {
         this.notificationService.error('Preencha todos os campos obrigatórios corretamente!');
       } else {
-        this.inscricaoService.atualizarDadosInscricao(this.form.value, 3);
+        this.inscricaoService.atualizarDadosInscricao({ novosDados: this.form.value, proximaEtapa: 3 });
         this.router.navigate([Rotas.PAGAMENTO]);
       }
     } catch (error) {
@@ -107,7 +114,7 @@ export default class ContatoComponent implements OnInit {
    */
   protected etapaAnterior(): void {
     try {
-      this.inscricaoService.atualizarDadosInscricao(this.form.value, 1);
+      this.inscricaoService.atualizarDadosInscricao({ novosDados: this.form.value, proximaEtapa: 1 });
       this.router.navigate([Rotas.DADOS_PESSOAIS]);
     } catch (error) {
       this.errorService.construirErro(error);

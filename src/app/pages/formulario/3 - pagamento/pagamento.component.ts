@@ -9,48 +9,59 @@
 import { SelectOption } from '../../../shared/components/Inputs/mpc-input-select/mpc-input-select.component';
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MpcModalComponent } from '../../../shared/components/mpc-modal/mpc-modal.component';
 import { Rotas } from '../../../shared/enums/rotas-enum';
 import { MpcFormProgressBarComponent } from '../../../shared/components/mpc-form-progress-bar/mpc-form-progress-bar.component';
 import { FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { MpcButtonDirective } from '../../../shared/directives/mpc-button/mpc-button.directive';
 import { MpcInputSelectComponent } from '../../../shared/components/Inputs/mpc-input-select/mpc-input-select.component';
 import { InscricaoService } from '../service/inscricao.service';
-import { MpcInputTextComponent } from '../../../shared/components/Inputs/mpc-input-text/mpc-input-text.component';
 import { ErrorService } from '../../../shared/error/error.service';
+import { MpcLoaderService } from '../../../shared/components/mpc-loader/mpc-loader.service';
 
 @Component({
   selector: 'app-pagamento',
   imports: [
-    MpcModalComponent, FormsModule,
-    ReactiveFormsModule, MpcButtonDirective, MpcInputSelectComponent, MpcFormProgressBarComponent, MpcInputTextComponent
+    FormsModule,
+    ReactiveFormsModule, MpcButtonDirective, MpcInputSelectComponent, MpcFormProgressBarComponent,
   ],
   templateUrl: './pagamento.component.html',
   styleUrls: ['./pagamento.component.css'],
 })
 export default class PagamentoComponent implements OnInit {
 
+  // Injeções
   private readonly formBuilder = inject(NonNullableFormBuilder);
   private readonly router = inject(Router);
   private readonly inscricaoService = inject(InscricaoService);
   private readonly errorService = inject(ErrorService);
+  private readonly loaderService = inject(MpcLoaderService);
 
+  // Variáveis
   protected formasPagamento: SelectOption[] = [
     { label: 'Cartão', value: 'Cartão', selected: false },
     { label: 'Pix', value: 'Pix', selected: false },
     { label: 'Dinheiro', value: 'Dinheiro', selected: false }
   ];
 
+  protected valorInscricao: number = 100.00;
+
   protected form = this.formBuilder.group({
     formaPagamento: [''],
-    valor: [100]
+    valor: [0.00]
   });
+
+  /**
+ * Formata o valor para o padrão monetário brasileiro.
+ */
+  get valorFormatado(): string {
+    return this.valorInscricao.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  }
 
   /**
    * Inicializa o formulário e atualiza os dados se já existirem.
    */
   ngOnInit(): void {
-    this.atualizarForm()
+    this.atualizarForm();
   }
 
   /**
@@ -58,11 +69,12 @@ export default class PagamentoComponent implements OnInit {
    */
   private atualizarForm(): void {
     try {
+      this.loaderService.show();
       const dadosInscricao = this.inscricaoService.getDadosInscricao();
 
       if (this.inscricaoService.isPagamentoCompleto()) {
         this.form.reset();
-        this.form.patchValue({ valor: dadosInscricao.valor });
+        this.valorInscricao = dadosInscricao.valor;
 
         if (dadosInscricao.formaPagamento) {
           this.formasPagamento.forEach(forma => {
@@ -75,25 +87,19 @@ export default class PagamentoComponent implements OnInit {
       }
     } catch (error) {
       this.errorService.construirErro(error);
+    } finally {
+      this.loaderService.hide();
     }
   }
 
   /**
    * Calcula o valor total de acordo com a forma de pagamento.
    */
-  private calcularValorTotal(): void {
+  protected calcularValorTotal(): void {
     const valorNormal = 100.00;
     const valorComTaxa = valorNormal as number * 1.05;
-    const valorTotal = this.form.value.formaPagamento === 'Cartão' ? valorComTaxa : valorNormal;
-    this.form.patchValue({ valor: valorTotal });
-  }
-
-  /**
-   * Atualiza a forma de pagamento e recalcula o valor.
-   */
-  protected atualizarFormaPagamento(formaPagamento: any): void {
-    this.form.patchValue({ formaPagamento });
-    this.calcularValorTotal();
+    const valorTotal = this.form.controls.formaPagamento.value === 'Cartão' ? valorComTaxa : valorNormal;
+    this.valorInscricao = valorTotal;
   }
 
   /**
@@ -109,7 +115,8 @@ export default class PagamentoComponent implements OnInit {
   protected proximaEtapa(): void {
     try {
       if (this.form.invalid) return;
-      this.inscricaoService.atualizarDadosInscricao(this.form.value, 4);
+      this.form.patchValue({ valor: this.valorInscricao });
+      this.inscricaoService.atualizarDadosInscricao({ novosDados: this.form.value, proximaEtapa: 4 });
       this.router.navigate([Rotas.CONFIRMACAO]);
     } catch (error) {
       this.errorService.construirErro(error);
@@ -121,7 +128,7 @@ export default class PagamentoComponent implements OnInit {
    */
   protected etapaAnterior(): void {
     try {
-      this.inscricaoService.atualizarDadosInscricao(this.form.value, 2);
+      this.inscricaoService.atualizarDadosInscricao({ novosDados: this.form.value, proximaEtapa: 2 });
       this.router.navigate([Rotas.CONTATO]);
     } catch (error) {
       this.errorService.construirErro(error);

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MpcInputCpfcnpjComponent } from './mpc-input-cpfcnpj.component';
 
 describe('MpcInputCpfcnpjComponent', () => {
@@ -7,7 +8,7 @@ describe('MpcInputCpfcnpjComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MpcInputCpfcnpjComponent]
+      imports: [MpcInputCpfcnpjComponent, ReactiveFormsModule]
     }).compileComponents();
     fixture = TestBed.createComponent(MpcInputCpfcnpjComponent);
     component = fixture.componentInstance;
@@ -18,66 +19,58 @@ describe('MpcInputCpfcnpjComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('deve emitir erro se campo obrigatório estiver vazio', () => {
+  it('deve escrever valor via writeValue', () => {
+    component.writeValue('12345678901');
+    expect(component.value).toBe('12345678901');
+  });
+
+  it('deve registrar onChange e onTouched', () => {
+    const fn = jest.fn();
+    component.registerOnChange(fn);
+    component.registerOnTouched(fn);
+    component.onChange('abc');
+    component.onTouched();
+    expect(fn).toHaveBeenCalled();
+  });
+
+  it('deve validar campo obrigatório vazio', () => {
     component.required = true;
-    const spy = jest.spyOn(component.error, 'emit');
-    component['campoTocado'] = true;
-    component['isCampoValido']('');
-    expect(spy).toHaveBeenCalledWith({ required: true });
+    (component as any).campoTocado = true;
+    component.value = '';
+    const control = new FormControl('');
+    const result = component.validate(control);
+    expect(result).toEqual({ required: true });
     expect((component as any).errorMessage).toContain('obrigatório');
   });
 
-  it('deve emitir erro se CPF/CNPJ for inválido', () => {
-    const spy = jest.spyOn(component.error, 'emit');
-    component['campoTocado'] = true;
-    component['isCampoValido']('123');
-    expect(spy).toHaveBeenCalledWith({ regex: true });
+  it('deve validar CPF/CNPJ inválido', () => {
+    component.required = true;
+    (component as any).campoTocado = true;
+    component.value = '123';
+    const control = new FormControl('123');
+    const result = component.validate(control);
+    expect(result).toEqual({ regex: true });
     expect((component as any).errorMessage).toContain('não é válido');
   });
 
-  it('deve aceitar campo válido', () => {
+  it('deve aceitar CPF válido', () => {
     component.required = true;
-    component['campoTocado'] = true;
-    component['isCampoValido']('52998224725'); // CPF válido
-    expect(component['errorMessage']).toBeUndefined();
+    (component as any).campoTocado = true;
+    component.value = '52998224725';
+    const control = new FormControl('52998224725');
+    const result = component.validate(control);
+    expect(result).toBeNull();
+    expect((component as any).errorMessage).toBeUndefined();
   });
 
   it('deve aceitar campo readonly ou disabled', () => {
     component.readonly = true;
-    expect(component['isCampoValido'](undefined)).toBeTruthy();
+    component.value = '';
+    const control = new FormControl('');
+    expect(component.validate(control)).toBeNull();
     component.readonly = false;
     component.disabled = true;
-    expect(component['isCampoValido'](undefined)).toBeTruthy();
-  });
-
-  it('deve validar CPF/CNPJ', () => {
-    // CNPJ
-    expect(component['isCpfCnpjValido']('19100000000197')).toBeFalsy();
-    expect(component['isCpfCnpjValido']('12345678000195')).toBeTruthy();
-    expect(component['isCpfCnpjValido']('11111111111111')).toBeFalsy();
-    expect(component['isCNPJValido']('12345678000194')).toBeFalsy();
-    expect(component['isCNPJValido']('12345678000100')).toBeFalsy();
-
-    // CPF
-    expect(component['isCpfCnpjValido']('52998224725')).toBeTruthy();
-    expect(component['isCpfCnpjValido']('12345678901')).toBeFalsy();
-    expect(component['isCpfCnpjValido']('11111111111')).toBeFalsy();
-    expect(component['isCPFValido']('52998224724')).toBeFalsy();
-    expect(component['isCPFValido']('52998224700')).toBeFalsy();
-    expect(component['isCPFValido'](undefined)).toBeFalsy();
-  });
-
-  it('deve emitir valor ao setValue válido', () => {
-    const spy = jest.spyOn(component.valor, 'emit');
-    component.required = true;
-    component['setValue']({ target: { value: '52998224725' } });
-    expect(spy).toHaveBeenCalledWith('52998224725');
-  });
-
-  it('deve marcar campo como tocado ao focar', () => {
-    component['campoTocado'] = false;
-    component['onFocus']();
-    expect(component['campoTocado']).toBeTruthy();
+    expect(component.validate(control)).toBeNull();
   });
 
   it('deve formatar valor corretamente', () => {
@@ -85,10 +78,87 @@ describe('MpcInputCpfcnpjComponent', () => {
     expect(component.valorFormatado).toBe('529.982.247-25');
   });
 
-  it('deve chamar isCampoValido no ngOnInit', () => {
-    const spy = jest.spyOn(component as any, 'isCampoValido');
-    component.value = '52998224725';
-    component.ngOnInit();
+  it('deve atualizar valor e disparar onChange/onTouched ao setValue', () => {
+    const onChange = jest.fn();
+    const onTouched = jest.fn();
+    component.registerOnChange(onChange);
+    component.registerOnTouched(onTouched);
+    (component as any).setValue({ target: { value: '52998224725' } });
+    expect(component.value).toBe('52998224725');
+    expect(onChange).toHaveBeenCalledWith('52998224725');
+    expect(onTouched).toHaveBeenCalled();
+  });
+
+  it('deve marcar campo como tocado ao focar', () => {
+    (component as any).campoTocado = false;
+    (component as any).onFocus();
+    expect((component as any).campoTocado).toBeTruthy();
+  });
+
+  it('isCampoObrigatorio deve retornar true se required e vazio', () => {
+    component.required = true;
+    expect((component as any).isCampoObrigatorio('')).toBe(true);
+    expect((component as any).isCampoObrigatorio(undefined)).toBe(true);
+  });
+
+  it('isCampoObrigatorio deve retornar false se não required ou preenchido', () => {
+    component.required = false;
+    expect((component as any).isCampoObrigatorio('')).toBe(false);
+    component.required = true;
+    expect((component as any).isCampoObrigatorio('123')).toBe(false);
+  });
+
+  it('isCPFValido deve retornar false para CPF inválido (tamanho errado)', () => {
+    expect((component as any).isCPFValido('123')).toBe(false);
+  });
+
+  it('isCPFValido deve retornar false para CPF inválido (dígitos repetidos)', () => {
+    expect((component as any).isCPFValido('11111111111')).toBe(false);
+  });
+
+  it('isCPFValido deve retornar false para CPF inválido (dígito verificador errado)', () => {
+    expect((component as any).isCPFValido('52998224724')).toBe(false);
+  });
+
+  it('isCPFValido deve retornar true para CPF válido', () => {
+    expect((component as any).isCPFValido('52998224725')).toBe(true);
+  });
+
+  it('isCNPJValido deve retornar false para CNPJ inválido (tamanho errado)', () => {
+    expect((component as any).isCNPJValido('123')).toBe(false);
+  });
+
+  it('isCNPJValido deve retornar false para CNPJ inválido (dígitos repetidos)', () => {
+    expect((component as any).isCNPJValido('11111111111111')).toBe(false);
+  });
+
+  it('isCNPJValido deve retornar false para CNPJ inválido (dígito verificador errado)', () => {
+    expect((component as any).isCNPJValido('11222333000180')).toBe(false);
+  });
+
+  it('isCNPJValido deve retornar true para CNPJ válido', () => {
+    expect((component as any).isCNPJValido('11222333000181')).toBe(true);
+  });
+
+  it('isCpfCnpjValido deve chamar isCPFValido para valores de até 11 dígitos', () => {
+    const spy = jest.spyOn(component as any, 'isCPFValido');
+    (component as any).isCpfCnpjValido('52998224725');
     expect(spy).toHaveBeenCalledWith('52998224725');
+  });
+
+  it('isCpfCnpjValido deve chamar isCNPJValido para valores maiores que 11 dígitos', () => {
+    const spy = jest.spyOn(component as any, 'isCNPJValido');
+    (component as any).isCpfCnpjValido('11222333000181');
+    expect(spy).toHaveBeenCalledWith('11222333000181');
+  });
+
+  it('validate deve retornar erro regex se valor inválido e campo não obrigatório', () => {
+    component.required = false;
+    (component as any).campoTocado = true;
+    component.value = '123';
+    const control = new FormControl('123');
+    const result = component.validate(control);
+    expect(result).toEqual({ regex: true });
+    expect((component as any).errorMessage).toContain('não é válido');
   });
 });

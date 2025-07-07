@@ -3,9 +3,9 @@
 
   <div class="input-group">
     <input [id]="id" type="text" class="form-control" [value]="value" (input)="setValue($event)"
-      [attr.minLength]="minLength" [disabled]="disabled" [readOnly]="readonly"
-      [style]="errorMessage ? 'border-color: red' : ''" (focus)="onFocus()"
-      (keydown.enter)="value && value.length >= minLength ? pesquisar() : null" />
+      [attr.minLength]="minLength" [readOnly]="readonly" [style.border-color]="errorMessage ? 'red' : null"
+      (focus)="onFocus()" (keydown.enter)="value && value.length >= minLength ? pesquisar() : null"
+      [disabled]="disabled" />
 
     <div class="icon-limpar" [style.visibility]="value && value.length > 0 ? 'visible' : 'hidden'">
       <i class="bi bi-x-lg" (click)="limparPesquisa()" style="cursor:pointer" title="Limpar pesquisa"></i>
@@ -18,7 +18,5 @@
     </div>
   </div>
 
-  @if (errorMessage) {
-  <p class="text-danger mt-1">{{ errorMessage }}</p>
-  }
+  <p class="text-danger mt-1" [style.visibility]="errorMessage ? 'visible' : 'hidden'"> {{ errorMessage }} </p>
 </div>

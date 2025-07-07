@@ -17,36 +17,30 @@
 
       <div class="row">
         <div class="col-md-6 mb-3">
-          <mpc-input-telefone [required]="true" (valor)="form.controls.telefone.setValue($event)"
-            (error)="form.controls.telefone.setErrors($event)" [value]="form.value.telefone" />
+          <mpc-input-telefone formControlName="telefone" [required]="true" />
         </div>
 
         <div class="col-md-6 mb-3">
-          <mpc-input-email [required]="true" [value]="form.value.email" (valor)="form.controls.email.setValue($event)"
-            (error)="form.controls.email.setErrors($event)" />
+          <mpc-input-email formControlName="email" [required]="true" />
         </div>
       </div>
 
       <div class="col-md-6 mb-3 align-items-center justify-content-between">
-        <mpc-input-busca-cep [value]="form.value.cep" [required]="true" (valor)="definirEnderecoPorCep($event)"
-          (error)="form.controls.cep.setErrors($event)" />
+        <mpc-input-busca-cep formControlName="cep" [required]="true" (endereco)="definirEnderecoPorCep($event)" />
       </div>
 
       <div class="row">
 
         <div class="col-md-4 mb-3">
-          <mpc-input-text label="Cidade" [readonly]="true" [value]="form.value.cidade"
-            (valor)="form.controls.cidade.setValue($event)" (error)="form.controls.cidade.setErrors($event)" />
+          <mpc-input-text label="Cidade" [readonly]="true" formControlName="cidade" />
         </div>
 
         <div class="col-md-4 mb-3">
-          <mpc-input-text label="Estado" [readonly]="true" [value]="form.value.estado"
-            (valor)="form.controls.estado.setValue($event)" (error)="form.controls.estado.setErrors($event)" />
+          <mpc-input-text label="Estado" [readonly]="true" formControlName="estado" />
         </div>
 
         <div class="col-md-4 mb-3">
-          <mpc-input-text label="Bairro" [readonly]="true" [value]="form.value.bairro"
-            (valor)="form.controls.bairro.setValue($event)" (error)="form.controls.bairro.setErrors($event)" />
+          <mpc-input-text label="Bairro" [readonly]="true" formControlName="bairro" />
         </div>
 
       </div>
@@ -54,20 +48,17 @@
       <div class="row">
 
         <div class="col-md-8 mb-3">
-          <mpc-input-text label="Rua" [value]="form.value.rua" [readonly]="true"
-            (valor)="form.controls.rua.setValue($event)" (error)="form.controls.rua.setErrors($event)" />
+          <mpc-input-text label="Rua" [readonly]="true" formControlName="rua" />
         </div>
 
         <div class="col-md-4 mb-3">
-          <mpc-input-text label="Número/Lote" [value]="form.value.numero" min="1"
-            (valor)="form.controls.numero.setValue($event)" (error)="form.controls.numero.setErrors($event)" />
+          <mpc-input-text label="Número/Lote" [min]="1" formControlName="numero" />
         </div>
 
       </div>
 
       <div class="row">
-        <mpc-input-text label="Complemento" max="50" [value]="form.value.complemento"
-          (valor)="form.controls.complemento.setValue($event)" (error)="form.controls.complemento.setErrors($event)" />
+        <mpc-input-text label="Complemento" [max]="50" formControlName="complemento" />
       </div>
 
       <div class="d-flex justify-content-center align-items-center mt-5">

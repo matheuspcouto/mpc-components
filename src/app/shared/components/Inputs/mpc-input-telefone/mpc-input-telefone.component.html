@@ -4,19 +4,14 @@
   <div class="input-group">
     <input [id]="id" type="tel" class="form-control col-md-4" [value]="valorFormatado" (input)="setValue($event)"
       [required]="required" (focus)="onFocus()" [disabled]="disabled" [readOnly]="readonly"
-      [style]="errorMessage ? 'border-color: red' : ''" [attr.maxLength]="15" />
+      [style.border-color]="errorMessage ? 'red' : null" [attr.maxLength]="15" />
 
-    @if (campoTocado) {
-    <div class="validation-icon">
-      @if (!errorMessage) { <i class="bi bi-check-circle-fill valid-icon"></i> }
-      @else { <i class="bi bi-x-circle-fill invalid-icon"></i> }
+    <div class="validation-icon" [style.visibility]="campoTocado ? 'visible' : 'hidden'">
+      <i [class]="errorMessage ? 'bi bi-x-circle-fill invalid-icon' : 'bi bi-check-circle-fill valid-icon'"></i>
     </div>
-    }
 
   </div>
 
-  @if (errorMessage) {
-  <p class="text-danger mt-1"> {{ errorMessage }} </p>
-  }
+  <p class="text-danger mt-1" [style.visibility]="errorMessage ? 'visible' : 'hidden'"> {{ errorMessage }} </p>
 
 </div>

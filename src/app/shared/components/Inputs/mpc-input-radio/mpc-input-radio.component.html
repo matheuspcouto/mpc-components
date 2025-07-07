@@ -5,16 +5,13 @@
   <div class="input-group">
     @for (option of options; track $index) {
     <label class="p-3">
-      <input [id]="id" (focus)="onFocus()" type="radio" (change)="setValue(option)"
-        [checked]="option.checked" [required]="required" [disabled]="disabled"
-        [readOnly]="readonly" /> {{ option.label }}
+      <input [id]="id" (focus)="onFocus()" type="radio" (change)="setValue(option)" [checked]="option.checked"
+        [required]="required" [readOnly]="readonly" [disabled]="disabled" /> {{ option.label }}
     </label>
     }
   </div>
 
-  @if (errorMessage) {
-  <p class="text-danger mt-1"> {{ errorMessage }} </p>
-  }
+  <p class="text-danger mt-1" [style.visibility]="errorMessage ? 'visible' : 'hidden'"> {{ errorMessage }} </p>
 
 </div>
 }
