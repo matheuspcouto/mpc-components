@@ -39,7 +39,6 @@
           border: none !important;
           border-bottom: 2px solid transparent !important;
           background-color: transparent !important;
-          color: var(--color-primary) !important; /* Cor do texto */
         }
       }
 
@@ -57,20 +56,13 @@
           color: inherit;
 
           &.active {
-            border-bottom: 2px solid var(--color-primary) !important;
-            color: var(--color-primary); /* Cor do texto quando ativo */
-          }
-
-          &:hover {
-            border-bottom: 2px solid var(--color-primary) !important;
-            color: var(--color-primary); /* Cor do texto quando hover */
+            border-bottom: 2px solid !important;
           }
         }
 
         /* Reticências */
         .pagination-dots {
           padding: 0 0.5rem;
-          color: var(--bs-secondary);
           font-size: 0.875rem;
         }
 

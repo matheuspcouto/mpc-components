@@ -1,14 +1,14 @@
 /**
  * @Componente MpcTabsComponent
- * Este componente é responsável por exibir uma lista de tabs com títulos e conteúdos.
+ * Este componente exibe uma lista de abas (tabs) com títulos e conteúdos customizáveis, permitindo seleção e acessibilidade.
  *
- * tabs {Tab[]}: Lista de tabs.
- * tabIndex {number}: (opcional) Índice da tab selecionada.
- * ariaLabel {string}: (opcional) Rótulo de acessibilidade das tabs.
- * tabSelected {EventEmitter<string>}: Evento emitido ao selecionar uma tab.
+ * @Input id {string} (opcional): Id do componente para acessibilidade.
+ * @Input tabIndex {number} (opcional): Índice de tabulação do componente.
+ * @Input ariaLabel {string} (opcional): Rótulo de acessibilidade das tabs.
+ * @Input tabs {Tab[]}: Lista de abas a serem exibidas.
+ * @Input textColor {string} (opcional): Cor do texto das abas.
  *
- * Exemplo de utilização:
- * <mpc-tabs [tabs]="tabs" [tabIndex]="0" ariaLabel="Tabs" (tabSelected)="selecionarTab($event)"></mpc-tabs>
+ * @Output tabSelected: Emite o objeto Tab selecionado ao trocar de aba.
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
@@ -22,7 +22,6 @@ export interface Tab {
   titulo: string;
 }
 
-// TODO: Ajustar cores
 @Component({
   selector: 'mpc-tabs',
   imports: [],
@@ -37,6 +36,9 @@ export class MpcTabsComponent implements OnInit {
   @Input() ariaLabel?: string = '';
 
   @Input() tabs: Tab[] = [];
+
+  // Estilos
+  @Input() textColor?: string = '';
 
   @Output() tabSelected = new EventEmitter<Tab>();
 

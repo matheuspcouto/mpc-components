@@ -8,14 +8,18 @@
         <p>MPC <span>Pagination</span></p>
       </div>
       <h5>
-        <strong>Descrição:</strong> O <code>mpc-pagination</code> é um componente de paginação customizado.
+        <strong>Descrição:</strong> O <code>mpc-pagination</code> é um componente de paginação customizado que exibe uma barra de navegação de páginas com suporte a seleção de itens por página, navegação e acessibilidade.
       </h5>
       <h5>
         <strong>Propriedades:</strong>
         <ul class="text-start mt-3">
-          <li><strong>totalItens</strong>: Total de itens (number).</li>
-          <li><strong>indices</strong>: Evento disparado ao mudar de página.</li>
-          <li><strong>mostrarSeletorItensPorPagina</strong>: (opcional) Seletor de itens por página.</li>
+          <li><strong>&#64;Input id</strong> <em>(string, opcional)</em>: Id do componente para acessibilidade.</li>
+          <li><strong>&#64;Input tabIndex</strong> <em>(number, opcional)</em>: Índice de tabulação do componente.</li>
+          <li><strong>&#64;Input ariaLabel</strong> <em>(string, opcional)</em>: Label para acessibilidade.</li>
+          <li><strong>&#64;Input totalItens</strong> <em>(number, obrigatório)</em>: Número total de itens a serem paginados.</li>
+          <li><strong>&#64;Input mostrarSeletorItensPorPagina</strong> <em>(boolean, opcional)</em>: Indica se deve mostrar o seletor de itens por página (padrão: true).</li>
+          <li><strong>&#64;Input textColor</strong> <em>(string, opcional)</em>: Cor do texto dos elementos da paginação.</li>
+          <li><strong>&#64;Output indices</strong>: Emite um objeto <code>{{ '{' }} indiceInicial, indiceFinal {{ '}' }}</code> indicando o range de itens exibidos na página atual.</li>
         </ul>
       </h5>
       <div class="mb-3">
@@ -25,11 +29,13 @@
       <div class="mb-5">
         <h5><strong>Exemplo de uso no arquivo <code>.html</code>:</strong></h5>
         <pre
-          class="chroma"><code class="language-html" data-lang="html">&lt;mpc-pagination [totalItens]="itensTotais.length" (indices)="definirIndiceLista($event)"&gt;&lt;/mpc-pagination&gt;</code></pre>
+          class="chroma"><code class="language-html" data-lang="html">&lt;mpc-pagination textColor="var(--color-primary)" [totalItens]="itensTotais.length" (indices)="definirIndiceLista($event)" [mostrarSeletorItensPorPagina]="true"&gt;&lt;/mpc-pagination&gt;</code></pre>
       </div>
       <div class="row mb-5">
+        <h5><strong>Veja como fica o componente:</strong></h5>
         <div class="col-12 d-flex justify-content-center">
-          <mpc-pagination [totalItens]="itensTotais.length" (indices)="definirIndiceLista($event)" [mostrarSeletorItensPorPagina]="true"></mpc-pagination>
+          <mpc-pagination textColor="var(--color-primary)" [totalItens]="itensTotais.length"
+            (indices)="definirIndiceLista($event)" [mostrarSeletorItensPorPagina]="true"></mpc-pagination>
         </div>
       </div>
     </div>
@@ -37,4 +43,3 @@
   <!-- ======= MpcPagination FIM ======= -->
 
 </main>
-

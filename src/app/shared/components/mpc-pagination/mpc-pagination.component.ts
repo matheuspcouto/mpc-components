@@ -1,13 +1,15 @@
 /**
  * @Componente MpcPaginationComponent
- * Este componente é responsável por exibir uma barra de navegação de páginas.
+ * Este componente exibe uma barra de navegação de páginas com suporte a seleção de itens por página, navegação e acessibilidade.
  *
- * totalItens: {number} Número total de itens a serem paginados.
- * itensPorPagina: {number} Número de itens a serem visualizados por página.
- * mostrarSeletorItensPorPagina: {boolean} Indica se deve mostrar o seletor de itens por página.
+ * @Input id {string} (opcional): Id do componente para acessibilidade.
+ * @Input tabIndex {number} (opcional): Índice de tabulação do componente.
+ * @Input ariaLabel {string} (opcional): Label para acessibilidade.
+ * @Input totalItens {number}: Número total de itens a serem paginados.
+ * @Input mostrarSeletorItensPorPagina {boolean} (opcional): Indica se deve mostrar o seletor de itens por página (padrão: true).
+ * @Input textColor {string} (opcional): Cor do texto dos elementos da paginação.
  *
- * Exemplo de utilização:
- * <mpc-pagination id="mpc-pagination" tabindex="0" ariaLabel="mpc-pagination" [totalItens]="itensTeste.length" (indices)="definirIndiceLista($event)"></mpc-pagination>
+ * @Output indices: Emite um objeto { indiceInicial, indiceFinal } indicando o range de itens exibidos na página atual.
  *
  * @author Matheus Pimentel Do Couto
  * @created 24/06/2025
@@ -21,7 +23,6 @@ export interface IndicesPaginacao {
   indiceFinal: number;
 }
 
-// TODO: Ajustar cores
 @Component({
   selector: 'mpc-pagination',
   imports: [],
@@ -42,6 +43,9 @@ export class MpcPaginationComponent implements OnInit, AfterViewInit, OnChanges 
   paginaAtual: number = 1;
   maxPaginasVisiveis: number = 5;
   opcoesSeletorItensPorPagina: number[] = [5, 10, 25, 50, 100];
+
+  // Estilos
+  @Input() textColor?: string = '';
 
   @Output() indices: EventEmitter<IndicesPaginacao> = new EventEmitter();
 

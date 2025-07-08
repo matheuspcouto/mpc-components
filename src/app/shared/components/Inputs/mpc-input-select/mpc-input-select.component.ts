@@ -29,8 +29,6 @@ export interface SelectOption {
   selected?: boolean;
 }
 
-
-// TODO: Adicionar Selecione
 @Component({
   selector: 'mpc-input-select',
   imports: [],

@@ -7,7 +7,7 @@
   flex-wrap: wrap;
   padding-left: 0;
   list-style: none;
-  color: gray;
+  color: gray; /* Cor do texto desabilitado */
   background-color: transparent;
   font-family: var(--font-secondary);
 
@@ -18,21 +18,12 @@
     cursor: pointer;
     height: 100%;
     border: 0;
-    border-bottom: 2px solid gray;
-
-    &:hover {
-      color: var(--color-primary);
-    }
+    border-bottom: 2px solid gray; /* Cor da borda desabilitada*/
 
     h4 {
       font-size: 18px;
       font-weight: 400;
       margin: 0;
     }
-  }
-
-  .active {
-    color: var(--color-primary);
-    border-color: var(--color-primary);
   }
 }
