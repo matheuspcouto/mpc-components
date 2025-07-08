@@ -16,7 +16,6 @@ import { MpcInputTextComponent } from '../../../shared/components/Inputs/mpc-inp
 import { InscricaoService } from '../service/inscricao.service';
 import { MpcInputTelefoneComponent } from '../../../shared/components/Inputs/mpc-input-telefone/mpc-input-telefone.component';
 import { MpcInputEmailComponent } from '../../../shared/components/Inputs/mpc-input-email/mpc-input-email.component';
-import { ToastrService } from 'ngx-toastr';
 import { Endereco, MpcInputBuscaCepComponent } from "../../../shared/components/Inputs/mpc-input-busca-cep/mpc-input-busca-cep.component";
 import { ErrorService } from '../../../shared/error/error.service';
 import { MpcLoaderService } from '../../../shared/components/mpc-loader/mpc-loader.service';
@@ -39,7 +38,6 @@ export default class ContatoComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly inscricaoService = inject(InscricaoService);
   private readonly formBuilder = inject(NonNullableFormBuilder);
-  private readonly notificationService = inject(ToastrService);
   private readonly errorService = inject(ErrorService);
   private readonly loaderService = inject(MpcLoaderService);
 
@@ -98,12 +96,8 @@ export default class ContatoComponent implements OnInit {
    */
   protected proximaEtapa(): void {
     try {
-      if (this.form.invalid) {
-        this.notificationService.error('Preencha todos os campos obrigatórios corretamente!');
-      } else {
-        this.inscricaoService.atualizarDadosInscricao({ novosDados: this.form.value, proximaEtapa: 3 });
-        this.router.navigate([Rotas.PAGAMENTO]);
-      }
+      this.inscricaoService.atualizarDadosInscricao({ novosDados: this.form.value, proximaEtapa: 3 });
+      this.router.navigate([Rotas.PAGAMENTO]);
     } catch (error) {
       this.errorService.construirErro(error);
     }

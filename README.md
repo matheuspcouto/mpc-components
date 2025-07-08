@@ -21,7 +21,6 @@ As principais bibliotecas utilizadas neste projeto (conforme `package.json`):
 - **bootstrap** ^5.3.2
 - **express** ^4.18.2
 - **jquery** ^3.7.1
-- **ngx-mask** ^17.1.8
 - **ngx-toastr** ^19.0.0
 - **rxjs** ~7.8.0
 - **tslib** ^2.3.0

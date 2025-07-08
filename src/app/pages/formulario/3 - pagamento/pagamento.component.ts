@@ -80,7 +80,7 @@ export default class PagamentoComponent implements OnInit {
           this.formasPagamento.forEach(forma => {
             if (forma.value === dadosInscricao.formaPagamento) {
               forma.selected = true;
-              this.form.patchValue({ formaPagamento: forma.value });
+              this.form.controls.formaPagamento.setValue(forma.value);
             }
           });
         }
@@ -114,8 +114,7 @@ export default class PagamentoComponent implements OnInit {
    */
   protected proximaEtapa(): void {
     try {
-      if (this.form.invalid) return;
-      this.form.patchValue({ valor: this.valorInscricao });
+      this.form.controls.valor.setValue(this.valorInscricao);
       this.inscricaoService.atualizarDadosInscricao({ novosDados: this.form.value, proximaEtapa: 4 });
       this.router.navigate([Rotas.CONFIRMACAO]);
     } catch (error) {

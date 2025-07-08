@@ -1,52 +1,50 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ToastrService } from 'ngx-toastr';
-import { NonNullableFormBuilder, ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NonNullableFormBuilder, FormControl, FormGroup } from '@angular/forms';
 import DadosPessoaisComponent from './dados-pessoais.component';
 import { InscricaoService } from '../service/inscricao.service';
-import { RouterTestingModule } from '@angular/router/testing';
-import { provideNgxMask } from 'ngx-mask';
 import { ErrorService } from '../../../shared/error/error.service';
 
 describe('DadosPessoaisComponent', () => {
   let component: DadosPessoaisComponent;
   let fixture: ComponentFixture<DadosPessoaisComponent>;
   let mockInscricaoService: any;
-  let mockToastrService: any;
   let mockFormBuilder: any;
   let mockErrorService: any;
 
   beforeEach(async () => {
+
     mockInscricaoService = {
       getDadosInscricao: jest.fn(),
       isDadosPessoaisCompletos: jest.fn(),
       atualizarDadosInscricao: jest.fn()
     };
-    mockToastrService = { error: jest.fn() };
+
     mockFormBuilder = {
       group: jest.fn().mockReturnValue(new FormGroup({
-        nome: new FormControl('', Validators.required),
-        sobrenome: new FormControl('', Validators.required),
-        dataNasc: new FormControl('', Validators.required),
-        sexo: new FormControl('', Validators.required),
-        estadoCivil: new FormControl('', Validators.required),
-        idade: new FormControl(0, Validators.min(1)),
-        cpfCnpj: new FormControl('', Validators.required),
+        nome: new FormControl(''),
+        sobrenome: new FormControl(''),
+        dataNasc: new FormControl(''),
+        sexo: new FormControl(''),
+        estadoCivil: new FormControl(''),
+        idade: new FormControl(0),
+        cpfCnpj: new FormControl(''),
       })),
       control: jest.fn(),
       array: jest.fn(),
       record: jest.fn()
     };
+
     mockErrorService = { construirErro: jest.fn() };
+
     await TestBed.configureTestingModule({
-      imports: [DadosPessoaisComponent, RouterTestingModule, ReactiveFormsModule],
+      imports: [DadosPessoaisComponent],
       providers: [
         { provide: InscricaoService, useValue: mockInscricaoService },
-        { provide: ToastrService, useValue: mockToastrService },
         { provide: NonNullableFormBuilder, useValue: mockFormBuilder },
         { provide: ErrorService, useValue: mockErrorService },
-        provideNgxMask()
       ]
     }).compileComponents();
+
     fixture = TestBed.createComponent(DadosPessoaisComponent);
     component = fixture.componentInstance;
   });
@@ -76,12 +74,6 @@ describe('DadosPessoaisComponent', () => {
     mockInscricaoService.isDadosPessoaisCompletos.mockReturnValue(false);
     component.ngOnInit();
     expect(component['form'].get('nome')?.value).toBe('');
-  });
-
-  it('deve mostrar erro se tentar avançar com formulário inválido', () => {
-    component['proximaEtapa']();
-    expect(mockToastrService.error).toHaveBeenCalled();
-    expect(mockInscricaoService.atualizarDadosInscricao).not.toHaveBeenCalled();
   });
 
   it('deve avançar para próxima etapa se formulário for válido', () => {

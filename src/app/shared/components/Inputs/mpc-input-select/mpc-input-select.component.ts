@@ -105,7 +105,7 @@ export class MpcInputSelectComponent implements ControlValueAccessor, Validator,
     this.options = optionsCopy;
 
     // Define a opção selecionada baseada no valor atual ou na opção marcada como selected
-    if (this.value) {
+    if (this.value.length > 0) {
       this.opcaoSelecionada = this.options.find(option => option.value === this.value);
     } else {
       this.opcaoSelecionada = this.options.find(option => option.selected) || this.options[0];

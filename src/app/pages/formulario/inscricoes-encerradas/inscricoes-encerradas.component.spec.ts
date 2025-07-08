@@ -1,7 +1,5 @@
-import { RouterTestingModule } from '@angular/router/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { InscricoesEncerradasComponent } from './inscricoes-encerradas.component';
-import { MpcNavbarComponent } from '../../../shared/components/mpc-navbar/mpc-navbar.component';
 
 describe('InscricoesEncerradasComponent', () => {
   let component: InscricoesEncerradasComponent;
@@ -9,7 +7,7 @@ describe('InscricoesEncerradasComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InscricoesEncerradasComponent, RouterTestingModule]
+      imports: [InscricoesEncerradasComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(InscricoesEncerradasComponent);

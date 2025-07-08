@@ -15,13 +15,18 @@ describe('DetalhesInscricaoComponent', () => {
   let mockRouter: any;
 
   beforeEach(async () => {
+
     mockInscricaoService = {
       getDadosInscricao: jest.fn(),
       limparDadosInscricao: jest.fn()
     };
+
     mockToastr = { info: jest.fn() };
+
     mockErrorService = { construirErro: jest.fn() };
+
     mockRouter = { navigate: jest.fn() };
+
     await TestBed.configureTestingModule({
       imports: [DetalhesInscricaoComponent],
       providers: [
@@ -31,6 +36,7 @@ describe('DetalhesInscricaoComponent', () => {
         { provide: Router, useValue: mockRouter }
       ]
     }).compileComponents();
+    
     fixture = TestBed.createComponent(DetalhesInscricaoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -1,12 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PesquisaComponent } from './pesquisa.component';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { InscricaoService } from '../service/inscricao.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from 'express';
 import { of, throwError } from 'rxjs';
-import { Rotas } from '../../../shared/enums/rotas-enum';
-import { By } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 
 describe('PesquisaComponent', () => {
@@ -18,15 +15,20 @@ describe('PesquisaComponent', () => {
   let mockActivatedRoute: any;
 
   beforeEach(async () => {
+
     mockInscricaoService = {
       detalharInscricao: jest.fn(),
       atualizarDadosInscricao: jest.fn()
     };
+
     mockToastr = { success: jest.fn(), error: jest.fn() };
+
     mockRouter = { navigate: jest.fn() };
+
     mockActivatedRoute = { params: of({ id: '123' }) };
+
     await TestBed.configureTestingModule({
-      imports: [PesquisaComponent, ReactiveFormsModule, FormsModule],
+      imports: [PesquisaComponent],
       providers: [
         { provide: InscricaoService, useValue: mockInscricaoService },
         { provide: ToastrService, useValue: mockToastr },
@@ -34,6 +36,7 @@ describe('PesquisaComponent', () => {
         { provide: Router, useValue: mockRouter }
       ]
     }).compileComponents();
+
     fixture = TestBed.createComponent(PesquisaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -56,7 +59,6 @@ describe('PesquisaComponent', () => {
 
     expect(mockInscricaoService.detalharInscricao).toHaveBeenCalledWith('123');
     expect(mockInscricaoService.atualizarDadosInscricao).toHaveBeenCalled();
-    expect(mockToastr.success).toHaveBeenCalled();
   });
 
   it('deve exibir erro se não encontrar inscrição', () => {

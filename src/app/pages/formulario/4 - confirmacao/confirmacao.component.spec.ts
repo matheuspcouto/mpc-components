@@ -1,4 +1,3 @@
-import { RouterTestingModule } from '@angular/router/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
@@ -6,8 +5,8 @@ import { ConfirmacaoComponent } from './confirmacao.component';
 import { InscricaoService } from '../service/inscricao.service';
 import { Inscricao } from '../model/inscricao.model';
 import { Rotas } from '../../../shared/enums/rotas-enum';
-import { ToastrService } from 'ngx-toastr';
 import { ErrorService } from '../../../shared/error/error.service';
+import { ToastrService } from 'ngx-toastr';
 
 describe('ConfirmacaoComponent', () => {
   let component: ConfirmacaoComponent;
@@ -20,22 +19,28 @@ describe('ConfirmacaoComponent', () => {
   let mockErrorService: any;
 
   beforeEach(async () => {
+
     mockInscricaoService = {
       getDadosInscricao: jest.fn(),
       inscrever: jest.fn(),
       atualizarDadosInscricao: jest.fn()
     };
+
     mockModalSucesso = {
       abrirModal: jest.fn(),
       fecharModal: jest.fn()
     };
-    mockToastService = { success: jest.fn() };
+
+    mockToastService = { info: jest.fn() };
+
     mockActivatedRoute = {
       snapshot: { queryParams: { inscricao: '123456789' } }
     };
+
     mockErrorService = { construirErro: jest.fn() };
+
     await TestBed.configureTestingModule({
-      imports: [ConfirmacaoComponent, RouterTestingModule],
+      imports: [ConfirmacaoComponent],
       providers: [
         { provide: InscricaoService, useValue: mockInscricaoService },
         { provide: ToastrService, useValue: mockToastService },
@@ -43,9 +48,9 @@ describe('ConfirmacaoComponent', () => {
         { provide: ErrorService, useValue: mockErrorService }
       ]
     }).compileComponents();
+
     fixture = TestBed.createComponent(ConfirmacaoComponent);
     component = fixture.componentInstance;
-    // @ts-ignore
     component['modalSucesso'] = mockModalSucesso;
     router = TestBed.inject(Router);
   });

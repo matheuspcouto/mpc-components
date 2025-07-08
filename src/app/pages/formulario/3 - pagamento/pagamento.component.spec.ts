@@ -1,9 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { FormControl, FormGroup, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import PagamentoComponent from './pagamento.component';
 import { InscricaoService } from '../service/inscricao.service';
-import { ToastrService } from 'ngx-toastr';
 import { ErrorService } from '../../../shared/error/error.service';
 
 describe('PagamentoComponent', () => {
@@ -11,31 +9,33 @@ describe('PagamentoComponent', () => {
   let fixture: ComponentFixture<PagamentoComponent>;
   let mockInscricaoService: any;
   let mockFormBuilder: any;
-  let mockToastrService: any;
   let mockErrorService: any;
 
   beforeEach(async () => {
+
     mockInscricaoService = { atualizarDadosInscricao: jest.fn(), getDadosInscricao: jest.fn(), isPagamentoCompleto: jest.fn() };
+
     mockFormBuilder = {
       group: jest.fn().mockReturnValue(new FormGroup({
-        formaPagamento: new FormControl('', Validators.required),
-        valor: new FormControl(100, Validators.required)
+        formaPagamento: new FormControl(''),
+        valor: new FormControl(0)
       })),
       control: jest.fn(),
       array: jest.fn(),
       record: jest.fn()
     };
-    mockToastrService = { error: jest.fn() };
+
     mockErrorService = { construirErro: jest.fn() };
+
     await TestBed.configureTestingModule({
-      imports: [PagamentoComponent, ReactiveFormsModule, RouterTestingModule],
+      imports: [PagamentoComponent],
       providers: [
         { provide: InscricaoService, useValue: mockInscricaoService },
         { provide: NonNullableFormBuilder, useValue: mockFormBuilder },
-        { provide: ToastrService, useValue: mockToastrService },
         { provide: ErrorService, useValue: mockErrorService }
       ]
     }).compileComponents();
+
     fixture = TestBed.createComponent(PagamentoComponent);
     component = fixture.componentInstance;
   });
@@ -45,7 +45,7 @@ describe('PagamentoComponent', () => {
   });
 
   it('deve inicializar o formulário e formas de pagamento corretamente', () => {
-    expect(component['form'].value).toEqual({ formaPagamento: '', valor: 100 });
+    expect(component['form'].value).toEqual({ formaPagamento: '', valor: 0.00 });
     expect(component['formasPagamento'].length).toBeGreaterThan(0);
   });
 
@@ -65,12 +65,6 @@ describe('PagamentoComponent', () => {
 
   it('deve formatar valor decimal em moeda brasileira', () => {
     expect((component as any).formatarValor(105.50).length).toBeGreaterThan(0);
-  });
-
-  it('deve mostrar erro se tentar avançar com formulário inválido', () => {
-    component['form'].patchValue({ formaPagamento: '' });
-    (component as any).proximaEtapa();
-    expect(mockInscricaoService.atualizarDadosInscricao).not.toHaveBeenCalled();
   });
 
   it('deve avançar para próxima etapa se formulário for válido', () => {

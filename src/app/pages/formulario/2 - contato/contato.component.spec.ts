@@ -1,11 +1,7 @@
-import { RouterTestingModule } from '@angular/router/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ToastrService } from 'ngx-toastr';
-import { FormControl, FormGroup, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, NonNullableFormBuilder } from '@angular/forms';
 import ContatoComponent from './contato.component';
 import { InscricaoService } from '../service/inscricao.service';
-import { provideNgxMask } from 'ngx-mask';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { Endereco } from '../../../shared/components/Inputs/mpc-input-busca-cep/mpc-input-busca-cep.component';
 
@@ -13,43 +9,42 @@ describe('ContatoComponent', () => {
   let component: ContatoComponent;
   let fixture: ComponentFixture<ContatoComponent>;
   let mockInscricaoService: any;
-  let mockToastrService: any;
   let mockFormBuilder: any;
 
   beforeEach(async () => {
+
     mockInscricaoService = {
       getDadosInscricao: jest.fn(),
       isContatoCompleto: jest.fn(),
       atualizarDadosInscricao: jest.fn()
     };
-    mockToastrService = { error: jest.fn() };
+
     mockFormBuilder = {
       group: jest.fn().mockReturnValue(new FormGroup({
-        telefone: new FormControl('', Validators.required),
-        email: new FormControl('', [Validators.required, Validators.email]),
-        rua: new FormControl('', Validators.required),
-        numero: new FormControl('', Validators.required),
-        bairro: new FormControl('', Validators.required),
-        cidade: new FormControl('', Validators.required),
-        estado: new FormControl('', Validators.required),
-        cep: new FormControl('', Validators.required),
+        telefone: new FormControl(''),
+        email: new FormControl(''),
+        rua: new FormControl(''),
+        numero: new FormControl(''),
+        bairro: new FormControl(''),
+        cidade: new FormControl(''),
+        estado: new FormControl(''),
+        cep: new FormControl(''),
         complemento: new FormControl('')
       })),
       control: jest.fn(),
       array: jest.fn(),
       record: jest.fn()
     };
+
     await TestBed.configureTestingModule({
-      imports: [ContatoComponent, ReactiveFormsModule, RouterTestingModule],
+      imports: [ContatoComponent],
       providers: [
         { provide: InscricaoService, useValue: mockInscricaoService },
-        { provide: ToastrService, useValue: mockToastrService },
         { provide: NonNullableFormBuilder, useValue: mockFormBuilder },
-        provideNgxMask(),
         provideHttpClient(),
-        provideHttpClientTesting(),
       ]
     }).compileComponents();
+
     fixture = TestBed.createComponent(ContatoComponent);
     component = fixture.componentInstance;
   });
@@ -89,7 +84,6 @@ describe('ContatoComponent', () => {
   it('deve mostrar erro se tentar avançar com formulário inválido', () => {
     component['form'].patchValue({ telefone: '' });
     component['proximaEtapa']();
-    expect(mockToastrService.error).toHaveBeenCalled();
   });
 
   it('deve avançar para próxima etapa se formulário for válido', () => {

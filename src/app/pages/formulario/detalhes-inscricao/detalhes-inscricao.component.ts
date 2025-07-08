@@ -38,13 +38,15 @@ export interface dadosDetalhesInscricao {
   styleUrls: ['./detalhes-inscricao.component.css']
 })
 export class DetalhesInscricaoComponent implements OnInit {
+
+  // Injeções
   private readonly inscricaoService = inject(InscricaoService);
   private readonly errorService = inject(ErrorService);
   private readonly notificationService = inject(ToastrService);
   private readonly router = inject(Router);
 
+  // Variáveis
   protected dadosDetalhesInscricao!: dadosDetalhesInscricao;
-
   protected isCopiado: boolean = false;
 
   /**

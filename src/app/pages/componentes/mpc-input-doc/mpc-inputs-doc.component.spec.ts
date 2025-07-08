@@ -1,10 +1,8 @@
 import { MpcInputsDocComponent } from './mpc-inputs-doc.component';
 import { Endereco } from '../../../shared/components/Inputs/mpc-input-busca-cep/mpc-input-busca-cep.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { NonNullableFormBuilder } from '@angular/forms';
-import { provideNgxMask } from 'ngx-mask';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -42,7 +40,7 @@ describe('MpcInputDocComponent', () => {
     };
 
     await TestBed.configureTestingModule({
-      imports: [MpcInputsDocComponent, ReactiveFormsModule],
+      imports: [MpcInputsDocComponent],
       providers: [
         { provide: NonNullableFormBuilder, useValue: mockFormBuilder },
         {
@@ -57,9 +55,7 @@ describe('MpcInputDocComponent', () => {
             }
           }
         },
-        provideNgxMask(),
         provideHttpClient(),
-        provideHttpClientTesting()
       ]
     }).compileComponents();
     fixture = TestBed.createComponent(MpcInputsDocComponent);

@@ -108,35 +108,29 @@ describe('MpcInputCpfcnpjComponent', () => {
     expect((component as any).isCampoObrigatorio('123')).toBe(false);
   });
 
-  it('isCPFValido deve retornar false para CPF inválido (tamanho errado)', () => {
+  it('deve validar corretamente CPF e CNPJ', () => {
+    // ---- Testes de CPF ----
+    // CPF inválido (tamanho errado)
     expect((component as any).isCPFValido('123')).toBe(false);
-  });
-
-  it('isCPFValido deve retornar false para CPF inválido (dígitos repetidos)', () => {
+    // CPF inválido (dígitos repetidos)
     expect((component as any).isCPFValido('11111111111')).toBe(false);
-  });
-
-  it('isCPFValido deve retornar false para CPF inválido (dígito verificador errado)', () => {
+    // CPF inválido (dígito verificador errado)
     expect((component as any).isCPFValido('52998224724')).toBe(false);
-  });
-
-  it('isCPFValido deve retornar true para CPF válido', () => {
+    // CPF válido
     expect((component as any).isCPFValido('52998224725')).toBe(true);
-  });
+    // CPF: 39053344710 (primeiro dígito verificador = 10, deve virar 0)
+    expect((component as any).isCPFValido('39053344710')).toBe(false);
+    // CPF: 74697131401 (segundo dígito verificador = 10, deve virar 0)
+    expect((component as any).isCPFValido('74697131401')).toBe(true);
 
-  it('isCNPJValido deve retornar false para CNPJ inválido (tamanho errado)', () => {
+    // ---- Testes de CNPJ ----
+    // CNPJ inválido (tamanho errado)
     expect((component as any).isCNPJValido('123')).toBe(false);
-  });
-
-  it('isCNPJValido deve retornar false para CNPJ inválido (dígitos repetidos)', () => {
+    // CNPJ inválido (dígitos repetidos)
     expect((component as any).isCNPJValido('11111111111111')).toBe(false);
-  });
-
-  it('isCNPJValido deve retornar false para CNPJ inválido (dígito verificador errado)', () => {
+    // CNPJ inválido (dígito verificador errado)
     expect((component as any).isCNPJValido('11222333000180')).toBe(false);
-  });
-
-  it('isCNPJValido deve retornar true para CNPJ válido', () => {
+    // CNPJ válido
     expect((component as any).isCNPJValido('11222333000181')).toBe(true);
   });
 

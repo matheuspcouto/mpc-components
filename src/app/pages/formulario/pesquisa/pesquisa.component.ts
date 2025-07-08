@@ -39,7 +39,6 @@ export class PesquisaComponent {
             .subscribe({
                 next: (response: Inscricao) => {
                     this.inscricaoService.atualizarDadosInscricao({ novosDados: response });
-                    this.notificacaoService.success('Inscrição encontrada com sucesso, redirecionando para a tela de detalhes', 'Sucesso');
                     this.router.navigate([Rotas.DETALHES_INSCRICAO]);
                 },
                 error: () => {

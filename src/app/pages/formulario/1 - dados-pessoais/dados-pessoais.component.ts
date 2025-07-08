@@ -17,7 +17,6 @@ import { MpcButtonDirective } from '../../../shared/directives/mpc-button/mpc-bu
 import { MpcInputDateComponent } from '../../../shared/components/Inputs/mpc-input-date/mpc-input-date.component';
 import { MpcInputSelectComponent, SelectOption } from '../../../shared/components/Inputs/mpc-input-select/mpc-input-select.component';
 import { MpcInputTextComponent } from '../../../shared/components/Inputs/mpc-input-text/mpc-input-text.component';
-import { ToastrService } from 'ngx-toastr';
 import { MpcInputNumberComponent } from '../../../shared/components/Inputs/mpc-input-number/mpc-input-number.component';
 import { MpcInputCpfcnpjComponent } from "../../../shared/components/Inputs/mpc-input-cpfcnpj/mpc-input-cpfcnpj.component";
 import { MpcInputTextAreaComponent } from "../../../shared/components/Inputs/mpc-input-text-area/mpc-input-text-area.component";
@@ -40,7 +39,6 @@ export default class DadosPessoaisComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly inscricaoService = inject(InscricaoService);
   private readonly formBuilder = inject(NonNullableFormBuilder);
-  private readonly notificationService = inject(ToastrService);
   private readonly errorService = inject(ErrorService);
   private readonly loaderService = inject(MpcLoaderService);
 
@@ -130,14 +128,8 @@ export default class DadosPessoaisComponent implements OnInit {
    */
   protected proximaEtapa(): void {
     try {
-      this.form.markAllAsTouched();
-
-      if (this.form.invalid) {
-        this.notificationService.error('Preencha todos os campos obrigatórios corretamente!');
-      } else {
-        this.inscricaoService.atualizarDadosInscricao({ novosDados: this.form.value, proximaEtapa: 2 });
-        this.router.navigate([Rotas.CONTATO]);
-      }
+      this.inscricaoService.atualizarDadosInscricao({ novosDados: this.form.value, proximaEtapa: 2 });
+      this.router.navigate([Rotas.CONTATO]);
     } catch (error) {
       this.errorService.construirErro(error);
     }
