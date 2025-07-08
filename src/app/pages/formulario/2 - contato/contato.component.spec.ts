@@ -3,7 +3,6 @@ import { FormControl, FormGroup, NonNullableFormBuilder } from '@angular/forms';
 import ContatoComponent from './contato.component';
 import { InscricaoService } from '../service/inscricao.service';
 import { provideHttpClient } from '@angular/common/http';
-import { Endereco } from '../../../shared/components/Inputs/mpc-input-busca-cep/mpc-input-busca-cep.component';
 
 describe('ContatoComponent', () => {
   let component: ContatoComponent;
@@ -100,7 +99,7 @@ describe('ContatoComponent', () => {
   });
 
   it('deve preencher campos de endereço com dados do CEP', () => {
-    const endereco: Endereco = { rua: 'Rua do CEP', bairro: 'Bairro do CEP', cidade: 'Cidade do CEP', estado: 'RJ', cep: '87654321' };
+    const endereco: any = { rua: 'Rua do CEP', bairro: 'Bairro do CEP', cidade: 'Cidade do CEP', estado: 'RJ', cep: '87654321' };
     component['definirEnderecoPorCep'](endereco);
     expect(component['form'].value.rua).toBe(endereco.rua);
     expect(component['form'].value.bairro).toBe(endereco.bairro);

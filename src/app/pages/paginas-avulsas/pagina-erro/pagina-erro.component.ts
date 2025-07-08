@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
-import { MpcButtonDirective } from '../../../shared/directives/mpc-button/mpc-button.directive';
 import { ErrorService } from '../../../shared/error/error.service';
 import { Rotas } from '../../../shared/enums/rotas-enum';
+import { MpcButtonDirective } from 'mpc-lib-angular';
 
 @Component({
   selector: 'app-pagina-erro',

@@ -9,14 +9,11 @@
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { InscricaoService } from '../service/inscricao.service';
 import { Router } from '@angular/router';
-import { MpcButtonDirective } from '../../../shared/directives/mpc-button/mpc-button.directive';
-import { MpcModalComponent, TipoModal } from '../../../shared/components/mpc-modal/mpc-modal.component';
-import { MpcModalConfig } from '../../../shared/components/mpc-modal/mpc-modal.directive';
 import { Rotas } from '../../../shared/enums/rotas-enum';
 import { Inscricao } from '../model/inscricao.model';
 import { ErrorService } from '../../../shared/error/error.service';
-import { MpcFormProgressBarComponent } from '../../../shared/components/mpc-form-progress-bar/mpc-form-progress-bar.component';
 import { take } from 'rxjs';
+import { MpcButtonDirective, MpcFormProgressBarComponent, MpcModalComponent, MpcModalConfig, TipoModal } from 'mpc-lib-angular';
 
 @Component({
   selector: 'app-confirmacao',

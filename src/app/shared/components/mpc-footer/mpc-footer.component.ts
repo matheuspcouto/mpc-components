@@ -15,7 +15,6 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'mpc-footer',
-  standalone: true,
   imports: [],
   templateUrl: './mpc-footer.component.html',
   styleUrls: ['./mpc-footer.component.css']

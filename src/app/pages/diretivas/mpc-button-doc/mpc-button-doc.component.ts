@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MpcButtonDirective } from '../../../shared/directives/mpc-button/mpc-button.directive';
+import { MpcButtonDirective } from 'mpc-lib-angular';
 
 @Component({
   selector: 'app-buttons',

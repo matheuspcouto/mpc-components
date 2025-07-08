@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { FormControl, FormGroup, NonNullableFormBuilder } from '@angular/forms';
 import PagamentoComponent from './pagamento.component';
 import { InscricaoService } from '../service/inscricao.service';
 import { ErrorService } from '../../../shared/error/error.service';

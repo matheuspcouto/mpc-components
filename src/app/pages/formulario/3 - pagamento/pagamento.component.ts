@@ -6,17 +6,16 @@
  * @created 27/06/2025
  * @updated 04/07/2025
  */
-import { SelectOption } from '../../../shared/components/Inputs/mpc-input-select/mpc-input-select.component';
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Rotas } from '../../../shared/enums/rotas-enum';
-import { MpcFormProgressBarComponent } from '../../../shared/components/mpc-form-progress-bar/mpc-form-progress-bar.component';
 import { FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
-import { MpcButtonDirective } from '../../../shared/directives/mpc-button/mpc-button.directive';
-import { MpcInputSelectComponent } from '../../../shared/components/Inputs/mpc-input-select/mpc-input-select.component';
 import { InscricaoService } from '../service/inscricao.service';
 import { ErrorService } from '../../../shared/error/error.service';
-import { MpcLoaderService } from '../../../shared/components/mpc-loader/mpc-loader.service';
+import {
+  MpcButtonDirective, MpcInputSelectComponent, MpcFormProgressBarComponent,
+  MpcLoaderService, SelectOption
+} from 'mpc-lib-angular';
 
 @Component({
   selector: 'app-pagamento',

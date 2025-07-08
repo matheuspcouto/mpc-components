@@ -1,12 +1,3 @@
-import { ToastrService } from 'ngx-toastr';
-import { Component, inject, OnInit } from '@angular/core';
-import { InscricaoService } from '../service/inscricao.service';
-import { MpcButtonDirective } from "../../../shared/directives/mpc-button/mpc-button.directive";
-import { Inscricao } from '../model/inscricao.model';
-import { ErrorService } from '../../../shared/error/error.service';
-import { Rotas } from '../../../shared/enums/rotas-enum';
-import { Router } from '@angular/router';
-
 /**
  * @Componente DetalhesInscricaoComponent
  * Este componente é responsável por exibir os detalhes da inscrição.
@@ -15,6 +6,15 @@ import { Router } from '@angular/router';
  * @created 27/06/2025
  * @updated 04/07/2025
  */
+
+import { ToastrService } from 'ngx-toastr';
+import { Component, inject, OnInit } from '@angular/core';
+import { InscricaoService } from '../service/inscricao.service';
+import { Inscricao } from '../model/inscricao.model';
+import { ErrorService } from '../../../shared/error/error.service';
+import { Rotas } from '../../../shared/enums/rotas-enum';
+import { Router } from '@angular/router';
+import { MpcButtonDirective } from 'mpc-lib-angular';
 
 export interface dadosDetalhesInscricao {
   dadosInscricao: {

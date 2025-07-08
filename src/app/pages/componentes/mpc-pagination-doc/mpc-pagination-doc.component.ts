@@ -1,10 +1,9 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { MpcPaginationComponent } from "../../../shared/components/mpc-pagination/mpc-pagination.component";
+import { MpcPaginationComponent } from 'mpc-lib-angular';
 
 @Component({
   selector: 'app-paginacao',
-  imports: [CommonModule, MpcPaginationComponent ],
+  imports: [MpcPaginationComponent ],
   templateUrl: './mpc-pagination-doc.component.html',
   styleUrl: './mpc-pagination-doc.component.css'
 })

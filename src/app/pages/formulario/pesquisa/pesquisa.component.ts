@@ -1,13 +1,3 @@
-import { Component, inject } from '@angular/core';
-import { ReactiveFormsModule, FormsModule, NonNullableFormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
-import { InscricaoService } from '../service/inscricao.service';
-import { Inscricao } from '../model/inscricao.model';
-import { take } from 'rxjs';
-import { Rotas } from '../../../shared/enums/rotas-enum';
-import { MpcInputPesquisaComponent } from '../../../shared/components/Inputs/mpc-input-pesquisa/mpc-input-pesquisa.component';
-import { ToastrService } from 'ngx-toastr';
-
 /**
  * @Componente PesquisaComponent
  * Este componente é responsável por exibir e gerenciar a pesquisa de inscrições.
@@ -16,6 +6,16 @@ import { ToastrService } from 'ngx-toastr';
  * @created 27/06/2025
  * @updated 04/07/2025
  */
+
+import { Component, inject } from '@angular/core';
+import { ReactiveFormsModule, FormsModule, NonNullableFormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
+import { InscricaoService } from '../service/inscricao.service';
+import { Inscricao } from '../model/inscricao.model';
+import { take } from 'rxjs';
+import { Rotas } from '../../../shared/enums/rotas-enum';
+import { MpcInputPesquisaComponent } from 'mpc-lib-angular';
+import { ToastrService } from 'ngx-toastr';
 @Component({
     selector: 'app-pesquisa',
     imports: [ReactiveFormsModule, FormsModule, MpcInputPesquisaComponent],

@@ -1,11 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MpcModalDocComponent } from './mpc-modal-doc.component';
-import { MpcModalComponent, TipoModal } from '../../../shared/components/mpc-modal/mpc-modal.component';
-import { MpcNavbarComponent } from '../../../shared/components/mpc-navbar/mpc-navbar.component';
-import { MpcButtonDirective } from '../../../shared/directives/mpc-button/mpc-button.directive';
 import { provideToastr } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
+import { MpcModalComponent } from 'mpc-lib-angular';
 
 describe('ModaisComponent', () => {
   let component: MpcModalDocComponent;
@@ -19,7 +17,7 @@ describe('ModaisComponent', () => {
     } as jest.Mocked<Partial<MpcModalComponent>>;
 
     await TestBed.configureTestingModule({
-      imports: [MpcModalDocComponent, MpcModalComponent, MpcNavbarComponent, MpcButtonDirective],
+      imports: [MpcModalDocComponent, MpcModalComponent],
       providers: [
         {
           provide: ActivatedRoute,

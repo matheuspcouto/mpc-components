@@ -1,16 +1,14 @@
 import { Component, inject } from '@angular/core';
-import { MpcInputTextComponent } from '../../../shared/components/Inputs/mpc-input-text/mpc-input-text.component';
-import { MpcInputNumberComponent } from '../../../shared/components/Inputs/mpc-input-number/mpc-input-number.component';
-import { MpcInputDateComponent } from '../../../shared/components/Inputs/mpc-input-date/mpc-input-date.component';
-import { MpcInputEmailComponent } from '../../../shared/components/Inputs/mpc-input-email/mpc-input-email.component';
-import { MpcInputSenhaComponent } from '../../../shared/components/Inputs/mpc-input-senha/mpc-input-senha.component';
-import { MpcInputCpfcnpjComponent } from '../../../shared/components/Inputs/mpc-input-cpfcnpj/mpc-input-cpfcnpj.component';
-import { MpcInputTelefoneComponent } from '../../../shared/components/Inputs/mpc-input-telefone/mpc-input-telefone.component';
-import { MpcInputTextAreaComponent } from '../../../shared/components/Inputs/mpc-input-text-area/mpc-input-text-area.component';
-import { MpcInputRadioComponent, RadioOption } from '../../../shared/components/Inputs/mpc-input-radio/mpc-input-radio.component';
-import { MpcInputSelectComponent, SelectOption } from '../../../shared/components/Inputs/mpc-input-select/mpc-input-select.component';
-import { Endereco, MpcInputBuscaCepComponent } from '../../../shared/components/Inputs/mpc-input-busca-cep/mpc-input-busca-cep.component';
 import { NonNullableFormBuilder } from '@angular/forms';
+import {
+  MpcInputTextComponent, MpcInputNumberComponent, MpcInputDateComponent,
+  MpcInputEmailComponent, MpcInputSenhaComponent, MpcInputTelefoneComponent,
+  MpcInputCpfcnpjComponent, MpcInputBuscaCepComponent, MpcInputTextAreaComponent,
+  MpcInputRadioComponent, MpcInputSelectComponent,
+  SelectOption,
+  RadioOption,
+  Endereco
+} from 'mpc-lib-angular';
 
 @Component({
   selector: 'app-mpc-inputs-doc',

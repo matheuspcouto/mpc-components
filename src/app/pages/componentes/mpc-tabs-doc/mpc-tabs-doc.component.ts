@@ -1,10 +1,9 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { MpcTabsComponent, Tab } from '../../../shared/components/mpc-tabs/mpc-tabs.component';
+import { MpcTabsComponent, Tab } from 'mpc-lib-angular';
 
 @Component({
   selector: 'app-tabs',
-  imports: [ CommonModule, MpcTabsComponent],
+  imports: [MpcTabsComponent],
   templateUrl: './mpc-tabs-doc.component.html',
   styleUrl: './mpc-tabs-doc.component.css'
 })

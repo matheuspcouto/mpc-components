@@ -92,5 +92,17 @@ npm test
 ```
 
 ---
+---
 
-Caso tenha dúvidas, consulte a documentação oficial do Angular ou abra uma issue neste repositório.
+Para dúvidas, sugestões ou problemas, consulte a [documentação oficial do Angular](https://angular.dev/)
+
+---
+
+## Autor
+
+Desenvolvido e mantido por **Matheus Pimentel do Couto**.
+
+> **Github:** [matheuspcouto](https://github.com/matheuspcouto)
+> **Linkedin:** [matheuspcouto](https://www.linkedin.com/in/matheuspcouto/)
+
+Sinta-se à vontade para entrar em contato para dúvidas, sugestões ou contribuições!

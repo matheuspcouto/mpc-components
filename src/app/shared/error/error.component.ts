@@ -12,8 +12,8 @@
 import { Component, inject, computed } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { MpcButtonDirective } from '../directives/mpc-button/mpc-button.directive';
 import { ErrorService } from './error.service';
+import { MpcButtonDirective } from 'mpc-lib-angular';
 
 @Component({
     selector: 'mpc-error',

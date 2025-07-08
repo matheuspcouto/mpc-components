@@ -9,19 +9,16 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Rotas } from '../../../shared/enums/rotas-enum';
-import { MpcFormProgressBarComponent } from '../../../shared/components/mpc-form-progress-bar/mpc-form-progress-bar.component';
 import { InscricaoService } from '../service/inscricao.service';
 import { FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
-import { MpcInputRadioComponent, RadioOption } from '../../../shared/components/Inputs/mpc-input-radio/mpc-input-radio.component';
-import { MpcButtonDirective } from '../../../shared/directives/mpc-button/mpc-button.directive';
-import { MpcInputDateComponent } from '../../../shared/components/Inputs/mpc-input-date/mpc-input-date.component';
-import { MpcInputSelectComponent, SelectOption } from '../../../shared/components/Inputs/mpc-input-select/mpc-input-select.component';
-import { MpcInputTextComponent } from '../../../shared/components/Inputs/mpc-input-text/mpc-input-text.component';
-import { MpcInputNumberComponent } from '../../../shared/components/Inputs/mpc-input-number/mpc-input-number.component';
-import { MpcInputCpfcnpjComponent } from "../../../shared/components/Inputs/mpc-input-cpfcnpj/mpc-input-cpfcnpj.component";
-import { MpcInputTextAreaComponent } from "../../../shared/components/Inputs/mpc-input-text-area/mpc-input-text-area.component";
 import { ErrorService } from '../../../shared/error/error.service';
-import { MpcLoaderService } from '../../../shared/components/mpc-loader/mpc-loader.service';
+import {
+  MpcInputRadioComponent, RadioOption, MpcInputDateComponent,
+  MpcInputSelectComponent, SelectOption, MpcInputTextComponent, MpcInputNumberComponent,
+  MpcInputCpfcnpjComponent, MpcInputTextAreaComponent, MpcLoaderService, MpcButtonDirective,
+  MpcFormProgressBarComponent
+} from 'mpc-lib-angular';
+
 
 @Component({
   selector: 'app-dados-pessoais',

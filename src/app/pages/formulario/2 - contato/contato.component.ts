@@ -6,19 +6,17 @@
  * @created 27/06/2025
  * @updated 04/07/2025
  */
+
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Rotas } from '../../../shared/enums/rotas-enum';
-import { MpcFormProgressBarComponent } from '../../../shared/components/mpc-form-progress-bar/mpc-form-progress-bar.component';
 import { FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
-import { MpcButtonDirective } from '../../../shared/directives/mpc-button/mpc-button.directive';
-import { MpcInputTextComponent } from '../../../shared/components/Inputs/mpc-input-text/mpc-input-text.component';
 import { InscricaoService } from '../service/inscricao.service';
-import { MpcInputTelefoneComponent } from '../../../shared/components/Inputs/mpc-input-telefone/mpc-input-telefone.component';
-import { MpcInputEmailComponent } from '../../../shared/components/Inputs/mpc-input-email/mpc-input-email.component';
-import { Endereco, MpcInputBuscaCepComponent } from "../../../shared/components/Inputs/mpc-input-busca-cep/mpc-input-busca-cep.component";
 import { ErrorService } from '../../../shared/error/error.service';
-import { MpcLoaderService } from '../../../shared/components/mpc-loader/mpc-loader.service';
+import {
+  MpcButtonDirective, MpcFormProgressBarComponent, MpcInputTextComponent,
+  MpcInputTelefoneComponent, MpcInputEmailComponent, MpcInputBuscaCepComponent, Endereco, MpcLoaderService
+} from 'mpc-lib-angular';
 
 @Component({
   selector: 'app-contato',
