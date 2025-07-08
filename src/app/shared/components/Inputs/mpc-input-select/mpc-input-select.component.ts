@@ -75,6 +75,7 @@ export class MpcInputSelectComponent implements ControlValueAccessor, Validator,
 
   writeValue(value: string): void {
     this.value = value;
+    this.atualizarOpcaoSelecionada();
   }
 
   registerOnChange(fn: any): void {
@@ -104,11 +105,17 @@ export class MpcInputSelectComponent implements ControlValueAccessor, Validator,
 
     this.options = optionsCopy;
 
-    // Define a opção selecionada baseada no valor atual ou na opção marcada como selected
-    if (this.value.length > 0) {
-      this.opcaoSelecionada = this.options.find(option => option.value === this.value);
-    } else {
-      this.opcaoSelecionada = this.options.find(option => option.selected) || this.options[0];
+    this.atualizarOpcaoSelecionada();
+  }
+
+  /**
+ * Atualiza a opção selecionada com base no valor atual.
+ */
+  private atualizarOpcaoSelecionada(): void {
+    if (this.options && this.options.length > 0) {
+      this.opcaoSelecionada = this.options.find(option => option.value === this.value)
+        || this.options.find(option => option.selected)
+        || this.options[0];
     }
   }
 

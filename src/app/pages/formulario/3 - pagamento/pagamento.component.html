@@ -38,13 +38,13 @@
       </div>
 
       <div class="d-flex justify-content-center align-items-center mt-5">
-        <button mpcButton (click)="proximaEtapa()" class="btn-proximo" icone="bi bi-arrow-right" texto="Próximo"
+        <button type="button" mpcButton (click)="proximaEtapa()" class="btn-proximo" icone="bi bi-arrow-right" texto="Próximo"
           [disabled]="form.invalid">
         </button>
       </div>
 
       <div class="d-flex justify-content-center align-items-center mt-3">
-        <button mpcButton (click)="etapaAnterior()" class="btn-voltar" posicaoIcone="esquerda" icone="bi bi-arrow-left"
+        <button type="button" mpcButton (click)="etapaAnterior()" class="btn-voltar" posicaoIcone="esquerda" icone="bi bi-arrow-left"
           texto="Voltar para Contato">
         </button>
       </div>

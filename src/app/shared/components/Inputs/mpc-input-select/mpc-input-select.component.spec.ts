@@ -156,4 +156,44 @@ describe('MpcInputSelectComponent', () => {
     expect(component['isCampoObrigatorio']()).toBe(false);
   });
 
+  // Testes explícitos para o método atualizarOpcaoSelecionada
+  describe('atualizarOpcaoSelecionada', () => {
+    it('deve manter opcaoSelecionada como Selecione se options for vazio', () => {
+      component.options = [];
+      (component as any).value = '';
+      (component as any).atualizarOpcaoSelecionada();
+      expect((component as any).opcaoSelecionada).toEqual({ label: 'Selecione', value: '', selected: true });
+    });
+
+    it('deve selecionar a opção cujo value bate com o value atual', () => {
+      component.options = [
+        { label: 'A', value: 'a' },
+        { label: 'B', value: 'b' }
+      ];
+      (component as any).value = 'b';
+      (component as any).atualizarOpcaoSelecionada();
+      expect((component as any).opcaoSelecionada).toEqual({ label: 'B', value: 'b' });
+    });
+
+    it('deve selecionar a opção marcada como selected se value não existir', () => {
+      component.options = [
+        { label: 'A', value: 'a' },
+        { label: 'B', value: 'b', selected: true }
+      ];
+      (component as any).value = 'x';
+      (component as any).atualizarOpcaoSelecionada();
+      expect((component as any).opcaoSelecionada).toEqual({ label: 'B', value: 'b', selected: true });
+    });
+
+    it('deve selecionar a primeira opção se nenhuma bater com value e nenhuma selected', () => {
+      component.options = [
+        { label: 'A', value: 'a' },
+        { label: 'B', value: 'b' }
+      ];
+      (component as any).value = 'x';
+      (component as any).atualizarOpcaoSelecionada();
+      expect((component as any).opcaoSelecionada).toEqual({ label: 'A', value: 'a' });
+    });
+  });
+
 });
