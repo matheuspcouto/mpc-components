@@ -1,0 +1,12 @@
+/* Variáveis CSS da Biblioteca MPC */
+:root {
+  /* Fontes */
+  --mpc-font-title: 'Potential', sans-serif;
+  --mpc-font-default: "Poppins", sans-serif;
+  --mpc-font-secondary: "Inter", sans-serif;
+
+  /* Cores */
+  --mpc-color-primary: #0E2749;
+  --mpc-color-secondary: #149DDD;
+  --mpc-color-tertiary: gray;
+} 

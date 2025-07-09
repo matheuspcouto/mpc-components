@@ -1,0 +1,18 @@
+@if (hasImagemFundo()) {
+<div class="card-background-img" [style.color]="estilos.textColor" [style.background-image]="getBackgroundImage()"
+  [id]="id" [tabIndex]="tabIndex" [attr.aria-label]="getAriaLabel()">
+
+  @if (hasTitulo()) {
+  <div class="titulo" [style.border-color]="estilos.barColor" tabindex="0" [attr.aria-label]="'Título: ' + titulo">{{
+    titulo }}</div>
+  }
+
+  @if (hasSubtitulo()) {
+  <h3 tabindex="0" [attr.aria-label]="'Subtítulo: ' + subtitulo">{{ subtitulo }}</h3>
+  }
+
+  @if (hasDescricao()) {
+  <p class="mb-0" tabindex="0" [attr.aria-label]="'Descrição: ' + descricao">{{ descricao }}</p>
+  }
+</div>
+}

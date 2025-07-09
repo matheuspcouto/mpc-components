@@ -20,10 +20,10 @@
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 1rem;
-    color: var(--color-primary);
+    color: var(--mpc-color-primary);
 
     span {
-      color: var(--color-secondary);
+      color: var(--mpc-color-secondary);
     }
   }
 

@@ -43,7 +43,7 @@ selectTab(tab: Tab) {{ '{' }}
       </div>
       <div class="mb-5">
         <h5><strong>Exemplo de uso no arquivo <code>.html</code>:</strong></h5>
-        <pre class="chroma"><code class="language-html" data-lang="html">&lt;mpc-tabs textColor="var(--color-primary)" [tabs]="tabs" [tabIndex]="0" ariaLabel="Tabs" (tabSelected)="selectTab($event)"&gt;&lt;/mpc-tabs&gt;
+        <pre class="chroma"><code class="language-html" data-lang="html">&lt;mpc-tabs textColor="var(--mpc-color-primary)" [tabs]="tabs" [tabIndex]="0" ariaLabel="Tabs" (tabSelected)="selectTab($event)"&gt;&lt;/mpc-tabs&gt;
 &lt;!-- Conteúdo 1 --&gt;
 &#64;if (tabSelecionada.id === 'conteudoTab1') {{ '{' }}
   &lt;div class="d-flex justify-content-center mt-3"&gt; Conteúdo 1 &lt;/div&gt;
@@ -61,7 +61,7 @@ selectTab(tab: Tab) {{ '{' }}
 
       <div class="row justify-content-center mb-5">
         <h5><strong>Veja como fica o componente:</strong></h5>
-        <mpc-tabs textColor="var(--color-primary)" [tabs]="tabs" [tabIndex]="0" ariaLabel="Tabs"
+        <mpc-tabs textColor="var(--mpc-color-primary)" [tabs]="tabs" [tabIndex]="0" ariaLabel="Tabs"
           (tabSelected)="selectTab($event)"></mpc-tabs>
 
         @if (tabSelecionada.id === 'conteudoTab1') {

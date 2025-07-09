@@ -88,9 +88,9 @@
             [links]="[&#123;icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'&#125;]"
             layout="vertical" [estilos]="{
               background: 'white',
-              textColor: 'var(--color-primary)',
-              borderColor: 'var(--color-primary)',
-              backgroundLinks: 'var(--color-primary)',
+              textColor: 'var(--mpc-color-primary)',
+              borderColor: 'var(--mpc-color-primary)',
+              backgroundLinks: 'var(--mpc-color-primary)',
               linksColor: 'white'
             }">
           </mpc-card>
@@ -102,10 +102,10 @@
               &#123;icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'&#125;,
               &#123;icone: 'bi bi-github', url: 'https://github.com/matheuspcouto'&#125;
             ]" layout="vertical" [estilos]="{
-              background: 'var(--color-primary)',
+              background: 'var(--mpc-color-primary)',
               textColor: 'white',
-              borderColor: 'var(--color-primary)',
-              backgroundLinks: 'var(--color-primary)',
+              borderColor: 'var(--mpc-color-primary)',
+              backgroundLinks: 'var(--mpc-color-primary)',
               linksColor: 'white'
             }">
           </mpc-card>
@@ -114,10 +114,10 @@
         <div class="col-lg-4">
           <mpc-card titulo="Card 3" subtitulo="Sem Links" descricaoUm="Este card não possui links"
             descricaoDois="Apenas informações básicas" imagem="/assets/img/no-image.jpg" layout="vertical" [estilos]="{
-              background: 'var(--color-secondary)',
+              background: 'var(--mpc-color-secondary)',
               textColor: 'white',
-              borderColor: 'var(--color-secondary)',
-              backgroundLinks: 'var(--color-secondary)',
+              borderColor: 'var(--mpc-color-secondary)',
+              backgroundLinks: 'var(--mpc-color-secondary)',
               linksColor: 'white'
             }">
           </mpc-card>
@@ -128,11 +128,11 @@
             descricaoUm="Este card tem layout horizontal, ideal para exibir informações em telas desktop."
             imagem="/assets/img/no-image.jpg" [estilos]="{
               background: 'white',
-              textColor: 'var(--color-primary)',
-              borderColor: 'var(--color-primary)',
-              backgroundLinks: 'var(--color-primary)',
+              textColor: 'var(--mpc-color-primary)',
+              borderColor: 'var(--mpc-color-primary)',
+              backgroundLinks: 'var(--mpc-color-primary)',
               linksColor: 'white',
-              barColor: 'var(--color-primary)'
+              barColor: 'var(--mpc-color-primary)'
             }" [links]="[{icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'}]">
           </mpc-card>
         </div>
@@ -141,12 +141,12 @@
           <mpc-card titulo="Card 5" subtitulo="Com Estilos Personalizados" layout="horizontal"
             descricaoUm="Este card demonstra o uso de estilos personalizados para cores e aparência."
             imagem="/assets/img/no-image.jpg" [estilos]="{
-              background: 'var(--color-primary)',
+              background: 'var(--mpc-color-primary)',
               textColor: 'white',
-              borderColor: 'var(--color-primary)',
+              borderColor: 'var(--mpc-color-primary)',
               backgroundLinks: 'white',
-              linksColor: 'var(--color-primary)',
-              barColor: 'var(--color-secondary)'
+              linksColor: 'var(--mpc-color-primary)',
+              barColor: 'var(--mpc-color-secondary)'
             }" [links]="[
               {icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'},
               {icone: 'bi bi-github', url: 'https://github.com/matheuspcouto'}
@@ -158,11 +158,11 @@
           <mpc-card titulo="Card 6" subtitulo="Com Estilos Personalizados" layout="horizontal"
             descricaoUm="Este card demonstra o uso de estilos personalizados para cores e aparência."
             imagem="/assets/img/no-image.jpg" [estilos]="{
-              background: 'var(--color-secondary)',
+              background: 'var(--mpc-color-secondary)',
               textColor: 'white',
-              borderColor: 'var(--color-secondary)',
+              borderColor: 'var(--mpc-color-secondary)',
               backgroundLinks: 'white',
-              linksColor: 'var(--color-secondary)',
+              linksColor: 'var(--mpc-color-secondary)',
               barColor: 'white'
             }">
           </mpc-card>
@@ -252,7 +252,7 @@
           <mpc-card-background-img titulo="Card 1" subtitulo="com imagem de fundo"
             descricao="Este é um card com imagem de fundo e gradiente escuro para melhor legibilidade" [estilos]="{
               textColor: 'white',
-              barColor: 'var(--color-primary)'
+              barColor: 'var(--mpc-color-primary)'
             }" imagemFundo="/assets/img/home/mountain.jpg" id="card-bg-1" [tabIndex]="0" ariaLabel="Card 1">
           </mpc-card-background-img>
         </div>
@@ -262,7 +262,7 @@
             descricao="Este card demonstra o uso de cores personalizadas para texto e barra"
             imagemFundo="/assets/img/no-image.jpg" id="card-bg-2" [estilos]="{
               textColor: 'white',
-              barColor: 'var(--color-secondary)'
+              barColor: 'var(--mpc-color-secondary)'
             }" [tabIndex]="0" ariaLabel="Card 2">
           </mpc-card-background-img>
         </div>
@@ -350,8 +350,8 @@
         <div class="col-lg-4">
           <mpc-card-menu icone="bi bi-linkedin" titulo="Linkedin" descricao="ir para o linkedin" [estilos]="{
               background: 'transparent',
-              textColor: 'var(--color-primary)',
-              iconeBackground: 'var(--color-primary)',
+              textColor: 'var(--mpc-color-primary)',
+              iconeBackground: 'var(--mpc-color-primary)',
               iconeColor: 'white'
             }" (acao)="onMenuCardClick()" id="card-menu-1" [tabIndex]="0" ariaLabel="Card de Menu 1">
           </mpc-card-menu>
@@ -361,8 +361,8 @@
           <mpc-card-menu icone="bi bi-github" titulo="Github" descricao="ir para o github" (acao)="onMenuCardClick()"
             id="card-menu-2" [tabIndex]="0" ariaLabel="Card de Menu 2" [estilos]="{
               background: 'transparent',
-              textColor: 'var(--color-secondary)',
-              iconeBackground: 'var(--color-secondary)',
+              textColor: 'var(--mpc-color-secondary)',
+              iconeBackground: 'var(--mpc-color-secondary)',
               iconeColor: 'white'
             }">
           </mpc-card-menu>
@@ -372,8 +372,8 @@
           <mpc-card-menu icone="bi bi-instagram" titulo="Instagram" descricao="ir para o instagram"
             (acao)="onMenuCardClick()" id="card-menu-3" [tabIndex]="0" ariaLabel="Card de Menu 3" [estilos]="{
               background: 'transparent',
-              textColor: 'var(--color-tertiary)',
-              iconeBackground: 'var(--color-tertiary)',
+              textColor: 'var(--mpc-color-tertiary)',
+              iconeBackground: 'var(--mpc-color-tertiary)',
               iconeColor: 'white'
             }">
           </mpc-card-menu>
@@ -469,9 +469,9 @@
           [descricao]="'Descrição ' + i" id="evento-1" [tabIndex]="0"
           [ariaLabel]="'Evento Especial em ' + i + ' de Junho'" [estilos]="{
             background: 'transparent',
-            textColor: 'var(--color-primary)',
-            borderColor: 'var(--color-primary)',
-            eventoBackground: 'var(--color-primary)',
+            textColor: 'var(--mpc-color-primary)',
+            borderColor: 'var(--mpc-color-primary)',
+            eventoBackground: 'var(--mpc-color-primary)',
             eventoColor: 'white'
           }">
         </mpc-card-evento>

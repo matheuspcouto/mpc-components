@@ -1,0 +1,19 @@
+<section class="page-divider-img" [style.background-image]="getBackgroundImage()">
+    <div class="container">
+        <div class="col-lg-12">
+            <div class="page-divider-text">
+                @if (hasTitulo()) {
+                <h2 tabindex="0" [attr.aria-label]="titulo">
+                    {{ titulo }}
+                </h2>
+                }
+
+                @if (hasSubtitulo()) {
+                <p tabindex="0" [attr.aria-label]="subtitulo">
+                    {{ subtitulo }}
+                </p>
+                }
+            </div>
+        </div>
+    </div>
+</section>

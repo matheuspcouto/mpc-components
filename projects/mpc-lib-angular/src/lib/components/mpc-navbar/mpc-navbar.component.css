@@ -1,0 +1,232 @@
+/*--------------------------------------------------------------
+# Geral
+--------------------------------------------------------------*/
+* {
+  color: #7f7f90 !important;
+  /* Cor padrão de texto desabilitado */
+  font-family: var(--mpc-font-secondary) !important;
+  /* Fonte padrão de texto */
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/*--------------------------------------------------------------
+# Header & Container
+--------------------------------------------------------------*/
+header {
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  /* Cor de fundo da barra de navegação */
+  transition: all 0.5s;
+  z-index: 99999;
+  height: 90px;
+
+  @media (max-width: 575px) {
+    height: 70px;
+  }
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+  }
+
+  @media screen and (max-width: 991.98px) {
+    .container {
+      justify-content: center;
+    }
+  }
+}
+
+/*--------------------------------------------------------------
+# Logo
+--------------------------------------------------------------*/
+.logo {
+  margin-right: auto;
+
+  img {
+    max-height: 70px;
+    margin-right: 6px;
+  }
+
+  @media screen and (max-width: 991.98px) {
+    img {
+      max-height: 40px;
+    }
+  }
+}
+
+/*--------------------------------------------------------------
+# Mobile
+--------------------------------------------------------------*/
+@media (max-width: 991.98px) {
+  .header-mobile {
+    display: flex !important;
+  }
+
+  .header-desktop {
+    display: none !important;
+  }
+
+
+  /* Botão Hamburguer */
+  button {
+    border: none !important;
+    background: none !important;
+  }
+
+  .mobile-nav-show {
+    font-size: 28px;
+    cursor: pointer;
+    line-height: 0;
+    z-index: 9999;
+    margin: 0 10px 0 20px;
+  }
+
+  .mobile-nav-active {
+    overflow: hidden;
+  }
+
+  /* Menu Lateral */
+  .offcanvas {
+    max-width: 65%;
+    height: auto;
+
+    /* Abas */
+    li {
+
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 20px;
+        border-bottom: 2px solid transparent;
+        font-size: 16px;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      /* Propriedades de aba ativa */
+      .aba-ativa {
+        color: var(--mpc-color-primary) !important;
+        border-bottom: 2px solid var(--mpc-color-secondary) !important;
+      }
+
+      /* Ícones das abas ativas */
+      .aba-ativa i {
+        color: var(--mpc-color-primary) !important;
+      }
+    }
+
+    .offcanvas-body {
+      margin-top: 3.5rem !important;
+      padding: 1rem !important;
+    }
+
+    /* Rodapé / Login */
+    .offcanvas-footer {
+      align-items: center;
+      padding: 30px 20px;
+      justify-content: center;
+      text-align: center;
+
+      a {
+        font-size: 16px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        color: var(--mpc-color-secondary) !important;
+
+        i {
+          margin-left: 10px;
+          font-weight: 300;
+          color: var(--mpc-color-secondary) !important;
+        }
+      }
+    }
+  }
+}
+
+/*--------------------------------------------------------------
+# Desktop Navigation
+--------------------------------------------------------------*/
+@media screen and (min-width: 992px) {
+
+  .header-mobile {
+    display: none !important;
+  }
+
+  .header-desktop {
+    display: flex !important;
+  }
+
+  .navbar {
+    padding: 0;
+
+    ul {
+      display: flex;
+
+      .dropdown {
+        .dropdown-menu {
+          border: 0;
+          padding: 20px 28px;
+          display: none;
+
+          li {
+            padding: 0;
+
+            &::before {
+              visibility: hidden;
+            }
+          }
+        }
+
+        &:hover .dropdown-menu {
+          display: block;
+        }
+      }
+
+      li {
+        position: relative;
+        white-space: nowrap;
+        padding: 10px 0 10px 28px;
+      }
+    }
+
+    /* Abas */
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 3px;
+      font-size: 16px;
+      font-weight: 600;
+      white-space: nowrap;
+      position: relative;
+      border-bottom: 2px solid transparent !important;
+
+      /* Efeito de hover semelhante a aba ativa*/
+      &:hover {
+        color: var(--mpc-color-primary) !important;
+        border-bottom: 2px solid var(--mpc-color-secondary) !important;
+      }
+    }
+
+    /* Propriedades de aba ativa */
+    .aba-ativa {
+      color: var(--mpc-color-primary) !important;
+      border-bottom: 2px solid var(--mpc-color-secondary) !important;
+    }
+  }
+}

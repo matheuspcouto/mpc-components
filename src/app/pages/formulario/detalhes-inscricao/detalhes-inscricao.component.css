@@ -18,7 +18,7 @@ p {
 
 .comprovante-tela {
   background-color: white;
-  font-family: var(--font-default);
+  font-family: var(--mpc-font-default);
   font-weight: 600;
   overflow-y: auto;
   margin-top: 70px;
@@ -44,7 +44,7 @@ p {
         }
 
         .comprovante-title {
-          font-family: var(--font-title);
+          font-family: var(--mpc-font-title);
           text-align: center;
           font-size: 1.5rem;
           font-weight: bold;
@@ -52,7 +52,7 @@ p {
         }
 
         .input-group em {
-          color: var(--color-secondary) !important;
+          color: var(--mpc-color-secondary) !important;
           display: block;
           font-size: 18px;
 
@@ -76,7 +76,7 @@ p {
 
         .btn-home {
           background-color: transparent !important;
-          color: var(--color-primary) !important;
+          color: var(--mpc-color-primary) !important;
         }
       }
     }

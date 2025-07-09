@@ -13,7 +13,7 @@ section {
 
   h5 {
     font-weight: 400;
-    color: var(--color-tertiary);
+    color: var(--mpc-color-tertiary);
     text-align: center;
     padding-bottom: 2rem;
     font-style: italic;
@@ -29,19 +29,19 @@ section {
       font-weight: 400;
       margin: 0;
       padding: 0;
-      color: var(--color-tertiary);
+      color: var(--mpc-color-tertiary);
       text-transform: uppercase;
-      font-family: var(--font-default);
+      font-family: var(--mpc-font-default);
     }
 
     p {
       margin: 0;
       font-size: clamp(2rem, 2vw, 2rem);
       font-weight: 400;
-      font-family: var(--fonte-padrao);
+      font-family: var(--mpc-font-default);
 
       span {
-        color: var(--color-secondary);
+        color: var(--mpc-color-secondary);
       }
     }
   }
@@ -52,7 +52,7 @@ section {
 --------------------------------------------------------------*/
 .container {
   max-width: 600px;
-  font-family: var(--font-default);
+  font-family: var(--mpc-font-default);
   font-weight: 600;
   padding: 2rem;
 }

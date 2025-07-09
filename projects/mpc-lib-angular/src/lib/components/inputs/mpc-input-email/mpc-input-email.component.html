@@ -1,0 +1,15 @@
+<div [tabIndex]="tabIndex" [attr.aria-label]="ariaLabel" class="form-group">
+  <label class="form-label">E-mail {{ required ? ' *' : '' }}</label>
+
+  <div class="input-group">
+    <input [id]="id" type="email" class="form-control" [value]="value" (input)="setValue($event)" [required]="required"
+      [readOnly]="readonly" [style.border-color]="errorMessage ? 'red' : null" (focus)="onFocus()"
+      [disabled]="disabled" />
+
+    <div class="validation-icon" [style.visibility]="campoTocado ? 'visible' : 'hidden'">
+      <i [class]="errorMessage ? 'bi bi-x-circle-fill invalid-icon' : 'bi bi-check-circle-fill valid-icon'"></i>
+    </div>
+  </div>
+
+  <p class="text-danger mt-1" [style.visibility]="errorMessage ? 'visible' : 'hidden'"> {{ errorMessage }} </p>
+</div>

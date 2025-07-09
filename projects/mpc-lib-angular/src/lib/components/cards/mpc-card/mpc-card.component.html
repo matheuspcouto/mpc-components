@@ -1,0 +1,81 @@
+<!-- Layout Vertical -->
+@if (isVertical()) {
+<div class="card-vertical" [tabIndex]="tabIndex" [attr.aria-label]="getAriaLabel()" [id]="id">
+
+  <div class="card-header">
+    <div class="card-img">
+      <img [src]="getImagemCard()" [alt]="'Imagem do card: ' + titulo">
+
+      @if (hasLinks()) {
+      <div class="links">
+        @for (link of links; track $index) {
+        <a tabindex="0" [attr.aria-label]="'Link para ' + link.url" [href]="link.url" target="_blank">
+          <i [class]="link.icone"></i>
+        </a>
+        }
+      </div>
+      }
+    </div>
+  </div>
+
+  <div class="card-body">
+    <div class="card-info">
+      @if (hasTitulo()) {
+      <h3 tabindex="0" [attr.aria-label]="'Título: ' + titulo">{{ titulo }}</h3>
+      }
+      @if (hasSubtitulo()) {
+      <h4 tabindex="0" [attr.aria-label]="'Subtítulo: ' + subtitulo">{{ subtitulo }}</h4>
+      }
+      @if (hasDescricaoUm()) {
+      <p class="mb-0" tabindex="0" [attr.aria-label]="'Descrição: ' + descricaoUm">{{ descricaoUm }}</p>
+      }
+      @if (hasDescricaoDois()) {
+      <p class="mb-0" tabindex="0" [attr.aria-label]="'Descrição adicional: ' + descricaoDois">{{ descricaoDois }}</p>
+      }
+    </div>
+  </div>
+</div>
+}
+
+<!-- Layout Horizontal -->
+@if (isHorizontal()) {
+<div class="card-horizontal" [id]="id" [tabindex]="tabIndex" [attr.aria-label]="getAriaLabel()">
+
+  <div class="col-lg-5">
+    <img [src]="getImagemCard()" [alt]="'Imagem do card: ' + titulo">
+  </div>
+
+  <div class="col-lg-7">
+    <div class="card-body">
+      @if (hasTitulo()) {
+      <h2 tabindex="0" [attr.aria-label]="'Título: ' + titulo">{{ titulo }}</h2>
+      }
+      @if (hasTitulo()) {
+      <div class="barra-titulo"></div>
+      }
+      @if (hasSubtitulo()) {
+      <h5 tabindex="0" [attr.aria-label]="'Subtítulo: ' + subtitulo">{{ subtitulo }}</h5>
+      }
+      @if (hasDescricaoUm()) {
+      <h5 tabindex="0" [attr.aria-label]="'Descrição: ' + descricaoUm">{{ descricaoUm }}</h5>
+      }
+      @if (hasDescricaoDois()) {
+      <h5 tabindex="0" [attr.aria-label]="'Descrição adicional: ' + descricaoDois">{{ descricaoDois }}</h5>
+      }
+    </div>
+
+    @if (hasLinks()) {
+    <div class="card-footer">
+      <div class="links">
+        @for (link of links; track $index) {
+        <a tabindex="0" [attr.aria-label]="'Link para ' + link.url" [href]="link.url" target="_blank"
+          rel="noopener noreferrer">
+          <i [class]="link.icone"></i>
+        </a>
+        }
+      </div>
+    </div>
+    }
+  </div>
+</div>
+}

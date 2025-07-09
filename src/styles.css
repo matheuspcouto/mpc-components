@@ -6,16 +6,14 @@
 
 :root {
   /* Fontes: Essas fontes também são utilizadas pelos componentes da lib */
-  --font-title: 'Potential', sans-serif;
-  --font-default: "Poppins", sans-serif;
-  --font-secondary: "Inter", sans-serif;
+  --mpc-font-title: 'Potential', sans-serif;
+  --mpc-font-default: "Poppins", sans-serif;
+  --mpc-font-secondary: "Inter", sans-serif;
 
   /* Cores: Essas cores também são utilizadas pelos componentes da lib */
-  --color-primary: #0E2749;
-  --color-secondary: #149DDD;
-  --color-tertiary: gray;
-  --color-black: #000;
-  --color-white: #fff;
+  --mpc-color-primary: #0E2749;
+  --mpc-color-secondary: #149DDD;
+  --mpc-color-tertiary: gray;
 
   scroll-behavior: smooth;
 }
@@ -35,17 +33,17 @@ html {
 }
 
 body {
-  font-family: var(--font-default);
-  color: var(--color-secondary);
+  font-family: var(--mpc-font-default);
+  color: var(--mpc-color-secondary);
   overflow: auto !important;
 }
 
 a {
-  color: var(--color-primary);
+  color: var(--mpc-color-primary);
   text-decoration: none !important;
 
   &:hover {
-    color: var(--color-primary);
+    color: var(--mpc-color-primary);
     text-decoration: none;
   }
 }

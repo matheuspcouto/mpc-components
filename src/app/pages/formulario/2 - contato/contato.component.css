@@ -13,7 +13,7 @@ section {
 
     h5 {
       font-weight: 400;
-      color: var(--color-tertiary);
+      color: var(--mpc-color-tertiary);
       font-size: 18px;
     }
 
@@ -23,13 +23,13 @@ section {
     }
 
     a:hover {
-      color: var(--color-primary) !important;
+      color: var(--mpc-color-primary) !important;
     }
   }
 
   h5 {
     font-weight: 400;
-    color: var(--color-tertiary);
+    color: var(--mpc-color-tertiary);
     text-align: center;
     padding-bottom: 2rem;
     font-style: italic;
@@ -45,19 +45,19 @@ section {
       font-weight: 400;
       margin: 0;
       padding: 0;
-      color: var(--color-tertiary);
+      color: var(--mpc-color-tertiary);
       text-transform: uppercase;
-      font-family: var(--font-default);
+      font-family: var(--mpc-font-default);
     }
 
     p {
       margin: 0;
       font-size: clamp(2rem, 2vw, 2rem);
       font-weight: 400;
-      font-family: var(--fonte-padrao);
+      font-family: var(--mpc-font-default);
 
       span {
-        color: var(--color-secondary);
+        color: var(--mpc-color-secondary);
       }
     }
   }
@@ -68,14 +68,14 @@ section {
 # inscricao Section
 --------------------------------------------------------------*/
 .inscricao {
-  font-family: var(--font-default);
+  font-family: var(--mpc-font-default);
   font-weight: 600;
   padding: 2rem;
   margin-top: 90px;
 
   form {
     .btn-proximo {
-      background-color: var(--color-primary);
+      background-color: var(--mpc-color-primary);
       color: white;
 
       &:disabled {
@@ -87,7 +87,7 @@ section {
 
     .btn-voltar {
       background-color: transparent !important;
-      color: var(--color-tertiary) !important;
+      color: var(--mpc-color-tertiary) !important;
     }
   }
 }

@@ -1,39 +1,79 @@
-export const Rotas = {
-  HOME: "/",
-  ERROR: "/error",
+export enum SegmentoRotas {
+  HOME = "",
+  ERROR = "error",
 
   // Componentes
-  COMPONENTES: "/componentes",
-  CARDS: "/componentes/mpc-cards-doc",
-  MODAIS: "/componentes/mpc-modal-doc",
-  LOADERS: "/componentes/mpc-loader-doc",
-  NAVBAR: "/componentes/mpc-navbar-doc",
-  FOOTER: "/componentes/mpc-footer-doc",
-  TABS: "/componentes/mpc-tabs-doc",
-  PAGINACAO: "/componentes/mpc-pagination-doc",
-  INPUTS: "/componentes/mpc-inputs-doc",
-  PAGE_HEADER: "/componentes/mpc-page-header-doc",
+  COMPONENTES = "componentes",
+  CARDS = "mpc-cards-doc",
+  MODAIS = "mpc-modal-doc",
+  LOADERS = "mpc-loader-doc",
+  NAVBAR = "mpc-navbar-doc",
+  FOOTER = "mpc-footer-doc",
+  TABS = "mpc-tabs-doc",
+  PAGINACAO = "mpc-pagination-doc",
+  INPUTS = "mpc-inputs-doc",
+  PAGE_HEADER = "mpc-page-header-doc",
 
   // Diretivas
-  DIRETIVAS: "/diretivas",
-  BTN_FLOAT: "/diretivas/mpc-btn-float-doc",
-  BUTTONS: "/diretivas/mpc-button-doc",
+  DIRETIVAS = "diretivas",
+  BTN_FLOAT = "mpc-btn-float-doc",
+  BUTTONS = "mpc-button-doc",
 
   // Paginas
-  PAGINAS: "/paginas",
+  PAGINAS = "paginas",
 
   // Formulário
-  FORMULARIO: "/paginas/formulario",
-  DADOS_PESSOAIS: "/paginas/formulario/dados-pessoais",
-  CONTATO: "/paginas/formulario/contato",
-  PAGAMENTO: "/paginas/formulario/pagamento",
-  CONFIRMACAO: "/paginas/formulario/confirmacao",
-  DETALHES_INSCRICAO: "/paginas/formulario/detalhes-inscricao",
-  PESQUISA: "/paginas/formulario/pesquisa",
-  INSCRICOES_ENCERRADAS: "/paginas/formulario/inscricoes-encerradas",
+  FORMULARIO = "formulario",
+  DADOS_PESSOAIS = "dados-pessoais",
+  CONTATO = "contato",
+  PAGAMENTO = "pagamento",
+  CONFIRMACAO = "confirmacao",
+  DETALHES_INSCRICAO = "detalhes-inscricao",
+  PESQUISA = "pesquisa",
+  INSCRICOES_ENCERRADAS = "inscricoes-encerradas",
 
   // Outras páginas
-  AGUARDE: "/paginas/aguarde",
-  LOGIN: "/paginas/login",
-  PAGINA_ERRO: "/paginas/pagina-erro"
+  AGUARDE = "aguarde",
+  LOGIN = "login",
+  PAGINA_ERRO = "pagina-erro"
+}
+
+export enum Rotas {
+  HOME = `/${SegmentoRotas.HOME}`,
+  ERROR = `/${SegmentoRotas.ERROR}`,
+
+  // Componentes
+  COMPONENTES = `/${SegmentoRotas.COMPONENTES}`,
+  CARDS = `/${SegmentoRotas.COMPONENTES}/${SegmentoRotas.CARDS}`,
+  MODAIS = `/${SegmentoRotas.COMPONENTES}/${SegmentoRotas.MODAIS}`,
+  LOADERS = `/${SegmentoRotas.COMPONENTES}/${SegmentoRotas.LOADERS}`,
+  NAVBAR = `/${SegmentoRotas.COMPONENTES}/${SegmentoRotas.NAVBAR}`,
+  FOOTER = `/${SegmentoRotas.COMPONENTES}/${SegmentoRotas.FOOTER}`,
+  TABS = `/${SegmentoRotas.COMPONENTES}/${SegmentoRotas.TABS}`,
+  PAGINACAO = `/${SegmentoRotas.COMPONENTES}/${SegmentoRotas.PAGINACAO}`,
+  INPUTS = `/${SegmentoRotas.COMPONENTES}/${SegmentoRotas.INPUTS}`,
+  PAGE_HEADER = `/${SegmentoRotas.COMPONENTES}/${SegmentoRotas.PAGE_HEADER}`,
+
+  // Diretivas
+  DIRETIVAS = `/${SegmentoRotas.DIRETIVAS}`,
+  BTN_FLOAT = `/${SegmentoRotas.DIRETIVAS}/${SegmentoRotas.BTN_FLOAT}`,
+  BUTTONS = `/${SegmentoRotas.DIRETIVAS}/${SegmentoRotas.BUTTONS}`,
+
+  // Paginas
+  PAGINAS = `/${SegmentoRotas.PAGINAS}`,
+
+  // Formulário
+  FORMULARIO = `/${SegmentoRotas.PAGINAS}/${SegmentoRotas.FORMULARIO}`,
+  DADOS_PESSOAIS = `/${SegmentoRotas.PAGINAS}/${SegmentoRotas.FORMULARIO}/${SegmentoRotas.DADOS_PESSOAIS}`,
+  CONTATO = `/${SegmentoRotas.PAGINAS}/${SegmentoRotas.FORMULARIO}/${SegmentoRotas.CONTATO}`,
+  PAGAMENTO = `/${SegmentoRotas.PAGINAS}/${SegmentoRotas.FORMULARIO}/${SegmentoRotas.PAGAMENTO}`,
+  CONFIRMACAO = `/${SegmentoRotas.PAGINAS}/${SegmentoRotas.FORMULARIO}/${SegmentoRotas.CONFIRMACAO}`,
+  DETALHES_INSCRICAO = `/${SegmentoRotas.PAGINAS}/${SegmentoRotas.FORMULARIO}/${SegmentoRotas.DETALHES_INSCRICAO}`,
+  PESQUISA = `/${SegmentoRotas.PAGINAS}/${SegmentoRotas.FORMULARIO}/${SegmentoRotas.PESQUISA}`,
+  INSCRICOES_ENCERRADAS = `/${SegmentoRotas.PAGINAS}/${SegmentoRotas.FORMULARIO}/${SegmentoRotas.INSCRICOES_ENCERRADAS}`,
+
+  // Outras páginas
+  AGUARDE = `/${SegmentoRotas.PAGINAS}/${SegmentoRotas.AGUARDE}`,
+  LOGIN = `/${SegmentoRotas.PAGINAS}/${SegmentoRotas.LOGIN}`,
+  PAGINA_ERRO = `/${SegmentoRotas.PAGINAS}/${SegmentoRotas.PAGINA_ERRO}`
 }

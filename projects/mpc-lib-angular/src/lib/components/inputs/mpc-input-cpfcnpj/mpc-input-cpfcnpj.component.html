@@ -1,0 +1,16 @@
+<div [tabIndex]="tabIndex" [attr.aria-label]="ariaLabel" class="form-group">
+  <label class="form-label">CPF/CNPJ{{ required ? ' *' : '' }}</label>
+
+  <div class="input-group">
+    <input [id]="id" type="text" class="form-control" [value]="valorFormatado" (input)="setValue($event)"
+      [required]="required" [style.border-color]="errorMessage ? 'red' : null" [readOnly]="readonly" (focus)="onFocus()"
+      [attr.maxLength]="18" [disabled]="disabled" />
+
+    <div class="validation-icon" [style.visibility]="campoTocado ? 'visible' : 'hidden'">
+      <i [class]="errorMessage ? 'bi bi-x-circle-fill invalid-icon' : 'bi bi-check-circle-fill valid-icon'"></i>
+    </div>
+
+  </div>
+
+  <p class="text-danger mt-1" [style.visibility]="errorMessage ? 'visible' : 'hidden'"> {{ errorMessage }} </p>
+</div>

@@ -1,0 +1,36 @@
+/*--------------------------------------------------------------
+# Page Divider Img Section
+--------------------------------------------------------------*/
+.page-divider-img {
+    background-size: cover;
+    background-position: center;
+    padding: 100px 0;
+
+    @media screen and (max-width: 991.98px) {
+        display: flex;
+    }
+
+    @media (min-width: 992px) {
+        background-attachment: fixed;
+    }
+
+    .page-divider-text {
+        padding: 30px;
+        width: 100%;
+        text-align: center;
+
+        h2,
+        p {
+            font-family: var(--mpc-font-title) !important;
+            font-size: 2rem;
+        }
+
+        p {
+            color: var(--mpc-color-primary);
+        }
+
+        h2 {
+            color: white;
+        }
+    }
+}

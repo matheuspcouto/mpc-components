@@ -1,0 +1,34 @@
+<div class="card-box" [style.border-color]="estilos.borderColor" >
+
+  <div class="card-timeline" [style.border-color]="estilos.borderColor">
+    <div [id]="id" [tabIndex]="tabIndex" [attr.aria-label]="getAriaLabel()" class="card-evento"
+      [style.background]="estilos.background">
+
+      @if (hasData()) {
+      <div class="card-evento-data" [style.background]="estilos.eventoBackground" [style.color]="estilos.eventoColor"
+        tabindex="0" [attr.aria-label]="'Data do evento: ' + dia + ' de ' + mes">
+        @if (hasDia()) {
+        <span class="evento-dia" [attr.aria-label]="'Dia: ' + dia">{{ dia }}</span>
+        }
+        @if (hasMes()) {
+        <span class="evento-mes" [attr.aria-label]="'Mês: ' + mes">{{ mes }}</span>
+        }
+      </div>
+      }
+
+      <div class="card-evento-body" [style.color]="estilos.textColor">
+        @if (hasTitulo()) {
+        <h3 tabindex="0" [attr.aria-label]="'Título: ' + titulo">{{ titulo }}</h3>
+        }
+
+        @if (hasSubtitulo()) {
+        <h4 tabindex="0" [attr.aria-label]="'Subtítulo: ' + subtitulo">{{ subtitulo }}</h4>
+        }
+
+        @if (hasDescricao()) {
+        <p tabindex="0" [attr.aria-label]="'Descrição: ' + descricao">{{ descricao }}</p>
+        }
+      </div>
+    </div>
+  </div>
+</div>

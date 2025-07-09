@@ -1,0 +1,18 @@
+<div [id]="id" [tabIndex]="tabIndex" [attr.aria-label]="getAriaLabel()" class="card-menu"
+  [style.background]="estilos.background" (click)="clique()" [style.cursor]="getCursor()">
+
+  @if (hasIcone()) {
+  <i [class]="icone" [style.background]="estilos.iconeBackground" [style.color]="estilos.iconeColor" tabindex="0"
+    [attr.aria-label]="'Ícone: ' + titulo"></i>
+  }
+
+  <div class="card-menu-body" [style.color]="estilos.textColor">
+    @if (hasTitulo()) {
+    <h3 tabindex="0" [attr.aria-label]="'Título: ' + titulo">{{ titulo }}</h3>
+    }
+
+    @if (hasDescricao()) {
+    <p tabindex="0" [attr.aria-label]="'Descrição: ' + descricao">{{ descricao }}</p>
+    }
+  </div>
+</div>

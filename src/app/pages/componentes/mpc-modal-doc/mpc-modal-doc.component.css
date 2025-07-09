@@ -11,7 +11,7 @@ section {
 
   h5 {
     font-weight: 400;
-    color: var(--color-tertiary);
+    color: var(--mpc-color-tertiary);
     text-align: center;
     padding-bottom: 2rem;
     font-style: italic;
@@ -27,19 +27,19 @@ section {
       font-weight: 400;
       margin: 0;
       padding: 0;
-      color: var(--color-tertiary);
+      color: var(--mpc-color-tertiary);
       text-transform: uppercase;
-      font-family: var(--font-default);
+      font-family: var(--mpc-font-default);
     }
 
     p {
       margin: 0;
       font-size: 48px;
       font-weight: 400;
-      font-family: var(--fonte-padrao);
+      font-family: var(--mpc-font-default);
 
       span {
-        color: var(--color-secondary);
+        color: var(--mpc-color-secondary);
       }
     }
   }
@@ -47,11 +47,11 @@ section {
 }
 
 pre {
-  background-color: var(--color-primary);
+  background-color: var(--mpc-color-primary);
   padding: 20px;
   border-radius: 5px;
   margin-top: 20px;
-  color: var(--color-white);
+  color: white;
   border-radius: 5px;
   overflow: hidden;
   display: flex;

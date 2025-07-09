@@ -14,7 +14,7 @@ import { MpcLoaderComponent, MpcNavbarComponent, NavbarConfig, MpcBtnFloatDirect
 export class AppComponent implements OnInit {
 
   protected abas: NavbarConfig[] = [
-    { titulo: 'Login', rota: Rotas.LOGIN, icone: 'bi bi-person-fill' },
+    /* { titulo: 'Login', rota: Rotas.LOGIN, icone: 'bi bi-person-fill' }, */
     { titulo: 'Home', rota: Rotas.HOME, icone: 'bi bi-house-fill' },
     {
       titulo: 'Componentes',
@@ -90,6 +90,6 @@ export class AppComponent implements OnInit {
 // TODO: Ajustar Tela de Login
 // TODO: Tela de Login com guard e renderizar só o componente de login
 // TODO: Tela de Cadastro
-// TODO: Adiiconar Page Divider a lib
 // TODO: Adicionar Pagina de Pipes
+// TODO: Sobrescrever --cores e --fontes na lib e ajustar hovers
 

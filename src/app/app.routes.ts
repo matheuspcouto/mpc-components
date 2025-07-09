@@ -1,11 +1,12 @@
 import { Routes } from '@angular/router';
 import { SiteAtivoGuard } from './guards/site-ativo/site-ativo.guard';
 import { InscricoesGuard } from './guards/inscricoes/inscricoes.guard';
+import { SegmentoRotas } from './shared/enums/rotas-enum';
 
 export const routes: Routes = [
   /*  Rotas para Home */
   {
-    path: '',
+    path: SegmentoRotas.HOME,
     pathMatch: 'full',
     loadComponent: () => import('./pages/paginas-avulsas/home/home.component').then(c => c.default),
     canActivate: [SiteAtivoGuard]
@@ -13,58 +14,53 @@ export const routes: Routes = [
 
   /*  Rotas para Error */
   {
-    path: 'error',
+    path: SegmentoRotas.ERROR,
     loadComponent: () => import('./shared/error/error.component').then(c => c.ErrorComponent),
     canActivate: [SiteAtivoGuard]
   },
 
   /*  Rotas para Componentes */
   {
-    path: 'componentes',
+    path: SegmentoRotas.COMPONENTES,
     children: [
       {
-        path: 'mpc-cards-doc',
+        path: SegmentoRotas.CARDS,
         loadComponent: () => import('./pages/componentes/mpc-cards-doc/mpc-cards-doc.component').then(c => c.MpcCardsDocComponent),
         canActivate: [SiteAtivoGuard]
       },
       {
-        path: 'mpc-modal-doc',
+        path: SegmentoRotas.MODAIS,
         loadComponent: () => import('./pages/componentes/mpc-modal-doc/mpc-modal-doc.component').then(c => c.MpcModalDocComponent),
         canActivate: [SiteAtivoGuard]
       },
       {
-        path: 'mpc-loader-doc',
+        path: SegmentoRotas.LOADERS,
         loadComponent: () => import('./pages/componentes/mpc-loader-doc/mpc-loader-doc.component').then(c => c.MpcLoaderDocComponent),
         canActivate: [SiteAtivoGuard]
       },
       {
-        path: 'mpc-navbar-doc',
+        path: SegmentoRotas.NAVBAR,
         loadComponent: () => import('./pages/componentes/mpc-navbar-doc/mpc-navbar-doc.component').then(c => c.MpcNavbarDocComponent),
         canActivate: [SiteAtivoGuard]
       },
       {
-        path: 'mpc-footer-doc',
+        path: SegmentoRotas.FOOTER,
         loadComponent: () => import('./pages/componentes/mpc-footer-doc/mpc-footer-doc.component').then(c => c.MpcFooterDocComponent),
         canActivate: [SiteAtivoGuard]
       },
       {
-        path: 'mpc-tabs-doc',
+        path: SegmentoRotas.TABS,
         loadComponent: () => import('./pages/componentes/mpc-tabs-doc/mpc-tabs-doc.component').then(c => c.MpcTabsDocComponent),
         canActivate: [SiteAtivoGuard]
       },
       {
-        path: 'mpc-pagination-doc',
+        path: SegmentoRotas.PAGINACAO,
         loadComponent: () => import('./pages/componentes/mpc-pagination-doc/mpc-pagination-doc.component').then(c => c.MpcPaginationDocComponent),
         canActivate: [SiteAtivoGuard]
       },
       {
-        path: 'mpc-inputs-doc',
+        path: SegmentoRotas.INPUTS,
         loadComponent: () => import('./pages/componentes/mpc-input-doc/mpc-inputs-doc.component').then(c => c.MpcInputsDocComponent),
-        canActivate: [SiteAtivoGuard]
-      },
-      {
-        path: 'mpc-page-header-doc',
-        loadComponent: () => import('./pages/componentes/mpc-page-header-doc/mpc-page-header-doc.component').then(c => c.MpcPageHeaderDocComponent),
         canActivate: [SiteAtivoGuard]
       },
     ]
@@ -72,15 +68,15 @@ export const routes: Routes = [
 
   /*  Rotas para Diretivas */
   {
-    path: 'diretivas',
+    path: SegmentoRotas.DIRETIVAS,
     children: [
       {
-        path: 'mpc-btn-float-doc',
+        path: SegmentoRotas.BTN_FLOAT,
         loadComponent: () => import('./pages/diretivas/mpc-btn-float-doc/mpc-btn-float-doc.component').then(c => c.MpcBtnFloatDocComponent),
         canActivate: [SiteAtivoGuard]
       },
       {
-        path: 'mpc-button-doc',
+        path: SegmentoRotas.BUTTONS,
         loadComponent: () => import('./pages/diretivas/mpc-button-doc/mpc-button-doc.component').then(c => c.MpcButtonDocComponent),
         canActivate: [SiteAtivoGuard]
       },
@@ -89,61 +85,61 @@ export const routes: Routes = [
 
   /*  Rotas para Páginas */
   {
-    path: 'paginas',
+    path: SegmentoRotas.PAGINAS,
     children: [
       {
-        path: 'login',
+        path: SegmentoRotas.LOGIN,
         loadComponent: () => import('./pages/paginas-avulsas/login/login.component').then(c => c.default)
       },
       {
-        path: 'formulario',
+        path: SegmentoRotas.FORMULARIO,
         children: [
           {
-            path: 'dados-pessoais',
+            path: SegmentoRotas.DADOS_PESSOAIS,
             loadComponent: () => import('./pages/formulario/1 - dados-pessoais/dados-pessoais.component').then(c => c.default),
             canActivate: [SiteAtivoGuard, InscricoesGuard]
           },
           {
-            path: 'contato',
+            path: SegmentoRotas.CONTATO,
             loadComponent: () => import('./pages/formulario/2 - contato/contato.component').then(c => c.default),
             canActivate: [SiteAtivoGuard, InscricoesGuard],
             data: { etapaMinima: 2, checagem: 'dadosPessoais' }
           },
           {
-            path: 'pagamento',
+            path: SegmentoRotas.PAGAMENTO,
             loadComponent: () => import('./pages/formulario/3 - pagamento/pagamento.component').then(c => c.default),
             canActivate: [SiteAtivoGuard, InscricoesGuard],
             data: { etapaMinima: 3, checagem: 'dadosPessoaisEContato' }
           },
           {
-            path: 'confirmacao',
+            path: SegmentoRotas.CONFIRMACAO,
             loadComponent: () => import('./pages/formulario/4 - confirmacao/confirmacao.component').then(c => c.ConfirmacaoComponent),
             canActivate: [SiteAtivoGuard, InscricoesGuard],
             data: { etapaMinima: 4, checagem: 'inscricaoCompleta' }
           },
           {
-            path: 'detalhes-inscricao',
+            path: SegmentoRotas.DETALHES_INSCRICAO,
             loadComponent: () => import('./pages/formulario/detalhes-inscricao/detalhes-inscricao.component').then(c => c.DetalhesInscricaoComponent),
             canActivate: [SiteAtivoGuard]
           },
           {
-            path: 'pesquisa',
+            path: SegmentoRotas.PESQUISA,
             loadComponent: () => import('./pages/formulario/pesquisa/pesquisa.component').then(c => c.PesquisaComponent),
             canActivate: [SiteAtivoGuard]
           },
           {
-            path: 'inscricoes-encerradas',
+            path: SegmentoRotas.INSCRICOES_ENCERRADAS,
             loadComponent: () => import('./pages/formulario/inscricoes-encerradas/inscricoes-encerradas.component').then(c => c.InscricoesEncerradasComponent),
             canActivate: [SiteAtivoGuard]
           },
         ]
       },
       {
-        path: 'aguarde',
+        path: SegmentoRotas.AGUARDE,
         loadComponent: () => import('./pages/aguarde/aguarde.component').then(c => c.default),
       },
       {
-        path: 'pagina-erro',
+        path: SegmentoRotas.PAGINA_ERRO,
         loadComponent: () => import('./pages/paginas-avulsas/pagina-erro/pagina-erro.component').then(c => c.PaginaErroComponent),
         canActivate: [SiteAtivoGuard]
       }
