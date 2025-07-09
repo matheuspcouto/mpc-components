@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { MpcCardMenuComponent } from '../../../shared/components/Cards/mpc-card-menu/mpc-card-menu.component';
-import { MpcButtonDirective } from 'mpc-lib-angular';
+import { MpcButtonDirective, MpcCardMenuComponent } from 'mpc-lib-angular';
 
 @Component({
   selector: 'app-home',
