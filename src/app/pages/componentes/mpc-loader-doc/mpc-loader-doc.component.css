@@ -1,4 +1,6 @@
-main { margin-top: 90px; }
+main {
+  margin-top: 90px;
+}
 
 /*--------------------------------------------------------------
 # Section
@@ -83,5 +85,3 @@ pre {
     white-space: pre-line;
   }
 }
-
-

@@ -9,3 +9,9 @@
     /* Fontes */
     --mpc-font-navbar: var(--font-subtitle);
 }
+
+#loader-exemplo {
+    /* Cores */
+    --mpc-bg-loader: white;
+    --mpc-color-loader: var(--color-primary);
+}

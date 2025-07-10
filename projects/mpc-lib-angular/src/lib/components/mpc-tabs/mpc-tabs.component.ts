@@ -2,20 +2,22 @@
  * @Componente MpcTabsComponent
  * Este componente exibe uma lista de abas (tabs) com títulos e conteúdos customizáveis, permitindo seleção e acessibilidade.
  *
- * @Input id {string} (opcional): Id do componente para acessibilidade.
- * @Input tabIndex {number} (opcional): Índice de tabulação do componente.
- * @Input ariaLabel {string} (opcional): Rótulo de acessibilidade das tabs.
- * @Input tabs {Tab[]}: Lista de abas a serem exibidas.
- * @Input textColor {string} (opcional): Cor do texto das abas.
+ * @Propriedades
+ * Input id {string} (opcional): Id do componente para acessibilidade.
+ * Input tabIndex {number} (opcional): Índice de tabulação do componente.
+ * Input ariaLabel {string} (opcional): Rótulo de acessibilidade das tabs.
+ * Input tabs {Tab[]}: Lista de abas a serem exibidas.
  *
- * @Output tabSelected: Emite o objeto Tab selecionado ao trocar de aba.
+ * @Eventos
+ * Output tabSelected: Emite o objeto Tab selecionado ao trocar de aba.
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
- * @updated 04/07/2025
+ * @updated 10/07/2025
  */
 
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AccessibilityInputs } from '../../../shared/accessibility-inputs';
 
 export interface Tab {
   id: string;
@@ -28,17 +30,9 @@ export interface Tab {
   templateUrl: './mpc-tabs.component.html',
   styleUrl: './mpc-tabs.component.css'
 })
-export class MpcTabsComponent implements OnInit {
-
-  // Acessibilidade
-  @Input() id?: string = '';
-  @Input() tabIndex?: number = 0
-  @Input() ariaLabel?: string = '';
+export class MpcTabsComponent extends AccessibilityInputs implements OnInit {
 
   @Input() tabs: Tab[] = [];
-
-  // Estilos
-  @Input() textColor?: string = '';
 
   @Output() tabSelected = new EventEmitter<Tab>();
 

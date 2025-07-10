@@ -1,21 +1,9 @@
-* {
-  /* Fontes */
-  --mpc-font-title: var(--font-title);
-  --mpc-font-default: var(--font-default);
-  --mpc-font-subtitle: var(--font-subtitle);
-
-  /* Cores */
-  --mpc-color-primary: var(--color-primary);
-  --mpc-color-secondary: var(--color-secondary);
-  --mpc-color-tertiary: var(--color-tertiary);
-}
-
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
 footer {
   font-size: 14px;
-  background-color: var(--mpc-color-primary);
+  background-color: var(--color-primary);
   /* Cor de fundo */
   padding: 3rem 10rem;
   color: white;
@@ -64,7 +52,7 @@ footer {
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      border: 1px solid #7f7f90;
+      border: 1px solid var(--color-tertiary);
       /* Cor da borda do link */
       color: white;
       /* Cor do texto do link */
@@ -76,7 +64,7 @@ footer {
       justify-content: center;
 
       &:hover {
-        border: 1px solid var(--mpc-color-secondary);
+        border: 1px solid var(--color-secondary);
         /* Cor da borda ao passar o mouse */
       }
     }
@@ -93,7 +81,7 @@ footer {
       display: inline-block;
       background: white;
       /* Cor de fundo do link */
-      color: var(--mpc-color-primary);
+      color: var(--color-primary);
       /* Cor do texto do link */
       line-height: 1;
       padding: 8px 0;
@@ -106,7 +94,7 @@ footer {
 
       /* Efeito ao passar o mouse */
       &:hover {
-        background: var(--mpc-color-primary);
+        background: var(--color-primary);
         color: white;
       }
     }

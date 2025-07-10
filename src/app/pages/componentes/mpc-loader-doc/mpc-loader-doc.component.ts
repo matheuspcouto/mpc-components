@@ -1,9 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { MpcButtonDirective, MpcLoaderService } from 'mpc-lib-angular';
+import { MpcLoaderService } from '../../../../../projects/mpc-lib-angular/src/lib/components/mpc-loader/mpc-loader.service';
+import { MpcButtonDirective } from '../../../../../projects/mpc-lib-angular/src/lib/directives/mpc-button/mpc-button.directive';
 
 @Component({
   selector: 'app-loaders',
-  imports: [ MpcButtonDirective ],
+  imports: [MpcButtonDirective],
   templateUrl: './mpc-loader-doc.component.html',
   styleUrl: './mpc-loader-doc.component.css'
 })

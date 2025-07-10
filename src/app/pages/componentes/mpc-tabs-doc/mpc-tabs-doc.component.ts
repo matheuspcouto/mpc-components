@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MpcTabsComponent, Tab } from 'mpc-lib-angular';
+import { MpcTabsComponent, Tab } from '../../../../../projects/mpc-lib-angular/src/lib/components/mpc-tabs/mpc-tabs.component';
 
 @Component({
   selector: 'app-tabs',

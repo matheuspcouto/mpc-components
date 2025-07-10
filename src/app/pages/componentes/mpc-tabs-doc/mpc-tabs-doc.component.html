@@ -61,8 +61,7 @@ selectTab(tab: Tab) {{ '{' }}
 
       <div class="row justify-content-center mb-5">
         <h5><strong>Veja como fica o componente:</strong></h5>
-        <mpc-tabs textColor="var(--mpc-color-primary)" [tabs]="tabs" [tabIndex]="0" ariaLabel="Tabs"
-          (tabSelected)="selectTab($event)"></mpc-tabs>
+        <mpc-tabs id="tabs" [tabs]="tabs" [tabIndex]="0" ariaLabel="Tabs" (tabSelected)="selectTab($event)"></mpc-tabs>
 
         @if (tabSelecionada.id === 'conteudoTab1') {
         <div class="d-flex justify-content-center mt-3">Conteúdo 1</div>

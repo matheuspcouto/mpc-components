@@ -1,4 +1,6 @@
-main { margin-top: 90px; }
+main {
+  margin-top: 90px;
+}
 
 /*--------------------------------------------------------------
 # Section
@@ -64,3 +66,16 @@ pre {
 }
 
 
+/*--------------------------------------------------------------
+# Tabs
+--------------------------------------------------------------*/
+#tabs {
+  /* Cores */
+  --mpc-color-text-tabs: var(--color-tertiary);
+  --mpc-color-text-active-tabs: var(--color-primary);
+  --mpc-color-border-tabs: var(--color-tertiary);
+  --mpc-color-border-active-tabs: var(--color-primary);
+
+  /* Fontes */
+  --mpc-font-tabs: var(--font-subtitle);
+}

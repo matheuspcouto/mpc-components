@@ -1,3 +1,14 @@
+:host {
+  /* Cores */
+  --mpc-color-text-tabs: var(--mpc-color-tertiary);
+  --mpc-color-text-active-tabs: var(--mpc-color-primary);
+  --mpc-color-border-tabs: var(--mpc-color-tertiary);
+  --mpc-color-border-active-tabs: var(--mpc-color-primary);
+
+  /* Fontes */  
+  --mpc-font-tabs: var(--mpc-font-subtitle);
+}
+
 /*--------------------------------------------------------------
 # Tabs Section
 --------------------------------------------------------------*/
@@ -7,9 +18,9 @@
   flex-wrap: wrap;
   padding-left: 0;
   list-style: none;
-  color: gray; /* Cor do texto desabilitado */
+  color: var(--mpc-color-text-tabs);
   background-color: transparent;
-  font-family: var(--mpc-font-subtitle);
+  font-family: var(--mpc-font-tabs);
 
   .nav-link {
     margin: 0 10px;
@@ -18,12 +29,22 @@
     cursor: pointer;
     height: 100%;
     border: 0;
-    border-bottom: 2px solid gray; /* Cor da borda desabilitada*/
+    border-bottom: 2px solid var(--mpc-color-border-tabs);
 
     h4 {
       font-size: 18px;
       font-weight: 400;
       margin: 0;
     }
+  }
+
+  .nav-link.active {
+    color: var(--mpc-color-text-active-tabs);
+    border-bottom: 2px solid var(--mpc-color-border-active-tabs);
+  }
+
+  .nav-link:hover {
+    color: var(--mpc-color-text-active-tabs);
+    border-bottom: 2px solid var(--mpc-color-border-active-tabs);
   }
 }
