@@ -64,3 +64,11 @@ pre {
     white-space: pre-line;
   }
 }
+
+form {
+  /* Inputs */
+  --mpc-color-text: var(--color-primary);
+  --mpc-color-border: var(--color-tertiary);
+  --mpc-color-border-success: var(--color-secondary);
+  --mpc-font-text: var(--font-subtitle);
+}

@@ -1,8 +1,43 @@
+:host {
+  /* Cores */
+  --mpc-color-text: var(--mpc-color-primary);
+  --mpc-color-error: #DC3545;
+
+  --mpc-color-border: var(--mpc-color-tertiary);
+  --mpc-color-border-success: var(--mpc-color-secondary);
+
+  /* Fontes */
+  --mpc-font-text: var(--mpc-font-default);
+}
+
+* {
+  font-family: var(--mpc-font-text);
+  color: var(--mpc-color-text);
+  font-weight: 600;
+}
+
+label.error {
+  color: var(--mpc-color-error) !important;
+}
+
 input {
+  background: transparent !important;
+  border: none;
+  border-bottom: 2px solid var(--mpc-color-border) !important;
+  border-radius: 0 !important;
+  font-weight: 400;
   width: 100%;
   padding-right: 5rem;
   /* Espaço para o ícone */
   box-sizing: border-box;
+
+  &.error {
+    border-color: var(--mpc-color-error) !important;
+  }
+
+  &.success {
+    border-color: var(--mpc-color-border-success) !important;
+  }
 }
 
 .icon-pesquisa {
@@ -20,6 +55,10 @@ input {
   width: 1.5rem;
   height: 1.5rem;
   z-index: 999;
+
+  &.error {
+    color: var(--mpc-color-error) !important;
+  }
 }
 
 .icon-limpar {
@@ -41,4 +80,8 @@ input {
 
 p {
   font-size: 14px;
+
+  &.error {
+    color: var(--mpc-color-error) !important;
+  }
 }

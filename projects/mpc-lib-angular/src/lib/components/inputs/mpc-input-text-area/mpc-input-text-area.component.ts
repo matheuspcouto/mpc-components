@@ -22,7 +22,7 @@
  * @updated 07/07/2025
  */
 
-import { Component, Input, forwardRef } from '@angular/core';
+import { Component, Input, forwardRef, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { ValidationErrors, ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, Validator, AbstractControl } from '@angular/forms';
 
 @Component({
@@ -43,7 +43,9 @@ import { ValidationErrors, ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATOR
     }
   ]
 })
-export class MpcInputTextAreaComponent implements ControlValueAccessor, Validator {
+export class MpcInputTextAreaComponent implements ControlValueAccessor, Validator, AfterViewInit {
+
+  @ViewChild('textarea', { static: false }) textareaRef!: ElementRef<HTMLTextAreaElement>;
 
   // Acessibilidade
   @Input() id: string = '';
@@ -68,6 +70,21 @@ export class MpcInputTextAreaComponent implements ControlValueAccessor, Validato
 
   writeValue(value: string): void {
     this.value = value;
+    // Ajusta a altura quando o valor é definido programaticamente
+    setTimeout(() => {
+      if (this.textareaRef) {
+        this.ajustarAltura(this.textareaRef.nativeElement);
+      }
+    });
+  }
+
+  ngAfterViewInit(): void {
+    // Ajusta a altura inicial se houver valor
+    if (this.value && this.textareaRef) {
+      setTimeout(() => {
+        this.ajustarAltura(this.textareaRef.nativeElement);
+      });
+    }
   }
 
   registerOnChange(fn: any): void {
@@ -102,6 +119,18 @@ export class MpcInputTextAreaComponent implements ControlValueAccessor, Validato
     this.value = event.target.value as string;
     this.onChange(this.value);
     this.onTouched();
+    this.ajustarAltura(event.target);
+  }
+
+  /**
+   * Ajusta automaticamente a altura do textarea conforme o conteúdo.
+   * @param textarea Elemento textarea.
+   */
+  private ajustarAltura(textarea: HTMLTextAreaElement): void {
+    // Reset da altura para calcular corretamente
+    textarea.style.height = 'auto';
+    // Define a nova altura baseada no scrollHeight
+    textarea.style.height = textarea.scrollHeight + 'px';
   }
 
   /**

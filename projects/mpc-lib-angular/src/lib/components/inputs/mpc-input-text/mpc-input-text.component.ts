@@ -17,7 +17,10 @@
 
 import { Component, Input, forwardRef } from '@angular/core';
 import { ValidationErrors, ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, Validator, AbstractControl } from '@angular/forms';
+import { AccessibilityInputs } from '../../../../shared/accessibility-inputs';
 
+
+// TODO: vincular form.control.touched com o campoTocado
 @Component({
   selector: 'mpc-input-text',
   imports: [],
@@ -36,12 +39,7 @@ import { ValidationErrors, ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATOR
     }
   ]
 })
-export class MpcInputTextComponent implements ControlValueAccessor, Validator {
-
-  // Acessibilidade
-  @Input() id: string = '';
-  @Input() tabIndex: number = 0;
-  @Input() ariaLabel: string = '';
+export class MpcInputTextComponent extends AccessibilityInputs implements ControlValueAccessor, Validator {
 
   // Validators
   @Input() label: string = '';

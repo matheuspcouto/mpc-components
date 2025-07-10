@@ -13,11 +13,13 @@ import { Rotas } from '../../../shared/enums/rotas-enum';
 import { FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { InscricaoService } from '../service/inscricao.service';
 import { ErrorService } from '../../../shared/error/error.service';
-import {
-  MpcButtonDirective, MpcFormProgressBarComponent, MpcInputTextComponent,
-  MpcInputTelefoneComponent, MpcInputEmailComponent, MpcInputBuscaCepComponent, Endereco, MpcLoaderService
-} from 'mpc-lib-angular';
-
+import { MpcInputTextComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-text/mpc-input-text.component';
+import { MpcButtonDirective } from '../../../../../projects/mpc-lib-angular/src/lib/directives/mpc-button/mpc-button.directive';
+import { MpcInputTelefoneComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-telefone/mpc-input-telefone.component';
+import { MpcFormProgressBarComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/mpc-form-progress-bar/mpc-form-progress-bar.component';
+import { MpcInputEmailComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-email/mpc-input-email.component';
+import { Endereco, MpcInputBuscaCepComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-busca-cep/mpc-input-busca-cep.component';
+import { MpcLoaderService } from '../../../../../projects/mpc-lib-angular/src/lib/components/mpc-loader/mpc-loader.service';
 @Component({
   selector: 'app-contato',
   imports: [

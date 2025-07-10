@@ -1,3 +1,30 @@
+:host {
+  /* Cores */
+  --mpc-color-text: var(--mpc-color-primary);
+  --mpc-color-error: #DC3545;
+
+  /* Fontes */
+  --mpc-font-text: var(--mpc-font-default);
+}
+
+* {
+  font-family: var(--mpc-font-text);
+  color: var(--mpc-color-text);
+  font-weight: 400;
+}
+
+#label-titulo {
+  font-weight: 600;
+}
+
+label.error {
+  color: var(--mpc-color-error) !important;
+}
+
 p {
   font-size: 14px;
+
+  &.error {
+    color: var(--mpc-color-error) !important;
+  }
 }

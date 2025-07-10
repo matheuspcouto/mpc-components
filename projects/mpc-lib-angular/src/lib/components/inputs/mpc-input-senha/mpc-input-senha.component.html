@@ -1,15 +1,17 @@
 <div [tabIndex]="tabIndex" [attr.aria-label]="ariaLabel" class="form-group">
-  <label class="form-label">Senha {{ required ? ' *' : '' }}</label>
+  <label [class.error]="errorMessage">Senha {{ required ? ' *' : '' }}</label>
 
   <div class="input-group">
     <input [id]="id" [type]="ocultarSenha ? 'password' : 'text'" class="form-control" [value]="value"
-      (input)="setValue($event)" [required]="required" [readOnly]="readonly" [style.border-color]="errorMessage ? 'red' : null"
-      (focus)="onFocus()" [disabled]="disabled" />
+      (input)="setValue($event)" [required]="required" [readOnly]="readonly" (focus)="onFocus()"
+      [disabled]="disabled" [class.error]="errorMessage" [class.success]="campoTocado && !errorMessage" />
 
     <div class="validation-icon">
       <i [class]="ocultarSenha ? 'bi bi-eye-fill' : 'bi bi-eye-slash-fill'" (click)="ocultarSenha = !ocultarSenha"></i>
     </div>
   </div>
 
-  <p class="text-danger mt-1" [style.visibility]="errorMessage ? 'visible' : 'hidden'"> {{ errorMessage }} </p>
+  <p class="mt-1" [class.error]="errorMessage" [style.visibility]="errorMessage ? 'visible' : 'hidden'">
+    {{ errorMessage }}
+  </p>
 </div>

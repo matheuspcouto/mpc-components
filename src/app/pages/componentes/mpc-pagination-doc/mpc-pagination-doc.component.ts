@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { MpcPaginationComponent } from 'mpc-lib-angular';
+import { MpcPaginationComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/mpc-pagination/mpc-pagination.component';
 
 @Component({
   selector: 'app-paginacao',
-  imports: [MpcPaginationComponent ],
+  imports: [MpcPaginationComponent],
   templateUrl: './mpc-pagination-doc.component.html',
   styleUrl: './mpc-pagination-doc.component.css'
 })

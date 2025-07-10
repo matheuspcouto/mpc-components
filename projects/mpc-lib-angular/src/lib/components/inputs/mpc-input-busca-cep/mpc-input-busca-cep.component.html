@@ -1,11 +1,13 @@
 <div [tabIndex]="tabIndex" [attr.aria-label]="ariaLabel" class="input-group">
-  <label class="form-label">CEP {{ required ? '*': ''}}</label>
+  <label [class.error]="errorMessage">CEP {{ required ? '*': ''}}</label>
 
   <div class="input-group">
     <input [id]="id" type="text" class="form-control" [value]="value" (input)="setValue($event)" (focus)="onFocus()"
-      [required]="required" [attr.maxLength]="9" [style.border-color]="errorMessage ? 'red' : null"
-      [disabled]="disabled" />
+      [required]="required" [attr.maxLength]="9" [disabled]="disabled" [class.error]="errorMessage"
+      [class.success]="campoTocado && !errorMessage" />
   </div>
 
-  <p class="text-danger mt-1" [style.visibility]="errorMessage ? 'visible' : 'hidden'"> {{ errorMessage }} </p>
+  <p class="mt-1" [class.error]="errorMessage" [style.visibility]="errorMessage ? 'visible' : 'hidden'">
+    {{ errorMessage }}
+  </p>
 </div>

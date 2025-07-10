@@ -1,10 +1,10 @@
 @if (options.length > 0) {
 <div [tabIndex]="tabIndex" [attr.aria-label]="ariaLabel" class="form-group">
-  <label class="form-label">{{ required ? label + ' *' : label }}</label>
+  <label [class.error]="errorMessage">{{ required ? label + ' *' : label }}</label>
 
   <div class="input-group">
     <select [id]="id" (change)="setValue($event.target)" class="form-select form-select-md" [disabled]="disabled"
-      [style.border-color]="errorMessage ? 'red' : null" (focus)="onFocus()">
+      (focus)="onFocus()" [class.error]="errorMessage" [class.success]="campoTocado && !errorMessage">
 
       @for (option of options; track $index) {
       <option [selected]="option.selected">
@@ -15,7 +15,9 @@
     </select>
   </div>
 
-  <p class="text-danger mt-1" [style.visibility]="errorMessage ? 'visible' : 'hidden'"> {{ errorMessage }} </p>
+  <p class="mt-1" [class.error]="errorMessage" [style.visibility]="errorMessage ? 'visible' : 'hidden'">
+    {{ errorMessage }}
+  </p>
 
 </div>
 }

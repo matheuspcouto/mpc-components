@@ -1,8 +1,11 @@
 <div [tabIndex]="tabIndex" [attr.aria-label]="ariaLabel" class="form-group">
-  <label class="form-label">{{ min ? label + ' *' : label }}</label>
+  <label [class.error]="errorMessage">{{ min ? label + ' *' : label }}</label>
 
   <input [id]="id" type="number" class="form-control" [value]="value" (input)="setValue($event)" [readOnly]="readonly"
-    (focus)="onFocus()" [required]="min" [style.border-color]="errorMessage ? 'red' : null" [disabled]="disabled" />
+    (focus)="onFocus()" [required]="min" [disabled]="disabled" [class.error]="errorMessage"
+    [class.success]="campoTocado && !errorMessage" />
 
-  <p class="text-danger mt-1" [style.visibility]="errorMessage ? 'visible' : 'hidden'"> {{ errorMessage }} </p>
+  <p class="mt-1" [class.error]="errorMessage" [style.visibility]="errorMessage ? 'visible' : 'hidden'">
+    {{ errorMessage }}
+  </p>
 </div>

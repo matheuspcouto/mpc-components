@@ -94,5 +94,5 @@ export class AppComponent implements OnInit {
 // TODO: Tela de Login com guard e renderizar só o componente de login
 // TODO: Tela de Cadastro
 // TODO: Adicionar Pagina de Pipes
-// TODO: Sobrescrever --cores e --fontes na lib e ajustar hovers
+// TODO: Ajustar imports da lib
 // TODO: Padronizar documentações

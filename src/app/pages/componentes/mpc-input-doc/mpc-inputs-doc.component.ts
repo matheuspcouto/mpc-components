@@ -1,14 +1,17 @@
 import { Component, inject } from '@angular/core';
 import { NonNullableFormBuilder } from '@angular/forms';
-import {
-  MpcInputTextComponent, MpcInputNumberComponent, MpcInputDateComponent,
-  MpcInputEmailComponent, MpcInputSenhaComponent, MpcInputTelefoneComponent,
-  MpcInputCpfcnpjComponent, MpcInputBuscaCepComponent, MpcInputTextAreaComponent,
-  MpcInputRadioComponent, MpcInputSelectComponent,
-  SelectOption,
-  RadioOption,
-  Endereco
-} from 'mpc-lib-angular';
+import { MpcInputTextComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-text/mpc-input-text.component';
+import { MpcInputNumberComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-number/mpc-input-number.component';
+import { MpcInputDateComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-date/mpc-input-date.component';
+import { MpcInputEmailComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-email/mpc-input-email.component';
+import { MpcInputSenhaComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-senha/mpc-input-senha.component';
+import { MpcInputTelefoneComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-telefone/mpc-input-telefone.component';
+import { MpcInputCpfcnpjComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-cpfcnpj/mpc-input-cpfcnpj.component';
+import { MpcInputBuscaCepComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-busca-cep/mpc-input-busca-cep.component';
+import { MpcInputTextAreaComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-text-area/mpc-input-text-area.component';
+import { MpcInputRadioComponent, RadioOption } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-radio/mpc-input-radio.component';
+import { MpcInputSelectComponent, SelectOption } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-select/mpc-input-select.component';
+import { Endereco } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-busca-cep/mpc-input-busca-cep.component';
 
 @Component({
   selector: 'app-mpc-inputs-doc',

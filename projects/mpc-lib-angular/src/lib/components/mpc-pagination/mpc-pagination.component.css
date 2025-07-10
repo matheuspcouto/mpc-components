@@ -1,3 +1,14 @@
+:host {
+  /* Cores */
+  --mpc-color-navbuttons: var(--mpc-color-primary);
+  --mpc-color-text-active: var(--mpc-color-primary);
+  --mpc-color-border-active: var(--mpc-color-primary);
+  --mpc-color-text-disabled: var(--mpc-color-tertiary);
+
+  /* Fontes */
+  --mpc-font-pagination: var(--mpc-font-subtitle);
+}
+
 /* Container principal */
 .mpc-pagination-container {
   display: flex;
@@ -12,6 +23,7 @@
     align-items: center;
     gap: 0.5rem;
     font-size: 0.875rem;
+    color: var(--mpc-color-text-active);
 
     select {
       min-width: 70px;
@@ -34,6 +46,7 @@
       .nav-buttons {
         display: flex;
         gap: 0.25rem;
+        color: var(--mpc-color-navbuttons);
 
         .btn {
           border: none !important;
@@ -47,17 +60,24 @@
         display: flex;
         align-items: center;
         gap: 0.25rem;
+        font-family: var(--mpc-font-pagination);
+        color: var(--mpc-color-text-disabled);
 
         .btn {
           border: none !important;
           border-bottom: 2px solid transparent !important;
           border-radius: 0;
           background-color: transparent;
-          color: inherit;
 
           &.active {
-            border-bottom: 2px solid !important;
+            border-bottom: 2px solid var(--mpc-color-border-active) !important;
+            color: var(--mpc-color-text-active);
           }
+        }
+
+        .btn:hover:not(.active) {
+          color: var(--mpc-color-text-active);
+          border-bottom: 2px solid var(--mpc-color-border-active) !important;
         }
 
         /* Reticências */

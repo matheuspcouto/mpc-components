@@ -14,8 +14,9 @@ import { InscricaoService } from '../service/inscricao.service';
 import { Inscricao } from '../model/inscricao.model';
 import { take } from 'rxjs';
 import { Rotas } from '../../../shared/enums/rotas-enum';
-import { MpcInputPesquisaComponent } from 'mpc-lib-angular';
 import { ToastrService } from 'ngx-toastr';
+import { MpcInputPesquisaComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-pesquisa/mpc-input-pesquisa.component';
+
 @Component({
     selector: 'app-pesquisa',
     imports: [ReactiveFormsModule, FormsModule, MpcInputPesquisaComponent],

@@ -74,6 +74,12 @@ section {
   margin-top: 90px;
 
   form {
+    /* Inputs */
+    --mpc-color-text: var(--color-primary);
+    --mpc-color-border: var(--color-tertiary);
+    --mpc-color-border-success: var(--color-secondary);
+    --mpc-font-text: var(--font-subtitle);
+    
     .btn-proximo {
       background-color: var(--mpc-color-primary);
       color: white;

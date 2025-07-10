@@ -1,17 +1,20 @@
 @if (options.length > 0) {
 <div [tabIndex]="tabIndex" [attr.aria-label]="ariaLabel" class="form-group">
-  <label class="form-label">{{ required ? label + ' *' : label }}</label>
+  <label id="label-titulo" [class.error]="errorMessage">{{ required ? label + ' *' : label }}</label>
 
   <div class="input-group">
     @for (option of options; track $index) {
     <label class="p-3">
       <input [id]="id" (focus)="onFocus()" type="radio" (change)="setValue(option)" [checked]="option.checked"
-        [required]="required" [readOnly]="readonly" [disabled]="disabled" /> {{ option.label }}
+        [required]="required" [readOnly]="readonly" [disabled]="disabled" [class.error]="errorMessage"
+        [class.success]="campoTocado && !errorMessage" /> {{ option.label }}
     </label>
     }
   </div>
 
-  <p class="text-danger mt-1" [style.visibility]="errorMessage ? 'visible' : 'hidden'"> {{ errorMessage }} </p>
+  <p class="mt-1" [class.error]="errorMessage" [style.visibility]="errorMessage ? 'visible' : 'hidden'">
+    {{ errorMessage }}
+  </p>
 
 </div>
 }

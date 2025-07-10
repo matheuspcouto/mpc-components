@@ -2,21 +2,20 @@
  * @Componente MpcPaginationComponent
  * Este componente exibe uma barra de navegação de páginas com suporte a seleção de itens por página, navegação e acessibilidade.
  *
- * @Input id {string} (opcional): Id do componente para acessibilidade.
- * @Input tabIndex {number} (opcional): Índice de tabulação do componente.
- * @Input ariaLabel {string} (opcional): Label para acessibilidade.
- * @Input totalItens {number}: Número total de itens a serem paginados.
- * @Input mostrarSeletorItensPorPagina {boolean} (opcional): Indica se deve mostrar o seletor de itens por página (padrão: true).
- * @Input textColor {string} (opcional): Cor do texto dos elementos da paginação.
+ * @Propriedades
+ * Input totalItens {number}: Número total de itens a serem paginados.
+ * Input mostrarSeletorItensPorPagina {boolean} (opcional): Indica se deve mostrar o seletor de itens por página (padrão: true).
  *
- * @Output indices: Emite um objeto { indiceInicial, indiceFinal } indicando o range de itens exibidos na página atual.
+ * @Eventos
+ * Output indices: Emite um objeto { indiceInicial, indiceFinal } indicando o range de itens exibidos na página atual.
  *
  * @author Matheus Pimentel Do Couto
  * @created 24/06/2025
- * @updated 04/07/2025
+ * @updated 10/07/2025
  */
 
 import { Component, Input, Output, EventEmitter, OnInit, AfterViewInit, OnChanges } from '@angular/core';
+import { AccessibilityInputs } from '../../../shared/accessibility-inputs';
 
 export interface IndicesPaginacao {
   indiceInicial: number;
@@ -29,12 +28,7 @@ export interface IndicesPaginacao {
   templateUrl: './mpc-pagination.component.html',
   styleUrl: './mpc-pagination.component.css'
 })
-export class MpcPaginationComponent implements OnInit, AfterViewInit, OnChanges {
-
-  // Acessibilidade
-  @Input() id?: string = '';
-  @Input() tabIndex?: number = 0;
-  @Input() ariaLabel?: string = 'Navegação de páginas';
+export class MpcPaginationComponent extends AccessibilityInputs implements OnInit, AfterViewInit, OnChanges {
 
   // Configurações de paginação
   @Input() totalItens: number = 0;
@@ -43,9 +37,6 @@ export class MpcPaginationComponent implements OnInit, AfterViewInit, OnChanges 
   paginaAtual: number = 1;
   maxPaginasVisiveis: number = 5;
   opcoesSeletorItensPorPagina: number[] = [5, 10, 25, 50, 100];
-
-  // Estilos
-  @Input() textColor?: string = '';
 
   @Output() indices: EventEmitter<IndicesPaginacao> = new EventEmitter();
 

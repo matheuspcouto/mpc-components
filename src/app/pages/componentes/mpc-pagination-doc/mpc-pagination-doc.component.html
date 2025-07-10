@@ -8,7 +8,8 @@
         <p>MPC <span>Pagination</span></p>
       </div>
       <h5>
-        <strong>Descrição:</strong> O <code>mpc-pagination</code> é um componente de paginação customizado que exibe uma barra de navegação de páginas com suporte a seleção de itens por página, navegação e acessibilidade.
+        <strong>Descrição:</strong> O <code>mpc-pagination</code> é um componente de paginação customizado que exibe uma
+        barra de navegação de páginas com suporte a seleção de itens por página, navegação e acessibilidade.
       </h5>
       <h5>
         <strong>Propriedades:</strong>
@@ -16,10 +17,15 @@
           <li><strong>&#64;Input id</strong> <em>(string, opcional)</em>: Id do componente para acessibilidade.</li>
           <li><strong>&#64;Input tabIndex</strong> <em>(number, opcional)</em>: Índice de tabulação do componente.</li>
           <li><strong>&#64;Input ariaLabel</strong> <em>(string, opcional)</em>: Label para acessibilidade.</li>
-          <li><strong>&#64;Input totalItens</strong> <em>(number, obrigatório)</em>: Número total de itens a serem paginados.</li>
-          <li><strong>&#64;Input mostrarSeletorItensPorPagina</strong> <em>(boolean, opcional)</em>: Indica se deve mostrar o seletor de itens por página (padrão: true).</li>
-          <li><strong>&#64;Input textColor</strong> <em>(string, opcional)</em>: Cor do texto dos elementos da paginação.</li>
-          <li><strong>&#64;Output indices</strong>: Emite um objeto <code>{{ '{' }} indiceInicial, indiceFinal {{ '}' }}</code> indicando o range de itens exibidos na página atual.</li>
+          <li><strong>&#64;Input totalItens</strong> <em>(number, obrigatório)</em>: Número total de itens a serem
+            paginados.</li>
+          <li><strong>&#64;Input mostrarSeletorItensPorPagina</strong> <em>(boolean, opcional)</em>: Indica se deve
+            mostrar o seletor de itens por página (padrão: true).</li>
+          <li><strong>&#64;Input textColor</strong> <em>(string, opcional)</em>: Cor do texto dos elementos da
+            paginação.</li>
+          <li><strong>&#64;Output indices</strong>: Emite um objeto
+            <code>{{ '{' }} indiceInicial, indiceFinal {{ '}' }}</code> indicando o range de itens exibidos na página
+            atual.</li>
         </ul>
       </h5>
       <div class="mb-3">
@@ -34,7 +40,7 @@
       <div class="row mb-5">
         <h5><strong>Veja como fica o componente:</strong></h5>
         <div class="col-12 d-flex justify-content-center">
-          <mpc-pagination textColor="var(--mpc-color-primary)" [totalItens]="itensTotais.length"
+          <mpc-pagination id="pagination-exemplo" [totalItens]="itensTotais.length"
             (indices)="definirIndiceLista($event)" [mostrarSeletorItensPorPagina]="true"></mpc-pagination>
         </div>
       </div>

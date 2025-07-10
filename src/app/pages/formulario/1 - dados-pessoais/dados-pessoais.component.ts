@@ -12,13 +12,16 @@ import { Rotas } from '../../../shared/enums/rotas-enum';
 import { InscricaoService } from '../service/inscricao.service';
 import { FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { ErrorService } from '../../../shared/error/error.service';
-import {
-  MpcInputRadioComponent, RadioOption, MpcInputDateComponent,
-  MpcInputSelectComponent, SelectOption, MpcInputTextComponent, MpcInputNumberComponent,
-  MpcInputCpfcnpjComponent, MpcInputTextAreaComponent, MpcLoaderService, MpcButtonDirective,
-  MpcFormProgressBarComponent
-} from 'mpc-lib-angular';
-
+import { MpcInputDateComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-date/mpc-input-date.component';
+import { MpcInputRadioComponent, RadioOption } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-radio/mpc-input-radio.component';
+import { MpcButtonDirective } from '../../../../../projects/mpc-lib-angular/src/lib/directives/mpc-button/mpc-button.directive';
+import { MpcInputSelectComponent, SelectOption } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-select/mpc-input-select.component';
+import { MpcInputTextComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-text/mpc-input-text.component';
+import { MpcInputNumberComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-number/mpc-input-number.component';
+import { MpcInputCpfcnpjComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-cpfcnpj/mpc-input-cpfcnpj.component';
+import { MpcInputTextAreaComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-text-area/mpc-input-text-area.component';
+import { MpcFormProgressBarComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/mpc-form-progress-bar/mpc-form-progress-bar.component';
+import { MpcLoaderService } from '../../../../../projects/mpc-lib-angular/src/lib/components/mpc-loader/mpc-loader.service';
 
 @Component({
   selector: 'app-dados-pessoais',
