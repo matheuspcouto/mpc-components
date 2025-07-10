@@ -2,15 +2,16 @@
  * @Diretiva MpcButtonDirective
  * Esta diretiva transforma qualquer elemento em um botão estilizado, permitindo a inclusão de ícones (esquerda/direita) e personalização via propriedades.
  *
- * Propriedades:
+ * @Propriedades
  * - posicaoIcone: 'esquerda' | 'direita' (padrão: 'direita')
  * - icone: string (classes do Bootstrap Icons ou outra biblioteca)
  *
- * Exemplo de uso:
+ * @Exemplo de uso:
  * <button mpcButton [icone]="'bi bi-check'" [posicaoIcone]="'esquerda'" texto="Salvar"></button>
  *
  * @author Matheus Pimentel Do Couto
  * @created 04/07/2025
+ * @updated 10/07/2025
  */
 
 import { Directive, Input, ElementRef, Renderer2, OnInit, OnChanges, SimpleChanges, inject } from '@angular/core';
@@ -23,6 +24,7 @@ enum PosicoesIcone {
     DIREITA = 'direita',
 }
 
+// TODO: Talvez transformar em um component para facilitar a utilização
 @Directive({
     selector: '[mpcButton]',
     standalone: true

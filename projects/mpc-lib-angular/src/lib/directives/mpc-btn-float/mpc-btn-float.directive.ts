@@ -15,6 +15,7 @@
 
 import { Directive, Input, ElementRef, Renderer2, OnInit, inject } from '@angular/core';
 
+// TODO: Talvez transformar em um component para facilitar a utilização
 @Directive({
     selector: '[mpcBtnFloat]',
     standalone: true

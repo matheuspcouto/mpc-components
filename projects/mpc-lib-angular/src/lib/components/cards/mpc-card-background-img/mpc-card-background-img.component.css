@@ -1,6 +1,21 @@
+:host {
+  /* Cores */
+  --mpc-color-text-card-bg-img: white;
+  --mpc-color-bar-card-bg-img: var(--mpc-color-primary);
+
+  /* Fontes */
+  --mpc-font-title-card-bg-img: var(--mpc-font-title);
+  --mpc-font-subtitle-card-bg-img: var(--mpc-font-subtitle);
+  --mpc-font-description-card-bg-img: var(--mpc-font-default);
+
+  /* Imagem de fundo */
+  --mpc-img-card-bg: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/assets/img/no-image.jpg');
+}
+
 .card-background-img {
   background-size: cover;
   background-position: center;
+  background-image: var(--mpc-img-card-bg);
   height: 500px;
   width: 500px;
   padding: 30px;
@@ -10,19 +25,29 @@
   display: flex;
   flex-direction: column;
   justify-content: end;
+  color: var(--mpc-color-text-card-bg-img);
 
   h3 {
+    font-family: var(--mpc-font-subtitle-card-bg-img);
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 5px;
   }
 
   .titulo {
-    border-bottom: 2px solid;
+    border-bottom: 2px solid var(--mpc-color-bar-card-bg-img);
+    font-family: var(--mpc-font-title-card-bg-img);
     font-size: clamp(2em, 2em + 1vw, 4em);
     font-weight: 600;
     margin-bottom: 15px;
     align-self: self-start;
+  }
+
+  p {
+    font-family: var(--mpc-font-description-card-bg-img);
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 15px;
   }
 }
 

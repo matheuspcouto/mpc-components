@@ -9,7 +9,7 @@
   list-style: none;
   color: gray; /* Cor do texto desabilitado */
   background-color: transparent;
-  font-family: var(--mpc-font-secondary);
+  font-family: var(--mpc-font-subtitle);
 
   .nav-link {
     margin: 0 10px;

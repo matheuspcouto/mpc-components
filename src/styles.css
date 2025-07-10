@@ -4,24 +4,33 @@
 /* Importação de bootstrap-icons */
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
 
-:root {
-  /* Fontes: Essas fontes também são utilizadas pelos componentes da lib */
-  --mpc-font-title: 'Potential', sans-serif;
-  --mpc-font-default: "Poppins", sans-serif;
-  --mpc-font-secondary: "Inter", sans-serif;
-
-  /* Cores: Essas cores também são utilizadas pelos componentes da lib */
-  --mpc-color-primary: #0E2749;
-  --mpc-color-secondary: #149DDD;
-  --mpc-color-tertiary: gray;
-
-  scroll-behavior: smooth;
-}
-
 /*--------------------------------------------------------------
 # Geral
 --------------------------------------------------------------*/
-html {
+
+* {
+  /* Fontes do app */
+  --font-title: 'Potential', sans-serif;
+  --font-default: "Poppins", sans-serif;
+  --font-subtitle: "Inter", sans-serif;
+
+  /* Definição de fontes da mpc-lib-angular */
+  --mpc-font-title: var(--font-title);
+  --mpc-font-default: var(--font-default);
+  --mpc-font-subtitle: var(--font-subtitle);
+
+  /* Cores do app */
+  --color-primary: #0E2749;
+  --color-secondary: #149DDD;
+  --color-tertiary: gray;
+
+  /* Definição de cores da mpc-lib-angular */
+  --mpc-color-primary: var(--color-primary);
+  --mpc-color-secondary: var(--color-secondary);
+  --mpc-color-tertiary: var(--color-tertiary);
+
+  scroll-behavior: smooth;
+
   -ms-overflow-style: none;
   /* IE and Edge */
   scrollbar-width: none;
@@ -33,23 +42,12 @@ html {
 }
 
 body {
-  font-family: var(--mpc-font-default);
-  color: var(--mpc-color-secondary);
+  font-family: var(--font-default);
   overflow: auto !important;
 }
 
-a {
-  color: var(--mpc-color-primary);
-  text-decoration: none !important;
-
-  &:hover {
-    color: var(--mpc-color-primary);
-    text-decoration: none;
-  }
-}
-
 /* Media Queries for Desktop & Mobile */
-@media (max-width: 768px) {
+@media (max-width: 991.98px) {
   .mobile {
     display: flex !important;
   }
@@ -59,7 +57,7 @@ a {
   }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 992px) {
   .mobile {
     display: none !important;
   }

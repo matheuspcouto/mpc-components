@@ -1,9 +1,23 @@
+:host {
+    /* Fontes */
+    --mpc-font-title-page-divider-img: var(--mpc-font-title);
+    --mpc-font-subtitle-page-divider-img: var(--mpc-font-subtitle);
+
+    /* Cores */
+    --mpc-color-title-page-divider-img: var(--mpc-color-primary);
+    --mpc-color-subtitle-page-divider-img: var(--mpc-color-secondary);
+
+    /* Imagem de fundo */
+    --mpc-img-background-page-divider: url('/assets/img/no-image.jpg');
+}
+
 /*--------------------------------------------------------------
 # Page Divider Img Section
 --------------------------------------------------------------*/
 .page-divider-img {
     background-size: cover;
     background-position: center;
+    background-image: var(--mpc-img-background-page-divider);
     padding: 100px 0;
 
     @media screen and (max-width: 991.98px) {
@@ -21,16 +35,16 @@
 
         h2,
         p {
-            font-family: var(--mpc-font-title) !important;
+            font-family: var(--mpc-font-title-page-divider-img) !important;
             font-size: 2rem;
         }
 
         p {
-            color: var(--mpc-color-primary);
+            color: var(--mpc-color-subtitle-page-divider-img);
         }
 
         h2 {
-            color: white;
+            color: var(--mpc-color-title-page-divider-img);
         }
     }
 }

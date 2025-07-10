@@ -1,6 +1,27 @@
+:host {
+  /* Timeline */
+  --mpc-color-border-timeline-card-evento: var(--mpc-color-primary);
+  --mpc-color-bg-timeline-card-evento: var(--mpc-color-primary);
+
+  /* Data */
+  --mpc-color-bg-data-card-evento: var(--mpc-color-primary);
+  --mpc-color-text-data-card-evento: white;
+  --mpc-font-text-data-card-evento: var(--mpc-font-title);
+
+  /* Card */
+  --mpc-color-bg-card-evento: white;
+  --mpc-color-title-card-evento: var(--mpc-color-primary);
+  --mpc-color-subtitle-card-evento: var(--mpc-color-primary);
+  --mpc-color-description-card-evento: var(--mpc-color-tertiary);
+
+  --mpc-font-title-card-evento: var(--mpc-font-subtitle);
+  --mpc-font-subtitle-card-evento: var(--mpc-font-subtitle);
+  --mpc-font-description-card-evento: var(--mpc-font-default);
+}
+
 .card-box {
   padding: 1rem;
-  border-left: 2px solid;
+  border-left: 2px solid var(--mpc-color-border-timeline-card-evento);
 
   .card-timeline {
     position: relative;
@@ -13,8 +34,8 @@
       border-radius: 50%;
       left: -25px;
       top: 45%;
-      background: white;
-      border: 2px solid
+      background: var(--mpc-color-bg-timeline-card-evento);
+      border: 2px solid var(--mpc-color-border-timeline-card-evento);
     }
   }
 
@@ -25,6 +46,7 @@
     display: flex;
     align-items: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    background: var(--mpc-color-bg-card-evento);
 
     .card-evento-data {
       display: flex;
@@ -35,6 +57,9 @@
       min-height: 4rem;
       border-radius: 50%;
       margin-right: 15px;
+      background: var(--mpc-color-bg-data-card-evento);
+      color: var(--mpc-color-text-data-card-evento);
+      font-family: var(--mpc-font-text-data-card-evento);
 
       .evento-dia {
         font-weight: 500;
@@ -53,11 +78,14 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: flex-start;
+      color: var(--mpc-color-text-card-evento);
 
       h3 {
         font-size: 18px;
         font-weight: 700;
         margin-bottom: 0;
+        font-family: var(--mpc-font-title-card-evento);
+        color: var(--mpc-color-title-card-evento);
       }
 
       h4 {
@@ -65,6 +93,8 @@
         font-style: italic;
         font-weight: 400;
         margin-top: 0.5rem;
+        color: var(--mpc-color-subtitle-card-evento);
+        font-family: var(--mpc-font-subtitle-card-evento);
       }
 
       p {
@@ -73,6 +103,8 @@
         line-height: 24px;
         font-size: 14px;
         margin-top: 5px;
+        font-family: var(--mpc-font-description-card-evento);
+        color: var(--mpc-color-description-card-evento);
       }
     }
   }

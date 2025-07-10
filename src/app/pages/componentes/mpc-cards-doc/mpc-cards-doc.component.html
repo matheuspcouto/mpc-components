@@ -1,7 +1,7 @@
 <main>
 
   <!-- ======= MpcCard INÍCIO ======= -->
-  <section id="cards">
+  <section id="cards-verticais-horizontais" class="cards-verticais-horizontais">
     <div class="container">
 
       <div class="section-header">
@@ -83,89 +83,46 @@
         </div>
 
         <div class="col-lg-4">
-          <mpc-card titulo="Card 1" subtitulo="Layout Vertical" descricaoUm="Este é um card com layout vertical"
+          <mpc-card id="card-1" titulo="Card 1" subtitulo="Layout Vertical"
+            descricaoUm="Este é um card com layout vertical"
             descricaoDois="Ideal para exibir informações em formato de coluna" imagem="/assets/img/no-image.jpg"
             [links]="[&#123;icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'&#125;]"
-            layout="vertical" [estilos]="{
-              background: 'white',
-              textColor: 'var(--mpc-color-primary)',
-              borderColor: 'var(--mpc-color-primary)',
-              backgroundLinks: 'var(--mpc-color-primary)',
-              linksColor: 'white'
-            }">
-          </mpc-card>
+            layout="vertical" />
         </div>
 
         <div class="col-lg-4">
-          <mpc-card titulo="Card 2" subtitulo="Com Links" descricaoUm="Este card possui múltiplos links"
+          <mpc-card id="card-2" titulo="Card 2" subtitulo="Com Links" descricaoUm="Este card possui múltiplos links"
             descricaoDois="Você pode adicionar quantos links precisar" imagem="/assets/img/no-image.jpg" [links]="[
               &#123;icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'&#125;,
               &#123;icone: 'bi bi-github', url: 'https://github.com/matheuspcouto'&#125;
-            ]" layout="vertical" [estilos]="{
-              background: 'var(--mpc-color-primary)',
-              textColor: 'white',
-              borderColor: 'var(--mpc-color-primary)',
-              backgroundLinks: 'var(--mpc-color-primary)',
-              linksColor: 'white'
-            }">
-          </mpc-card>
+            ]" layout="vertical" />
         </div>
 
         <div class="col-lg-4">
-          <mpc-card titulo="Card 3" subtitulo="Sem Links" descricaoUm="Este card não possui links"
-            descricaoDois="Apenas informações básicas" imagem="/assets/img/no-image.jpg" layout="vertical" [estilos]="{
-              background: 'var(--mpc-color-secondary)',
-              textColor: 'white',
-              borderColor: 'var(--mpc-color-secondary)',
-              backgroundLinks: 'var(--mpc-color-secondary)',
-              linksColor: 'white'
-            }">
-          </mpc-card>
+          <mpc-card id="card-3" titulo="Card 3" subtitulo="Sem Links" descricaoUm="Este card não possui links"
+            descricaoDois="Apenas informações básicas" imagem="/assets/img/no-image.jpg" layout="vertical" />
         </div>
 
         <div class="col-lg-12">
-          <mpc-card titulo="Card 4" subtitulo="Layout Horizontal" layout="horizontal"
+          <mpc-card id="card-4" titulo="Card 4" subtitulo="Layout Horizontal" layout="horizontal"
             descricaoUm="Este card tem layout horizontal, ideal para exibir informações em telas desktop."
-            imagem="/assets/img/no-image.jpg" [estilos]="{
-              background: 'white',
-              textColor: 'var(--mpc-color-primary)',
-              borderColor: 'var(--mpc-color-primary)',
-              backgroundLinks: 'var(--mpc-color-primary)',
-              linksColor: 'white',
-              barColor: 'var(--mpc-color-primary)'
-            }" [links]="[{icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'}]">
-          </mpc-card>
+            imagem="/assets/img/no-image.jpg"
+            [links]="[{icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'}]" />
         </div>
 
         <div class="col-lg-12">
-          <mpc-card titulo="Card 5" subtitulo="Com Estilos Personalizados" layout="horizontal"
+          <mpc-card id="card-5" titulo="Card 5" subtitulo="Com Estilos Personalizados" layout="horizontal"
             descricaoUm="Este card demonstra o uso de estilos personalizados para cores e aparência."
-            imagem="/assets/img/no-image.jpg" [estilos]="{
-              background: 'var(--mpc-color-primary)',
-              textColor: 'white',
-              borderColor: 'var(--mpc-color-primary)',
-              backgroundLinks: 'white',
-              linksColor: 'var(--mpc-color-primary)',
-              barColor: 'var(--mpc-color-secondary)'
-            }" [links]="[
+            imagem="/assets/img/no-image.jpg" [links]="[
               {icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'},
               {icone: 'bi bi-github', url: 'https://github.com/matheuspcouto'}
-            ]">
-          </mpc-card>
+            ]" />
         </div>
 
         <div class="col-lg-12">
-          <mpc-card titulo="Card 6" subtitulo="Com Estilos Personalizados" layout="horizontal"
+          <mpc-card id="card-6" titulo="Card 6" subtitulo="Com Estilos Personalizados" layout="horizontal"
             descricaoUm="Este card demonstra o uso de estilos personalizados para cores e aparência."
-            imagem="/assets/img/no-image.jpg" [estilos]="{
-              background: 'var(--mpc-color-secondary)',
-              textColor: 'white',
-              borderColor: 'var(--mpc-color-secondary)',
-              backgroundLinks: 'white',
-              linksColor: 'var(--mpc-color-secondary)',
-              barColor: 'white'
-            }">
-          </mpc-card>
+            imagem="/assets/img/no-image.jpg" />
         </div>
 
       </div>
@@ -249,22 +206,14 @@
         </div>
 
         <div class="col-lg-6">
-          <mpc-card-background-img titulo="Card 1" subtitulo="com imagem de fundo"
-            descricao="Este é um card com imagem de fundo e gradiente escuro para melhor legibilidade" [estilos]="{
-              textColor: 'white',
-              barColor: 'var(--mpc-color-primary)'
-            }" imagemFundo="/assets/img/home/mountain.jpg" id="card-bg-1" [tabIndex]="0" ariaLabel="Card 1">
-          </mpc-card-background-img>
+          <mpc-card-background-img titulo="Card 1" subtitulo="com imagem de fundo" id="card-bg-1"
+            descricao="Este é um card com imagem de fundo e gradiente escuro para melhor legibilidade" [tabIndex]="0"
+            ariaLabel="Card 1" (acao)="onMenuCardClick()" />
         </div>
 
         <div class="col-lg-6">
-          <mpc-card-background-img titulo="Card 2" subtitulo="com cores personalizadas"
-            descricao="Este card demonstra o uso de cores personalizadas para texto e barra"
-            imagemFundo="/assets/img/no-image.jpg" id="card-bg-2" [estilos]="{
-              textColor: 'white',
-              barColor: 'var(--mpc-color-secondary)'
-            }" [tabIndex]="0" ariaLabel="Card 2">
-          </mpc-card-background-img>
+          <mpc-card-background-img titulo="Card 2" subtitulo="com cores personalizadas" id="card-bg-2"
+            descricao="Este card demonstra o uso de cores personalizadas para texto e barra" [tabIndex]="0" />
         </div>
 
       </div>
@@ -348,35 +297,18 @@
         </div>
 
         <div class="col-lg-4">
-          <mpc-card-menu icone="bi bi-linkedin" titulo="Linkedin" descricao="ir para o linkedin" [estilos]="{
-              background: 'transparent',
-              textColor: 'var(--mpc-color-primary)',
-              iconeBackground: 'var(--mpc-color-primary)',
-              iconeColor: 'white'
-            }" (acao)="onMenuCardClick()" id="card-menu-1" [tabIndex]="0" ariaLabel="Card de Menu 1">
-          </mpc-card-menu>
+          <mpc-card-menu icone="bi bi-linkedin" titulo="Linkedin" descricao="ir para o linkedin"
+            (acao)="onMenuCardClick()" id="card-menu-1" [tabIndex]="0" ariaLabel="Card de Menu 1" />
         </div>
 
         <div class="col-lg-4">
           <mpc-card-menu icone="bi bi-github" titulo="Github" descricao="ir para o github" (acao)="onMenuCardClick()"
-            id="card-menu-2" [tabIndex]="0" ariaLabel="Card de Menu 2" [estilos]="{
-              background: 'transparent',
-              textColor: 'var(--mpc-color-secondary)',
-              iconeBackground: 'var(--mpc-color-secondary)',
-              iconeColor: 'white'
-            }">
-          </mpc-card-menu>
+            id="card-menu-2" [tabIndex]="0" ariaLabel="Card de Menu 2" />
         </div>
 
         <div class="col-lg-4">
           <mpc-card-menu icone="bi bi-instagram" titulo="Instagram" descricao="ir para o instagram"
-            (acao)="onMenuCardClick()" id="card-menu-3" [tabIndex]="0" ariaLabel="Card de Menu 3" [estilos]="{
-              background: 'transparent',
-              textColor: 'var(--mpc-color-tertiary)',
-              iconeBackground: 'var(--mpc-color-tertiary)',
-              iconeColor: 'white'
-            }">
-          </mpc-card-menu>
+            (acao)="onMenuCardClick()" id="card-menu-3" [tabIndex]="0" ariaLabel="Card de Menu 3" />
         </div>
 
       </div>
@@ -465,16 +397,9 @@
         </div>
 
         @for (i of [1, 2, 3]; track i) {
-        <mpc-card-evento [dia]="i.toString()" mes="JUN" [titulo]="'Card de Evento ' + i" [subtitulo]="'Subtítulo ' + i"
-          [descricao]="'Descrição ' + i" id="evento-1" [tabIndex]="0"
-          [ariaLabel]="'Evento Especial em ' + i + ' de Junho'" [estilos]="{
-            background: 'transparent',
-            textColor: 'var(--mpc-color-primary)',
-            borderColor: 'var(--mpc-color-primary)',
-            eventoBackground: 'var(--mpc-color-primary)',
-            eventoColor: 'white'
-          }">
-        </mpc-card-evento>
+        <mpc-card-evento class="cards-evento" [dia]="i.toString()" mes="JUN" [titulo]="'Card de Evento ' + i"
+          [subtitulo]="'Subtítulo ' + i" [descricao]="'Descrição ' + i" id="evento-1" [tabIndex]="0"
+          [ariaLabel]="'Evento Especial em ' + i + ' de Junho'" />
         }
       </div>
 

@@ -1,18 +1,18 @@
-:root {
-
+:host {
   /* Cores */
-  --mpc-bg-card: var(--mpc-bg-card, white);
-  --mpc-border-color: var(--mpc-border-color, var(--mpc-color-primary));
-  --mpc-bg-links: var(--mpc-bg-links, var(--mpc-color-primary));
-  --mpc-color-links: var(--mpc-color-links, var(--mpc-color-white));
-  --mpc-color-text-title: var(--mpc-color-text-title, var(--mpc-color-primary));
-  --mpc-color-text-subtitle: var(--mpc-color-text-subtitle, var(--mpc-color-primary));
-  --mpc-color-bar: var(--mpc-color-bar, var(--mpc-color-primary));
+  --mpc-bg-card: white;
+  --mpc-border-color-card: var(--mpc-color-primary);
+  --mpc-bg-links-card: var(--mpc-color-primary);
+  --mpc-color-links-card: white;
+  --mpc-color-text-title-card: var(--mpc-color-primary);
+  --mpc-color-text-subtitle-card: var(--mpc-color-primary);
+  --mpc-color-text-description-card: var(--mpc-color-primary);
+  --mpc-color-bar-card: var(--mpc-color-primary);
 
   /* Fontes */
-  --mpc-font-title: var(--mpc-font-title, var(--mpc-font-default));
-  --mpc-font-subtitle: var(--mpc-font-subtitle, var(--mpc-font-secondary));
-  --mpc-font-description: var(--mpc-font-description, var(--mpc-font-default));
+  --mpc-font-title-card: var(--mpc-font-title);
+  --mpc-font-subtitle-card: var(--mpc-font-subtitle);
+  --mpc-font-description-card: var(--mpc-font-default);
 }
 
 /*--------------------------------------------------------------
@@ -26,8 +26,8 @@
   box-shadow: 0px 0 30px rgba(55, 55, 63, 0.08);
   transition: 0.3s;
   border-radius: 5px;
-  border-bottom: 4px solid var(--mpc-border-color);
-  border-top: 4px solid var(--mpc-border-color);
+  border-bottom: 4px solid var(--mpc-border-color-card);
+  border-top: 4px solid var(--mpc-border-color-card);
   background: var(--mpc-bg-card);
 
   .card-header {
@@ -54,7 +54,7 @@
       transition: 0.5s;
       max-width: 60px;
       z-index: 2;
-      background: var(--mpc-bg-links);
+      background: var(--mpc-bg-links-card);
 
       a {
         transition: color 0.3s;
@@ -62,11 +62,19 @@
         display: block;
         line-height: 0;
         text-align: center;
-        color: var(--mpc-color-links);
+        color: var(--mpc-color-links-card);
       }
 
       i {
         font-size: 18px;
+      }
+
+      &:hover {
+        background: var(--mpc-color-links-card);
+
+        a {
+          color: var(--mpc-bg-links-card);
+        }
       }
     }
   }
@@ -78,37 +86,30 @@
     .card-info {
       padding: 1rem 1rem 0;
 
-      h4,
       h3 {
-        color: var(--mpc-color-text-title);
         font-weight: 700;
         font-size: 20px;
         margin-bottom: 0.5rem;
-        font-family: var(--mpc-font-title);
+        font-family: var(--mpc-font-title-card);
+        color: var(--mpc-color-text-title-card);
       }
 
       h4 {
         margin-bottom: 1.5rem;
-        color: var(--mpc-color-text-subtitle);
-        font-family: var(--mpc-font-subtitle);
+        font-weight: 700;
+        font-size: 20px;
+        color: var(--mpc-color-text-subtitle-card);
+        font-family: var(--mpc-font-subtitle-card);
       }
 
       p {
-        color: var(--mpc-color-text-description);
+        color: var(--mpc-color-text-description-card);
         font-style: italic;
         font-size: 15px;
         line-height: 26px;
-        font-family: var(--mpc-font-description);
+        font-family: var(--mpc-font-description-card);
       }
     }
-  }
-}
-
-/* Desktop */
-@media screen and (min-width: 992px) {
-  .card-vertical:hover {
-    transform: scale(1.08);
-    box-shadow: 0px 0 30px rgba(55, 55, 63, 0.15);
   }
 }
 
@@ -118,8 +119,8 @@
 .card-horizontal {
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  border-top: 4px solid var(--mpc-border-color);
-  border-bottom: 4px solid var(--mpc-border-color);
+  border-top: 4px solid var(--mpc-border-color-card);
+  border-bottom: 4px solid var(--mpc-border-color-card);
   display: flex;
   flex-direction: row-reverse;
   height: 350px;
@@ -139,18 +140,18 @@
       height: 3px;
       margin: 10px 0;
       border-radius: 5px;
-      background: var(--mpc-color-bar);
+      background: var(--mpc-color-bar-card);
     }
 
     h2 {
-      color: var(--mpc-color-text-title);
-      font-family: var(--mpc-font-title);
+      color: var(--mpc-color-text-title-card);
+      font-family: var(--mpc-font-title-card);
     }
 
     h5 {
       margin: 1.5rem 0;
-      color: var(--mpc-color-text-description);
-      font-family: var(--mpc-font-description);
+      color: var(--mpc-color-text-description-card);
+      font-family: var(--mpc-font-description-card);
 
       i {
         margin-bottom: 2rem;
@@ -166,6 +167,7 @@
       opacity: 1;
       border-radius: 5px;
       transition: 0.5s;
+      background: var(--mpc-bg-links-card);
 
       a {
         display: inline-block;
@@ -175,6 +177,15 @@
         border-radius: 5px;
         text-align: center;
         width: 50px;
+        color: var(--mpc-color-links-card);
+      }
+
+      &:hover {
+        background: var(--mpc-color-links-card);
+
+        a {
+          color: var(--mpc-bg-links-card);
+        }
       }
     }
   }

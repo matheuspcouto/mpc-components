@@ -9,7 +9,7 @@
   width: 100vw;
   height: 100vh;
   background: white;
-  font-family: var(--mpc-font-secondary) !important;
+  font-family: var(--mpc-font-subtitle) !important;
   z-index: 99999;
 
   .error-container {

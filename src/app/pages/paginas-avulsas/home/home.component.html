@@ -12,8 +12,8 @@
           </a>
         </p>
         <div class="d-flex">
-          <button mpcButton texto="Ver repositório" icone="bi bi-book-fill" posicaoIcone="esquerda"
-            (click)="irParaRepositorio()" class="btn-home">
+          <button mpcButton texto="Ver Biblioteca" icone="bi bi-book-fill" posicaoIcone="esquerda" (click)="irParaLib()"
+            class="btn-home">
           </button>
         </div>
       </div>
@@ -66,7 +66,7 @@
   <!-- ======= Descricao Section ======= -->
 
   <!-- ======= Capa Meio Section ======= -->
-  <mpc-page-divider-img titulo="Mpc" subtitulo="Components" imagemFundo="/assets/img/home/mountain.jpg" />
+  <mpc-page-divider-img titulo="Mpc" subtitulo="Components" id="page-divider-img" />
   <!-- ======= Capa Meio Section ======= -->
 
   <!-- ======= Contato Section ======= -->
@@ -87,11 +87,11 @@
       <div class="row gy-4">
 
         <div class="col-lg-6">
-          <mpc-card-menu icone="bi bi-map" titulo="Endereço" descricao="Palmas, Tocantins"></mpc-card-menu>
+          <mpc-card-menu class="cards-menu" icone="bi bi-map" titulo="Endereço" descricao="Palmas, Tocantins"></mpc-card-menu>
         </div>
 
         <div class="col-lg-6">
-          <mpc-card-menu icone="bi bi-telephone" titulo="Telefone" descricao="(63) 9 9201-4337"></mpc-card-menu>
+          <mpc-card-menu class="cards-menu" icone="bi bi-telephone" titulo="Telefone" descricao="(63) 9 9201-4337"></mpc-card-menu>
         </div>
 
       </div>

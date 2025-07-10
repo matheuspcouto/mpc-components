@@ -8,16 +8,13 @@
  * @Propriedades
  * Input titulo {string} - Título principal da seção (obrigatório, padrão: 'Mpc Components')
  * Input subtitulo {string} - Subtítulo da seção (opcional)
- * Input imagemFundo {string} - URL da imagem de fundo (obrigatório)
  * 
  * @Exemplo
  * ```html
  * <!-- Divisor de Página Básico -->
  * <mpc-page-divider-img
  *   titulo="Mpc Components"
- *   subtitulo="Biblioteca de Componentes"
- *   imagemFundo="/assets/img/divider-bg.jpg">
- * </mpc-page-divider-img>
+ *   subtitulo="Biblioteca de Componentes" />
  * ```
  * 
  * @author Matheus Pimentel Do Couto
@@ -40,18 +37,8 @@ export class MpcPageDividerImgComponent {
   @Input() titulo: string = 'Mpc Components';
   /** Subtítulo da seção */
   @Input() subtitulo?: string;
-  /** URL da imagem de fundo */
-  @Input() imagemFundo: string = '';
 
   // ===== MÉTODOS PÚBLICOS =====
-
-  /**
-   * Retorna o estilo de background-image com gradiente escuro sobre a imagem de fundo.
-   * @returns {string} CSS para background-image
-   */
-  protected getBackgroundImage(): string {
-    return `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(${this.imagemFundo})`;
-  }
 
   /**
    * Verifica se a seção possui título.
@@ -67,13 +54,5 @@ export class MpcPageDividerImgComponent {
    */
   protected hasSubtitulo(): boolean {
     return Boolean(this.subtitulo && this.subtitulo.trim().length > 0);
-  }
-
-  /**
-   * Verifica se a seção possui imagem de fundo.
-   * @returns {boolean} true se houver imagem de fundo
-   */
-  protected hasImagemFundo(): boolean {
-    return Boolean(this.imagemFundo && this.imagemFundo.trim().length > 0);
   }
 }

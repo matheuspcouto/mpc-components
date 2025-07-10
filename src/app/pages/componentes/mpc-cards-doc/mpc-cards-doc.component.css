@@ -64,3 +64,182 @@ pre {
     white-space: pre-line;
   }
 }
+
+/*--------------------------------------------------------------
+# Cards Verticais e Horizontais
+--------------------------------------------------------------*/
+#cards-verticais-horizontais {
+  * {
+    /* Fontes */
+    --mpc-font-title-card: var(--font-subtitle);
+    --mpc-font-subtitle-card: var(--font-subtitle);
+    --mpc-font-description-card: var(--font-default);
+  }
+
+  mpc-card#card-1 {
+    /* Cores */
+    --mpc-bg-card: white;
+    --mpc-border-color-card: var(--color-primary);
+    --mpc-bg-links-card: var(--color-primary);
+    --mpc-color-links-card: white;
+    --mpc-color-text-title-card: var(--color-primary);
+    --mpc-color-text-subtitle-card: var(--color-primary);
+    --mpc-color-text-description-card: var(--color-primary);
+    --mpc-color-bar-card: var(--color-primary);
+  }
+
+  mpc-card#card-2 {
+    /* Cores */
+    --mpc-bg-card: white;
+    --mpc-border-color-card: var(--color-secondary);
+    --mpc-bg-links-card: var(--color-secondary);
+    --mpc-color-links-card: white;
+    --mpc-color-text-title-card: var(--color-primary);
+    --mpc-color-text-subtitle-card: var(--color-primary);
+    --mpc-color-text-description-card: var(--color-primary);
+    --mpc-color-bar-card: var(--color-primary);
+  }
+
+  mpc-card#card-3 {
+    /* Cores */
+    --mpc-bg-card: var(--color-primary);
+    --mpc-border-color-card: var(--color-primary);
+    --mpc-bg-links-card: var(--color-secondary);
+    --mpc-color-links-card: white;
+    --mpc-color-text-title-card: white;
+    --mpc-color-text-subtitle-card: white;
+    --mpc-color-text-description-card: white;
+    --mpc-color-bar-card: white;
+  }
+
+  mpc-card#card-4 {
+    /* Cores */
+    --mpc-bg-card: white;
+    --mpc-border-color-card: var(--color-primary);
+    --mpc-bg-links-card: var(--color-primary);
+    --mpc-color-links-card: white;
+    --mpc-color-text-title-card: var(--color-primary);
+    --mpc-color-text-subtitle-card: var(--color-primary);
+    --mpc-color-text-description-card: var(--color-primary);
+    --mpc-color-bar-card: var(--color-primary);
+  }
+
+  mpc-card#card-5 {
+    /* Cores */
+    --mpc-bg-card: white;
+    --mpc-border-color-card: var(--color-secondary);
+    --mpc-bg-links-card: var(--color-secondary);
+    --mpc-color-links-card: white;
+    --mpc-color-text-title-card: var(--color-primary);
+    --mpc-color-text-subtitle-card: var(--color-primary);
+    --mpc-color-text-description-card: var(--color-primary);
+    --mpc-color-bar-card: var(--color-primary);
+  }
+
+  mpc-card#card-6 {
+    /* Cores */
+    --mpc-bg-card: var(--color-primary);
+    --mpc-border-color-card: var(--color-primary);
+    --mpc-bg-links-card: var(--color-secondary);
+    --mpc-color-links-card: white;
+    --mpc-color-text-title-card: white;
+    --mpc-color-text-subtitle-card: white;
+    --mpc-color-text-description-card: white;
+    --mpc-color-bar-card: white;
+  }
+}
+
+/*--------------------------------------------------------------
+# Cards com Imagem de Fundo
+--------------------------------------------------------------*/
+#cards-background-img {
+  * {
+    /* Fontes */
+    --mpc-font-title-card-bg-img: var(--font-subtitle);
+    --mpc-font-subtitle-card-bg-img: var(--font-subtitle);
+    --mpc-font-description-card-bg-img: var(--font-default);
+  }
+
+  mpc-card-background-img#card-bg-1 {
+    /* Cores */
+    --mpc-color-text-card-bg-img: white;
+    --mpc-color-bar-card-bg-img: var(--color-secondary);
+
+    /* Imagem de fundo */
+    --mpc-img-card-bg: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/assets/img/home/mountain.jpg');
+  }
+
+  mpc-card-background-img#card-bg-2 {
+    /* Cores */
+    --mpc-color-text-card-bg-img: var(--color-secondary);
+    --mpc-color-bar-card-bg-img: white;
+  }
+}
+
+/*--------------------------------------------------------------
+# Cards Menu
+--------------------------------------------------------------*/
+#cards-menu {
+  * {
+    /* Fontes */
+    --mpc-font-title-card-menu: var(--font-subtitle);
+    --mpc-font-description-card-menu: var(--font-default);
+  }
+
+  mpc-card-menu#card-menu-1 {
+    /* Cores */
+    --mpc-color-bg-card-menu: white;
+    --mpc-color-title-card-menu: var(--color-primary);
+    --mpc-color-description-card-menu: var(--color-tertiary);
+    --mpc-color-bg-icone-card-menu: var(--color-primary);
+    --mpc-color-text-icone-card-menu: white;
+  }
+
+  mpc-card-menu#card-menu-2 {
+    /* Cores */
+    --mpc-color-bg-card-menu: white;
+    --mpc-color-title-card-menu: var(--color-secondary);
+    --mpc-color-description-card-menu: var(--color-secondary);
+    --mpc-color-bg-icone-card-menu: var(--color-secondary);
+    --mpc-color-text-icone-card-menu: white;
+  }
+
+  mpc-card-menu#card-menu-3 {
+    /* Cores */
+    --mpc-color-bg-card-menu: var(--color-primary);
+    --mpc-color-title-card-menu: white;
+    --mpc-color-description-card-menu: white;
+    --mpc-color-bg-icone-card-menu: white;
+    --mpc-color-text-icone-card-menu: var(--color-primary);
+  }
+}
+
+/*--------------------------------------------------------------
+# Cards Evento
+--------------------------------------------------------------*/
+#cards-evento {
+  * {
+    --mpc-font-title-card-evento: var(--font-subtitle);
+    --mpc-font-subtitle-card-evento: var(--font-subtitle);
+    --mpc-font-description-card-evento: var(--font-default);
+
+    --mpc-font-text-data-card-evento: var(--font-subtitle);
+  }
+
+  .cards-evento {
+    /* Timeline */
+    --mpc-color-border-timeline-card-evento: var(--color-primary);
+    --mpc-color-bg-timeline-card-evento: white;
+
+    /* Data */
+    --mpc-color-bg-data-card-evento: var(--color-primary);
+    --mpc-color-text-data-card-evento: white;
+
+    /* Card */
+    --mpc-color-bg-card-evento: white;
+    --mpc-color-title-card-evento: var(--color-primary);
+    --mpc-color-subtitle-card-evento: var(--color-primary);
+    --mpc-color-description-card-evento: var(--color-tertiary);
+  }
+
+}

@@ -1,10 +1,22 @@
 /*--------------------------------------------------------------
 # Geral
 --------------------------------------------------------------*/
+:host {
+  /* Cores */
+  --mpc-color-bg-header: white;
+  --mpc-color-text-disabled: #7f7f90;
+  --mpc-color-text-active: var(--mpc-color-primary);
+  --mpc-color-text-hover: var(--mpc-color-primary);
+  --mpc-color-border-active: var(--mpc-color-secondary);
+
+  /* Fontes */
+  --mpc-font-navbar: var(--mpc-font-subtitle);
+}
+
 * {
-  color: #7f7f90 !important;
+  color: var(--mpc-color-text-disabled) !important;
   /* Cor padrão de texto desabilitado */
-  font-family: var(--mpc-font-secondary) !important;
+  font-family: var(--mpc-font-navbar) !important;
   /* Fonte padrão de texto */
 }
 
@@ -12,6 +24,10 @@ ul {
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+a {
+  text-decoration: none;
 }
 
 /*--------------------------------------------------------------
@@ -23,7 +39,7 @@ header {
   top: 0;
   left: 0;
   right: 0;
-  background: white;
+  background: var(--mpc-color-bg-header);
   /* Cor de fundo da barra de navegação */
   transition: all 0.5s;
   z-index: 99999;
@@ -117,13 +133,13 @@ header {
 
       /* Propriedades de aba ativa */
       .aba-ativa {
-        color: var(--mpc-color-primary) !important;
-        border-bottom: 2px solid var(--mpc-color-secondary) !important;
+        color: var(--mpc-color-text-active) !important;
+        border-bottom: 2px solid var(--mpc-color-border-active) !important;
       }
 
       /* Ícones das abas ativas */
       .aba-ativa i {
-        color: var(--mpc-color-primary) !important;
+        color: var(--mpc-color-text-active) !important;
       }
     }
 
@@ -146,12 +162,12 @@ header {
         align-items: center;
         justify-content: center;
         width: 100%;
-        color: var(--mpc-color-secondary) !important;
+        color: var(--mpc-color-text-active) !important;
 
         i {
           margin-left: 10px;
           font-weight: 300;
-          color: var(--mpc-color-secondary) !important;
+          color: var(--mpc-color-text-active) !important;
         }
       }
     }
@@ -218,15 +234,15 @@ header {
 
       /* Efeito de hover semelhante a aba ativa*/
       &:hover {
-        color: var(--mpc-color-primary) !important;
-        border-bottom: 2px solid var(--mpc-color-secondary) !important;
+        color: var(--mpc-color-text-hover) !important;
+        border-bottom: 2px solid var(--mpc-color-border-active) !important;
       }
     }
 
     /* Propriedades de aba ativa */
     .aba-ativa {
-      color: var(--mpc-color-primary) !important;
-      border-bottom: 2px solid var(--mpc-color-secondary) !important;
+      color: var(--mpc-color-text-active) !important;
+      border-bottom: 2px solid var(--mpc-color-border-active) !important;
     }
   }
 }

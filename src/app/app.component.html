@@ -1,11 +1,11 @@
-<mpc-navbar [abasInput]="abas"></mpc-navbar>
+<mpc-navbar id="navbar" [abasInput]="abas"></mpc-navbar>
 
 <router-outlet></router-outlet>
 
 <mpc-footer></mpc-footer>
 
-<mpc-loader backgroundColor="white" [color]="'var(--mpc-color-primary)'"></mpc-loader>
+<mpc-loader backgroundColor="white" [color]="'var(--color-primary)'"></mpc-loader>
 
-<button mpcBtnFloat id="scrollTop" icone="bi bi-arrow-up-short" [style.background-color]="'var(--mpc-color-secondary)'"
+<button mpcBtnFloat id="scrollTop" icone="bi bi-arrow-up-short" [style.background-color]="'var(--color-secondary)'"
     [style.color]="'white'" (click)="scrollToTop()">
 </button>

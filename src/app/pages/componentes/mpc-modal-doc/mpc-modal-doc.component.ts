@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { MpcButtonDirective, MpcModalComponent, MpcModalConfig, TipoModal } from 'mpc-lib-angular';
+import { MpcModalComponent, MpcModalConfig, TipoModal } from '../../../../../projects/mpc-lib-angular/src/lib/components/mpc-modal/mpc-modal.component';
+import { MpcButtonDirective } from '../../../../../projects/mpc-lib-angular/src/lib/directives/mpc-button/mpc-button.directive';
 
 @Component({
   selector: 'app-modais',

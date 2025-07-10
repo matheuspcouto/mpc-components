@@ -37,7 +37,7 @@ A biblioteca define as seguintes variáveis CSS que podem ser sobrescritas:
 ```css
 --mpc-font-title: 'Potential', sans-serif;
 --mpc-font-default: "Poppins", sans-serif;
---mpc-font-secondary: "Inter", sans-serif;
+--mpc-font-subtitle: "Inter", sans-serif;
 ```
 
 #### Cores
@@ -63,7 +63,7 @@ No seu arquivo `styles.css`:
   /* Sobrescrever fontes */
   --mpc-font-default: "Your Custom Font", sans-serif;
   --mpc-font-title: 'AAA', sans-serif;
-  --mpc-font-secondary: "BBB", sans-serif;
+  --mpc-font-subtitle: "BBB", sans-serif;
   --
 }
 ```

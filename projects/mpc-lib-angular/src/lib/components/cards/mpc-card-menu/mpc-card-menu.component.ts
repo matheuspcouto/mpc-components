@@ -6,49 +6,27 @@
  * O card possui design limpo com ícone circular e layout flexível.
  * 
  * @Propriedades
- * Input id {string} - ID único do card para acessibilidade
- * Input tabIndex {number} - Índice de tabulação para navegação por teclado
- * Input ariaLabel {string} - Rótulo para leitores de tela
  * Input titulo {string} - Título principal do card (obrigatório)
  * Input descricao {string} - Descrição do card (opcional)
  * Input icone {string} - Classe do ícone (obrigatório, ex: 'bi bi-telephone')
- * Input estilos {CardMenuEstilos} - Objeto com estilos personalizados (opcional)
  * Output acao {EventEmitter<void>} - Evento emitido ao clicar no card (opcional)
  * 
  * @Exemplo
  * ```html
- * <!-- Card de Menu com Estilos Personalizados -->
  * <mpc-card-menu
  *   icone="bi bi-linkedin"
  *   titulo="LinkedIn"
  *   descricao="Conecte-se conosco"
- *   [estilos]="{
- *     background: '#0077b5',
- *     textColor: '#ffffff',
- *     iconeBackground: '#ffffff',
- *     iconeColor: '#0077b5'
- *   }"
- *   (acao)="onLinkedInClick()">
- * </mpc-card-menu>
+ *   (acao)="onLinkedInClick()" />
  * ```
  * 
  * @author Matheus Pimentel Do Couto
  * @created 24/06/2025
- * @updated 09/07/2025
+ * @updated 10/07/2025
  */
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-
-export interface CardMenuEstilos {
-  /** Cor de fundo do card */
-  background?: string;
-  /** Cor do texto do card */
-  textColor?: string;
-  /** Cor de fundo do ícone */
-  iconeBackground?: string;
-  /** Cor do ícone */
-  iconeColor?: string;
-}
+import { AccessibilityInputs } from '../../../../shared/accessibility-inputs';
 
 @Component({
   selector: 'mpc-card-menu',
@@ -56,15 +34,7 @@ export interface CardMenuEstilos {
   templateUrl: './mpc-card-menu.component.html',
   styleUrl: './mpc-card-menu.component.css'
 })
-export class MpcCardMenuComponent {
-
-  // ===== PROPRIEDADES DE ACESSIBILIDADE =====
-  /** ID único do card para acessibilidade */
-  @Input() id?: string = '';
-  /** Índice de tabulação para navegação por teclado */
-  @Input() tabIndex?: number = 0;
-  /** Rótulo para leitores de tela */
-  @Input() ariaLabel?: string = '';
+export class MpcCardMenuComponent extends AccessibilityInputs {
 
   // ===== PROPRIEDADES PRINCIPAIS =====
   /** Título principal do card */
@@ -73,15 +43,6 @@ export class MpcCardMenuComponent {
   @Input() descricao?: string;
   /** Classe do ícone (ex: 'bi bi-telephone') */
   @Input() icone: string = '';
-
-  // ===== PROPRIEDADES DE ESTILO =====
-  /** Objeto com estilos personalizados */
-  @Input() estilos: CardMenuEstilos = {
-    background: 'white',
-    textColor: '#0E2749',
-    iconeBackground: '#0E2749',
-    iconeColor: 'white',
-  };
 
   // ===== EVENTOS =====
   /** Evento emitido ao clicar no card */

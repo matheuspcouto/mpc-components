@@ -14,7 +14,6 @@
  * Input descricao {string} - Descrição do evento (opcional)
  * Input dia {string} - Dia do evento (obrigatório)
  * Input mes {string} - Mês do evento (obrigatório)
- * Input estilos {CardEventoEstilos} - Objeto com estilos personalizados (opcional)
  * 
  * @Exemplo
  * ```html
@@ -24,60 +23,23 @@
  *   subtitulo="Domingo"
  *   descricao="Venha nos conhecer e traga sua família"
  *   dia="15"
- *   mes="Jun">
- * </mpc-card-evento>
- * 
- * <!-- Card de Evento com Estilos Personalizados -->
- * <mpc-card-evento
- *   titulo="Evento Especial"
- *   subtitulo="Sábado"
- *   descricao="Um momento único de comunhão"
- *   dia="20"
- *   mes="Jul"
- *   [estilos]="{
- *     background: '#f8f9fa',
- *     textColor: '#212529',
- *     borderColor: '#007bff',
- *     eventoBackground: '#007bff',
- *     eventoColor: '#ffffff'
- *   }">
- * </mpc-card-evento>
+ *   mes="Jun" />
  * ```
  * 
  * @author Matheus Pimentel Do Couto
  * @created 24/06/2025
- * @updated 09/07/2025
+ * @updated 10/07/2025
  */
 
 import { Component, Input } from '@angular/core';
-
-export interface CardEventoEstilos {
-  /** Cor de fundo do card */
-  background?: string;
-  /** Cor do texto do card */
-  textColor?: string;
-  /** Cor da borda e linha de timeline */
-  borderColor?: string;
-  /** Cor de fundo do círculo de data */
-  eventoBackground?: string;
-  /** Cor do texto do círculo de data */
-  eventoColor?: string;
-}
+import { AccessibilityInputs } from '../../../../shared/accessibility-inputs';
 
 @Component({
   selector: 'mpc-card-evento',
   templateUrl: './mpc-card-evento.component.html',
   styleUrl: './mpc-card-evento.component.css'
 })
-export class MpcCardEventoComponent {
-
-  // ===== PROPRIEDADES DE ACESSIBILIDADE =====
-  /** ID único do card para acessibilidade */
-  @Input() id?: string = '';
-  /** Índice de tabulação para navegação por teclado */
-  @Input() tabIndex?: number = 0;
-  /** Rótulo para leitores de tela */
-  @Input() ariaLabel?: string = '';
+export class MpcCardEventoComponent extends AccessibilityInputs {
 
   // ===== PROPRIEDADES PRINCIPAIS =====
   /** Título principal do evento */
@@ -90,16 +52,6 @@ export class MpcCardEventoComponent {
   @Input() dia: string = '';
   /** Mês do evento */
   @Input() mes: string = '';
-
-  // ===== PROPRIEDADES DE ESTILO =====
-  /** Objeto com estilos personalizados */
-  @Input() estilos: CardEventoEstilos = {
-    background: 'white',
-    textColor: '#0E2749',
-    borderColor: '#0E2749',
-    eventoBackground: '#0E2749',
-    eventoColor: 'white',
-  };
 
   // ===== MÉTODOS PÚBLICOS =====
 

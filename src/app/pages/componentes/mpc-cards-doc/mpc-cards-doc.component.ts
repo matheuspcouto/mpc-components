@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { MpcCardBackGroundImgComponent, MpcCardComponent, MpcCardEventoComponent, MpcCardMenuComponent } from 'mpc-lib-angular';
+import { MpcCardComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/cards/mpc-card/mpc-card.component';
+import { MpcCardBackGroundImgComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/cards/mpc-card-background-img/mpc-card-background-img.component';
+import { MpcCardEventoComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/cards/mpc-card-evento/mpc-card-evento.component';
+import { MpcCardMenuComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/cards/mpc-card-menu/mpc-card-menu.component';
 
 @Component({
   selector: 'app-cards',

@@ -1,0 +1,11 @@
+#navbar {
+    /* Cores */
+    --mpc-color-bg-header: white;
+    --mpc-color-text-disabled: var(--color-tertiary);
+    --mpc-color-text-active: var(--color-primary);
+    --mpc-color-text-hover: var(--color-primary);
+    --mpc-color-border-active: var(--color-secondary);
+
+    /* Fontes */
+    --mpc-font-navbar: var(--font-subtitle);
+}

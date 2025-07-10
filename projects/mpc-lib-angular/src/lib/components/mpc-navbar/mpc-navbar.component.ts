@@ -2,14 +2,15 @@
  * @Componente MpcNavbarComponent
  * Este componente é responsável por exibir a barra de navegação principal.
  *
- * abas: NavbarConfig[]: Configuração das abas da navbar.
+ * @Propriedades
+ * abasInput: NavbarConfig[]: Configuração das abas da navbar.
  *
- * Exemplo de utilização:
- * <mpc-navbar [abas]="abas"></mpc-navbar>
+ * @Exemplo de utilização:
+ * <mpc-navbar [abasInput]="abas"></mpc-navbar>
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
- * @updated 04/07/2025
+ * @updated 10/07/2025
  */
 
 import { Component, inject, Input, OnInit } from '@angular/core';

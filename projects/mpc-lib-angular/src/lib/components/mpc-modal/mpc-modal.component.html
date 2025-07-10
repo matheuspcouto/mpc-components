@@ -18,19 +18,16 @@
       <!-- Botões -->
       <div class="modal-buttons">
         <!-- Botão Principal de Ação -->
-        <button mpcButton [style.background-color]="'#0E2749'" [style.color]="'white'" (click)="botao()"
-          [texto]="modal.textoBotao"></button>
+        <button id="first-button" mpcButton (click)="botao()" [texto]="modal.textoBotao"></button>
 
         <!-- Botão Secundário de Ação -->
         @if (modal.textoSegundoBotao) {
-        <button mpcButton [style.background-color]="'transparent'" [style.color]="'black'" (click)="segundoBotao()"
-          [texto]="modal.textoSegundoBotao"></button>
+        <button id="second-button" mpcButton (click)="segundoBotao()" [texto]="modal.textoSegundoBotao"></button>
         }
 
         <!-- Botão de Copiar Erro caso seja um modal de erro -->
         @if (btnCopiarMensagemErro) {
-        <button mpcButton [icone]="isCopiado ? 'bi bi-clipboard-check' : 'bi bi-clipboard'"
-          [style.background-color]="'transparent'" [style.color]="'black'" (click)="copiarCodigo()"
+        <button id="copy-button" mpcButton [icone]="isCopiado ? 'bi bi-clipboard-check' : 'bi bi-clipboard'" (click)="copiarCodigo()"
           [texto]="'Copiar código'"></button>
         }
       </div>

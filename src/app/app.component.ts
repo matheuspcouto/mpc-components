@@ -3,7 +3,10 @@ import { RouterOutlet } from '@angular/router';
 import { MpcFooterComponent } from "./shared/components/mpc-footer/mpc-footer.component";
 import { Rotas } from './shared/enums/rotas-enum';
 import { isPlatformBrowser } from '@angular/common';
-import { MpcLoaderComponent, MpcNavbarComponent, NavbarConfig, MpcBtnFloatDirective } from 'mpc-lib-angular';
+import { MpcNavbarComponent } from '../../projects/mpc-lib-angular/src/lib/components/mpc-navbar/mpc-navbar.component';
+import { MpcBtnFloatDirective } from '../../projects/mpc-lib-angular/src/lib/directives/mpc-btn-float/mpc-btn-float.directive';
+import { MpcLoaderComponent } from '../../projects/mpc-lib-angular/src/lib/components/mpc-loader/mpc-loader.component';
+import { NavbarConfig } from '../../projects/mpc-lib-angular/src/lib/components/mpc-navbar/mpc-navbar.component';
 
 @Component({
   selector: 'app-root',
@@ -92,4 +95,4 @@ export class AppComponent implements OnInit {
 // TODO: Tela de Cadastro
 // TODO: Adicionar Pagina de Pipes
 // TODO: Sobrescrever --cores e --fontes na lib e ajustar hovers
-
+// TODO: Padronizar documentações

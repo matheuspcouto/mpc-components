@@ -1,8 +1,23 @@
-/* Geral */
-button {
-  max-width: 30vh;
-  min-width: 20vh;
-  box-shadow: none !important;
+:host {
+  /* Cores */
+  --mpc-color-bg-modal: white;
+  --mpc-color-title-modal: var(--mpc-color-primary);
+  --mpc-color-description-modal: var(--mpc-color-tertiary);
+
+  /* Botões */
+  --mpc-color-first-button-bg-modal: var(--mpc-color-primary);
+  --mpc-color-first-button-text-modal: white;
+
+  --mpc-color-second-button-bg-modal: var(--mpc-color-secondary);
+  --mpc-color-second-button-text-modal: white;
+
+  --mpc-color-copy-button-bg-modal: transparent;
+  --mpc-color-copy-button-text-modal: var(--mpc-color-primary);
+
+  /* Fontes */
+  --mpc-font-title-modal: var(--mpc-font-subtitle);
+  --mpc-font-description-modal: var(--mpc-font-default);
+  --mpc-font-button-modal: var(--mpc-font-default);
 }
 
 .modal {
@@ -10,7 +25,6 @@ button {
   z-index: 9999999999;
   backdrop-filter: blur(5px) brightness(0.3);
   transition: opacity 0.3s ease, visibility 0s 0.3s;
-  font-family: var(--mpc-font-secondary) !important;
 
   .tela-inteira {
     display: flex;
@@ -34,9 +48,9 @@ button {
   }
 
   .modal-content {
-    background-color: var(--mpc-color-white);
-    padding: var(--mpc-spacing-lg);
+    padding: 20px;
     overflow: hidden;
+    background-color: var(--mpc-color-bg-modal);
 
     .modal-body {
       display: flex;
@@ -53,11 +67,15 @@ button {
         font-size: 1.5rem;
         font-weight: bold;
         margin: 2rem;
+        font-family: var(--mpc-font-title-modal) !important;
+        color: var(--mpc-color-title-modal) !important;
       }
 
       .modal-description {
         font-size: 1rem;
         text-align: center;
+        font-family: var(--mpc-font-description-modal) !important;
+        color: var(--mpc-color-description-modal) !important;
       }
     }
 
@@ -66,6 +84,29 @@ button {
       flex-direction: column;
       align-items: center;
       gap: 15px;
+
+      /* Botões padrão */
+      button {
+        max-width: 30vh;
+        min-width: 20vh;
+        box-shadow: none !important;
+        font-family: var(--mpc-font-button-modal) !important;
+      }
+
+      button#first-button {
+        background-color: var(--mpc-color-first-button-bg-modal);
+        color: var(--mpc-color-first-button-text-modal);
+      }
+
+      button#second-button {
+        background-color: var(--mpc-color-second-button-bg-modal);
+        color: var(--mpc-color-second-button-text-modal);
+      }
+
+      button#copy-button {
+        background-color: var(--mpc-color-copy-button-bg-modal);
+        color: var(--mpc-color-copy-button-text-modal);
+      }
     }
   }
 }

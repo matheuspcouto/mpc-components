@@ -1,12 +1,10 @@
-<div class="card-box" [style.border-color]="estilos.borderColor" >
+<div class="card-box">
 
-  <div class="card-timeline" [style.border-color]="estilos.borderColor">
-    <div [id]="id" [tabIndex]="tabIndex" [attr.aria-label]="getAriaLabel()" class="card-evento"
-      [style.background]="estilos.background">
+  <div class="card-timeline">
+    <div [id]="id" [tabIndex]="tabIndex" [attr.aria-label]="getAriaLabel()" class="card-evento">
 
       @if (hasData()) {
-      <div class="card-evento-data" [style.background]="estilos.eventoBackground" [style.color]="estilos.eventoColor"
-        tabindex="0" [attr.aria-label]="'Data do evento: ' + dia + ' de ' + mes">
+      <div class="card-evento-data" tabindex="0" [attr.aria-label]="'Data do evento: ' + dia + ' de ' + mes">
         @if (hasDia()) {
         <span class="evento-dia" [attr.aria-label]="'Dia: ' + dia">{{ dia }}</span>
         }
@@ -16,7 +14,7 @@
       </div>
       }
 
-      <div class="card-evento-body" [style.color]="estilos.textColor">
+      <div class="card-evento-body">
         @if (hasTitulo()) {
         <h3 tabindex="0" [attr.aria-label]="'Título: ' + titulo">{{ titulo }}</h3>
         }
