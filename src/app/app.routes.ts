@@ -24,6 +24,11 @@ export const routes: Routes = [
     path: SegmentoRotas.COMPONENTES,
     children: [
       {
+        path: SegmentoRotas.LIB_DOC,
+        loadComponent: () => import('./pages/documentacao-geral/documentacao-geral.component').then(c => c.DocumentacaoGeralComponent),
+        canActivate: [SiteAtivoGuard]
+      },
+      {
         path: SegmentoRotas.CARDS,
         loadComponent: () => import('./pages/componentes/mpc-cards-doc/mpc-cards-doc.component').then(c => c.MpcCardsDocComponent),
         canActivate: [SiteAtivoGuard]

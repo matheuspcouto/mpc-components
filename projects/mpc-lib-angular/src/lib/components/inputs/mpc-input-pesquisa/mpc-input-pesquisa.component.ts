@@ -1,27 +1,63 @@
 /**
  * @Componente MpcInputPesquisaComponent
- * Este componente exibe um campo de pesquisa customizado, integrado ao Angular Forms.
- *
- * @Input id {string}: (opcional) Id do campo.
- * @Input tabIndex {number}: (opcional) Índice de tabulação do campo.
- * @Input ariaLabel {string}: (opcional) Label para acessibilidade.
- * @Input readonly {boolean}: (opcional) Campo somente leitura.
- * @Input disabled {boolean}: (opcional) Campo desabilitado.
- * @Input label {string}: (opcional) Label do campo.
- * @Input min {string}: (opcional) Número mínimo de caracteres.
- *
- * Integração: ControlValueAccessor e Validator (compatível com Reactive Forms e Template Forms)
- *
- * Exemplo de uso:
- * <mpc-input-pesquisa [formControl]="control" label="Pesquisar" [min]="3" [tabIndex]="1" [ariaLabel]="'Pesquisar'" />
- *
+ * 
+ * Este componente exibe um campo de pesquisa customizado com ícone de busca
+ * e funcionalidade de limpar, implementando ControlValueAccessor para integração com formulários reativos.
+ * 
+ * @Propriedades
+ * @Input() label {string} - Label do campo (obrigatório)
+ * @Input() placeholder {string} - Texto de placeholder (opcional)
+ * @Input() readonly {boolean} - Campo somente leitura (opcional, padrão: false)
+ * @Input() disabled {boolean} - Campo desabilitado (opcional, padrão: false)
+ * @Input() id {string} - ID único do campo para acessibilidade (opcional)
+ * @Input() tabIndex {number} - TabIndex para navegação por teclado (opcional, padrão: 0)
+ * @Input() ariaLabel {string} - Rótulo para leitores de tela (opcional)
+ * 
+ * @Eventos
+ * @Output() pesquisar {EventEmitter<string>} - Emite o termo de pesquisa
+ * @Output() limpar {EventEmitter<void>} - Emite quando o campo é limpo
+ * 
+ * @Exemplo
+ * ```html
+ * <!-- Input Pesquisa Básico -->
+ * <mpc-input-pesquisa 
+ *   label="Pesquisar"
+ *   placeholder="Digite para pesquisar..."
+ *   [(ngModel)]="termoPesquisa"
+ *   (pesquisar)="onPesquisar($event)"
+ *   (limpar)="onLimpar()">
+ * </mpc-input-pesquisa>
+ * 
+ * <!-- Input Pesquisa com Placeholder -->
+ * <mpc-input-pesquisa 
+ *   label="Buscar"
+ *   placeholder="Nome, email ou telefone..."
+ *   [(ngModel)]="busca"
+ *   (pesquisar)="realizarBusca($event)">
+ * </mpc-input-pesquisa>
+ * ```
+ * 
+ * @Implementações
+ * ControlValueAccessor: Interface para integração com formulários
+ * - writeValue(value: string): void - Define o valor do campo
+ * - registerOnChange(fn: any): void - Registra função de mudança
+ * - registerOnTouched(fn: any): void - Registra função de toque
+ * 
+ * @Variáveis CSS
+ * --mpc-color-text: Cor do texto do campo (padrão: var(--mpc-color-primary))
+ * --mpc-color-error: Cor de erro (padrão: #DC3545)
+ * --mpc-color-border: Cor da borda do campo (padrão: var(--mpc-color-tertiary))
+ * --mpc-color-border-success: Cor da borda de sucesso (padrão: var(--mpc-color-secondary))
+ * --mpc-font-text: Fonte do campo (padrão: var(--mpc-font-default))
+ * 
  * @author Matheus Pimentel Do Couto
- * @created 27/02/2025
- * @updated 07/07/2025
+ * @created 27/06/2025
+ * @updated 10/07/2025
  */
 
 import { Component, EventEmitter, Input, Output, forwardRef } from '@angular/core';
 import { ValidationErrors, ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, Validator, AbstractControl } from '@angular/forms';
+import { AccessibilityInputs } from '../../../../shared/accessibility-inputs';
 
 @Component({
   selector: 'mpc-input-pesquisa',
@@ -41,12 +77,7 @@ import { ValidationErrors, ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATOR
     }
   ]
 })
-export class MpcInputPesquisaComponent implements ControlValueAccessor, Validator {
-
-  // Acessibilidade
-  @Input() id: string = '';
-  @Input() tabIndex: number = 0;
-  @Input() ariaLabel: string = '';  
+export class MpcInputPesquisaComponent extends AccessibilityInputs implements ControlValueAccessor, Validator {
 
   // Validators
   @Input() label: string = '';

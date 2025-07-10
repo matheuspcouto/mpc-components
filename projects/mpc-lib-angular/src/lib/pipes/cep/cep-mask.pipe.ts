@@ -24,6 +24,8 @@ export class CepMaskPipe implements PipeTransform {
 
   /**
    * Aplica a máscara de CEP ao valor informado.
+   * @param value - Valor a ser aplicado a máscara
+   * @returns Valor com máscara
    */
   transform(value: string | null | undefined): string {
     if (!value) {
@@ -42,6 +44,8 @@ export class CepMaskPipe implements PipeTransform {
 
   /**
    * Aplica a máscara no formato 00000-000.
+   * @param valor - Valor a ser aplicado a máscara
+   * @returns Valor com máscara
    */
   private aplicarMascaraCEP(valor: string): string {
     // Limita a 8 dígitos para CEP

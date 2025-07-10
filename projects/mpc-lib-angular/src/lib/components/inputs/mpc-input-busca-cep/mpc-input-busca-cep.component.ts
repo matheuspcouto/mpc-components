@@ -1,26 +1,68 @@
 /**
  * @Componente MpcInputBuscaCepComponent
- * Este componente exibe um campo de busca de CEP customizado, com máscara e integração a API, integrado ao Angular Forms.
- *
- * @Input id {string}: (opcional) Id do campo.
- * @Input tabIndex {number}: (opcional) Índice de tabulação do campo.
- * @Input ariaLabel {string}: (opcional) Label para acessibilidade.
- * @Input required {boolean}: (opcional) Campo obrigatório.
- *
- * Integração: ControlValueAccessor e Validator (compatível com Reactive Forms e Template Forms)
- *
- * Exemplo de uso:
- * <mpc-input-busca-cep [formControl]="control" [tabIndex]="1" [ariaLabel]="'CEP'" [required]="true" (endereco)="endereco($event)" />
- *
+ * 
+ * Este componente exibe um campo de busca de CEP customizado com validação
+ * e busca automática de endereço, implementando ControlValueAccessor para integração com formulários reativos.
+ * 
+ * @Propriedades
+ * @Input() id {string} - ID do campo (obrigatório)
+ * @Input() tabIndex {number} - Índice do campo (opcional)
+ * @Input() ariaLabel {string} - Label do campo (opcional)
+ * @Input() label {string} - Label do campo (obrigatório)
+ * @Input() readonly {boolean} - Campo somente leitura (opcional, padrão: false)
+ * @Input() disabled {boolean} - Campo desabilitado (opcional, padrão: false)
+ * @Input() id {string} - ID único do campo para acessibilidade (opcional)
+ * @Input() tabIndex {number} - TabIndex para navegação por teclado (opcional, padrão: 0)
+ * @Input() ariaLabel {string} - Rótulo para leitores de tela (opcional)
+ * 
+ * @Eventos
+ * @Output() cepEncontrado {EventEmitter<any>} - Emite os dados do endereço quando o CEP é encontrado
+ * @Output() cepNaoEncontrado {EventEmitter<string>} - Emite quando o CEP não é encontrado
+ * 
+ * @Exemplo
+ * ```html
+ * <!-- Input Busca CEP Básico -->
+ * <mpc-input-busca-cep 
+ *   label="CEP"
+ *   [(ngModel)]="cep"
+ *   (cepEncontrado)="onCepEncontrado($event)"
+ *   (cepNaoEncontrado)="onCepNaoEncontrado($event)">
+ * </mpc-input-busca-cep>
+ * 
+ * <!-- Input Busca CEP com Handler -->
+ * <mpc-input-busca-cep 
+ *   label="CEP"
+ *   [(ngModel)]="cep"
+ *   (cepEncontrado)="preencherEndereco($event)">
+ * </mpc-input-busca-cep>
+ * ```
+ * 
+ * @Implementações
+ * ControlValueAccessor: Interface para integração com formulários
+ * - writeValue(value: string): void - Define o valor do campo
+ * - registerOnChange(fn: any): void - Registra função de mudança
+ * - registerOnTouched(fn: any): void - Registra função de toque
+ * 
+ * Validator: Interface para validação de campos
+ * - validate(control: AbstractControl): ValidationErrors | null - Valida o campo
+ * 
+ * @Variáveis CSS
+ * --mpc-color-text: Cor do texto do campo (padrão: var(--mpc-color-primary))
+ * --mpc-color-error: Cor de erro (padrão: #DC3545)
+ * --mpc-color-border: Cor da borda do campo (padrão: var(--mpc-color-tertiary))
+ * --mpc-color-border-success: Cor da borda de sucesso (padrão: var(--mpc-color-secondary))
+ * --mpc-font-text: Fonte do campo (padrão: var(--mpc-font-default))
+ * 
  * @author Matheus Pimentel Do Couto
- * @created 27/02/2025
- * @updated 07/07/2025
+ * @created 27/06/2025
+ * @updated 10/07/2025
  */
 
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, Output, forwardRef, inject } from '@angular/core';
 import { ValidationErrors, ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, Validator, AbstractControl } from '@angular/forms';
 import { CepMaskPipe } from '../../../pipes/cep/cep-mask.pipe';
+import { AccessibilityInputs } from '../../../../shared/accessibility-inputs';
 
 export interface Endereco {
   rua: string;
@@ -49,12 +91,7 @@ export const REGEX_CEP = /^\d{5}-?\d{3}$/;
     }
   ]
 })
-export class MpcInputBuscaCepComponent implements ControlValueAccessor, Validator {
-
-  // Acessibilidade
-  @Input() id: string = '';
-  @Input() tabIndex: number = 0;
-  @Input() ariaLabel: string = '';
+export class MpcInputBuscaCepComponent extends AccessibilityInputs implements ControlValueAccessor, Validator {
 
   // Validators
   @Input() required: boolean = false;

@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
   protected abas: NavbarConfig[] = [
     /* { titulo: 'Login', rota: Rotas.LOGIN, icone: 'bi bi-person-fill' }, */
     { titulo: 'Home', rota: Rotas.HOME, icone: 'bi bi-house-fill' },
+    { titulo: 'Documentação', rota: Rotas.LIB_DOC, icone: 'bi bi-book' },
     {
       titulo: 'Componentes',
       rota: Rotas.COMPONENTES,
@@ -28,11 +29,10 @@ export class AppComponent implements OnInit {
         { titulo: 'mpc-modal', rota: Rotas.MODAIS },
         { titulo: 'mpc-loader', rota: Rotas.LOADERS },
         { titulo: 'mpc-navbar', rota: Rotas.NAVBAR },
-        { titulo: 'mpc-footer', rota: Rotas.FOOTER },
+       /*  { titulo: 'mpc-footer', rota: Rotas.FOOTER }, */
         { titulo: 'mpc-tabs', rota: Rotas.TABS },
         { titulo: 'mpc-pagination', rota: Rotas.PAGINACAO },
         { titulo: 'mpc-inputs', rota: Rotas.INPUTS },
-        { titulo: 'mpc-page-header', rota: Rotas.PAGE_HEADER },
       ]
     },
     {

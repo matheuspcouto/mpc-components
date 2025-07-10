@@ -1,28 +1,65 @@
 /**
  * @Componente MpcInputRadioComponent
- * Este componente exibe um campo do tipo radio customizado, integrado ao Angular Forms.
- *
- * @Input id {string}: (opcional) Id do campo.
- * @Input label {string}: Label do campo.
- * @Input tabIndex {number}: (opcional) Índice de tabulação do campo.
- * @Input ariaLabel {string}: (opcional) Label para acessibilidade.
- * @Input readonly {boolean}: (opcional) Campo somente leitura.
- * @Input disabled {boolean}: (opcional) Campo desabilitado.
- * @Input required {boolean}: (opcional) Campo obrigatório.
- * @Input options {RadioOption[]}: Lista de opções do radio.
- *
- * Integração: ControlValueAccessor e Validator (compatível com Reactive Forms e Template Forms)
- *
- * Exemplo de uso:
- * <mpc-input-radio [formControl]="control" label="Sexo" [options]="options" [required]="true" [tabIndex]="1" [ariaLabel]="'Sexo'" />
- *
+ * 
+ * Este componente exibe um grupo de botões de rádio customizados com validação,
+ * implementando ControlValueAccessor para integração com formulários reativos.
+ * 
+ * @Propriedades
+ * @Input() label {string} - Label do grupo (obrigatório)
+ * @Input() opcoes {RadioOption[]} - Array de opções do rádio (obrigatório)
+ * @Input() readonly {boolean} - Campo somente leitura (opcional, padrão: false)
+ * @Input() disabled {boolean} - Campo desabilitado (opcional, padrão: false)
+ * @Input() id {string} - ID único do campo para acessibilidade (opcional)
+ * @Input() tabIndex {number} - TabIndex para navegação por teclado (opcional, padrão: 0)
+ * @Input() ariaLabel {string} - Rótulo para leitores de tela (opcional)
+ * 
+ * @Exemplo
+ * ```html
+ * <!-- Input Radio Básico -->
+ * <mpc-input-radio 
+ *   label="Sexo"
+ *   [opcoes]="opcoesSexo"
+ *   [(ngModel)]="sexo">
+ * </mpc-input-radio>
+ * 
+ * <!-- Input Radio com Opções -->
+ * <mpc-input-radio 
+ *   label="Status"
+ *   [opcoes]="opcoesStatus"
+ *   [(ngModel)]="status">
+ * </mpc-input-radio>
+ * 
+ * <!-- Configuração das Opções -->
+ * const opcoesSexo: RadioOption[] = [
+ *   { label: 'Masculino', value: 'M' },
+ *   { label: 'Feminino', value: 'F' }
+ * ];
+ * ```
+ * 
+ * @Interfaces
+ * RadioOption: Interface para opções do rádio
+ * - label: string - Texto exibido na opção
+ * - value: string - Valor da opção
+ * 
+ * @Implementações
+ * ControlValueAccessor: Interface para integração com formulários
+ * - writeValue(value: string): void - Define o valor do campo
+ * - registerOnChange(fn: any): void - Registra função de mudança
+ * - registerOnTouched(fn: any): void - Registra função de toque
+ * 
+ * @Variáveis CSS
+ * --mpc-color-text: Cor do texto do campo (padrão: var(--mpc-color-primary))
+ * --mpc-color-error: Cor de erro (padrão: #DC3545)
+ * --mpc-font-text: Fonte do campo (padrão: var(--mpc-font-default))
+ * 
  * @author Matheus Pimentel Do Couto
- * @created 27/02/2025
- * @updated 07/07/2025
+ * @created 27/06/2025
+ * @updated 10/07/2025
  */
 
 import { Component, EventEmitter, Input, Output, forwardRef } from '@angular/core';
 import { ValidationErrors, ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, Validator, AbstractControl } from '@angular/forms';
+import { AccessibilityInputs } from '../../../../shared/accessibility-inputs';
 
 export interface RadioOption {
   label: string;
@@ -48,12 +85,7 @@ export interface RadioOption {
     }
   ]
 })
-export class MpcInputRadioComponent implements ControlValueAccessor, Validator {
-
-  // Acessibilidade
-  @Input() id: string = '';
-  @Input() tabIndex: number = 0;
-  @Input() ariaLabel: string = '';
+export class MpcInputRadioComponent extends AccessibilityInputs implements ControlValueAccessor, Validator {
 
   // Validators
   @Input() label: string = '';

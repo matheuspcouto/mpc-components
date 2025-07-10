@@ -3,33 +3,40 @@
   <section id="inputs">
     <div class="container">
       <div class="section-header">
-        <h2>Experimente os</h2>
+        <h2>experimente os</h2>
         <p>MPC <span>Inputs</span></p>
       </div>
+      
       <h5>
-        <strong>Descrição:</strong> Os <code>mpc-input-*</code> são componentes customizados baseados no Bootstrap para
-        entrada de dados, como texto, número, data, e-mail, senha, telefone, CPF/CNPJ, CEP, área de texto, rádio e
-        select. Eles oferecem validação, acessibilidade e integração fácil com formulários Angular.
+        <strong>Descrição:</strong> Os <code>mpc-input-*</code> são componentes customizados para entrada de dados,
+        implementando ControlValueAccessor para integração com formulários reativos. Todos os inputs suportam validação,
+        acessibilidade e personalização via variáveis CSS.
       </h5>
+      
       <h5>
-        <strong>Propriedades comuns:</strong>
+        <strong>Propriedades:</strong>
         <ul class="text-start mt-3">
-          <li><strong>label</strong>: Label do campo (quando aplicável).</li>
-          <li><strong>value</strong>: Valor do campo.</li>
-          <li><strong>id</strong>: (opcional) Id do campo.</li>
-          <li><strong>tabIndex</strong>: (opcional) Índice de tabulação do campo.</li>
-          <li><strong>ariaLabel</strong>: (opcional) Label para acessibilidade.</li>
+          <li><strong>label</strong>: (obrigatório) Label do campo.</li>
           <li><strong>readonly</strong>: (opcional) Campo somente leitura.</li>
-          <li><strong>disabled</strong>: (opcional) Indica se o campo está desabilitado.</li>
-          <li><strong>required</strong>: (opcional) Indica se o campo é obrigatório.</li>
-          <li><strong>min</strong>: (opcional) Valor mínimo ou mínimo de caracteres (quando aplicável).</li>
-          <li><strong>max</strong>: (opcional) Valor máximo ou máximo de caracteres (quando aplicável).</li>
-          <li><strong>options</strong>: (apenas para rádio e select) Lista de opções do campo.</li>
+          <li><strong>disabled</strong>: (opcional) Campo desabilitado.</li>
+          <li><strong>min</strong>: (opcional) Valor mínimo de caracteres.</li>
+          <li><strong>max</strong>: (opcional) Valor máximo de caracteres.</li>
+          <li><strong>required</strong>: (opcional) Campo obrigatório.</li>
+          <li><strong>id</strong>: (opcional) ID único do campo para acessibilidade.</li>
+          <li><strong>tabIndex</strong>: (opcional) TabIndex para navegação por teclado.</li>
+          <li><strong>ariaLabel</strong>: (opcional) Rótulo para leitores de tela.</li>
         </ul>
       </h5>
+
+      <div class="mb-3">
+        <h5><strong>Instalação:</strong></h5>
+        <pre class="chroma"><code>npm install mpc-lib-angular</code></pre>
+      </div>
+
       <div class="mb-3">
         <h5><strong>Importação no arquivo <code>.ts</code>:</strong></h5>
-        <pre class="chroma"><code>imports: [
+        <pre class="chroma"><code>
+import &#123; 
   MpcInputTextComponent,
   MpcInputNumberComponent,
   MpcInputDateComponent,
@@ -41,55 +48,76 @@
   MpcInputTextAreaComponent,
   MpcInputRadioComponent,
   MpcInputSelectComponent
-]</code></pre>
-      </div>
-      <div class="mb-3">
-        <h5><strong>Inicialização do formulário no arquivo <code>.ts</code>:</strong></h5>
-        <pre class="chroma"><code>private readonly formBuilder = inject(NonNullableFormBuilder);
+&#125; from 'mpc-lib-angular';
 
-protected form = this.formBuilder.group(&#123;
-  nome: [''],
-  idade: [0],
-  dataNasc: [''],
-  email: [''],
-  senha: [''],
-  telefone: [''],
-  cpfCnpj: [''],
-  descricao: [''],
-  cep: [''],
-  rua: [''],
-  numero: [''],
-  complemento: [''],
-  bairro: [''],
-  cidade: [''],
-  estado: [''],
-&#125;);</code></pre>
+// No seu componente
+imports: [
+  MpcInputTextComponent,
+  MpcInputNumberComponent,
+  MpcInputDateComponent,
+  MpcInputEmailComponent,
+  MpcInputSenhaComponent,
+  MpcInputTelefoneComponent,
+  MpcInputCpfcnpjComponent,
+  MpcInputBuscaCepComponent,
+  MpcInputTextAreaComponent,
+  MpcInputRadioComponent,
+  MpcInputSelectComponent
+]
+        </code></pre>
       </div>
+
       <div class="mb-5">
         <h5><strong>Exemplo de uso no arquivo <code>.html</code>:</strong></h5>
-        <pre class="chroma"><code class="language-html" data-lang="html">&lt;mpc-input-text label="Nome" [value]="form.value.nome" (valor)="form.controls.nome.setValue($event)" (error)="form.controls.nome.setErrors($event)" min="3" /&gt;
+        <pre class="chroma"><code class="language-html" data-lang="html">&lt;!-- Input Text Básico --&gt;
+&lt;mpc-input-text 
+  label="Nome" 
+  [(ngModel)]="nome" 
+  [min]="3" 
+  [required]="true"&gt;
+&lt;/mpc-input-text&gt;
 
-&lt;mpc-input-number label="Idade" [value]="form.value.idade" (valor)="form.controls.idade.setValue($event)" (error)="form.controls.idade.setErrors($event)" [min]="18" [max]="100" /&gt;
+&lt;!-- Input Email com Validação --&gt;
+&lt;mpc-input-email 
+  label="Email" 
+  [(ngModel)]="email" 
+  [required]="true"&gt;
+&lt;/mpc-input-email&gt;
 
-&lt;mpc-input-date label="Data de Nascimento" [value]="form.value.dataNasc" (valor)="form.controls.dataNasc.setValue($event)" (error)="form.controls.dataNasc.setErrors($event)" [minDate]="minDate" [required]="true" [maxDate]="maxDate" /&gt;
+&lt;!-- Input Senha com Validação --&gt;
+&lt;mpc-input-senha 
+  label="Senha" 
+  [(ngModel)]="senha" 
+  [required]="true"&gt;
+&lt;/mpc-input-senha&gt;
 
-&lt;mpc-input-email [value]="form.value.email" (valor)="form.controls.email.setValue($event)" (error)="form.controls.email.setErrors($event)" [required]="true" /&gt;
+&lt;!-- Input Select com Opções --&gt;
+&lt;mpc-input-select 
+  label="Estado" 
+  [opcoes]="estados" 
+  [(ngModel)]="estado"&gt;
+&lt;/mpc-input-select&gt;
 
-&lt;mpc-input-senha [value]="form.value.senha" (valor)="form.controls.senha.setValue($event)" (error)="form.controls.senha.setErrors($event)" [required]="true" /&gt;
-
-&lt;mpc-input-telefone [value]="form.value.telefone" (valor)="form.controls.telefone.setValue($event)" (error)="form.controls.telefone.setErrors($event)" [required]="true" /&gt;
-
-&lt;mpc-input-cpfcnpj [value]="form.value.cpfCnpj" (valor)="form.controls.cpfCnpj.setValue($event)" (error)="form.controls.cpfCnpj.setErrors($event)" [required]="true" /&gt;
-
-&lt;mpc-input-busca-cep [value]="form.value.cep" [required]="true" (valor)="definirEnderecoPorCep($event)" (error)="form.controls.cep.setErrors($event)" /&gt;
-
-&lt;mpc-input-text-area label="Descrição" [value]="form.value.descricao" (valor)="form.controls.descricao.setValue($event)" (error)="form.controls.descricao.setErrors($event)" min="10" max="100" /&gt;
-
-&lt;mpc-input-radio label="Sexo" [options]="sexos" [required]="true" /&gt;
-
-&lt;mpc-input-select label="Estado" [options]="estadosCivis" [required]="true" /&gt;
-</code></pre>
+&lt;!-- Input com Acessibilidade --&gt;
+&lt;mpc-input-text 
+  label="Nome Completo"
+  id="nome-completo"
+  [tabIndex]="1"
+  ariaLabel="Campo para inserir o nome completo da pessoa"
+  [(ngModel)]="nome"&gt;
+&lt;/mpc-input-text&gt;</code></pre>
       </div>
+
+      <div class="mb-3">
+        <h5><strong>Personalização com Variáveis CSS:</strong></h5>
+        <pre class="chroma"><code>/* Variáveis CSS comuns a todos os inputs */
+--mpc-color-text: var(--mpc-color-primary);      /* Cor do texto do campo */
+--mpc-color-error: #DC3545;                      /* Cor de erro */
+--mpc-color-border: var(--mpc-color-tertiary);   /* Cor da borda do campo */
+--mpc-color-border-success: var(--mpc-color-secondary); /* Cor da borda de sucesso */
+--mpc-font-text: var(--mpc-font-default);       /* Fonte do campo */</code></pre>
+      </div>
+
       <div class="row gy-4">
         <div class="col-12 d-flex justify-content-center">
           <h4>Inputs Customizados</h4>

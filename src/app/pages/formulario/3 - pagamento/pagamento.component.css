@@ -77,6 +77,11 @@ section {
   padding: 2rem;
   margin-top: 90px;
 
+  #barra-progresso {
+    --mpc-color-bar: var(--mpc-color-secondary);
+    --mpc-color-text: var(--mpc-color-tertiary);
+  }
+
   form {
     /* Inputs */
     --mpc-color-text: var(--color-primary);

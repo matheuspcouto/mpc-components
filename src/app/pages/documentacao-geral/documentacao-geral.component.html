@@ -1,0 +1,320 @@
+<main>
+
+  <!-- ======= Documentação Geral INÍCIO ======= -->
+  <section id="documentacao-geral" class="documentacao-geral">
+    <div class="container">
+
+      <div class="section-header">
+        <h2>documentação</h2>
+        <p>MPC <span>Library Angular</span></p>
+      </div>
+
+      <h5>
+        <strong>Descrição:</strong> A <code>mpc-lib-angular</code> é uma biblioteca de componentes Angular com sistema
+        de design customizável,
+        desenvolvida para facilitar a criação de interfaces modernas e responsivas. A biblioteca oferece componentes
+        prontos
+        para uso com estilos personalizáveis através de variáveis CSS.
+      </h5>
+
+      <!-- ======= Requisitos do Sistema ======= -->
+      <div class="mb-5">
+        <h4 class="text-center mb-4"><strong>Requisitos do Sistema</strong></h4>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <h5><strong>Versões Suportadas:</strong></h5>
+            <ul class="text-start mt-3">
+              <li><strong>Node.js:</strong> 20.x ou superior</li>
+              <li><strong>Angular:</strong> 19.x ou superior</li>
+              <li><strong>Bootstrap:</strong> 5.x </li>
+            </ul>
+          </div>
+
+          <div class="col-lg-6">
+            <h5><strong>Dependências:</strong></h5>
+            <ul class="text-start mt-3">
+              <li><strong>Bootstrap Icons:</strong> Para ícones dos componentes</li>
+              <li><strong>Bootstrap CSS:</strong> Para estilos base</li>
+              <li><strong>Angular Common:</strong> Para funcionalidades básicas</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======= Instalação ======= -->
+      <div class="mb-5">
+        <h4 class="text-center mb-4"><strong>Instalação</strong></h4>
+
+        <div class="mb-3">
+          <h5><strong>1. Instalar a Biblioteca:</strong></h5>
+          <pre class="chroma"><code>npm install mpc-lib-angular</code></pre>
+        </div>
+
+        <div class="mb-3">
+          <h5><strong>2. Instalar Bootstrap (se ainda não tiver):</strong></h5>
+          <pre class="chroma"><code>npm install bootstrap bootstrap-icons</code></pre>
+        </div>
+
+        <div class="mb-3">
+          <h5><strong>3. Configurar Bootstrap no angular.json:</strong></h5>
+          <pre class="chroma"><code class="language-json" data-lang="json">&#123;
+  "styles": [
+    "node_modules/bootstrap/dist/css/bootstrap.min.css",
+    "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+    "node_modules/mpc-lib-angular/lib/styles/mpc-lib-angular.css",
+    "src/styles.css"
+  ]
+&#125;</code></pre>
+        </div>
+      </div>
+
+      <!-- ======= Configuração dos Estilos ======= -->
+      <div class="mb-5">
+        <h4 class="text-center mb-4"><strong>Configuração dos Estilos</strong></h4>
+
+        <div class="mb-3">
+          <h5><strong>Importar os Estilos da Biblioteca:</strong></h5>
+          <p class="text-center">No seu arquivo <code>angular.json</code>, adicione os estilos da biblioteca:</p>
+          <pre class="chroma"><code class="language-json" data-lang="json">&#123;
+  "styles": [
+    "node_modules/mpc-lib-angular/lib/styles/mpc-lib-angular.css",
+    "src/styles.css"
+  ]
+&#125;</code></pre>
+        </div>
+
+        <div class="mb-3">
+          <h5><strong>Ou no seu styles.css:</strong></h5>
+          <pre
+            class="chroma"><code class="language-css" data-lang="css">&#64;import '~mpc-lib-angular/lib/styles/mpc-lib.css';</code></pre>
+        </div>
+      </div>
+
+      <!-- ======= Variáveis CSS ======= -->
+      <div class="mb-5">
+        <h4 class="text-center mb-4"><strong>Variáveis CSS Disponíveis</strong></h4>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <h5><strong>Fontes:</strong></h5>
+            <pre class="chroma"><code class="language-css" data-lang="css">--mpc-font-title: 'Potential', sans-serif;
+--mpc-font-default: "Poppins", sans-serif;
+--mpc-font-subtitle: "Inter", sans-serif;</code></pre>
+          </div>
+
+          <div class="col-lg-6">
+            <h5><strong>Cores:</strong></h5>
+            <pre class="chroma"><code class="language-css" data-lang="css">--mpc-color-primary: #0E2749;
+--mpc-color-secondary: #149DDD;
+--mpc-color-tertiary: gray;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======= Como Sobrescrever Variáveis CSS ======= -->
+      <div class="mb-5">
+        <h4 class="text-center mb-4"><strong>Como Sobrescrever Variáveis CSS</strong></h4>
+
+        <div class="mb-3">
+          <h5><strong>Opção 1: Sobrescrever no :root (Recomendado)</strong></h5>
+          <p class="text-center">No seu arquivo <code>styles.css</code>:</p>
+          <pre class="chroma"><code class="language-css" data-lang="css">:root &#123;
+  /* Sobrescrever cores da biblioteca */
+  --mpc-color-primary: #your-custom-color;
+  --mpc-color-secondary: #your-custom-secondary;
+  --mpc-color-tertiary: #your-custom-color;
+  
+  /* Sobrescrever fontes */
+  --mpc-font-default: "Your Custom Font", sans-serif;
+  --mpc-font-title: 'AAA', sans-serif;
+  --mpc-font-subtitle: "BBB", sans-serif;
+&#125;</code></pre>
+        </div>
+
+        <div class="mb-3">
+          <h5><strong>Opção 2: Sobrescrever em um Container Específico</strong></h5>
+          <pre class="chroma"><code class="language-css" data-lang="css">.my-custom-theme &#123;
+  --mpc-color-primary: #your-custom-color;
+  --mpc-color-secondary: #your-custom-secondary;
+  --mpc-color-tertiary: #your-custom-color;
+&#125;</code></pre>
+        </div>
+
+        <div class="mb-3">
+          <h5><strong>Opção 3: Usando CSS Custom Properties com Fallbacks</strong></h5>
+          <pre class="chroma"><code class="language-css" data-lang="css">:root &#123;
+  --mpc-color-primary: var(--your-custom-primary, #0E2749);
+  --mpc-color-secondary: var(--your-custom-secondary, #149DDD);
+&#125;</code></pre>
+        </div>
+      </div>
+
+      <!-- ======= Classes Utilitárias ======= -->
+      <div class="mb-5">
+        <h4 class="text-center mb-4"><strong>Classes Utilitárias</strong></h4>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <h5><strong>Cores de Texto:</strong></h5>
+            <ul class="text-start mt-3">
+              <li><code>.mpc-text-primary</code></li>
+              <li><code>.mpc-text-secondary</code></li>
+              <li><code>.mpc-text-tertiary</code></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-6">
+            <h5><strong>Cores de Fundo:</strong></h5>
+            <ul class="text-start mt-3">
+              <li><code>.mpc-bg-primary</code></li>
+              <li><code>.mpc-bg-secondary</code></li>
+              <li><code>.mpc-bg-tertiary</code></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======= Exemplo de Uso ======= -->
+      <div class="mb-5">
+        <h4 class="text-center mb-4"><strong>Exemplo de Uso</strong></h4>
+
+        <div class="mb-3">
+          <h5><strong>HTML com Classes Utilitárias:</strong></h5>
+          <pre class="chroma"><code class="language-html" data-lang="html">&lt;div class="mpc-bg-primary"&gt;
+  &lt;h1 class="mpc-text-primary"&gt;Título&lt;/h1&gt;
+  &lt;p class="mpc-text-secondary"&gt;Descrição&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <div class="mb-3">
+          <h5><strong>Importação de Componentes:</strong></h5>
+          <pre class="chroma"><code class="language-typescript" data-lang="typescript">import &#123; MpcCardComponent &#125; from 'mpc-lib-angular';
+
+&#64;Component(&#123;
+  selector: 'app-example',
+  imports: [MpcCardComponent],
+  templateUrl: './example.component.html'
+&#125;)
+export class ExampleComponent &#123;
+  // Seu código aqui
+&#125;</code></pre>
+        </div>
+      </div>
+
+      <!-- ======= Componentes Disponíveis ======= -->
+      <div class="mb-5">
+        <h4 class="text-center mb-4"><strong>Componentes Disponíveis</strong></h4>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <h5><strong>Cards:</strong></h5>
+            <ul class="text-start mt-3">
+              <li><code>MpcCardComponent</code> - Cards verticais e horizontais</li>
+              <li><code>MpcCardBackGroundImgComponent</code> - Cards com imagem de fundo</li>
+              <li><code>MpcCardMenuComponent</code> - Cards de menu</li>
+              <li><code>MpcCardEventoComponent</code> - Cards de evento</li>
+            </ul>
+          </div>
+
+          <div class="col-lg-6">
+            <h5><strong>Inputs:</strong></h5>
+            <ul class="text-start mt-3">
+              <li><code>MpcInputTextComponent</code> - Input de texto</li>
+              <li><code>MpcInputEmailComponent</code> - Input de email</li>
+              <li><code>MpcInputSenhaComponent</code> - Input de senha</li>
+              <li><code>MpcInputTelefoneComponent</code> - Input de telefone</li>
+              <li><code>MpcInputCpfCnpjComponent</code> - Input de CPF/CNPJ</li>
+              <li><code>MpcInputDateComponent</code> - Input de data</li>
+              <li><code>MpcInputNumberComponent</code> - Input numérico</li>
+              <li><code>MpcInputSelectComponent</code> - Input select</li>
+              <li><code>MpcInputRadioComponent</code> - Input radio</li>
+              <li><code>MpcInputTextAreaComponent</code> - Input textarea</li>
+              <li><code>MpcInputPesquisaComponent</code> - Input de pesquisa</li>
+              <li><code>MpcInputBuscaCepComponent</code> - Input de busca CEP</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-lg-6">
+            <h5><strong>Outros Componentes:</strong></h5>
+            <ul class="text-start mt-3">
+              <li><code>MpcModalComponent</code> - Modal customizável</li>
+              <li><code>MpcNavbarComponent</code> - Navbar responsiva</li>
+              <li><code>MpcPaginationComponent</code> - Paginação</li>
+              <li><code>MpcTabsComponent</code> - Abas</li>
+              <li><code>MpcLoaderComponent</code> - Loader</li>
+              <li><code>MpcFormProgressBarComponent</code> - Barra de progresso</li>
+            </ul>
+          </div>
+
+          <div class="col-lg-6">
+            <h5><strong>Diretivas:</strong></h5>
+            <ul class="text-start mt-3">
+              <li><code>MpcButtonDirective</code> - Diretiva para botões</li>
+              <li><code>MpcBtnFloatDirective</code> - Diretiva para botão flutuante</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======= Pipes Disponíveis ======= -->
+      <div class="mb-5">
+        <h4 class="text-center mb-4"><strong>Pipes Disponíveis</strong></h4>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <h5><strong>Formatação:</strong></h5>
+            <ul class="text-start mt-3">
+              <li><code>CepMaskPipe</code> - Formatação de CEP</li>
+              <li><code>CpfCnpjMaskPipe</code> - Formatação de CPF/CNPJ</li>
+              <li><code>EmailMaskPipe</code> - Formatação de email</li>
+              <li><code>TelefoneMaskPipe</code> - Formatação de telefone</li>
+            </ul>
+          </div>
+
+          <div class="col-lg-6">
+            <h5><strong>Exemplo de Uso dos Pipes:</strong></h5>
+            <pre class="chroma"><code class="language-html" data-lang="html">&lt;p&gt;{{ '12345678901' + ' | ' + 'CpfCnpjMaskPipe' }}&lt;/p&gt;
+&lt;p&gt;{{ '12345678' + ' | ' + 'CepMaskPipe' }}&lt;/p&gt;
+&lt;p&gt;{{ '11999999999' + ' | ' + 'TelefoneMaskPipe' }}&lt;/p&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======= Informações do Autor ======= -->
+      <div class="mb-5">
+        <h4 class="text-center mb-4"><strong>Informações do Autor</strong></h4>
+
+        <div class="text-center">
+          <h5><strong>Desenvolvido e mantido por:</strong></h5>
+          <h4 class="text-primary">Matheus Pimentel do Couto</h4>
+
+          <div class="row mt-4">
+            <div class="col-lg-6">
+              <h5><strong>GitHub:</strong></h5>
+              <a href="https://github.com/matheuspcouto" target="_blank" class="text-decoration-none">
+                <i class="bi bi-github"></i> matheuspcouto
+              </a>
+            </div>
+
+            <div class="col-lg-6">
+              <h5><strong>LinkedIn:</strong></h5>
+              <a href="https://www.linkedin.com/in/matheuspcouto/" target="_blank" class="text-decoration-none">
+                <i class="bi bi-linkedin"></i> matheuspcouto
+              </a>
+            </div>
+          </div>
+
+          <p class="mt-4">
+            <strong>Sinta-se à vontade para entrar em contato para dúvidas, sugestões ou contribuições!</strong>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <!-- ======= Documentação Geral FIM ======= -->
+
+</main>

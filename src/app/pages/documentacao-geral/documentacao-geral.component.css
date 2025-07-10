@@ -1,0 +1,128 @@
+main {
+  margin-top: 90px;
+}
+
+/*--------------------------------------------------------------
+# Section
+--------------------------------------------------------------*/
+section {
+  overflow: hidden;
+  padding: 50px 0;
+
+  h5 {
+    font-weight: 400;
+    color: var(--mpc-color-tertiary);
+    text-align: center;
+    padding-bottom: 2rem;
+    font-style: italic;
+  }
+
+  .section-header {
+    text-align: center;
+    padding-bottom: 30px;
+
+    h2 {
+      font-size: 13px;
+      letter-spacing: 1px;
+      font-weight: 400;
+      margin: 0;
+      padding: 0;
+      color: var(--mpc-color-tertiary);
+      text-transform: uppercase;
+      font-family: var(--mpc-font-default);
+    }
+
+    p {
+      margin: 0;
+      font-size: 48px;
+      font-weight: 400;
+      font-family: var(--mpc-font-default);
+
+      span {
+        color: var(--mpc-color-secondary);
+      }
+    }
+  }
+}
+
+pre {
+  background-color: var(--mpc-color-primary);
+  padding: 20px;
+  border-radius: 5px;
+  margin-top: 20px;
+  color: white;
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+
+  code {
+    width: 100%;
+    white-space: pre-line;
+  }
+}
+
+/*--------------------------------------------------------------
+# Documentação Geral
+--------------------------------------------------------------*/
+#documentacao-geral {
+  * {
+    /* Fontes */
+    --mpc-font-title-doc: var(--mpc-font-subtitle);
+    --mpc-font-subtitle-doc: var(--mpc-font-subtitle);
+    --mpc-font-description-doc: var(--mpc-font-default);
+  }
+
+  h4 {
+    color: var(--mpc-color-primary);
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  ul li {
+    margin-bottom: 0.5rem;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  ul li:before {
+    content: "•";
+    color: var(--mpc-color-secondary);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+  }
+
+  code {
+    background-color: var(--mpc-color-primary);
+    color: white;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.9em;
+  }
+
+  a {
+    color: var(--mpc-color-secondary);
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--mpc-color-primary);
+    text-decoration: underline;
+  }
+
+  .text-primary {
+    color: var(--mpc-color-secondary) !important;
+  }
+
+  .bi {
+    margin-right: 0.5rem;
+  }
+} 

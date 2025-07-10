@@ -13,6 +13,7 @@
 
 import { Component } from '@angular/core';
 
+// TODO: ngcontainer e selector
 @Component({
   selector: 'mpc-footer',
   imports: [],

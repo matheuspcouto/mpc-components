@@ -65,6 +65,11 @@ section {
   padding: 2rem;
   margin-top: 90px;
 
+  #barra-progresso {
+    --mpc-color-bar: var(--mpc-color-secondary);
+    --mpc-color-text: var(--mpc-color-tertiary);
+  }
+
   .btn-inscrever {
     background-color: var(--mpc-color-primary);
     color: white;

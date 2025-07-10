@@ -1,30 +1,55 @@
 /**
  * @Componente MpcCardEventoComponent
  * 
- * Este componente é responsável por exibir cards de eventos com design de timeline,
- * ideal para exibir informações de eventos com data, título, subtítulo e descrição.
- * O card possui um layout único com círculo de data e linha de timeline.
+ * Este componente é responsável por exibir cards de eventos com timeline,
+ * incluindo data, título, subtítulo e descrição em um layout visual atrativo.
  * 
  * @Propriedades
- * Input id {string} - ID único do card para acessibilidade
- * Input tabIndex {number} - Índice de tabulação para navegação por teclado
- * Input ariaLabel {string} - Rótulo para leitores de tela
- * Input titulo {string} - Título principal do evento (obrigatório)
- * Input subtitulo {string} - Subtítulo do evento (opcional)
- * Input descricao {string} - Descrição do evento (opcional)
- * Input dia {string} - Dia do evento (obrigatório)
- * Input mes {string} - Mês do evento (obrigatório)
+ * @Input() id {string} - ID do card (obrigatório)
+ * @Input() tabIndex {number} - Índice do card (opcional)
+ * @Input() ariaLabel {string} - Label do card (opcional)
+ * @Input() data {string} - Data do evento (obrigatório, formato: YYYY-MM-DD)
+ * @Input() titulo {string} - Título do evento (obrigatório)
+ * @Input() subtitulo {string} - Subtítulo do evento (opcional)
+ * @Input() descricao {string} - Descrição do evento (opcional)
  * 
  * @Exemplo
  * ```html
  * <!-- Card de Evento Básico -->
  * <mpc-card-evento
- *   titulo="Culto de Adoração"
- *   subtitulo="Domingo"
- *   descricao="Venha nos conhecer e traga sua família"
- *   dia="15"
- *   mes="Jun" />
+ *   data="2024-12-25"
+ *   titulo="Natal"
+ *   subtitulo="Celebração"
+ *   descricao="Celebração do nascimento de Jesus Cristo"
+ *   id="card-natal"
+ *   [tabIndex]="0"
+ *   ariaLabel="Card do evento de Natal" />
+ * 
+ * <!-- Card de Evento com Ação -->
+ * <mpc-card-evento
+ *   data="2024-12-31"
+ *   titulo="Ano Novo"
+ *   subtitulo="Réveillon"
+ *   descricao="Celebração da virada do ano"
+ *   (acao)="onEventoClick()"
+ *   id="card-ano-novo"
+ *   [tabIndex]="0"
+ *   ariaLabel="Card do evento de Ano Novo" />
  * ```
+ * 
+ * @Variáveis CSS
+ * --mpc-color-border-timeline-card-evento: Cor da borda da timeline (padrão: var(--mpc-color-primary))
+ * --mpc-color-bg-timeline-card-evento: Cor de fundo da timeline (padrão: var(--mpc-color-primary))
+ * --mpc-color-bg-data-card-evento: Cor de fundo da data (padrão: var(--mpc-color-primary))
+ * --mpc-color-text-data-card-evento: Cor do texto da data (padrão: white)
+ * --mpc-font-text-data-card-evento: Fonte do texto da data (padrão: var(--mpc-font-title))
+ * --mpc-color-bg-card-evento: Cor de fundo do card (padrão: white)
+ * --mpc-color-title-card-evento: Cor do título do card (padrão: var(--mpc-color-primary))
+ * --mpc-color-subtitle-card-evento: Cor do subtítulo do card (padrão: var(--mpc-color-primary))
+ * --mpc-color-description-card-evento: Cor da descrição do card (padrão: var(--mpc-color-tertiary))
+ * --mpc-font-title-card-evento: Fonte do título do card (padrão: var(--mpc-font-subtitle))
+ * --mpc-font-subtitle-card-evento: Fonte do subtítulo do card (padrão: var(--mpc-font-subtitle))
+ * --mpc-font-description-card-evento: Fonte da descrição do card (padrão: var(--mpc-font-default))
  * 
  * @author Matheus Pimentel Do Couto
  * @created 24/06/2025
@@ -41,7 +66,7 @@ import { AccessibilityInputs } from '../../../../shared/accessibility-inputs';
 })
 export class MpcCardEventoComponent extends AccessibilityInputs {
 
-  // ===== PROPRIEDADES PRINCIPAIS =====
+  // ===== PROPRIEDADES PÚBLICAS =====
   /** Título principal do evento */
   @Input() titulo: string = '';
   /** Subtítulo do evento */
@@ -53,7 +78,7 @@ export class MpcCardEventoComponent extends AccessibilityInputs {
   /** Mês do evento */
   @Input() mes: string = '';
 
-  // ===== MÉTODOS PÚBLICOS =====
+  // ===== MÉTODOS PROTEGIDOS =====
 
   /**
    * Verifica se o card possui título.

@@ -6,9 +6,20 @@
  * título, subtítulo e descrição sobrepostos à imagem de fundo.
  * 
  * @Propriedades
- * Input titulo {string} - Título principal do card (obrigatório)
- * Input subtitulo {string} - Subtítulo do card (opcional)
- * Input descricao {string} - Descrição do card (opcional)
+ * @Input() id {string} - ID do card (obrigatório)
+ * @Input() tabIndex {number} - Índice do card (opcional)
+ * @Input() ariaLabel {string} - Label do card (opcional)
+ * @Input() titulo {string} - Título principal do card (obrigatório)
+ * @Input() subtitulo {string} - Subtítulo do card (opcional)
+ * @Input() descricao {string} - Descrição do card (opcional)
+ * 
+ * @Variáveis CSS
+ * --mpc-color-text-card-bg-img: white;
+ * --mpc-color-bar-card-bg-img: var(--mpc-color-primary);
+ * --mpc-font-title-card-bg-img: var(--mpc-font-title);
+ * --mpc-font-subtitle-card-bg-img: var(--mpc-font-subtitle);
+ * --mpc-font-description-card-bg-img: var(--mpc-font-default);
+ * --mpc-img-card-bg: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/assets/img/no-image.jpg');
  * 
  * @Exemplo
  * ```html

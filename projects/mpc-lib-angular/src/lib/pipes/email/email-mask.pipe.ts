@@ -25,6 +25,8 @@ export class EmailMaskPipe implements PipeTransform {
 
   /**
    * Aplica a máscara de e-mail ao valor informado.
+   * @param value - Valor a ser aplicado a máscara
+   * @returns Valor com máscara
    */
   transform(value: string | null | undefined): string {
     if (!value) {
@@ -45,6 +47,8 @@ export class EmailMaskPipe implements PipeTransform {
 
   /**
    * Aplica formatação visual básica ao e-mail.
+   * @param email - Email a ser formatado
+   * @returns Email formatado
    */
   private aplicarFormatacaoEmail(email: string): string {
     // Se não contém @, retorna como está sendo digitado

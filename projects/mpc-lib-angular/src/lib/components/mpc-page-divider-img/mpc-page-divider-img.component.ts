@@ -1,28 +1,41 @@
 /**
  * @Componente MpcPageDividerImgComponent
  * 
- * Este componente é responsável por exibir seções divisórias de página com imagem de fundo,
- * ideal para criar separações visuais impactantes entre seções de conteúdo.
- * O componente possui design responsivo com efeito parallax em desktop.
+ * Este componente é responsável por exibir um divisor de página com imagem de fundo,
+ * título e subtítulo, ideal para separar seções com visual impactante.
  * 
  * @Propriedades
- * Input titulo {string} - Título principal da seção (obrigatório, padrão: 'Mpc Components')
- * Input subtitulo {string} - Subtítulo da seção (opcional)
+ * @Input() id {string} - ID do campo (obrigatório)
+ * @Input() tabIndex {number} - Índice do campo (opcional)
+ * @Input() ariaLabel {string} - Label do campo (opcional)
+ * @Input() titulo {string} - Título do divisor (obrigatório)
+ * @Input() subtitulo {string} - Subtítulo do divisor (opcional)
  * 
  * @Exemplo
  * ```html
- * <!-- Divisor de Página Básico -->
+ * <!-- Page Divider Básico -->
  * <mpc-page-divider-img
- *   titulo="Mpc Components"
- *   subtitulo="Biblioteca de Componentes" />
+ *   titulo="Nossa Missão"
+ *   subtitulo="Transformar vidas através do amor"
+ *   id="divider-missao"
+ *   [tabIndex]="0"
+ *   ariaLabel="Divisor da seção Nossa Missão" />
  * ```
  * 
+ * @Variáveis CSS
+ * --mpc-font-title-page-divider-img: Fonte do título (padrão: var(--mpc-font-title))
+ * --mpc-font-subtitle-page-divider-img: Fonte do subtítulo (padrão: var(--mpc-font-subtitle))
+ * --mpc-color-title-page-divider-img: Cor do título (padrão: var(--mpc-color-primary))
+ * --mpc-color-subtitle-page-divider-img: Cor do subtítulo (padrão: var(--mpc-color-secondary))
+ * --mpc-img-background-page-divider: Imagem de fundo (padrão: url('/assets/img/no-image.jpg'))
+ * 
  * @author Matheus Pimentel Do Couto
- * @created 24/06/2024
- * @updated 09/07/2024
+ * @created 27/02/2025
+ * @updated 10/07/2025
  */
 
 import { Component, Input } from '@angular/core';
+import { AccessibilityInputs } from '../../../shared/accessibility-inputs';
 
 @Component({
   selector: 'mpc-page-divider-img',
@@ -30,15 +43,15 @@ import { Component, Input } from '@angular/core';
   templateUrl: './mpc-page-divider-img.component.html',
   styleUrl: './mpc-page-divider-img.component.css'
 })
-export class MpcPageDividerImgComponent {
+export class MpcPageDividerImgComponent extends AccessibilityInputs {
 
-  // ===== PROPRIEDADES PRINCIPAIS =====
+  // ===== PROPRIEDADES PÚBLICAS =====
   /** Título principal da seção */
   @Input() titulo: string = 'Mpc Components';
   /** Subtítulo da seção */
   @Input() subtitulo?: string;
 
-  // ===== MÉTODOS PÚBLICOS =====
+  // ===== MÉTODOS PROTEGIDOS =====
 
   /**
    * Verifica se a seção possui título.

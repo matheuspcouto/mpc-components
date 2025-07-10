@@ -7,41 +7,51 @@
         <h2>experimente o</h2>
         <p>MPC <span>Navbar</span></p>
       </div>
+      
       <h5>
-        <strong>Descrição:</strong> O <code>mpc-navbar</code> é um componente de barra de navegação responsiva, baseado
-        no Bootstrap, que facilita a navegação entre as páginas do sistema. Suporta abas simples e abas com submenus.
+        <strong>Descrição:</strong> O <code>mpc-navbar</code> é um componente de barra de navegação responsiva
+        que suporta abas com sub-rotas e identificação automática de abas de login.
       </h5>
+      
       <h5>
         <strong>Propriedades:</strong>
         <ul class="text-start mt-3">
-          <li><strong>abasInput</strong>: Array de configuração das abas de navegação. Cada aba deve seguir a interface <code>NavbarConfig</code>.</li>
+          <li><strong>abasInput</strong>: (obrigatório) Array de configuração das abas de navegação.</li>
+          <li><strong>id</strong>: (opcional) O ID único do navbar para acessibilidade.</li>
+          <li><strong>tabIndex</strong>: (opcional) O índice de tabulação para navegação por teclado.</li>
+          <li><strong>ariaLabel</strong>: (opcional) Rótulo para leitores de tela.</li>
         </ul>
       </h5>
-      <h5>
-        <strong>Interface NavbarConfig:</strong>
-        <ul class="text-start mt-3">
-          <li><strong>titulo</strong>: Título da aba (string)</li>
-          <li><strong>rota</strong>: Rota de navegação (string)</li>
-          <li><strong>icone</strong>: Classe do ícone Bootstrap (string)</li>
-          <li><strong>subRotas</strong>: Array opcional de subrotas (SubRotaConfig[])</li>
-        </ul>
-      </h5>
-      <h5>
-        <strong>Interface SubRotaConfig:</strong>
-        <ul class="text-start mt-3">
-          <li><strong>titulo</strong>: Título da subrota (string)</li>
-          <li><strong>rota</strong>: Rota da subrota (string, opcional)</li>
-          <li><strong>fragment</strong>: Fragmento da URL (string, opcional)</li>
-        </ul>
-      </h5>
+
+      <div class="mb-3">
+        <h5><strong>Instalação:</strong></h5>
+        <pre class="chroma"><code>npm install mpc-lib-angular</code></pre>
+      </div>
+
       <div class="mb-3">
         <h5><strong>Importação no arquivo <code>.ts</code>:</strong></h5>
-        <pre class="chroma"><code>imports: [ MpcNavbarComponent ]</code></pre>
+        <pre class="chroma"><code>
+import &#123; MpcNavbarComponent, NavbarConfig, SubRotaConfig &#125; from 'mpc-lib-angular';
+
+// No seu componente
+imports: [ MpcNavbarComponent ]
+        </code></pre>
       </div>
-      <div class="mb-3">
-        <h5><strong>Exemplo de uso básico no arquivo <code>.html</code>:</strong></h5>
-        <pre class="chroma"><code class="language-html" data-lang="html">&lt;mpc-navbar [abasInput]="abas"&gt;&lt;/mpc-navbar&gt;</code></pre>
+
+      <div class="mb-5">
+        <h5><strong>Exemplo de uso no arquivo <code>.html</code>:</strong></h5>
+        <pre class="chroma"><code class="language-html" data-lang="html">&lt;!-- Navbar Básico --&gt;
+&lt;mpc-navbar [abasInput]="abas"&gt;&lt;/mpc-navbar&gt;
+
+&lt;!-- Navbar com Acessibilidade --&gt;
+&lt;mpc-navbar 
+  [abasInput]="abas"
+  id="navbar-principal"
+  [tabIndex]="0"
+  ariaLabel="Navegação principal"&gt;
+&lt;/mpc-navbar&gt;</code></pre>
       </div>
+
       <div class="mb-3">
         <h5><strong>Exemplo de configuração das abas no arquivo <code>.ts</code>:</strong></h5>
         <pre class="chroma"><code class="language-typescript" data-lang="typescript">abas: NavbarConfig[] = [
@@ -57,6 +67,40 @@
     ]
   &#125;
 ];</code></pre>
+      </div>
+
+      <div class="mb-3">
+        <h5><strong>Personalização com Variáveis CSS:</strong></h5>
+        <pre class="chroma"><code>/* Cores da Navbar */
+--mpc-color-bg-header: white;                    /* Cor de fundo da navbar */
+--mpc-color-text-disabled: #7f7f90;             /* Cor do texto desabilitado */
+--mpc-color-text-active: var(--mpc-color-primary); /* Cor do texto ativo */
+--mpc-color-text-hover: var(--mpc-color-primary);  /* Cor do texto no hover */
+--mpc-color-border-active: var(--mpc-color-secondary); /* Cor da borda ativa */
+
+/* Fontes */
+--mpc-font-navbar: var(--mpc-font-subtitle);    /* Fonte da navbar */</code></pre>
+      </div>
+
+      <div class="mb-3">
+        <h5><strong>Interfaces:</strong></h5>
+        <ul class="text-start mt-3">
+          <li><strong>NavbarConfig:</strong> Interface para configuração das abas
+            <ul>
+              <li><code>titulo</code>: Título da aba (string)</li>
+              <li><code>rota</code>: Rota de navegação (string)</li>
+              <li><code>icone</code>: Classe do ícone Bootstrap (string)</li>
+              <li><code>subRotas</code>: Array opcional de subrotas (SubRotaConfig[])</li>
+            </ul>
+          </li>
+          <li><strong>SubRotaConfig:</strong> Interface para configuração de sub-rotas
+            <ul>
+              <li><code>titulo</code>: Título da subrota (string)</li>
+              <li><code>rota</code>: Rota da subrota (string, opcional)</li>
+              <li><code>fragment</code>: Fragmento da URL (string, opcional)</li>
+            </ul>
+          </li>
+        </ul>
       </div>
     </div>
   </section>

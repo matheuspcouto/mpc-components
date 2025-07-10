@@ -4,6 +4,7 @@ export enum SegmentoRotas {
 
   // Componentes
   COMPONENTES = "componentes",
+  LIB_DOC = "documentacao-geral",
   CARDS = "mpc-cards-doc",
   MODAIS = "mpc-modal-doc",
   LOADERS = "mpc-loader-doc",
@@ -44,6 +45,7 @@ export enum Rotas {
 
   // Componentes
   COMPONENTES = `/${SegmentoRotas.COMPONENTES}`,
+  LIB_DOC = `/${SegmentoRotas.COMPONENTES}/${SegmentoRotas.LIB_DOC}`,
   CARDS = `/${SegmentoRotas.COMPONENTES}/${SegmentoRotas.CARDS}`,
   MODAIS = `/${SegmentoRotas.COMPONENTES}/${SegmentoRotas.MODAIS}`,
   LOADERS = `/${SegmentoRotas.COMPONENTES}/${SegmentoRotas.LOADERS}`,

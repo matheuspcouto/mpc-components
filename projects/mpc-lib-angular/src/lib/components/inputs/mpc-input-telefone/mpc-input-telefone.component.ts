@@ -1,28 +1,65 @@
 /**
  * @Componente MpcInputTelefoneComponent
- * Este componente exibe um campo de telefone customizado com máscara e validação, integrado ao Angular Forms.
- *
- * @Input id {string}: (opcional) Id do campo.
- * @Input label {string}: Label do campo.
- * @Input tabIndex {number}: (opcional) Índice de tabulação do campo.
- * @Input ariaLabel {string}: (opcional) Label para acessibilidade.
- * @Input readonly {boolean}: (opcional) Campo somente leitura.
- * @Input disabled {boolean}: (opcional) Campo desabilitado.
- * @Input required {boolean}: (opcional) Campo obrigatório.
- *
- * Integração: ControlValueAccessor e Validator (compatível com Reactive Forms e Template Forms)
- *
- * Exemplo de uso:
- * <mpc-input-telefone [formControl]="control" label="Telefone" [required]="true" [tabIndex]="1" [ariaLabel]="'Telefone'" />
- *
+ * 
+ * Este componente exibe um campo de telefone customizado com validação de formato
+ * e máscara automática, implementando ControlValueAccessor para integração com formulários reativos.
+ * 
+ * @Propriedades
+ * @Input() label {string} - Label do campo (obrigatório)
+ * @Input() readonly {boolean} - Campo somente leitura (opcional, padrão: false)
+ * @Input() disabled {boolean} - Campo desabilitado (opcional, padrão: false)
+ * @Input() id {string} - ID único do campo para acessibilidade (opcional)
+ * @Input() tabIndex {number} - TabIndex para navegação por teclado (opcional, padrão: 0)
+ * @Input() ariaLabel {string} - Rótulo para leitores de tela (opcional)
+ * 
+ * @Exemplo
+ * ```html
+ * <!-- Input Telefone Básico -->
+ * <mpc-input-telefone 
+ *   label="Telefone"
+ *   [(ngModel)]="telefone">
+ * </mpc-input-telefone>
+ * 
+ * <!-- Input Telefone Somente Leitura -->
+ * <mpc-input-telefone 
+ *   label="Telefone"
+ *   [readonly]="true"
+ *   [(ngModel)]="telefone">
+ * </mpc-input-telefone>
+ * 
+ * <!-- Input Telefone Desabilitado -->
+ * <mpc-input-telefone 
+ *   label="Telefone"
+ *   [disabled]="true"
+ *   [(ngModel)]="telefone">
+ * </mpc-input-telefone>
+ * ```
+ * 
+ * @Implementações
+ * ControlValueAccessor: Interface para integração com formulários
+ * - writeValue(value: string): void - Define o valor do campo
+ * - registerOnChange(fn: any): void - Registra função de mudança
+ * - registerOnTouched(fn: any): void - Registra função de toque
+ * 
+ * Validator: Interface para validação de campos
+ * - validate(control: AbstractControl): ValidationErrors | null - Valida o campo
+ * 
+ * @Variáveis CSS
+ * --mpc-color-text: Cor do texto do campo (padrão: var(--mpc-color-primary))
+ * --mpc-color-error: Cor de erro (padrão: #DC3545)
+ * --mpc-color-border: Cor da borda do campo (padrão: var(--mpc-color-tertiary))
+ * --mpc-color-border-success: Cor da borda de sucesso (padrão: var(--mpc-color-secondary))
+ * --mpc-font-text: Fonte do campo (padrão: var(--mpc-font-default))
+ * 
  * @author Matheus Pimentel Do Couto
- * @created 27/02/2025
- * @updated 07/07/2025
+ * @created 27/06/2025
+ * @updated 10/07/2025
  */
 
 import { Component, Input, forwardRef } from '@angular/core';
 import { ValidationErrors, ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, Validator, AbstractControl } from '@angular/forms';
 import { TelefoneMaskPipe } from '../../../pipes/telefone/telefone-mask.pipe';
+import { AccessibilityInputs } from '../../../../shared/accessibility-inputs';
 
 export const REGEX_TELEFONE = /^\(?(?:[14689][1-9]|2[12478]|3[1234578]|5[1345]|7[134579])\)? ?(?:[2-8]|9[1-9])[0-9]{3}\-?[0-9]{4}$/;
 
@@ -44,12 +81,7 @@ export const REGEX_TELEFONE = /^\(?(?:[14689][1-9]|2[12478]|3[1234578]|5[1345]|7
     }
   ]
 })
-export class MpcInputTelefoneComponent implements ControlValueAccessor, Validator {
-
-  // Acessibilidade
-  @Input() id: string = '';
-  @Input() tabIndex: number = 0;
-  @Input() ariaLabel: string = '';
+export class MpcInputTelefoneComponent extends AccessibilityInputs implements ControlValueAccessor, Validator {
 
   // Validators
   @Input() label: string = '';

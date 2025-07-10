@@ -1,3 +1,8 @@
+:host {
+  --mpc-color-bar: var(--mpc-color-primary);
+  --mpc-color-text: var(--mpc-color-primary);
+}
+
 .progress-container {
   display: flex;
   justify-content: space-between;
@@ -6,18 +11,21 @@
   p {
     margin: 0;
     font-size: 14px;
+    color: var(--mpc-color-text);
   }
 }
 
 .progress-bar {
   width: 100%;
   height: 5px;
-  background-color: #e0e0e0; /* Cor fixa para barra de progresso */
+  background-color: #e0e0e0;
+  /* Cor fixa para barra de progresso */
   border-radius: 5px;
 
   .progress-fill {
     height: 100%;
     border-radius: 5px;
     transition: width 0.3s;
+    background-color: var(--mpc-color-bar);
   }
 }

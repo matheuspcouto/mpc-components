@@ -24,6 +24,8 @@ export class TelefoneMaskPipe implements PipeTransform {
 
   /**
    * Aplica a máscara de telefone ao valor informado.
+   * @param value - Valor a ser aplicado a máscara
+   * @returns Valor com máscara
    */
   transform(value: string | null | undefined): string {
     if (!value) {
@@ -42,6 +44,8 @@ export class TelefoneMaskPipe implements PipeTransform {
 
   /**
    * Aplica a máscara no formato (00) 00000-0000.
+   * @param valor - Valor a ser aplicado a máscara
+   * @returns Valor com máscara
    */
   private aplicarMascaraTelefone(valor: string): string {
     // Limita a 11 dígitos para telefone brasileiro

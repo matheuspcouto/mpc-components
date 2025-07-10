@@ -10,10 +10,11 @@
       </div>
 
       <h5>
-        <strong>Descrição:</strong> O <code>mpc-card</code> é um componente avançado para exibir cards personalizados
-        com diferentes layouts, suportando conteúdo rico incluindo imagens, títulos, subtítulos, descrições e links.
-        Oferece suporte completo a acessibilidade e responsividade.
+        <strong>Descrição:</strong> O <code>mpc-card</code> é um componente para exibir cards com layout vertical e
+        horizontal,
+        suportando imagens, títulos, subtítulos, descrições e links com design customizável.
       </h5>
+
       <h5>
         <strong>Propriedades:</strong>
         <ul class="text-start mt-3">
@@ -21,33 +22,41 @@
           <li><strong>subtitulo</strong>: (opcional) O subtítulo do card.</li>
           <li><strong>descricaoUm</strong>: (opcional) A primeira descrição do card.</li>
           <li><strong>descricaoDois</strong>: (opcional) A segunda descrição do card.</li>
-          <li><strong>imagem</strong>: (opcional) A imagem do card. Exemplo: '/assets/img/imagem.jpg'.</li>
-          <li><strong>links</strong>: (opcional) Lista de links do card. Exemplo:
-            <code>[&#123; icone: 'bi bi-linkedin', url: 'https://linkedin.com' &#125;]</code>
-          </li>
-          <li><strong>layout</strong>: (opcional) Layout do card: <code>vertical</code> ou <code>horizontal</code>.
-            Padrão: <code>vertical</code>.</li>
-          <li><strong>estilos</strong>: (opcional) Objeto com estilos personalizados para cores e aparência.</li>
+          <li><strong>imagem</strong>: (opcional) URL da imagem do card.</li>
+          <li><strong>links</strong>: (opcional) Array de links com ícones.</li>
+          <li><strong>layout</strong>: (opcional) Layout do card ('vertical' | 'horizontal', padrão: 'vertical').</li>
           <li><strong>id</strong>: (opcional) O ID único do card para acessibilidade.</li>
           <li><strong>tabIndex</strong>: (opcional) O índice de tabulação para navegação por teclado.</li>
           <li><strong>ariaLabel</strong>: (opcional) Rótulo para leitores de tela.</li>
         </ul>
       </h5>
+
+      <div class="mb-3">
+        <h5><strong>Instalação:</strong></h5>
+        <pre class="chroma"><code>npm install mpc-lib-angular</code></pre>
+      </div>
+
       <div class="mb-3">
         <h5><strong>Importação no arquivo <code>.ts</code>:</strong></h5>
-        <pre class="chroma"><code>imports: [ MpcCardComponent ]</code></pre>
+        <pre class="chroma"><code>
+import &#123; MpcCardComponent &#125; from 'mpc-lib-angular';
+
+// No seu componente
+imports: [ MpcCardComponent ]
+        </code></pre>
       </div>
+
       <div class="mb-5">
         <h5><strong>Exemplo de uso no arquivo <code>.html</code>:</strong></h5>
         <pre class="chroma"><code class="language-html" data-lang="html">&lt;!-- Card Vertical Básico --&gt;
 &lt;mpc-card
-  titulo="Card 1"
-  subtitulo="Layout Vertical"
+  titulo="Título do Card"
+  subtitulo="Subtítulo"
   descricaoUm="Primeira descrição do card"
   descricaoDois="Segunda descrição do card"
-  imagem="/assets/img/no-image.jpg"
-  [links]="[&#123;icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'&#125;]"
-  layout="vertical"&gt;
+  imagem="/assets/img/exemplo.jpg"
+  [links]="[&#123;icone: 'bi bi-linkedin', url: 'https://linkedin.com'&#125;]"
+  [layout]="'vertical'"&gt;
 &lt;/mpc-card&gt;
 
 &lt;!-- Card Horizontal com Links --&gt;
@@ -55,24 +64,12 @@
   titulo="Card Horizontal"
   subtitulo="Com Links"
   descricaoUm="Descrição do card horizontal"
-  imagem="/assets/img/no-image.jpg"
+  imagem="/assets/img/exemplo.jpg"
+  [layout]="'horizontal'"
   [links]="[
     &#123;icone: 'bi bi-linkedin', url: 'https://linkedin.com'&#125;,
     &#123;icone: 'bi bi-github', url: 'https://github.com'&#125;
-  ]"
-  layout="horizontal"&gt;
-&lt;/mpc-card&gt;
-
-&lt;!-- Card com Estilos Personalizados --&gt;
-&lt;mpc-card
-  titulo="Card Personalizado"
-  [estilos]="&#123;
-    background: '#f8f9fa',
-    textColor: '#212529',
-    borderColor: '#007bff',
-    backgroundLinks: '#007bff',
-    linksColor: '#ffffff'
-  &#125;"&gt;
+  ]"&gt;
 &lt;/mpc-card&gt;</code></pre>
       </div>
 
@@ -84,45 +81,29 @@
 
         <div class="col-lg-4">
           <mpc-card id="card-1" titulo="Card 1" subtitulo="Layout Vertical"
-            descricaoUm="Este é um card com layout vertical"
-            descricaoDois="Ideal para exibir informações em formato de coluna" imagem="/assets/img/no-image.jpg"
+            descricaoUm="Este é um card com layout vertical" imagem="/assets/img/no-image.jpg"
             [links]="[&#123;icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'&#125;]"
-            layout="vertical" />
+            [layout]="'vertical'" />
         </div>
 
         <div class="col-lg-4">
           <mpc-card id="card-2" titulo="Card 2" subtitulo="Com Links" descricaoUm="Este card possui múltiplos links"
-            descricaoDois="Você pode adicionar quantos links precisar" imagem="/assets/img/no-image.jpg" [links]="[
+            imagem="/assets/img/no-image.jpg" [links]="[
               &#123;icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'&#125;,
               &#123;icone: 'bi bi-github', url: 'https://github.com/matheuspcouto'&#125;
-            ]" layout="vertical" />
+            ]" [layout]="'vertical'" />
         </div>
 
         <div class="col-lg-4">
           <mpc-card id="card-3" titulo="Card 3" subtitulo="Sem Links" descricaoUm="Este card não possui links"
-            descricaoDois="Apenas informações básicas" imagem="/assets/img/no-image.jpg" layout="vertical" />
+            imagem="/assets/img/no-image.jpg" [layout]="'vertical'" />
         </div>
 
         <div class="col-lg-12">
-          <mpc-card id="card-4" titulo="Card 4" subtitulo="Layout Horizontal" layout="horizontal"
+          <mpc-card id="card-4" titulo="Card 4" subtitulo="Layout Horizontal" [layout]="'horizontal'"
             descricaoUm="Este card tem layout horizontal, ideal para exibir informações em telas desktop."
             imagem="/assets/img/no-image.jpg"
             [links]="[{icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'}]" />
-        </div>
-
-        <div class="col-lg-12">
-          <mpc-card id="card-5" titulo="Card 5" subtitulo="Com Estilos Personalizados" layout="horizontal"
-            descricaoUm="Este card demonstra o uso de estilos personalizados para cores e aparência."
-            imagem="/assets/img/no-image.jpg" [links]="[
-              {icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'},
-              {icone: 'bi bi-github', url: 'https://github.com/matheuspcouto'}
-            ]" />
-        </div>
-
-        <div class="col-lg-12">
-          <mpc-card id="card-6" titulo="Card 6" subtitulo="Com Estilos Personalizados" layout="horizontal"
-            descricaoUm="Este card demonstra o uso de estilos personalizados para cores e aparência."
-            imagem="/assets/img/no-image.jpg" />
         </div>
 
       </div>
@@ -142,59 +123,59 @@
       </div>
 
       <h5>
-        <strong>Descrição:</strong> O <code>mpc-card-background-img</code> é um componente avançado para exibir
-        cards com imagem de fundo e gradiente escuro, ideal para destacar informações importantes com visual
-        impactante. Oferece suporte completo a acessibilidade e responsividade.
+        <strong>Descrição:</strong> O <code>mpc-card-background-img</code> é um componente para exibir cards com imagem
+        de fundo e gradiente escuro, ideal para destacar informações importantes com visual impactante.
       </h5>
+
       <h5>
         <strong>Propriedades:</strong>
         <ul class="text-start mt-3">
           <li><strong>titulo</strong>: (obrigatório) O título principal do card.</li>
-          <li><strong>subtitulo</strong>: (opcional) O subtítulo do card (ex: horário).</li>
+          <li><strong>subtitulo</strong>: (opcional) O subtítulo do card.</li>
           <li><strong>descricao</strong>: (opcional) A descrição do card.</li>
-          <li><strong>imagemFundo</strong>: (obrigatório) A imagem de fundo do card. Exemplo:
-            '/assets/img/home/mountain.jpg'.</li>
-          <li><strong>estilos</strong>: (opcional) Objeto com estilos personalizados para cores e aparência.</li>
           <li><strong>id</strong>: (opcional) O ID único do card para acessibilidade.</li>
           <li><strong>tabIndex</strong>: (opcional) O índice de tabulação para navegação por teclado.</li>
           <li><strong>ariaLabel</strong>: (opcional) Rótulo para leitores de tela.</li>
+          <li><strong>acao</strong>: (opcional) Evento emitido ao clicar no card.</li>
         </ul>
       </h5>
+
+      <div class="mb-3">
+        <h5><strong>Instalação:</strong></h5>
+        <pre class="chroma"><code>npm install mpc-lib-angular</code></pre>
+      </div>
+
       <div class="mb-3">
         <h5><strong>Importação no arquivo <code>.ts</code>:</strong></h5>
-        <pre class="chroma"><code>imports: [ MpcCardBackGroundImgComponent ]</code></pre>
+        <pre class="chroma"><code>
+import &#123; MpcCardBackGroundImgComponent &#125; from 'mpc-lib-angular';
+
+// No seu componente
+imports: [ MpcCardBackGroundImgComponent ]
+        </code></pre>
       </div>
+
       <div class="mb-5">
         <h5><strong>Exemplo de uso no arquivo <code>.html</code>:</strong></h5>
-        <pre class="chroma"><code class="language-html" data-lang="html">&lt;!-- Card Básico --&gt;
-&lt;mpc-card-background-img
-  titulo="Card 1"
-  subtitulo="com imagem de fundo"
-  descricao="Este é um card com imagem de fundo"
-  imagemFundo="/assets/img/home/mountain.jpg"&gt;
-&lt;/mpc-card-background-img&gt;
-
-&lt;!-- Card com Cores Personalizadas --&gt;
-&lt;mpc-card-background-img
-  titulo="Evento Especial"
-  subtitulo="Sábado às 20H"
-  descricao="Um momento único de comunhão e adoração"
-  imagemFundo="/assets/img/evento.jpg"
-  [estilos]="&#123;
-    textColor: '#ffffff',
-    barColor: '#ff6b35'
-  &#125;"&gt;
-&lt;/mpc-card-background-img&gt;
-
-&lt;!-- Card com Acessibilidade --&gt;
+        <pre class="chroma"><code class="language-html" data-lang="html">&lt;!-- Card com Background Básico --&gt;
 &lt;mpc-card-background-img
   titulo="Programação"
   subtitulo="Horários dos Cultos"
   descricao="Confira nossa programação semanal"
-  imagemFundo="/assets/img/programacao.jpg"
   id="card-programacao"
   [tabIndex]="0"
   ariaLabel="Card de programação semanal"&gt;
+&lt;/mpc-card-background-img&gt;
+
+&lt;!-- Card com Background com Ação --&gt;
+&lt;mpc-card-background-img
+  titulo="Evento Especial"
+  subtitulo="Domingo"
+  descricao="Um momento único de comunhão"
+  (acao)="onCardClick()"
+  id="card-evento"
+  [tabIndex]="0"
+  ariaLabel="Card de evento especial"&gt;
 &lt;/mpc-card-background-img&gt;</code></pre>
       </div>
 
@@ -243,16 +224,24 @@
           <li><strong>titulo</strong>: (obrigatório) O título principal do card.</li>
           <li><strong>descricao</strong>: (opcional) A descrição do card.</li>
           <li><strong>icone</strong>: (obrigatório) O ícone do card (classe do Bootstrap Icons).</li>
-          <li><strong>estilos</strong>: (opcional) Objeto com estilos personalizados para cores e aparência.</li>
-          <li><strong>acao</strong>: (opcional) Evento emitido ao clicar no card.</li>
           <li><strong>id</strong>: (opcional) O ID único do card para acessibilidade.</li>
           <li><strong>tabIndex</strong>: (opcional) O índice de tabulação para navegação por teclado.</li>
           <li><strong>ariaLabel</strong>: (opcional) Rótulo para leitores de tela.</li>
+          <li><strong>acao</strong>: (opcional) Evento emitido ao clicar no card.</li>
         </ul>
       </h5>
       <div class="mb-3">
+        <h5><strong>Instalação:</strong></h5>
+        <pre class="chroma"><code>npm install mpc-lib-angular</code></pre>
+      </div>
+      <div class="mb-3">
         <h5><strong>Importação no arquivo <code>.ts</code>:</strong></h5>
-        <pre class="chroma"><code>imports: [ MpcCardMenuComponent ]</code></pre>
+        <pre class="chroma"><code>
+import &#123; MpcCardMenuComponent &#125; from 'mpc-lib-angular';
+
+// No seu componente
+imports: [ MpcCardMenuComponent ]
+        </code></pre>
       </div>
       <div class="mb-5">
         <h5><strong>Exemplo de uso no arquivo <code>.html</code>:</strong></h5>
@@ -262,20 +251,6 @@
   titulo="Telefone"
   descricao="(63) 9 9201-4337"
   (acao)="onMenuCardClick()"&gt;
-&lt;/mpc-card-menu&gt;
-
-&lt;!-- Card de Menu com Estilos Personalizados --&gt;
-&lt;mpc-card-menu
-  icone="bi bi-linkedin"
-  titulo="LinkedIn"
-  descricao="Conecte-se conosco"
-  [estilos]="&#123;
-    background: '#0077b5',
-    textColor: '#ffffff',
-    iconeBackground: '#ffffff',
-    iconeColor: '#0077b5'
-  &#125;"
-  (acao)="onLinkedInClick()"&gt;
 &lt;/mpc-card-menu&gt;
 
 &lt;!-- Card de Menu com Acessibilidade --&gt;
@@ -340,15 +315,23 @@
           <li><strong>descricao</strong>: (opcional) A descrição do evento.</li>
           <li><strong>dia</strong>: (obrigatório) O dia do evento.</li>
           <li><strong>mes</strong>: (obrigatório) O mês do evento.</li>
-          <li><strong>estilos</strong>: (opcional) Objeto com estilos personalizados para cores e aparência.</li>
           <li><strong>id</strong>: (opcional) O ID único do card para acessibilidade.</li>
           <li><strong>tabIndex</strong>: (opcional) O índice de tabulação para navegação por teclado.</li>
           <li><strong>ariaLabel</strong>: (opcional) Rótulo para leitores de tela.</li>
         </ul>
       </h5>
       <div class="mb-3">
+        <h5><strong>Instalação:</strong></h5>
+        <pre class="chroma"><code>npm install mpc-lib-angular</code></pre>
+      </div>
+      <div class="mb-3">
         <h5><strong>Importação no arquivo <code>.ts</code>:</strong></h5>
-        <pre class="chroma"><code>imports: [ MpcCardEventoComponent ]</code></pre>
+        <pre class="chroma"><code>
+import &#123; MpcCardEventoComponent &#125; from 'mpc-lib-angular';
+
+// No seu componente
+imports: [ MpcCardEventoComponent ]
+        </code></pre>
       </div>
       <div class="mb-5">
         <h5><strong>Exemplo de uso no arquivo <code>.html</code>:</strong></h5>
@@ -359,22 +342,6 @@
   descricao="Venha nos conhecer e traga sua família"
   dia="15"
   mes="Jun"&gt;
-&lt;/mpc-card-evento&gt;
-
-&lt;!-- Card de Evento com Estilos Personalizados --&gt;
-&lt;mpc-card-evento
-  titulo="Evento Especial"
-  subtitulo="Sábado"
-  descricao="Um momento único de comunhão"
-  dia="20"
-  mes="Jul"
-  [estilos]="&#123;
-    background: '#f8f9fa',
-    textColor: '#212529',
-    borderColor: '#007bff',
-    eventoBackground: '#007bff',
-    eventoColor: '#ffffff'
-  &#125;"&gt;
 &lt;/mpc-card-evento&gt;
 
 &lt;!-- Card de Evento com Acessibilidade --&gt;
@@ -404,13 +371,6 @@
       </div>
 
       <!-- ======= MpcCardEvento FIM ======= -->
-
-      <h5>
-        Para mais informações sobre como utilizar cards no Bootstrap, consulte a <a
-          href="https://getbootstrap.com/docs/5.1/components/cards/" target="_blank">documentação oficial do
-          Bootstrap
-          sobre cards</a>.
-      </h5>
 
     </div>
 

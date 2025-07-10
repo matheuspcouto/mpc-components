@@ -1,29 +1,67 @@
 /**
  * @Componente MpcInputNumberComponent
- * Este componente exibe um campo de número customizado com validação de mínimo e máximo, integração total com Angular Forms.
- *
- * @Input id {string}: (opcional) Id do campo.
- * @Input label {string}: Label do campo.
- * @Input tabIndex {number}: (opcional) Índice de tabulação do campo.
- * @Input ariaLabel {string}: (opcional) Label para acessibilidade.
- * @Input readonly {boolean}: (opcional) Campo somente leitura.
- * @Input disabled {boolean}: (opcional) Campo desabilitado.
- * @Input min {number}: (opcional) Valor mínimo permitido.
- * @Input max {number}: (opcional) Valor máximo permitido.
- * @Input required {boolean}: (opcional) Campo obrigatório.
- *
- * Integração: ControlValueAccessor e Validator (compatível com Reactive Forms e Template Forms)
- *
- * Exemplo de uso:
- * <mpc-input-number [formControl]="control" label="Idade" [min]="0" [max]="100" [required]="true" [tabIndex]="1" [ariaLabel]="'Idade'" />
- *
+ * 
+ * Este componente exibe um campo numérico customizado com validação de valor mínimo
+ * e máximo, implementando ControlValueAccessor para integração com formulários reativos.
+ * 
+ * @Propriedades
+ * @Input() label {string} - Label do campo (obrigatório)
+ * @Input() min {number} - Valor mínimo permitido (opcional)
+ * @Input() max {number} - Valor máximo permitido (opcional)
+ * @Input() readonly {boolean} - Campo somente leitura (opcional, padrão: false)
+ * @Input() disabled {boolean} - Campo desabilitado (opcional, padrão: false)
+ * @Input() id {string} - ID único do campo para acessibilidade (opcional)
+ * @Input() tabIndex {number} - TabIndex para navegação por teclado (opcional, padrão: 0)
+ * @Input() ariaLabel {string} - Rótulo para leitores de tela (opcional)
+ * 
+ * @Exemplo
+ * ```html
+ * <!-- Input Number Básico -->
+ * <mpc-input-number 
+ *   label="Idade"
+ *   [(ngModel)]="idade">
+ * </mpc-input-number>
+ * 
+ * <!-- Input Number com Validação -->
+ * <mpc-input-number 
+ *   label="Quantidade"
+ *   [min]="1"
+ *   [max]="100"
+ *   [(ngModel)]="quantidade">
+ * </mpc-input-number>
+ * 
+ * <!-- Input Number Somente Leitura -->
+ * <mpc-input-number 
+ *   label="Código"
+ *   [readonly]="true"
+ *   [(ngModel)]="codigo">
+ * </mpc-input-number>
+ * ```
+ * 
+ * @Implementações
+ * ControlValueAccessor: Interface para integração com formulários
+ * - writeValue(value: number): void - Define o valor do campo
+ * - registerOnChange(fn: any): void - Registra função de mudança
+ * - registerOnTouched(fn: any): void - Registra função de toque
+ * 
+ * Validator: Interface para validação de campos
+ * - validate(control: AbstractControl): ValidationErrors | null - Valida o campo
+ * 
+ * @Variáveis CSS
+ * --mpc-color-text: Cor do texto do campo (padrão: var(--mpc-color-primary))
+ * --mpc-color-error: Cor de erro (padrão: #DC3545)
+ * --mpc-color-border: Cor da borda do campo (padrão: var(--mpc-color-tertiary))
+ * --mpc-color-border-success: Cor da borda de sucesso (padrão: var(--mpc-color-secondary))
+ * --mpc-font-text: Fonte do campo (padrão: var(--mpc-font-default))
+ * 
  * @author Matheus Pimentel Do Couto
- * @created 27/02/2025
- * @updated 07/07/2025
+ * @created 27/06/2025
+ * @updated 10/07/2025
  */
 
 import { Component, Input, forwardRef } from '@angular/core';
 import { ValidationErrors, ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, Validator, AbstractControl } from '@angular/forms';
+import { AccessibilityInputs } from '../../../../shared/accessibility-inputs';
 
 @Component({
   selector: 'mpc-input-number',
@@ -43,44 +81,64 @@ import { ValidationErrors, ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATOR
     }
   ]
 })
-export class MpcInputNumberComponent implements ControlValueAccessor, Validator {
+export class MpcInputNumberComponent extends AccessibilityInputs implements ControlValueAccessor, Validator {
 
-  // Acessibilidade
-  @Input() id: string = '';
-  @Input() tabIndex: number = 0;
-  @Input() ariaLabel: string = '';
+  // ===== PROPRIEDADES PÚBLICAS =====
+  /** Label do campo */
   @Input() label: string = '';
-
-  // Validators
+  /** Campo somente leitura */
   @Input() readonly: boolean = false;
+  /** Campo desabilitado */
   @Input() disabled: boolean = false;
+  /** Valor mínimo permitido */
   @Input() min?: number;
+  /** Valor máximo permitido */
   @Input() max?: number;
+  /** Campo obrigatório */
   @Input() required: boolean = false;
 
-  // Variáveis
+  // ===== PROPRIEDADES PRIVADAS =====
+  /** Valor atual do campo */
   public value: number = 0.00;
+  /** Mensagem de erro de validação */
   protected errorMessage?: string;
+  /** Controla se o campo foi tocado */
   protected campoTocado: boolean = false;
 
-  // ControlValueAccessor
+  // ===== MÉTODOS DO CONTROLVALUEACCESSOR =====
+  /** Função de mudança do ControlValueAccessor */
   onChange = (_: any) => { };
+  /** Função de toque do ControlValueAccessor */
   onTouched = () => { };
 
+  /**
+   * Define o valor do campo.
+   * @param value Valor a ser definido
+   */
   writeValue(value: number): void {
     this.value = value;
   }
 
+  /**
+   * Registra a função de mudança.
+   * @param fn Função de mudança
+   */
   registerOnChange(fn: any): void {
     this.onChange = fn;
   }
 
+  /**
+   * Registra a função de toque.
+   * @param fn Função de toque
+   */
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
   }
 
+  // ===== MÉTODOS PROTEGIDOS =====
+
   /**
-   * Marca o campo como tocado (para exibir mensagens de erro após interação).
+   * Marca o campo como tocado quando recebe foco.
    */
   protected onFocus(): void {
     this.campoTocado = true;
@@ -88,8 +146,8 @@ export class MpcInputNumberComponent implements ControlValueAccessor, Validator 
   }
 
   /**
-   * Atualiza o valor do campo a partir do evento de input e notifica o Angular Forms.
-   * @param event Evento de input do campo.
+   * Atualiza o valor do campo, emite se válido e notifica o formulário.
+   * @param event Evento de input
    */
   protected setValue(event: any): void {
     this.value = event.target.value as number;
@@ -97,39 +155,47 @@ export class MpcInputNumberComponent implements ControlValueAccessor, Validator 
     this.onTouched();
   }
 
+  // ===== MÉTODOS DO VALIDATOR =====
+
   /**
-   * Valida o campo conforme regras de mínimo, máximo e obrigatório.
-   * @param control Controle do formulário.
-   * @returns ValidationErrors|null
+   * Valida o campo baseado nas regras de mínimo, máximo e obrigatório.
+   * @param control Controle do formulário
+   * @returns ValidationErrors | null - Erros de validação ou null se válido
    */
   validate(control: AbstractControl): ValidationErrors | null {
     if (this.readonly || this.disabled) { return null; }
+    
     if (this.isCampoObrigatorio(this.value)) {
       if (this.campoTocado) {
         this.errorMessage = `O campo ${this.label} é obrigatório`;
       }
       return { required: true };
     }
+    
     if (this.isMenorQueValorMinimo(this.value)) {
       if (this.campoTocado) {
         this.errorMessage = `O valor mínimo para o campo ${this.label} é ${this.min}`;
       }
       return { min: true };
     }
+    
     if (this.isMaiorQueValorMaximo(this.value)) {
       if (this.campoTocado) {
         this.errorMessage = `O valor máximo para o campo ${this.label} é ${this.max}`;
       }
       return { max: true };
     }
+    
     this.errorMessage = undefined;
     return null;
   }
 
+  // ===== MÉTODOS PRIVADOS =====
+
   /**
    * Verifica se o valor é menor que o mínimo permitido.
-   * @param value Valor do campo.
-   * @returns boolean
+   * @param value Valor do campo
+   * @returns {boolean} true se o valor for menor que o mínimo
    */
   private isMenorQueValorMinimo(value: number | undefined): boolean {
     if (this.min == null || this.min == undefined) return false;
@@ -139,8 +205,8 @@ export class MpcInputNumberComponent implements ControlValueAccessor, Validator 
 
   /**
    * Verifica se o valor é maior que o máximo permitido.
-   * @param value Valor do campo.
-   * @returns boolean
+   * @param value Valor do campo
+   * @returns {boolean} true se o valor for maior que o máximo
    */
   private isMaiorQueValorMaximo(value: number | undefined): boolean {
     if (this.max == null || this.max == undefined) return false;
@@ -150,8 +216,8 @@ export class MpcInputNumberComponent implements ControlValueAccessor, Validator 
 
   /**
    * Verifica se o campo é obrigatório e está vazio.
-   * @param value Valor do campo.
-   * @returns boolean
+   * @param value Valor do campo
+   * @returns {boolean} true se o campo for obrigatório e estiver vazio
    */
   private isCampoObrigatorio(value: number | undefined): boolean {
     if (!this.required) return false;

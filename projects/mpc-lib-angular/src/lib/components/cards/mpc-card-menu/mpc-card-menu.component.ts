@@ -1,24 +1,47 @@
 /**
  * @Componente MpcCardMenuComponent
  * 
- * Este componente é responsável por exibir cards de menu interativos com ícone, título,
- * descrição e ação de clique. Ideal para navegação rápida e ações de menu.
- * O card possui design limpo com ícone circular e layout flexível.
+ * Este componente é responsável por exibir cards de menu com ícone, título e descrição,
+ * ideal para navegação e apresentação de funcionalidades com design atrativo.
  * 
  * @Propriedades
- * Input titulo {string} - Título principal do card (obrigatório)
- * Input descricao {string} - Descrição do card (opcional)
- * Input icone {string} - Classe do ícone (obrigatório, ex: 'bi bi-telephone')
- * Output acao {EventEmitter<void>} - Evento emitido ao clicar no card (opcional)
+ * @Input() id {string} - ID do card (obrigatório)
+ * @Input() tabIndex {number} - Índice do card (opcional)
+ * @Input() ariaLabel {string} - Label do card (opcional)
+ * @Input() titulo {string} - Título do card (obrigatório)
+ * @Input() descricao {string} - Descrição do card (opcional)
+ * @Input() icone {string} - Classe do ícone (obrigatório, ex: 'bi bi-house')
  * 
  * @Exemplo
  * ```html
+ * <!-- Card de Menu Básico -->
  * <mpc-card-menu
- *   icone="bi bi-linkedin"
- *   titulo="LinkedIn"
- *   descricao="Conecte-se conosco"
- *   (acao)="onLinkedInClick()" />
+ *   titulo="Início"
+ *   descricao="Página inicial do sistema"
+ *   icone="bi bi-house"
+ *   id="card-inicio"
+ *   [tabIndex]="0"
+ *   ariaLabel="Card do menu Início" />
+ * 
+ * <!-- Card de Menu com Ação -->
+ * <mpc-card-menu
+ *   titulo="Configurações"
+ *   descricao="Ajustar preferências"
+ *   icone="bi bi-gear"
+ *   (acao)="onMenuClick()"
+ *   id="card-config"
+ *   [tabIndex]="0"
+ *   ariaLabel="Card do menu Configurações" />
  * ```
+ * 
+ * @Variáveis CSS
+ * --mpc-color-bg-card-menu: Cor de fundo do card (padrão: white)
+ * --mpc-color-title-card-menu: Cor do título do card (padrão: var(--mpc-color-primary))
+ * --mpc-color-description-card-menu: Cor da descrição do card (padrão: var(--mpc-color-tertiary))
+ * --mpc-color-bg-icone-card-menu: Cor de fundo do ícone (padrão: var(--mpc-color-primary))
+ * --mpc-color-text-icone-card-menu: Cor do texto do ícone (padrão: white)
+ * --mpc-font-title-card-menu: Fonte do título do card (padrão: var(--mpc-font-subtitle))
+ * --mpc-font-description-card-menu: Fonte da descrição do card (padrão: var(--mpc-font-default))
  * 
  * @author Matheus Pimentel Do Couto
  * @created 24/06/2025

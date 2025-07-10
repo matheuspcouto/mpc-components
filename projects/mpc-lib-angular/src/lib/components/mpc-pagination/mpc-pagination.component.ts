@@ -1,16 +1,40 @@
 /**
  * @Componente MpcPaginationComponent
- * Este componente exibe uma barra de navegação de páginas com suporte a seleção de itens por página, navegação e acessibilidade.
- *
+ * 
+ * Este componente é responsável por exibir uma paginação completa com navegação,
+ * seletor de itens por página e informações de paginação de forma responsiva.
+ * 
  * @Propriedades
- * Input totalItens {number}: Número total de itens a serem paginados.
- * Input mostrarSeletorItensPorPagina {boolean} (opcional): Indica se deve mostrar o seletor de itens por página (padrão: true).
- *
+ * @Input() id {string} - ID do campo (obrigatório)
+ * @Input() tabIndex {number} - Índice do campo (opcional)
+ * @Input() ariaLabel {string} - Label do campo (opcional)
+ * @Input() totalItens {number} - Total de itens (obrigatório)
+ * @Input() mostrarSeletorItensPorPagina {boolean} - Se deve mostrar o seletor de itens por página (opcional, padrão: true)
+ * 
  * @Eventos
- * Output indices: Emite um objeto { indiceInicial, indiceFinal } indicando o range de itens exibidos na página atual.
- *
+ * @Output() indices {EventEmitter<IndicesPaginacao>} - Emite os índices dos itens visíveis
+ * 
+ * @Exemplo
+ * ```html
+ * <!-- Paginação Básica -->
+ * <mpc-pagination
+ *   [totalItens]="100"
+ *   [mostrarSeletorItensPorPagina]="true"
+ *   (indices)="onIndicesChange($event)"
+ *   id="paginacao-exemplo"
+ *   [tabIndex]="0"
+ *   ariaLabel="Paginação dos resultados" />
+ * ```
+ * 
+ * @Variáveis CSS
+ * --mpc-color-navbuttons: Cor dos botões de navegação (padrão: var(--mpc-color-primary))
+ * --mpc-color-text-active: Cor do texto ativo (padrão: var(--mpc-color-primary))
+ * --mpc-color-border-active: Cor da borda ativa (padrão: var(--mpc-color-primary))
+ * --mpc-color-text-disabled: Cor do texto desabilitado (padrão: var(--mpc-color-tertiary))
+ * --mpc-font-pagination: Fonte da paginação (padrão: var(--mpc-font-subtitle))
+ * 
  * @author Matheus Pimentel Do Couto
- * @created 24/06/2025
+ * @created 27/02/2025
  * @updated 10/07/2025
  */
 
@@ -18,7 +42,9 @@ import { Component, Input, Output, EventEmitter, OnInit, AfterViewInit, OnChange
 import { AccessibilityInputs } from '../../../shared/accessibility-inputs';
 
 export interface IndicesPaginacao {
+  /** Índice do primeiro item visível */
   indiceInicial: number;
+  /** Índice do último item visível */
   indiceFinal: number;
 }
 
@@ -30,40 +56,64 @@ export interface IndicesPaginacao {
 })
 export class MpcPaginationComponent extends AccessibilityInputs implements OnInit, AfterViewInit, OnChanges {
 
-  // Configurações de paginação
+  // ===== PROPRIEDADES PÚBLICAS =====
+  /** Número total de itens a serem paginados */
   @Input() totalItens: number = 0;
+  /** Indica se deve mostrar o seletor de itens por página */
   @Input() mostrarSeletorItensPorPagina: boolean = true;
+  /** Número de itens por página */
   itensPorPagina: number = 5;
+  /** Página atual */
   paginaAtual: number = 1;
+  /** Número máximo de páginas visíveis na paginação */
   maxPaginasVisiveis: number = 5;
+  /** Opções disponíveis no seletor de itens por página */
   opcoesSeletorItensPorPagina: number[] = [5, 10, 25, 50, 100];
 
+  /** Evento emitido com os índices dos itens visíveis */
   @Output() indices: EventEmitter<IndicesPaginacao> = new EventEmitter();
 
-  // Propriedades calculadas
+  // ===== PROPRIEDADES PROTEGIDAS =====
+  /** Total de páginas calculado */
   protected totalPaginas: number = 0;
+  /** Array de páginas visíveis na paginação */
   protected paginasVisiveis: number[] = [];
+  /** Controla exibição das reticências no início */
   protected mostrarPrimeirasReticencias: boolean = false;
+  /** Controla exibição das reticências no final */
   protected mostrarUltimasReticencias: boolean = false;
-
-  // Variáveis para exibir quantos itens estão sendo mostrados
+  /** Primeiro item visível na página atual */
   protected primeiroItem: number = 0;
+  /** Último item visível na página atual */
   protected ultimoItem: number = 0;
 
+  // ===== MÉTODOS DO CICLO DE VIDA =====
+
+  /**
+   * Inicializa o componente calculando a paginação.
+   */
   ngOnInit(): void {
     this.calcularPaginacao();
   }
 
+  /**
+   * Emite os índices após a inicialização da view.
+   */
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.emitirIndices();
     });
   }
 
+  /**
+   * Recalcula a paginação quando as propriedades mudam.
+   */
   ngOnChanges(): void {
     this.calcularPaginacao();
     this.emitirIndices();
   }
+
+  // ===== MÉTODOS PRIVADOS =====
 
   /**
    * Calcula o total de páginas e atualiza as páginas visíveis e itens visíveis.
@@ -127,6 +177,8 @@ export class MpcPaginationComponent extends AccessibilityInputs implements OnIni
     });
   }
 
+  // ===== MÉTODOS PÚBLICOS =====
+
   /**
    * Navega para a página informada.
    * @param pagina Página de destino
@@ -187,8 +239,11 @@ export class MpcPaginationComponent extends AccessibilityInputs implements OnIni
     }
   }
 
+  // ===== GETTERS =====
+
   /**
    * Indica se existe página anterior.
+   * @returns {boolean} true se existe página anterior
    */
   get temPaginaAnterior(): boolean {
     return this.paginaAtual > 1;
@@ -196,20 +251,23 @@ export class MpcPaginationComponent extends AccessibilityInputs implements OnIni
 
   /**
    * Indica se existe próxima página.
+   * @returns {boolean} true se existe próxima página
    */
   get temProximaPagina(): boolean {
     return this.paginaAtual < this.totalPaginas;
   }
 
   /**
-   * Indica se está na primeira página.
+   * Indica se a página atual é a primeira.
+   * @returns {boolean} true se for a primeira página
    */
   get ehPrimeiraPagina(): boolean {
     return this.paginaAtual === 1;
   }
 
   /**
-   * Indica se está na última página.
+   * Indica se a página atual é a última.
+   * @returns {boolean} true se for a última página
    */
   get ehUltimaPagina(): boolean {
     return this.paginaAtual === this.totalPaginas;

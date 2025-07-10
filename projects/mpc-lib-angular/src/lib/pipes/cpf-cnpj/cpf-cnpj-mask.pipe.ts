@@ -25,6 +25,8 @@ export class CpfCnpjMaskPipe implements PipeTransform {
 
   /**
    * Aplica a máscara de CPF ou CNPJ ao valor informado.
+   * @param value - Valor a ser aplicado a máscara
+   * @returns Valor com máscara
    */
   transform(value: string | null | undefined): string {
     if (!value) {
@@ -44,6 +46,8 @@ export class CpfCnpjMaskPipe implements PipeTransform {
 
   /**
    * Aplica a máscara de CPF no formato 000.000.000-00.
+   * @param valor - Valor a ser aplicado a máscara
+   * @returns Valor com máscara
    */
   private aplicarMascaraCPF(valor: string): string {
     // Limita a 11 dígitos para CPF
@@ -63,6 +67,8 @@ export class CpfCnpjMaskPipe implements PipeTransform {
 
   /**
    * Aplica a máscara de CNPJ no formato 00.000.000/0000-00.
+   * @param valor - Valor a ser aplicado a máscara
+   * @returns Valor com máscara
    */
   private aplicarMascaraCNPJ(valor: string): string {
     // Limita a 14 dígitos para CNPJ

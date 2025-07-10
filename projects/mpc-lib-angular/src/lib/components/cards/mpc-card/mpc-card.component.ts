@@ -1,52 +1,66 @@
 /**
  * @Componente MpcCardComponent
  * 
- * Este componente é responsável por exibir cards personalizados com diferentes layouts,
- * suportando conteúdo rico incluindo imagens, títulos, subtítulos, descrições e links.
+ * Este componente é responsável por exibir cards com layout vertical e horizontal,
+ * suportando imagens, títulos, subtítulos, descrições e links com design customizável.
  * 
  * @Propriedades
- * @Input() titulo {string} - Título principal do card (obrigatório)
+ * @Input() id {string} - ID do card (obrigatório)
+ * @Input() tabIndex {number} - Índice do card (opcional)
+ * @Input() ariaLabel {string} - Label do card (opcional)
+ * @Input() titulo {string} - Título do card (obrigatório)
  * @Input() subtitulo {string} - Subtítulo do card (opcional)
- * @Input() descricaoUm {string} - Primeira descrição do card (opcional)
- * @Input() descricaoDois {string} - Segunda descrição do card (opcional)
- * @Input() imagem {string} - URL da imagem do card (opcional, usa imagem padrão se não fornecida)
- * @Input() links {CardLinks[]} - Array de links com ícones (opcional)
- * @Input() layout {'vertical' | 'horizontal'} - Layout do card (padrão: 'vertical')
+ * @Input() descricao {string} - Descrição do card (opcional)
+ * @Input() imagem {string} - URL da imagem (opcional)
+ * @Input() links {CardLink[]} - Array de links do card (opcional)
+ * @Input() tipo {string} - Tipo do card ('vertical' | 'horizontal') (opcional, padrão: 'vertical')
  * 
- * @Exemplo de uso
+ * @Exemplo
  * ```html
  * <!-- Card Vertical Básico -->
- * <mpc-card 
- *   titulo="Título do Card" 
- *   subtitulo="Subtítulo" 
- *   descricaoUm="Primeira descrição"
- *   descricaoDois="Segunda descrição"
- *   imagem="/assets/img/card-image.jpg"
- *   layout="vertical">
- * </mpc-card>
+ * <mpc-card
+ *   titulo="Título do Card"
+ *   subtitulo="Subtítulo"
+ *   descricao="Descrição do card"
+ *   imagem="/assets/img/exemplo.jpg"
+ *   id="card-exemplo"
+ *   [tabIndex]="0"
+ *   ariaLabel="Card de exemplo" />
  * 
  * <!-- Card Horizontal com Links -->
- * <mpc-card 
- *   titulo="Card Horizontal" 
- *   subtitulo="Com Links" 
- *   descricaoUm="Descrição do card"
- *   imagem="/assets/img/card-image.jpg"
- *   [links]="[
- *     {url: 'https://linkedin.com', icone: 'bi bi-linkedin'},
- *     {url: 'https://github.com', icone: 'bi bi-github'}
- *   ]"
- *   layout="horizontal">
- * </mpc-card>
+ * <mpc-card
+ *   titulo="Card Horizontal"
+ *   subtitulo="Subtítulo"
+ *   descricao="Descrição do card horizontal"
+ *   imagem="/assets/img/exemplo.jpg"
+ *   [tipo]="'horizontal'"
+ *   [links]="linksCard"
+ *   id="card-horizontal"
+ *   [tabIndex]="0"
+ *   ariaLabel="Card horizontal com links" />
  * ```
  * 
  * @Interfaces
- * CardLinks: Interface para links do card
+ * CardLink: Interface para links do card
  * - url: string - URL do link
- * - icone: string - Classe do ícone (ex: 'bi bi-linkedin')
+ * - icone: string - Classe do ícone (ex: 'bi bi-facebook')
+ * 
+ * @Variáveis CSS
+ * --mpc-bg-card: Cor de fundo do card (padrão: white)
+ * --mpc-border-color-card: Cor da borda do card (padrão: var(--mpc-color-primary))
+ * --mpc-bg-links-card: Cor de fundo dos links (padrão: var(--mpc-color-primary))
+ * --mpc-color-links-card: Cor dos links (padrão: white)
+ * --mpc-color-text-title-card: Cor do título do card (padrão: var(--mpc-color-primary))
+ * --mpc-color-text-subtitle-card: Cor do subtítulo do card (padrão: var(--mpc-color-primary))
+ * --mpc-color-text-description-card: Cor da descrição do card (padrão: var(--mpc-color-primary))
+ * --mpc-color-bar-card: Cor da barra do card (padrão: var(--mpc-color-primary))
+ * --mpc-font-title-card: Fonte do título do card (padrão: var(--mpc-font-title))
+ * --mpc-font-subtitle-card: Fonte do subtítulo do card (padrão: var(--mpc-font-subtitle))
+ * --mpc-font-description-card: Fonte da descrição do card (padrão: var(--mpc-font-default))
  * 
  * @author Matheus Pimentel Do Couto
  * @created 24/06/2025
- * @updated 09/07/2025
+ * @updated 10/07/2025
  */
 
 import { Component, Input } from '@angular/core';
