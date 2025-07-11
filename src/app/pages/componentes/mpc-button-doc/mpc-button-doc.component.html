@@ -1,0 +1,95 @@
+<main>
+  <!-- ======= MpcButton INÍCIO ======= -->
+  <section id="buttons">
+    <div class="container">
+      <div class="section-header">
+        <h2>experimente o componente</h2>
+        <p>MPC<span> Button </span> </p>
+      </div>
+      <h5>
+        <strong>Descrição:</strong> O <code>&lt;mpc-button&gt;</code> do MpcComponents é um componente estilizado,
+        permitindo a inclusão de ícones e personalização via propriedades.
+      </h5>
+      <h5>
+        <strong>Propriedades do Componente:</strong>
+        <ul class="text-start mt-3">
+          <li><strong>texto</strong>: <code>string</code> (opcional) — Texto exibido no botão.</li>
+          <li><strong>icone</strong>: <code>string</code> (opcional) — Classes do ícone (ex: 'bi bi-check').</li>
+          <li><strong>posicaoIcone</strong>: <code>'esquerda' | 'direita'</code> (opcional, padrão: 'direita') — Posição do ícone em relação ao texto.</li>
+          <li><strong>disabled</strong>: <code>boolean</code> (opcional, padrão: false) — Indica se o botão está desabilitado.</li>
+          <li><strong>id</strong>: <code>string</code> (opcional) — ID do botão para acessibilidade.</li>
+          <li><strong>tabIndex</strong>: <code>number</code> (opcional) — Índice de tabulação para navegação por teclado.</li>
+          <li><strong>ariaLabel</strong>: <code>string</code> (opcional) — Rótulo para leitores de tela.</li>
+        </ul>
+      </h5>
+      <h5>
+        <strong>Propriedades CSS do Elemento:</strong>
+        <ul class="text-start mt-3">
+          <li><strong>[style.background-color]</strong>: Cor personalizada para o fundo do botão (hex, rgb, rgba, nome
+            da cor).</li>
+          <li><strong>[style.color]</strong>: Cor personalizada para o texto do botão (hex, rgb, rgba, nome da cor).
+          </li>
+          <li><strong>disabled</strong>: (opcional) Atributo que indica se o botão está desabilitado.</li>
+          <li><strong>tabindex</strong>: (opcional) Índice de tabulação para acessibilidade.</li>
+          <li><strong>aria-label</strong>: (opcional) Descrição do botão para acessibilidade.</li>
+        </ul>
+      </h5>
+      <div class="mb-3">
+        <h5><strong>Importação no arquivo <code>.ts</code>:</strong></h5>
+        <pre class="chroma"><code>
+import &#123; MpcButtonComponent &#125; from 'mpc-lib-angular';
+
+// No seu componente
+imports: [MpcButtonComponent]
+        </code></pre>
+      </div>
+      <div class="mb-5">
+        <h5><strong>Exemplo de uso no arquivo <code>.html</code>:</strong></h5>
+        <pre class="chroma"><code class="language-html" data-lang="html">
+<!-- Botão Básico -->
+<mpc-button texto="Salvar"></mpc-button>
+
+<!-- Botão com Ícone à Direita -->
+<mpc-button
+  [icone]="'bi bi-check'"
+  [posicaoIcone]="'direita'"
+  texto="Salvar">
+</mpc-button>
+
+<!-- Botão com Ícone à Esquerda -->
+<mpc-button
+  [icone]="'bi bi-arrow-left'"
+  [posicaoIcone]="'esquerda'"
+  texto="Voltar">
+</mpc-button>
+
+<!-- Botão Apenas com Ícone -->
+<mpc-button [icone]="'bi bi-plus'"></mpc-button>
+        </code></pre>
+      </div>
+      <h5 class="text-start">
+        <strong>Observações importantes:</strong>
+        <ul class="text-start mt-3">
+          <li>O componente <code>&lt;mpc-button&gt;</code> já aplica a classe CSS <code>.mpc-btn</code> automaticamente.
+          </li>
+          <li>O texto e ícone são inseridos dinamicamente pelo Angular.</li>
+          <li>As cores são definidas através das propriedades CSS <code>[style.background-color]</code> e
+            <code>[style.color]</code>.
+          </li>
+          <li>A posição padrão do ícone é <code>direita</code>.</li>
+          <li>As cores podem ser definidas em qualquer formato CSS válido (hex, rgb, rgba, nomes de cores, variáveis
+            CSS).</li>
+          <li>Para eventos de clique, utilize <code>(click)="suaFuncao()"</code>.</li>
+          <li>O componente inclui suporte para acessibilidade com <code>tabindex</code> e <code>aria-label</code>.</li>
+        </ul>
+      </h5>
+      <div class="row mb-5">
+        <div class="col-12 d-flex justify-content-center">
+          <mpc-button (click)="alert('Exemplo de Botão')" [icone]="'bi bi-code-slash'" [posicaoIcone]="'esquerda'"
+            [texto]="'Exemplo de Botão'" [disabled]="true" />
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ======= MpcButton FIM ======= -->
+</main>

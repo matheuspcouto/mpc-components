@@ -37,4 +37,13 @@ describe('MpcCardDocComponent', () => {
     component.onMenuCardClick();
     expect(alertSpy).toHaveBeenCalledWith('Ação executada!');
   });
+
+  it('deve renderizar card background com imagemFundo customizada', () => {
+    const fixture = TestBed.createComponent(MpcCardsDocComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    // Busca por um card com imagemFundo customizada
+    const card = compiled.querySelector('mpc-card-background-img[imagemFundo="/assets/img/home/mountain.jpg"]');
+    expect(card).toBeTruthy();
+  });
 });

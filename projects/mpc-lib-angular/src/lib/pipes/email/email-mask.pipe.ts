@@ -5,9 +5,9 @@
  * Aplica formatação visual básica mantendo a estrutura do email
  * Exemplo: usuario@dominio.com
  *
- * Exemplo de utilização:
- * {{ 'usuario@exemplo.com' | emailMask }}
- * {{ email | emailMask }}
+ * @Exemplo de utilização:
+ * {{ 'usuario@exemplo.com' | emailMaskPipe }}
+ * {{ email | emailMaskPipe }}
  * this.emailMaskPipe.transform(email);
  *
  * @author Matheus Pimentel Do Couto
@@ -18,7 +18,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'emailMask',
+  name: 'emailMaskPipe',
   standalone: true
 })
 export class EmailMaskPipe implements PipeTransform {

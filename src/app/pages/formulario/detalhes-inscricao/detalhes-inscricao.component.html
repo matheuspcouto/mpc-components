@@ -126,15 +126,11 @@
             botão abaixo. </p>
         </div>
 
-        <button mpcButton class="btn-whatsapp" texto="Solicitar pelo WhatsApp"
-          icone="bi bi-whatsapp" (click)="pedirLinkPagamento()">
-        </button>
+        <mpc-button id="btn-whatsapp" texto="Solicitar pelo WhatsApp" icone="bi bi-whatsapp"
+          (click)="pedirLinkPagamento()" />
         }
 
-        <button mpcButton class="btn-home" (click)="irParaHome()" texto="Ir para Home"
-          icone="bi bi-house">
-        </button>
-
+        <mpc-button id="btn-home" (click)="irParaHome()" texto="Ir para Home" icone="bi bi-house" />
       </div>
     </div>
   </div>

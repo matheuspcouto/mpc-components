@@ -19,9 +19,11 @@
     flex-direction: column;
     justify-content: center;
 
-    .btn-home {
-      background-color: white !important;
-      color: var(--mpc-color-primary) !important;
+    #btn-home {
+      --mpc-bg-color-btn: white;
+      --mpc-text-color-btn: var(--color-primary);
+      --mpc-bg-color-btn-hover: var(--color-secondary);
+      --mpc-text-color-btn-hover: white;
     }
 
     h2 {
@@ -168,9 +170,6 @@ section {
   /* Fontes */
   --mpc-font-title-page-divider-img: var(--font-title);
   --mpc-font-subtitle-page-divider-img: var(--font-title);
-
-  /* Imagem de fundo */
-  --mpc-img-background-page-divider: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/assets/img/home/mountain.jpg');
 }
 
 /*--------------------------------------------------------------

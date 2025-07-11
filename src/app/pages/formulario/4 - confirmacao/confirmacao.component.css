@@ -70,20 +70,15 @@ section {
     --mpc-color-text: var(--mpc-color-tertiary);
   }
 
-  .btn-inscrever {
-    background-color: var(--mpc-color-primary);
-    color: white;
-
-    &:disabled {
-      background-color: #5C636A;
-      color: white;
-      cursor: default !important;
-    }
+  #btn-inscrever {
+    --mpc-bg-color-btn: var(--color-primary);
+    --mpc-text-color-btn: white;
+    --mpc-bg-color-btn-hover: var(--color-secondary);
   }
 
-  .btn-voltar {
-    background-color: transparent !important;
-    color: var(--mpc-color-tertiary) !important;
+  #btn-voltar {
+    --mpc-bg-color-btn: transparent;
+    --mpc-text-color-btn: var(--color-tertiary);
   }
 }
 

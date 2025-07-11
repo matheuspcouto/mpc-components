@@ -15,49 +15,45 @@
       </h5>
 
       <h5>
-        <strong>Propriedades:</strong>
+        <strong>Propriedades do Componente:</strong>
         <ul class="text-start mt-3">
-          <li><strong>id</strong>: (opcional) O ID único do modal para acessibilidade.</li>
-          <li><strong>tabIndex</strong>: (opcional) O índice de tabulação para navegação por teclado.</li>
-          <li><strong>ariaLabel</strong>: (opcional) Rótulo para leitores de tela.</li>
+          <li><strong>id</strong>: <code>string</code> (opcional) — ID do modal para acessibilidade.</li>
+          <li><strong>tabIndex</strong>: <code>number</code> (opcional) — Índice de tabulação para navegação por teclado.</li>
+          <li><strong>ariaLabel</strong>: <code>string</code> (opcional) — Rótulo para leitores de tela.</li>
         </ul>
+        <span class="text-muted">O componente não possui outros <code>&#64;Input()</code>. O controle de exibição e conteúdo é feito via métodos públicos e configuração (<code>MpcModalConfig</code>).</span>
       </h5>
-
-      <div class="mb-3">
-        <h5><strong>Instalação:</strong></h5>
-        <pre class="chroma"><code>npm install mpc-lib-angular</code></pre>
-      </div>
-
       <div class="mb-3">
         <h5><strong>Importação no arquivo <code>.ts</code>:</strong></h5>
         <pre class="chroma"><code>
-import &#123; MpcModalComponent, ModalConfig, TipoModal &#125; from 'mpc-lib-angular';
+import &#123; MpcModalComponent, MpcModalConfig, TipoModal &#125; from 'mpc-lib-angular';
 
 // No seu componente
-imports: [ MpcModalComponent ]
+imports: [MpcModalComponent]
         </code></pre>
       </div>
-
       <div class="mb-5">
         <h5><strong>Exemplo de uso no arquivo <code>.html</code>:</strong></h5>
-        <pre class="chroma"><code class="language-html" data-lang="html">&lt;!-- Modal Básico --&gt;
-&lt;mpc-modal #modalExemplo&gt;&lt;/mpc-modal&gt;
+        <pre class="chroma"><code class="language-html" data-lang="html">
+<!-- Modal Básico -->
+<mpc-modal #modalExemplo></mpc-modal>
 
-&lt;!-- Modal com Acessibilidade --&gt;
-&lt;mpc-modal 
-  #modalExemplo 
+<!-- Modal com Acessibilidade -->
+<mpc-modal
+  #modalExemplo
   id="modal-principal"
   [tabIndex]="0"
-  ariaLabel="Modal de exemplo"&gt;
-&lt;/mpc-modal&gt;</code></pre>
+  ariaLabel="Modal de exemplo">
+</mpc-modal>
+        </code></pre>
       </div>
-
       <div class="mb-3">
         <h5><strong>Exemplo de uso no arquivo <code>.ts</code>:</strong></h5>
-        <pre class="chroma"><code>&#64;ViewChild('modalExemplo', &#123; static: true &#125;) modalExemplo!: MpcModalComponent;
+        <pre class="chroma"><code>
+&#64;ViewChild('modalExemplo', &#123; static: true &#125;) modalExemplo!: MpcModalComponent;
 
 abrirModalSucesso() &#123;
-  const modalSucesso: ModalConfig = &#123;
+  const modalSucesso: MpcModalConfig = &#123;
     titulo: 'Modal de Sucesso',
     texto: 'Operação realizada com sucesso!',
     tipoModal: TipoModal.SUCESSO,
@@ -67,7 +63,8 @@ abrirModalSucesso() &#123;
     textoSegundoBotao: 'Fechar',
   &#125;;
   this.modalExemplo?.abrirModal(modalSucesso);
-&#125;</code></pre>
+&#125;
+        </code></pre>
       </div>
 
       <div class="mb-3">
@@ -94,20 +91,20 @@ abrirModalSucesso() &#123;
       <h5>Veja e teste abaixo os tipos de modais disponíveis</h5>
       <div class="row gy-3 mb-5">
         <div class="col-lg-6 d-flex justify-content-center">
-          <button mpcButton (click)="abrirModalSucesso()" [style.background-color]="'green'" [style.color]="'white'"
-            icone="bi bi-check-all" posicaoIcone="esquerda" [tabIndex]="0" texto="Modal de Sucesso"></button>
+          <mpc-button (click)="abrirModalSucesso()" icone="bi bi-check-all" posicaoIcone="esquerda" [tabIndex]="0"
+            texto="Modal de Sucesso" id="btn-modal-sucesso" />
         </div>
         <div class="col-lg-6 d-flex justify-content-center">
-          <button mpcButton (click)="abrirModalConfirmacao()" [style.background-color]="'black'" [style.color]="'white'"
-            icone="bi bi-question-lg" posicaoIcone="esquerda" [tabIndex]="0" texto="Modal de Confirmação"></button>
+          <mpc-button (click)="abrirModalConfirmacao()" icone="bi bi-question-lg" posicaoIcone="esquerda" [tabIndex]="0"
+            texto="Modal de Confirmação" id="btn-modal-confirmacao" />
         </div>
         <div class="col-lg-6 d-flex justify-content-center">
-          <button mpcButton (click)="abrirModalAlerta()" [style.background-color]="'yellow'" [style.color]="'black'"
-            icone="bi bi-exclamation-triangle" posicaoIcone="esquerda" [tabIndex]="0" texto="Modal de Alerta"></button>
+          <mpc-button (click)="abrirModalAlerta()" icone="bi bi-exclamation-triangle" posicaoIcone="esquerda"
+            [tabIndex]="0" texto="Modal de Alerta" id="btn-modal-alerta" />
         </div>
         <div class="col-lg-6 d-flex justify-content-center">
-          <button mpcButton (click)="abrirModalErro()" [style.background-color]="'red'" [style.color]="'white'"
-            icone="bi bi-bug" posicaoIcone="esquerda" [tabIndex]="0" texto="Modal de Erro"></button>
+          <mpc-button (click)="abrirModalErro()" icone="bi bi-bug" posicaoIcone="esquerda" [tabIndex]="0"
+            texto="Modal de Erro" id="btn-modal-erro" />
         </div>
       </div>
 

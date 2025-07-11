@@ -1,24 +1,36 @@
 /**
  * @Componente ErrorComponent
+ *
  * Este componente é responsável por exibir uma tela de erro com informações detalhadas.
  * É chamado pelo ErrorService e exibe uma mensagem de erro com um botão para voltar e outro para copiar a mensagem de erro.
  * Utiliza Signal para receber o estado do erro automaticamente.
  *
+ * @Propriedades
+ * @protected exibirErro {Signal<boolean>} - Indica se há erro para exibir
+ * @protected erro {Signal<any>} - Retorna o erro atual
+ * @protected imagemErro {Signal<string>} - Retorna a imagem do erro ou imagem padrão
+ * @protected isCopiado {boolean} - Indica se a mensagem foi copiada
+ *
+ * @Exemplo
+ * ```html
+ * <mpc-error></mpc-error>
+ * ```
+ *
  * @author Matheus Pimentel Do Couto
  * @created 01/07/2025
- * @updated 04/07/2025
+ * @updated 10/07/2025
  */
 
 import { Component, inject, computed } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ErrorService } from './error.service';
-import { MpcButtonDirective } from 'mpc-lib-angular';
+import { MpcButtonComponent } from 'mpc-lib-angular';
 
 @Component({
     selector: 'mpc-error',
     standalone: true,
-    imports: [MpcButtonDirective],
+    imports: [MpcButtonComponent],
     templateUrl: './error.component.html',
     styleUrls: ['./error.component.css']
 })
@@ -29,22 +41,28 @@ export class ErrorComponent {
 
     /**
      * Computed signal que verifica se há erro para exibir.
+     * @returns {boolean} true se houver erro
      */
     protected readonly exibirErro = computed(() => this.errorService.erro() !== null);
 
     /**
      * Computed signal que retorna o erro atual.
+     * @returns {any} Objeto de erro atual
      */
     protected readonly erro = computed(() => this.errorService.erro());
 
     /**
      * Computed signal que retorna a imagem do erro ou imagem padrão.
+     * @returns {string} Caminho da imagem do erro
      */
     protected readonly imagemErro = computed(() => {
         const erroAtual = this.erro();
         return erroAtual?.imagem || 'assets/img/modal/error.png';
     });
 
+    /**
+     * Indica se a mensagem de erro foi copiada para a área de transferência.
+     */
     protected isCopiado: boolean = false;
 
     /**
@@ -60,6 +78,7 @@ export class ErrorComponent {
 
     /**
      * Copia a mensagem de erro para a área de transferência e exibe notificação.
+     * @param mensagem Mensagem de erro a ser copiada
      */
     protected copiarMensagem(mensagem: string | undefined): void {
         if (!mensagem) return;

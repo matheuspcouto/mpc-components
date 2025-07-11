@@ -1,5 +1,26 @@
+
+/**
+ * @Componente MpcPaginationDocComponent
+ *
+ * Este componente exibe exemplos e documentação do componente de paginação da biblioteca MPC,
+ * demonstrando como paginar listas de itens e controlar índices de exibição.
+ *
+ * @Propriedades
+ * @protected itensTotais {any[]} - Lista de itens para paginação
+ * @protected indiceInicial {number} - Índice inicial da página atual
+ * @protected indiceFinal {number} - Índice final da página atual
+ *
+ * @Exemplo
+ * ```html
+ * <app-paginacao></app-paginacao>
+ * ```
+ *
+ * @author Matheus Pimentel Do Couto
+ * @created 10/07/2025
+ * @updated 10/07/2025
+ */
 import { Component } from '@angular/core';
-import { MpcPaginationComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/mpc-pagination/mpc-pagination.component';
+import { MpcPaginationComponent } from 'mpc-lib-angular';
 
 @Component({
   selector: 'app-paginacao',
@@ -9,6 +30,9 @@ import { MpcPaginationComponent } from '../../../../../projects/mpc-lib-angular/
 })
 export class MpcPaginationDocComponent {
 
+  /**
+   * Lista de itens para paginação.
+   */
   itensTotais = [
     { id: 1, nome: 'Item 1' },
     { id: 2, nome: 'Item 2' },
@@ -60,11 +84,21 @@ export class MpcPaginationDocComponent {
     { id: 48, nome: 'Item 48' },
     { id: 49, nome: 'Item 49' },
     { id: 50, nome: 'Item 50' },
-  ]
+  ];
 
+  /**
+   * Índice inicial da página atual.
+   */
   indiceInicial: number = 0;
+  /**
+   * Índice final da página atual.
+   */
   indiceFinal: number = 0;
 
+  /**
+   * Atualiza os índices de exibição da lista conforme a página selecionada.
+   * @param event Objeto contendo os índices inicial e final
+   */
   definirIndiceLista(event: any) {
     const { indiceInicial, indiceFinal } = event;
     this.indiceInicial = indiceInicial;

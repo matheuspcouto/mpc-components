@@ -5,10 +5,6 @@
 export * from './lib/mpc-lib.service';
 export * from './lib/mpc-lib.component';
 
-// Directives
-export * from './lib/directives/mpc-btn-float/mpc-btn-float.directive';
-export * from './lib/directives/mpc-button/mpc-button.directive';
-
 // Cards
 export * from './lib/components/cards/mpc-card/mpc-card.component';
 export * from './lib/components/cards/mpc-card-background-img/mpc-card-background-img.component';
@@ -43,6 +39,10 @@ export * from './lib/components/mpc-pagination/mpc-pagination.component';
 export * from './lib/components/mpc-tabs/mpc-tabs.component';
 export * from './lib/components/mpc-navbar/mpc-navbar.component';
 export * from './lib/components/mpc-modal/mpc-modal.component';
+export * from './lib/components/mpc-button/mpc-button.component';
+export * from './lib/components/mpc-btn-float/mpc-btn-float.component';
+export * from './lib/components/mpc-page-divider-img/mpc-page-divider-img.component';
+
 
 
 

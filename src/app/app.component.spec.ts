@@ -70,36 +70,19 @@ describe('AppComponent', () => {
       const abaComponentes = component['abas'].find(aba => aba.titulo === 'Componentes');
       const subRotasEsperadas = [
         { titulo: 'mpc-cards', rota: Rotas.CARDS },
+        { titulo: 'mpc-button', rota: Rotas.BUTTONS },
+        { titulo: 'mpc-btn-float', rota: Rotas.BTN_FLOAT },
         { titulo: 'mpc-modal', rota: Rotas.MODAIS },
         { titulo: 'mpc-loader', rota: Rotas.LOADERS },
         { titulo: 'mpc-navbar', rota: Rotas.NAVBAR },
-        { titulo: 'mpc-footer', rota: Rotas.FOOTER },
         { titulo: 'mpc-tabs', rota: Rotas.TABS },
         { titulo: 'mpc-pagination', rota: Rotas.PAGINACAO },
         { titulo: 'mpc-inputs', rota: Rotas.INPUTS },
-        { titulo: 'mpc-page-header', rota: Rotas.PAGE_HEADER },
+        { titulo: 'mpc-page-divider-img', rota: Rotas.PAGE_DIVIDER_IMG },
+        { titulo: 'mpc-pipes', rota: Rotas.PIPES },
       ];
 
       expect(abaComponentes?.subRotas).toEqual(subRotasEsperadas);
-    });
-
-    it('deve ter a aba Diretivas configurada com sub-rotas', () => {
-      const abaDiretivas = component['abas'].find(aba => aba.titulo === 'Diretivas');
-      expect(abaDiretivas).toBeDefined();
-      expect(abaDiretivas?.rota).toBe(Rotas.DIRETIVAS);
-      expect(abaDiretivas?.icone).toBe('bi bi-code-slash');
-      expect(abaDiretivas?.subRotas).toBeDefined();
-      expect(Array.isArray(abaDiretivas?.subRotas)).toBe(true);
-    });
-
-    it('deve ter todas as sub-rotas da aba Diretivas', () => {
-      const abaDiretivas = component['abas'].find(aba => aba.titulo === 'Diretivas');
-      const subRotasEsperadas = [
-        { titulo: 'mpc-button', rota: Rotas.BUTTONS },
-        { titulo: 'mpc-btn-float', rota: Rotas.BTN_FLOAT },
-      ];
-
-      expect(abaDiretivas?.subRotas).toEqual(subRotasEsperadas);
     });
 
     it('deve ter a aba Formulário configurada com sub-rotas', () => {
@@ -134,6 +117,7 @@ describe('AppComponent', () => {
     it('deve ter todas as sub-rotas da aba Páginas Avulsas', () => {
       const abaPaginas = component['abas'].find(aba => aba.titulo === 'Páginas Avulsas');
       const subRotasEsperadas = [
+        { titulo: 'Home', rota: Rotas.HOME },
         { titulo: 'Aguarde', rota: Rotas.AGUARDE },
         { titulo: 'Erro', rota: Rotas.PAGINA_ERRO },
       ];
@@ -202,7 +186,7 @@ describe('AppComponent', () => {
       
       scrollCallback();
       
-      expect(mockDocument.getElementById).toHaveBeenCalledWith('scrollTop');
+      expect(mockDocument.getElementById).toHaveBeenCalledWith('btn-scroll-top');
       expect(mockElement.style.visibility).toBe('visible');
     });
 
@@ -220,7 +204,7 @@ describe('AppComponent', () => {
       
       scrollCallback();
       
-      expect(mockDocument.getElementById).toHaveBeenCalledWith('scrollTop');
+      expect(mockDocument.getElementById).toHaveBeenCalledWith('btn-scroll-top');
       expect(mockElement.style.visibility).toBe('hidden');
     });
 

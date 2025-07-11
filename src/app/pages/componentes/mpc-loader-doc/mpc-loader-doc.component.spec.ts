@@ -1,28 +1,28 @@
 import { MpcLoaderDocComponent } from './mpc-loader-doc.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ActivatedRoute } from '@angular/router';
-import { of } from 'rxjs';
 
 describe('MpcLoaderDocComponent', () => {
   let component: MpcLoaderDocComponent;
   let fixture: ComponentFixture<MpcLoaderDocComponent>;
+  let mockLoaderService: { show: jest.Mock, hide: jest.Mock };
 
   beforeEach(async () => {
+    mockLoaderService = {
+      show: jest.fn(),
+      hide: jest.fn()
+    };
+
     await TestBed.configureTestingModule({
       imports: [MpcLoaderDocComponent],
       providers: [
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            data: of({})
-          }
-        }
+        { provide: (component as any)?.mpcLoaderService?.constructor || 'mpcLoaderService', useValue: mockLoaderService }
       ]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(MpcLoaderDocComponent);
     component = fixture.componentInstance;
+    // Força a injeção do mock
+    (component as any).mpcLoaderService = mockLoaderService;
     fixture.detectChanges();
   });
 
@@ -30,8 +30,12 @@ describe('MpcLoaderDocComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('deve abrir o loading', () => {
+  it('deve abrir e fechar o loading', () => {
+    jest.useFakeTimers();
     component.abrirLoading();
-    expect(component['mpcLoaderService'].isLoading()).toBeTruthy();
+    expect(mockLoaderService.show).toHaveBeenCalled();
+    jest.advanceTimersByTime(5000);
+    expect(mockLoaderService.hide).toHaveBeenCalled();
+    jest.useRealTimers();
   });
 });

@@ -1,10 +1,21 @@
 /**
  * @Componente ConfirmacaoComponent
- * Este componente é responsável por exibir e gerenciar a etapa de confirmação do formulário.
+ *
+ * Este componente é responsável por exibir e gerenciar a etapa de confirmação do formulário de inscrição,
+ * mostrando um resumo dos dados preenchidos e permitindo a finalização da inscrição.
+ *
+ * @Propriedades
+ * @ViewChild modalSucesso {MpcModalComponent} - Referência ao modal de sucesso
+ * @protected dadosInscricao {Inscricao} - Dados da inscrição a serem exibidos
+ *
+ * @Exemplo
+ * ```html
+ * <app-confirmacao></app-confirmacao>
+ * ```
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/06/2025
- * @updated 04/07/2025
+ * @updated 10/07/2025
  */
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { InscricaoService } from '../service/inscricao.service';
@@ -13,11 +24,11 @@ import { Rotas } from '../../../shared/enums/rotas-enum';
 import { Inscricao } from '../model/inscricao.model';
 import { ErrorService } from '../../../shared/error/error.service';
 import { take } from 'rxjs';
-import { MpcButtonDirective, MpcFormProgressBarComponent, MpcModalComponent, MpcModalConfig, TipoModal } from 'mpc-lib-angular';
+import { MpcButtonComponent, MpcFormProgressBarComponent, MpcModalComponent, MpcModalConfig, TipoModal } from 'mpc-lib-angular';
 
 @Component({
   selector: 'app-confirmacao',
-  imports: [MpcButtonDirective, MpcModalComponent, MpcFormProgressBarComponent],
+  imports: [MpcModalComponent, MpcFormProgressBarComponent, MpcButtonComponent],
   templateUrl: './confirmacao.component.html',
   styleUrl: './confirmacao.component.css'
 })
@@ -28,8 +39,14 @@ export class ConfirmacaoComponent implements OnInit {
   private readonly inscricaoService = inject(InscricaoService);
   private readonly errorService = inject(ErrorService);
 
-  // Variáveis
+  /**
+   * Referência ao modal de sucesso.
+   */
   @ViewChild('modalSucesso', { static: true }) private modalSucesso!: MpcModalComponent;
+  
+  /**
+   * Dados da inscrição a serem exibidos.
+   */
   protected dadosInscricao = new Inscricao();
 
   /**
@@ -37,7 +54,6 @@ export class ConfirmacaoComponent implements OnInit {
    */
   ngOnInit(): void {
     const dados = this.inscricaoService.getDadosInscricao();
-
     this.dadosInscricao.inicializarDadosPessoais(dados);
     this.dadosInscricao.inicializarContato(dados);
     this.dadosInscricao.inicializarPagamento(dados);
@@ -45,6 +61,8 @@ export class ConfirmacaoComponent implements OnInit {
 
   /**
    * Formata o valor para o padrão monetário brasileiro.
+   * @param valor Valor a ser formatado
+   * @returns {string} Valor formatado
    */
   protected formatarValor(valor: any): string {
     return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
@@ -52,6 +70,7 @@ export class ConfirmacaoComponent implements OnInit {
 
   /**
    * Retorna o sexo formatado.
+   * @returns {string} Sexo formatado
    */
   protected getSexo(): string {
     return this.dadosInscricao.sexo === 'M' ? 'Masculino' : 'Feminino';
@@ -71,7 +90,6 @@ export class ConfirmacaoComponent implements OnInit {
           },
           error: (error: any) => { throw error }
         });
-
     } catch (error) {
       this.errorService.construirErro(error);
     }
@@ -101,7 +119,6 @@ export class ConfirmacaoComponent implements OnInit {
       segundoBotao: () => { this.modalSucesso?.fecharModal(); },
       textoSegundoBotao: 'Fechar',
     }
-
     this.modalSucesso?.abrirModal(modalSucesso);
   }
 }

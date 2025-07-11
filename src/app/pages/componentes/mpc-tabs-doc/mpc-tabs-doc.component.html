@@ -13,12 +13,12 @@
       </h5>
       
       <h5>
-        <strong>Propriedades:</strong>
+        <strong>Propriedades do Componente:</strong>
         <ul class="text-start mt-3">
-          <li><strong>tabs</strong>: (obrigatório) Lista de abas a serem exibidas.</li>
-          <li><strong>id</strong>: (opcional) ID do componente para acessibilidade.</li>
-          <li><strong>tabIndex</strong>: (opcional) Índice de tabulação do componente.</li>
-          <li><strong>ariaLabel</strong>: (opcional) Rótulo de acessibilidade das tabs.</li>
+          <li><strong>tabs</strong>: <code>Tab[]</code> <b>(obrigatório)</b> — Lista de abas a serem exibidas.</li>
+          <li><strong>id</strong>: <code>string</code> (opcional) — ID do componente para acessibilidade.</li>
+          <li><strong>tabIndex</strong>: <code>number</code> (opcional) — Índice de tabulação do componente.</li>
+          <li><strong>ariaLabel</strong>: <code>string</code> (opcional) — Rótulo de acessibilidade das tabs.</li>
         </ul>
       </h5>
 
@@ -79,15 +79,15 @@ imports: [ MpcTabsComponent ]
       <div class="mb-3">
         <h5><strong>Eventos:</strong></h5>
         <ul class="text-start mt-3">
-          <li><strong>tabSelected</strong>: Emite o objeto <code>Tab</code> selecionado ao trocar de aba</li>
+          <li><strong>tabSelected</strong>: Emite o objeto <code>Tab</code> selecionado ao trocar de aba.</li>
         </ul>
       </div>
 
       <div class="mb-3">
         <h5><strong>Interface Tab:</strong></h5>
         <ul class="text-start mt-3">
-          <li><strong>id</strong>: Identificador único da aba (string)</li>
-          <li><strong>titulo</strong>: Título exibido na aba (string)</li>
+          <li><strong>id</strong>: <code>string</code> — Identificador único da aba.</li>
+          <li><strong>titulo</strong>: <code>string</code> — Título exibido na aba.</li>
         </ul>
       </div>
 

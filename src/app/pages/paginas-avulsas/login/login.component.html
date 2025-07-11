@@ -20,12 +20,10 @@
       </div>
 
       <div class="form-actions">
-        <button mpcButton (click)="login()" [style.background-color]="'var(--mpc-color-primary)'" [style.color]="'white'"
-          icone="bi bi-box-arrow-in-right" posicaoIcone="direita" texto="Entrar" [disabled]="form.invalid">
-        </button>
+        <mpc-button (click)="login()" [style.background-color]="'var(--mpc-color-primary)'" [style.color]="'white'"
+          icone="bi bi-box-arrow-in-right" posicaoIcone="direita" texto="Entrar" [disabled]="form.invalid" />
 
-        <button mpcButton (click)="login()" [style.color]="'var(--mpc-color-secondary)'" texto="Cadastrar-se">
-        </button>
+        <mpc-button (click)="login()" texto="Cadastrar-se" />
       </div>
 
     </form>

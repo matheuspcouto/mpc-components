@@ -1,10 +1,22 @@
 /**
  * @Componente PagamentoComponent
- * Este componente é responsável por exibir e gerenciar o formulário de pagamento.
+ *
+ * Este componente é responsável por exibir e gerenciar o formulário de pagamento do usuário,
+ * incluindo seleção de forma de pagamento, cálculo e formatação do valor da inscrição.
+ *
+ * @Propriedades
+ * @protected formasPagamento {SelectOption[]} - Opções de formas de pagamento
+ * @protected valorInscricao {number} - Valor da inscrição
+ * @protected form {FormGroup} - Formulário reativo de pagamento
+ *
+ * @Exemplo
+ * ```html
+ * <app-pagamento></app-pagamento>
+ * ```
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/06/2025
- * @updated 04/07/2025
+ * @updated 10/07/2025
  */
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -12,17 +24,15 @@ import { Rotas } from '../../../shared/enums/rotas-enum';
 import { FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { InscricaoService } from '../service/inscricao.service';
 import { ErrorService } from '../../../shared/error/error.service';
-import { MpcButtonDirective } from '../../../../../projects/mpc-lib-angular/src/lib/directives/mpc-button/mpc-button.directive';
-import { MpcInputSelectComponent, SelectOption } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-select/mpc-input-select.component';
-import { MpcFormProgressBarComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/mpc-form-progress-bar/mpc-form-progress-bar.component';
-import { MpcLoaderService } from '../../../../../projects/mpc-lib-angular/src/lib/components/mpc-loader/mpc-loader.service';
+import { MpcInputSelectComponent, SelectOption, MpcFormProgressBarComponent, MpcLoaderService, MpcButtonComponent } from 'mpc-lib-angular';
 
 @Component({
   selector: 'app-pagamento',
   imports: [
     FormsModule,
-    ReactiveFormsModule, MpcButtonDirective, MpcInputSelectComponent, MpcFormProgressBarComponent,
-  ],
+    ReactiveFormsModule, MpcInputSelectComponent, MpcFormProgressBarComponent,
+    MpcButtonComponent
+],
   templateUrl: './pagamento.component.html',
   styleUrls: ['./pagamento.component.css'],
 })
@@ -35,23 +45,32 @@ export default class PagamentoComponent implements OnInit {
   private readonly errorService = inject(ErrorService);
   private readonly loaderService = inject(MpcLoaderService);
 
-  // Variáveis
+  /**
+   * Opções de formas de pagamento disponíveis.
+   */
   protected formasPagamento: SelectOption[] = [
     { label: 'Cartão', value: 'Cartão', selected: false },
     { label: 'Pix', value: 'Pix', selected: false },
     { label: 'Dinheiro', value: 'Dinheiro', selected: false }
   ];
 
+  /**
+   * Valor da inscrição.
+   */
   protected valorInscricao: number = 100.00;
 
+  /**
+   * Formulário reativo de pagamento.
+   */
   protected form = this.formBuilder.group({
     formaPagamento: [''],
     valor: [0.00]
   });
 
   /**
- * Formata o valor para o padrão monetário brasileiro.
- */
+   * Retorna o valor formatado em moeda brasileira.
+   * @returns {string} Valor formatado em moeda brasileira
+   */
   get valorFormatado(): string {
     return this.valorInscricao.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   }
@@ -92,7 +111,7 @@ export default class PagamentoComponent implements OnInit {
   }
 
   /**
-   * Calcula o valor total de acordo com a forma de pagamento.
+   * Calcula o valor total de acordo com a forma de pagamento selecionada.
    */
   protected calcularValorTotal(): void {
     const valorNormal = 100.00;
@@ -100,14 +119,7 @@ export default class PagamentoComponent implements OnInit {
     const valorTotal = this.form.controls.formaPagamento.value === 'Cartão' ? valorComTaxa : valorNormal;
     this.valorInscricao = valorTotal;
   }
-
-  /**
-   * Formata o valor para o padrão monetário brasileiro.
-   */
-  protected formatarValor(valor: any): string {
-    return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-  }
-
+  
   /**
    * Avança para a próxima etapa do formulário.
    */

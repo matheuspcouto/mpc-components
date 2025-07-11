@@ -94,18 +94,24 @@
       }
 
       button#first-button {
-        background-color: var(--mpc-color-first-button-bg-modal);
-        color: var(--mpc-color-first-button-text-modal);
+        --mpc-bg-color-btn: var(--mpc-color-first-button-bg-modal);
+        --mpc-text-color-btn: var(--mpc-color-first-button-text-modal);
+        --mpc-bg-color-btn-hover: var(--mpc-color-first-button-bg-modal);
+        --mpc-text-color-btn-hover: var(--mpc-color-first-button-text-modal);
       }
 
       button#second-button {
-        background-color: var(--mpc-color-second-button-bg-modal);
-        color: var(--mpc-color-second-button-text-modal);
+        --mpc-bg-color-btn: var(--mpc-color-second-button-bg-modal);
+        --mpc-text-color-btn: var(--mpc-color-second-button-text-modal);
+        --mpc-bg-color-btn-hover: var(--mpc-color-second-button-bg-modal);
+        --mpc-text-color-btn-hover: var(--mpc-color-second-button-text-modal);
       }
 
       button#copy-button {
-        background-color: var(--mpc-color-copy-button-bg-modal);
-        color: var(--mpc-color-copy-button-text-modal);
+        --mpc-bg-color-btn: var(--mpc-color-copy-button-bg-modal);
+        --mpc-text-color-btn: var(--mpc-color-copy-button-text-modal);
+        --mpc-bg-color-btn-hover: var(--mpc-color-copy-button-bg-modal);
+        --mpc-text-color-btn-hover: var(--mpc-color-copy-button-text-modal);
       }
     }
   }

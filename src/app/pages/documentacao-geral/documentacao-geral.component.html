@@ -207,17 +207,17 @@ export class ExampleComponent &#123;
         <h4 class="text-center mb-4"><strong>Componentes Disponíveis</strong></h4>
 
         <div class="row">
-          <div class="col-lg-6">
+          <div class="col-lg-4">
             <h5><strong>Cards:</strong></h5>
             <ul class="text-start mt-3">
-              <li><code>MpcCardComponent</code> - Cards verticais e horizontais</li>
-              <li><code>MpcCardBackGroundImgComponent</code> - Cards com imagem de fundo</li>
-              <li><code>MpcCardMenuComponent</code> - Cards de menu</li>
-              <li><code>MpcCardEventoComponent</code> - Cards de evento</li>
+              <li><code>MpcCardComponent</code> - Card vertical/horizontal</li>
+              <li><code>MpcCardBackGroundImgComponent</code> - Card com imagem de fundo</li>
+              <li><code>MpcCardMenuComponent</code> - Card de menu</li>
+              <li><code>MpcCardEventoComponent</code> - Card de evento</li>
             </ul>
           </div>
 
-          <div class="col-lg-6">
+          <div class="col-lg-4">
             <h5><strong>Inputs:</strong></h5>
             <ul class="text-start mt-3">
               <li><code>MpcInputTextComponent</code> - Input de texto</li>
@@ -234,10 +234,8 @@ export class ExampleComponent &#123;
               <li><code>MpcInputBuscaCepComponent</code> - Input de busca CEP</li>
             </ul>
           </div>
-        </div>
 
-        <div class="row mt-4">
-          <div class="col-lg-6">
+          <div class="col-lg-4">
             <h5><strong>Outros Componentes:</strong></h5>
             <ul class="text-start mt-3">
               <li><code>MpcModalComponent</code> - Modal customizável</li>
@@ -246,14 +244,9 @@ export class ExampleComponent &#123;
               <li><code>MpcTabsComponent</code> - Abas</li>
               <li><code>MpcLoaderComponent</code> - Loader</li>
               <li><code>MpcFormProgressBarComponent</code> - Barra de progresso</li>
-            </ul>
-          </div>
-
-          <div class="col-lg-6">
-            <h5><strong>Diretivas:</strong></h5>
-            <ul class="text-start mt-3">
-              <li><code>MpcButtonDirective</code> - Diretiva para botões</li>
-              <li><code>MpcBtnFloatDirective</code> - Diretiva para botão flutuante</li>
+              <li><code>MpcPageDividerImgComponent</code> - Divisor de página com imagem</li>
+              <li><code>MpcButtonComponent</code> - Botão customizável</li>
+              <li><code>MpcBtnFloatComponent</code> - Botão flutuante</li>
             </ul>
           </div>
         </div>
@@ -267,18 +260,32 @@ export class ExampleComponent &#123;
           <div class="col-lg-6">
             <h5><strong>Formatação:</strong></h5>
             <ul class="text-start mt-3">
-              <li><code>CepMaskPipe</code> - Formatação de CEP</li>
-              <li><code>CpfCnpjMaskPipe</code> - Formatação de CPF/CNPJ</li>
-              <li><code>EmailMaskPipe</code> - Formatação de email</li>
-              <li><code>TelefoneMaskPipe</code> - Formatação de telefone</li>
+              <li><code>cpfCnpjMaskPipe</code> - Formatação de CPF/CNPJ</li>
+              <li><code>cepMaskPipe</code> - Formatação de CEP</li>
+              <li><code>telefoneMaskPipe</code> - Formatação de telefone</li>
+              <li><code>emailMaskPipe</code> - Formatação de email</li>
             </ul>
           </div>
 
           <div class="col-lg-6">
             <h5><strong>Exemplo de Uso dos Pipes:</strong></h5>
-            <pre class="chroma"><code class="language-html" data-lang="html">&lt;p&gt;{{ '12345678901' + ' | ' + 'CpfCnpjMaskPipe' }}&lt;/p&gt;
-&lt;p&gt;{{ '12345678' + ' | ' + 'CepMaskPipe' }}&lt;/p&gt;
-&lt;p&gt;{{ '11999999999' + ' | ' + 'TelefoneMaskPipe' }}&lt;/p&gt;</code></pre>
+            <pre class="chroma"><code class="language-html" data-lang="html">&lt;p&gt;{{ ' 12345678901' + ' | ' + 'cpfCnpjMaskPipe ' }}&lt;/p&gt;
+&lt;p&gt;{{ ' 12345678' + ' | ' + 'cepMaskPipe ' }}&lt;/p&gt;
+&lt;p&gt;{{ ' 11999999999' + ' | ' + 'telefoneMaskPipe ' }}&lt;/p&gt;</code></pre>
+
+            <div class="alert alert-info mt-2" role="alert">
+              <strong>Observação:</strong> Para utilizar os pipes standalone, é necessário importá-los no array
+              <code>imports</code> do seu componente Angular:
+              <pre class="chroma mb-0"><code class="language-typescript" data-lang="typescript">import &#123; CpfCnpjMaskPipe, CepMaskPipe, TelefoneMaskPipe &#125; from 'mpc-lib-angular';
+
+&#64;Component(&#123;
+  // ...
+  imports: [CpfCnpjMaskPipe, CepMaskPipe, TelefoneMaskPipe],
+  // ...
+&#125;)
+export class SeuComponente &#123; &#125;
+</code></pre>
+            </div>
           </div>
         </div>
       </div>

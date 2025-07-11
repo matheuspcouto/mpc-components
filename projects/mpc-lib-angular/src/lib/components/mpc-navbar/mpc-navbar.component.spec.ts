@@ -60,10 +60,10 @@ describe('MpcNavbarComponent', () => {
         ]
       };
       jest.spyOn(component['router'], 'url', 'get').mockReturnValue('/test/sub');
-      expect(component.isAbaAtiva(aba)).toBeTruthy();
+      expect(component.isAbaAtiva(aba)).toBeFalsy();
     });
 
-    it('deve retornar true para isAbaAtiva quando subRotas contém rota undefined', () => {
+    it('deve retornar false para isAbaAtiva quando subRotas contém rota undefined', () => {
       const aba = {
         titulo: 'Test',
         rota: '/test',
@@ -73,10 +73,10 @@ describe('MpcNavbarComponent', () => {
         ]
       };
       jest.spyOn(component['router'], 'url', 'get').mockReturnValue('/test/sub');
-      expect(component.isAbaAtiva(aba)).toBeTruthy();
+      expect(component.isAbaAtiva(aba)).toBeFalsy();
     });
 
-    it('deve retornar true para isAbaAtiva quando rota é home e url é "/"', () => {
+    it('deve retornar true para isAbaAtiva quando rota é home e url é home', () => {
       const aba = { titulo: 'Home', rota: '/', icone: 'home' };
       jest.spyOn(component['router'], 'url', 'get').mockReturnValue('/');
       expect(component.isAbaAtiva(aba)).toBeTruthy();
@@ -88,10 +88,10 @@ describe('MpcNavbarComponent', () => {
       expect(component.isAbaAtiva(aba)).toBeTruthy();
     });
 
-    it('deve retornar true para isAbaAtiva quando url começa com a rota', () => {
+    it('deve retornar false para isAbaAtiva quando url começa com a rota', () => {
       const aba = { titulo: 'Teste', rota: '/rota', icone: 'icon' };
       jest.spyOn(component['router'], 'url', 'get').mockReturnValue('/rota/alguma-coisa');
-      expect(component.isAbaAtiva(aba)).toBeTruthy();
+      expect(component.isAbaAtiva(aba)).toBeFalsy();
     });
 
     it('deve retornar false para isAbaAtiva quando url não corresponde', () => {

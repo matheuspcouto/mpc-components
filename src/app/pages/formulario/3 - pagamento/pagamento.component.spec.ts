@@ -63,10 +63,6 @@ describe('PagamentoComponent', () => {
     expect(component['form'].value.valor).toBe(100);
   });
 
-  it('deve formatar valor decimal em moeda brasileira', () => {
-    expect((component as any).formatarValor(105.50).length).toBeGreaterThan(0);
-  });
-
   it('deve avançar para próxima etapa se formulário for válido', () => {
     component['form'].patchValue({ formaPagamento: 'Pix', valor: 100 });
     (component as any).proximaEtapa();

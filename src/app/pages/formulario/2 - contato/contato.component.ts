@@ -1,10 +1,20 @@
 /**
  * @Componente ContatoComponent
- * Este componente é responsável por exibir e gerenciar o formulário de contato.
+ *
+ * Este componente é responsável por exibir e gerenciar o formulário de contato do usuário,
+ * incluindo campos de telefone, email e endereço, com integração de busca de CEP e barra de progresso.
+ *
+ * @Propriedades
+ * @protected form {FormGroup} - Formulário reativo de contato
+ *
+ * @Exemplo
+ * ```html
+ * <app-contato></app-contato>
+ * ```
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/06/2025
- * @updated 04/07/2025
+ * @updated 10/07/2025
  */
 
 import { Component, inject, OnInit } from '@angular/core';
@@ -13,22 +23,17 @@ import { Rotas } from '../../../shared/enums/rotas-enum';
 import { FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { InscricaoService } from '../service/inscricao.service';
 import { ErrorService } from '../../../shared/error/error.service';
-import { MpcInputTextComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-text/mpc-input-text.component';
-import { MpcButtonDirective } from '../../../../../projects/mpc-lib-angular/src/lib/directives/mpc-button/mpc-button.directive';
-import { MpcInputTelefoneComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-telefone/mpc-input-telefone.component';
-import { MpcFormProgressBarComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/mpc-form-progress-bar/mpc-form-progress-bar.component';
-import { MpcInputEmailComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-email/mpc-input-email.component';
-import { Endereco, MpcInputBuscaCepComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-busca-cep/mpc-input-busca-cep.component';
-import { MpcLoaderService } from '../../../../../projects/mpc-lib-angular/src/lib/components/mpc-loader/mpc-loader.service';
+import { MpcInputTextComponent, MpcInputTelefoneComponent, MpcFormProgressBarComponent, MpcInputEmailComponent, Endereco, MpcInputBuscaCepComponent, MpcLoaderService, MpcButtonComponent } from 'mpc-lib-angular';
 @Component({
   selector: 'app-contato',
   imports: [
     FormsModule,
     ReactiveFormsModule, MpcInputTextComponent, MpcInputTelefoneComponent,
-    MpcButtonDirective, MpcFormProgressBarComponent,
+    MpcFormProgressBarComponent,
     MpcInputEmailComponent,
-    MpcInputBuscaCepComponent
-  ],
+    MpcInputBuscaCepComponent,
+    MpcButtonComponent
+],
   templateUrl: './contato.component.html',
   styleUrls: ['./contato.component.css'],
 })
@@ -41,7 +46,9 @@ export default class ContatoComponent implements OnInit {
   private readonly errorService = inject(ErrorService);
   private readonly loaderService = inject(MpcLoaderService);
 
-  // Formulário
+  /**
+   * Formulário reativo de contato.
+   */
   protected form = this.formBuilder.group({
     telefone: [''],
     email: [''],
@@ -71,7 +78,6 @@ export default class ContatoComponent implements OnInit {
 
       if (this.inscricaoService.isContatoCompleto()) {
         this.form.reset();
-
         this.form.patchValue({
           telefone: dadosInscricao.telefone,
           email: dadosInscricao.email,
@@ -116,7 +122,8 @@ export default class ContatoComponent implements OnInit {
   }
 
   /**
-   * Preenche o endereço no formulário a partir do CEP.
+   * Preenche o endereço no formulário a partir do CEP informado.
+   * @param endereco Objeto de endereço retornado pela busca de CEP
    */
   protected definirEnderecoPorCep(endereco: Endereco): void {
     this.form.patchValue({

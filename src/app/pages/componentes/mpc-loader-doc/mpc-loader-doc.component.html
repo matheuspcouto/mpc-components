@@ -10,22 +10,21 @@
       </div>
 
       <h5>
-        <strong>Descrição:</strong> O <code>mpc-loader</code> é um componente standalone que exibe uma animação de carregamento
-        na tela, controlado via serviço para gerenciar estados de carregamento de forma reativa.
+        <strong>Propriedades do Componente:</strong>
+        <ul class="text-start mt-3">
+          <li><strong>id</strong>: <code>string</code> (opcional) — ID do loader para acessibilidade.</li>
+          <li><strong>tabIndex</strong>: <code>number</code> (opcional) — Índice de tabulação para navegação por teclado.</li>
+          <li><strong>ariaLabel</strong>: <code>string</code> (opcional) — Rótulo para leitores de tela.</li>
+        </ul>
+        <span class="text-muted">O componente não possui outros <code>&#64;Input()</code>. O controle de exibição é feito via <code>MpcLoaderService</code>.</span>
       </h5>
-
-      <div class="mb-3">
-        <h5><strong>Instalação:</strong></h5>
-        <pre class="chroma"><code>npm install mpc-lib-angular</code></pre>
-      </div>
-
       <div class="mb-3">
         <h5><strong>Importação no arquivo <code>.ts</code>:</strong></h5>
         <pre class="chroma"><code>
 import &#123; MpcLoaderComponent, MpcLoaderService &#125; from 'mpc-lib-angular';
 
 // No seu componente
-imports: [ MpcLoaderComponent ]
+imports: [MpcLoaderComponent]
 
 // Injetar o serviço
 private readonly mpcLoaderService = inject(MpcLoaderService);
@@ -75,10 +74,8 @@ abrirLoading() &#123;
       <h5>Clique no botão abaixo e veja como ficou a implementação.</h5>
 
       <div class="col-md-12 mb-3 d-flex justify-content-center">
-        <button mpcButton [disabled]="false" (click)="abrirLoading()" [style.background-color]="'var(--mpc-color-primary)'"
-          [style.color]="'white'" icone="bi bi-arrow-clockwise" posicaoIcone="esquerda" [tabIndex]="0"
-          texto="Abrir Loader">
-        </button>
+        <mpc-button [disabled]="false" (click)="abrirLoading()" icone="bi bi-arrow-clockwise" posicaoIcone="esquerda"
+          [tabIndex]="0" texto="Abrir Loader" id="btn-abrir-loader" />
       </div>
 
     </div>

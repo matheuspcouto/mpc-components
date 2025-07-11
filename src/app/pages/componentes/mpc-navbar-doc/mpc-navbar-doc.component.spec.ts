@@ -1,7 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MpcNavbarDocComponent } from './mpc-navbar-doc.component';
-import { ActivatedRoute } from '@angular/router';
-import { of } from 'rxjs';
 
 describe('MpcNavbarDocComponent', () => {
   let component: MpcNavbarDocComponent;
@@ -9,17 +7,8 @@ describe('MpcNavbarDocComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MpcNavbarDocComponent],
-      providers: [
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            data: of({})
-          }
-        }
-      ]
-    })
-    .compileComponents();
+      imports: [MpcNavbarDocComponent]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(MpcNavbarDocComponent);
     component = fixture.componentInstance;

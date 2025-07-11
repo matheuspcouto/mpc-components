@@ -1,0 +1,54 @@
+:host {
+  --mpc-bg-color-btn: var(--mpc-color-primary);
+  --mpc-text-color-btn: white;
+
+  --mpc-bg-color-btn-hover: var(--mpc-bg-color-btn, none);
+  --mpc-text-color-btn-hover: var(--mpc-text-color-btn, none);
+}
+
+/* Botões */
+.mpc-btn {
+  display: flex;
+  position: relative !important;
+  padding-block: 0.5rem !important;
+  padding-inline: 1.25rem !important;
+  border-radius: 9999px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  outline: none !important;
+  overflow: hidden !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  min-width: 30vh;
+  max-width: 50vh;
+  text-decoration: none !important;
+  color: var(--mpc-text-color-btn);
+  background-color: var(--mpc-bg-color-btn);
+  border: none;
+
+  .icon-float-left {
+    margin-left: 0.5rem !important;
+  }
+
+  .icon-float-right {
+    margin-right: 0.5rem !important;
+  }
+
+  &:hover {
+    background-color: var(--mpc-bg-color-btn-hover);
+    color: var(--mpc-text-color-btn-hover);
+    transition: all 0.3s ease-in;
+  }
+}
+
+.mpc-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media screen and (min-width: 992px) {
+  .mpc-btn {
+    max-width: 30vh;
+  }
+}

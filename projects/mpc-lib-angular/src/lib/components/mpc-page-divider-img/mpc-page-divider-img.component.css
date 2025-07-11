@@ -6,9 +6,6 @@
     /* Cores */
     --mpc-color-title-page-divider-img: var(--mpc-color-primary);
     --mpc-color-subtitle-page-divider-img: var(--mpc-color-secondary);
-
-    /* Imagem de fundo */
-    --mpc-img-background-page-divider: url('/assets/img/no-image.jpg');
 }
 
 /*--------------------------------------------------------------
@@ -17,7 +14,6 @@
 .page-divider-img {
     background-size: cover;
     background-position: center;
-    background-image: var(--mpc-img-background-page-divider);
     padding: 100px 0;
 
     @media screen and (max-width: 991.98px) {

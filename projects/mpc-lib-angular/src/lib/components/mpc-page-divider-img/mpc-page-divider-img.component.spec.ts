@@ -10,7 +10,7 @@ describe('MpcPageDividerImgComponent', () => {
     await TestBed.configureTestingModule({
       imports: [MpcPageDividerImgComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(MpcPageDividerImgComponent);
     component = fixture.componentInstance;
@@ -19,5 +19,13 @@ describe('MpcPageDividerImgComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('getBackgroundImage', () => {
+    component.imagemFundo = 'aaa';
+    expect(component['getBackgroundImage']()).toContain('aaa');
+
+    component.imagemFundo = '';
+    expect(component['getBackgroundImage']()).toContain('no-image');
   });
 });

@@ -8,8 +8,7 @@ describe('MpcBtnFloatDocComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [MpcBtnFloatDocComponent]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(MpcBtnFloatDocComponent);
     component = fixture.componentInstance;
@@ -18,5 +17,12 @@ describe('MpcBtnFloatDocComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('deve rolar para o topo ao chamar scrollToTop', () => {
+    const scrollSpy = jest.spyOn(window, 'scrollTo').mockImplementation();
+    component.scrollToTop();
+    expect(scrollSpy).toHaveBeenCalledWith({ top: 0, behavior: 'smooth' });
+    scrollSpy.mockRestore();
   });
 }); 

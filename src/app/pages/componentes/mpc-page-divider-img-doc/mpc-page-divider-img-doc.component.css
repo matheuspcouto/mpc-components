@@ -1,0 +1,64 @@
+main {
+  margin-top: 90px;
+}
+
+section {
+  overflow: hidden;
+  padding: 50px 0;
+}
+
+.section-header {
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+.section-header h2 {
+  font-size: 13px;
+  letter-spacing: 1px;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  color: var(--mpc-color-tertiary);
+  text-transform: uppercase;
+  font-family: var(--mpc-font-default);
+}
+
+.section-header p {
+  margin: 0;
+  font-size: 48px;
+  font-weight: 400;
+  font-family: var(--mpc-font-default);
+}
+
+.section-header p span {
+  color: var(--mpc-color-secondary);
+}
+
+h5 {
+  font-weight: 400;
+  color: var(--mpc-color-tertiary);
+  text-align: center;
+  padding-bottom: 2rem;
+  font-style: italic;
+}
+
+ul {
+  text-align: left;
+}
+
+pre {
+  background-color: var(--mpc-color-primary);
+  padding: 20px;
+  border-radius: 5px;
+  margin-top: 20px;
+  color: white;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+pre code {
+  width: 100%;
+  white-space: pre-line;
+} 

@@ -11,23 +11,25 @@
 
       <h5>
         <strong>Descrição:</strong> O <code>mpc-card</code> é um componente para exibir cards com layout vertical e
-        horizontal,
-        suportando imagens, títulos, subtítulos, descrições e links com design customizável.
+        horizontal, suportando imagens, títulos, subtítulos, descrições e links com design customizável.
       </h5>
 
       <h5>
         <strong>Propriedades:</strong>
         <ul class="text-start mt-3">
-          <li><strong>titulo</strong>: (obrigatório) O título principal do card.</li>
-          <li><strong>subtitulo</strong>: (opcional) O subtítulo do card.</li>
-          <li><strong>descricaoUm</strong>: (opcional) A primeira descrição do card.</li>
-          <li><strong>descricaoDois</strong>: (opcional) A segunda descrição do card.</li>
-          <li><strong>imagem</strong>: (opcional) URL da imagem do card.</li>
-          <li><strong>links</strong>: (opcional) Array de links com ícones.</li>
-          <li><strong>layout</strong>: (opcional) Layout do card ('vertical' | 'horizontal', padrão: 'vertical').</li>
-          <li><strong>id</strong>: (opcional) O ID único do card para acessibilidade.</li>
-          <li><strong>tabIndex</strong>: (opcional) O índice de tabulação para navegação por teclado.</li>
-          <li><strong>ariaLabel</strong>: (opcional) Rótulo para leitores de tela.</li>
+          <li><strong>titulo</strong>: <code>string</code> (obrigatório) — O título principal do card.</li>
+          <li><strong>subtitulo</strong>: <code>string</code> (opcional) — O subtítulo do card.</li>
+          <li><strong>descricaoUm</strong>: <code>string</code> (opcional) — Primeira descrição do card.</li>
+          <li><strong>descricaoDois</strong>: <code>string</code> (opcional) — Segunda descrição do card.</li>
+          <li><strong>imagem</strong>: <code>string</code> (opcional) — URL da imagem do card.</li>
+          <li><strong>links</strong>: <code>Array&lt;&#123; url: string; icone: string &#125;&gt;</code> (opcional) —
+            Array de links com ícones.</li>
+          <li><strong>layout</strong>: <code>'vertical' | 'horizontal'</code> (opcional, padrão: 'vertical') — Layout do
+            card.</li>
+          <li><strong>id</strong>: <code>string</code> (opcional) — ID único do card para acessibilidade.</li>
+          <li><strong>tabIndex</strong>: <code>number</code> (opcional) — Índice de tabulação para navegação por
+            teclado.</li>
+          <li><strong>ariaLabel</strong>: <code>string</code> (opcional) — Rótulo para leitores de tela.</li>
         </ul>
       </h5>
 
@@ -42,7 +44,7 @@
 import &#123; MpcCardComponent &#125; from 'mpc-lib-angular';
 
 // No seu componente
-imports: [ MpcCardComponent ]
+imports: [MpcCardComponent]
         </code></pre>
       </div>
 
@@ -103,7 +105,7 @@ imports: [ MpcCardComponent ]
           <mpc-card id="card-4" titulo="Card 4" subtitulo="Layout Horizontal" [layout]="'horizontal'"
             descricaoUm="Este card tem layout horizontal, ideal para exibir informações em telas desktop."
             imagem="/assets/img/no-image.jpg"
-            [links]="[{icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'}]" />
+            [links]="[&#123;icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'&#125;]" />
         </div>
 
       </div>
@@ -130,13 +132,18 @@ imports: [ MpcCardComponent ]
       <h5>
         <strong>Propriedades:</strong>
         <ul class="text-start mt-3">
-          <li><strong>titulo</strong>: (obrigatório) O título principal do card.</li>
-          <li><strong>subtitulo</strong>: (opcional) O subtítulo do card.</li>
-          <li><strong>descricao</strong>: (opcional) A descrição do card.</li>
-          <li><strong>id</strong>: (opcional) O ID único do card para acessibilidade.</li>
-          <li><strong>tabIndex</strong>: (opcional) O índice de tabulação para navegação por teclado.</li>
-          <li><strong>ariaLabel</strong>: (opcional) Rótulo para leitores de tela.</li>
-          <li><strong>acao</strong>: (opcional) Evento emitido ao clicar no card.</li>
+          <li><strong>titulo</strong>: <code>string</code> (obrigatório) — O título principal do card.</li>
+          <li><strong>subtitulo</strong>: <code>string</code> (opcional) — O subtítulo do card.</li>
+          <li><strong>descricao</strong>: <code>string</code> (opcional) — A descrição do card.</li>
+          <li><strong>imagemFundo</strong>: <code>string</code> (opcional) — Caminho da imagem de fundo do card. Um
+            gradiente escuro é aplicado automaticamente para garantir contraste. Se não informado, será usada a imagem
+            padrão do componente.</li>
+          <li><strong>id</strong>: <code>string</code> (opcional) — ID único do card para acessibilidade.</li>
+          <li><strong>tabIndex</strong>: <code>number</code> (opcional) — Índice de tabulação para navegação por
+            teclado.</li>
+          <li><strong>ariaLabel</strong>: <code>string</code> (opcional) — Rótulo para leitores de tela.</li>
+          <li><strong>acao</strong>: <code>EventEmitter&lt;void&gt;</code> (opcional) — Evento emitido ao clicar no
+            card.</li>
         </ul>
       </h5>
 
@@ -151,32 +158,34 @@ imports: [ MpcCardComponent ]
 import &#123; MpcCardBackGroundImgComponent &#125; from 'mpc-lib-angular';
 
 // No seu componente
-imports: [ MpcCardBackGroundImgComponent ]
+imports: [MpcCardBackGroundImgComponent]
         </code></pre>
       </div>
 
       <div class="mb-5">
         <h5><strong>Exemplo de uso no arquivo <code>.html</code>:</strong></h5>
-        <pre class="chroma"><code class="language-html" data-lang="html">&lt;!-- Card com Background Básico --&gt;
+        <pre class="chroma"><code class="language-html" data-lang="html">&lt;!-- Card com Background customizado --&gt;
 &lt;mpc-card-background-img
   titulo="Programação"
   subtitulo="Horários dos Cultos"
   descricao="Confira nossa programação semanal"
   id="card-programacao"
   [tabIndex]="0"
+  imagemFundo="/assets/img/exemplo.jpg"
   ariaLabel="Card de programação semanal"&gt;
 &lt;/mpc-card-background-img&gt;
 
-&lt;!-- Card com Background com Ação --&gt;
+&lt;!-- Card com Background padrão (sem imagemFundo) --&gt;
 &lt;mpc-card-background-img
-  titulo="Evento Especial"
-  subtitulo="Domingo"
-  descricao="Um momento único de comunhão"
-  (acao)="onCardClick()"
-  id="card-evento"
-  [tabIndex]="0"
-  ariaLabel="Card de evento especial"&gt;
-&lt;/mpc-card-background-img&gt;</code></pre>
+  titulo="Sem imagem customizada"
+  descricao="Usa a imagem padrão do componente"
+  id="card-sem-img"
+/&gt;</code></pre>
+        <div class="alert alert-info mt-2" role="alert">
+          <strong>Observação:</strong> O componente aplica automaticamente um gradiente escuro sobre a imagem de fundo
+          para garantir a legibilidade do texto. Caso a propriedade <code>imagemFundo</code> não seja informada, será
+          utilizada a imagem padrão <code>/assets/img/no-image.jpg</code>.
+        </div>
       </div>
 
       <!-- Cards com Imagem de Fundo -->
@@ -188,13 +197,13 @@ imports: [ MpcCardBackGroundImgComponent ]
 
         <div class="col-lg-6">
           <mpc-card-background-img titulo="Card 1" subtitulo="com imagem de fundo" id="card-bg-1"
-            descricao="Este é um card com imagem de fundo e gradiente escuro para melhor legibilidade" [tabIndex]="0"
-            ariaLabel="Card 1" (acao)="onMenuCardClick()" />
+            descricao="Este é um card com imagem de fundo customizada e gradiente escuro para melhor legibilidade"
+            [tabIndex]="0" imagemFundo="/assets/img/home/mountain.jpg" ariaLabel="Card 1" (acao)="onMenuCardClick()" />
         </div>
 
         <div class="col-lg-6">
-          <mpc-card-background-img titulo="Card 2" subtitulo="com cores personalizadas" id="card-bg-2"
-            descricao="Este card demonstra o uso de cores personalizadas para texto e barra" [tabIndex]="0" />
+          <mpc-card-background-img titulo="Card 2" subtitulo="com imagem padrão" id="card-bg-2"
+            descricao="Este card demonstra o uso da imagem padrão do componente para o background" [tabIndex]="0" />
         </div>
 
       </div>
@@ -214,20 +223,22 @@ imports: [ MpcCardBackGroundImgComponent ]
       </div>
 
       <h5>
-        <strong>Descrição:</strong> O <code>mpc-card-menu</code> é um componente avançado para exibir cards de menu
-        interativos com ícone, título, descrição e ação de clique. Ideal para navegação rápida e ações de menu.
-        O card possui design limpo com ícone circular e layout flexível.
+        <strong>Descrição:</strong> O <code>mpc-card-menu</code> é um componente para exibir cards de menu interativos
+        com ícone, título, descrição e ação de clique.
       </h5>
       <h5>
         <strong>Propriedades:</strong>
         <ul class="text-start mt-3">
-          <li><strong>titulo</strong>: (obrigatório) O título principal do card.</li>
-          <li><strong>descricao</strong>: (opcional) A descrição do card.</li>
-          <li><strong>icone</strong>: (obrigatório) O ícone do card (classe do Bootstrap Icons).</li>
-          <li><strong>id</strong>: (opcional) O ID único do card para acessibilidade.</li>
-          <li><strong>tabIndex</strong>: (opcional) O índice de tabulação para navegação por teclado.</li>
-          <li><strong>ariaLabel</strong>: (opcional) Rótulo para leitores de tela.</li>
-          <li><strong>acao</strong>: (opcional) Evento emitido ao clicar no card.</li>
+          <li><strong>titulo</strong>: <code>string</code> (obrigatório) — O título principal do card.</li>
+          <li><strong>descricao</strong>: <code>string</code> (opcional) — A descrição do card.</li>
+          <li><strong>icone</strong>: <code>string</code> (obrigatório) — Classe do ícone (ex: 'bi
+            bi-telephone').</li>
+          <li><strong>id</strong>: <code>string</code> (opcional) — ID único do card para acessibilidade.</li>
+          <li><strong>tabIndex</strong>: <code>number</code> (opcional) — Índice de tabulação para navegação por
+            teclado.</li>
+          <li><strong>ariaLabel</strong>: <code>string</code> (opcional) — Rótulo para leitores de tela.</li>
+          <li><strong>acao</strong>: <code>EventEmitter&lt;void&gt;</code> (opcional) — Evento emitido ao clicar no
+            card.</li>
         </ul>
       </h5>
       <div class="mb-3">
@@ -237,10 +248,10 @@ imports: [ MpcCardBackGroundImgComponent ]
       <div class="mb-3">
         <h5><strong>Importação no arquivo <code>.ts</code>:</strong></h5>
         <pre class="chroma"><code>
-import &#123; MpcCardMenuComponent &#125; from 'mpc-lib-angular';
+import & MpcCardMenuComponent &#125; from 'mpc-lib-angular';
 
 // No seu componente
-imports: [ MpcCardMenuComponent ]
+imports: [MpcCardMenuComponent]
         </code></pre>
       </div>
       <div class="mb-5">
@@ -303,21 +314,21 @@ imports: [ MpcCardMenuComponent ]
       </div>
 
       <h5>
-        <strong>Descrição:</strong> O <code>mpc-card-evento</code> é um componente avançado para exibir cards de eventos
-        com design de timeline, ideal para exibir informações de eventos com data, título, subtítulo e descrição.
-        O card possui um layout único com círculo de data e linha de timeline.
+        <strong>Descrição:</strong> O <code>mpc-card-evento</code> é um componente para exibir cards de eventos com
+        design de timeline, incluindo data, título, subtítulo e descrição.
       </h5>
       <h5>
         <strong>Propriedades:</strong>
         <ul class="text-start mt-3">
-          <li><strong>titulo</strong>: (obrigatório) O título principal do evento.</li>
-          <li><strong>subtitulo</strong>: (opcional) O subtítulo do evento.</li>
-          <li><strong>descricao</strong>: (opcional) A descrição do evento.</li>
-          <li><strong>dia</strong>: (obrigatório) O dia do evento.</li>
-          <li><strong>mes</strong>: (obrigatório) O mês do evento.</li>
-          <li><strong>id</strong>: (opcional) O ID único do card para acessibilidade.</li>
-          <li><strong>tabIndex</strong>: (opcional) O índice de tabulação para navegação por teclado.</li>
-          <li><strong>ariaLabel</strong>: (opcional) Rótulo para leitores de tela.</li>
+          <li><strong>titulo</strong>: <code>string</code> (obrigatório) — O título principal do evento.</li>
+          <li><strong>subtitulo</strong>: <code>string</code> (opcional) — O subtítulo do evento.</li>
+          <li><strong>descricao</strong>: <code>string</code> (opcional) — A descrição do evento.</li>
+          <li><strong>dia</strong>: <code>string</code> (obrigatório) — O dia do evento.</li>
+          <li><strong>mes</strong>: <code>string</code> (obrigatório) — O mês do evento.</li>
+          <li><strong>id</strong>: <code>string</code> (opcional) — ID único do card para acessibilidade.</li>
+          <li><strong>tabIndex</strong>: <code>number</code> (opcional) — Índice de tabulação para navegação por
+            teclado.</li>
+          <li><strong>ariaLabel</strong>: <code>string</code> (opcional) — Rótulo para leitores de tela.</li>
         </ul>
       </h5>
       <div class="mb-3">
@@ -330,7 +341,7 @@ imports: [ MpcCardMenuComponent ]
 import &#123; MpcCardEventoComponent &#125; from 'mpc-lib-angular';
 
 // No seu componente
-imports: [ MpcCardEventoComponent ]
+imports: [MpcCardEventoComponent]
         </code></pre>
       </div>
       <div class="mb-5">

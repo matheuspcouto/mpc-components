@@ -9,15 +9,12 @@ describe('InscricoesEncerradasComponent', () => {
     await TestBed.configureTestingModule({
       imports: [InscricoesEncerradasComponent]
     }).compileComponents();
-
     fixture = TestBed.createComponent(InscricoesEncerradasComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  describe('Inicialização do Componente', () => {
-    it('deve criar o componente', () => {
-      expect(component).toBeTruthy();
-    });
+  it('deve criar o componente', () => {
+    expect(component).toBeTruthy();
   });
 });

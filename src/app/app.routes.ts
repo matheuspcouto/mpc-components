@@ -68,21 +68,24 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/componentes/mpc-input-doc/mpc-inputs-doc.component').then(c => c.MpcInputsDocComponent),
         canActivate: [SiteAtivoGuard]
       },
-    ]
-  },
-
-  /*  Rotas para Diretivas */
-  {
-    path: SegmentoRotas.DIRETIVAS,
-    children: [
+      {
+        path: SegmentoRotas.PAGE_DIVIDER_IMG,
+        loadComponent: () => import('./pages/componentes/mpc-page-divider-img-doc/mpc-page-divider-img-doc.component').then(c => c.MpcPageDividerImgDocComponent),
+        canActivate: [SiteAtivoGuard]
+      },
       {
         path: SegmentoRotas.BTN_FLOAT,
-        loadComponent: () => import('./pages/diretivas/mpc-btn-float-doc/mpc-btn-float-doc.component').then(c => c.MpcBtnFloatDocComponent),
+        loadComponent: () => import('./pages/componentes/mpc-btn-float-doc/mpc-btn-float-doc.component').then(c => c.MpcBtnFloatDocComponent),
         canActivate: [SiteAtivoGuard]
       },
       {
         path: SegmentoRotas.BUTTONS,
-        loadComponent: () => import('./pages/diretivas/mpc-button-doc/mpc-button-doc.component').then(c => c.MpcButtonDocComponent),
+        loadComponent: () => import('./pages/componentes/mpc-button-doc/mpc-button-doc.component').then(c => c.MpcButtonDocComponent),
+        canActivate: [SiteAtivoGuard]
+      },
+      {
+        path: SegmentoRotas.PIPES,
+        loadComponent: () => import('./pages/componentes/mpc-pipes-doc/mpc-pipes-doc.component').then(c => c.MpcPipesDocComponent),
         canActivate: [SiteAtivoGuard]
       },
     ]

@@ -14,12 +14,12 @@
       </h5>
       
       <h5>
-        <strong>Propriedades:</strong>
+        <strong>Propriedades do Componente:</strong>
         <ul class="text-start mt-3">
-          <li><strong>abasInput</strong>: (obrigatório) Array de configuração das abas de navegação.</li>
-          <li><strong>id</strong>: (opcional) O ID único do navbar para acessibilidade.</li>
-          <li><strong>tabIndex</strong>: (opcional) O índice de tabulação para navegação por teclado.</li>
-          <li><strong>ariaLabel</strong>: (opcional) Rótulo para leitores de tela.</li>
+          <li><strong>abasInput</strong>: <code>NavbarConfig[]</code> <b>(obrigatório)</b> — Array de configuração das abas de navegação.</li>
+          <li><strong>id</strong>: <code>string</code> (opcional) — ID do navbar para acessibilidade.</li>
+          <li><strong>tabIndex</strong>: <code>number</code> (opcional) — Índice de tabulação para navegação por teclado.</li>
+          <li><strong>ariaLabel</strong>: <code>string</code> (opcional) — Rótulo para leitores de tela.</li>
         </ul>
       </h5>
 
@@ -87,17 +87,17 @@ imports: [ MpcNavbarComponent ]
         <ul class="text-start mt-3">
           <li><strong>NavbarConfig:</strong> Interface para configuração das abas
             <ul>
-              <li><code>titulo</code>: Título da aba (string)</li>
-              <li><code>rota</code>: Rota de navegação (string)</li>
-              <li><code>icone</code>: Classe do ícone Bootstrap (string)</li>
-              <li><code>subRotas</code>: Array opcional de subrotas (SubRotaConfig[])</li>
+              <li><code>titulo</code>: <code>string</code> — Título da aba</li>
+              <li><code>rota</code>: <code>string</code> — Rota de navegação</li>
+              <li><code>icone</code>: <code>string</code> — Classe do ícone Bootstrap</li>
+              <li><code>subRotas</code>: <code>SubRotaConfig[]</code> (opcional) — Array de subrotas</li>
             </ul>
           </li>
           <li><strong>SubRotaConfig:</strong> Interface para configuração de sub-rotas
             <ul>
-              <li><code>titulo</code>: Título da subrota (string)</li>
-              <li><code>rota</code>: Rota da subrota (string, opcional)</li>
-              <li><code>fragment</code>: Fragmento da URL (string, opcional)</li>
+              <li><code>titulo</code>: <code>string</code> — Título da subrota</li>
+              <li><code>rota</code>: <code>string</code> (opcional) — Rota da subrota</li>
+              <li><code>fragment</code>: <code>string</code> (opcional) — Fragmento da URL</li>
             </ul>
           </li>
         </ul>

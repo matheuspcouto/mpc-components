@@ -21,9 +21,9 @@ describe('MpcPaginationComponent', () => {
     });
 
     it('deve inicializar com valores padrão', () => {
-      expect(component.id).toBe('');
-      expect(component.tabIndex).toBe(0);
-      expect(component.ariaLabel).toBe('Navegação de páginas');
+      expect(component.id).toBeUndefined();
+      expect(component.tabIndex).toBeUndefined();
+      expect(component.ariaLabel).toBeUndefined();
       expect(component.totalItens).toBe(0);
       expect(component.mostrarSeletorItensPorPagina).toBe(true);
       expect(component['itensPorPagina']).toBe(5);

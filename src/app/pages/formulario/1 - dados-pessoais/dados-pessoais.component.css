@@ -85,15 +85,10 @@ section {
     --mpc-color-border-success: var(--color-secondary);
     --mpc-font-text: var(--font-subtitle);
 
-    .btn-proximo {
-      background-color: var(--mpc-color-primary);
-      color: white;
-
-      &:disabled {
-        background-color: #5C636A;
-        color: white;
-        cursor: default !important;
-      }
+    #btn-proximo {
+      --mpc-bg-color-btn: var(--color-primary);
+      --mpc-text-color-btn: white;
+      --mpc-bg-color-btn-hover: var(--color-secondary);
     }
   }
 }

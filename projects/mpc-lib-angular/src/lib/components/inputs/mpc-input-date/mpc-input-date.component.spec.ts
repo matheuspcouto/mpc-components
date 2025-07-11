@@ -134,7 +134,7 @@ describe('MpcInputDateComponent', () => {
     component.validate({ value: '' } as any);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('p.text-danger')?.textContent).toContain('obrigatório');
+    expect(compiled.querySelector('p')?.textContent).toContain('obrigatório');
   });
 
   it('deve chamar writeValue', () => {

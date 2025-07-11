@@ -1,15 +1,22 @@
 /**
  * @Service ErrorService
+ *
  * Este service é responsável por lidar com erros e construir objetos de erro personalizados.
  * Utiliza Signal para gerenciar o estado do erro e compartilhar com componentes.
  *
- * Exemplo de utilização:
+ * @Propriedades
+ * @private _erro {Signal<Erro|null>} - Signal interna para o estado do erro
+ * @public erro {Signal<Erro|null>} - Signal somente leitura para acesso externo
+ *
+ * @Exemplo
+ * ```typescript
  * private errorService = inject(ErrorService);
  * errorService.construirErro(erro);
+ * ```
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/06/2025
- * @updated 04/07/2025
+ * @updated 10/07/2025
  */
 
 import { inject, Injectable, signal } from "@angular/core";
@@ -17,6 +24,9 @@ import { Rotas } from "../enums/rotas-enum";
 import { Erro } from "./error.interface";
 import { Router } from "@angular/router";
 
+/**
+ * Objeto padrão de erro utilizado pelo serviço.
+ */
 export const ERRO_PADRAO: Erro = {
   titulo: "Ops, algo deu errado!",
   mensagem: "Não foi possível realizar a operação, tente novamente e caso o problema persista, entre em contato com o suporte.",
@@ -26,17 +36,26 @@ export const ERRO_PADRAO: Erro = {
 
 @Injectable({ providedIn: "root" })
 export class ErrorService {
+  /**
+   * Instância do Router para navegação programática.
+   */
   private readonly router = inject(Router);
 
-  // Signal para gerenciar o estado do erro
+  /**
+   * Signal interna para gerenciar o estado do erro.
+   */
   private readonly _erro = signal<Erro | null>(null);
 
-  // Signal público para componentes acessarem o erro
+  /**
+   * Signal pública somente leitura para componentes acessarem o erro.
+   */
   public readonly erro = this._erro.asReadonly();
 
   /**
    * Constrói um erro e atualiza o estado.
-   * @param erro Objeto de erro
+   * @param erro Objeto de erro ou erro HTTP
+   * @example
+   *   errorService.construirErro({ mensagem: 'Erro customizado' });
    */
   construirErro(erro: any): void {
     let erroProcessado: Erro;
@@ -72,6 +91,8 @@ export class ErrorService {
 
   /**
    * Limpa o estado do erro.
+   * @example
+   *   errorService.limparErro();
    */
   limparErro(): void {
     this._erro.set(null);

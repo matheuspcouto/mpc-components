@@ -85,3 +85,8 @@ pre {
     white-space: pre-line;
   }
 }
+
+#btn-abrir-loader {
+  --mpc-bg-color-btn: var(--mpc-color-primary);
+  --mpc-text-color-btn: white;
+}

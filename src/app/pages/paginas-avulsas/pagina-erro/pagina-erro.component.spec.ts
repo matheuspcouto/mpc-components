@@ -1,8 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PaginaErroComponent } from './pagina-erro.component';
 import { ErrorService } from '../../../shared/error/error.service';
-import { of } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
 
 describe('PaginaErroComponent', () => {
   let component: PaginaErroComponent;
@@ -10,26 +8,11 @@ describe('PaginaErroComponent', () => {
   let mockErrorService: any;
 
   beforeEach(async () => {
-    mockErrorService = {
-      construirErro: jest.fn()
-    };
-
+    mockErrorService = { construirErro: jest.fn() };
     await TestBed.configureTestingModule({
       imports: [PaginaErroComponent],
       providers: [
-        { provide: ErrorService, useValue: mockErrorService },
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            params: of({}),
-            queryParams: of({}),
-            snapshot: {
-              params: {},
-              queryParams: {},
-              data: {}
-            }
-          }
-        }
+        { provide: ErrorService, useValue: mockErrorService }
       ]
     }).compileComponents();
   });

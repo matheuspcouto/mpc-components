@@ -86,3 +86,23 @@ pre {
   --mpc-font-description-modal: var(--font-default);
   --mpc-font-button-modal: var(--font-default);
 }
+
+#btn-modal-sucesso {
+  --mpc-bg-color-btn: green;
+  --mpc-text-color-btn: white;
+}
+
+#btn-modal-confirmacao {
+  --mpc-bg-color-btn: black;
+  --mpc-text-color-btn: white;
+}
+
+#btn-modal-alerta {
+  --mpc-bg-color-btn: yellow;
+  --mpc-text-color-btn: black;
+}
+
+#btn-modal-erro {
+  --mpc-bg-color-btn: red;
+  --mpc-text-color-btn: white;
+}

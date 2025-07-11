@@ -60,8 +60,8 @@
  */
 
 import { Component } from '@angular/core';
-import { MpcButtonDirective } from '../../directives/mpc-button/mpc-button.directive';
 import { AccessibilityInputs } from '../../../shared/accessibility-inputs';
+import { MpcButtonComponent } from "../mpc-button/mpc-button.component";
 
 export interface MpcModalConfig {
   /** Título do modal */
@@ -102,7 +102,7 @@ export const TipoModal = {
 
 @Component({
   selector: 'mpc-modal',
-  imports: [MpcButtonDirective],
+  imports: [MpcButtonComponent],
   templateUrl: './mpc-modal.component.html',
   styleUrls: ['./mpc-modal.component.css']
 })

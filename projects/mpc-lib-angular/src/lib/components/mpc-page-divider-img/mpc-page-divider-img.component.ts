@@ -10,6 +10,7 @@
  * @Input() ariaLabel {string} - Label do campo (opcional)
  * @Input() titulo {string} - Título do divisor (obrigatório)
  * @Input() subtitulo {string} - Subtítulo do divisor (opcional)
+ * @Input() imagemFundo {string} - Imagem de funco do divisor (obrigatorio)
  * 
  * @Exemplo
  * ```html
@@ -19,6 +20,7 @@
  *   subtitulo="Transformar vidas através do amor"
  *   id="divider-missao"
  *   [tabIndex]="0"
+ *   imagemFundo="/assets/img/no-image.jpg"
  *   ariaLabel="Divisor da seção Nossa Missão" />
  * ```
  * 
@@ -27,7 +29,6 @@
  * --mpc-font-subtitle-page-divider-img: Fonte do subtítulo (padrão: var(--mpc-font-subtitle))
  * --mpc-color-title-page-divider-img: Cor do título (padrão: var(--mpc-color-primary))
  * --mpc-color-subtitle-page-divider-img: Cor do subtítulo (padrão: var(--mpc-color-secondary))
- * --mpc-img-background-page-divider: Imagem de fundo (padrão: url('/assets/img/no-image.jpg'))
  * 
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
@@ -50,8 +51,21 @@ export class MpcPageDividerImgComponent extends AccessibilityInputs {
   @Input() titulo: string = 'Mpc Components';
   /** Subtítulo da seção */
   @Input() subtitulo?: string;
+  /** Imagem de fundo da seção */
+  @Input() imagemFundo?: string;
+
 
   // ===== MÉTODOS PROTEGIDOS =====
+
+  /**
+  * Verifica e retorna a imagem de fundo escurecida.
+  * @returns {string} imagem de fundo escurecida
+  */
+  protected getBackgroundImage(): string {
+    return this.imagemFundo && this.imagemFundo.length > 0 ?
+      `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(${this.imagemFundo})` :
+      "linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(/assets/img/no-image.jpg)";
+  }
 
   /**
    * Verifica se a seção possui título.

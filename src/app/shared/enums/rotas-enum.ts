@@ -14,6 +14,8 @@ export enum SegmentoRotas {
   PAGINACAO = "mpc-pagination-doc",
   INPUTS = "mpc-inputs-doc",
   PAGE_HEADER = "mpc-page-header-doc",
+  PAGE_DIVIDER_IMG = "mpc-page-divider-img-doc",
+  PIPES = "mpc-pipes-doc",
 
   // Diretivas
   DIRETIVAS = "diretivas",
@@ -55,12 +57,11 @@ export enum Rotas {
   PAGINACAO = `/${SegmentoRotas.COMPONENTES}/${SegmentoRotas.PAGINACAO}`,
   INPUTS = `/${SegmentoRotas.COMPONENTES}/${SegmentoRotas.INPUTS}`,
   PAGE_HEADER = `/${SegmentoRotas.COMPONENTES}/${SegmentoRotas.PAGE_HEADER}`,
-
-  // Diretivas
-  DIRETIVAS = `/${SegmentoRotas.DIRETIVAS}`,
-  BTN_FLOAT = `/${SegmentoRotas.DIRETIVAS}/${SegmentoRotas.BTN_FLOAT}`,
-  BUTTONS = `/${SegmentoRotas.DIRETIVAS}/${SegmentoRotas.BUTTONS}`,
-
+  BTN_FLOAT = `/${SegmentoRotas.COMPONENTES}/${SegmentoRotas.BTN_FLOAT}`,
+  BUTTONS = `/${SegmentoRotas.COMPONENTES}/${SegmentoRotas.BUTTONS}`,
+  PAGE_DIVIDER_IMG = `/${SegmentoRotas.COMPONENTES}/${SegmentoRotas.PAGE_DIVIDER_IMG}`,
+  PIPES = `/${SegmentoRotas.COMPONENTES}/${SegmentoRotas.PIPES}`,
+  
   // Paginas
   PAGINAS = `/${SegmentoRotas.PAGINAS}`,
 

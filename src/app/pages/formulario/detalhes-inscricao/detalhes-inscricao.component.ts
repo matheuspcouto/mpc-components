@@ -1,10 +1,21 @@
 /**
  * @Componente DetalhesInscricaoComponent
- * Este componente é responsável por exibir os detalhes da inscrição.
+ *
+ * Este componente é responsável por exibir os detalhes da inscrição do usuário,
+ * incluindo dados pessoais, dados da inscrição e informações de pagamento.
+ *
+ * @Propriedades
+ * @protected dadosDetalhesInscricao {dadosDetalhesInscricao} - Dados organizados para exibição
+ * @protected isCopiado {boolean} - Indica se o código foi copiado para a área de transferência
+ *
+ * @Exemplo
+ * ```html
+ * <detalhes-inscricao></detalhes-inscricao>
+ * ```
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/06/2025
- * @updated 04/07/2025
+ * @updated 10/07/2025
  */
 
 import { ToastrService } from 'ngx-toastr';
@@ -14,7 +25,7 @@ import { Inscricao } from '../model/inscricao.model';
 import { ErrorService } from '../../../shared/error/error.service';
 import { Rotas } from '../../../shared/enums/rotas-enum';
 import { Router } from '@angular/router';
-import { MpcButtonDirective } from 'mpc-lib-angular';
+import { MpcButtonComponent } from 'mpc-lib-angular';
 
 export interface dadosDetalhesInscricao {
   dadosInscricao: {
@@ -33,7 +44,7 @@ export interface dadosDetalhesInscricao {
 
 @Component({
   selector: 'detalhes-inscricao',
-  imports: [MpcButtonDirective],
+  imports: [MpcButtonComponent],
   templateUrl: './detalhes-inscricao.component.html',
   styleUrls: ['./detalhes-inscricao.component.css']
 })
@@ -45,8 +56,13 @@ export class DetalhesInscricaoComponent implements OnInit {
   private readonly notificationService = inject(ToastrService);
   private readonly router = inject(Router);
 
-  // Variáveis
+  /**
+   * Dados organizados para exibição dos detalhes da inscrição.
+   */
   protected dadosDetalhesInscricao!: dadosDetalhesInscricao;
+  /**
+   * Indica se o código foi copiado para a área de transferência.
+   */
   protected isCopiado: boolean = false;
 
   /**
@@ -63,7 +79,6 @@ export class DetalhesInscricaoComponent implements OnInit {
     try {
       const inscricao = this.inscricaoService.getDadosInscricao();
       if (!inscricao) { throw new Error('Inscrição não encontrada'); }
-
       this.dadosDetalhesInscricao = {
         dadosPessoais: this.inicializarDadosPessoais(inscricao),
         dadosInscricao: this.inicializarDadosInscricao(inscricao),
@@ -76,6 +91,8 @@ export class DetalhesInscricaoComponent implements OnInit {
 
   /**
    * Inicializa os dados da inscrição (código, data, status).
+   * @param response Objeto de inscrição
+   * @returns {codigoInscricao, dataInscricao, status}
    */
   private inicializarDadosInscricao(response: Inscricao): { codigoInscricao: string, dataInscricao: string, status: string } {
     return {
@@ -87,51 +104,45 @@ export class DetalhesInscricaoComponent implements OnInit {
 
   /**
    * Inicializa os dados pessoais da inscrição.
+   * @param response Objeto de inscrição
+   * @returns {Array<{label: string, valor: string}>}
    */
   private inicializarDadosPessoais(response: Inscricao): { label: string, valor: string }[] {
     const dadosPessoais: { label: string, valor: string }[] = [];
-
     if (response.nome) {
       dadosPessoais.push({ label: 'Nome', valor: response.nome });
     }
-
     if (response.cpfCnpj) {
       dadosPessoais.push({ label: 'CPF/CNPJ', valor: response.cpfCnpj });
     }
-
     if (response.dataNasc) {
       dadosPessoais.push({ label: 'Data de Nascimento', valor: this.formatarData(response.dataNasc) });
     }
-
     if (response.sexo) {
       dadosPessoais.push({ label: 'Sexo', valor: response.sexo });
     }
-
     if (response.estadoCivil) {
       dadosPessoais.push({ label: 'Estado Civil', valor: response.estadoCivil });
     }
-
     if (response.idade) {
       dadosPessoais.push({ label: 'Idade', valor: response.idade.toString() });
     }
-
     if (response.telefone) {
       dadosPessoais.push({ label: 'Telefone', valor: response.telefone });
     }
-
     if (response.email) {
       dadosPessoais.push({ label: 'E-mail', valor: response.email });
     }
-
     if (response.endereco) {
       dadosPessoais.push({ label: 'Endereço', valor: response.endereco });
     }
-
     return dadosPessoais;
   }
 
   /**
    * Inicializa os dados de pagamento da inscrição.
+   * @param response Objeto de inscrição
+   * @returns {formaPagamento, valor, statusPagamento, dataPagamento}
    */
   private inicializarDadosPagamento(response: Inscricao): { formaPagamento: string, valor: number, statusPagamento?: string, dataPagamento?: string } {
     return {
@@ -144,6 +155,7 @@ export class DetalhesInscricaoComponent implements OnInit {
 
   /**
    * Copia o código da inscrição para a área de transferência.
+   * @param valor Código a ser copiado
    */
   protected copiarCodigo(valor: string | undefined): void {
     if (!valor) return;
@@ -170,6 +182,8 @@ export class DetalhesInscricaoComponent implements OnInit {
 
   /**
    * Retorna a classe do badge de status da inscrição.
+   * @param status Status da inscrição
+   * @returns {string} Classe CSS
    */
   protected getBadgeStatusInscricao(status: string | undefined): string {
     if (!status) return '';
@@ -180,6 +194,8 @@ export class DetalhesInscricaoComponent implements OnInit {
 
   /**
    * Retorna a classe do badge de status do pagamento.
+   * @param status Status do pagamento
+   * @returns {string} Classe CSS
    */
   protected getBadgeStatusPagamento(status: string | undefined): string {
     if (!status) return '';
@@ -190,6 +206,8 @@ export class DetalhesInscricaoComponent implements OnInit {
 
   /**
    * Retorna o texto do status do pagamento.
+   * @param status Status do pagamento
+   * @returns {string} Texto do status
    */
   protected getTextoStatusPagamento(status: string | undefined): string {
     if (!status) return '';
@@ -200,6 +218,8 @@ export class DetalhesInscricaoComponent implements OnInit {
 
   /**
    * Retorna o texto do status da inscrição.
+   * @param status Status da inscrição
+   * @returns {string} Texto do status
    */
   protected getTextoStatusInscricao(status: string | undefined): string {
     if (!status) return '';
@@ -210,6 +230,8 @@ export class DetalhesInscricaoComponent implements OnInit {
 
   /**
    * Formata o valor para o padrão monetário brasileiro.
+   * @param valor Valor a ser formatado
+   * @returns {string} Valor formatado
    */
   protected formatarValor(valor: number): string {
     return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
@@ -217,6 +239,8 @@ export class DetalhesInscricaoComponent implements OnInit {
 
   /**
    * Formata a data para o padrão brasileiro.
+   * @param data Data a ser formatada
+   * @returns {string} Data formatada
    */
   protected formatarData(data: string | undefined): string {
     if (!data) return '';
@@ -224,7 +248,6 @@ export class DetalhesInscricaoComponent implements OnInit {
     if (date instanceof Date && !isNaN(date.getTime())) {
       return new Date(date).toLocaleDateString('pt-BR');
     }
-
     return data.substring(0, 10);
   }
 

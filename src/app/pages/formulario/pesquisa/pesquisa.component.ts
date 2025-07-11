@@ -1,10 +1,20 @@
 /**
  * @Componente PesquisaComponent
+ *
  * Este componente é responsável por exibir e gerenciar a pesquisa de inscrições.
+ * Permite ao usuário buscar inscrições pelo campo de pesquisa e navegar para os detalhes do resultado encontrado.
+ *
+ * @Propriedades
+ * @protected form {FormGroup} - Formulário reativo de pesquisa
+ *
+ * @Exemplo
+ * ```html
+ * <app-pesquisa></app-pesquisa>
+ * ```
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/06/2025
- * @updated 04/07/2025
+ * @updated 10/07/2025
  */
 
 import { Component, inject } from '@angular/core';
@@ -15,7 +25,7 @@ import { Inscricao } from '../model/inscricao.model';
 import { take } from 'rxjs';
 import { Rotas } from '../../../shared/enums/rotas-enum';
 import { ToastrService } from 'ngx-toastr';
-import { MpcInputPesquisaComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-pesquisa/mpc-input-pesquisa.component';
+import { MpcInputPesquisaComponent } from 'mpc-lib-angular';
 
 @Component({
     selector: 'app-pesquisa',
@@ -24,11 +34,16 @@ import { MpcInputPesquisaComponent } from '../../../../../projects/mpc-lib-angul
     styleUrls: ['./pesquisa.component.css']
 })
 export class PesquisaComponent {
+
+    // Serviços
     private readonly router = inject(Router);
     private readonly inscricaoService = inject(InscricaoService);
     private readonly formBuilder = inject(NonNullableFormBuilder);
     private readonly notificacaoService = inject(ToastrService);
 
+    /**
+     * Formulário reativo de pesquisa.
+     */
     protected form = this.formBuilder.group({ pesquisa: [''] });
 
     /**

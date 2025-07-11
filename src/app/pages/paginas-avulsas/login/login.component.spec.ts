@@ -1,6 +1,6 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import LoginComponent from './login.component';
 
 describe('LoginComponent', () => {
@@ -9,15 +9,8 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        LoginComponent,
-        ReactiveFormsModule
-      ],
-      providers: [
-        FormBuilder
-      ]
-    })
-      .compileComponents();
+      imports: [LoginComponent, ReactiveFormsModule]
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -30,14 +23,12 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('deve fazer login', () => {
+  it('deve validar o formulário e executar login', () => {
     component['form'].patchValue({
       email: 'teste@teste.com',
       senha: '123456'
-    })
-
+    });
     component['login']();
-
     expect(component['form'].valid).toBeTruthy();
   });
 });

@@ -1,0 +1,35 @@
+:host {
+  --mpc-btn-float-bg: var(--mpc-color-primary);
+  --mpc-btn-float-color: var(--mpc-color-white);
+}
+
+.mpc-btn-float {
+  visibility: visible;
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  z-index: 998;
+  width: 44px;
+  height: 44px;
+  border-radius: 50px;
+  border: none;
+  transition: all ease-in 0.4s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  outline: none;
+  background: var(--mpc-btn-float-bg);
+  color: var(--mpc-btn-float-color);
+
+  i {
+    font-size: 24px;
+    line-height: 0;
+  }
+}
+
+.mpc-btn-float:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

@@ -86,3 +86,22 @@ pre {
   }
 }
 
+#btn-erro-detalhado {
+  --mpc-bg-color-btn: #dc3545;
+  --mpc-text-color-btn: white;
+}
+
+#btn-erro-generico {
+  --mpc-bg-color-btn: #ffc107;
+  --mpc-text-color-btn: black;
+}
+
+#btn-erro-validacao {
+  --mpc-bg-color-btn: #17a2b8;
+  --mpc-text-color-btn: white;
+}
+
+#btn-erro-com-imagem {
+  --mpc-bg-color-btn: #fd7e14;
+  --mpc-text-color-btn: white;
+}

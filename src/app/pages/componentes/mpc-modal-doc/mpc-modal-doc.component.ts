@@ -1,18 +1,45 @@
 import { Component, ViewChild } from '@angular/core';
-import { MpcModalComponent, MpcModalConfig, TipoModal } from '../../../../../projects/mpc-lib-angular/src/lib/components/mpc-modal/mpc-modal.component';
-import { MpcButtonDirective } from '../../../../../projects/mpc-lib-angular/src/lib/directives/mpc-button/mpc-button.directive';
+import { MpcModalComponent, MpcModalConfig, TipoModal, MpcButtonComponent } from 'mpc-lib-angular';
 
+/**
+ * @Componente MpcModalDocComponent
+ *
+ * Este componente exibe exemplos e documentação do componente de modal da biblioteca MPC,
+ * demonstrando como abrir diferentes tipos de modais programaticamente.
+ *
+ * @Propriedades
+ * @protected erro {any} - Exemplo de variável de erro
+ * @ViewChild modalExemplo {MpcModalComponent} - Referência ao modal de exemplo
+ *
+ * @Exemplo
+ * ```html
+ * <app-modais></app-modais>
+ * ```
+ *
+ * @author Matheus Pimentel Do Couto
+ * @created 10/07/2025
+ * @updated 10/07/2025
+ */
 @Component({
   selector: 'app-modais',
-  imports: [MpcModalComponent, MpcButtonDirective],
+  imports: [MpcModalComponent, MpcButtonComponent],
   templateUrl: './mpc-modal-doc.component.html',
   styleUrl: './mpc-modal-doc.component.css'
 })
 export class MpcModalDocComponent {
 
+  /**
+   * Exemplo de variável de erro.
+   */
   erro: any;
+  /**
+   * Referência ao modal de exemplo.
+   */
   @ViewChild('modalExemplo', { static: true }) modalExemplo!: MpcModalComponent;
 
+  /**
+   * Abre um modal de confirmação.
+   */
   abrirModalConfirmacao() {
     const modalConfirmacao: MpcModalConfig = {
       titulo: 'Modal de Confirmação',
@@ -23,10 +50,12 @@ export class MpcModalDocComponent {
       segundoBotao: () => { this.modalExemplo?.fecharModal(); },
       textoSegundoBotao: 'Fechar',
     }
-
     this.modalExemplo?.abrirModal(modalConfirmacao);
   }
 
+  /**
+   * Abre um modal de sucesso.
+   */
   abrirModalSucesso() {
     const modalSucesso: MpcModalConfig = {
       titulo: 'Modal de Sucesso',
@@ -37,10 +66,12 @@ export class MpcModalDocComponent {
       segundoBotao: () => { this.modalExemplo?.fecharModal(); },
       textoSegundoBotao: 'Fechar',
     }
-
     this.modalExemplo?.abrirModal(modalSucesso);
   }
 
+  /**
+   * Abre um modal de alerta.
+   */
   abrirModalAlerta() {
     const modalAlerta: MpcModalConfig = {
       titulo: 'Modal de Alerta',
@@ -51,10 +82,12 @@ export class MpcModalDocComponent {
       segundoBotao: () => { this.modalExemplo?.fecharModal(); },
       textoSegundoBotao: 'Fechar',
     }
-
     this.modalExemplo?.abrirModal(modalAlerta);
   }
 
+  /**
+   * Abre um modal de erro.
+   */
   abrirModalErro() {
     const modalErro: MpcModalConfig = {
       titulo: 'Modal de Erro',
@@ -65,7 +98,6 @@ export class MpcModalDocComponent {
       // Não é necessário passar o segundo botão
       // O modal de erro já possui um botão de copiar o erro
     }
-
     this.modalExemplo?.abrirModal(modalErro);
   }
 

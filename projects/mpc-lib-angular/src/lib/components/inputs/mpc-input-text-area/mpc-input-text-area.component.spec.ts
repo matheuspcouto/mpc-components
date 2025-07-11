@@ -26,7 +26,8 @@ describe('MpcInputTextAreaComponent', () => {
   });
 
   it('deve atualizar o valor ao setValue', () => {
-    const event = { target: { value: 'teste' } } as any;
+    const event = { target: { value: 'teste', style: { height: 'auto' }, scrollHeight: 42 } } as any;
+    component.textareaRef = { nativeElement: { style: { height: 'auto' }, scrollHeight: 42 } } as any;
     component['setValue'](event);
     expect(component.value).toBe('teste');
   });
@@ -139,5 +140,44 @@ describe('MpcInputTextAreaComponent', () => {
     const spyOnWriteValue = jest.spyOn(component as any, 'writeValue');
     component.writeValue('teste');
     expect(spyOnWriteValue).toHaveBeenCalledWith('teste');
+  });
+
+  it('deve chamar ajustarAltura no ngAfterViewInit se houver valor', () => {
+    component.value = 'valor inicial';
+    const ajustarAlturaSpy = jest.spyOn<any, any>(component as any, 'ajustarAltura');
+    component.textareaRef = { nativeElement: { style: { height: 'auto' }, scrollHeight: 42 } } as any;
+    jest.useFakeTimers();
+    component.ngAfterViewInit();
+    jest.runAllTimers();
+    expect(ajustarAlturaSpy).toHaveBeenCalled();
+    jest.useRealTimers();
+  });
+
+  it('deve chamar ajustarAltura no writeValue se textareaRef existir', () => {
+    const ajustarAlturaSpy = jest.spyOn<any, any>(component as any, 'ajustarAltura');
+    component.textareaRef = { nativeElement: { style: { height: 'auto' }, scrollHeight: 42 } } as any;
+    jest.useFakeTimers();
+    component.writeValue('novo valor');
+    jest.runAllTimers();
+    expect(ajustarAlturaSpy).toHaveBeenCalled();
+    jest.useRealTimers();
+  });
+
+  it('deve executar ajustarAltura corretamente', () => {
+    const textarea = { style: { height: 'auto' }, scrollHeight: 123 } as any;
+    (component as any).ajustarAltura(textarea);
+    expect(textarea.style.height).toBe('123px');
+  });
+
+  it('deve registrar função de mudança com registerOnChange', () => {
+    const fn = jest.fn();
+    component.registerOnChange(fn);
+    expect(component.onChange).toBe(fn);
+  });
+
+  it('deve registrar função de toque com registerOnTouched', () => {
+    const fn = jest.fn();
+    component.registerOnTouched(fn);
+    expect(component.onTouched).toBe(fn);
   });
 }); 

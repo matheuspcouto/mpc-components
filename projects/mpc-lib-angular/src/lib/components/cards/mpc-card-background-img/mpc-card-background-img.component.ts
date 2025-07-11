@@ -12,6 +12,7 @@
  * @Input() titulo {string} - Título principal do card (obrigatório)
  * @Input() subtitulo {string} - Subtítulo do card (opcional)
  * @Input() descricao {string} - Descrição do card (opcional)
+ * @Input() imagemFundo {string} - Imagem de fundo do card (obrigatorio)
  * 
  * @Variáveis CSS
  * --mpc-color-text-card-bg-img: white;
@@ -19,19 +20,30 @@
  * --mpc-font-title-card-bg-img: var(--mpc-font-title);
  * --mpc-font-subtitle-card-bg-img: var(--mpc-font-subtitle);
  * --mpc-font-description-card-bg-img: var(--mpc-font-default);
- * --mpc-img-card-bg: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/assets/img/no-image.jpg');
  * 
  * @Exemplo
  * ```html
- * <!-- Card com Imagem de Fundo -->
+ * <!-- Card com Imagem de Fundo customizada -->
  * <mpc-card-background-img
  *   titulo="Programação"
  *   subtitulo="Horários dos Cultos"
  *   descricao="Confira nossa programação semanal"
  *   id="card-programacao"
  *   [tabIndex]="0"
+ *   imagemFundo="/assets/img/exemplo.jpg"
  *   ariaLabel="Card de programação semanal" />
- * ```
+ *
+ * <!-- Card com Imagem de Fundo padrão -->
+ * <mpc-card-background-img
+ *   titulo="Sem imagem customizada"
+ *   descricao="Usa a imagem padrão do componente"
+ *   id="card-sem-img"
+ * />
+ * ``` 
+ * 
+ * @detalhe
+ * Se a propriedade <code>imagemFundo</code> for informada, ela será usada como imagem de fundo com gradiente escuro.
+ * Caso contrário, será usada a imagem padrão definida no CSS (<code>--mpc-img-card-bg</code>).
  * 
  * @author Matheus Pimentel Do Couto
  * @created 24/06/2025
@@ -55,7 +67,9 @@ export class MpcCardBackGroundImgComponent extends AccessibilityInputs {
   @Input() subtitulo: string = '';
   /** Descrição do card */
   @Input() descricao: string = '';
-
+  /** Imagem de fundo do card */
+  @Input() imagemFundo?: string;
+  /** Evento de clique do card */
   @Output() acao = new EventEmitter<void>();
 
   // ===== MÉTODOS PÚBLICOS =====
@@ -112,5 +126,15 @@ export class MpcCardBackGroundImgComponent extends AccessibilityInputs {
  */
   protected getCursor(): string {
     return this.hasAcao() ? 'pointer' : 'default';
+  }
+
+  /**
+   * Retorna a imagem de fundo escurecida com gradiente.
+   * @returns {string} background-image CSS
+   */
+  protected getBackgroundImage(): string {
+    return this.imagemFundo && this.imagemFundo.length > 0
+      ? `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(${this.imagemFundo})`
+      : "linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(/assets/img/no-image.jpg)";
   }
 }

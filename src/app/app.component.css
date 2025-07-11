@@ -15,3 +15,8 @@
     --mpc-bg-loader: white;
     --mpc-color-loader: var(--color-primary);
 }
+
+#btn-scroll-top {
+    --mpc-btn-float-bg: var(--color-secondary);
+    --mpc-btn-float-color: white;
+}

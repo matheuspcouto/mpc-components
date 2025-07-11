@@ -1,10 +1,23 @@
 /**
  * @Componente DadosPessoaisComponent
- * Este componente é responsável por exibir e gerenciar o formulário de dados pessoais.
+ *
+ * Este componente é responsável por exibir e gerenciar o formulário de dados pessoais do usuário,
+ * incluindo campos como nome, sobrenome, data de nascimento, sexo, estado civil, CPF/CNPJ e descrição.
+ *
+ * @Propriedades
+ * @protected dataAtual {string} - Data atual para validação de data de nascimento
+ * @protected estadosCivis {SelectOption[]} - Opções de estado civil
+ * @protected sexos {RadioOption[]} - Opções de sexo
+ * @protected form {FormGroup} - Formulário reativo de dados pessoais
+ *
+ * @Exemplo
+ * ```html
+ * <app-dados-pessoais></app-dados-pessoais>
+ * ```
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/06/2025
- * @updated 07/07/2025
+ * @updated 10/07/2025
  */
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -12,24 +25,15 @@ import { Rotas } from '../../../shared/enums/rotas-enum';
 import { InscricaoService } from '../service/inscricao.service';
 import { FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { ErrorService } from '../../../shared/error/error.service';
-import { MpcInputDateComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-date/mpc-input-date.component';
-import { MpcInputRadioComponent, RadioOption } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-radio/mpc-input-radio.component';
-import { MpcButtonDirective } from '../../../../../projects/mpc-lib-angular/src/lib/directives/mpc-button/mpc-button.directive';
-import { MpcInputSelectComponent, SelectOption } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-select/mpc-input-select.component';
-import { MpcInputTextComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-text/mpc-input-text.component';
-import { MpcInputNumberComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-number/mpc-input-number.component';
-import { MpcInputCpfcnpjComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-cpfcnpj/mpc-input-cpfcnpj.component';
-import { MpcInputTextAreaComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/inputs/mpc-input-text-area/mpc-input-text-area.component';
-import { MpcFormProgressBarComponent } from '../../../../../projects/mpc-lib-angular/src/lib/components/mpc-form-progress-bar/mpc-form-progress-bar.component';
-import { MpcLoaderService } from '../../../../../projects/mpc-lib-angular/src/lib/components/mpc-loader/mpc-loader.service';
+import { MpcInputDateComponent, MpcInputRadioComponent, RadioOption, MpcInputSelectComponent, SelectOption, MpcInputTextComponent, MpcInputNumberComponent, MpcInputCpfcnpjComponent, MpcInputTextAreaComponent, MpcFormProgressBarComponent, MpcLoaderService, MpcButtonComponent } from 'mpc-lib-angular';
 
 @Component({
   selector: 'app-dados-pessoais',
   imports: [FormsModule,
     ReactiveFormsModule, MpcInputTextComponent, MpcInputDateComponent,
-    MpcInputRadioComponent, MpcButtonDirective, MpcInputSelectComponent,
+    MpcInputRadioComponent, MpcInputSelectComponent,
     MpcFormProgressBarComponent, MpcInputNumberComponent,
-    MpcInputCpfcnpjComponent, MpcInputTextAreaComponent],
+    MpcInputCpfcnpjComponent, MpcInputTextAreaComponent, MpcButtonComponent],
   templateUrl: './dados-pessoais.component.html',
   styleUrls: ['./dados-pessoais.component.css'],
 })
@@ -42,9 +46,14 @@ export default class DadosPessoaisComponent implements OnInit {
   private readonly errorService = inject(ErrorService);
   private readonly loaderService = inject(MpcLoaderService);
 
-  // Variáveis
+  /**
+   * Data atual para validação de data de nascimento.
+   */
   protected dataAtual: string = new Date().toISOString().split('T')[0];
 
+  /**
+   * Opções de estado civil para o select.
+   */
   protected estadosCivis: SelectOption[] = [
     { label: 'Solteiro(a)', value: 'Solteiro(a)', selected: false },
     { label: 'Casado(a)', value: 'Casado(a)', selected: false },
@@ -53,11 +62,17 @@ export default class DadosPessoaisComponent implements OnInit {
     { label: 'Separado(a)', value: 'Separado(a)', selected: false }
   ];
 
+  /**
+   * Opções de sexo para o radio.
+   */
   protected sexos: RadioOption[] = [
     { label: 'Masculino', value: 'M', checked: false },
     { label: 'Feminino', value: 'F', checked: false }
   ];
 
+  /**
+   * Formulário reativo de dados pessoais.
+   */
   protected form = this.formBuilder.group({
     nome: [''],
     sobrenome: [''],
@@ -86,7 +101,6 @@ export default class DadosPessoaisComponent implements OnInit {
 
       if (this.inscricaoService.isDadosPessoaisCompletos()) {
         this.form.reset();
-
         this.form.patchValue({
           nome: dadosInscricao.nome,
           sobrenome: dadosInscricao.sobrenome,
@@ -95,7 +109,6 @@ export default class DadosPessoaisComponent implements OnInit {
           cpfCnpj: dadosInscricao.cpfCnpj,
           descricao: dadosInscricao.descricao,
         });
-
         if (dadosInscricao.sexo) {
           this.sexos.forEach(sexo => {
             if (sexo.value === dadosInscricao.sexo) {
@@ -112,7 +125,6 @@ export default class DadosPessoaisComponent implements OnInit {
             }
           });
         }
-
         this.dataAtual = this.formatarData(this.dataAtual);
       }
     } catch (error) {
@@ -136,6 +148,8 @@ export default class DadosPessoaisComponent implements OnInit {
 
   /**
    * Formata a data para o padrão yyyy-mm-dd.
+   * @param data Data a ser formatada
+   * @returns {string} Data formatada
    */
   private formatarData(data: string): string {
     const partes = data.split('-');

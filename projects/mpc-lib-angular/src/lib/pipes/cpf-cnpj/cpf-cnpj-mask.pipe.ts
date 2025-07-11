@@ -5,9 +5,9 @@
  * CPF: 000.000.000-00
  * CNPJ: 00.000.000/0000-00
  *
- * Exemplo de utilização:
- * {{ '12345678901' | cpfCnpjMask }}
- * {{ documento | cpfCnpjMask }}
+ * @Exemplo de utilização:
+ * {{ '12345678901' | cpfCnpjMaskPipe }}
+ * {{ documento | cpfCnpjMaskPipe }}
  * this.cpfCnpjMaskPipe.transform(documento);
  *
  * @author Matheus Pimentel Do Couto
@@ -18,7 +18,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'cpfCnpjMask',
+  name: 'cpfCnpjMaskPipe',
   standalone: true
 })
 export class CpfCnpjMaskPipe implements PipeTransform {

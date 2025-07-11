@@ -1,5 +1,5 @@
-<div class="card-background-img" [id]="id" [tabIndex]="tabIndex" [attr.aria-label]="getAriaLabel()" (click)="onClick()"
-  [style.cursor]="getCursor()">
+<div class="card-background-img" [style.background-image]="getBackgroundImage()" [id]="id" [tabIndex]="tabIndex"
+  [attr.aria-label]="getAriaLabel()" (click)="onClick()" [style.cursor]="getCursor()">
 
   @if (hasTitulo()) {
   <div class="titulo" tabindex="0" [attr.aria-label]="'Título: ' + titulo">{{

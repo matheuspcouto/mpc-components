@@ -66,24 +66,20 @@
 
       <div class="row">
         <div class="col-lg-3 px-5 py-3 justify-content-center align-items-center d-flex">
-          <button mpcButton [style.background-color]="'#dc3545'" [style.color]="'white'" icone="bi bi-bug" posicaoIcone="esquerda"
-            (click)="simularErroDetalhado()" texto="Erro Detalhado">
-          </button>
+          <mpc-button icone="bi bi-bug" posicaoIcone="esquerda" (click)="simularErroDetalhado()" texto="Erro Detalhado"
+            id="btn-erro-detalhado" />
         </div>
         <div class="col-lg-3 px-5 py-3 justify-content-center align-items-center d-flex">
-          <button mpcButton [style.background-color]="'#ffc107'" [style.color]="'black'" icone="bi bi-bug" posicaoIcone="esquerda"
-            (click)="simularErroGenerico()" texto="Erro Genérico">
-          </button>
+          <mpc-button icone="bi bi-bug" posicaoIcone="esquerda" (click)="simularErroGenerico()" texto="Erro Genérico"
+            id="btn-erro-generico" />
         </div>
         <div class="col-lg-3 px-5 py-3 justify-content-center align-items-center d-flex">
-          <button mpcButton [style.background-color]="'#17a2b8'" [style.color]="'white'" icone="bi bi-bug" posicaoIcone="esquerda"
-            (click)="simularErroValidacao()" texto="Erro de Validação">
-          </button>
+          <mpc-button icone="bi bi-bug" posicaoIcone="esquerda" (click)="simularErroValidacao()"
+            texto="Erro de Validação" id="btn-erro-validacao" />
         </div>
         <div class="col-lg-3 px-5 py-3 justify-content-center align-items-center d-flex">
-          <button mpcButton [style.background-color]="'#fd7e14'" [style.color]="'white'" icone="bi bi-bug" posicaoIcone="esquerda"
-            (click)="simularErroComImagem()" texto="Erro + Imagem">
-          </button>
+          <mpc-button icone="bi bi-bug" posicaoIcone="esquerda" (click)="simularErroComImagem()" texto="Erro + Imagem"
+            id="btn-erro-com-imagem" />
         </div>
       </div>
 

@@ -1,35 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import HomeComponent from './home.component';
-import { ActivatedRoute, Router } from '@angular/router';
-import { of } from 'rxjs';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
-  let router: Router;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomeComponent],
-      providers: [
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            params: of({}),
-            queryParams: of({}),
-            snapshot: {
-              params: {},
-              queryParams: {},
-              data: {}
-            }
-          }
-        }
-      ]
-    })
-      .compileComponents();
-
-    router = TestBed.inject(Router);
-    jest.spyOn(router, 'navigate').mockImplementation(jest.fn());
+      imports: [HomeComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -42,16 +21,10 @@ describe('HomeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('deve ter o router injetado corretamente', () => {
-    // Assert
-    expect(component).toBeTruthy();
-    expect(router).toBeDefined();
-  });
-
-  it('deve chamar window.open ao executar irParaRepositorio', () => {
+  it('deve chamar window.open ao executar irParaLib', () => {
     const spy = jest.spyOn(window, 'open').mockImplementation();
-    component.irParaRepositorio();
-    expect(spy).toHaveBeenCalledWith('https://github.com/matheuspcouto/mpc-components', '_blank');
+    component.irParaLib();
+    expect(spy).toHaveBeenCalledWith('https://www.npmjs.com/package/mpc-lib-angular?activeTab=readme', '_blank');
     spy.mockRestore();
   });
 });

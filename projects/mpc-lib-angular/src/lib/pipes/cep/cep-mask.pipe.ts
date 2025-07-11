@@ -4,9 +4,9 @@
  *
  * CEP: 00000-000
  *
- * Exemplo de utilização:
- * {{ '12345678' | cepMask }}
- * {{ cep | cepMask }}
+ * @Exemplo de utilização:
+ * {{ '12345678' | cepMaskPipe }}
+ * {{ cep | cepMaskPipe }}
  * this.cepMaskPipe.transform(cep);
  *
  * @author Matheus Pimentel Do Couto
@@ -17,7 +17,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'cepMask',
+  name: 'cepMaskPipe',
   standalone: true
 })
 export class CepMaskPipe implements PipeTransform {

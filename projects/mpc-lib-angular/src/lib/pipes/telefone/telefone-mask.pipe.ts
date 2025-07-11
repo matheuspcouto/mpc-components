@@ -4,9 +4,9 @@
  *
  * Formato: (00) 00000-0000
  *
- * Exemplo de utilização:
- * {{ '11987654321' | telefoneMask }}
- * {{ telefone | telefoneMask }}
+ * @Exemplo de utilização:
+ * {{ '11987654321' | telefoneMaskPipe }}
+ * {{ telefone | telefoneMaskPipe }}
  * this.telefoneMaskPipe.transform(telefone);
  *
  * @author Matheus Pimentel Do Couto
@@ -17,7 +17,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'telefoneMask',
+  name: 'telefoneMaskPipe',
   standalone: true
 })
 export class TelefoneMaskPipe implements PipeTransform {

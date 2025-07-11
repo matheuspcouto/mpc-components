@@ -1,5 +1,4 @@
 import { MpcInputsDocComponent } from './mpc-inputs-doc.component';
-import { Endereco } from '../../../shared/components/Inputs/mpc-input-busca-cep/mpc-input-busca-cep.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NonNullableFormBuilder } from '@angular/forms';
@@ -91,7 +90,7 @@ describe('MpcInputDocComponent', () => {
   });
 
   it('deve preencher campos de endereço com dados do CEP', () => {
-    const endereco: Endereco = { rua: 'Rua do CEP', bairro: 'Bairro do CEP', cidade: 'Cidade do CEP', estado: 'RJ', cep: '87654321' };
+    const endereco = { rua: 'Rua do CEP', bairro: 'Bairro do CEP', cidade: 'Cidade do CEP', estado: 'RJ', cep: '87654321' };
     component['definirEnderecoPorCep'](endereco);
     expect(component['form'].value.rua).toBe(endereco.rua);
     expect(component['form'].value.bairro).toBe(endereco.bairro);

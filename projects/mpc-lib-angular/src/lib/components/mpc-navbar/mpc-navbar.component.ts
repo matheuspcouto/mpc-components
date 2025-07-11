@@ -132,7 +132,10 @@ export class MpcNavbarComponent extends AccessibilityInputs implements OnInit {
     const url = this.router.url;
 
     if (aba.subRotas) {
-      return aba.subRotas.some(sub => url.startsWith(sub.rota || ''));
+      // Se alguma sub-aba estiver ativa, a principal não deve ficar ativa
+      if (aba.subRotas.some(sub => url.startsWith(sub.rota || ''))) {
+        return false;
+      }
     }
 
     // Tratamento especial para rota home "/"
@@ -140,7 +143,7 @@ export class MpcNavbarComponent extends AccessibilityInputs implements OnInit {
       return url === '/' || url === '';
     }
 
-    return url.startsWith(aba.rota);
+    return url === aba.rota;
   }
 
   /**
@@ -150,6 +153,12 @@ export class MpcNavbarComponent extends AccessibilityInputs implements OnInit {
    */
   isSubAbaAtiva(sub: SubRotaConfig): boolean {
     const url = this.router.url;
+
+    // Tratamento especial para rota home "/"
+    if (sub.rota === '/') {
+      return url === '/' || url === '';
+    }
+
     return !!sub.rota && url.startsWith(sub.rota);
   }
 
