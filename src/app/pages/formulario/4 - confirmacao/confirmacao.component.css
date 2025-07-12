@@ -1,36 +1,11 @@
-/*--------------------------------------------------------------
-# Geral
---------------------------------------------------------------*/
-h4 {
-  font-size: 1.5rem;
-  padding: 0.5rem 0;
-}
-
 .container {
-  h5 {
-    font-size: 1rem;
-    font-weight: bold;
-    margin: 5px 0;
-  }
-
-  p {
-    margin-bottom: 0 !important;
-    font-weight: 300;
-  }
-}
-
-/*--------------------------------------------------------------
-# inscricao Section
---------------------------------------------------------------*/
-.inscricao {
-  font-family: var(--mpc-font-default);
+  font-family: var(--font-default);
   font-weight: 600;
   padding: 2rem;
-  margin-top: 90px;
 
   #barra-progresso {
-    --mpc-color-bar: var(--mpc-color-secondary);
-    --mpc-color-text: var(--mpc-color-tertiary);
+    --mpc-color-bar: var(--color-secondary);
+    --mpc-color-text: var(--color-tertiary);
   }
 
   #btn-inscrever {
@@ -42,6 +17,22 @@ h4 {
   #btn-voltar {
     --mpc-bg-color-btn: transparent;
     --mpc-text-color-btn: var(--color-tertiary);
+  }
+
+  h5 {
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 5px 0;
+  }
+
+  h4 {
+    font-size: 1.5rem;
+    padding: 0.5rem 0;
+  }
+
+  p {
+    margin-bottom: 0 !important;
+    font-weight: 300;
   }
 }
 
@@ -55,7 +46,7 @@ h4 {
   --mpc-color-first-button-bg-modal: var(--color-primary);
   --mpc-color-first-button-text-modal: white;
 
-  --mpc-color-second-button-bg-modal: white;
+  --mpc-color-second-button-bg-modal: transparent;
   --mpc-color-second-button-text-modal: var(--color-primary);
 
   /* Fontes */

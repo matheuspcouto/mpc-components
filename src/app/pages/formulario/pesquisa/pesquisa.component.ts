@@ -26,10 +26,11 @@ import { take } from 'rxjs';
 import { Rotas } from '../../../shared/enums/rotas-enum';
 import { ToastrService } from 'ngx-toastr';
 import { MpcInputPesquisaComponent } from 'mpc-lib-angular';
+import { MpcSectionComponent } from '../../../shared/components/mpc-section/mpc-section.component';
 
 @Component({
     selector: 'app-pesquisa',
-    imports: [ReactiveFormsModule, FormsModule, MpcInputPesquisaComponent],
+    imports: [ReactiveFormsModule, FormsModule, MpcInputPesquisaComponent, MpcSectionComponent],
     templateUrl: './pesquisa.component.html',
     styleUrls: ['./pesquisa.component.css']
 })

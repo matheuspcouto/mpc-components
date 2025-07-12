@@ -26,6 +26,7 @@ import { InscricaoService } from '../service/inscricao.service';
 import { FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { MpcInputDateComponent, MpcInputRadioComponent, RadioOption, MpcInputSelectComponent, SelectOption, MpcInputTextComponent, MpcInputNumberComponent, MpcInputCpfcnpjComponent, MpcInputTextAreaComponent, MpcFormProgressBarComponent, MpcLoaderService, MpcButtonComponent } from 'mpc-lib-angular';
 import { MpcErrorService } from '../../../shared/components/mpc-error/mpc-error.service';
+import { MpcSectionComponent } from "../../../shared/components/mpc-section/mpc-section.component";
 
 @Component({
   selector: 'app-dados-pessoais',
@@ -33,7 +34,7 @@ import { MpcErrorService } from '../../../shared/components/mpc-error/mpc-error.
     ReactiveFormsModule, MpcInputTextComponent, MpcInputDateComponent,
     MpcInputRadioComponent, MpcInputSelectComponent,
     MpcFormProgressBarComponent, MpcInputNumberComponent,
-    MpcInputCpfcnpjComponent, MpcInputTextAreaComponent, MpcButtonComponent],
+    MpcInputCpfcnpjComponent, MpcInputTextAreaComponent, MpcButtonComponent, MpcSectionComponent],
   templateUrl: './dados-pessoais.component.html',
   styleUrls: ['./dados-pessoais.component.css'],
 })

@@ -4,14 +4,14 @@
 
 h5 {
   font-weight: 400;
-  color: var(--mpc-color-tertiary);
+  color: var(--color-tertiary);
   text-align: center;
   padding-bottom: 2rem;
   font-style: italic;
 }
 
 pre {
-  background-color: var(--mpc-color-primary);
+  background-color: var(--color-primary);
   padding: 20px;
   border-radius: 5px;
   margin-top: 20px;

@@ -1,15 +1,11 @@
-/*--------------------------------------------------------------
-# inscricao Section
---------------------------------------------------------------*/
-.inscricao {
-  font-family: var(--mpc-font-default);
+.container {
+  font-family: var(--font-default);
   font-weight: 600;
   padding: 2rem;
-  margin-top: 90px;
 
   #barra-progresso {
-    --mpc-color-bar: var(--mpc-color-secondary);
-    --mpc-color-text: var(--mpc-color-tertiary);
+    --mpc-color-bar: var(--color-secondary);
+    --mpc-color-text: var(--color-tertiary);
   }
 
   form {

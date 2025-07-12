@@ -24,6 +24,7 @@ import { FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angul
 import { InscricaoService } from '../service/inscricao.service';
 import { MpcInputTextComponent, MpcInputTelefoneComponent, MpcFormProgressBarComponent, MpcInputEmailComponent, Endereco, MpcInputBuscaCepComponent, MpcLoaderService, MpcButtonComponent } from 'mpc-lib-angular';
 import { MpcErrorService } from '../../../shared/components/mpc-error/mpc-error.service';
+import { MpcSectionComponent } from '../../../shared/components/mpc-section/mpc-section.component';
 @Component({
   selector: 'app-contato',
   imports: [
@@ -32,7 +33,8 @@ import { MpcErrorService } from '../../../shared/components/mpc-error/mpc-error.
     MpcFormProgressBarComponent,
     MpcInputEmailComponent,
     MpcInputBuscaCepComponent,
-    MpcButtonComponent
+    MpcButtonComponent,
+    MpcSectionComponent
 ],
   templateUrl: './contato.component.html',
   styleUrls: ['./contato.component.css'],

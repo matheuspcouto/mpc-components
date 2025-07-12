@@ -20,16 +20,16 @@
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 1rem;
-    color: var(--mpc-color-primary);
+    color: var(--color-primary);
 
     span {
-      color: var(--mpc-color-secondary);
+      color: var(--color-secondary);
     }
   }
 
   p {
     font-style: italic;
     text-align: center;
-    color: gray;
+    color: var(--color-tertiary);
   }
 }

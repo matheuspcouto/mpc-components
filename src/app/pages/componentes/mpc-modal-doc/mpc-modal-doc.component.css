@@ -39,8 +39,8 @@ pre {
   --mpc-color-first-button-bg-modal: var(--color-primary);
   --mpc-color-first-button-text-modal: white;
 
-  --mpc-color-second-button-bg-modal: var(--color-secondary);
-  --mpc-color-second-button-text-modal: white;
+  --mpc-color-second-button-bg-modal: transparent;
+  --mpc-color-second-button-text-modal: var(--color-primary);
 
   --mpc-color-copy-button-bg-modal: transparent;
   --mpc-color-copy-button-text-modal: var(--color-primary);

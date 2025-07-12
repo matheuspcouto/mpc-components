@@ -35,7 +35,7 @@
     margin-right: 0.5rem !important;
   }
 
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: var(--mpc-bg-color-btn-hover);
     color: var(--mpc-text-color-btn-hover);
     transition: all 0.3s ease-in;

@@ -25,10 +25,11 @@ import { Inscricao } from '../model/inscricao.model';
 import { MpcErrorService } from '../../../shared/components/mpc-error/mpc-error.service';
 import { take } from 'rxjs';
 import { MpcButtonComponent, MpcFormProgressBarComponent, MpcModalComponent, MpcModalConfig, TipoModal } from 'mpc-lib-angular';
+import { MpcSectionComponent } from '../../../shared/components/mpc-section/mpc-section.component';
 
 @Component({
   selector: 'app-confirmacao',
-  imports: [MpcModalComponent, MpcFormProgressBarComponent, MpcButtonComponent],
+  imports: [MpcModalComponent, MpcFormProgressBarComponent, MpcButtonComponent, MpcSectionComponent],
   templateUrl: './confirmacao.component.html',
   styleUrl: './confirmacao.component.css'
 })
