@@ -194,6 +194,12 @@ describe('MpcNavbarComponent', () => {
       expect(routerMock.navigate).not.toHaveBeenCalled();
     });
 
+    it('não deve navegar para rota se for undefined', () => {
+      jest.spyOn<any, any>(component as any, 'verificarRotaExiste').mockReturnValue(false);
+      component.navegarPara(undefined);
+      expect(routerMock.navigate).not.toHaveBeenCalled();
+    });
+
     it('deve navegar para aba', () => {
       jest.spyOn(component, 'navegarPara');
       const aba = { titulo: 'Aba', rota: '/rota', icone: 'icon' };

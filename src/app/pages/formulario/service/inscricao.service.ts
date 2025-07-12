@@ -38,7 +38,7 @@ export class InscricaoService {
   /**
    * URL base da API.
    */
-  private apiUrl = environment.apiUrl;
+  private baseUrl = environment.baseUrl;
 
   /**
    * Signal para armazenar os dados da inscrição.
@@ -126,7 +126,7 @@ export class InscricaoService {
       }, 3000);
     });
     // Implementação Real:
-    // return this.http.get<any>(`${this.apiUrl}/inscricoes/${codigoInscricao}/detalhes`, { headers: this.headers });
+    // return this.http.get<any>(`${this.baseUrl}/inscricoes/${codigoInscricao}/detalhes`, { headers: this.headers });
   }
 
   /**
@@ -142,7 +142,7 @@ export class InscricaoService {
       observer.complete();
     });
     // Implementação Real:
-    // return this.http.get<any>(`${this.apiUrl}/inscricoes`, { headers: this.headers });
+    // return this.http.get<any>(`${this.baseUrl}/inscricoes`, { headers: this.headers });
   }
 
   /**
@@ -163,7 +163,7 @@ export class InscricaoService {
     // Implementação Real:
     /* const requestBody = JSON.stringify(body);
     const headersWithSexo = this.headers.append('sexo', sexo);
-    return this.http.post<any>(`${this.apiUrl}/inscricao`, requestBody, { headers: headersWithSexo }); */
+    return this.http.post<any>(`${this.baseUrl}/inscricao`, requestBody, { headers: headersWithSexo }); */
   }
 
   /**

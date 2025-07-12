@@ -3,8 +3,10 @@
   "version": "2.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "dev": "ng serve -o -c development",
+    "local": "ng serve -o -c local",
+    "production": "ng serve -o -c production",
+    "build": "ng build --configuration production",
     "test": "jest --coverage --no-cache --detectOpenHandles",
     "serve:ssr:mpc-components": "node dist/mpc-components/server/server.mjs"
   },

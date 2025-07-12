@@ -29,6 +29,7 @@ import { Rotas } from './shared/enums/rotas-enum';
 import { isPlatformBrowser } from '@angular/common';
 import { MpcBtnFloatComponent, MpcLoaderComponent } from 'mpc-lib-angular';
 import { MpcNavbarComponent, NavbarConfig } from './shared/components/mpc-navbar/mpc-navbar.component';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -102,6 +103,7 @@ export class AppComponent implements OnInit {
       });
     }
 
+    console.log(`Server running on: '${environment.env}' mode.`);
   }
 
   /**
@@ -118,6 +120,5 @@ export class AppComponent implements OnInit {
 // TODO: Ajustar Tela de Login
 // TODO: Tela de Login com guard e renderizar só o componente de login
 // TODO: Tela de Cadastro
-// TODO: Environment por ambiente e comandos
 // TODO: Corrigir documentação (um de cada vez)
 // TODO: Exemplos de arquivos de config/yml em templates ou aba configs
