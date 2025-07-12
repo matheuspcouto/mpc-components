@@ -1,0 +1,93 @@
+<!-- ======= Navbar INÍCIO ======= -->
+<mpc-section class="navbar" titulo="experimente o componente" titulo="MPC" tituloDestaque="Navbar">
+  <h5>
+    <strong>Descrição:</strong> O <code>&lt;navbar&gt;</code> é um componente de navegação estilizado e acessível para uso em aplicações Angular, permitindo abas, submenus e identificação automática de login.
+  </h5>
+
+  <h5>
+    <strong>Propriedades do Componente:</strong>
+    <ul class="text-start mt-3">
+      <li><strong>[abasInput]</strong>: <code>NavbarConfig[]</code> <b>(obrigatório)</b> — Array de configuração das abas da navbar.</li>
+    </ul>
+    <span class="text-muted">O componente não possui outros <code>&#64;Input()</code>. Toda a navegação é definida via <code>abasInput</code>.</span>
+  </h5>
+
+  <div class="mb-3">
+    <h5><strong>⚠️ IMPORTANTE:</strong></h5>
+    <div class="alert alert-warning" role="alert">
+      <strong>Este componente NÃO faz parte da biblioteca <code>mpc-lib-angular</code>!</strong><br>
+      Para utilizá-lo, você precisa:
+      <ol class="mt-2 mb-0">
+        <li>Baixar o projeto do <a href="https://github.com/matheus-pimentel/mpc-components" target="_blank">GitHub</a></li>
+        <li>Copiar a pasta <code>src/app/shared/components/mpc-navbar/</code> para o seu projeto</li>
+        <li>Importar o componente diretamente no seu módulo/componente</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <h5><strong>Importação no arquivo <code>.ts</code>:</strong></h5>
+    <pre class="chroma"><code>
+import &#123; MpcNavbarComponent &#125; from './shared/components/mpc-navbar/mpc-navbar.component';
+
+// No seu componente
+imports: [ MpcNavbarComponent ]
+    </code></pre>
+  </div>
+
+  <div class="mb-5">
+    <h5><strong>Exemplo de uso no arquivo <code>.html</code>:</strong></h5>
+    <pre class="chroma"><code class="language-html" data-lang="html">&lt;!-- Navbar Básica --&gt;
+&lt;mpc-navbar [abasInput]="abas"&gt;&lt;/mpc-navbar&gt;
+
+&lt;!-- Exemplo de configuração das abas no arquivo .ts --&gt;
+const abas: NavbarConfig[] = [
+  &#123;
+    titulo: 'Home',
+    rota: '/',
+    icone: 'bi bi-house'
+  &#125;,
+  &#123;
+    titulo: 'Perfil',
+    rota: '/perfil',
+    icone: 'bi bi-person',
+    subRotas: [
+      &#123; titulo: 'Dados Pessoais', rota: '/perfil/dados' &#125;,
+      &#123; titulo: 'Configurações', rota: '/perfil/config' &#125;
+    ]
+  &#125;,
+  &#123;
+    titulo: 'Login',
+    rota: '/login',
+    icone: 'bi bi-box-arrow-in-right'
+  &#125;
+];
+</code></pre>
+  </div>
+
+  <div class="mb-3">
+    <h5><strong>Personalização com Variáveis CSS:</strong></h5>
+    <pre class="chroma"><code>/* Cores da Navbar */
+--mpc-color-bg-header: white;                  /* Cor de fundo da navbar */
+--mpc-color-text-disabled: #7f7f90;            /* Cor do texto desabilitado */
+--mpc-color-text-active: var(--mpc-color-primary); /* Cor do texto ativo */
+--mpc-color-text-hover: var(--mpc-color-primary);  /* Cor do texto no hover */
+--mpc-color-border-active: var(--mpc-color-secondary); /* Cor da borda ativa */
+
+/* Fontes */
+--mpc-font-navbar: var(--mpc-font-subtitle);   /* Fonte da navbar */
+</code></pre>
+  </div>
+
+  <div class="mb-3">
+    <h5><strong>Como personalizar:</strong></h5>
+    <ul class="text-start mt-3">
+      <li>Para alterar as abas, edite o array <code>abasInput</code> no seu arquivo <code>.ts</code></li>
+      <li>Para usar em todas as páginas, inclua no <code>app.component.html</code></li>
+      <li>Para personalizar cores e fontes, use as variáveis CSS acima</li>
+    </ul>
+  </div>
+
+  <h5>Veja abaixo como fica a implementação do <code>mpc-navbar</code> na sua página html.</h5>
+</mpc-section>
+<!-- ======= Navbar FIM ======= -->

@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { NonNullableFormBuilder } from '@angular/forms';
 import { MpcInputTextComponent, MpcInputNumberComponent, MpcInputDateComponent, MpcInputEmailComponent, MpcInputSenhaComponent, MpcInputTelefoneComponent, MpcInputCpfcnpjComponent, MpcInputBuscaCepComponent, MpcInputTextAreaComponent, MpcInputRadioComponent, RadioOption, MpcInputSelectComponent, SelectOption, Endereco } from 'mpc-lib-angular';
+import { MpcSectionComponent } from '../../../shared/components/mpc-section/mpc-section.component';
 
 /**
  * @Componente MpcInputsDocComponent
@@ -38,6 +39,7 @@ import { MpcInputTextComponent, MpcInputNumberComponent, MpcInputDateComponent, 
     MpcInputTextAreaComponent,
     MpcInputRadioComponent,
     MpcInputSelectComponent,
+    MpcSectionComponent
   ],
   templateUrl: './mpc-inputs-doc.component.html',
   styleUrl: './mpc-inputs-doc.component.css'

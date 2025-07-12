@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { MpcModalComponent, MpcModalConfig, TipoModal, MpcButtonComponent } from 'mpc-lib-angular';
+import { MpcSectionComponent } from '../../../shared/components/mpc-section/mpc-section.component';
 
 /**
  * @Componente MpcModalDocComponent
@@ -22,7 +23,7 @@ import { MpcModalComponent, MpcModalConfig, TipoModal, MpcButtonComponent } from
  */
 @Component({
   selector: 'app-modais',
-  imports: [MpcModalComponent, MpcButtonComponent],
+  imports: [MpcModalComponent, MpcSectionComponent, MpcButtonComponent],
   templateUrl: './mpc-modal-doc.component.html',
   styleUrl: './mpc-modal-doc.component.css'
 })

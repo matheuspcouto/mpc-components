@@ -20,10 +20,11 @@
 
 import { Component } from '@angular/core';
 import { MpcTabsComponent, Tab } from 'mpc-lib-angular';
+import { MpcSectionComponent } from '../../../shared/components/mpc-section/mpc-section.component';
 
 @Component({
   selector: 'app-tabs',
-  imports: [MpcTabsComponent],
+  imports: [MpcTabsComponent, MpcSectionComponent],
   templateUrl: './mpc-tabs-doc.component.html',
   styleUrl: './mpc-tabs-doc.component.css'
 })

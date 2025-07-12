@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MpcCardComponent, MpcCardBackGroundImgComponent, MpcCardEventoComponent, MpcCardMenuComponent } from 'mpc-lib-angular';
+import { MpcSectionComponent } from '../../../shared/components/mpc-section/mpc-section.component';
 
 /**
  * @Componente MpcCardsDocComponent
@@ -21,7 +22,7 @@ import { MpcCardComponent, MpcCardBackGroundImgComponent, MpcCardEventoComponent
  */
 @Component({
   selector: 'app-cards',
-  imports: [MpcCardComponent, MpcCardBackGroundImgComponent, MpcCardMenuComponent, MpcCardEventoComponent],
+  imports: [MpcCardComponent, MpcCardBackGroundImgComponent, MpcCardMenuComponent, MpcCardEventoComponent, MpcSectionComponent],
   templateUrl: './mpc-cards-doc.component.html',
   styleUrl: './mpc-cards-doc.component.css'
 })

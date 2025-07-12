@@ -1,0 +1,152 @@
+<!-- ======= Header Desktop ======= -->
+<header class="header-desktop" tabindex="0" aria-label="Barra de Navegação">
+  <div class="container">
+
+    <!-- Logo -->
+    <a (click)="navegarParaHome()" class="logo" tabindex="0" aria-label="Logo" style="cursor: pointer;">
+      <img src="/assets/img/logo.png">
+    </a>
+    <!-- Fim da logo -->
+
+    <nav id="navbar" class="navbar">
+      <ul>
+
+        @for (aba of abas; track $index) {
+        <!-- Aba de menu -->
+        @if (!aba.subRotas) {
+        <li tabindex="0" [attr.aria-label]="'Aba ' + aba.titulo">
+          <a (click)="navegarParaAba(aba)" [class.aba-ativa]="isAbaAtiva(aba)" style="cursor: pointer;">
+            {{ aba.titulo }}
+          </a>
+        </li>
+        }
+
+        <!-- Abas que possuem subRotas -->
+        @if (aba.subRotas) {
+        <li class="dropdown" tabindex="0" [attr.aria-label]="'Aba com submenu ' + aba.titulo">
+          <a class="dropdown-toggle" (click)="navegarParaAba(aba)" [class.aba-ativa]="isAbaAtiva(aba)"
+            data-bs-toggle="dropdown" style="cursor: pointer;">
+            {{ aba.titulo }}
+          </a>
+
+          <ul class="dropdown-menu">
+            @for (sub of aba.subRotas; track $index) {
+            <li class="mb-3">
+              @if (sub.rota) {
+              <a class="dropdown-item" (click)="navegarParaSubRota(sub)" [class.aba-ativa]="isSubAbaAtiva(sub)"
+                style="cursor: pointer;"> {{ sub.titulo
+                }}
+              </a>
+              }
+              @if (sub.fragment) {
+              <a class="dropdown-item" (click)="navegarParaSubRota(sub, aba.rota)" style="cursor: pointer;">{{
+                sub.titulo }}</a>
+              }
+            </li>
+            }
+          </ul>
+        </li>
+        }
+        <!-- Fim das abas que possuem subRotas -->
+        }
+        <!-- Fim da aba de menu -->
+
+        <!-- Aba de Login -->
+        @if (abaLogin) {
+        <li tabindex="0" [attr.aria-label]="abaLogin.titulo">
+          <a (click)="navegarParaLogin()" style="cursor: pointer;">
+            {{ abaLogin.titulo }} <i [class]="abaLogin.icone + ' ms-2'"></i>
+          </a>
+        </li>
+        }
+        <!-- Fim da aba de login -->
+
+      </ul>
+    </nav>
+  </div>
+</header>
+<!-- ======= End Header Desktop ======= -->
+
+<!-- ======= Header Mobile ======= -->
+<header class="header-mobile" tabindex="0" aria-label="Barra de Navegação">
+  <div class="container">
+
+    <!-- Logo -->
+    <a (click)="navegarParaHome()" class="logo" tabindex="0" aria-label="Logo" style="cursor: pointer;">
+      <img src="/assets/img/logo.png">
+    </a>
+    <!-- Fim do logo -->
+
+    <!-- Botão Hamburguer lateral -->
+    <button type="button" (click)="isClicado = !isClicado" class="mobile-nav-toggle mobile-nav-show"
+      [class]="!isClicado ? 'bi bi-list' : 'bi bi-x'" data-bs-toggle="offcanvas" data-bs-target="#menuLateral"
+      tabindex="0" [attr.aria-label]="!isClicado ? 'Abrir Menu Lateral' : 'Fechar Menu Lateral'">
+    </button>
+    <!-- Fim do botão Hamburguer lateral -->
+
+    <!-- Menu Lateral -->
+    <div class="offcanvas offcanvas-end" data-bs-backdrop="static" data-bs-scroll="false" id="menuLateral">
+      <div class="offcanvas-body">
+        <ul>
+
+          @for (aba of abas; track $index) {
+
+          <!-- Abas de menu -->
+          @if (!aba.subRotas) {
+          <li tabindex="0" [attr.aria-label]="'Aba ' + aba.titulo">
+            <a (click)="navegarParaAba(aba)" [class.aba-ativa]="isAbaAtiva(aba)" style="cursor: pointer;">
+              <i [class]="aba.icone"></i> {{ aba.titulo }}
+            </a>
+          </li>
+          }
+          <!-- Fim da aba de menu -->
+
+          <!-- Abas que possuem subRotas -->
+          @if (aba.subRotas) {
+          <li tabindex="0" [attr.aria-label]="'Aba com submenu ' + aba.titulo">
+            <a data-bs-toggle="collapse" [attr.data-bs-target]="'#subMenu'+ $index" [class.aba-ativa]="isAbaAtiva(aba)">
+              <i [class]="aba.icone"></i> {{ aba.titulo }}
+              <em class="bi bi-caret-down-fill"></em>
+            </a>
+
+            <div class="collapse" [id]="'subMenu' + $index">
+              <ul>
+                @for (sub of aba.subRotas; track $index) {
+                <li>
+                  @if (sub.rota) {
+                  <a (click)="navegarParaSubRota(sub)" [class.aba-ativa]="isSubAbaAtiva(sub)" style="cursor: pointer;">
+                    {{ sub.titulo }} </a>
+                  }
+                  @if (sub.fragment) {
+                  <a (click)="navegarParaSubRota(sub, aba.rota)" style="cursor: pointer;"> {{ sub.titulo }} </a>
+                  }
+                </li>
+                }
+              </ul>
+            </div>
+          </li>
+          }
+          <!-- Fim das abas que possuem subRotas -->
+          }
+
+        </ul>
+      </div>
+
+      <!-- Rodapé do Menu Lateral -->
+      @if (abaLogin) {
+      <div class="offcanvas-footer">
+        <hr>
+        <div class="d-flex justify-content-center align-items-center">
+          <a (click)="navegarParaLogin()" target="_blank" style="cursor: pointer;">{{ abaLogin.titulo }} <i
+              [class]="abaLogin.icone"></i></a>
+        </div>
+      </div>
+      }
+      <!-- Fim do Rodapé do Menu Lateral -->
+
+    </div>
+    <!-- Fim do Menu Lateral -->
+
+  </div>
+</header>
+<!-- ======= End Header Mobile ======= -->

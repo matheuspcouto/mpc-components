@@ -3,6 +3,8 @@ import { FormControl, FormGroup, NonNullableFormBuilder } from '@angular/forms';
 import ContatoComponent from './contato.component';
 import { InscricaoService } from '../service/inscricao.service';
 import { provideHttpClient } from '@angular/common/http';
+import { MpcErrorService } from '../../../shared/components/mpc-error/mpc-error.service';
+import { Router } from '@angular/router';
 
 describe('ContatoComponent', () => {
   let component: ContatoComponent;
@@ -41,6 +43,8 @@ describe('ContatoComponent', () => {
         { provide: InscricaoService, useValue: mockInscricaoService },
         { provide: NonNullableFormBuilder, useValue: mockFormBuilder },
         provideHttpClient(),
+        MpcErrorService,
+        { provide: Router, useValue: { navigate: jest.fn() } } // Mock do Router
       ]
     }).compileComponents();
 

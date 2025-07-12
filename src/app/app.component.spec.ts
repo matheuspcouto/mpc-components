@@ -60,7 +60,6 @@ describe('AppComponent', () => {
     it('deve ter a aba Componentes configurada com sub-rotas', () => {
       const abaComponentes = component['abas'].find(aba => aba.titulo === 'Componentes');
       expect(abaComponentes).toBeDefined();
-      expect(abaComponentes?.rota).toBe(Rotas.COMPONENTES);
       expect(abaComponentes?.icone).toBe('bi bi-code-slash');
       expect(abaComponentes?.subRotas).toBeDefined();
       expect(Array.isArray(abaComponentes?.subRotas)).toBe(true);
@@ -74,21 +73,17 @@ describe('AppComponent', () => {
         { titulo: 'mpc-btn-float', rota: Rotas.BTN_FLOAT },
         { titulo: 'mpc-modal', rota: Rotas.MODAIS },
         { titulo: 'mpc-loader', rota: Rotas.LOADERS },
-        { titulo: 'mpc-navbar', rota: Rotas.NAVBAR },
         { titulo: 'mpc-tabs', rota: Rotas.TABS },
         { titulo: 'mpc-pagination', rota: Rotas.PAGINACAO },
         { titulo: 'mpc-inputs', rota: Rotas.INPUTS },
         { titulo: 'mpc-page-divider-img', rota: Rotas.PAGE_DIVIDER_IMG },
-        { titulo: 'mpc-pipes', rota: Rotas.PIPES },
       ];
-
       expect(abaComponentes?.subRotas).toEqual(subRotasEsperadas);
     });
 
     it('deve ter a aba Formulário configurada com sub-rotas', () => {
       const abaFormulario = component['abas'].find(aba => aba.titulo === 'Formulário');
       expect(abaFormulario).toBeDefined();
-      expect(abaFormulario?.rota).toBe(Rotas.FORMULARIO);
       expect(abaFormulario?.icone).toBe('bi bi-file-earmark-text-fill');
       expect(abaFormulario?.subRotas).toBeDefined();
       expect(Array.isArray(abaFormulario?.subRotas)).toBe(true);
@@ -105,23 +100,22 @@ describe('AppComponent', () => {
       expect(abaFormulario?.subRotas).toEqual(subRotasEsperadas);
     });
 
-    it('deve ter a aba Páginas Avulsas configurada com sub-rotas', () => {
-      const abaPaginas = component['abas'].find(aba => aba.titulo === 'Páginas Avulsas');
+    it('deve ter a aba Templates configurada com sub-rotas', () => {
+      const abaPaginas = component['abas'].find(aba => aba.titulo === 'Templates');
       expect(abaPaginas).toBeDefined();
-      expect(abaPaginas?.rota).toBe(Rotas.PAGINAS);
       expect(abaPaginas?.icone).toBe('bi bi-filetype-html');
       expect(abaPaginas?.subRotas).toBeDefined();
       expect(Array.isArray(abaPaginas?.subRotas)).toBe(true);
     });
 
-    it('deve ter todas as sub-rotas da aba Páginas Avulsas', () => {
-      const abaPaginas = component['abas'].find(aba => aba.titulo === 'Páginas Avulsas');
+    it('deve ter todas as sub-rotas da aba Templates', () => {
+      const abaPaginas = component['abas'].find(aba => aba.titulo === 'Templates');
       const subRotasEsperadas = [
-        { titulo: 'Home', rota: Rotas.HOME },
         { titulo: 'Aguarde', rota: Rotas.AGUARDE },
         { titulo: 'Erro', rota: Rotas.PAGINA_ERRO },
+        { titulo: 'Navbar', rota: Rotas.NAVBAR },
+        { titulo: 'Footer', rota: Rotas.FOOTER },
       ];
-
       expect(abaPaginas?.subRotas).toEqual(subRotasEsperadas);
     });
 

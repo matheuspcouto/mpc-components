@@ -1,11 +1,6 @@
-main {
-  margin-top: 90px;
-}
-
-section {
-  overflow: hidden;
-  padding: 50px 0;
-}
+/*--------------------------------------------------------------
+# Geral
+--------------------------------------------------------------*/
 
 .section-header {
   text-align: center;
@@ -52,13 +47,15 @@ pre {
   border-radius: 5px;
   margin-top: 20px;
   color: white;
+  border-radius: 5px;
   overflow: hidden;
   display: flex;
   justify-content: center;
+  justify-items: center;
   align-items: center;
-}
 
-pre code {
-  width: 100%;
-  white-space: pre-line;
+  code {
+    width: 100%;
+    white-space: pre-line;
+  }
 } 

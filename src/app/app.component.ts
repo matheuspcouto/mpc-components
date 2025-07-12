@@ -27,7 +27,8 @@ import { RouterOutlet } from '@angular/router';
 import { MpcFooterComponent } from "./shared/components/mpc-footer/mpc-footer.component";
 import { Rotas } from './shared/enums/rotas-enum';
 import { isPlatformBrowser } from '@angular/common';
-import { MpcNavbarComponent, NavbarConfig, MpcBtnFloatComponent, MpcLoaderComponent } from 'mpc-lib-angular';
+import { MpcBtnFloatComponent, MpcLoaderComponent } from 'mpc-lib-angular';
+import { MpcNavbarComponent, NavbarConfig } from './shared/components/mpc-navbar/mpc-navbar.component';
 
 @Component({
   selector: 'app-root',
@@ -46,7 +47,6 @@ export class AppComponent implements OnInit {
     { titulo: 'Documentação', rota: Rotas.LIB_DOC, icone: 'bi bi-book' },
     {
       titulo: 'Componentes',
-      rota: Rotas.COMPONENTES,
       icone: 'bi bi-code-slash',
       subRotas: [
         { titulo: 'mpc-cards', rota: Rotas.CARDS },
@@ -54,18 +54,14 @@ export class AppComponent implements OnInit {
         { titulo: 'mpc-btn-float', rota: Rotas.BTN_FLOAT },
         { titulo: 'mpc-modal', rota: Rotas.MODAIS },
         { titulo: 'mpc-loader', rota: Rotas.LOADERS },
-        { titulo: 'mpc-navbar', rota: Rotas.NAVBAR },
-        /*  { titulo: 'mpc-footer', rota: Rotas.FOOTER }, */
         { titulo: 'mpc-tabs', rota: Rotas.TABS },
         { titulo: 'mpc-pagination', rota: Rotas.PAGINACAO },
         { titulo: 'mpc-inputs', rota: Rotas.INPUTS },
         { titulo: 'mpc-page-divider-img', rota: Rotas.PAGE_DIVIDER_IMG },
-        { titulo: 'mpc-pipes', rota: Rotas.PIPES },
       ]
     },
     {
       titulo: 'Formulário',
-      rota: Rotas.FORMULARIO,
       icone: 'bi bi-file-earmark-text-fill',
       subRotas: [
         { titulo: 'Realizar Inscrição (Fluxo)', rota: Rotas.DADOS_PESSOAIS },
@@ -74,14 +70,14 @@ export class AppComponent implements OnInit {
       ]
     },
     {
-      titulo: 'Páginas Avulsas',
-      rota: Rotas.PAGINAS,
+      titulo: 'Templates',
       icone: 'bi bi-filetype-html',
       subRotas: [
-        { titulo: 'Home', rota: Rotas.HOME },
         { titulo: 'Aguarde', rota: Rotas.AGUARDE },
         /* { titulo: 'Login', rota: Rotas.LOGIN }, */
         { titulo: 'Erro', rota: Rotas.PAGINA_ERRO },
+        { titulo: 'Navbar', rota: Rotas.NAVBAR },
+        { titulo: 'Footer', rota: Rotas.FOOTER },
       ]
     },
   ];
@@ -123,3 +119,5 @@ export class AppComponent implements OnInit {
 // TODO: Tela de Login com guard e renderizar só o componente de login
 // TODO: Tela de Cadastro
 // TODO: Environment por ambiente e comandos
+// TODO: Corrigir documentação (um de cada vez)
+// TODO: Exemplos de arquivos de config/yml em templates ou aba configs

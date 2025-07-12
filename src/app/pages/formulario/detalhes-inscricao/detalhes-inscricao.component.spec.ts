@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DetalhesInscricaoComponent } from './detalhes-inscricao.component';
 import { InscricaoService } from '../service/inscricao.service';
 import { ToastrService } from 'ngx-toastr';
-import { ErrorService } from '../../../shared/error/error.service';
+import { MpcErrorService } from '../../../shared/components/mpc-error/mpc-error.service';
 import { Router } from '@angular/router';
 import { Inscricao } from '../model/inscricao.model';
 
@@ -11,7 +11,7 @@ describe('DetalhesInscricaoComponent', () => {
   let fixture: ComponentFixture<DetalhesInscricaoComponent>;
   let mockInscricaoService: any;
   let mockToastr: any;
-  let mockErrorService: any;
+  let mockMpcErrorService: any;
   let mockRouter: any;
 
   beforeEach(async () => {
@@ -23,7 +23,7 @@ describe('DetalhesInscricaoComponent', () => {
 
     mockToastr = { info: jest.fn() };
 
-    mockErrorService = { construirErro: jest.fn() };
+    mockMpcErrorService = { construirErro: jest.fn() };
 
     mockRouter = { navigate: jest.fn() };
 
@@ -32,7 +32,7 @@ describe('DetalhesInscricaoComponent', () => {
       providers: [
         { provide: InscricaoService, useValue: mockInscricaoService },
         { provide: ToastrService, useValue: mockToastr },
-        { provide: ErrorService, useValue: mockErrorService },
+        { provide: MpcErrorService, useValue: mockMpcErrorService },
         { provide: Router, useValue: mockRouter }
       ]
     }).compileComponents();
@@ -55,7 +55,7 @@ describe('DetalhesInscricaoComponent', () => {
   it('deve tratar erro em detalharInscricao', () => {
     mockInscricaoService.getDadosInscricao.mockImplementation(() => { throw new Error('erro'); });
     component['detalharInscricao']();
-    expect(mockErrorService.construirErro).toHaveBeenCalled();
+    expect(mockMpcErrorService.construirErro).toHaveBeenCalled();
   });
 
   it('deve inicializar dados pessoais', () => {

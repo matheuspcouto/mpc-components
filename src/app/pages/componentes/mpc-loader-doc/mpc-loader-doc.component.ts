@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { MpcLoaderService, MpcButtonComponent } from 'mpc-lib-angular';
+import { MpcSectionComponent } from '../../../shared/components/mpc-section/mpc-section.component';
 
 /**
  * @Componente MpcLoaderDocComponent
@@ -21,7 +22,7 @@ import { MpcLoaderService, MpcButtonComponent } from 'mpc-lib-angular';
  */
 @Component({
   selector: 'app-loaders',
-  imports: [MpcButtonComponent],
+  imports: [MpcSectionComponent, MpcButtonComponent],
   templateUrl: './mpc-loader-doc.component.html',
   styleUrl: './mpc-loader-doc.component.css'
 })

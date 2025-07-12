@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NonNullableFormBuilder, FormControl, FormGroup } from '@angular/forms';
 import DadosPessoaisComponent from './dados-pessoais.component';
 import { InscricaoService } from '../service/inscricao.service';
-import { ErrorService } from '../../../shared/error/error.service';
+import { MpcErrorService } from '../../../shared/components/mpc-error/mpc-error.service';
 
 describe('DadosPessoaisComponent', () => {
   let component: DadosPessoaisComponent;
@@ -41,7 +41,7 @@ describe('DadosPessoaisComponent', () => {
       providers: [
         { provide: InscricaoService, useValue: mockInscricaoService },
         { provide: NonNullableFormBuilder, useValue: mockFormBuilder },
-        { provide: ErrorService, useValue: mockErrorService },
+        { provide: MpcErrorService, useValue: mockErrorService },
       ]
     }).compileComponents();
 

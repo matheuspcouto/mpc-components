@@ -2,8 +2,7 @@
  * @Componente MpcFooterComponent
  * Este componente é responsável por exibir o rodapé da aplicação.
  *
- *
- * Exemplo de utilização:
+ * @Exemplo de utilização:
  * <mpc-footer></mpc-footer>
  *
  * @author Matheus Pimentel Do Couto
@@ -13,7 +12,6 @@
 
 import { Component } from '@angular/core';
 
-// TODO: ngcontainer e selector
 @Component({
   selector: 'mpc-footer',
   imports: [],

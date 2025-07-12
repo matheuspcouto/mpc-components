@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MpcSectionComponent } from '../../../shared/components/mpc-section/mpc-section.component';
 import { MpcPageDividerImgComponent } from 'mpc-lib-angular';
 
 /**
@@ -13,7 +14,7 @@ import { MpcPageDividerImgComponent } from 'mpc-lib-angular';
 @Component({
   selector: 'app-page-divider-img-doc',
   standalone: true,
-  imports: [MpcPageDividerImgComponent],
+  imports: [MpcPageDividerImgComponent, MpcSectionComponent],
   templateUrl: './mpc-page-divider-img-doc.component.html',
   styleUrl: './mpc-page-divider-img-doc.component.css'
 })

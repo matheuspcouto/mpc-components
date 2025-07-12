@@ -5,7 +5,7 @@ import { ConfirmacaoComponent } from './confirmacao.component';
 import { InscricaoService } from '../service/inscricao.service';
 import { Inscricao } from '../model/inscricao.model';
 import { Rotas } from '../../../shared/enums/rotas-enum';
-import { ErrorService } from '../../../shared/error/error.service';
+import { MpcErrorService } from '../../../shared/components/mpc-error/mpc-error.service';
 import { ToastrService } from 'ngx-toastr';
 
 describe('ConfirmacaoComponent', () => {
@@ -16,7 +16,7 @@ describe('ConfirmacaoComponent', () => {
   let mockToastService: any;
   let mockActivatedRoute: any;
   let router: Router;
-  let mockErrorService: any;
+  let mockMpcErrorService: any;
 
   beforeEach(async () => {
 
@@ -37,7 +37,7 @@ describe('ConfirmacaoComponent', () => {
       snapshot: { queryParams: { inscricao: '123456789' } }
     };
 
-    mockErrorService = { construirErro: jest.fn() };
+    mockMpcErrorService = { construirErro: jest.fn() };
 
     await TestBed.configureTestingModule({
       imports: [ConfirmacaoComponent],
@@ -45,7 +45,7 @@ describe('ConfirmacaoComponent', () => {
         { provide: InscricaoService, useValue: mockInscricaoService },
         { provide: ToastrService, useValue: mockToastService },
         { provide: ActivatedRoute, useValue: mockActivatedRoute },
-        { provide: ErrorService, useValue: mockErrorService }
+        { provide: MpcErrorService, useValue: mockMpcErrorService }
       ]
     }).compileComponents();
 
@@ -113,17 +113,15 @@ describe('ConfirmacaoComponent', () => {
         subscribe: ({ next, error }: any) => error(erro)
       })
     });
-    const errorServiceSpy = jest.spyOn((component as any)['errorService'], 'construirErro');
     component['inscrever']();
-    expect(errorServiceSpy).toHaveBeenCalled();
+    expect(mockMpcErrorService.construirErro).toHaveBeenCalled();
   });
 
   it('deve chamar ErrorService.construirErro quando ocorre exceção em etapaAnterior', () => {
     const error = new Error('Erro simulado');
     jest.spyOn(router, 'navigate').mockImplementation(() => { throw error; });
-    const errorServiceSpy = jest.spyOn((component as any)['errorService'], 'construirErro');
     component['etapaAnterior']();
-    expect(errorServiceSpy).toHaveBeenCalledWith(error);
+    expect(mockMpcErrorService.construirErro).toHaveBeenCalledWith(error);
   });
 
   it('deve chamar atualizarDadosInscricao ao inscrever com sucesso', () => {

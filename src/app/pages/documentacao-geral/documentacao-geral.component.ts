@@ -16,10 +16,12 @@
  * @updated 10/07/2025
  */
 import { Component } from '@angular/core';
+import { MpcSectionComponent } from "../../shared/components/mpc-section/mpc-section.component";
 
 @Component({
   selector: 'app-documentacao-geral',
   templateUrl: './documentacao-geral.component.html',
   styleUrl: './documentacao-geral.component.css',
+  imports: [MpcSectionComponent],
 })
 export class DocumentacaoGeralComponent { } 

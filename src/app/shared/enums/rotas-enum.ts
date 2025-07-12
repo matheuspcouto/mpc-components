@@ -8,8 +8,8 @@ export enum SegmentoRotas {
   CARDS = "mpc-cards-doc",
   MODAIS = "mpc-modal-doc",
   LOADERS = "mpc-loader-doc",
-  NAVBAR = "mpc-navbar-doc",
-  FOOTER = "mpc-footer-doc",
+  NAVBAR = "navbar",
+  FOOTER = "footer",
   TABS = "mpc-tabs-doc",
   PAGINACAO = "mpc-pagination-doc",
   INPUTS = "mpc-inputs-doc",
@@ -22,8 +22,8 @@ export enum SegmentoRotas {
   BTN_FLOAT = "mpc-btn-float-doc",
   BUTTONS = "mpc-button-doc",
 
-  // Paginas
-  PAGINAS = "paginas",
+  // Templates
+  TEMPLATES = "templates",
 
   // Formulário
   FORMULARIO = "formulario",
@@ -51,8 +51,6 @@ export enum Rotas {
   CARDS = `/${SegmentoRotas.COMPONENTES}/${SegmentoRotas.CARDS}`,
   MODAIS = `/${SegmentoRotas.COMPONENTES}/${SegmentoRotas.MODAIS}`,
   LOADERS = `/${SegmentoRotas.COMPONENTES}/${SegmentoRotas.LOADERS}`,
-  NAVBAR = `/${SegmentoRotas.COMPONENTES}/${SegmentoRotas.NAVBAR}`,
-  FOOTER = `/${SegmentoRotas.COMPONENTES}/${SegmentoRotas.FOOTER}`,
   TABS = `/${SegmentoRotas.COMPONENTES}/${SegmentoRotas.TABS}`,
   PAGINACAO = `/${SegmentoRotas.COMPONENTES}/${SegmentoRotas.PAGINACAO}`,
   INPUTS = `/${SegmentoRotas.COMPONENTES}/${SegmentoRotas.INPUTS}`,
@@ -60,23 +58,22 @@ export enum Rotas {
   BTN_FLOAT = `/${SegmentoRotas.COMPONENTES}/${SegmentoRotas.BTN_FLOAT}`,
   BUTTONS = `/${SegmentoRotas.COMPONENTES}/${SegmentoRotas.BUTTONS}`,
   PAGE_DIVIDER_IMG = `/${SegmentoRotas.COMPONENTES}/${SegmentoRotas.PAGE_DIVIDER_IMG}`,
-  PIPES = `/${SegmentoRotas.COMPONENTES}/${SegmentoRotas.PIPES}`,
-  
-  // Paginas
-  PAGINAS = `/${SegmentoRotas.PAGINAS}`,
 
   // Formulário
-  FORMULARIO = `/${SegmentoRotas.PAGINAS}/${SegmentoRotas.FORMULARIO}`,
-  DADOS_PESSOAIS = `/${SegmentoRotas.PAGINAS}/${SegmentoRotas.FORMULARIO}/${SegmentoRotas.DADOS_PESSOAIS}`,
-  CONTATO = `/${SegmentoRotas.PAGINAS}/${SegmentoRotas.FORMULARIO}/${SegmentoRotas.CONTATO}`,
-  PAGAMENTO = `/${SegmentoRotas.PAGINAS}/${SegmentoRotas.FORMULARIO}/${SegmentoRotas.PAGAMENTO}`,
-  CONFIRMACAO = `/${SegmentoRotas.PAGINAS}/${SegmentoRotas.FORMULARIO}/${SegmentoRotas.CONFIRMACAO}`,
-  DETALHES_INSCRICAO = `/${SegmentoRotas.PAGINAS}/${SegmentoRotas.FORMULARIO}/${SegmentoRotas.DETALHES_INSCRICAO}`,
-  PESQUISA = `/${SegmentoRotas.PAGINAS}/${SegmentoRotas.FORMULARIO}/${SegmentoRotas.PESQUISA}`,
-  INSCRICOES_ENCERRADAS = `/${SegmentoRotas.PAGINAS}/${SegmentoRotas.FORMULARIO}/${SegmentoRotas.INSCRICOES_ENCERRADAS}`,
+  FORMULARIO = `/${SegmentoRotas.FORMULARIO}`,
+  DADOS_PESSOAIS = `/${SegmentoRotas.FORMULARIO}/${SegmentoRotas.DADOS_PESSOAIS}`,
+  CONTATO = `/${SegmentoRotas.FORMULARIO}/${SegmentoRotas.CONTATO}`,
+  PAGAMENTO = `/${SegmentoRotas.FORMULARIO}/${SegmentoRotas.PAGAMENTO}`,
+  CONFIRMACAO = `/${SegmentoRotas.FORMULARIO}/${SegmentoRotas.CONFIRMACAO}`,
+  DETALHES_INSCRICAO = `/${SegmentoRotas.FORMULARIO}/${SegmentoRotas.DETALHES_INSCRICAO}`,
+  PESQUISA = `/${SegmentoRotas.FORMULARIO}/${SegmentoRotas.PESQUISA}`,
+  INSCRICOES_ENCERRADAS = `/${SegmentoRotas.FORMULARIO}/${SegmentoRotas.INSCRICOES_ENCERRADAS}`,
 
-  // Outras páginas
-  AGUARDE = `/${SegmentoRotas.PAGINAS}/${SegmentoRotas.AGUARDE}`,
-  LOGIN = `/${SegmentoRotas.PAGINAS}/${SegmentoRotas.LOGIN}`,
-  PAGINA_ERRO = `/${SegmentoRotas.PAGINAS}/${SegmentoRotas.PAGINA_ERRO}`
+  // Templates
+  TEMPLATES = `/${SegmentoRotas.TEMPLATES}`,
+  AGUARDE = `/${SegmentoRotas.TEMPLATES}/${SegmentoRotas.AGUARDE}`,
+  LOGIN = `/${SegmentoRotas.TEMPLATES}/${SegmentoRotas.LOGIN}`,
+  PAGINA_ERRO = `/${SegmentoRotas.TEMPLATES}/${SegmentoRotas.PAGINA_ERRO}`,
+  NAVBAR = `/${SegmentoRotas.TEMPLATES}/${SegmentoRotas.NAVBAR}`,
+  FOOTER = `/${SegmentoRotas.TEMPLATES}/${SegmentoRotas.FOOTER}`,
 }

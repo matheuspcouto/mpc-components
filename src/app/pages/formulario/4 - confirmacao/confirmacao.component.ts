@@ -22,7 +22,7 @@ import { InscricaoService } from '../service/inscricao.service';
 import { Router } from '@angular/router';
 import { Rotas } from '../../../shared/enums/rotas-enum';
 import { Inscricao } from '../model/inscricao.model';
-import { ErrorService } from '../../../shared/error/error.service';
+import { MpcErrorService } from '../../../shared/components/mpc-error/mpc-error.service';
 import { take } from 'rxjs';
 import { MpcButtonComponent, MpcFormProgressBarComponent, MpcModalComponent, MpcModalConfig, TipoModal } from 'mpc-lib-angular';
 
@@ -37,7 +37,7 @@ export class ConfirmacaoComponent implements OnInit {
   // Injeções
   private readonly router = inject(Router);
   private readonly inscricaoService = inject(InscricaoService);
-  private readonly errorService = inject(ErrorService);
+  private readonly mpcErrorService = inject(MpcErrorService);
 
   /**
    * Referência ao modal de sucesso.
@@ -91,7 +91,7 @@ export class ConfirmacaoComponent implements OnInit {
           error: (error: any) => { throw error }
         });
     } catch (error) {
-      this.errorService.construirErro(error);
+      this.mpcErrorService.construirErro(error);
     }
   }
 
@@ -102,7 +102,7 @@ export class ConfirmacaoComponent implements OnInit {
     try {
       this.router.navigate([Rotas.PAGAMENTO]);
     } catch (error) {
-      this.errorService.construirErro(error);
+      this.mpcErrorService.construirErro(error);
     }
   }
 

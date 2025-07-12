@@ -22,8 +22,8 @@ import { Router } from '@angular/router';
 import { Rotas } from '../../../shared/enums/rotas-enum';
 import { FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { InscricaoService } from '../service/inscricao.service';
-import { ErrorService } from '../../../shared/error/error.service';
 import { MpcInputTextComponent, MpcInputTelefoneComponent, MpcFormProgressBarComponent, MpcInputEmailComponent, Endereco, MpcInputBuscaCepComponent, MpcLoaderService, MpcButtonComponent } from 'mpc-lib-angular';
+import { MpcErrorService } from '../../../shared/components/mpc-error/mpc-error.service';
 @Component({
   selector: 'app-contato',
   imports: [
@@ -43,7 +43,7 @@ export default class ContatoComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly inscricaoService = inject(InscricaoService);
   private readonly formBuilder = inject(NonNullableFormBuilder);
-  private readonly errorService = inject(ErrorService);
+  private readonly errorService = inject(MpcErrorService);
   private readonly loaderService = inject(MpcLoaderService);
 
   /**

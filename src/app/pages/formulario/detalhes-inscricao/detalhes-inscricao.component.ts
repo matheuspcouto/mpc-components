@@ -22,7 +22,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Component, inject, OnInit } from '@angular/core';
 import { InscricaoService } from '../service/inscricao.service';
 import { Inscricao } from '../model/inscricao.model';
-import { ErrorService } from '../../../shared/error/error.service';
+import { MpcErrorService } from '../../../shared/components/mpc-error/mpc-error.service';
 import { Rotas } from '../../../shared/enums/rotas-enum';
 import { Router } from '@angular/router';
 import { MpcButtonComponent } from 'mpc-lib-angular';
@@ -52,7 +52,7 @@ export class DetalhesInscricaoComponent implements OnInit {
 
   // Injeções
   private readonly inscricaoService = inject(InscricaoService);
-  private readonly errorService = inject(ErrorService);
+  private readonly mpcErrorService = inject(MpcErrorService);
   private readonly notificationService = inject(ToastrService);
   private readonly router = inject(Router);
 
@@ -85,7 +85,7 @@ export class DetalhesInscricaoComponent implements OnInit {
         dadosPagamento: this.inicializarDadosPagamento(inscricao)
       };
     } catch (error: any) {
-      this.errorService.construirErro(error);
+      this.mpcErrorService.construirErro(error);
     }
   }
 

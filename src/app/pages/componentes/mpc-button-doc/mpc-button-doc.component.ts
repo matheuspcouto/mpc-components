@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MpcButtonComponent } from 'mpc-lib-angular';
+import { MpcSectionComponent } from '../../../shared/components/mpc-section/mpc-section.component';
 
 /**
  * @Componente MpcButtonDocComponent
@@ -21,7 +22,7 @@ import { MpcButtonComponent } from 'mpc-lib-angular';
  */
 @Component({
   selector: 'app-buttons',
-  imports: [MpcButtonComponent],
+  imports: [MpcButtonComponent, MpcSectionComponent],
   templateUrl: './mpc-button-doc.component.html',
   styleUrl: './mpc-button-doc.component.css'
 })

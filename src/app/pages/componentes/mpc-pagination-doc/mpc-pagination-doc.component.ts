@@ -20,11 +20,12 @@
  * @updated 10/07/2025
  */
 import { Component } from '@angular/core';
+import { MpcSectionComponent } from '../../../shared/components/mpc-section/mpc-section.component';
 import { MpcPaginationComponent } from 'mpc-lib-angular';
 
 @Component({
   selector: 'app-paginacao',
-  imports: [MpcPaginationComponent],
+  imports: [MpcPaginationComponent, MpcSectionComponent],
   templateUrl: './mpc-pagination-doc.component.html',
   styleUrl: './mpc-pagination-doc.component.css'
 })

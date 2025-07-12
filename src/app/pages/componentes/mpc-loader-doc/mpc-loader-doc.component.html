@@ -1,26 +1,20 @@
-<main>
+<!-- ======= MpcLoader ======= -->
+<mpc-section class="loader" subtitulo="experimente o" titulo="MPC" tituloDestaque="Loader">
 
-  <!-- ======= MpcLoader ======= -->
-  <section id="loader" class="section-components">
-    <div class="container">
-
-      <div class="section-header">
-        <h2>experimente o</h2>
-        <p>MPC <span>Loader</span></p>
-      </div>
-
-      <h5>
-        <strong>Propriedades do Componente:</strong>
-        <ul class="text-start mt-3">
-          <li><strong>id</strong>: <code>string</code> (opcional) — ID do loader para acessibilidade.</li>
-          <li><strong>tabIndex</strong>: <code>number</code> (opcional) — Índice de tabulação para navegação por teclado.</li>
-          <li><strong>ariaLabel</strong>: <code>string</code> (opcional) — Rótulo para leitores de tela.</li>
-        </ul>
-        <span class="text-muted">O componente não possui outros <code>&#64;Input()</code>. O controle de exibição é feito via <code>MpcLoaderService</code>.</span>
-      </h5>
-      <div class="mb-3">
-        <h5><strong>Importação no arquivo <code>.ts</code>:</strong></h5>
-        <pre class="chroma"><code>
+  <h5>
+    <strong>Propriedades do Componente:</strong>
+    <ul class="text-start mt-3">
+      <li><strong>id</strong>: <code>string</code> (opcional) — ID do loader para acessibilidade.</li>
+      <li><strong>tabIndex</strong>: <code>number</code> (opcional) — Índice de tabulação para navegação por teclado.
+      </li>
+      <li><strong>ariaLabel</strong>: <code>string</code> (opcional) — Rótulo para leitores de tela.</li>
+    </ul>
+    <span class="text-muted">O componente não possui outros <code>&#64;Input()</code>. O controle de exibição é feito
+      via <code>MpcLoaderService</code>.</span>
+  </h5>
+  <div class="mb-3">
+    <h5><strong>Importação no arquivo <code>.ts</code>:</strong></h5>
+    <pre class="chroma"><code>
 import &#123; MpcLoaderComponent, MpcLoaderService &#125; from 'mpc-lib-angular';
 
 // No seu componente
@@ -29,11 +23,11 @@ imports: [MpcLoaderComponent]
 // Injetar o serviço
 private readonly mpcLoaderService = inject(MpcLoaderService);
         </code></pre>
-      </div>
+  </div>
 
-      <div class="mb-5">
-        <h5><strong>Exemplo de uso no arquivo <code>.html</code>:</strong></h5>
-        <pre class="chroma"><code class="language-html" data-lang="html">&lt;!-- Loader Básico --&gt;
+  <div class="mb-5">
+    <h5><strong>Exemplo de uso no arquivo <code>.html</code>:</strong></h5>
+    <pre class="chroma"><code class="language-html" data-lang="html">&lt;!-- Loader Básico --&gt;
 &lt;mpc-loader id="loader-principal"&gt;&lt;/mpc-loader&gt;
 
 &lt;!-- Loader com Acessibilidade --&gt;
@@ -42,45 +36,40 @@ private readonly mpcLoaderService = inject(MpcLoaderService);
   [tabIndex]="0"
   ariaLabel="Carregamento da página"&gt;
 &lt;/mpc-loader&gt;</code></pre>
-      </div>
+  </div>
 
-      <div class="mb-3">
-        <h5><strong>Exemplo de uso no arquivo <code>.ts</code>:</strong></h5>
-        <pre class="chroma"><code>private readonly mpcLoaderService = inject(MpcLoaderService);
+  <div class="mb-3">
+    <h5><strong>Exemplo de uso no arquivo <code>.ts</code>:</strong></h5>
+    <pre class="chroma"><code>private readonly mpcLoaderService = inject(MpcLoaderService);
 
 abrirLoading() &#123;
   this.mpcLoaderService.show();
   // Implemente a lógica entre a abertura e o fechamento do loading
   setTimeout(() => this.mpcLoaderService.hide(), 5000);
 &#125;</code></pre>
-      </div>
+  </div>
 
-      <div class="mb-3">
-        <h5><strong>Personalização com Variáveis CSS:</strong></h5>
-        <pre class="chroma"><code>/* Cores do Loader */
+  <div class="mb-3">
+    <h5><strong>Personalização com Variáveis CSS:</strong></h5>
+    <pre class="chroma"><code>/* Cores do Loader */
 --mpc-bg-loader: white;                    /* Cor de fundo do loader */
 --mpc-color-loader: var(--mpc-color-primary); /* Cor do spinner do loader */</code></pre>
-      </div>
+  </div>
 
-      <div class="mb-3">
-        <h5><strong>Métodos do MpcLoaderService:</strong></h5>
-        <ul class="text-start mt-3">
-          <li><code>show()</code>: Exibe o loader (incrementa contador interno)</li>
-          <li><code>hide()</code>: Oculta o loader (decrementa contador interno)</li>
-          <li><code>isLoading()</code>: Retorna se o loader está carregando</li>
-        </ul>
-      </div>
+  <div class="mb-3">
+    <h5><strong>Métodos do MpcLoaderService:</strong></h5>
+    <ul class="text-start mt-3">
+      <li><code>show()</code>: Exibe o loader (incrementa contador interno)</li>
+      <li><code>hide()</code>: Oculta o loader (decrementa contador interno)</li>
+      <li><code>isLoading()</code>: Retorna se o loader está carregando</li>
+    </ul>
+  </div>
 
-      <h5>Clique no botão abaixo e veja como ficou a implementação.</h5>
+  <h5>Clique no botão abaixo e veja como ficou a implementação.</h5>
 
-      <div class="col-md-12 mb-3 d-flex justify-content-center">
-        <mpc-button [disabled]="false" (click)="abrirLoading()" icone="bi bi-arrow-clockwise" posicaoIcone="esquerda"
-          [tabIndex]="0" texto="Abrir Loader" id="btn-abrir-loader" />
-      </div>
-
-    </div>
-
-  </section>
-  <!-- ======= MpcLoader ======= -->
-
-</main>
+  <div class="col-md-12 mb-3 d-flex justify-content-center">
+    <mpc-button [disabled]="false" (click)="abrirLoading()" icone="bi bi-arrow-clockwise" posicaoIcone="esquerda"
+      [tabIndex]="0" texto="Abrir Loader" id="btn-abrir-loader" />
+  </div>
+</mpc-section>
+<!-- ======= MpcLoader ======= -->

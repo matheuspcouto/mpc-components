@@ -1,49 +1,13 @@
-main {
-  margin-top: 90px;
-}
-
 /*--------------------------------------------------------------
-# Section
+# Geral
 --------------------------------------------------------------*/
-section {
-  overflow: hidden;
-  padding: 50px 0;
 
-  h5 {
-    font-weight: 400;
-    color: var(--mpc-color-tertiary);
-    text-align: center;
-    padding-bottom: 2rem;
-    font-style: italic;
-  }
-
-  .section-header {
-    text-align: center;
-    padding-bottom: 30px;
-
-    h2 {
-      font-size: 13px;
-      letter-spacing: 1px;
-      font-weight: 400;
-      margin: 0;
-      padding: 0;
-      color: var(--mpc-color-tertiary);
-      text-transform: uppercase;
-      font-family: var(--mpc-font-default);
-    }
-
-    p {
-      margin: 0;
-      font-size: 48px;
-      font-weight: 400;
-      font-family: var(--mpc-font-default);
-
-      span {
-        color: var(--mpc-color-secondary);
-      }
-    }
-  }
-
+h5 {
+  font-weight: 400;
+  color: var(--mpc-color-tertiary);
+  text-align: center;
+  padding-bottom: 2rem;
+  font-style: italic;
 }
 
 pre {
@@ -68,7 +32,7 @@ pre {
 /*--------------------------------------------------------------
 # Cards Verticais e Horizontais
 --------------------------------------------------------------*/
-#cards-verticais-horizontais {
+.cards-verticais-horizontais {
   * {
     /* Fontes */
     --mpc-font-title-card: var(--font-subtitle);
@@ -152,7 +116,7 @@ pre {
 /*--------------------------------------------------------------
 # Cards com Imagem de Fundo
 --------------------------------------------------------------*/
-#cards-background-img {
+.cards-background-img {
   * {
     /* Fontes */
     --mpc-font-title-card-bg-img: var(--font-subtitle);
@@ -179,7 +143,7 @@ pre {
 /*--------------------------------------------------------------
 # Cards Menu
 --------------------------------------------------------------*/
-#cards-menu {
+.cards-menu {
   * {
     /* Fontes */
     --mpc-font-title-card-menu: var(--font-subtitle);
@@ -217,29 +181,25 @@ pre {
 /*--------------------------------------------------------------
 # Cards Evento
 --------------------------------------------------------------*/
-#cards-evento {
-  * {
-    --mpc-font-title-card-evento: var(--font-subtitle);
-    --mpc-font-subtitle-card-evento: var(--font-subtitle);
-    --mpc-font-description-card-evento: var(--font-default);
+.cards-evento {
+  --mpc-font-title-card-evento: var(--font-subtitle);
+  --mpc-font-subtitle-card-evento: var(--font-subtitle);
+  --mpc-font-description-card-evento: var(--font-default);
 
-    --mpc-font-text-data-card-evento: var(--font-subtitle);
-  }
+  --mpc-font-text-data-card-evento: var(--font-subtitle);
 
-  .cards-evento {
-    /* Timeline */
-    --mpc-color-border-timeline-card-evento: var(--color-primary);
-    --mpc-color-bg-timeline-card-evento: white;
+  /* Timeline */
+  --mpc-color-border-timeline-card-evento: var(--color-primary);
+  --mpc-color-bg-timeline-card-evento: white;
 
-    /* Data */
-    --mpc-color-bg-data-card-evento: var(--color-primary);
-    --mpc-color-text-data-card-evento: white;
+  /* Data */
+  --mpc-color-bg-data-card-evento: var(--color-primary);
+  --mpc-color-text-data-card-evento: white;
 
-    /* Card */
-    --mpc-color-bg-card-evento: white;
-    --mpc-color-title-card-evento: var(--color-primary);
-    --mpc-color-subtitle-card-evento: var(--color-primary);
-    --mpc-color-description-card-evento: var(--color-tertiary);
-  }
+  /* Card */
+  --mpc-color-bg-card-evento: white;
+  --mpc-color-title-card-evento: var(--color-primary);
+  --mpc-color-subtitle-card-evento: var(--color-primary);
+  --mpc-color-description-card-evento: var(--color-tertiary);
 
 }

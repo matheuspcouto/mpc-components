@@ -1,0 +1,79 @@
+
+  <!-- ======= Footer INÍCIO ======= -->
+  <mpc-section class="footer" titulo="experimente o componente" titulo="MPC" tituloDestaque="Footer">
+      
+      <h5>
+        <strong>Descrição:</strong> O <code>&lt;footer&gt;</code> é um componente de rodapé estilizado para uso em aplicações Angular.
+      </h5>
+      
+      <h5>
+        <strong>Propriedades do Componente:</strong>
+        <ul class="text-start mt-3">
+          <li><strong>id</strong>: <code>string</code> (opcional) — ID do footer para acessibilidade.</li>
+          <li><strong>tabIndex</strong>: <code>number</code> (opcional) — Índice de tabulação para navegação por teclado.</li>
+          <li><strong>ariaLabel</strong>: <code>string</code> (opcional) — Rótulo para leitores de tela.</li>
+        </ul>
+        <span class="text-muted">O componente não possui outros <code>&#64;Input()</code>. É apenas visual e de acessibilidade.</span>
+      </h5>
+
+      <div class="mb-3">
+        <h5><strong>⚠️ IMPORTANTE:</strong></h5>
+        <div class="alert alert-warning" role="alert">
+          <strong>Este componente NÃO faz parte da biblioteca <code>mpc-lib-angular</code>!</strong><br>
+          Para utilizá-lo, você precisa:
+          <ol class="mt-2 mb-0">
+            <li>Baixar o projeto do <a href="https://github.com/matheus-pimentel/mpc-components" target="_blank">GitHub</a></li>
+            <li>Copiar a pasta <code>src/app/shared/components/mpc-footer/</code> para o seu projeto</li>
+            <li>Importar o componente diretamente no seu módulo/componente</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <h5><strong>Importação no arquivo <code>.ts</code>:</strong></h5>
+        <pre class="chroma"><code>
+import &#123; MpcFooterComponent &#125; from './shared/components/mpc-footer/mpc-footer.component';
+
+// No seu componente
+imports: [ MpcFooterComponent ]
+        </code></pre>
+      </div>
+
+      <div class="mb-5">
+        <h5><strong>Exemplo de uso no arquivo <code>.html</code>:</strong></h5>
+        <pre class="chroma"><code class="language-html" data-lang="html">&lt;!-- Footer Básico --&gt;
+&lt;mpc-footer&gt;&lt;/mpc-footer&gt;
+
+&lt;!-- Footer com Acessibilidade --&gt;
+&lt;mpc-footer 
+  id="footer-principal"
+  [tabIndex]="0"
+  ariaLabel="Rodapé da página principal"&gt;
+&lt;/mpc-footer&gt;</code></pre>
+      </div>
+
+      <div class="mb-3">
+        <h5><strong>Personalização com Variáveis CSS:</strong></h5>
+        <pre class="chroma"><code>/* Cores do Footer */
+--mpc-color-bg-footer: var(--mpc-color-primary);      /* Cor de fundo do footer */
+--mpc-color-text-footer: white;                        /* Cor do texto do footer */
+--mpc-color-links-footer: white;                       /* Cor dos links do footer */
+--mpc-color-hover-footer: var(--mpc-color-secondary);  /* Cor do hover dos links */
+
+/* Fontes */
+--mpc-font-footer: var(--mpc-font-default);            /* Fonte do footer */</code></pre>
+      </div>
+
+      <div class="mb-3">
+        <h5><strong>Como personalizar:</strong></h5>
+        <ul class="text-start mt-3">
+          <li>Para alterar as informações do rodapé, edite o arquivo <code>mpc-footer.component.html</code></li>
+          <li>Para usar em todas as páginas, inclua no <code>app.component.html</code></li>
+          <li>Para personalizar cores e fontes, use as variáveis CSS acima</li>
+        </ul>
+      </div>
+
+      <h5>Veja abaixo como fica a implementação do <code>mpc-footer</code> na sua página html.</h5>
+  </mpc-section>
+  <!-- ======= Footer FIM ======= -->
+

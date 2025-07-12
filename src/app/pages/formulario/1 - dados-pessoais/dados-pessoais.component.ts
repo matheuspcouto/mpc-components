@@ -24,8 +24,8 @@ import { Router } from '@angular/router';
 import { Rotas } from '../../../shared/enums/rotas-enum';
 import { InscricaoService } from '../service/inscricao.service';
 import { FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
-import { ErrorService } from '../../../shared/error/error.service';
 import { MpcInputDateComponent, MpcInputRadioComponent, RadioOption, MpcInputSelectComponent, SelectOption, MpcInputTextComponent, MpcInputNumberComponent, MpcInputCpfcnpjComponent, MpcInputTextAreaComponent, MpcFormProgressBarComponent, MpcLoaderService, MpcButtonComponent } from 'mpc-lib-angular';
+import { MpcErrorService } from '../../../shared/components/mpc-error/mpc-error.service';
 
 @Component({
   selector: 'app-dados-pessoais',
@@ -43,7 +43,7 @@ export default class DadosPessoaisComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly inscricaoService = inject(InscricaoService);
   private readonly formBuilder = inject(NonNullableFormBuilder);
-  private readonly errorService = inject(ErrorService);
+  private readonly errorService = inject(MpcErrorService);
   private readonly loaderService = inject(MpcLoaderService);
 
   /**

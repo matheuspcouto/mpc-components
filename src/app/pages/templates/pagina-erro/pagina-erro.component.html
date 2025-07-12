@@ -1,0 +1,95 @@
+<!-- ======= ErrorComponent INÍCIO ======= -->
+<mpc-section class="error" titulo="experimente o componente" titulo="MPC" tituloDestaque="MPC Error Component">
+  <h5>
+    <strong>Descrição:</strong> O <code>&lt;mpc-error&gt;</code> é um componente responsável por exibir uma tela de erro completa e responsiva, com informações detalhadas, botões de ação e suporte a imagens personalizadas. Utiliza Signal para gerenciar o estado do erro automaticamente através do <code>MpcErrorService</code>.
+  </h5>
+
+  <h5>
+    <strong>Propriedades do Componente:</strong>
+    <ul class="text-start mt-3">
+      <li><strong>Gerenciamento de Estado:</strong> Utiliza Signal para compartilhar o estado do erro entre service e componente.</li>
+      <li><strong>Exibição Automática:</strong> A tela é exibida automaticamente quando um erro é construído pelo <code>MpcErrorService</code>.</li>
+      <li><strong>Imagens Personalizadas:</strong> Suporte a imagens personalizadas para diferentes tipos de erro.</li>
+      <li><strong>Navegação:</strong> O botão "Voltar" redireciona para a rota especificada no objeto de erro.</li>
+      <li><strong>Cópia de Mensagem:</strong> O botão "Copiar Mensagem" copia o título e descrição do erro para a área de transferência.</li>
+      <li><strong>Responsivo:</strong> A tela se adapta a diferentes tamanhos de dispositivo.</li>
+    </ul>
+    <span class="text-muted">O componente não possui <code>&#64;Input()</code> diretos. Toda a configuração é feita via <code>MpcErrorService</code>.</span>
+  </h5>
+
+  <div class="mb-3">
+    <h5><strong>⚠️ DEPENDÊNCIA:</strong></h5>
+    <div class="alert alert-info" role="alert">
+      O <code>mpc-error</code> utiliza o componente <code>mpc-button</code> da biblioteca <code>mpc-lib-angular</code>.<br>
+      <strong>É necessário ter a <code>mpc-lib-angular</code> instalada no seu projeto para o funcionamento correto dos botões!</strong><br>
+      <span class="text-muted">Instale com <code>npm install mpc-lib-angular</code> se ainda não estiver no seu projeto.</span>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <h5><strong>Importação no arquivo <code>.ts</code>:</strong></h5>
+    <pre class="chroma"><code>
+import &#123; MpcErrorComponent &#125; from './shared/components/mpc-error/mpc-error.component';
+import &#123; MpcErrorService &#125; from './shared/components/mpc-error/mpc-error.service';
+
+// No seu componente
+imports: [ MpcErrorComponent ]
+
+// Injeção do serviço
+private mpcErrorService = inject(MpcErrorService);
+    </code></pre>
+  </div>
+
+  <div class="mb-5">
+    <h5><strong>Exemplo de uso no arquivo <code>.html</code>:</strong></h5>
+    <pre class="chroma"><code class="language-html" data-lang="html">&lt;!-- O componente será exibido automaticamente quando um erro for construído pelo MpcErrorService --&gt;
+&lt;mpc-error&gt;&lt;/mpc-error&gt;
+</code></pre>
+    <h5><strong>Exemplo de uso do MpcErrorService no arquivo <code>.ts</code>:</strong></h5>
+    <pre class="chroma"><code>
+// Com imagem padrão
+mpcErrorService.construirErro(erro, rotaRetorno);
+
+// Com imagem personalizada
+mpcErrorService.construirErro(erro, rotaRetorno, 'caminho/para/imagem.png');
+    </code></pre>
+  </div>
+
+  <div class="mb-3">
+    <h5><strong>Personalização com Variáveis CSS:</strong></h5>
+    <pre class="chroma"><code>/* Personalize as cores e imagens do erro conforme sua necessidade. */
+/* Exemplo de variáveis (adicione no seu CSS global se desejar): */
+--mpc-error-bg: #fff3f3; /* Cor de fundo do erro */
+--mpc-error-title: #d32f2f; /* Cor do título do erro */
+--mpc-error-description: #333; /* Cor da descrição */
+--mpc-error-btn: var(--mpc-color-primary); /* Cor dos botões */
+    </code></pre>
+  </div>
+
+  <div class="mb-3">
+    <h5><strong>Como personalizar:</strong></h5>
+    <ul class="text-start mt-3">
+      <li>Para alterar as mensagens de erro, utilize o <code>MpcErrorService</code> no seu componente.</li>
+      <li>Para personalizar imagens, passe o caminho da imagem ao construir o erro.</li>
+      <li>Para alterar cores e estilos, utilize as variáveis CSS acima ou edite o arquivo <code>mpc-error.component.css</code></li>
+    </ul>
+  </div>
+
+  <h5>Veja abaixo como fica a implementação do <code>mpc-error</code> na sua página html.</h5>
+
+  <div class="row">
+    <div class="col-lg-3 px-5 py-3 justify-content-center align-items-center d-flex">
+      <mpc-button icone="bi bi-bug" posicaoIcone="esquerda" (click)="simularErroDetalhado()" texto="Erro Detalhado" id="btn-erro-detalhado" />
+    </div>
+    <div class="col-lg-3 px-5 py-3 justify-content-center align-items-center d-flex">
+      <mpc-button icone="bi bi-bug" posicaoIcone="esquerda" (click)="simularErroGenerico()" texto="Erro Genérico" id="btn-erro-generico" />
+    </div>
+    <div class="col-lg-3 px-5 py-3 justify-content-center align-items-center d-flex">
+      <mpc-button icone="bi bi-bug" posicaoIcone="esquerda" (click)="simularErroValidacao()" texto="Erro de Validação" id="btn-erro-validacao" />
+    </div>
+    <div class="col-lg-3 px-5 py-3 justify-content-center align-items-center d-flex">
+      <mpc-button icone="bi bi-bug" posicaoIcone="esquerda" (click)="simularErroComImagem()" texto="Erro + Imagem" id="btn-erro-com-imagem" />
+    </div>
+  </div>
+</mpc-section>
+<!-- ======= ErrorComponent FIM ======= -->

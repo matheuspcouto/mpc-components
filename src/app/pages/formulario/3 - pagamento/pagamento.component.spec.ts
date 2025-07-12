@@ -2,14 +2,14 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, NonNullableFormBuilder } from '@angular/forms';
 import PagamentoComponent from './pagamento.component';
 import { InscricaoService } from '../service/inscricao.service';
-import { ErrorService } from '../../../shared/error/error.service';
+import { MpcErrorService } from '../../../shared/components/mpc-error/mpc-error.service';
 
 describe('PagamentoComponent', () => {
   let component: PagamentoComponent;
   let fixture: ComponentFixture<PagamentoComponent>;
   let mockInscricaoService: any;
   let mockFormBuilder: any;
-  let mockErrorService: any;
+  let mockMpcErrorService: any;
 
   beforeEach(async () => {
 
@@ -25,14 +25,14 @@ describe('PagamentoComponent', () => {
       record: jest.fn()
     };
 
-    mockErrorService = { construirErro: jest.fn() };
+    mockMpcErrorService = { construirErro: jest.fn() };
 
     await TestBed.configureTestingModule({
       imports: [PagamentoComponent],
       providers: [
         { provide: InscricaoService, useValue: mockInscricaoService },
         { provide: NonNullableFormBuilder, useValue: mockFormBuilder },
-        { provide: ErrorService, useValue: mockErrorService }
+        { provide: MpcErrorService, useValue: mockMpcErrorService }
       ]
     }).compileComponents();
 
@@ -80,21 +80,21 @@ describe('PagamentoComponent', () => {
     mockInscricaoService.getDadosInscricao.mockImplementation(() => { throw new Error('Erro simulado'); });
     mockInscricaoService.isPagamentoCompleto.mockReturnValue(true);
     component.ngOnInit();
-    expect(mockErrorService.construirErro).toHaveBeenCalled();
+    expect(mockMpcErrorService.construirErro).toHaveBeenCalled();
   });
 
   it('deve chamar ErrorService.construirErro quando ocorre exceção em proximaEtapa', () => {
     mockInscricaoService.atualizarDadosInscricao.mockImplementation(() => { throw new Error('Erro simulado'); });
     component['form'].patchValue({ formaPagamento: 'Pix', valor: 100 });
     (component as any).proximaEtapa();
-    expect(mockErrorService.construirErro).toHaveBeenCalled();
+    expect(mockMpcErrorService.construirErro).toHaveBeenCalled();
   });
 
   it('deve chamar ErrorService.construirErro quando ocorre exceção em etapaAnterior', () => {
     mockInscricaoService.atualizarDadosInscricao.mockImplementation(() => { throw new Error('Erro simulado'); });
     component['form'].patchValue({ formaPagamento: 'Pix', valor: 100 });
     (component as any).etapaAnterior();
-    expect(mockErrorService.construirErro).toHaveBeenCalled();
+    expect(mockMpcErrorService.construirErro).toHaveBeenCalled();
   });
 
   it('deve inicializar o formulário com dados de inscrição completos', () => {

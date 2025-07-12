@@ -1,71 +1,18 @@
-main {
-  margin-top: 90px;
+/*--------------------------------------------------------------
+# Geral
+--------------------------------------------------------------*/
+
+h5 {
+  font-weight: 400;
+  color: var(--mpc-color-tertiary);
+  text-align: center;
+  padding-bottom: 2rem;
+  font-style: italic;
 }
 
 /*--------------------------------------------------------------
 # Section
 --------------------------------------------------------------*/
-section {
-  overflow: hidden;
-  padding: 50px 0;
-
-  .section-components {
-    .col-lg-6 {
-      justify-items: center;
-    }
-
-    h5 {
-      font-weight: 400;
-      color: var(--mpc-color-tertiary);
-      font-size: 18px;
-    }
-
-    li {
-      list-style: none;
-      margin-bottom: 10px;
-    }
-
-    a:hover {
-      color: var(--mpc-color-primary) !important;
-    }
-  }
-
-  h5 {
-    font-weight: 400;
-    color: var(--mpc-color-tertiary);
-    text-align: center;
-    padding-bottom: 2rem;
-    font-style: italic;
-  }
-
-  .section-header {
-    text-align: center;
-    padding-bottom: 30px;
-
-    h2 {
-      font-size: 13px;
-      letter-spacing: 1px;
-      font-weight: 400;
-      margin: 0;
-      padding: 0;
-      color: var(--mpc-color-tertiary);
-      text-transform: uppercase;
-      font-family: var(--mpc-font-default);
-    }
-
-    p {
-      margin: 0;
-      font-size: 48px;
-      font-weight: 400;
-      font-family: var(--mpc-font-default);
-
-      span {
-        color: var(--mpc-color-secondary);
-      }
-    }
-  }
-
-}
 
 pre {
   background-color: var(--mpc-color-primary);

@@ -37,7 +37,6 @@ export * from './lib/components/mpc-loader/mpc-loader.service'; // Service para 
 export * from './lib/components/mpc-loader/mpc-loader.component'; // Componente para o loader
 export * from './lib/components/mpc-pagination/mpc-pagination.component';
 export * from './lib/components/mpc-tabs/mpc-tabs.component';
-export * from './lib/components/mpc-navbar/mpc-navbar.component';
 export * from './lib/components/mpc-modal/mpc-modal.component';
 export * from './lib/components/mpc-button/mpc-button.component';
 export * from './lib/components/mpc-btn-float/mpc-btn-float.component';

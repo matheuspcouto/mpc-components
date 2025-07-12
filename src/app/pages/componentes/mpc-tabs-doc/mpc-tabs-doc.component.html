@@ -1,45 +1,39 @@
-<main>
-  <!-- ======= MpcTabs INÍCIO ======= -->
-  <section id="tabs">
-    <div class="container">
-      <div class="section-header">
-        <h2>experimente os</h2>
-        <p>MPC <span>Tabs</span></p>
-      </div>
-      
-      <h5>
-        <strong>Descrição:</strong> O <code>mpc-tabs</code> é um componente que exibe uma lista de abas (tabs) com
-        títulos e conteúdos customizáveis, permitindo seleção e acessibilidade.
-      </h5>
-      
-      <h5>
-        <strong>Propriedades do Componente:</strong>
-        <ul class="text-start mt-3">
-          <li><strong>tabs</strong>: <code>Tab[]</code> <b>(obrigatório)</b> — Lista de abas a serem exibidas.</li>
-          <li><strong>id</strong>: <code>string</code> (opcional) — ID do componente para acessibilidade.</li>
-          <li><strong>tabIndex</strong>: <code>number</code> (opcional) — Índice de tabulação do componente.</li>
-          <li><strong>ariaLabel</strong>: <code>string</code> (opcional) — Rótulo de acessibilidade das tabs.</li>
-        </ul>
-      </h5>
+<!-- ======= MpcTabs INÍCIO ======= -->
+<mpc-section class="tabs" titulo="experimente os" titulo="MPC" tituloDestaque="Tabs">
 
-      <div class="mb-3">
-        <h5><strong>Instalação:</strong></h5>
-        <pre class="chroma"><code>npm install mpc-lib-angular</code></pre>
-      </div>
+  <h5>
+    <strong>Descrição:</strong> O <code>mpc-tabs</code> é um componente que exibe uma lista de abas (tabs) com
+    títulos e conteúdos customizáveis, permitindo seleção e acessibilidade.
+  </h5>
 
-      <div class="mb-3">
-        <h5><strong>Importação no arquivo <code>.ts</code>:</strong></h5>
-        <pre class="chroma"><code>
+  <h5>
+    <strong>Propriedades do Componente:</strong>
+    <ul class="text-start mt-3">
+      <li><strong>tabs</strong>: <code>Tab[]</code> <b>(obrigatório)</b> — Lista de abas a serem exibidas.</li>
+      <li><strong>id</strong>: <code>string</code> (opcional) — ID do componente para acessibilidade.</li>
+      <li><strong>tabIndex</strong>: <code>number</code> (opcional) — Índice de tabulação do componente.</li>
+      <li><strong>ariaLabel</strong>: <code>string</code> (opcional) — Rótulo de acessibilidade das tabs.</li>
+    </ul>
+  </h5>
+
+  <div class="mb-3">
+    <h5><strong>Instalação:</strong></h5>
+    <pre class="chroma"><code>npm install mpc-lib-angular</code></pre>
+  </div>
+
+  <div class="mb-3">
+    <h5><strong>Importação no arquivo <code>.ts</code>:</strong></h5>
+    <pre class="chroma"><code>
 import &#123; MpcTabsComponent, Tab &#125; from 'mpc-lib-angular';
 
 // No seu componente
 imports: [ MpcTabsComponent ]
         </code></pre>
-      </div>
+  </div>
 
-      <div class="mb-5">
-        <h5><strong>Exemplo de uso no arquivo <code>.html</code>:</strong></h5>
-        <pre class="chroma"><code class="language-html" data-lang="html">&lt;!-- Tabs Básicas --&gt;
+  <div class="mb-5">
+    <h5><strong>Exemplo de uso no arquivo <code>.html</code>:</strong></h5>
+    <pre class="chroma"><code class="language-html" data-lang="html">&lt;!-- Tabs Básicas --&gt;
 &lt;mpc-tabs 
   [tabs]="tabs" 
   (tabSelected)="selectTab($event)"&gt;
@@ -61,11 +55,11 @@ imports: [ MpcTabsComponent ]
 &#64;if (tabSelecionada.id === 'conteudoTab2') &#123;
   &lt;div&gt;Conteúdo 2&lt;/div&gt;
 &#125;</code></pre>
-      </div>
+  </div>
 
-      <div class="mb-3">
-        <h5><strong>Personalização com Variáveis CSS:</strong></h5>
-        <pre class="chroma"><code>/* Cores das Tabs */
+  <div class="mb-3">
+    <h5><strong>Personalização com Variáveis CSS:</strong></h5>
+    <pre class="chroma"><code>/* Cores das Tabs */
 --mpc-color-text-tabs: var(--mpc-color-primary);      /* Cor do texto das tabs */
 --mpc-color-bg-tabs: white;                           /* Cor de fundo das tabs */
 --mpc-color-border-tabs: var(--mpc-color-primary);    /* Cor da borda das tabs */
@@ -74,38 +68,36 @@ imports: [ MpcTabsComponent ]
 
 /* Fontes */
 --mpc-font-tabs: var(--mpc-font-default);             /* Fonte das tabs */</code></pre>
-      </div>
+  </div>
 
-      <div class="mb-3">
-        <h5><strong>Eventos:</strong></h5>
-        <ul class="text-start mt-3">
-          <li><strong>tabSelected</strong>: Emite o objeto <code>Tab</code> selecionado ao trocar de aba.</li>
-        </ul>
-      </div>
+  <div class="mb-3">
+    <h5><strong>Eventos:</strong></h5>
+    <ul class="text-start mt-3">
+      <li><strong>tabSelected</strong>: Emite o objeto <code>Tab</code> selecionado ao trocar de aba.</li>
+    </ul>
+  </div>
 
-      <div class="mb-3">
-        <h5><strong>Interface Tab:</strong></h5>
-        <ul class="text-start mt-3">
-          <li><strong>id</strong>: <code>string</code> — Identificador único da aba.</li>
-          <li><strong>titulo</strong>: <code>string</code> — Título exibido na aba.</li>
-        </ul>
-      </div>
+  <div class="mb-3">
+    <h5><strong>Interface Tab:</strong></h5>
+    <ul class="text-start mt-3">
+      <li><strong>id</strong>: <code>string</code> — Identificador único da aba.</li>
+      <li><strong>titulo</strong>: <code>string</code> — Título exibido na aba.</li>
+    </ul>
+  </div>
 
-      <div class="row justify-content-center mb-5">
-        <h5><strong>Veja como fica o componente:</strong></h5>
-        <mpc-tabs id="tabs" [tabs]="tabs" [tabIndex]="0" ariaLabel="Tabs" (tabSelected)="selectTab($event)"></mpc-tabs>
+  <div class="row justify-content-center mb-5">
+    <h5><strong>Veja como fica o componente:</strong></h5>
+    <mpc-tabs id="tabs" [tabs]="tabs" [tabIndex]="0" ariaLabel="Tabs" (tabSelected)="selectTab($event)"></mpc-tabs>
 
-        @if (tabSelecionada.id === 'conteudoTab1') {
-        <div class="d-flex justify-content-center mt-3">Conteúdo 1</div>
-        }
-        @if (tabSelecionada.id === 'conteudoTab2') {
-        <div class="d-flex justify-content-center mt-3">Conteúdo 2</div>
-        }
-        @if (tabSelecionada.id === 'conteudoTab3') {
-        <div class="d-flex justify-content-center mt-3">Conteúdo 3</div>
-        }
-      </div>
-    </div>
-  </section>
-  <!-- ======= MpcTabs FIM ======= -->
-</main>
+    @if (tabSelecionada.id === 'conteudoTab1') {
+    <div class="d-flex justify-content-center mt-3">Conteúdo 1</div>
+    }
+    @if (tabSelecionada.id === 'conteudoTab2') {
+    <div class="d-flex justify-content-center mt-3">Conteúdo 2</div>
+    }
+    @if (tabSelecionada.id === 'conteudoTab3') {
+    <div class="d-flex justify-content-center mt-3">Conteúdo 3</div>
+    }
+  </div>
+</mpc-section>
+<!-- ======= MpcTabs FIM ======= -->

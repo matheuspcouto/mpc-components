@@ -1,50 +1,46 @@
-<main>
-  <!-- ======= MPC Inputs INÍCIO ======= -->
-  <section id="inputs">
-    <div class="container">
-      <div class="section-header">
-        <h2>experimente os</h2>
-        <p>MPC <span>Inputs</span></p>
-      </div>
-      
-      <h5>
-        <strong>Descrição:</strong> Os <code>mpc-input-*</code> são componentes customizados para entrada de dados,
-        implementando ControlValueAccessor para integração com formulários reativos. Todos os inputs suportam validação,
-        acessibilidade e personalização via variáveis CSS.
-      </h5>
-      
-      <h5>
-        <strong>Propriedades Comuns:</strong>
-        <ul class="text-start mt-3">
-          <li><strong>label</strong>: <code>string</code> <b>(obrigatório)</b> — Label do campo.</li>
-          <li><strong>readonly</strong>: <code>boolean</code> (opcional) — Campo somente leitura.</li>
-          <li><strong>disabled</strong>: <code>boolean</code> (opcional) — Campo desabilitado.</li>
-          <li><strong>required</strong>: <code>boolean</code> (opcional) — Campo obrigatório.</li>
-          <li><strong>id</strong>: <code>string</code> (opcional) — ID único do campo para acessibilidade.</li>
-          <li><strong>tabIndex</strong>: <code>number</code> (opcional) — TabIndex para navegação por teclado.</li>
-          <li><strong>ariaLabel</strong>: <code>string</code> (opcional) — Rótulo para leitores de tela.</li>
-        </ul>
-      </h5>
-      <h5>
-        <strong>Propriedades Específicas:</strong>
-        <ul class="text-start mt-3">
-          <li><strong>min</strong>: <code>number</code> (opcional) — Valor mínimo (inputs de texto, número, área de texto).</li>
-          <li><strong>max</strong>: <code>number</code> (opcional) — Valor máximo (inputs de texto, número, área de texto).</li>
-          <li><strong>minDate</strong>: <code>Date | string</code> (opcional) — Data mínima (input de data).</li>
-          <li><strong>maxDate</strong>: <code>Date | string</code> (opcional) — Data máxima (input de data).</li>
-          <li><strong>options</strong>: <code>any[]</code> (opcional) — Opções para select/radio.</li>
-          <li><strong>opcoes</strong>: <code>any[]</code> (opcional) — Opções para select (alias).</li>
-        </ul>
-      </h5>
+<!-- ======= MPC Inputs INÍCIO ======= -->
+<mpc-section class="inputs" subtitulo="experimente os" titulo="MPC" tituloDestaque="Inputs">
 
-      <div class="mb-3">
-        <h5><strong>Instalação:</strong></h5>
-        <pre class="chroma"><code>npm install mpc-lib-angular</code></pre>
-      </div>
+  <h5>
+    <strong>Descrição:</strong> Os <code>mpc-input-*</code> são componentes customizados para entrada de dados,
+    implementando ControlValueAccessor para integração com formulários reativos. Todos os inputs suportam validação,
+    acessibilidade e personalização via variáveis CSS.
+  </h5>
 
-      <div class="mb-3">
-        <h5><strong>Importação no arquivo <code>.ts</code>:</strong></h5>
-        <pre class="chroma"><code>
+  <h5>
+    <strong>Propriedades Comuns:</strong>
+    <ul class="text-start mt-3">
+      <li><strong>label</strong>: <code>string</code> <b>(obrigatório)</b> — Label do campo.</li>
+      <li><strong>readonly</strong>: <code>boolean</code> (opcional) — Campo somente leitura.</li>
+      <li><strong>disabled</strong>: <code>boolean</code> (opcional) — Campo desabilitado.</li>
+      <li><strong>required</strong>: <code>boolean</code> (opcional) — Campo obrigatório.</li>
+      <li><strong>id</strong>: <code>string</code> (opcional) — ID único do campo para acessibilidade.</li>
+      <li><strong>tabIndex</strong>: <code>number</code> (opcional) — TabIndex para navegação por teclado.</li>
+      <li><strong>ariaLabel</strong>: <code>string</code> (opcional) — Rótulo para leitores de tela.</li>
+    </ul>
+  </h5>
+  <h5>
+    <strong>Propriedades Específicas:</strong>
+    <ul class="text-start mt-3">
+      <li><strong>min</strong>: <code>number</code> (opcional) — Valor mínimo (inputs de texto, número, área de texto).
+      </li>
+      <li><strong>max</strong>: <code>number</code> (opcional) — Valor máximo (inputs de texto, número, área de texto).
+      </li>
+      <li><strong>minDate</strong>: <code>Date | string</code> (opcional) — Data mínima (input de data).</li>
+      <li><strong>maxDate</strong>: <code>Date | string</code> (opcional) — Data máxima (input de data).</li>
+      <li><strong>options</strong>: <code>any[]</code> (opcional) — Opções para select/radio.</li>
+      <li><strong>opcoes</strong>: <code>any[]</code> (opcional) — Opções para select (alias).</li>
+    </ul>
+  </h5>
+
+  <div class="mb-3">
+    <h5><strong>Instalação:</strong></h5>
+    <pre class="chroma"><code>npm install mpc-lib-angular</code></pre>
+  </div>
+
+  <div class="mb-3">
+    <h5><strong>Importação no arquivo <code>.ts</code>:</strong></h5>
+    <pre class="chroma"><code>
 import &#123; 
   MpcInputTextComponent,
   MpcInputNumberComponent,
@@ -74,11 +70,11 @@ imports: [
   MpcInputSelectComponent
 ]
         </code></pre>
-      </div>
+  </div>
 
-      <div class="mb-5">
-        <h5><strong>Exemplo de uso no arquivo <code>.html</code>:</strong></h5>
-        <pre class="chroma"><code class="language-html" data-lang="html">&lt;!-- Input Text Básico --&gt;
+  <div class="mb-5">
+    <h5><strong>Exemplo de uso no arquivo <code>.html</code>:</strong></h5>
+    <pre class="chroma"><code class="language-html" data-lang="html">&lt;!-- Input Text Básico --&gt;
 &lt;mpc-input-text 
   label="Nome" 
   [(ngModel)]="nome" 
@@ -115,91 +111,89 @@ imports: [
   ariaLabel="Campo para inserir o nome completo da pessoa"
   [(ngModel)]="nome"&gt;
 &lt;/mpc-input-text&gt;</code></pre>
-      </div>
+  </div>
 
-      <div class="mb-3">
-        <h5><strong>Personalização com Variáveis CSS:</strong></h5>
-        <pre class="chroma"><code>/* Variáveis CSS comuns a todos os inputs */
+  <div class="mb-3">
+    <h5><strong>Personalização com Variáveis CSS:</strong></h5>
+    <pre class="chroma"><code>/* Variáveis CSS comuns a todos os inputs */
 --mpc-color-text: var(--mpc-color-primary);      /* Cor do texto do campo */
 --mpc-color-error: #DC3545;                      /* Cor de erro */
 --mpc-color-border: var(--mpc-color-tertiary);   /* Cor da borda do campo */
 --mpc-color-border-success: var(--mpc-color-secondary); /* Cor da borda de sucesso */
 --mpc-font-text: var(--mpc-font-default);       /* Fonte do campo */</code></pre>
-      </div>
+  </div>
 
-      <div class="row gy-4">
-        <div class="col-12 d-flex justify-content-center">
-          <h4>Inputs Customizados</h4>
-        </div>
-        <!-- Exemplos visuais dos inputs -->
-        <div class="col-lg-6">
-          <h5>Input de Texto</h5>
-          <mpc-input-text label="Nome" formControlName="nome" [min]="3" />
-        </div>
-        <div class="col-lg-6">
-          <h5>Input de Número</h5>
-          <mpc-input-number label="Idade" formControlName="idade" [min]="18" [max]="100" />
-        </div>
-        <div class="col-lg-6">
-          <h5>Input de Data</h5>
-          <mpc-input-date label="Data de Nascimento" formControlName="dataNasc" [minDate]="minDate" [required]="true"
-            [maxDate]="maxDate" />
-        </div>
-        <div class="col-lg-6">
-          <h5>Input de E-mail</h5>
-          <mpc-input-email formControlName="email" [required]="true" />
-        </div>
-        <div class="col-lg-6">
-          <h5>Input de Senha</h5>
-          <mpc-input-senha formControlName="senha" [required]="true" />
-        </div>
-        <div class="col-lg-6">
-          <h5>Input de Telefone</h5>
-          <mpc-input-telefone formControlName="telefone" [required]="true" />
-        </div>
-        <div class="col-lg-6">
-          <h5>Input de CPF/CNPJ</h5>
-          <mpc-input-cpfcnpj formControlName="cpfCnpj" [required]="true" />
-        </div>
-        <div class="col-lg-6">
-          <h5>Input de Área de Texto</h5>
-          <mpc-input-text-area label="Descrição" formControlName="descricao" [min]="10" [max]="100" />
-        </div>
-        <div class="col-lg-6">
-          <h5>Input de Rádio</h5>
-          <mpc-input-radio label="Sexo" [options]="sexos" [required]="true" />
-        </div>
-        <div class="col-lg-6">
-          <h5>Input Select</h5>
-          <mpc-input-select label="Estado Civil" [options]="estadosCivis" [required]="true" />
-        </div>
-        <div class="col-lg-12 mt-5 mb-3">
-          <h5>Input de CEP</h5>
-          <h6>Este campo utiliza dados da API do <a href="https://viacep.com.br/" target="_blank">ViaCEP</a>. Para saber
-            mais como usar, visite a página e leia a documentação.</h6>
-          <mpc-input-busca-cep formControlName="cep" [required]="true" (endereco)="definirEnderecoPorCep($event)" />
-        </div>
-        <div class="row">
-          <div class="col-lg-4 mb-3">
-            <mpc-input-text label="Cidade" [readonly]="true" formControlName="cidade" />
-          </div>
-          <div class="col-lg-4 mb-3">
-            <mpc-input-text label="Estado" [readonly]="true" formControlName="estado" />
-          </div>
-          <div class="col-lg-4 mb-3">
-            <mpc-input-text label="Bairro" [readonly]="true" formControlName="bairro" />
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-8 mb-3">
-            <mpc-input-text label="Rua" [readonly]="true" formControlName="rua" />
-          </div>
-          <div class="col-lg-4 mb-3">
-            <mpc-input-text label="Número/Lote" [min]="1" formControlName="numero" />
-          </div>
-        </div>
+  <div class="row gy-4">
+    <div class="col-12 d-flex justify-content-center">
+      <h4>Inputs Customizados</h4>
+    </div>
+    <!-- Exemplos visuais dos inputs -->
+    <div class="col-lg-6">
+      <h5>Input de Texto</h5>
+      <mpc-input-text label="Nome" formControlName="nome" [min]="3" />
+    </div>
+    <div class="col-lg-6">
+      <h5>Input de Número</h5>
+      <mpc-input-number label="Idade" formControlName="idade" [min]="18" [max]="100" />
+    </div>
+    <div class="col-lg-6">
+      <h5>Input de Data</h5>
+      <mpc-input-date label="Data de Nascimento" formControlName="dataNasc" [minDate]="minDate" [required]="true"
+        [maxDate]="maxDate" />
+    </div>
+    <div class="col-lg-6">
+      <h5>Input de E-mail</h5>
+      <mpc-input-email formControlName="email" [required]="true" />
+    </div>
+    <div class="col-lg-6">
+      <h5>Input de Senha</h5>
+      <mpc-input-senha formControlName="senha" [required]="true" />
+    </div>
+    <div class="col-lg-6">
+      <h5>Input de Telefone</h5>
+      <mpc-input-telefone formControlName="telefone" [required]="true" />
+    </div>
+    <div class="col-lg-6">
+      <h5>Input de CPF/CNPJ</h5>
+      <mpc-input-cpfcnpj formControlName="cpfCnpj" [required]="true" />
+    </div>
+    <div class="col-lg-6">
+      <h5>Input de Área de Texto</h5>
+      <mpc-input-text-area label="Descrição" formControlName="descricao" [min]="10" [max]="100" />
+    </div>
+    <div class="col-lg-6">
+      <h5>Input de Rádio</h5>
+      <mpc-input-radio label="Sexo" [options]="sexos" [required]="true" />
+    </div>
+    <div class="col-lg-6">
+      <h5>Input Select</h5>
+      <mpc-input-select label="Estado Civil" [options]="estadosCivis" [required]="true" />
+    </div>
+    <div class="col-lg-12 mt-5 mb-3">
+      <h5>Input de CEP</h5>
+      <h6>Este campo utiliza dados da API do <a href="https://viacep.com.br/" target="_blank">ViaCEP</a>. Para saber
+        mais como usar, visite a página e leia a documentação.</h6>
+      <mpc-input-busca-cep formControlName="cep" [required]="true" (endereco)="definirEnderecoPorCep($event)" />
+    </div>
+    <div class="row">
+      <div class="col-lg-4 mb-3">
+        <mpc-input-text label="Cidade" [readonly]="true" formControlName="cidade" />
+      </div>
+      <div class="col-lg-4 mb-3">
+        <mpc-input-text label="Estado" [readonly]="true" formControlName="estado" />
+      </div>
+      <div class="col-lg-4 mb-3">
+        <mpc-input-text label="Bairro" [readonly]="true" formControlName="bairro" />
       </div>
     </div>
-  </section>
-  <!-- ======= MPC Inputs FIM ======= -->
-</main>
+    <div class="row">
+      <div class="col-lg-8 mb-3">
+        <mpc-input-text label="Rua" [readonly]="true" formControlName="rua" />
+      </div>
+      <div class="col-lg-4 mb-3">
+        <mpc-input-text label="Número/Lote" [min]="1" formControlName="numero" />
+      </div>
+    </div>
+  </div>
+</mpc-section>
+<!-- ======= MPC Inputs FIM ======= -->

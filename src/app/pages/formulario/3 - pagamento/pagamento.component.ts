@@ -23,7 +23,7 @@ import { Router } from '@angular/router';
 import { Rotas } from '../../../shared/enums/rotas-enum';
 import { FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { InscricaoService } from '../service/inscricao.service';
-import { ErrorService } from '../../../shared/error/error.service';
+import { MpcErrorService } from '../../../shared/components/mpc-error/mpc-error.service';
 import { MpcInputSelectComponent, SelectOption, MpcFormProgressBarComponent, MpcLoaderService, MpcButtonComponent } from 'mpc-lib-angular';
 
 @Component({
@@ -42,7 +42,7 @@ export default class PagamentoComponent implements OnInit {
   private readonly formBuilder = inject(NonNullableFormBuilder);
   private readonly router = inject(Router);
   private readonly inscricaoService = inject(InscricaoService);
-  private readonly errorService = inject(ErrorService);
+  private readonly mpcErrorService = inject(MpcErrorService);
   private readonly loaderService = inject(MpcLoaderService);
 
   /**
@@ -104,7 +104,7 @@ export default class PagamentoComponent implements OnInit {
         }
       }
     } catch (error) {
-      this.errorService.construirErro(error);
+      this.mpcErrorService.construirErro(error);
     } finally {
       this.loaderService.hide();
     }
@@ -129,7 +129,7 @@ export default class PagamentoComponent implements OnInit {
       this.inscricaoService.atualizarDadosInscricao({ novosDados: this.form.value, proximaEtapa: 4 });
       this.router.navigate([Rotas.CONFIRMACAO]);
     } catch (error) {
-      this.errorService.construirErro(error);
+      this.mpcErrorService.construirErro(error);
     }
   }
 
@@ -141,7 +141,7 @@ export default class PagamentoComponent implements OnInit {
       this.inscricaoService.atualizarDadosInscricao({ novosDados: this.form.value, proximaEtapa: 2 });
       this.router.navigate([Rotas.CONTATO]);
     } catch (error) {
-      this.errorService.construirErro(error);
+      this.mpcErrorService.construirErro(error);
     }
   }
 }
