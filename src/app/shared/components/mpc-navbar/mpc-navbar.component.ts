@@ -5,12 +5,12 @@
  * suportando abas com sub-rotas e identificação automática de abas de login.
  * 
  * @Propriedades
- * @Input() abasInput {NavbarConfig[]} - Configuração das abas da navbar
+ * abasInput {NavbarConfig[]} - Configuração das abas da navbar
  * 
  * @Exemplo
  * ```html
  * <!-- Navbar Básica -->
- * <mpc-navbar [abasInput]="abas"></mpc-navbar>
+ * <mpc-navbar id="navbar" />
  * 
  * <!-- Configuração das Abas -->
  * const abas: NavbarConfig[] = [
@@ -49,20 +49,21 @@
  * - subRotas?: SubRotaConfig[] - Array de sub-rotas (opcional)
  * 
  * @Variáveis CSS
- * --mpc-color-bg-header: Cor de fundo da navbar (padrão: white)
- * --mpc-color-text-disabled: Cor do texto desabilitado (padrão: #7f7f90)
- * --mpc-color-text-active: Cor do texto ativo (padrão: var(--mpc-color-primary))
- * --mpc-color-text-hover: Cor do texto no hover (padrão: var(--mpc-color-primary))
- * --mpc-color-border-active: Cor da borda ativa (padrão: var(--mpc-color-secondary))
- * --mpc-font-navbar: Fonte da navbar (padrão: var(--mpc-font-subtitle))
+ * --mpc-color-bg-header: Cor de fundo da navbar
+ * --mpc-color-text-disabled: Cor do texto desabilitado
+ * --mpc-color-text-active: Cor do texto ativo
+ * --mpc-color-text-hover: Cor do texto no hover
+ * --mpc-color-border-active: Cor da borda ativa
+ * --mpc-font-navbar: Fonte da navbar
  * 
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
  * @updated 10/07/2025
  */
 
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Rotas } from '../../enums/rotas-enum';
 
 export interface SubRotaConfig {
   /** Título da sub-rota */
@@ -93,15 +94,54 @@ export class MpcNavbarComponent implements OnInit {
 
   // ===== PROPRIEDADES PÚBLICAS =====
   /** Configuração das abas da navbar */
-  @Input() abasInput: NavbarConfig[] = [];
+  private abasInput: NavbarConfig[] = [
+    /* { titulo: 'Login', rota: Rotas.LOGIN, icone: 'bi bi-person-fill' }, */
+    { titulo: 'Home', rota: Rotas.HOME, icone: 'bi bi-house-fill' },
+    { titulo: 'Documentação', rota: Rotas.LIB_DOC, icone: 'bi bi-book' },
+    {
+      titulo: 'Componentes',
+      icone: 'bi bi-code-slash',
+      subRotas: [
+        { titulo: 'mpc-cards', rota: Rotas.CARDS },
+        { titulo: 'mpc-button', rota: Rotas.BUTTONS },
+        { titulo: 'mpc-btn-float', rota: Rotas.BTN_FLOAT },
+        { titulo: 'mpc-modal', rota: Rotas.MODAIS },
+        { titulo: 'mpc-loader', rota: Rotas.LOADERS },
+        { titulo: 'mpc-tabs', rota: Rotas.TABS },
+        { titulo: 'mpc-pagination', rota: Rotas.PAGINACAO },
+        { titulo: 'mpc-inputs', rota: Rotas.INPUTS },
+        { titulo: 'mpc-page-divider-img', rota: Rotas.PAGE_DIVIDER_IMG },
+      ]
+    },
+    {
+      titulo: 'Formulário',
+      icone: 'bi bi-file-earmark-text-fill',
+      subRotas: [
+        { titulo: 'Realizar Inscrição (Fluxo)', rota: Rotas.DADOS_PESSOAIS },
+        { titulo: 'Pesquisar Inscrição', rota: Rotas.PESQUISA },
+        { titulo: 'Inscrições Encerradas', rota: Rotas.INSCRICOES_ENCERRADAS },
+      ]
+    },
+    {
+      titulo: 'Templates',
+      icone: 'bi bi-filetype-html',
+      subRotas: [
+        { titulo: 'Aguarde', rota: Rotas.AGUARDE },
+        /* { titulo: 'Login', rota: Rotas.LOGIN }, */
+        { titulo: 'Erro', rota: Rotas.PAGINA_ERRO },
+        { titulo: 'Navbar', rota: Rotas.NAVBAR },
+        { titulo: 'Footer', rota: Rotas.FOOTER },
+      ]
+    },
+  ];
 
   // ===== PROPRIEDADES PRIVADAS =====
   /** Array de abas filtradas (excluindo login) */
-  abas: NavbarConfig[] = [];
+  protected abas: NavbarConfig[] = [];
   /** Aba de login identificada automaticamente */
-  abaLogin!: NavbarConfig;
+  protected abaLogin!: NavbarConfig;
   /** Controla o estado de clique */
-  isClicado = false;
+  protected isClicado = false;
 
   /** Serviço de roteamento injetado */
   private readonly router = inject(Router);
@@ -123,7 +163,7 @@ export class MpcNavbarComponent implements OnInit {
    * @param aba Configuração da aba
    * @returns {boolean} true se a aba estiver ativa
    */
-  isAbaAtiva(aba: NavbarConfig): boolean {
+  protected isAbaAtiva(aba: NavbarConfig): boolean {
     const url = this.router.url;
 
     // Se alguma sub-aba estiver ativa, a principal deve ficar ativa
@@ -131,16 +171,16 @@ export class MpcNavbarComponent implements OnInit {
       // Verifica se alguma sub-rota está ativa, mas ignora sub-rotas que apontam para home
       const subRotaAtiva = aba.subRotas.some(sub => {
         if (!sub.rota) return false;
-        
+
         // Tratamento especial para rota home "/"
         if (sub.rota === '/') {
           // Se estamos na home, não ativa a aba pai para evitar conflitos
           return false;
         }
-        
+
         return url.startsWith(sub.rota);
       });
-      
+
       if (subRotaAtiva) {
         return true;
       }
@@ -159,7 +199,7 @@ export class MpcNavbarComponent implements OnInit {
    * @param sub Configuração da sub-rota
    * @returns {boolean} true se a sub-aba estiver ativa
    */
-  isSubAbaAtiva(sub: SubRotaConfig): boolean {
+  protected isSubAbaAtiva(sub: SubRotaConfig): boolean {
     const url = this.router.url;
 
     // Tratamento especial para rota home "/"
@@ -175,7 +215,7 @@ export class MpcNavbarComponent implements OnInit {
    * @param aba Configuração da aba
    * @returns {boolean} true se for uma aba de login
    */
-  isAbaLogin(aba: NavbarConfig): boolean {
+  protected isAbaLogin(aba: NavbarConfig): boolean {
     // Identifica se a aba é de login pelo título ou rota
     const tituloEhLogin = typeof aba.titulo === 'string' && aba.titulo.toLowerCase().includes('login');
     const rotaEhLogin = typeof aba.rota === 'string' && aba.rota.toLowerCase().includes('login');
@@ -187,7 +227,7 @@ export class MpcNavbarComponent implements OnInit {
    * @param rota Rota para navegar
    * @param fragment Fragmento da URL (opcional)
    */
-  navegarPara(rota?: string, fragment?: string): void {
+  protected navegarPara(rota?: string, fragment?: string): void {
     if (!rota) return;
 
     // Verifica se a rota existe antes de navegar
@@ -204,7 +244,7 @@ export class MpcNavbarComponent implements OnInit {
    * Navega para uma aba específica.
    * @param aba Configuração da aba
    */
-  navegarParaAba(aba: NavbarConfig): void {
+  protected navegarParaAba(aba: NavbarConfig): void {
     this.navegarPara(aba.rota);
   }
 
@@ -213,7 +253,7 @@ export class MpcNavbarComponent implements OnInit {
    * @param sub Configuração da sub-rota
    * @param rotaPai Rota da aba pai (para fragmentos)
    */
-  navegarParaSubRota(sub: SubRotaConfig, rotaPai?: string): void {
+  protected navegarParaSubRota(sub: SubRotaConfig, rotaPai?: string): void {
     if (sub.rota) {
       this.navegarPara(sub.rota);
     } else if (sub.fragment && rotaPai) {
@@ -226,14 +266,14 @@ export class MpcNavbarComponent implements OnInit {
   /**
    * Navega para a página inicial.
    */
-  navegarParaHome(): void {
+  protected navegarParaHome(): void {
     this.navegarPara('/');
   }
 
   /**
    * Navega para a aba de login.
    */
-  navegarParaLogin(): void {
+  protected navegarParaLogin(): void {
     if (this.abaLogin) {
       this.navegarPara(this.abaLogin.rota);
     }
@@ -252,7 +292,7 @@ export class MpcNavbarComponent implements OnInit {
       if (rota === '/') {
         return true;
       }
-      
+
       // Tenta navegar para a rota sem realmente navegar
       const urlTree = this.router.createUrlTree([rota]);
       const url = this.router.serializeUrl(urlTree);

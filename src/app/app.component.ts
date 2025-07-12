@@ -40,50 +40,6 @@ import { environment } from '../environments/environment';
 export class AppComponent implements OnInit {
 
   /**
-   * Configuração das abas e sub-rotas exibidas na navbar principal.
-   */
-  protected abas: NavbarConfig[] = [
-    /* { titulo: 'Login', rota: Rotas.LOGIN, icone: 'bi bi-person-fill' }, */
-    { titulo: 'Home', rota: Rotas.HOME, icone: 'bi bi-house-fill' },
-    { titulo: 'Documentação', rota: Rotas.LIB_DOC, icone: 'bi bi-book' },
-    {
-      titulo: 'Componentes',
-      icone: 'bi bi-code-slash',
-      subRotas: [
-        { titulo: 'mpc-cards', rota: Rotas.CARDS },
-        { titulo: 'mpc-button', rota: Rotas.BUTTONS },
-        { titulo: 'mpc-btn-float', rota: Rotas.BTN_FLOAT },
-        { titulo: 'mpc-modal', rota: Rotas.MODAIS },
-        { titulo: 'mpc-loader', rota: Rotas.LOADERS },
-        { titulo: 'mpc-tabs', rota: Rotas.TABS },
-        { titulo: 'mpc-pagination', rota: Rotas.PAGINACAO },
-        { titulo: 'mpc-inputs', rota: Rotas.INPUTS },
-        { titulo: 'mpc-page-divider-img', rota: Rotas.PAGE_DIVIDER_IMG },
-      ]
-    },
-    {
-      titulo: 'Formulário',
-      icone: 'bi bi-file-earmark-text-fill',
-      subRotas: [
-        { titulo: 'Realizar Inscrição (Fluxo)', rota: Rotas.DADOS_PESSOAIS },
-        { titulo: 'Pesquisar Inscrição', rota: Rotas.PESQUISA },
-        { titulo: 'Inscrições Encerradas', rota: Rotas.INSCRICOES_ENCERRADAS },
-      ]
-    },
-    {
-      titulo: 'Templates',
-      icone: 'bi bi-filetype-html',
-      subRotas: [
-        { titulo: 'Aguarde', rota: Rotas.AGUARDE },
-        /* { titulo: 'Login', rota: Rotas.LOGIN }, */
-        { titulo: 'Erro', rota: Rotas.PAGINA_ERRO },
-        { titulo: 'Navbar', rota: Rotas.NAVBAR },
-        { titulo: 'Footer', rota: Rotas.FOOTER },
-      ]
-    },
-  ];
-
-  /**
    * Identificador da plataforma (browser/server) para controle de funcionalidades específicas.
    */
   private readonly platformId = inject(PLATFORM_ID);
