@@ -12,8 +12,8 @@
           </a>
         </p>
         <div class="d-flex">
-          <mpc-button texto="Ver Documentação" icone="bi bi-book-fill" posicaoIcone="esquerda" (click)="irParaDocumentacao()"
-            class="btn-home" [tabIndex]="0" ariaLabel="Ver Documentação" />
+          <mpc-button texto="Ver Documentação" icone="bi bi-book-fill" posicaoIcone="esquerda"
+            (click)="irParaDocumentacao()" class="btn-home" [tabIndex]="0" ariaLabel="Ver Documentação" />
         </div>
       </div>
       <div class="col-lg-4 order-lg-2">
@@ -28,30 +28,33 @@
   <!-- ======= Descricao Section ======= -->
   <mpc-section class="descricao" subtitulo="conheça o" titulo="Mpc" tituloDestaque="Components">
 
-    <div class="row no-gutters">
-      <div class="col-lg-6 mb-3">
-        <div class="item-descricao">
-          <i class="bi bi-chat-fill"></i>
-          <span>O que é ?</span>
-          <h5>
-            Um repositório de componentes e páginas Angular responsivos e altamente personalizáveis, projetado para
-            facilitar o desenvolvimento de aplicações web. Este site foi totalmente desenvolvido com utilizando esses
-            componentes.
-          </h5>
+    <div class="container">
+      <div class="row no-gutters">
+        <div class="col-lg-6 mb-3">
+          <div class="item-descricao">
+            <i class="bi bi-chat-fill"></i>
+            <span>O que é ?</span>
+            <h5>
+              Um repositório de componentes e páginas Angular responsivos e altamente personalizáveis, projetado para
+              facilitar o desenvolvimento de aplicações web. Este site foi totalmente desenvolvido com utilizando esses
+              componentes.
+            </h5>
+          </div>
+        </div>
+
+        <div class="col-lg-6 mb-3">
+          <div class="item-descricao">
+            <i class="bi bi-coin"></i>
+            <span>Quanto custa ?</span>
+            <h5>NADA! <br>
+              O repositório é open source, o que significa que é gratuito para uso e modificação. Os desenvolvedores
+              podem baixar o código, explorar os componentes disponíveis e utilizá-los em seus próprios projetos,
+              promovendo a colaboração e a inovação na comunidade Angular.
+            </h5>
+          </div>
         </div>
       </div>
 
-      <div class="col-lg-6 mb-3">
-        <div class="item-descricao">
-          <i class="bi bi-coin"></i>
-          <span>Quanto custa ?</span>
-          <h5>NADA! <br>
-            O repositório é open source, o que significa que é gratuito para uso e modificação. Os desenvolvedores
-            podem baixar o código, explorar os componentes disponíveis e utilizá-los em seus próprios projetos,
-            promovendo a colaboração e a inovação na comunidade Angular.
-          </h5>
-        </div>
-      </div>
     </div>
 
   </mpc-section>
@@ -65,26 +68,27 @@
   <!-- ======= Contato Section ======= -->
   <mpc-section class="contato" subtitulo="informações de" titulo="Contato">
 
-    <div class="mb-3">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d31416.51104492992!2d-48.342735231809975!3d-10.175463146480574!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spt-BR!2sbr!4v1740512106198!5m2!1spt-BR!2sbr"
-        allowfullscreen frameBorder="0"></iframe>
-    </div>
-
-    <div class="row gy-4">
-
-      <div class="col-lg-6">
-        <mpc-card-menu class="cards-menu" icone="bi bi-map" titulo="Endereço"
-          descricao="Palmas, Tocantins"></mpc-card-menu>
+    <div class="container">
+      <div class="mb-3">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d31416.51104492992!2d-48.342735231809975!3d-10.175463146480574!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spt-BR!2sbr!4v1740512106198!5m2!1spt-BR!2sbr"
+          allowfullscreen frameBorder="0"></iframe>
       </div>
 
-      <div class="col-lg-6">
-        <mpc-card-menu class="cards-menu" icone="bi bi-telephone" titulo="Telefone"
-          descricao="(63) 9 9201-4337"></mpc-card-menu>
+      <div class="row gy-4">
+
+        <div class="col-lg-6">
+          <mpc-card-menu class="cards-menu" icone="bi bi-map" titulo="Endereço"
+            descricao="Palmas, Tocantins"></mpc-card-menu>
+        </div>
+
+        <div class="col-lg-6">
+          <mpc-card-menu class="cards-menu" icone="bi bi-telephone" titulo="Telefone"
+            descricao="(63) 9 9201-4337"></mpc-card-menu>
+        </div>
+
       </div>
-
     </div>
-
   </mpc-section>
   <!-- ======= End Contato Section ======= -->
 

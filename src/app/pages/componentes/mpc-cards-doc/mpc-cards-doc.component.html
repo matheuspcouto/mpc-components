@@ -1,10 +1,11 @@
 <!-- ======= MpcCard INÍCIO ======= -->
 <mpc-section class="cards-verticais-horizontais" subtitulo="experimente os" titulo="MPC" tituloDestaque="Cards">
 
-  <h5>
-    <strong>Descrição:</strong> O <code>mpc-card</code> é um componente para exibir cards com layout vertical e
-    horizontal, suportando imagens, títulos, subtítulos, descrições e links com design customizável.
-  </h5>
+  <div class="container">
+    <h5>
+      <strong>Descrição:</strong> O <code>mpc-card</code> é um componente para exibir cards com layout vertical e
+      horizontal, suportando imagens, títulos, subtítulos, descrições e links com design customizável.
+    </h5>
 
   <h5>
     <strong>Propriedades:</strong>
@@ -99,6 +100,7 @@ imports: [MpcCardComponent]
         imagem="/assets/img/no-image.jpg"
         [links]="[&#123;icone: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/matheuspcouto/'&#125;]" />
     </div>
+    </div>
   </div>
 
 </mpc-section>
@@ -107,10 +109,11 @@ imports: [MpcCardComponent]
 <!-- ======= MpcCardBackgroundImg INÍCIO ======= -->
   <mpc-section class="cards-background-img" subtitulo="experimente os" titulo="Cards com" tituloDestaque="Background">
 
-  <h5>
-    <strong>Descrição:</strong> O <code>mpc-card-background-img</code> é um componente para exibir cards com imagem
-    de fundo e gradiente escuro, ideal para destacar informações importantes com visual impactante.
-  </h5>
+  <div class="container">
+    <h5>
+      <strong>Descrição:</strong> O <code>mpc-card-background-img</code> é um componente para exibir cards com imagem
+      de fundo e gradiente escuro, ideal para destacar informações importantes com visual impactante.
+    </h5>
 
   <h5>
     <strong>Propriedades:</strong>
@@ -189,6 +192,7 @@ imports: [MpcCardBackGroundImgComponent]
         descricao="Este card demonstra o uso da imagem padrão do componente para o background" [tabIndex]="0" />
     </div>
 
+    </div>
   </div>
 </mpc-section>
 <!-- ======= MpcCardBackgroundImg FIM ======= -->
@@ -196,10 +200,11 @@ imports: [MpcCardBackGroundImgComponent]
 <!-- ======= MpcCardMenu INÍCIO ======= -->
   <mpc-section class="cards-menu" subtitulo="experimente os" titulo="Cards de" tituloDestaque="Menu">
 
-  <h5>
-    <strong>Descrição:</strong> O <code>mpc-card-menu</code> é um componente para exibir cards de menu interativos
-    com ícone, título, descrição e ação de clique.
-  </h5>
+  <div class="container">
+    <h5>
+      <strong>Descrição:</strong> O <code>mpc-card-menu</code> é um componente para exibir cards de menu interativos
+      com ícone, título, descrição e ação de clique.
+    </h5>
   <h5>
     <strong>Propriedades:</strong>
     <ul class="text-start mt-3">
@@ -271,6 +276,7 @@ imports: [MpcCardMenuComponent]
         (acao)="onMenuCardClick()" id="card-menu-3" [tabIndex]="0" ariaLabel="Card de Menu 3" />
     </div>
 
+    </div>
   </div>
 
 </mpc-section>
@@ -279,10 +285,11 @@ imports: [MpcCardMenuComponent]
 <!-- ======= MpcCardEvento INÍCIO ======= -->
   <mpc-section class="cards-evento" subtitulo="experimente os" titulo="Cards de" tituloDestaque="Evento">
 
-  <h5>
-    <strong>Descrição:</strong> O <code>mpc-card-evento</code> é um componente para exibir cards de eventos com
-    design de timeline, incluindo data, título, subtítulo e descrição.
-  </h5>
+  <div class="container">
+    <h5>
+      <strong>Descrição:</strong> O <code>mpc-card-evento</code> é um componente para exibir cards de eventos com
+      design de timeline, incluindo data, título, subtítulo e descrição.
+    </h5>
   <h5>
     <strong>Propriedades:</strong>
     <ul class="text-start mt-3">
@@ -345,6 +352,7 @@ imports: [MpcCardEventoComponent]
       [subtitulo]="'Subtítulo ' + i" [descricao]="'Descrição ' + i" id="evento-1" [tabIndex]="0"
       [ariaLabel]="'Evento Especial em ' + i + ' de Junho'" />
     }
+    </div>
   </div>
 
 </mpc-section>

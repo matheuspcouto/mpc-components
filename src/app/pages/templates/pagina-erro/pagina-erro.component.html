@@ -1,8 +1,9 @@
 <!-- ======= ErrorComponent INÍCIO ======= -->
 <mpc-section class="error" titulo="experimente o componente" titulo="MPC" tituloDestaque="MPC Error Component">
-  <h5>
-    <strong>Descrição:</strong> O <code>&lt;mpc-error&gt;</code> é um componente responsável por exibir uma tela de erro completa e responsiva, com informações detalhadas, botões de ação e suporte a imagens personalizadas. Utiliza Signal para gerenciar o estado do erro automaticamente através do <code>MpcErrorService</code>.
-  </h5>
+  <div class="container">
+    <h5>
+      <strong>Descrição:</strong> O <code>&lt;mpc-error&gt;</code> é um componente responsável por exibir uma tela de erro completa e responsiva, com informações detalhadas, botões de ação e suporte a imagens personalizadas. Utiliza Signal para gerenciar o estado do erro automaticamente através do <code>MpcErrorService</code>.
+    </h5>
 
   <h5>
     <strong>Propriedades do Componente:</strong>
@@ -89,6 +90,7 @@ mpcErrorService.construirErro(erro, rotaRetorno, 'caminho/para/imagem.png');
     </div>
     <div class="col-lg-3 px-5 py-3 justify-content-center align-items-center d-flex">
       <mpc-button icone="bi bi-bug" posicaoIcone="esquerda" (click)="simularErroComImagem()" texto="Erro + Imagem" id="btn-erro-com-imagem" />
+    </div>
     </div>
   </div>
 </mpc-section>

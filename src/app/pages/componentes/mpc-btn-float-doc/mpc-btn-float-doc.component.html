@@ -1,9 +1,10 @@
   <!-- ======= MpcBtnFloat INÍCIO ======= -->
   <mpc-section class="buttons-float" subtitulo="experimente o componente" titulo="MPC" tituloDestaque="Btn Float">
-    <h5>
-      <strong>Descrição:</strong> O <code>&lt;mpc-btn-float&gt;</code> do MpcComponents é um componente que exibe um
-      botão flutuante fixo para rolar a página ao topo, permitindo personalização de ícone e cores.
-    </h5>
+    <div class="container">
+      <h5>
+        <strong>Descrição:</strong> O <code>&lt;mpc-btn-float&gt;</code> do MpcComponents é um componente que exibe um
+        botão flutuante fixo para rolar a página ao topo, permitindo personalização de ícone e cores.
+      </h5>
     <h5>
       <strong>Propriedades do Componente:</strong>
       <ul class="text-start mt-3">
@@ -61,6 +62,7 @@ imports: [MpcBtnFloatComponent]
       <div class="col-12 d-flex justify-content-center">
         <mpc-btn-float (click)="scrollToTop()" [icone]="'bi bi-arrow-up-short'" [style.background-color]="'#007bff'"
           [style.color]="'white'"></mpc-btn-float>
+              </div>
       </div>
     </div>
   </mpc-section>

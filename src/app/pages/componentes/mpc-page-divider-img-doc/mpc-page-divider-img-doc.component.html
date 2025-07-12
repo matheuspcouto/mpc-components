@@ -1,17 +1,18 @@
 <mpc-section class="divider-img" subtitulo="experimente o" titulo="MPC" tituloDestaque="Page Divider Img">
-  <h5>
-    <strong>Propriedades do Componente:</strong>
-    <ul class="text-start mt-3">
-      <li><strong>id</strong>: <code>string</code> (obrigatório) — ID do divisor para acessibilidade.</li>
-      <li><strong>tabIndex</strong>: <code>number</code> (opcional) — Índice de tabulação para navegação por
-        teclado.</li>
-      <li><strong>ariaLabel</strong>: <code>string</code> (opcional) — Rótulo para leitores de tela.</li>
-      <li><strong>titulo</strong>: <code>string</code> (obrigatório) — Título principal do divisor.</li>
-      <li><strong>subtitulo</strong>: <code>string</code> (opcional) — Subtítulo do divisor.</li>
-      <li><strong>imagemFundo</strong>: <code>string</code> (obrigatório) — Caminho da imagem de fundo do divisor. Um
-        gradiente escuro é aplicado automaticamente para garantir contraste.</li>
-    </ul>
-  </h5>
+  <div class="container">
+    <h5>
+      <strong>Propriedades do Componente:</strong>
+      <ul class="text-start mt-3">
+        <li><strong>id</strong>: <code>string</code> (obrigatório) — ID do divisor para acessibilidade.</li>
+        <li><strong>tabIndex</strong>: <code>number</code> (opcional) — Índice de tabulação para navegação por
+          teclado.</li>
+        <li><strong>ariaLabel</strong>: <code>string</code> (opcional) — Rótulo para leitores de tela.</li>
+        <li><strong>titulo</strong>: <code>string</code> (obrigatório) — Título principal do divisor.</li>
+        <li><strong>subtitulo</strong>: <code>string</code> (opcional) — Subtítulo do divisor.</li>
+        <li><strong>imagemFundo</strong>: <code>string</code> (obrigatório) — Caminho da imagem de fundo do divisor. Um
+          gradiente escuro é aplicado automaticamente para garantir contraste.</li>
+      </ul>
+    </h5>
   <div class="mb-3">
     <h5><strong>Importação no arquivo <code>.ts</code>:</strong></h5>
     <pre class="chroma"><code>
@@ -47,6 +48,7 @@ imports: [MpcPageDividerImgComponent]
   </div>
   <h5>Veja abaixo um exemplo visual do divisor de página:</h5>
 
-  <mpc-page-divider-img titulo="Exemplo de" subtitulo="Page Divider" imagemFundo="/assets/img/home/mountain.jpg" />
+    <mpc-page-divider-img titulo="Exemplo de" subtitulo="Page Divider" imagemFundo="/assets/img/home/mountain.jpg" />
+  </div>
 
 </mpc-section>

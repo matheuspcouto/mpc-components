@@ -122,4 +122,3 @@ export class AppComponent implements OnInit {
 // TODO: Tela de Cadastro
 // TODO: Corrigir documentação (um de cada vez)
 // TODO: Exemplos de arquivos de config/yml em templates ou aba configs
-// TODO: Corrigir padding
