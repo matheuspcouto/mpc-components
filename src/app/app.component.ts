@@ -2,21 +2,11 @@
 /**
  * @Componente AppComponent
  *
- * Este componente é o componente raiz da aplicação, responsável por gerenciar a navegação principal,
- * exibir a barra de navegação, rodapé, botão flutuante e loader global. Também controla o comportamento
+ * Este componente é o componente raiz da aplicação, responsável por exibir a barra de navegação, 
+ * rodapé, botão flutuante e loader global. Também controla o comportamento
  * de rolagem da página e a visibilidade do botão de voltar ao topo.
  *
- * @Propriedades
- * @protected abas {NavbarConfig[]} - Configuração das abas e sub-rotas exibidas na navbar
- *
- * @Exemplo
- * ```html
- * <app-root></app-root>
- * ```
- *
- * @Interfaces
- * NavbarConfig: Interface para configuração das abas da navegação
- *
+
  * @author Matheus Pimentel Do Couto
  * @created 24/06/2025
  * @updated 10/07/2025
@@ -25,10 +15,9 @@
 import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MpcFooterComponent } from "./shared/components/mpc-footer/mpc-footer.component";
-import { Rotas } from './shared/enums/rotas-enum';
 import { isPlatformBrowser } from '@angular/common';
 import { MpcBtnFloatComponent, MpcLoaderComponent } from 'mpc-lib-angular';
-import { MpcNavbarComponent, NavbarConfig } from './shared/components/mpc-navbar/mpc-navbar.component';
+import { MpcNavbarComponent } from './shared/components/mpc-navbar/mpc-navbar.component';
 import { environment } from '../environments/environment';
 
 @Component({

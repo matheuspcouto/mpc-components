@@ -5,7 +5,7 @@
  * suportando abas com sub-rotas e identificação automática de abas de login.
  * 
  * @Propriedades
- * abasInput {NavbarConfig[]} - Configuração das abas da navbar
+ * _abas {NavbarConfig[]} - Configuração das abas da navbar
  * 
  * @Exemplo
  * ```html
@@ -94,7 +94,7 @@ export class MpcNavbarComponent implements OnInit {
 
   // ===== PROPRIEDADES PÚBLICAS =====
   /** Configuração das abas da navbar */
-  private abasInput: NavbarConfig[] = [
+  protected _abas: NavbarConfig[] = [
     /* { titulo: 'Login', rota: Rotas.LOGIN, icone: 'bi bi-person-fill' }, */
     { titulo: 'Home', rota: Rotas.HOME, icone: 'bi bi-house-fill' },
     { titulo: 'Documentação', rota: Rotas.LIB_DOC, icone: 'bi bi-book' },
@@ -152,9 +152,9 @@ export class MpcNavbarComponent implements OnInit {
    * Inicializa o componente, filtrando as abas e identificando a aba de login.
    */
   ngOnInit(): void {
-    if (this.abasInput) {
-      this.abas = this.abasInput.filter(aba => !this.isAbaLogin(aba)); // Filtra as abas para exibir apenas as que não são de login
-      this.abaLogin = this.abasInput.find(aba => this.isAbaLogin(aba))!; // Encontra a aba de login
+    if (this._abas) {
+      this.abas = this._abas.filter(aba => !this.isAbaLogin(aba)); // Filtra as abas para exibir apenas as que não são de login
+      this.abaLogin = this._abas.find(aba => this.isAbaLogin(aba))!; // Encontra a aba de login
     }
   }
 

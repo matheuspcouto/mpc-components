@@ -131,7 +131,7 @@ export const routes: Routes = [
       },
       {
         path: SegmentoRotas.AGUARDE,
-        loadComponent: () => import('./pages/aguarde/aguarde.component').then(c => c.default),
+        loadComponent: () => import('./pages/templates/aguarde/aguarde.component').then(c => c.default),
       },
       {
         path: SegmentoRotas.PAGINA_ERRO,
