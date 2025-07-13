@@ -127,6 +127,13 @@
   /* Fontes */
   --mpc-font-title-page-divider-img: var(--font-title);
   --mpc-font-subtitle-page-divider-img: var(--font-title);
+
+  /* Tamanho Fonte */
+  --mpc-font-size-title-page-divider-img: 2rem;
+  --mpc-font-size-subtitle-page-divider-img: 2rem;
+
+  /* Background-Position */
+  --mpc-bg-position-page-divider-img: center;
 }
 
 /*--------------------------------------------------------------

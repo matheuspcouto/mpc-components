@@ -34,17 +34,18 @@ export class AppComponent implements OnInit {
   private readonly platformId = inject(PLATFORM_ID);
 
   /**
+   * Define visualização do botão de voltar ao topo
+   */
+  protected showScrollTop: boolean = false;
+
+  /**
    * Inicializa o componente e adiciona listener para controlar a visibilidade do botão de scroll para o topo.
    */
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       window.addEventListener('scroll', () => {
         const scrollPosition = window.scrollY;
-        const btnScrollTop = document.getElementById('btn-scroll-top');
-
-        if (btnScrollTop) {
-          btnScrollTop.style.visibility = scrollPosition > 300 ? 'visible' : 'hidden';
-        }
+        this.showScrollTop = scrollPosition > 300;
       });
     }
 

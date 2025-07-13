@@ -128,9 +128,6 @@ pre {
     /* Cores */
     --mpc-color-text-card-bg-img: white;
     --mpc-color-bar-card-bg-img: var(--color-secondary);
-
-    /* Imagem de fundo */
-    --mpc-img-card-bg: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/assets/img/home/mountain.jpg');
   }
 
   mpc-card-background-img#card-bg-2 {

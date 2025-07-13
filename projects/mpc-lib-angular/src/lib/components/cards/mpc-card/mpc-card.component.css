@@ -22,13 +22,18 @@
   display: flex;
   align-items: stretch;
   flex-direction: column;
-  height: 600px;
+  min-height: 600px;
   box-shadow: 0px 0 30px rgba(55, 55, 63, 0.08);
   transition: 0.3s;
   border-radius: 5px;
   border-bottom: 4px solid var(--mpc-border-color-card);
   border-top: 4px solid var(--mpc-border-color-card);
   background: var(--mpc-bg-card);
+
+  &:hover {
+    transform: scale(1.05);
+    transition: all 0.3s ease-in;
+  }
 
   .card-header {
     padding: 0 !important;
@@ -37,7 +42,6 @@
     .card-img {
       position: relative;
       overflow: hidden;
-      border-radius: 5px 5px 0 0;
 
       img {
         width: 100%;
@@ -84,7 +88,8 @@
     text-align: center;
 
     .card-info {
-      padding: 1rem 1rem 0;
+      padding: 2rem;
+      margin-bottom: 2rem;
 
       h3 {
         font-weight: 700;

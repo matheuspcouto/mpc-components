@@ -25,10 +25,13 @@
  * ```
  * 
  * @Variáveis CSS
- * --mpc-font-title-page-divider-img: Fonte do título (padrão: var(--mpc-font-title))
- * --mpc-font-subtitle-page-divider-img: Fonte do subtítulo (padrão: var(--mpc-font-subtitle))
- * --mpc-color-title-page-divider-img: Cor do título (padrão: var(--mpc-color-primary))
- * --mpc-color-subtitle-page-divider-img: Cor do subtítulo (padrão: var(--mpc-color-secondary))
+ * --mpc-font-title-page-divider-img: Fonte do título
+ * --mpc-font-subtitle-page-divider-img: Fonte do subtítulo 
+ * --mpc-color-title-page-divider-img: Cor do título 
+ * --mpc-color-subtitle-page-divider-img: Cor do subtítulo
+ * --mpc-font-size-title-page-divider-img: 2rem;
+ * --mpc-font-size-subtitle-page-divider-img: 2rem;
+ * --mpc-bg-position-page-divider-img: center;
  * 
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025

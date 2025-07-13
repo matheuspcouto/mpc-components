@@ -12,8 +12,8 @@
 .card-background-img {
   background-size: cover;
   background-position: center;
-  height: 500px;
-  width: 500px;
+  min-height: 600px;
+  min-width: 300px;
   padding: 30px;
   margin: 0 auto;
   border-radius: 5px;
@@ -34,7 +34,6 @@
     border-bottom: 2px solid var(--mpc-color-bar-card-bg-img);
     font-family: var(--mpc-font-title-card-bg-img);
     font-size: clamp(2em, 2em + 1vw, 4em);
-    font-weight: 600;
     margin-bottom: 15px;
     align-self: self-start;
   }

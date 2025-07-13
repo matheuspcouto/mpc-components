@@ -134,7 +134,7 @@ export class MpcCardBackGroundImgComponent extends AccessibilityInputs {
    */
   protected getBackgroundImage(): string {
     return this.imagemFundo && this.imagemFundo.length > 0
-      ? `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(${this.imagemFundo})`
-      : "linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(/assets/img/no-image.jpg)";
+      ? `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${this.imagemFundo})`
+      : "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/assets/img/no-image.jpg)";
   }
 }

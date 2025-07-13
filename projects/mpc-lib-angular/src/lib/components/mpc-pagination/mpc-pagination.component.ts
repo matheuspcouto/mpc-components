@@ -10,6 +10,7 @@
  * @Input() ariaLabel {string} - Label do campo (opcional)
  * @Input() totalItens {number} - Total de itens (obrigatório)
  * @Input() mostrarSeletorItensPorPagina {boolean} - Se deve mostrar o seletor de itens por página (opcional, padrão: true)
+ * @Input() opcoesSeletorItensPorPagina {number[]} - Opções de quantidades a serem mostradas no seletor de Itens po Página
  * 
  * @Eventos
  * @Output() indices {EventEmitter<IndicesPaginacao>} - Emite os índices dos itens visíveis
@@ -68,7 +69,7 @@ export class MpcPaginationComponent extends AccessibilityInputs implements OnIni
   /** Número máximo de páginas visíveis na paginação */
   maxPaginasVisiveis: number = 5;
   /** Opções disponíveis no seletor de itens por página */
-  opcoesSeletorItensPorPagina: number[] = [5, 10, 25, 50, 100];
+  @Input() opcoesSeletorItensPorPagina: number[] = [5, 12, 24, 50, 100];
 
   /** Evento emitido com os índices dos itens visíveis */
   @Output() indices: EventEmitter<IndicesPaginacao> = new EventEmitter();

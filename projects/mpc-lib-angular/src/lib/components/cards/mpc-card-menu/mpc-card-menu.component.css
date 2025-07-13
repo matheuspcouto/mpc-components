@@ -58,11 +58,13 @@
     }
   }
 
-  &:hover {
-    i {
-      background-color: var(--mpc-color-text-icone-card-menu);
-      color: var(--mpc-color-bg-icone-card-menu);
-      transition: 0.3s ease-in;
+  @media screen and (min-width: 992px) {
+    &:hover {
+      i {
+        background-color: var(--mpc-color-text-icone-card-menu);
+        color: var(--mpc-color-bg-icone-card-menu);
+        transition: 0.3s ease-in;
+      }
     }
   }
 }

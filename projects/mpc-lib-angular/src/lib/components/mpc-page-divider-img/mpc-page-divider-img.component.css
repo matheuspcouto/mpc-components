@@ -6,6 +6,13 @@
     /* Cores */
     --mpc-color-title-page-divider-img: var(--mpc-color-primary);
     --mpc-color-subtitle-page-divider-img: var(--mpc-color-secondary);
+
+    /* Tamanho Fonte */
+    --mpc-font-size-title-page-divider-img: 2rem;
+    --mpc-font-size-subtitle-page-divider-img: 2rem;
+
+    /* Background-Position */
+    --mpc-bg-position-page-divider-img: center;
 }
 
 /*--------------------------------------------------------------
@@ -13,34 +20,32 @@
 --------------------------------------------------------------*/
 .page-divider-img {
     background-size: cover;
-    background-position: center;
+    background-position: var(--mpc-bg-position-page-divider-img) !important;
     padding: 100px 0;
 
     @media screen and (max-width: 991.98px) {
         display: flex;
     }
 
-    @media (min-width: 992px) {
-        background-attachment: fixed;
-    }
-
     .page-divider-text {
         padding: 30px;
         width: 100%;
         text-align: center;
-
-        h2,
-        p {
-            font-family: var(--mpc-font-title-page-divider-img) !important;
-            font-size: 2rem;
-        }
+        align-items: center;
 
         p {
             color: var(--mpc-color-subtitle-page-divider-img);
+            font-size: var(--mpc-font-size-subtitle-page-divider-img);
+            font-family: var(--mpc-font-subtitle-page-divider-img) !important;
+            margin-bottom: 0 !important;
         }
 
         h2 {
             color: var(--mpc-color-title-page-divider-img);
+            font-size: var(--mpc-font-size-title-page-divider-img);
+            font-family: var(--mpc-font-title-page-divider-img) !important;
+            margin-bottom: 0 !important;
+            margin-top: 10px !important;
         }
     }
 }
