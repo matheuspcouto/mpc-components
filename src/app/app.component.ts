@@ -1,4 +1,3 @@
-
 /**
  * @Componente AppComponent
  *
@@ -16,9 +15,10 @@ import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MpcFooterComponent } from "./shared/components/mpc-footer/mpc-footer.component";
 import { isPlatformBrowser } from '@angular/common';
-import { MpcBtnFloatComponent, MpcLoaderComponent } from 'mpc-lib-angular';
-import { MpcNavbarComponent } from './shared/components/mpc-navbar/mpc-navbar.component';
+import { MpcBtnFloatComponent, MpcLoaderComponent, MpcNavbarComponent } from 'mpc-lib-angular';
 import { environment } from '../environments/environment';
+import { Rotas } from './shared/enums/rotas-enum';
+import { NavbarConfig } from '../../projects/mpc-lib-angular/src/lib/components/mpc-navbar/mpc-navbar.component';
 
 @Component({
   selector: 'app-root',
@@ -37,6 +37,47 @@ export class AppComponent implements OnInit {
    * Define visualização do botão de voltar ao topo
    */
   protected showScrollTop: boolean = false;
+
+  protected abas: NavbarConfig[] = [
+    /* { titulo: 'Login', rota: Rotas.LOGIN, icone: 'bi bi-person-fill' }, */
+    { titulo: 'Home', rota: Rotas.HOME, icone: 'bi bi-house-fill' },
+    { titulo: 'Documentação', rota: Rotas.LIB_DOC, icone: 'bi bi-book' },
+    {
+      titulo: 'Componentes',
+      icone: 'bi bi-code-slash',
+      subRotas: [
+        { titulo: 'mpc-cards', rota: Rotas.CARDS },
+        { titulo: 'mpc-button', rota: Rotas.BUTTONS },
+        { titulo: 'mpc-btn-float', rota: Rotas.BTN_FLOAT },
+        { titulo: 'mpc-modal', rota: Rotas.MODAIS },
+        { titulo: 'mpc-loader', rota: Rotas.LOADERS },
+        { titulo: 'mpc-tabs', rota: Rotas.TABS },
+        { titulo: 'mpc-pagination', rota: Rotas.PAGINACAO },
+        { titulo: 'mpc-inputs', rota: Rotas.INPUTS },
+        { titulo: 'mpc-page-divider-img', rota: Rotas.PAGE_DIVIDER_IMG },
+      ]
+    },
+    {
+      titulo: 'Formulário',
+      icone: 'bi bi-file-earmark-text-fill',
+      subRotas: [
+        { titulo: 'Realizar Inscrição (Fluxo)', rota: Rotas.DADOS_PESSOAIS },
+        { titulo: 'Pesquisar Inscrição', rota: Rotas.PESQUISA },
+        { titulo: 'Inscrições Encerradas', rota: Rotas.INSCRICOES_ENCERRADAS },
+      ]
+    },
+    {
+      titulo: 'Templates',
+      icone: 'bi bi-filetype-html',
+      subRotas: [
+        { titulo: 'Aguarde', rota: Rotas.AGUARDE },
+        /* { titulo: 'Login', rota: Rotas.LOGIN }, */
+        { titulo: 'Erro', rota: Rotas.PAGINA_ERRO },
+        { titulo: 'Navbar', rota: Rotas.NAVBAR },
+        { titulo: 'Footer', rota: Rotas.FOOTER },
+      ]
+    },
+  ];
 
   /**
    * Inicializa o componente e adiciona listener para controlar a visibilidade do botão de scroll para o topo.

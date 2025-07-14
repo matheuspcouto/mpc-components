@@ -53,11 +53,11 @@ describe('MpcNavbarComponent', () => {
   it('deve inicializar abas e abaLogin corretamente no ngOnInit', () => {
     const abasMock = [
       { titulo: 'Home', rota: '/', icone: 'home' },
-      { titulo: 'Login', rota: '/login', icone: 'login' }
+      { titulo: 'Login', rota: '/login', icone: 'login', isAbaLogin: true }
     ];
-    component['_abas'] = abasMock;
+    component['abas'] = abasMock;
     component.ngOnInit();
-    expect(component['abas'].length).toBe(1); // Apenas a aba Home
+    expect(component['abas'].length).toBe(2);
     expect(component['abaLogin']).toEqual(abasMock[1]);
   });
 
@@ -156,23 +156,6 @@ describe('MpcNavbarComponent', () => {
       const sub = { titulo: 'Sub', rota: '/' };
       Object.defineProperty(component['router'], 'url', { get: () => '' });
       expect(component['isSubAbaAtiva'](sub)).toBe(true);
-    });
-  });
-
-  describe('isAbaLogin', () => {
-    it('deve identificar aba de login pelo título', () => {
-      const aba = { titulo: 'Login', rota: '/qualquer', icone: 'icon' };
-      expect(component['isAbaLogin'](aba)).toBeTruthy();
-    });
-
-    it('deve identificar aba de login pela rota', () => {
-      const aba = { titulo: 'Entrar', rota: '/login', icone: 'icon' };
-      expect(component['isAbaLogin'](aba)).toBeTruthy();
-    });
-
-    it('não deve identificar aba de login se não for login', () => {
-      const aba = { titulo: 'Home', rota: '/', icone: 'icon' };
-      expect(component['isAbaLogin'](aba)).toBeFalsy();
     });
   });
 

@@ -4,13 +4,13 @@
 :host {
   /* Cores */
   --mpc-color-bg-header: white;
-  --mpc-color-text-disabled: #7f7f90;
-  --mpc-color-text-active: var(--mpc-color-primary);
-  --mpc-color-text-hover: var(--mpc-color-primary);
-  --mpc-color-border-active: var(--mpc-color-secondary);
+  --mpc-color-text-disabled: var(--color-tertiary);
+  --mpc-color-text-active: var(--color-primary);
+  --mpc-color-text-hover: var(--color-primary);
+  --mpc-color-border-active: var(--color-secondary);
 
   /* Fontes */
-  --mpc-font-navbar: var(--mpc-font-subtitle);
+  --mpc-font-navbar: var(--mpc-font-title);
 }
 
 * {

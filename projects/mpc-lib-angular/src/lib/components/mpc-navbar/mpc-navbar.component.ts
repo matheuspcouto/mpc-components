@@ -1,19 +1,21 @@
 /**
  * @Componente MpcNavbarComponent
  * 
- * Este componente é responsável por exibir a barra de navegação principal,
- * suportando abas com sub-rotas e identificação automática de abas de login.
- * 
+ * Este componente exibe a barra de navegação principal do sistema, permitindo configuração dinâmica das abas e sub-abas, além de exibir um logo personalizado.
+ *
  * @Propriedades
- * _abas {NavbarConfig[]} - Configuração das abas da navbar
- * 
- * @Exemplo
+ * @Input abas {NavbarConfig[]} - Lista de abas e sub-abas a serem exibidas na navbar
+ * @Input logo {string} - Caminho da imagem do logo a ser exibido na navbar (opcional)
+ *
+ * @Exemplo de uso
  * ```html
- * <!-- Navbar Básica -->
- * <mpc-navbar id="navbar" />
- * 
- * <!-- Configuração das Abas -->
- * const abas: NavbarConfig[] = [
+ * <!-- Exemplo de uso em app.component.html -->
+ * <mpc-navbar id="navbar" [abas]="abas" logo="/assets/img/logo-preta.png" />
+ * ```
+ *
+ * @Exemplo de configuração das abas no componente pai (app.component.ts):
+ * ```typescript
+ * abas: NavbarConfig[] = [
  *   {
  *     titulo: 'Home',
  *     rota: '/',
@@ -31,23 +33,25 @@
  *   {
  *     titulo: 'Login',
  *     rota: '/login',
- *     icone: 'bi bi-box-arrow-in-right'
+ *     icone: 'bi bi-box-arrow-in-right',
+ *     isAbaLogin: true
  *   }
  * ];
  * ```
- * 
+ *
  * @Interfaces
  * SubRotaConfig: Interface para configuração de sub-rotas
  * - titulo: string - Título da sub-rota
  * - fragment?: string - Fragmento da URL (opcional)
  * - rota?: string - Rota da sub-aba (opcional)
- * 
+ *
  * NavbarConfig: Interface para configuração das abas da navbar
  * - titulo: string - Título da aba
  * - rota?: string - Rota da aba (opcional - se houver subRotas)
  * - icone: string - Classe do ícone (ex: 'bi bi-house')
  * - subRotas?: SubRotaConfig[] - Array de sub-rotas (opcional)
- * 
+ * - isAbaLogin?: boolean - Indica se é a aba de login (opcional)
+ *
  * @Variáveis CSS
  * --mpc-color-bg-header: Cor de fundo da navbar
  * --mpc-color-text-disabled: Cor do texto desabilitado
@@ -55,15 +59,14 @@
  * --mpc-color-text-hover: Cor do texto no hover
  * --mpc-color-border-active: Cor da borda ativa
  * --mpc-font-navbar: Fonte da navbar
- * 
+ *
  * @author Matheus Pimentel Do Couto
  * @created 27/02/2025
  * @updated 10/07/2025
  */
 
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Rotas } from '../../enums/rotas-enum';
 
 export interface SubRotaConfig {
   /** Título da sub-rota */
@@ -83,6 +86,8 @@ export interface NavbarConfig {
   icone: string;
   /** Array de sub-rotas (opcional) */
   subRotas?: SubRotaConfig[];
+  /** Flag de aba de login */
+  isAbaLogin?: boolean;
 }
 
 @Component({
@@ -92,54 +97,13 @@ export interface NavbarConfig {
 })
 export class MpcNavbarComponent implements OnInit {
 
-  // ===== PROPRIEDADES PÚBLICAS =====
+  // ===== PROPRIEDADE =====
   /** Configuração das abas da navbar */
-  protected _abas: NavbarConfig[] = [
-    /* { titulo: 'Login', rota: Rotas.LOGIN, icone: 'bi bi-person-fill' }, */
-    { titulo: 'Home', rota: Rotas.HOME, icone: 'bi bi-house-fill' },
-    { titulo: 'Documentação', rota: Rotas.LIB_DOC, icone: 'bi bi-book' },
-    {
-      titulo: 'Componentes',
-      icone: 'bi bi-code-slash',
-      subRotas: [
-        { titulo: 'mpc-cards', rota: Rotas.CARDS },
-        { titulo: 'mpc-button', rota: Rotas.BUTTONS },
-        { titulo: 'mpc-btn-float', rota: Rotas.BTN_FLOAT },
-        { titulo: 'mpc-modal', rota: Rotas.MODAIS },
-        { titulo: 'mpc-loader', rota: Rotas.LOADERS },
-        { titulo: 'mpc-tabs', rota: Rotas.TABS },
-        { titulo: 'mpc-pagination', rota: Rotas.PAGINACAO },
-        { titulo: 'mpc-inputs', rota: Rotas.INPUTS },
-        { titulo: 'mpc-page-divider-img', rota: Rotas.PAGE_DIVIDER_IMG },
-      ]
-    },
-    {
-      titulo: 'Formulário',
-      icone: 'bi bi-file-earmark-text-fill',
-      subRotas: [
-        { titulo: 'Realizar Inscrição (Fluxo)', rota: Rotas.DADOS_PESSOAIS },
-        { titulo: 'Pesquisar Inscrição', rota: Rotas.PESQUISA },
-        { titulo: 'Inscrições Encerradas', rota: Rotas.INSCRICOES_ENCERRADAS },
-      ]
-    },
-    {
-      titulo: 'Templates',
-      icone: 'bi bi-filetype-html',
-      subRotas: [
-        { titulo: 'Aguarde', rota: Rotas.AGUARDE },
-        /* { titulo: 'Login', rota: Rotas.LOGIN }, */
-        { titulo: 'Erro', rota: Rotas.PAGINA_ERRO },
-        { titulo: 'Navbar', rota: Rotas.NAVBAR },
-        { titulo: 'Footer', rota: Rotas.FOOTER },
-      ]
-    },
-  ];
-
-  // ===== PROPRIEDADES PRIVADAS =====
-  /** Array de abas filtradas (excluindo login) */
-  protected abas: NavbarConfig[] = [];
+  @Input() abas: NavbarConfig[] = [];
+  /** Logo da aplicação da navbar */
+  @Input() logo?: string;
   /** Aba de login identificada automaticamente */
-  protected abaLogin!: NavbarConfig;
+  protected abaLogin?: NavbarConfig;
   /** Controla o estado de clique */
   protected isClicado = false;
 
@@ -148,14 +112,8 @@ export class MpcNavbarComponent implements OnInit {
 
   // ===== MÉTODOS PÚBLICOS =====
 
-  /**
-   * Inicializa o componente, filtrando as abas e identificando a aba de login.
-   */
   ngOnInit(): void {
-    if (this._abas) {
-      this.abas = this._abas.filter(aba => !this.isAbaLogin(aba)); // Filtra as abas para exibir apenas as que não são de login
-      this.abaLogin = this._abas.find(aba => this.isAbaLogin(aba))!; // Encontra a aba de login
-    }
+    this.abaLogin = this.abas.find(aba => aba.isAbaLogin);
   }
 
   /**
@@ -208,18 +166,6 @@ export class MpcNavbarComponent implements OnInit {
     }
 
     return !!sub.rota && url.startsWith(sub.rota);
-  }
-
-  /**
-   * Identifica se uma aba é de login pelo título ou rota.
-   * @param aba Configuração da aba
-   * @returns {boolean} true se for uma aba de login
-   */
-  protected isAbaLogin(aba: NavbarConfig): boolean {
-    // Identifica se a aba é de login pelo título ou rota
-    const tituloEhLogin = typeof aba.titulo === 'string' && aba.titulo.toLowerCase().includes('login');
-    const rotaEhLogin = typeof aba.rota === 'string' && aba.rota.toLowerCase().includes('login');
-    return tituloEhLogin || rotaEhLogin;
   }
 
   /**
