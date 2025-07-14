@@ -10,13 +10,6 @@
 
   /* Card */
   --mpc-color-bg-card-evento: white;
-  --mpc-color-title-card-evento: var(--mpc-color-primary);
-  --mpc-color-subtitle-card-evento: var(--mpc-color-primary);
-  --mpc-color-description-card-evento: var(--mpc-color-tertiary);
-
-  --mpc-font-title-card-evento: var(--mpc-font-subtitle);
-  --mpc-font-subtitle-card-evento: var(--mpc-font-subtitle);
-  --mpc-font-description-card-evento: var(--mpc-font-default);
 }
 
 .card-box {
@@ -78,34 +71,6 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: flex-start;
-      color: var(--mpc-color-text-card-evento);
-
-      h3 {
-        font-size: 18px;
-        font-weight: 700;
-        margin-bottom: 0;
-        font-family: var(--mpc-font-title-card-evento);
-        color: var(--mpc-color-title-card-evento);
-      }
-
-      h4 {
-        font-size: 16px;
-        font-style: italic;
-        font-weight: 400;
-        margin-top: 0.5rem;
-        color: var(--mpc-color-subtitle-card-evento);
-        font-family: var(--mpc-font-subtitle-card-evento);
-      }
-
-      p {
-        padding: 0;
-        margin: 0;
-        line-height: 24px;
-        font-size: 14px;
-        margin-top: 5px;
-        font-family: var(--mpc-font-description-card-evento);
-        color: var(--mpc-color-description-card-evento);
-      }
     }
   }
 }

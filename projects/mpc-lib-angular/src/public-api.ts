@@ -40,7 +40,6 @@ export * from './lib/components/mpc-tabs/mpc-tabs.component';
 export * from './lib/components/mpc-modal/mpc-modal.component';
 export * from './lib/components/mpc-button/mpc-button.component';
 export * from './lib/components/mpc-btn-float/mpc-btn-float.component';
-export * from './lib/components/mpc-page-divider-img/mpc-page-divider-img.component';
 
 
 

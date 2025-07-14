@@ -1,31 +1,19 @@
 <div class="card-box">
 
   <div class="card-timeline">
-    <div [id]="id" [tabIndex]="tabIndex" [attr.aria-label]="getAriaLabel()" class="card-evento">
+    <div class="card-evento">
 
       @if (hasData()) {
       <div class="card-evento-data" tabindex="0" [attr.aria-label]="'Data do evento: ' + dia + ' de ' + mes">
-        @if (hasDia()) {
-        <span class="evento-dia" [attr.aria-label]="'Dia: ' + dia">{{ dia }}</span>
-        }
-        @if (hasMes()) {
-        <span class="evento-mes" [attr.aria-label]="'Mês: ' + mes">{{ mes }}</span>
-        }
+        <span class="evento-dia">{{ dia }}</span>
+        <span class="evento-mes">{{ mes }}</span>
       </div>
       }
 
       <div class="card-evento-body">
-        @if (hasTitulo()) {
-        <h3 tabindex="0" [attr.aria-label]="'Título: ' + titulo">{{ titulo }}</h3>
-        }
-
-        @if (hasSubtitulo()) {
-        <h4 tabindex="0" [attr.aria-label]="'Subtítulo: ' + subtitulo">{{ subtitulo }}</h4>
-        }
-
-        @if (hasDescricao()) {
-        <p tabindex="0" [attr.aria-label]="'Descrição: ' + descricao">{{ descricao }}</p>
-        }
+        <ng-content select="[titulo]"></ng-content>
+        <ng-content select="[subtitulo]"></ng-content>
+        <ng-content select="[descricao]"></ng-content>
       </div>
     </div>
   </div>

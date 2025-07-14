@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MpcSectionComponent } from '../../../shared/components/mpc-section/mpc-section.component';
-import { MpcPageDividerImgComponent } from 'mpc-lib-angular';
+import { MpcPageDividerImgComponent } from '../../../shared/components/mpc-page-divider-img/mpc-page-divider-img.component';
 
 /**
  * @Componente MpcPageDividerImgDocComponent

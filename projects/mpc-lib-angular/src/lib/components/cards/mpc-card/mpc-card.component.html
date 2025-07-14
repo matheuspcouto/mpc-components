@@ -1,10 +1,10 @@
 <!-- Layout Vertical -->
 @if (isVertical()) {
-<div class="card-vertical" [tabIndex]="tabIndex" [attr.aria-label]="getAriaLabel()" [id]="id">
+<div class="card-vertical">
 
   <div class="card-header">
     <div class="card-img">
-      <img [src]="getImagemCard()" [alt]="'Imagem do card: ' + titulo">
+      <img [src]="getImagemCard()">
 
       @if (hasLinks()) {
       <div class="links">
@@ -20,18 +20,9 @@
 
   <div class="card-body">
     <div class="card-info">
-      @if (hasTitulo()) {
-      <h3 tabindex="0" [attr.aria-label]="'Título: ' + titulo">{{ titulo }}</h3>
-      }
-      @if (hasSubtitulo()) {
-      <h4 tabindex="0" [attr.aria-label]="'Subtítulo: ' + subtitulo">{{ subtitulo }}</h4>
-      }
-      @if (hasDescricaoUm()) {
-      <p class="mb-0" tabindex="0" [attr.aria-label]="'Descrição: ' + descricaoUm">{{ descricaoUm }}</p>
-      }
-      @if (hasDescricaoDois()) {
-      <p class="mb-0" tabindex="0" [attr.aria-label]="'Descrição adicional: ' + descricaoDois">{{ descricaoDois }}</p>
-      }
+      <ng-content select="[titulo]"></ng-content>
+      <ng-content select="[subtitulo]"></ng-content>
+      <ng-content select="[descricao]"></ng-content>
     </div>
   </div>
 </div>
@@ -39,29 +30,17 @@
 
 <!-- Layout Horizontal -->
 @if (isHorizontal()) {
-<div class="card-horizontal" [id]="id" [tabindex]="tabIndex" [attr.aria-label]="getAriaLabel()">
+<div class="card-horizontal">
 
   <div class="col-lg-5">
-    <img [src]="getImagemCard()" [alt]="'Imagem do card: ' + titulo">
+    <img [src]="getImagemCard()">
   </div>
 
   <div class="col-lg-7">
     <div class="card-body">
-      @if (hasTitulo()) {
-      <h2 tabindex="0" [attr.aria-label]="'Título: ' + titulo">{{ titulo }}</h2>
-      }
-      @if (hasTitulo()) {
-      <div class="barra-titulo"></div>
-      }
-      @if (hasSubtitulo()) {
-      <h5 tabindex="0" [attr.aria-label]="'Subtítulo: ' + subtitulo">{{ subtitulo }}</h5>
-      }
-      @if (hasDescricaoUm()) {
-      <h5 tabindex="0" [attr.aria-label]="'Descrição: ' + descricaoUm">{{ descricaoUm }}</h5>
-      }
-      @if (hasDescricaoDois()) {
-      <h5 tabindex="0" [attr.aria-label]="'Descrição adicional: ' + descricaoDois">{{ descricaoDois }}</h5>
-      }
+      <ng-content select="[titulo]"></ng-content>
+      <ng-content select="[subtitulo]"></ng-content>
+      <ng-content select="[descricao]"></ng-content>
     </div>
 
     @if (hasLinks()) {

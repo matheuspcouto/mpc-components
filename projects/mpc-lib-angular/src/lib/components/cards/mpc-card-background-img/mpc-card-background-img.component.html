@@ -1,16 +1,8 @@
-<div class="card-background-img" [style.background-image]="getBackgroundImage()" [id]="id" [tabIndex]="tabIndex"
-  [attr.aria-label]="getAriaLabel()" (click)="onClick()" [style.cursor]="getCursor()">
+<div class="card-background-img" [style.background-image]="getBackgroundImage()">
+  <ng-content select="[titulo]">
+    <div class="titulo"></div>
+  </ng-content>
 
-  @if (hasTitulo()) {
-  <div class="titulo" tabindex="0" [attr.aria-label]="'Título: ' + titulo">{{
-    titulo }}</div>
-  }
-
-  @if (hasSubtitulo()) {
-  <h3 tabindex="0" [attr.aria-label]="'Subtítulo: ' + subtitulo">{{ subtitulo }}</h3>
-  }
-
-  @if (hasDescricao()) {
-  <p class="mb-0" tabindex="0" [attr.aria-label]="'Descrição: ' + descricao">{{ descricao }}</p>
-  }
+  <ng-content select="[subtitulo]"></ng-content>
+  <ng-content select="[descricao]"></ng-content>
 </div>

@@ -23,13 +23,7 @@ describe('MpcCardEventoComponent', () => {
     });
 
     it('deve ter valores padrão', () => {
-        expect(component.id).toBeUndefined();
-        expect(component.tabIndex).toBeUndefined();
-        expect(component.ariaLabel).toBeUndefined();
-        expect(component.titulo).toBe('');
-        expect(component.subtitulo).toBe('');
         expect(component.dia).toBe('');
         expect(component.mes).toBe('');
-        expect(component.descricao).toBe(undefined);
     });
 });

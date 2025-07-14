@@ -1,133 +1,47 @@
 /**
- * @Componente MpcCardBackGroundImgComponent
- * 
- * Este componente é responsável por exibir cards com imagem de fundo e gradiente escuro,
- * ideal para destacar informações importantes com visual impactante. O card possui
- * título, subtítulo e descrição sobrepostos à imagem de fundo.
- * 
- * @Propriedades
- * @Input() id {string} - ID do card (obrigatório)
- * @Input() tabIndex {number} - Índice do card (opcional)
- * @Input() ariaLabel {string} - Label do card (opcional)
- * @Input() titulo {string} - Título principal do card (obrigatório)
- * @Input() subtitulo {string} - Subtítulo do card (opcional)
- * @Input() descricao {string} - Descrição do card (opcional)
- * @Input() imagemFundo {string} - Imagem de fundo do card (obrigatorio)
- * 
- * @Variáveis CSS
- * --mpc-color-text-card-bg-img: white;
- * --mpc-color-bar-card-bg-img: var(--mpc-color-primary);
- * --mpc-font-title-card-bg-img: var(--mpc-font-title);
- * --mpc-font-subtitle-card-bg-img: var(--mpc-font-subtitle);
- * --mpc-font-description-card-bg-img: var(--mpc-font-default);
- * 
- * @Exemplo
- * ```html
- * <!-- Card com Imagem de Fundo customizada -->
- * <mpc-card-background-img
- *   titulo="Programação"
- *   subtitulo="Horários dos Cultos"
- *   descricao="Confira nossa programação semanal"
- *   id="card-programacao"
- *   [tabIndex]="0"
- *   imagemFundo="/assets/img/exemplo.jpg"
- *   ariaLabel="Card de programação semanal" />
+ * @component MpcCardBackGroundImgComponent
  *
- * <!-- Card com Imagem de Fundo padrão -->
- * <mpc-card-background-img
- *   titulo="Sem imagem customizada"
- *   descricao="Usa a imagem padrão do componente"
- *   id="card-sem-img"
- * />
- * ``` 
- * 
- * @detalhe
+ * Componente responsável por exibir cards com imagem de fundo e gradiente escuro,
+ * ideal para destacar informações importantes de forma visualmente impactante. O card permite
+ * inserir conteúdo customizado via <ng-content>.
+ *
+ * @Inputs
+ * @Input() imagemFundo {string} - Caminho da imagem de fundo do card
+ *
+ * @Exemplo
+ * <!-- Card com imagem de fundo customizada e conteúdo extra -->
+ * <mpc-card-background-img imagemFundo="/assets/img/eventos/capa-eventos.JPG">
+ *   <h3 titulo>Eventos Especiais</h3>
+ *   <h4 subtitulo>Eventos Especiais</h4>
+ *   <p descricao>Confira nossa programação de eventos!</p>
+ * </mpc-card-background-img>
+ *
+ *
+ * @Observação
  * Se a propriedade <code>imagemFundo</code> for informada, ela será usada como imagem de fundo com gradiente escuro.
- * Caso contrário, será usada a imagem padrão definida no CSS (<code>--mpc-img-card-bg</code>).
- * 
+ * Caso contrário, será utilizada a imagem padrão definida no CSS (<code>--mpc-img-card-bg</code>) ou "/assets/img/no-image.jpg".
+ * O conteúdo passado entre as tags <mpc-card-background-img> será exibido dentro do card, utilizando <ng-content>.
+ *
  * @author Matheus Pimentel Do Couto
- * @created 24/06/2025
- * @updated 10/07/2025
+ * @created 24/06/2024
+ * @updated 10/07/2024
  */
 
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { AccessibilityInputs } from '../../../../shared/accessibility-inputs';
+import { Component, Input } from '@angular/core';
+
 @Component({
   selector: 'mpc-card-background-img',
   imports: [],
   templateUrl: './mpc-card-background-img.component.html',
   styleUrl: './mpc-card-background-img.component.css'
 })
-export class MpcCardBackGroundImgComponent extends AccessibilityInputs {
+export class MpcCardBackGroundImgComponent {
 
   // ===== PROPRIEDADES PRINCIPAIS =====
-  /** Título principal do card */
-  @Input() titulo: string = '';
-  /** Subtítulo do card */
-  @Input() subtitulo: string = '';
-  /** Descrição do card */
-  @Input() descricao: string = '';
   /** Imagem de fundo do card */
-  @Input() imagemFundo?: string;
-  /** Evento de clique do card */
-  @Output() acao = new EventEmitter<void>();
+  @Input() imagemFundo: string = '';
 
   // ===== MÉTODOS PÚBLICOS =====
-  /**
-   * Emite um evento de clique.
-   */
-  protected onClick(): void {
-    this.acao.emit();
-  }
-
-  /**
-   * Verifica se o card possui título.
-   * @returns {boolean} true se houver título
-   */
-  protected hasTitulo(): boolean {
-    return Boolean(this.titulo && this.titulo.trim().length > 0);
-  }
-
-  /**
-   * Verifica se o card possui subtítulo.
-   * @returns {boolean} true se houver subtítulo
-   */
-  protected hasSubtitulo(): boolean {
-    return Boolean(this.subtitulo && this.subtitulo.trim().length > 0);
-  }
-
-  /**
-   * Verifica se o card possui descrição.
-   * @returns {boolean} true se houver descrição
-   */
-  protected hasDescricao(): boolean {
-    return Boolean(this.descricao && this.descricao.trim().length > 0);
-  }
-
-  /**
-   * Retorna o aria-label do card ou um fallback baseado no título.
-   * @returns {string} aria-label do card
-   */
-  protected getAriaLabel(): string {
-    return this.ariaLabel || this.titulo;
-  }
-
-  /**
-   * Verifica se o card possui ação de clique.
-   * @returns {boolean} true se houver ação
-   */
-  protected hasAcao(): boolean {
-    return Boolean(this.acao.observed);
-  }
-
-  /**
- * Retorna o cursor apropriado baseado na presença de ação.
- * @returns {string} cursor CSS
- */
-  protected getCursor(): string {
-    return this.hasAcao() ? 'pointer' : 'default';
-  }
-
   /**
    * Retorna a imagem de fundo escurecida com gradiente.
    * @returns {string} background-image CSS

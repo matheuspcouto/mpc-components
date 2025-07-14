@@ -5,9 +5,6 @@
  * título e subtítulo, ideal para separar seções com visual impactante.
  * 
  * @Propriedades
- * @Input() id {string} - ID do campo (obrigatório)
- * @Input() tabIndex {number} - Índice do campo (opcional)
- * @Input() ariaLabel {string} - Label do campo (opcional)
  * @Input() titulo {string} - Título do divisor (obrigatório)
  * @Input() subtitulo {string} - Subtítulo do divisor (opcional)
  * @Input() imagemFundo {string} - Imagem de funco do divisor (obrigatorio)
@@ -39,7 +36,6 @@
  */
 
 import { Component, Input } from '@angular/core';
-import { AccessibilityInputs } from '../../../shared/accessibility-inputs';
 
 @Component({
   selector: 'mpc-page-divider-img',
@@ -47,7 +43,7 @@ import { AccessibilityInputs } from '../../../shared/accessibility-inputs';
   templateUrl: './mpc-page-divider-img.component.html',
   styleUrl: './mpc-page-divider-img.component.css'
 })
-export class MpcPageDividerImgComponent extends AccessibilityInputs {
+export class MpcPageDividerImgComponent {
 
   // ===== PROPRIEDADES PÚBLICAS =====
   /** Título principal da seção */

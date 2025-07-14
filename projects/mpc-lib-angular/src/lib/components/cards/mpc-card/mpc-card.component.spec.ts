@@ -23,13 +23,6 @@ describe('MpcCardComponent', () => {
   });
 
   it('deve ter valores padrão', () => {
-    expect(component.id).toBeUndefined();
-    expect(component.tabIndex).toBeUndefined();
-    expect(component.ariaLabel).toBeUndefined();
-    expect(component.titulo).toBe('');
-    expect(component.subtitulo).toBe('');
-    expect(component.descricaoUm).toBe('');
-    expect(component.descricaoDois).toBe('');
     expect(component.imagem).toBe('');
     expect(component.layout).toBe('vertical');
     expect(component.links).toEqual([]);
@@ -52,20 +45,5 @@ describe('MpcCardComponent', () => {
   it('deve retornar o layout horizontal correto', () => {
     component.layout = 'horizontal';
     expect(component['isHorizontal']).toBeTruthy();
-  });
-
-  it('deve retornar false para hasDescricaoDois quando descricaoDois for string vazia', () => {
-    component.descricaoDois = '';
-    expect((component as any).hasDescricaoDois()).toBeFalsy();
-  });
-
-  it('deve retornar false para hasDescricaoDois quando descricaoDois for apenas espaços', () => {
-    component.descricaoDois = '   ';
-    expect((component as any).hasDescricaoDois()).toBeFalsy();
-  });
-
-  it('deve retornar true para hasDescricaoDois quando descricaoDois for preenchido', () => {
-    component.descricaoDois = 'Descrição extra';
-    expect((component as any).hasDescricaoDois()).toBeTruthy();
   });
 });

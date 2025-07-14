@@ -1,3 +1,6 @@
+<mpc-page-divider-img titulo="Exemplo de" subtitulo="Page Divider" imagemFundo="/assets/img/home/mountain.jpg"
+  class="page-divider-img mt-3" />
+
 <mpc-section class="divider-img" subtitulo="experimente o" titulo="MPC" tituloDestaque="Page Divider Img">
   <div class="container">
     <h5>
@@ -13,18 +16,18 @@
           gradiente escuro é aplicado automaticamente para garantir contraste.</li>
       </ul>
     </h5>
-  <div class="mb-3">
-    <h5><strong>Importação no arquivo <code>.ts</code>:</strong></h5>
-    <pre class="chroma"><code>
+    <div class="mb-3">
+      <h5><strong>Importação no arquivo <code>.ts</code>:</strong></h5>
+      <pre class="chroma"><code>
 import &#123; MpcPageDividerImgComponent &#125; from 'mpc-lib-angular';
 
 // No seu componente
 imports: [MpcPageDividerImgComponent]
         </code></pre>
-  </div>
-  <div class="mb-5">
-    <h5><strong>Exemplo de uso no arquivo <code>.html</code>:</strong></h5>
-    <pre class="chroma"><code class="language-html" data-lang="html">&lt;!-- Page Divider com Imagem de Fundo --&gt;
+    </div>
+    <div class="mb-5">
+      <h5><strong>Exemplo de uso no arquivo <code>.html</code>:</strong></h5>
+      <pre class="chroma"><code class="language-html" data-lang="html">&lt;!-- Page Divider com Imagem de Fundo --&gt;
 &lt;mpc-page-divider-img
   titulo="Exemplo de"
   subtitulo="Page Divider"
@@ -32,23 +35,22 @@ imports: [MpcPageDividerImgComponent]
   [tabIndex]="0"
   imagemFundo="/assets/img/home/mountain.jpg"
   ariaLabel="Exemplo" /&gt;</code></pre>
-    <div class="alert alert-info mt-2" role="alert">
-      <strong>Observação:</strong> O componente aplica automaticamente um gradiente escuro sobre a imagem de fundo para
-      garantir a legibilidade do texto.
+      <div class="alert alert-info mt-2" role="alert">
+        <strong>Observação:</strong> O componente aplica automaticamente um gradiente escuro sobre a imagem de fundo
+        para
+        garantir a legibilidade do texto.
+      </div>
     </div>
-  </div>
-  <div class="mb-3">
-    <h5><strong>Personalização com Variáveis CSS:</strong></h5>
-    <pre class="chroma"><code>/* Personalize o divisor de página */
+    <div class="mb-3">
+      <h5><strong>Personalização com Variáveis CSS:</strong></h5>
+      <pre class="chroma"><code>/* Personalize o divisor de página */
 --mpc-font-title-page-divider-img: var(--mpc-font-title);
 --mpc-font-subtitle-page-divider-img: var(--mpc-font-subtitle);
 --mpc-color-title-page-divider-img: var(--mpc-color-primary);
 --mpc-color-subtitle-page-divider-img: var(--mpc-color-secondary);
         </code></pre>
-  </div>
-  <h5>Veja abaixo um exemplo visual do divisor de página:</h5>
-
-    <mpc-page-divider-img titulo="Exemplo de" subtitulo="Page Divider" imagemFundo="/assets/img/home/mountain.jpg" />
+    </div>
+    <h5>Veja abaixo um exemplo visual do divisor de página:</h5>
   </div>
 
 </mpc-section>

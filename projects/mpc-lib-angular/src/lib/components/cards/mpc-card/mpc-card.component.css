@@ -4,15 +4,7 @@
   --mpc-border-color-card: var(--mpc-color-primary);
   --mpc-bg-links-card: var(--mpc-color-primary);
   --mpc-color-links-card: white;
-  --mpc-color-text-title-card: var(--mpc-color-primary);
-  --mpc-color-text-subtitle-card: var(--mpc-color-primary);
-  --mpc-color-text-description-card: var(--mpc-color-primary);
   --mpc-color-bar-card: var(--mpc-color-primary);
-
-  /* Fontes */
-  --mpc-font-title-card: var(--mpc-font-title);
-  --mpc-font-subtitle-card: var(--mpc-font-subtitle);
-  --mpc-font-description-card: var(--mpc-font-default);
 }
 
 /*--------------------------------------------------------------
@@ -90,30 +82,6 @@
     .card-info {
       padding: 2rem;
       margin-bottom: 2rem;
-
-      h3 {
-        font-weight: 700;
-        font-size: 20px;
-        margin-bottom: 0.5rem;
-        font-family: var(--mpc-font-title-card);
-        color: var(--mpc-color-text-title-card);
-      }
-
-      h4 {
-        margin-bottom: 1.5rem;
-        font-weight: 700;
-        font-size: 20px;
-        color: var(--mpc-color-text-subtitle-card);
-        font-family: var(--mpc-font-subtitle-card);
-      }
-
-      p {
-        color: var(--mpc-color-text-description-card);
-        font-style: italic;
-        font-size: 15px;
-        line-height: 26px;
-        font-family: var(--mpc-font-description-card);
-      }
     }
   }
 }
@@ -146,21 +114,6 @@
       margin: 10px 0;
       border-radius: 5px;
       background: var(--mpc-color-bar-card);
-    }
-
-    h2 {
-      color: var(--mpc-color-text-title-card);
-      font-family: var(--mpc-font-title-card);
-    }
-
-    h5 {
-      margin: 1.5rem 0;
-      color: var(--mpc-color-text-description-card);
-      font-family: var(--mpc-font-description-card);
-
-      i {
-        margin-bottom: 2rem;
-      }
     }
   }
 

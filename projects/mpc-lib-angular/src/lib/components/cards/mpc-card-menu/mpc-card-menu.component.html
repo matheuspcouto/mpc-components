@@ -1,17 +1,11 @@
-<div [id]="id" [tabIndex]="tabIndex" [attr.aria-label]="getAriaLabel()" class="card-menu" (click)="clique()"
-  [style.cursor]="getCursor()">
+<div class="card-menu">
 
   @if (hasIcone()) {
-  <i [class]="icone" tabindex="0" [attr.aria-label]="'Ícone: ' + titulo"></i>
+  <i [class]="icone"></i>
   }
 
   <div class="card-menu-body">
-    @if (hasTitulo()) {
-    <h3 tabindex="0" [attr.aria-label]="'Título: ' + titulo">{{ titulo }}</h3>
-    }
-
-    @if (hasDescricao()) {
-    <p tabindex="0" [attr.aria-label]="'Descrição: ' + descricao">{{ descricao }}</p>
-    }
+    <ng-content select="[titulo]"></ng-content>
+    <ng-content select="[subtitulo]"></ng-content>
   </div>
 </div>

@@ -1,34 +1,26 @@
 /*--------------------------------------------------------------
+# Page Divider Img Section
+--------------------------------------------------------------*/
+.page-divider-img {
+  /* Cores */
+  --mpc-color-title-page-divider-img: white;
+  --mpc-color-subtitle-page-divider-img: var(--color-secondary);
+
+  /* Fontes */
+  --mpc-font-title-page-divider-img: var(--font-title);
+  --mpc-font-subtitle-page-divider-img: var(--font-title);
+
+  /* Tamanho Fonte */
+  --mpc-font-size-title-page-divider-img: 2rem;
+  --mpc-font-size-subtitle-page-divider-img: 2rem;
+
+  /* Background-Position */
+  --mpc-bg-position-page-divider-img: center;
+}
+
+/*--------------------------------------------------------------
 # Geral
 --------------------------------------------------------------*/
-
-.section-header {
-  text-align: center;
-  padding-bottom: 30px;
-}
-
-.section-header h2 {
-  font-size: 13px;
-  letter-spacing: 1px;
-  font-weight: 400;
-  margin: 0;
-  padding: 0;
-  color: var(--mpc-color-tertiary);
-  text-transform: uppercase;
-  font-family: var(--mpc-font-default);
-}
-
-.section-header p {
-  margin: 0;
-  font-size: 48px;
-  font-weight: 400;
-  font-family: var(--mpc-font-default);
-}
-
-.section-header p span {
-  color: var(--mpc-color-secondary);
-}
-
 h5 {
   font-weight: 400;
   color: var(--mpc-color-tertiary);
@@ -58,4 +50,4 @@ pre {
     width: 100%;
     white-space: pre-line;
   }
-} 
+}
