@@ -15,10 +15,9 @@ import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MpcFooterComponent } from "./shared/components/mpc-footer/mpc-footer.component";
 import { isPlatformBrowser } from '@angular/common';
-import { MpcBtnFloatComponent, MpcLoaderComponent, MpcNavbarComponent } from 'mpc-lib-angular';
+import { MpcBtnFloatComponent, MpcLoaderComponent, MpcNavbarComponent, NavbarConfig } from 'mpc-lib-angular';
 import { environment } from '../environments/environment';
 import { Rotas } from './shared/enums/rotas-enum';
-import { NavbarConfig } from '../../projects/mpc-lib-angular/src/lib/components/mpc-navbar/mpc-navbar.component';
 
 @Component({
   selector: 'app-root',

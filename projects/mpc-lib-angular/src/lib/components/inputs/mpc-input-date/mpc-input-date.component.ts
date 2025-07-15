@@ -67,7 +67,7 @@ import { AccessibilityInputs } from '../../../../shared/accessibility-inputs';
   selector: 'mpc-input-date',
   imports: [],
   templateUrl: './mpc-input-date.component.html',
-  styleUrl: './mpc-input-date.component.css',
+  styleUrls: ['./mpc-input-date.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

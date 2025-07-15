@@ -19,8 +19,7 @@
  */
 
 import { Component } from '@angular/core';
-import { MpcTabsComponent, Tab } from 'mpc-lib-angular';
-import { MpcSectionComponent } from '../../../shared/components/mpc-section/mpc-section.component';
+import { MpcTabsComponent, Tab, MpcSectionComponent } from 'mpc-lib-angular';
 
 @Component({
   selector: 'app-tabs',

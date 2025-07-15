@@ -71,7 +71,7 @@ export interface RadioOption {
   selector: 'mpc-input-radio',
   imports: [],
   templateUrl: './mpc-input-radio.component.html',
-  styleUrl: './mpc-input-radio.component.css',
+  styleUrls: ['./mpc-input-radio.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

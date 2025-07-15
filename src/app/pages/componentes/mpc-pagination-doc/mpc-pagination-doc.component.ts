@@ -20,7 +20,7 @@
  * @updated 10/07/2025
  */
 import { Component } from '@angular/core';
-import { MpcSectionComponent } from '../../../shared/components/mpc-section/mpc-section.component';
+import { MpcSectionComponent } from 'mpc-lib-angular';
 import { MpcPaginationComponent } from 'mpc-lib-angular';
 
 @Component({
@@ -86,6 +86,11 @@ export class MpcPaginationDocComponent {
     { id: 49, nome: 'Item 49' },
     { id: 50, nome: 'Item 50' },
   ];
+
+  /**
+   * Opcoes de qtd de Itens por Página
+   */
+  opcoesSeletorItensPorPagina: number[] = [6, 12, 24, 50, 100];
 
   /**
    * Índice inicial da página atual.

@@ -67,7 +67,7 @@ export const REGEX_TELEFONE = /^\(?(?:[14689][1-9]|2[12478]|3[1234578]|5[1345]|7
   selector: 'mpc-input-telefone',
   imports: [],
   templateUrl: './mpc-input-telefone.component.html',
-  styleUrl: './mpc-input-telefone.component.css',
+  styleUrls: ['./mpc-input-telefone.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

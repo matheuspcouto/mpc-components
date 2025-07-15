@@ -80,6 +80,10 @@ describe('AppComponent', () => {
       });
     });
 
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+
     it('deve adicionar event listener de scroll quando executado no browser', () => {
       component.ngOnInit();
       expect(mockWindow.addEventListener).toHaveBeenCalled();
@@ -99,8 +103,7 @@ describe('AppComponent', () => {
 
       scrollCallback();
 
-      expect(mockDocument.getElementById).toHaveBeenCalledWith('btn-scroll-top');
-      expect(mockElement.style.visibility).toBe('visible');
+      expect(component['showScrollTop']).toBe(true);
     });
 
     it('deve ocultar o botão scroll-to-top quando scroll <= 300px', () => {
@@ -117,8 +120,7 @@ describe('AppComponent', () => {
 
       scrollCallback();
 
-      expect(mockDocument.getElementById).toHaveBeenCalledWith('btn-scroll-top');
-      expect(mockElement.style.visibility).toBe('hidden');
+      expect(component['showScrollTop']).toBe(false);
     });
 
     it('deve lidar com elemento scrollTop não encontrado', () => {
@@ -133,7 +135,7 @@ describe('AppComponent', () => {
       expect(() => scrollCallback()).not.toThrow();
     });
 
-    it('deve definir visibility como hidden quando scroll <= 300px', () => {
+    it('deve definir showScrollTop como false quando scroll <= 300px', () => {
       component.ngOnInit();
 
       const scrollCallback = mockWindow.addEventListener.mock.calls[0][1];
@@ -145,10 +147,10 @@ describe('AppComponent', () => {
 
       scrollCallback();
 
-      expect(mockElement.style.visibility).toBe('hidden');
+      expect(component['showScrollTop']).toBe(false);
     });
 
-    it('deve definir visibility como visible quando scroll > 300px', () => {
+    it('deve definir showScrollTop como true quando scroll > 300px', () => {
       component.ngOnInit();
 
       const scrollCallback = mockWindow.addEventListener.mock.calls[0][1];
@@ -160,7 +162,7 @@ describe('AppComponent', () => {
 
       scrollCallback();
 
-      expect(mockElement.style.visibility).toBe('visible');
+      expect(component['showScrollTop']).toBe(true);
     });
   });
 
@@ -227,20 +229,6 @@ describe('AppComponent', () => {
       component['scrollToTop']();
 
       expect(mockScrollTo).toHaveBeenCalledTimes(3);
-    });
-
-    it('deve lidar com múltiplas chamadas de ngOnInit', () => {
-      const mockAddEventListener = jest.fn();
-      Object.defineProperty(window, 'addEventListener', {
-        value: mockAddEventListener,
-        writable: true
-      });
-
-      component.ngOnInit();
-      component.ngOnInit();
-      component.ngOnInit();
-
-      expect(mockAddEventListener).toHaveBeenCalledTimes(3);
     });
   });
 });

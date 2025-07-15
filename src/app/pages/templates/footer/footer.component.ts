@@ -16,7 +16,7 @@
  * @updated 10/07/2025
  */
 import { Component } from '@angular/core';
-import { MpcSectionComponent } from '../../../shared/components/mpc-section/mpc-section.component';
+import { MpcSectionComponent } from 'mpc-lib-angular';
 
 @Component({
   selector: 'footer',

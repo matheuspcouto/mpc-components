@@ -62,7 +62,7 @@ export interface Tab {
   selector: 'mpc-tabs',
   imports: [],
   templateUrl: './mpc-tabs.component.html',
-  styleUrl: './mpc-tabs.component.css'
+  styleUrls: ['./mpc-tabs.component.scss']
 })
 export class MpcTabsComponent extends AccessibilityInputs implements OnInit {
 

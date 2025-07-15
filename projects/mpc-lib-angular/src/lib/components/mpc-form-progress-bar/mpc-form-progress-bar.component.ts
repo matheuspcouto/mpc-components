@@ -34,7 +34,7 @@ import { Component, Input } from '@angular/core';
   selector: 'mpc-form-progress-bar',
   imports: [],
   templateUrl: './mpc-form-progress-bar.component.html',
-  styleUrl: './mpc-form-progress-bar.component.css'
+  styleUrls: ['./mpc-form-progress-bar.component.scss']
 })
 export class MpcFormProgressBarComponent {
 

@@ -53,7 +53,7 @@ export interface IndicesPaginacao {
   selector: 'mpc-pagination',
   imports: [],
   templateUrl: './mpc-pagination.component.html',
-  styleUrl: './mpc-pagination.component.css'
+  styleUrls: ['./mpc-pagination.component.scss']
 })
 export class MpcPaginationComponent extends AccessibilityInputs implements OnInit, AfterViewInit, OnChanges {
 
@@ -69,7 +69,7 @@ export class MpcPaginationComponent extends AccessibilityInputs implements OnIni
   /** Número máximo de páginas visíveis na paginação */
   maxPaginasVisiveis: number = 5;
   /** Opções disponíveis no seletor de itens por página */
-  @Input() opcoesSeletorItensPorPagina: number[] = [5, 12, 24, 50, 100];
+  @Input() opcoesSeletorItensPorPagina: number[] = [5, 10, 25, 50, 100];
 
   /** Evento emitido com os índices dos itens visíveis */
   @Output() indices: EventEmitter<IndicesPaginacao> = new EventEmitter();
@@ -94,6 +94,7 @@ export class MpcPaginationComponent extends AccessibilityInputs implements OnIni
    * Inicializa o componente calculando a paginação.
    */
   ngOnInit(): void {
+    this.itensPorPagina = this.opcoesSeletorItensPorPagina[0];
     this.calcularPaginacao();
   }
 

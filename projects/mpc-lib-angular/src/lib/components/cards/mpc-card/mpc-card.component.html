@@ -1,11 +1,14 @@
-<!-- Layout Vertical -->
-@if (isVertical()) {
-<div class="card-vertical">
-
+<div [class]="{'card-horizontal': isHorizontal(), 'card-vertical': isVertical()}">
+  <!-- Imagem e links -->
+  @if (isHorizontal()) {
+  <div class="col-lg-5">
+    <img [src]="getImagemCard()">
+  </div>
+  }
+  @else {
   <div class="card-header">
     <div class="card-img">
       <img [src]="getImagemCard()">
-
       @if (hasLinks()) {
       <div class="links">
         @for (link of links; track $index) {
@@ -17,38 +20,19 @@
       }
     </div>
   </div>
+  }
 
-  <div class="card-body">
-    <div class="card-info">
-      <ng-content select="[titulo]"></ng-content>
-      <ng-content select="[subtitulo]"></ng-content>
-      <ng-content select="[descricao]"></ng-content>
-    </div>
-  </div>
-</div>
-}
-
-<!-- Layout Horizontal -->
-@if (isHorizontal()) {
-<div class="card-horizontal">
-
-  <div class="col-lg-5">
-    <img [src]="getImagemCard()">
-  </div>
-
-  <div class="col-lg-7">
+  <!-- Corpo do card -->
+  <div [class]="isHorizontal() ? 'col-lg-7' : 'card-body'">
     <div class="card-body">
-      <ng-content select="[titulo]"></ng-content>
-      <ng-content select="[subtitulo]"></ng-content>
-      <ng-content select="[descricao]"></ng-content>
+      <ng-content select="[card-body]"></ng-content>
     </div>
-
-    @if (hasLinks()) {
+    <!-- Links no rodapé para horizontal -->
+    @if (isHorizontal() && hasLinks()) {
     <div class="card-footer">
       <div class="links">
         @for (link of links; track $index) {
-        <a tabindex="0" [attr.aria-label]="'Link para ' + link.url" [href]="link.url" target="_blank"
-          rel="noopener noreferrer">
+        <a tabindex="0" [attr.aria-label]="'Link para ' + link.url" [href]="link.url" target="_blank">
           <i [class]="link.icone"></i>
         </a>
         }
@@ -57,4 +41,3 @@
     }
   </div>
 </div>
-}

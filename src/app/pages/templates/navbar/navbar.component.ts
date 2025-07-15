@@ -16,7 +16,8 @@
  * @updated 10/07/2025
  */
 import { Component } from '@angular/core';
-import { MpcSectionComponent } from '../../../shared/components/mpc-section/mpc-section.component';
+import { MpcSectionComponent } from 'mpc-lib-angular';
+
 
 @Component({
   selector: 'navbar',
@@ -24,4 +25,4 @@ import { MpcSectionComponent } from '../../../shared/components/mpc-section/mpc-
   styleUrl: './navbar.component.css',
   imports: [MpcSectionComponent]
 })
-export class NavbarComponent {}
+export class NavbarComponent { }

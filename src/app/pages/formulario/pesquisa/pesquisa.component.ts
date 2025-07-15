@@ -26,7 +26,7 @@ import { take } from 'rxjs';
 import { Rotas } from '../../../shared/enums/rotas-enum';
 import { ToastrService } from 'ngx-toastr';
 import { MpcInputPesquisaComponent } from 'mpc-lib-angular';
-import { MpcSectionComponent } from '../../../shared/components/mpc-section/mpc-section.component';
+import { MpcSectionComponent } from 'mpc-lib-angular';
 
 @Component({
     selector: 'app-pesquisa',

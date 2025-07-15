@@ -25,7 +25,7 @@ import { FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angul
 import { InscricaoService } from '../service/inscricao.service';
 import { MpcErrorService } from '../../../shared/components/mpc-error/mpc-error.service';
 import { MpcInputSelectComponent, SelectOption, MpcFormProgressBarComponent, MpcLoaderService, MpcButtonComponent } from 'mpc-lib-angular';
-import { MpcSectionComponent } from '../../../shared/components/mpc-section/mpc-section.component';
+import { MpcSectionComponent } from 'mpc-lib-angular';
 
 @Component({
   selector: 'app-pagamento',

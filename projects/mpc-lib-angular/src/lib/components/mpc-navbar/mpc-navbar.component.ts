@@ -93,7 +93,7 @@ export interface NavbarConfig {
 @Component({
   selector: 'mpc-navbar',
   templateUrl: './mpc-navbar.component.html',
-  styleUrls: ['./mpc-navbar.component.css']
+  styleUrls: ['./mpc-navbar.component.scss']
 })
 export class MpcNavbarComponent implements OnInit {
 

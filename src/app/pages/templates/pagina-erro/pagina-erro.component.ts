@@ -19,8 +19,7 @@
 import { Component, inject } from '@angular/core';
 import { MpcErrorService } from '../../../shared/components/mpc-error/mpc-error.service';
 import { Rotas } from '../../../shared/enums/rotas-enum';
-import { MpcButtonComponent } from 'mpc-lib-angular';
-import { MpcSectionComponent } from "../../../shared/components/mpc-section/mpc-section.component";
+import { MpcButtonComponent, MpcSectionComponent } from 'mpc-lib-angular';
 
 @Component({
   selector: 'app-pagina-erro',

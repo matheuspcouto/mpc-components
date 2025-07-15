@@ -77,7 +77,7 @@ export const REGEX_CEP = /^\d{5}-?\d{3}$/;
 @Component({
   selector: 'mpc-input-busca-cep',
   templateUrl: './mpc-input-busca-cep.component.html',
-  styleUrls: ['./mpc-input-busca-cep.component.css'],
+  styleUrls: ['./mpc-input-busca-cep.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

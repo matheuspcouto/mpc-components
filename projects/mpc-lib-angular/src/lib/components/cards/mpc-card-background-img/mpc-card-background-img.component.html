@@ -1,8 +1,3 @@
 <div class="card-background-img" [style.background-image]="getBackgroundImage()">
-  <ng-content select="[titulo]">
-    <div class="titulo"></div>
-  </ng-content>
-
-  <ng-content select="[subtitulo]"></ng-content>
-  <ng-content select="[descricao]"></ng-content>
+  <ng-content select="[card-body]"></ng-content>
 </div>

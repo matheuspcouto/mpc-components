@@ -8,7 +8,7 @@
     align-items: center;
     width: 100vw;
     height: 100vh;
-    background: white;
+    background: var(--white);
     font-family: var(--mpc-font-subtitle) !important;
     z-index: 99999;
   
@@ -21,7 +21,7 @@
       padding: 20px;
   
       .error-content {
-        background-color: white;
+        background-color: var(--white);
         padding: 30px;
         overflow: hidden;
         border-radius: 5px;
@@ -63,7 +63,7 @@
   
           #btn-voltar {
             --mpc-bg-color-btn: var(--color-primary);
-            --mpc-text-color-btn: white;
+            --mpc-text-color-btn: var(--white);
           }
   
           #btn-copiar {
@@ -111,7 +111,7 @@
           left: 0;
           bottom: 0;
           width: 100vw;
-          background: white;
+          background: var(--white);
           padding: 1.5rem 1rem 2rem 1rem;
           display: flex;
           flex-direction: column;

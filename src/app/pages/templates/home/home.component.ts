@@ -21,8 +21,7 @@ import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Rotas } from '../../../shared/enums/rotas-enum';
 import { MpcPageDividerImgComponent } from '../../../shared/components/mpc-page-divider-img/mpc-page-divider-img.component';
-import { MpcCardMenuComponent, MpcButtonComponent } from 'mpc-lib-angular';
-import { MpcSectionComponent } from '../../../shared/components/mpc-section/mpc-section.component';
+import { MpcCardMenuComponent, MpcButtonComponent, MpcSectionComponent } from 'mpc-lib-angular';
 
 @Component({
   selector: 'app-home',

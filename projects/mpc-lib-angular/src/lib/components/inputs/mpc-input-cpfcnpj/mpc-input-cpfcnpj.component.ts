@@ -68,7 +68,7 @@ import { AccessibilityInputs } from '../../../../shared/accessibility-inputs';
   selector: 'mpc-input-cpfcnpj',
   imports: [],
   templateUrl: './mpc-input-cpfcnpj.component.html',
-  styleUrl: './mpc-input-cpfcnpj.component.css',
+  styleUrls: ['./mpc-input-cpfcnpj.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

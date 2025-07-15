@@ -44,7 +44,7 @@ import { MpcLoaderService } from './mpc-loader.service';
 @Component({
   selector: 'mpc-loader',
   templateUrl: './mpc-loader.component.html',
-  styleUrls: ['./mpc-loader.component.css']
+  styleUrls: ['./mpc-loader.component.scss']
 })
 export class MpcLoaderComponent {
 

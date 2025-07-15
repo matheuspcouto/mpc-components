@@ -12,8 +12,10 @@
  * @Exemplo
  * ```html
  * <mpc-card-menu icone="bi bi-house">
- *   <span titulo>Início</span>
- *   <span subtitulo>Página inicial do sistema</span>
+ * <div card-body>
+ *   <span>Início</span>
+ *   <span>Página inicial do sistema</span>
+ * </div>
  * </mpc-card-menu>
  * ```
  *
@@ -27,13 +29,13 @@
  * @updated 10/07/2025
  */
 
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'mpc-card-menu',
   imports: [],
   templateUrl: './mpc-card-menu.component.html',
-  styleUrl: './mpc-card-menu.component.css'
+  styleUrls: ['./mpc-card-menu.component.scss']
 })
 export class MpcCardMenuComponent {
 

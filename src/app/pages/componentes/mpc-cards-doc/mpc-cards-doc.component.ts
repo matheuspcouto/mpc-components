@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { MpcCardComponent, MpcCardBackGroundImgComponent, MpcCardEventoComponent, MpcCardMenuComponent } from 'mpc-lib-angular';
-import { MpcSectionComponent } from '../../../shared/components/mpc-section/mpc-section.component';
+import { MpcCardComponent, MpcCardBackGroundImgComponent, MpcCardEventoComponent, MpcCardMenuComponent, MpcSectionComponent } from 'mpc-lib-angular';
 
 /**
  * @Componente MpcCardsDocComponent

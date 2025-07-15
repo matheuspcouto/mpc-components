@@ -104,7 +104,7 @@ export const TipoModal = {
   selector: 'mpc-modal',
   imports: [MpcButtonComponent],
   templateUrl: './mpc-modal.component.html',
-  styleUrls: ['./mpc-modal.component.css']
+  styleUrls: ['./mpc-modal.component.scss']
 })
 export class MpcModalComponent extends AccessibilityInputs {
 

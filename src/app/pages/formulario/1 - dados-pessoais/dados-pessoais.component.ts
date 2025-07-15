@@ -24,9 +24,8 @@ import { Router } from '@angular/router';
 import { Rotas } from '../../../shared/enums/rotas-enum';
 import { InscricaoService } from '../service/inscricao.service';
 import { FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
-import { MpcInputDateComponent, MpcInputRadioComponent, RadioOption, MpcInputSelectComponent, SelectOption, MpcInputTextComponent, MpcInputNumberComponent, MpcInputCpfcnpjComponent, MpcInputTextAreaComponent, MpcFormProgressBarComponent, MpcLoaderService, MpcButtonComponent } from 'mpc-lib-angular';
+import { MpcInputDateComponent, MpcInputRadioComponent, RadioOption, MpcInputSelectComponent, SelectOption, MpcInputTextComponent, MpcInputNumberComponent, MpcInputCpfcnpjComponent, MpcInputTextAreaComponent, MpcFormProgressBarComponent, MpcLoaderService, MpcButtonComponent, MpcSectionComponent } from 'mpc-lib-angular';
 import { MpcErrorService } from '../../../shared/components/mpc-error/mpc-error.service';
-import { MpcSectionComponent } from "../../../shared/components/mpc-section/mpc-section.component";
 
 @Component({
   selector: 'app-dados-pessoais',

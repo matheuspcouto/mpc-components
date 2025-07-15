@@ -31,7 +31,7 @@ import { AccessibilityInputs } from '../../../shared/accessibility-inputs';
 @Component({
   selector: 'mpc-btn-float',
   templateUrl: './mpc-btn-float.component.html',
-  styleUrl: './mpc-btn-float.component.css',
+  styleUrls: ['./mpc-btn-float.component.scss']
 })
 export class MpcBtnFloatComponent extends AccessibilityInputs {
 

@@ -23,17 +23,6 @@ describe('MpcCardMenuComponent', () => {
   });
 
   it('deve ter valores padrão', () => {
-    expect(component.id).toBeUndefined();
-    expect(component.tabIndex).toBeUndefined();
-    expect(component.ariaLabel).toBeUndefined();
-    expect(component.titulo).toBe('');
-    expect(component.descricao).toBe(undefined);
     expect(component.icone).toBe('');
-  });
-
-  it('deve emitir o evento acao ao chamar clique', () => {
-    const spy = jest.spyOn(component.acao, 'emit');
-    (component as any).clique();
-    expect(spy).toHaveBeenCalled();
   });
 });

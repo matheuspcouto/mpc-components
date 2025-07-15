@@ -59,11 +59,6 @@ export const routes: Routes = [
         canActivate: [SiteAtivoGuard]
       },
       {
-        path: SegmentoRotas.PAGE_DIVIDER_IMG,
-        loadComponent: () => import('./pages/componentes/mpc-page-divider-img-doc/mpc-page-divider-img-doc.component').then(c => c.MpcPageDividerImgDocComponent),
-        canActivate: [SiteAtivoGuard]
-      },
-      {
         path: SegmentoRotas.BTN_FLOAT,
         loadComponent: () => import('./pages/componentes/mpc-btn-float-doc/mpc-btn-float-doc.component').then(c => c.MpcBtnFloatDocComponent),
         canActivate: [SiteAtivoGuard]

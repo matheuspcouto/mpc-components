@@ -11,9 +11,11 @@
  * @Exemplo
  * <!-- Card com imagem de fundo customizada e conteúdo extra -->
  * <mpc-card-background-img imagemFundo="/assets/img/eventos/capa-eventos.JPG">
- *   <h3 titulo>Eventos Especiais</h3>
- *   <h4 subtitulo>Eventos Especiais</h4>
- *   <p descricao>Confira nossa programação de eventos!</p>
+ * <div card-body>
+ *   <h3>Eventos Especiais</h3>
+ *   <h4>Eventos Especiais</h4>
+ *   <p>Confira nossa programação de eventos!</p>
+ * </div
  * </mpc-card-background-img>
  *
  *
@@ -33,7 +35,7 @@ import { Component, Input } from '@angular/core';
   selector: 'mpc-card-background-img',
   imports: [],
   templateUrl: './mpc-card-background-img.component.html',
-  styleUrl: './mpc-card-background-img.component.css'
+  styleUrls: ['./mpc-card-background-img.component.scss']
 })
 export class MpcCardBackGroundImgComponent {
 

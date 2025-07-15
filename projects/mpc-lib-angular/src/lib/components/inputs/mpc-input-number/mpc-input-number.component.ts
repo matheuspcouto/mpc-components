@@ -67,7 +67,7 @@ import { AccessibilityInputs } from '../../../../shared/accessibility-inputs';
   selector: 'mpc-input-number',
   imports: [],
   templateUrl: './mpc-input-number.component.html',
-  styleUrl: './mpc-input-number.component.css',
+  styleUrls: ['./mpc-input-number.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

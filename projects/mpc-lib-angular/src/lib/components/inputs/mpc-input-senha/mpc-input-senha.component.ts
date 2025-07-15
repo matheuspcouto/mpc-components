@@ -64,7 +64,7 @@ import { AccessibilityInputs } from '../../../../shared/accessibility-inputs';
   selector: 'mpc-input-senha',
   imports: [],
   templateUrl: './mpc-input-senha.component.html',
-  styleUrl: './mpc-input-senha.component.css',
+  styleUrls: ['./mpc-input-senha.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

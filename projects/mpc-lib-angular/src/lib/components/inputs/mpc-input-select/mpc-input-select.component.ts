@@ -73,7 +73,7 @@ export interface SelectOption {
   selector: 'mpc-input-select',
   imports: [],
   templateUrl: './mpc-input-select.component.html',
-  styleUrl: './mpc-input-select.component.css',
+  styleUrls: ['./mpc-input-select.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

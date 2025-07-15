@@ -38,6 +38,39 @@ pre {
     --mpc-font-title-card: var(--font-subtitle);
     --mpc-font-subtitle-card: var(--font-subtitle);
     --mpc-font-description-card: var(--font-default);
+
+    h3 {
+      font-weight: 700;
+      font-size: 25px;
+      margin-bottom: 0.5rem;
+      font-family: var(--font-subtitle);
+      color: var(--color-secondary);
+    }
+
+    .barra-titulo {
+      width: 100px;
+      height: 3px;
+      margin: 10px 0;
+      border-radius: 5px;
+      background: var(--color-primary);
+    }
+
+    h4 {
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--color-primary);
+      font-family: var(--font-subtitle);
+    }
+
+    p {
+      color: var(--color-primary);
+      font-style: italic;
+      font-size: 15px;
+      line-height: 26px;
+      font-family: var(--font-default);
+      margin-bottom: 0;
+    }
   }
 
   mpc-card#card-1 {

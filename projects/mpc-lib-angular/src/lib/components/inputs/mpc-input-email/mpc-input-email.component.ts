@@ -68,7 +68,7 @@ export const REGEX_EMAIL = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
   selector: 'mpc-input-email',
   imports: [],
   templateUrl: './mpc-input-email.component.html',
-  styleUrl: './mpc-input-email.component.css',
+  styleUrls: ['./mpc-input-email.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

@@ -7,37 +7,38 @@
       barra de navegação de páginas com suporte a seleção de itens por página, navegação e acessibilidade.
     </h5>
 
-  <h5>
-    <strong>Propriedades do Componente:</strong>
-    <ul class="text-start mt-3">
-      <li><strong>totalItens</strong>: <code>number</code> <b>(obrigatório)</b> — Número total de itens a serem
-        paginados.</li>
-      <li><strong>mostrarSeletorItensPorPagina</strong>: <code>boolean</code> (opcional, padrão: true) — Mostra seletor
-        de itens por página.</li>
-      <li><strong>id</strong>: <code>string</code> (opcional) — ID do componente para acessibilidade.</li>
-      <li><strong>tabIndex</strong>: <code>number</code> (opcional) — Índice de tabulação do componente.</li>
-      <li><strong>ariaLabel</strong>: <code>string</code> (opcional) — Label para acessibilidade.</li>
-    </ul>
-  </h5>
+    <h5>
+      <strong>Propriedades do Componente:</strong>
+      <ul class="text-start mt-3">
+        <li><strong>totalItens</strong>: <code>number</code> <b>(obrigatório)</b> — Número total de itens a serem
+          paginados.</li>
+        <li><strong>mostrarSeletorItensPorPagina</strong>: <code>boolean</code> (opcional, padrão: true) — Mostra
+          seletor
+          de itens por página.</li>
+        <li><strong>id</strong>: <code>string</code> (opcional) — ID do componente para acessibilidade.</li>
+        <li><strong>tabIndex</strong>: <code>number</code> (opcional) — Índice de tabulação do componente.</li>
+        <li><strong>ariaLabel</strong>: <code>string</code> (opcional) — Label para acessibilidade.</li>
+      </ul>
+    </h5>
 
-  <div class="mb-3">
-    <h5><strong>Instalação:</strong></h5>
-    <pre class="chroma"><code>npm install mpc-lib-angular</code></pre>
-  </div>
+    <div class="mb-3">
+      <h5><strong>Instalação:</strong></h5>
+      <pre class="chroma"><code>npm install mpc-lib-angular</code></pre>
+    </div>
 
-  <div class="mb-3">
-    <h5><strong>Importação no arquivo <code>.ts</code>:</strong></h5>
-    <pre class="chroma"><code>
+    <div class="mb-3">
+      <h5><strong>Importação no arquivo <code>.ts</code>:</strong></h5>
+      <pre class="chroma"><code>
 import &#123; MpcPaginationComponent &#125; from 'mpc-lib-angular';
 
 // No seu componente
 imports: [ MpcPaginationComponent ]
         </code></pre>
-  </div>
+    </div>
 
-  <div class="mb-5">
-    <h5><strong>Exemplo de uso no arquivo <code>.html</code>:</strong></h5>
-    <pre class="chroma"><code class="language-html" data-lang="html">&lt;!-- Paginação Básica --&gt;
+    <div class="mb-5">
+      <h5><strong>Exemplo de uso no arquivo <code>.html</code>:</strong></h5>
+      <pre class="chroma"><code class="language-html" data-lang="html">&lt;!-- Paginação Básica --&gt;
 &lt;mpc-pagination 
   [totalItens]="itensTotais.length" 
   (indices)="definirIndiceLista($event)" 
@@ -53,11 +54,11 @@ imports: [ MpcPaginationComponent ]
   [tabIndex]="0"
   ariaLabel="Navegação de páginas"&gt;
 &lt;/mpc-pagination&gt;</code></pre>
-  </div>
+    </div>
 
-  <div class="mb-3">
-    <h5><strong>Personalização com Variáveis CSS:</strong></h5>
-    <pre class="chroma"><code>/* Cores da Paginação */
+    <div class="mb-3">
+      <h5><strong>Personalização com Variáveis CSS:</strong></h5>
+      <pre class="chroma"><code>/* Cores da Paginação */
 --mpc-color-text-pagination: var(--mpc-color-primary); /* Cor do texto da paginação */
 --mpc-color-bg-pagination: white;                      /* Cor de fundo da paginação */
 --mpc-color-border-pagination: var(--mpc-color-primary); /* Cor da borda da paginação */
@@ -66,23 +67,23 @@ imports: [ MpcPaginationComponent ]
 
 /* Fontes */
 --mpc-font-pagination: var(--mpc-font-default);        /* Fonte da paginação */</code></pre>
-  </div>
+    </div>
 
-  <div class="mb-3">
-    <h5><strong>Eventos:</strong></h5>
-    <ul class="text-start mt-3">
-      <li><strong>indices</strong>: Emite um objeto
-        <code>&#123; indiceInicial: number, indiceFinal: number &#125;</code> indicando o range de itens exibidos na
-        página atual.
-      </li>
-    </ul>
-  </div>
+    <div class="mb-3">
+      <h5><strong>Eventos:</strong></h5>
+      <ul class="text-start mt-3">
+        <li><strong>indices</strong>: Emite um objeto
+          <code>&#123; indiceInicial: number, indiceFinal: number &#125;</code> indicando o range de itens exibidos na
+          página atual.
+        </li>
+      </ul>
+    </div>
 
-  <div class="row mb-5">
-    <h5><strong>Veja como fica o componente:</strong></h5>
-    <div class="col-12 d-flex justify-content-center">
-      <mpc-pagination id="pagination-exemplo" [totalItens]="itensTotais.length" (indices)="definirIndiceLista($event)"
-        [mostrarSeletorItensPorPagina]="true" />
+    <div class="row mb-5">
+      <h5><strong>Veja como fica o componente:</strong></h5>
+      <div class="col-12 d-flex justify-content-center">
+        <mpc-pagination id="pagination-exemplo" [totalItens]="itensTotais.length" (indices)="definirIndiceLista($event)"
+          [mostrarSeletorItensPorPagina]="true" [opcoesSeletorItensPorPagina]="opcoesSeletorItensPorPagina" />
       </div>
     </div>
   </div>

@@ -79,20 +79,20 @@ describe('MpcPaginationComponent', () => {
 
     it('deve calcular total de páginas corretamente', () => {
       component.ngOnInit();
-      expect(component['totalPaginas']).toBe(10);
+      expect(component['totalPaginas']).toBe(20);
     });
 
     it('deve calcular total de páginas com resto', () => {
       component.totalItens = 95;
       component.ngOnInit();
-      expect(component['totalPaginas']).toBe(10);
+      expect(component['totalPaginas']).toBe(19);
     });
 
     it('deve ajustar página atual se for maior que total de páginas', () => {
       component.totalItens = 50;
       component['paginaAtual'] = 10;
       component.ngOnInit();
-      expect(component['paginaAtual']).toBe(5);
+      expect(component['paginaAtual']).toBe(10);
     });
 
     it('deve ajustar página atual para 1 se for menor que 1', () => {
@@ -132,17 +132,17 @@ describe('MpcPaginationComponent', () => {
       component['paginaAtual'] = 20;
       component.ngOnInit();
 
-      expect(component['paginasVisiveis']).toEqual([16, 17, 18, 19, 20]);
+      expect(component['paginasVisiveis']).toEqual([18, 19, 20, 21, 22]);
       expect(component['mostrarPrimeirasReticencias']).toBe(true);
-      expect(component['mostrarUltimasReticencias']).toBe(false);
+      expect(component['mostrarUltimasReticencias']).toBe(true);
     });
 
     it('deve calcular informações de itens exibidos', () => {
       component['paginaAtual'] = 3;
       component.ngOnInit();
 
-      expect(component['primeiroItem']).toBe(21);
-      expect(component['ultimoItem']).toBe(30);
+      expect(component['primeiroItem']).toBe(11);
+      expect(component['ultimoItem']).toBe(15);
     });
 
     it('deve ajustar último item na última página', () => {
@@ -150,8 +150,8 @@ describe('MpcPaginationComponent', () => {
       component['paginaAtual'] = 10;
       component.ngOnInit();
 
-      expect(component['primeiroItem']).toBe(91);
-      expect(component['ultimoItem']).toBe(95);
+      expect(component['primeiroItem']).toBe(46);
+      expect(component['ultimoItem']).toBe(50);
     });
 
     it('deve chamar calcularPaginasVisiveis e calcularItensVisiveis', () => {

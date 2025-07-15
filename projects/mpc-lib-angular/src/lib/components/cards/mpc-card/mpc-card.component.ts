@@ -7,30 +7,20 @@
  * @Inputs
  * @Input() imagem?: string - URL da imagem do card (opcional)
  * @Input() links: CardLinks[] - Array de links com ícones (opcional)
- * @Input() layout: 'vertical' | 'horizontal' - Layout do card (opcional, padrão: 'vertical')
+ * @Input() layout: 'vertical' | 'horizontal' | 'dinamico' - Layout do card (opcional, padrão: 'vertical').
+ *   - 'vertical': sempre vertical
+ *   - 'horizontal': sempre horizontal
+ *   - 'dinamico': horizontal em telas grandes (>= 992px), vertical em telas pequenas (< 992px)
  *
  * @Exemplo
  * ```html
- * <!-- Card Vertical Básico -->
- * <mpc-card [imagem]="'/assets/img/exemplo.jpg'" [layout]="'vertical'">
- *   <h3 titulo>Título customizado</h3>
- *   <h4 subtitulo>Subtítulo customizado</h4>
- *   <p descricao>Descrição customizada com <b>ng-content</b>.</p>
- * </mpc-card>
- *
- * <!-- Card Horizontal com Links e conteúdo customizado -->
- * <mpc-card
- *   [imagem]="'/assets/img/exemplo.jpg'"
- *   [layout]="'horizontal'"
- *   [links]="[
- *     { url: 'https://facebook.com', icone: 'bi bi-facebook' },
- *     { url: 'https://instagram.com', icone: 'bi bi-instagram' }
- *   ]">
- *   <div>
- *     <h3 titulo>Título customizado</h3>
- *     <h4 subtitulo>Subtítulo customizado</h4>
- *     <p>Texto customizado para o layout horizontal.</p>
- *   </div>
+ * <!-- Card Dinâmico (horizontal em desktop, vertical em mobile) -->
+ * <mpc-card [imagem]="'/assets/img/exemplo.jpg'" [layout]="'dinamico'">
+ *  <div card-body>
+ *   <h3>Título customizado</h3>
+ *   <h4>Subtítulo customizado</h4>
+ *   <p>Descrição customizada com <b>ng-content</b>.</p>
+ * </div>
  * </mpc-card>
  * ```
  *
@@ -43,7 +33,6 @@
  * --mpc-border-color-card: Cor da borda do card (padrão: var(--mpc-color-primary))
  * --mpc-bg-links-card: Cor de fundo dos links (padrão: var(--mpc-color-primary))
  * --mpc-color-links-card: Cor dos links (padrão: white)
- * --mpc-color-bar-card: Cor da barra do card (padrão: var(--mpc-color-primary))
  *
  * @Métodos públicos
  * - getImagemCard(): retorna a URL da imagem ou uma imagem padrão caso não exista
@@ -69,7 +58,7 @@ export interface CardLinks {
   selector: 'mpc-card',
   imports: [],
   templateUrl: './mpc-card.component.html',
-  styleUrl: './mpc-card.component.css'
+  styleUrls: ['./mpc-card.component.scss']
 })
 export class MpcCardComponent {
 
@@ -78,10 +67,17 @@ export class MpcCardComponent {
   @Input() imagem?: string = '';
   /** Array de links com ícones */
   @Input() links: CardLinks[] = [];
-  /** Layout do card: 'vertical' ou 'horizontal' */
-  @Input() layout: 'vertical' | 'horizontal' = 'vertical';
+  /** Layout do card: 'vertical', 'horizontal' ou 'dinamico' */
+  @Input() layout: 'vertical' | 'horizontal' | 'dinamico' = 'vertical';
 
-  // ===== MÉTODOS PÚBLICOS =====
+  // ===== MÉTODOS =====
+
+  /**
+ * Getter para saber se o layout é dinâmico
+ */
+  get isDinamico(): boolean {
+    return this.layout === 'dinamico';
+  }
 
   /**
    * Retorna a URL da imagem do card ou uma imagem padrão caso não exista.
@@ -93,18 +89,28 @@ export class MpcCardComponent {
 
   /**
    * Verifica se o layout do card é vertical.
+   * No modo dinâmico, retorna true se a tela for pequena.
    * @returns {boolean} true se o layout for vertical
    */
   protected isVertical(): boolean {
-    return this.layout === 'vertical';
+    if (this.layout === 'vertical') return true;
+    if (this.layout === 'dinamico') {
+      return window.innerWidth < 992;
+    }
+    return false;
   }
 
   /**
    * Verifica se o layout do card é horizontal.
+   * No modo dinâmico, retorna true se a tela for grande.
    * @returns {boolean} true se o layout for horizontal
    */
   protected isHorizontal(): boolean {
-    return this.layout === 'horizontal';
+    if (this.layout === 'horizontal') return true;
+    if (this.layout === 'dinamico') {
+      return window.innerWidth >= 992;
+    }
+    return false;
   }
 
   /**

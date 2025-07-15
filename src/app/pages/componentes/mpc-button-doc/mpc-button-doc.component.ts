@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MpcButtonComponent } from 'mpc-lib-angular';
-import { MpcSectionComponent } from '../../../shared/components/mpc-section/mpc-section.component';
+import { MpcSectionComponent } from 'mpc-lib-angular';
 
 /**
  * @Componente MpcButtonDocComponent

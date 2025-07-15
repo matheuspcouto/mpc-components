@@ -10,16 +10,13 @@
  * @Exemplo de uso
  * ```html
  * <mpc-card-evento [dia]="'25'" [mes]="'Dez'">
- *   <span titulo>Ceia de Natal</span>
- *   <span subtitulo>Domingo, 19h</span>
- *   <span descricao>Participe conosco deste momento especial!</span>
+ * div card-body>
+ *   <span>Ceia de Natal</span>
+ *   <span>Domingo, 19h</span>
+ *   <span>Participe conosco deste momento especial!</span>
+ * </div>
  * </mpc-card-evento>
  * ```
- *
- * @Content Projection (ng-content)
- * - [titulo]: título do evento
- * - [subtitulo]: subtítulo do evento
- * - [descricao]: descrição do evento
  *
  * @Variáveis CSS disponíveis
  * --mpc-color-border-timeline-card-evento: Cor da linha vertical da timeline (padrão: var(--mpc-color-primary))
@@ -43,7 +40,7 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'mpc-card-evento',
   templateUrl: './mpc-card-evento.component.html',
-  styleUrl: './mpc-card-evento.component.css'
+  styleUrls: ['./mpc-card-evento.component.scss']
 })
 export class MpcCardEventoComponent {
 

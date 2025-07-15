@@ -19,7 +19,6 @@
 
 import { Component, inject, computed } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { MpcButtonComponent } from 'mpc-lib-angular';
 import { MpcErrorService } from './mpc-error.service';
 
@@ -28,7 +27,7 @@ export interface MpcErro {
     mensagem: string;
     rotaRetorno: string;
     imagem?: string;
-  }
+}
 
 @Component({
     selector: 'mpc-error',
@@ -37,9 +36,10 @@ export interface MpcErro {
     styleUrls: ['./mpc-error.component.css']
 })
 export class MpcErrorComponent {
-    private router = inject(Router);
-    private notificationService = inject(ToastrService);
-    private errorService = inject(MpcErrorService);
+
+    // Injeções
+    private readonly router = inject(Router);
+    private readonly errorService = inject(MpcErrorService);
 
     /**
      * Computed signal que verifica se há erro para exibir.
@@ -89,7 +89,6 @@ export class MpcErrorComponent {
         if (!mensagem) return;
         navigator.clipboard.writeText(mensagem);
         this.isCopiado = true;
-        this.notificationService.info('Copiado para área de transferência', '');
         setTimeout(() => { this.isCopiado = false; }, 3000);
     }
 } 

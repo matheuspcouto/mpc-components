@@ -64,7 +64,7 @@ enum PosicoesIcone {
   selector: 'mpc-button',
   imports: [],
   templateUrl: './mpc-button.component.html',
-  styleUrl: './mpc-button.component.css'
+  styleUrls: ['./mpc-button.component.scss']
 })
 export class MpcButtonComponent extends AccessibilityInputs {
 

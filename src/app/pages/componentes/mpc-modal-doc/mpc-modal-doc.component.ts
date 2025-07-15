@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { MpcModalComponent, MpcModalConfig, TipoModal, MpcButtonComponent } from 'mpc-lib-angular';
-import { MpcSectionComponent } from '../../../shared/components/mpc-section/mpc-section.component';
+import { MpcSectionComponent } from 'mpc-lib-angular';
 
 /**
  * @Componente MpcModalDocComponent

@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { MpcLoaderService, MpcButtonComponent } from 'mpc-lib-angular';
-import { MpcSectionComponent } from '../../../shared/components/mpc-section/mpc-section.component';
+import { MpcLoaderService, MpcButtonComponent, MpcSectionComponent } from 'mpc-lib-angular';
 
 /**
  * @Componente MpcLoaderDocComponent

@@ -41,6 +41,7 @@ export * from './lib/components/mpc-modal/mpc-modal.component';
 export * from './lib/components/mpc-button/mpc-button.component';
 export * from './lib/components/mpc-btn-float/mpc-btn-float.component';
 export * from './lib/components/mpc-navbar/mpc-navbar.component';
+export * from './lib/components/mpc-section/mpc-section.component';
 
 
 
