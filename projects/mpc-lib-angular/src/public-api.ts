@@ -31,6 +31,9 @@ export * from './lib/pipes/cpf-cnpj/cpf-cnpj-mask.pipe';
 export * from './lib/pipes/email/email-mask.pipe';
 export * from './lib/pipes/telefone/telefone-mask.pipe';
 
+// Interceptors
+export * from './lib/interceptors/mpc-http-loader-interceptor/mpc-http-loader.interceptor';
+
 // Components
 export * from './lib/components/mpc-form-progress-bar/mpc-form-progress-bar.component';
 export * from './lib/components/mpc-loader/mpc-loader.service'; // Service para o loader
@@ -42,6 +45,8 @@ export * from './lib/components/mpc-button/mpc-button.component';
 export * from './lib/components/mpc-btn-float/mpc-btn-float.component';
 export * from './lib/components/mpc-navbar/mpc-navbar.component';
 export * from './lib/components/mpc-section/mpc-section.component';
+export * from './lib/components/mpc-page-divider-img/mpc-page-divider-img.component';
+export * from './lib/components/mpc-page-header-home/mpc-page-header-home.component';
 
 
 

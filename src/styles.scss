@@ -44,16 +44,30 @@
 body {
   font-family: var(--font-default);
   overflow: auto !important;
-}
 
-mpc-section {
-  /* Cores */
-  --mpc-section-color-titulo: var(--color-primary);
-  --mpc-section-color-titulo-destaque: var(--color-secondary);
-  --mpc-section-color-subtitulo: var(--color-tertiary);
+  @media screen and (min-width: 992px) {
+    main {
+      margin-top: 90px;
+    }
+  }
 
-  /* Fontes */
-  --mpc-section-font-titulo: var(--font-subtitle);
-  --mpc-section-font-titulo-destaque: var(--font-subtitle);
-  --mpc-section-font-subtitulo: var(--font-default);
+  @media screen and (max-width: 991.98px) {
+    main {
+      margin-top: 70px;
+    }
+  }
+
+  main {
+    mpc-section {
+      /* Cores */
+      --mpc-section-color-titulo: var(--color-primary);
+      --mpc-section-color-titulo-destaque: var(--color-secondary);
+      --mpc-section-color-subtitulo: var(--color-tertiary);
+
+      /* Fontes */
+      --mpc-section-font-titulo: var(--font-subtitle);
+      --mpc-section-font-titulo-destaque: var(--font-subtitle);
+      --mpc-section-font-subtitulo: var(--font-default);
+    }
+  }
 }

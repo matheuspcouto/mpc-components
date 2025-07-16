@@ -37,7 +37,7 @@ import { MpcSectionComponent } from 'mpc-lib-angular';
     MpcSectionComponent
 ],
   templateUrl: './contato.component.html',
-  styleUrls: ['./contato.component.css'],
+  styleUrls: ['./contato.component.scss'],
 })
 export default class ContatoComponent implements OnInit {
 

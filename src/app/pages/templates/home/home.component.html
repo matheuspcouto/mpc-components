@@ -1,30 +1,25 @@
-<!-- ======= Page Header Home Section ======= -->
-<section id="page-header-home" class="page-header-home">
-  <div class="container">
-    <div class="row gy-5">
-      <div class="col-lg-8 page-header-content">
-        <h2><span>Mpc</span></h2>
-        <h2> Components </h2>
-        <br>
-        <p>Desenvolvido por
-          <a href="https://www.linkedin.com/in/matheuspcouto/" target="_blank">
-            Matheus Pimentel Do Couto
-          </a>
-        </p>
-        <div class="d-flex">
-          <mpc-button texto="Ver Documentação" icone="bi bi-book-fill" posicaoIcone="esquerda"
-            (click)="irParaDocumentacao()" class="btn-home" [tabIndex]="0" ariaLabel="Ver Documentação" />
-        </div>
-      </div>
-      <div class="col-lg-4 order-lg-2">
-        <img src="/assets/img/logo.png" class="img-page-header">
-      </div>
-    </div>
-  </div>
-</section>
-<!-- ======= End Page Header Home Section ======= -->
-
 <main>
+
+  <!-- ======= Page Header Home ======= -->
+  <mpc-page-header-home imagemFundo="/assets/img/home/mountain.jpg">
+    <div content>
+      <h2><span>Mpc</span></h2>
+      <h2> Components </h2>
+      <br>
+      <p>Desenvolvido por
+        <a href="https://www.linkedin.com/in/matheuspcouto/" target="_blank">
+          Matheus Pimentel Do Couto
+        </a>
+      </p>
+      <mpc-button texto="Ver Documentação" icone="bi bi-book-fill" posicaoIcone="esquerda"
+        (click)="irParaDocumentacao()" class="btn-home" [tabIndex]="0" ariaLabel="Ver Documentação" />
+    </div>
+    <div logo>
+      <img src="/assets/img/logo.png">
+    </div>
+  </mpc-page-header-home>
+  <!-- ======= End Page Header Home ======= -->
+
   <!-- ======= Descricao Section ======= -->
   <mpc-section class="descricao" subtitulo="conheça o" titulo="Mpc" tituloDestaque="Components">
 
@@ -36,7 +31,8 @@
             <span>O que é ?</span>
             <h5>
               Um repositório de componentes e páginas Angular responsivos e altamente personalizáveis, projetado para
-              facilitar o desenvolvimento de aplicações web. Este site foi totalmente desenvolvido com utilizando esses
+              facilitar o desenvolvimento de aplicações web. Este site foi totalmente desenvolvido com utilizando
+              esses
               componentes.
             </h5>
           </div>

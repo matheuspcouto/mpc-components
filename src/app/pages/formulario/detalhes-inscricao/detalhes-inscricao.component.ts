@@ -46,7 +46,7 @@ export interface dadosDetalhesInscricao {
   selector: 'detalhes-inscricao',
   imports: [MpcButtonComponent],
   templateUrl: './detalhes-inscricao.component.html',
-  styleUrls: ['./detalhes-inscricao.component.css']
+  styleUrls: ['./detalhes-inscricao.component.scss']
 })
 export class DetalhesInscricaoComponent implements OnInit {
 

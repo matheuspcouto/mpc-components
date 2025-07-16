@@ -35,7 +35,7 @@ import { MpcSectionComponent } from 'mpc-lib-angular';
     MpcButtonComponent, MpcSectionComponent
 ],
   templateUrl: './pagamento.component.html',
-  styleUrls: ['./pagamento.component.css'],
+  styleUrls: ['./pagamento.component.scss'],
 })
 export default class PagamentoComponent implements OnInit {
 

@@ -24,7 +24,7 @@ import { MpcSectionComponent } from 'mpc-lib-angular';
   selector: 'app-buttons',
   imports: [MpcButtonComponent, MpcSectionComponent],
   templateUrl: './mpc-button-doc.component.html',
-  styleUrl: './mpc-button-doc.component.css'
+  styleUrl: './mpc-button-doc.component.scss'
 })
 export class MpcButtonDocComponent {
   /**

@@ -29,7 +29,7 @@ import { MpcInputSenhaComponent, MpcInputEmailComponent, MpcButtonComponent } fr
     MpcButtonComponent
   ],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export default class LoginComponent {
 

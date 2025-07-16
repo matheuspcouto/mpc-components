@@ -1,83 +1,65 @@
 /*--------------------------------------------------------------
 # Page Header Home Section
 --------------------------------------------------------------*/
-.page-header-home {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  position: relative;
-  min-height: 100vh;
-  padding: 160px 0 60px 0;
-  background-size: cover !important;
-  background-position: center !important;
-  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(/assets/img/home/mountain.jpg);
+mpc-page-header-home {
 
-  .page-header-content {
-    order: 2 !important;
-    text-align: start;
+  mpc-button {
+    justify-content: start;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    --mpc-bg-color-btn: white;
+    --mpc-text-color-btn: var(--color-primary);
+    --mpc-bg-color-btn-hover: var(--color-secondary);
+    --mpc-text-color-btn-hover: white;
+  }
 
-    .btn-home {
-      --mpc-bg-color-btn: white;
-      --mpc-text-color-btn: var(--color-primary);
-      --mpc-bg-color-btn-hover: var(--color-secondary);
-      --mpc-text-color-btn-hover: white;
+  img {
+    height: auto;
+    width: 100%;
+    border-radius: 50%;
+  }
+
+  h2 {
+    font-family: var(--mpc-font-title) !important;
+    font-size: 64px;
+    font-weight: 500;
+    color: white !important;
+
+    span {
+      color: var(--mpc-color-secondary);
+      font-size: clamp(1em, 1em + 1vw, 3em);
+    }
+  }
+
+  p {
+    color: var(--mpc-color-tertiary);
+    font-size: 25px;
+    font-weight: 400;
+    margin-bottom: 30px;
+  }
+
+  a {
+    color: white;
+    text-decoration: none;
+
+    &:hover {
+      color: var(--mpc-color-secondary);
+    }
+  }
+}
+
+@media screen and (max-width: 991.98px) {
+  mpc-page-header-home {
+    mpc-button {
+      justify-content: center;
     }
 
     h2 {
-      font-family: var(--mpc-font-title) !important;
-      font-size: 64px;
-      font-weight: 500;
-      color: white !important;
-
-      span {
-        color: var(--mpc-color-secondary);
-        font-size: clamp(1em, 1em + 1vw, 3em);
-      }
+      font-size: 40px;
     }
 
-    @media (max-width: 640px) {
-      h2 {
-        font-size: 30px;
-      }
+    span {
+      font-size: 45px;
     }
-
-    p {
-      color: var(--mpc-color-tertiary);
-      font-size: 25px;
-      font-weight: 400;
-      margin-bottom: 30px;
-    }
-
-    @media (max-width: 640px) {
-      p {
-        font-size: 18px;
-      }
-    }
-
-    a {
-      color: white;
-      text-decoration: none;
-
-      &:hover {
-        color: var(--mpc-color-secondary);
-      }
-    }
-  }
-
-  @media screen and (max-width: 640px) {
-    .page-header-content {
-      text-align: center;
-      align-items: center;
-    }
-
-  }
-
-  .img-page-header {
-    width: 100%;
-    height: auto;
   }
 }
 

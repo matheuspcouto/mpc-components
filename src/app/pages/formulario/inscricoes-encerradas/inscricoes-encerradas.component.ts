@@ -21,6 +21,6 @@ import { Component } from '@angular/core';
   selector: 'inscricoes-encerradas',
   imports: [],
   templateUrl: './inscricoes-encerradas.component.html',
-  styleUrl: './inscricoes-encerradas.component.css'
+  styleUrl: './inscricoes-encerradas.component.scss'
 })
 export class InscricoesEncerradasComponent {}

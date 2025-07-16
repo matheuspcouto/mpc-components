@@ -22,7 +22,7 @@ import { MpcSectionComponent } from 'mpc-lib-angular';
 @Component({
   selector: 'navbar',
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css',
+  styleUrl: './navbar.component.scss',
   imports: [MpcSectionComponent]
 })
 export class NavbarComponent { }

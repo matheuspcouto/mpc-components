@@ -41,7 +41,7 @@ import { MpcInputTextComponent, MpcInputNumberComponent, MpcInputDateComponent, 
     MpcSectionComponent
   ],
   templateUrl: './mpc-inputs-doc.component.html',
-  styleUrl: './mpc-inputs-doc.component.css'
+  styleUrl: './mpc-inputs-doc.component.scss'
 })
 export class MpcInputsDocComponent {
   /**

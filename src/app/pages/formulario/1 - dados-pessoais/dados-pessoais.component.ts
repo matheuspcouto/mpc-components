@@ -35,7 +35,7 @@ import { MpcErrorService } from '../../../shared/components/mpc-error/mpc-error.
     MpcFormProgressBarComponent, MpcInputNumberComponent,
     MpcInputCpfcnpjComponent, MpcInputTextAreaComponent, MpcButtonComponent, MpcSectionComponent],
   templateUrl: './dados-pessoais.component.html',
-  styleUrls: ['./dados-pessoais.component.css'],
+  styleUrls: ['./dados-pessoais.component.scss'],
 })
 export default class DadosPessoaisComponent implements OnInit {
 

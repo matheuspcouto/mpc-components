@@ -27,7 +27,7 @@ import { MpcPaginationComponent } from 'mpc-lib-angular';
   selector: 'app-paginacao',
   imports: [MpcPaginationComponent, MpcSectionComponent],
   templateUrl: './mpc-pagination-doc.component.html',
-  styleUrl: './mpc-pagination-doc.component.css'
+  styleUrl: './mpc-pagination-doc.component.scss'
 })
 export class MpcPaginationDocComponent {
 

@@ -25,7 +25,7 @@ import { MpcSectionComponent } from 'mpc-lib-angular';
   selector: 'app-btn-float-doc',
   imports: [MpcBtnFloatComponent, MpcSectionComponent],
   templateUrl: './mpc-btn-float-doc.component.html',
-  styleUrl: './mpc-btn-float-doc.component.css'
+  styleUrl: './mpc-btn-float-doc.component.scss'
 })
 export class MpcBtnFloatDocComponent {
   /**

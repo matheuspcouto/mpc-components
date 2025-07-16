@@ -23,7 +23,7 @@ import { MpcLoaderService, MpcButtonComponent, MpcSectionComponent } from 'mpc-l
   selector: 'app-loaders',
   imports: [MpcSectionComponent, MpcButtonComponent],
   templateUrl: './mpc-loader-doc.component.html',
-  styleUrl: './mpc-loader-doc.component.css'
+  styleUrl: './mpc-loader-doc.component.scss'
 })
 export class MpcLoaderDocComponent {
 

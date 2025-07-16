@@ -21,6 +21,6 @@ import { Component } from '@angular/core';
   selector: 'app-aguarde',
   imports: [],
   templateUrl: './aguarde.component.html',
-  styleUrls: ['./aguarde.component.css']
+  styleUrls: ['./aguarde.component.scss']
 })
 export default class AguardeComponent { }

@@ -32,7 +32,7 @@ import { MpcSectionComponent } from 'mpc-lib-angular';
     selector: 'app-pesquisa',
     imports: [ReactiveFormsModule, FormsModule, MpcInputPesquisaComponent, MpcSectionComponent],
     templateUrl: './pesquisa.component.html',
-    styleUrls: ['./pesquisa.component.css']
+    styleUrls: ['./pesquisa.component.scss']
 })
 export class PesquisaComponent {
 

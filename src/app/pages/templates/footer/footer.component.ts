@@ -21,7 +21,7 @@ import { MpcSectionComponent } from 'mpc-lib-angular';
 @Component({
   selector: 'footer',
   templateUrl: './footer.component.html',
-  styleUrl: './footer.component.css',
+  styleUrl: './footer.component.scss',
   imports: [MpcSectionComponent]
 })
 export class FooterComponent {}

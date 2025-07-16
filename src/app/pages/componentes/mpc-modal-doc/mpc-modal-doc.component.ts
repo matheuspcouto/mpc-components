@@ -25,7 +25,7 @@ import { MpcSectionComponent } from 'mpc-lib-angular';
   selector: 'app-modais',
   imports: [MpcModalComponent, MpcSectionComponent, MpcButtonComponent],
   templateUrl: './mpc-modal-doc.component.html',
-  styleUrl: './mpc-modal-doc.component.css'
+  styleUrl: './mpc-modal-doc.component.scss'
 })
 export class MpcModalDocComponent {
 

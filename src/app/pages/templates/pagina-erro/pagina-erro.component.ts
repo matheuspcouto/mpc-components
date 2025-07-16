@@ -26,7 +26,7 @@ import { MpcButtonComponent, MpcSectionComponent } from 'mpc-lib-angular';
   standalone: true,
   imports: [MpcButtonComponent, MpcSectionComponent],
   templateUrl: './pagina-erro.component.html',
-  styleUrl: './pagina-erro.component.css'
+  styleUrl: './pagina-erro.component.scss'
 })
 export class PaginaErroComponent {
   private mpcErrorService = inject(MpcErrorService);

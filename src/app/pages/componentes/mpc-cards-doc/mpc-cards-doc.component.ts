@@ -23,7 +23,7 @@ import { MpcCardComponent, MpcCardBackGroundImgComponent, MpcCardEventoComponent
   selector: 'app-cards',
   imports: [MpcCardComponent, MpcCardBackGroundImgComponent, MpcCardMenuComponent, MpcCardEventoComponent, MpcSectionComponent],
   templateUrl: './mpc-cards-doc.component.html',
-  styleUrl: './mpc-cards-doc.component.css'
+  styleUrl: './mpc-cards-doc.component.scss'
 })
 export class MpcCardsDocComponent {
   /**

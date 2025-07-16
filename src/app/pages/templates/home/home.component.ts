@@ -20,14 +20,13 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Rotas } from '../../../shared/enums/rotas-enum';
-import { MpcPageDividerImgComponent } from '../../../shared/components/mpc-page-divider-img/mpc-page-divider-img.component';
-import { MpcCardMenuComponent, MpcButtonComponent, MpcSectionComponent } from 'mpc-lib-angular';
+import { MpcCardMenuComponent, MpcButtonComponent, MpcSectionComponent, MpcPageDividerImgComponent, MpcPageHeaderHomeComponent } from 'mpc-lib-angular';
 
 @Component({
   selector: 'app-home',
-  imports: [MpcCardMenuComponent, MpcPageDividerImgComponent, MpcButtonComponent, MpcSectionComponent],
+  imports: [MpcCardMenuComponent, MpcPageDividerImgComponent, MpcButtonComponent, MpcSectionComponent, MpcPageHeaderHomeComponent],
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.scss']
 })
 export default class HomeComponent {
 

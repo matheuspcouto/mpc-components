@@ -25,7 +25,7 @@ import { MpcTabsComponent, Tab, MpcSectionComponent } from 'mpc-lib-angular';
   selector: 'app-tabs',
   imports: [MpcTabsComponent, MpcSectionComponent],
   templateUrl: './mpc-tabs-doc.component.html',
-  styleUrl: './mpc-tabs-doc.component.css'
+  styleUrl: './mpc-tabs-doc.component.scss'
 })
 export class MpcTabsDocComponent {
 

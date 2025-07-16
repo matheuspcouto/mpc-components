@@ -33,7 +33,7 @@ export interface MpcErro {
     selector: 'mpc-error',
     imports: [MpcButtonComponent],
     templateUrl: './mpc-error.component.html',
-    styleUrls: ['./mpc-error.component.css']
+    styleUrls: ['./mpc-error.component.scss']
 })
 export class MpcErrorComponent {
 

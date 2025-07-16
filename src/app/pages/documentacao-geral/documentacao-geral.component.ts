@@ -21,7 +21,7 @@ import { MpcSectionComponent } from 'mpc-lib-angular';
 @Component({
   selector: 'app-documentacao-geral',
   templateUrl: './documentacao-geral.component.html',
-  styleUrl: './documentacao-geral.component.css',
+  styleUrl: './documentacao-geral.component.scss',
   imports: [MpcSectionComponent],
 })
 export class DocumentacaoGeralComponent { } 

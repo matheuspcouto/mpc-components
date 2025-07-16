@@ -31,7 +31,7 @@ import { MpcSectionComponent } from 'mpc-lib-angular';
   selector: 'app-confirmacao',
   imports: [MpcModalComponent, MpcFormProgressBarComponent, MpcButtonComponent, MpcSectionComponent],
   templateUrl: './confirmacao.component.html',
-  styleUrl: './confirmacao.component.css'
+  styleUrl: './confirmacao.component.scss'
 })
 export class ConfirmacaoComponent implements OnInit {
 
