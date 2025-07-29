@@ -1,9 +1,3 @@
-import { inject, Injectable } from '@angular/core';
-import { CanActivate, Router, ActivatedRouteSnapshot } from '@angular/router';
-import { InscricaoService } from '../../pages/formulario/service/inscricao.service';
-import { Rotas } from '../../shared/enums/rotas-enum';
-import { Observable, map, of } from 'rxjs';
-
 /**
  * @Guard InscricoesGuard
  * Este guard é responsável por controlar o acesso às rotas de inscrição, verificando vagas e etapas do formulário.
@@ -12,6 +6,12 @@ import { Observable, map, of } from 'rxjs';
  * @created 27/06/2025
  * @updated 04/07/2025
  */
+import { inject, Injectable } from '@angular/core';
+import { CanActivate, Router, ActivatedRouteSnapshot } from '@angular/router';
+import { InscricaoService } from '../../pages/formulario/service/inscricao.service';
+import { Rotas } from '../../shared/enums/rotas-enum';
+import { Observable, map, of } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })

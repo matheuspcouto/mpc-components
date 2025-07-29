@@ -80,17 +80,7 @@ export default class ContatoComponent implements OnInit {
 
       if (this.inscricaoService.isContatoCompleto()) {
         this.form.reset();
-        this.form.patchValue({
-          telefone: dadosInscricao.telefone,
-          email: dadosInscricao.email,
-          rua: dadosInscricao.rua,
-          numero: dadosInscricao.numero,
-          bairro: dadosInscricao.bairro,
-          cidade: dadosInscricao.cidade,
-          estado: dadosInscricao.estado,
-          cep: dadosInscricao.cep,
-          complemento: dadosInscricao.complemento,
-        });
+        this.form.patchValue(dadosInscricao);
       }
     } catch (error) {
       this.errorService.construirErro(error);

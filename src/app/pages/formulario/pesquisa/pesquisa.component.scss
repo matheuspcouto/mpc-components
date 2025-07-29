@@ -6,6 +6,16 @@
   font-family: var(--font-default);
   font-weight: 600;
   padding: 2rem;
+
+  form {
+    /* Inputs */
+    .form-input {
+      --mpc-color-text: var(--color-primary);
+      --mpc-color-border: var(--color-tertiary);
+      --mpc-color-border-success: var(--color-secondary);
+      --mpc-font-text: var(--font-subtitle);
+    }
+  }
 }
 
 /* Mobile */

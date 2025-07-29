@@ -101,14 +101,8 @@ export default class DadosPessoaisComponent implements OnInit {
 
       if (this.inscricaoService.isDadosPessoaisCompletos()) {
         this.form.reset();
-        this.form.patchValue({
-          nome: dadosInscricao.nome,
-          sobrenome: dadosInscricao.sobrenome,
-          dataNasc: dadosInscricao.dataNasc,
-          idade: dadosInscricao.idade,
-          cpfCnpj: dadosInscricao.cpfCnpj,
-          descricao: dadosInscricao.descricao,
-        });
+        this.form.patchValue(dadosInscricao);
+        
         if (dadosInscricao.sexo) {
           this.sexos.forEach(sexo => {
             if (sexo.value === dadosInscricao.sexo) {

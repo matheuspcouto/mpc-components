@@ -5,7 +5,7 @@
  * Utiliza Signals para armazenar dados e etapas, e métodos para manipulação e simulação de requisições.
  *
  * @Propriedades
- * @private apiUrl {string} - URL base da API
+ * @private baseUrl {string} - URL base da API
  * @private dadosInscricaoSignal {Signal<any>} - Signal para os dados da inscrição
  * @public dadosInscricao {Signal<any>} - Signal somente leitura dos dados da inscrição
  * @private etapaAtualSignal {Signal<number>} - Signal para a etapa atual do formulário
@@ -35,37 +35,23 @@ import { Inscricao } from '../model/inscricao.model';
   providedIn: 'root'
 })
 export class InscricaoService {
-  /**
-   * URL base da API.
-   */
+  // URL base da API.
   private baseUrl = environment.baseUrl;
 
-  /**
-   * Signal para armazenar os dados da inscrição.
-   */
+  // Signal para armazenar os dados da inscrição.
   private dadosInscricaoSignal = signal<any>({});
-  /**
-   * Signal somente leitura dos dados da inscrição.
-   */
+  // Signal somente leitura dos dados da inscrição.
   dadosInscricao = this.dadosInscricaoSignal.asReadonly();
 
-  /**
-   * Signal para armazenar a etapa atual do formulário.
-   */
+  // Signal para armazenar a etapa atual do formulário.
   private etapaAtualSignal = signal<number>(1);
-  /**
-   * Signal somente leitura da etapa atual.
-   */
+  // Signal somente leitura da etapa atual.
   etapaAtual = this.etapaAtualSignal.asReadonly();
 
-  /**
-   * Headers padrão para requisições HTTP.
-   */
+  // Headers padrão para requisições HTTP.
   private headers = new HttpHeaders({ 'Content-Type': 'application/json;charset=UTF-8' });
 
-  /**
-   * Instância do HttpClient para requisições HTTP.
-   */
+  // Instância do HttpClient para requisições HTTP.
   private http = inject(HttpClient);
 
   /**

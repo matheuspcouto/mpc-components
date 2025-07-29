@@ -11,43 +11,43 @@
 
       <div class="row">
         <div class="col-md-6 mb-3">
-          <mpc-input-text label="Nome" [min]="3" formControlName="nome" />
+          <mpc-input-text label="Nome" [min]="3" formControlName="nome" class="form-input" />
         </div>
 
         <div class="col-md-6 mb-3">
-          <mpc-input-text label="Sobrenome" [min]="3" [max]="100" formControlName="sobrenome" />
+          <mpc-input-text label="Sobrenome" [min]="3" [max]="100" formControlName="sobrenome" class="form-input" />
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-4 mb-3">
           <mpc-input-date label="Data de Nascimento" [maxDate]="dataAtual" [required]="true"
-            formControlName="dataNasc" />
+            formControlName="dataNasc" class="form-input" />
         </div>
 
         <div class="col-md-4 mb-3">
-          <mpc-input-number label="Idade" [min]="1" [max]="99" formControlName="idade" />
+          <mpc-input-number label="Idade" [min]="1" [max]="99" formControlName="idade" class="form-input" />
         </div>
 
         <div class="col-md-4 mb-3">
-          <mpc-input-cpfcnpj [required]="true" formControlName="cpfCnpj" />
+          <mpc-input-cpfcnpj [required]="true" formControlName="cpfCnpj" class="form-input" />
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-6 mb-3">
-          <mpc-input-radio label="Sexo" [required]="true" [options]="sexos" formControlName="sexo" />
+          <mpc-input-radio label="Sexo" [required]="true" [options]="sexos" formControlName="sexo" class="form-input" />
         </div>
 
         <div class="col-md-6 mb-3">
           <mpc-input-select label="Estado Civil" [options]="estadosCivis" [required]="true"
-            formControlName="estadoCivil" />
+            formControlName="estadoCivil" class="form-input" />
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-6">
-          <mpc-input-text-area label="Descrição" [max]="100" formControlName="descricao" />
+          <mpc-input-text-area label="Descrição" [max]="100" formControlName="descricao" class="form-input" />
         </div>
       </div>
 

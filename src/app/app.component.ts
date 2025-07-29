@@ -85,7 +85,6 @@ export class AppComponent implements OnInit {
 
   /**
    * Inicializa o componente e adiciona listener para controlar a visibilidade do botão de scroll para o topo.
-   * Também inicializa a animação AOS e exibe o ambiente atual no console.
    * @returns {void}
    */
   ngOnInit(): void {

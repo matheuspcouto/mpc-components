@@ -1,5 +1,5 @@
 /*
- * Public API Surface of mpc-lib
+ * Public API Surface of mpc-lib-angular
  */
 
 export * from './lib/mpc-lib.service';

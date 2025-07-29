@@ -11,30 +11,30 @@
 
       <div class="row">
         <div class="col-md-6 mb-3">
-          <mpc-input-telefone formControlName="telefone" [required]="true" />
+          <mpc-input-telefone formControlName="telefone" [required]="true" class="form-input" />
         </div>
 
         <div class="col-md-6 mb-3">
-          <mpc-input-email formControlName="email" [required]="true" />
+          <mpc-input-email formControlName="email" [required]="true" class="form-input" />
         </div>
       </div>
 
       <div class="col-md-6 mb-3 align-items-center justify-content-between">
-        <mpc-input-busca-cep formControlName="cep" [required]="true" (endereco)="definirEnderecoPorCep($event)" />
+        <mpc-input-busca-cep formControlName="cep" [required]="true" (endereco)="definirEnderecoPorCep($event)" class="form-input" />
       </div>
 
       <div class="row">
 
         <div class="col-md-4 mb-3">
-          <mpc-input-text label="Cidade" [readonly]="true" formControlName="cidade" />
+          <mpc-input-text label="Cidade" formControlName="cidade" class="form-input" />
         </div>
 
         <div class="col-md-4 mb-3">
-          <mpc-input-text label="Estado" [readonly]="true" formControlName="estado" />
+          <mpc-input-text label="Estado" formControlName="estado" class="form-input" />
         </div>
 
         <div class="col-md-4 mb-3">
-          <mpc-input-text label="Bairro" [readonly]="true" formControlName="bairro" />
+          <mpc-input-text label="Bairro" formControlName="bairro" class="form-input" />
         </div>
 
       </div>
@@ -42,17 +42,17 @@
       <div class="row">
 
         <div class="col-md-8 mb-3">
-          <mpc-input-text label="Rua" [readonly]="true" formControlName="rua" />
+          <mpc-input-text label="Rua" formControlName="rua" class="form-input" />
         </div>
 
         <div class="col-md-4 mb-3">
-          <mpc-input-text label="Número/Lote" [min]="1" formControlName="numero" />
+          <mpc-input-text label="Número/Lote" [min]="1" formControlName="numero" class="form-input" />
         </div>
 
       </div>
 
       <div class="row">
-        <mpc-input-text label="Complemento" [max]="50" formControlName="complemento" />
+        <mpc-input-text label="Complemento" [max]="50" formControlName="complemento" class="form-input" />
       </div>
 
       <div class="d-flex justify-content-center align-items-center mt-5">
