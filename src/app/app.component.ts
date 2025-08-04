@@ -11,7 +11,7 @@
  */
 
 import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import { MpcBtnFloatComponent, MpcLoaderComponent, MpcNavbarComponent, NavbarConfig } from 'mpc-lib-angular';
 import { environment } from '../environments/environment';
@@ -31,6 +31,12 @@ export class AppComponent implements OnInit {
    * @type {any}
    */
   private readonly platformId = inject(PLATFORM_ID);
+
+  /**
+   * Serviço de roteamento para navegação entre páginas.
+   * @type {Router}
+   */
+  private readonly router = inject(Router);
 
   /**
    * Define visualização do botão de voltar ao topo.
@@ -93,6 +99,12 @@ export class AppComponent implements OnInit {
         const scrollPosition = window.scrollY;
         this.showScrollTop = scrollPosition > 300;
       });
+
+      this.router.events.subscribe(event => {
+        if (event instanceof NavigationEnd) {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
     }
 
     console.log(`Server running on: '${environment.env}' mode.`);
@@ -106,6 +118,20 @@ export class AppComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+  }
+
+  /**
+   * Rotas onde a navbar NÃO deve aparecer
+   * @type {string[]}
+   */
+  protected esconderNavbar: string[] = ['/aguarde'];
+
+  /**
+   * Verifica se a navbar deve ser exibida com base na URL atual.
+   * @returns {boolean}
+   */
+  protected mostrarNavbar(): boolean {
+    return !this.esconderNavbar.some(route => this.router.url.startsWith(route));
   }
 }
 

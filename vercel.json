@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/inscricoes",
+      "destination": "http://localhost:3000/inscricoes"
+    },
+    {
+      "source": "/api/detalhes-inscricao",
+      "destination": "http://localhost:3000/detalhes-inscricao"
+    }
+  ]
+} 

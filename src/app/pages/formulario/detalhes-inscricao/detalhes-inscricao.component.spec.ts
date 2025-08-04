@@ -165,7 +165,7 @@ describe('DetalhesInscricaoComponent', () => {
 
   it('deve formatar valor e data', () => {
     expect(component['formatarValor'](10)).toContain('R$');
-    expect(component['formatarData']('data-invalida')).toBe('data-inval');
+    expect(component['formatarData']('data-invalida')).toBe('');
     expect(component['formatarData']('')).toBe('');
   });
 

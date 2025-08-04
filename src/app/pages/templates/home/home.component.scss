@@ -101,21 +101,24 @@ mpc-page-header-home {
 /*--------------------------------------------------------------
 # Page Divider Img Section
 --------------------------------------------------------------*/
-.page-divider-img {
-  /* Cores */
-  --mpc-color-title-page-divider-img: white;
-  --mpc-color-subtitle-page-divider-img: var(--color-secondary);
+mpc-page-divider-img {
 
-  /* Fontes */
-  --mpc-font-title-page-divider-img: var(--font-title);
-  --mpc-font-subtitle-page-divider-img: var(--font-title);
+  h2 {
+    font-size: 2rem;
+    font-family: var(--font-title);
+    font-weight: 400;
+    color: white;
+  }
 
-  /* Tamanho Fonte */
-  --mpc-font-size-title-page-divider-img: 2rem;
-  --mpc-font-size-subtitle-page-divider-img: 2rem;
+  span {
+    font-size: 2rem;
+    font-family: var(--font-title);
+    color: var(--mpc-color-secondary);
+  }
 
-  /* Background-Position */
-  --mpc-bg-position-page-divider-img: center;
+  .content {
+    flex-direction: row;
+  }
 }
 
 /*--------------------------------------------------------------
@@ -130,16 +133,25 @@ mpc-page-header-home {
     height: 350px;
   }
 
-  .cards-menu {
-    /* Cores */
-    --mpc-color-bg-card-menu: white;
-    --mpc-color-title-card-menu: var(--color-primary);
-    --mpc-color-description-card-menu: var(--color-primary);
+  mpc-card-menu {
     --mpc-color-bg-icone-card-menu: var(--color-primary);
-    --mpc-color-text-icone-card-menu: white;
 
-    /* Fontes */
-    --mpc-font-title-card-menu: var(--font-subtitle);
-    --mpc-font-description-card-menu: var(--font-default);
+    h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 0;
+      color: var(--color-primary);
+      font-family: var(--font-subtitle);
+    }
+
+    p {
+      padding: 0;
+      margin: 0;
+      line-height: 24px;
+      font-size: 14px;
+      margin-top: 5px;
+      color: var(--color-primary);
+      font-family: var(--font-subtitle);
+    }
   }
 }

@@ -36,17 +36,31 @@ describe('InscricaoService', () => {
   });
 
   it('deve listar inscrições (mock)', done => {
+    const mockResponse = [{ id: 1, nome: 'João' }] as any;
+    
     service.listarInscricoes().subscribe(resultado => {
       expect(resultado).toBeDefined();
+      expect(resultado).toEqual(mockResponse);
       done();
     });
+
+    const req = httpMock.expectOne(`${service['baseUrl']}/listar`);
+    expect(req.request.method).toBe('GET');
+    req.flush(mockResponse);
   });
 
   it('deve inscrever com sucesso', done => {
+    const mockResponse = { id: 1, nome: 'João' } as any;
+    
     service.inscrever({ nome: 'João' } as any).subscribe((resultado: any) => {
       expect(resultado).toBeDefined();
+      expect(resultado).toEqual(mockResponse);
       done();
     });
+
+    const req = httpMock.expectOne(`${service['baseUrl']}/inscrever`);
+    expect(req.request.method).toBe('POST');
+    req.flush(mockResponse);
   });
 
   it('deve validar dados pessoais completos', () => {
@@ -74,10 +88,17 @@ describe('InscricaoService', () => {
   });
 
   it('deve detalhar inscrição (mock)', done => {
+    const mockResponse = { id: 123, nome: 'João' } as any;
+    
     service.detalharInscricao('123').subscribe(resultado => {
       expect(resultado).toBeDefined();
+      expect(resultado).toEqual(mockResponse);
       done();
     });
+
+    const req = httpMock.expectOne(`${service['baseUrl']}/detalhes`);
+    expect(req.request.method).toBe('GET');
+    req.flush(mockResponse);
   });
 
   it('deve limpar dados da inscrição', () => {

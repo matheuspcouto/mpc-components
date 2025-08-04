@@ -27,8 +27,6 @@ import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
-import inscricoes from '../../../../../mock/inscricoes.json';
-import detalhesInscricao from '../../../../../mock/detalhes-inscricao.json';
 import { Inscricao } from '../model/inscricao.model';
 
 @Injectable({
@@ -104,15 +102,8 @@ export class InscricaoService {
    *   inscricaoService.detalharInscricao('123').subscribe(...)
    */
   detalharInscricao(id: string): Observable<Inscricao> {
-    // MOCK - Retorna o objeto mock do arquivo JSON
-    return Observable.create((observer: any) => {
-      setTimeout(() => {
-        observer.next(detalhesInscricao);
-        observer.complete();
-      }, 3000);
-    });
-    // Implementação Real:
-    // return this.http.get<any>(`${this.baseUrl}/inscricoes/${codigoInscricao}/detalhes`, { headers: this.headers });
+    const headersWithId = this.headers.append('id', id);
+    return this.http.get<any>(`${this.baseUrl}/detalhes`, { headers: headersWithId });
   }
 
   /**
@@ -122,13 +113,7 @@ export class InscricaoService {
    *   inscricaoService.listarInscricoes().subscribe(...)
    */
   listarInscricoes(): Observable<Inscricao[]> {
-    // MOCK
-    return Observable.create((observer: any) => {
-      observer.next(inscricoes);
-      observer.complete();
-    });
-    // Implementação Real:
-    // return this.http.get<any>(`${this.baseUrl}/inscricoes`, { headers: this.headers });
+    return this.http.get<any>(`${this.baseUrl}/listar`, { headers: this.headers });
   }
 
   /**
@@ -139,17 +124,8 @@ export class InscricaoService {
    *   inscricaoService.inscrever({ ... }).subscribe(...)
    */
   inscrever(body: Inscricao): Observable<Inscricao> {
-    // MOCK
-    return Observable.create((observer: any) => {
-      setTimeout(() => {
-        observer.next(detalhesInscricao);
-        observer.complete();
-      }, 3000)
-    });
-    // Implementação Real:
-    /* const requestBody = JSON.stringify(body);
-    const headersWithSexo = this.headers.append('sexo', sexo);
-    return this.http.post<any>(`${this.baseUrl}/inscricao`, requestBody, { headers: headersWithSexo }); */
+    const requestBody = JSON.stringify(body);
+    return this.http.post<any>(`${this.baseUrl}/inscrever`, requestBody, { headers: this.headers });
   }
 
   /**

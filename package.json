@@ -3,9 +3,9 @@
   "version": "2.0.0",
   "scripts": {
     "ng": "ng",
-    "dev": "ng serve -o -c development",
-    "local": "ng serve -o -c local",
-    "production": "ng serve -o -c production",
+    "mock": "json-server -m mocks/gate.js -p 3000 -w mocks/dados.json -r mocks/routes.json --delay 1000",
+    "local": "ng serve -o --proxy-config proxy.conf.mock.json",
+    "start": "concurrently \"npm run mock\" \"npm run local\"",
     "build": "ng build --configuration production",
     "test": "jest --coverage --no-cache --detectOpenHandles",
     "serve:ssr:mpc-components": "node dist/mpc-components/server/server.mjs"
@@ -40,6 +40,7 @@
     "jasmine-core": "~5.5.0",
     "jest": "^29.7.0",
     "jest-preset-angular": "^14.6.0",
+    "json-server": "^0.17.3",
     "karma": "^6.4.4",
     "karma-chrome-launcher": "^3.2.0",
     "karma-jasmine": "^5.1.0",

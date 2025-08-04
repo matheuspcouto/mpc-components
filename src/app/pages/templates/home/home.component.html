@@ -57,8 +57,13 @@
   <!-- ======= Descricao Section ======= -->
 
   <!-- ======= Capa Meio Section ======= -->
-  <mpc-page-divider-img titulo="Mpc" subtitulo="Components" class="page-divider-img"
-    imagemFundo="/assets/img/home/mountain.jpg" />
+  <mpc-page-divider-img imagemFundo="/assets/img/home/mountain.jpg">
+    <div content>
+      <h2>Mpc
+        <span>Components</span>.
+      </h2>
+    </div>
+  </mpc-page-divider-img>
   <!-- ======= Capa Meio Section ======= -->
 
   <!-- ======= Contato Section ======= -->
@@ -71,16 +76,24 @@
           allowfullscreen frameBorder="0"></iframe>
       </div>
 
-      <div class="row gy-4">
+      <div class="row">
 
-        <div class="col-lg-6">
-          <mpc-card-menu class="cards-menu" icone="bi bi-map" titulo="Endereço"
-            descricao="Palmas, Tocantins"></mpc-card-menu>
+        <div class="col-lg-6 mb-3">
+          <mpc-card-menu icone="bi bi-map">
+            <div card-body>
+              <h3>Endereço</h3>
+              <p>Palmas, Tocantins</p>
+            </div>
+          </mpc-card-menu>
         </div>
 
-        <div class="col-lg-6">
-          <mpc-card-menu class="cards-menu" icone="bi bi-telephone" titulo="Telefone"
-            descricao="(63) 9 9201-4337"></mpc-card-menu>
+        <div class="col-lg-6 mb-3">
+          <mpc-card-menu icone="bi bi-telephone">
+            <div card-body>
+              <h3>Telefone</h3>
+              <p>(63) 9 9201-4337</p>
+            </div>
+          </mpc-card-menu>
         </div>
 
       </div>

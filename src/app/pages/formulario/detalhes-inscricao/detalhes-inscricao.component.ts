@@ -15,7 +15,7 @@
  *
  * @author Matheus Pimentel Do Couto
  * @created 27/06/2025
- * @updated 10/07/2025
+ * @updated 04/08/2025
  */
 
 import { ToastrService } from 'ngx-toastr';
@@ -25,7 +25,7 @@ import { Inscricao } from '../model/inscricao.model';
 import { MpcErrorService } from '../../../shared/components/mpc-error/mpc-error.service';
 import { Rotas } from '../../../shared/enums/rotas-enum';
 import { Router } from '@angular/router';
-import { MpcButtonComponent } from 'mpc-lib-angular';
+import { MpcButtonComponent, MpcSectionComponent } from 'mpc-lib-angular';
 
 export interface dadosDetalhesInscricao {
   dadosInscricao: {
@@ -44,7 +44,7 @@ export interface dadosDetalhesInscricao {
 
 @Component({
   selector: 'detalhes-inscricao',
-  imports: [MpcButtonComponent],
+  imports: [MpcButtonComponent, MpcSectionComponent],
   templateUrl: './detalhes-inscricao.component.html',
   styleUrls: ['./detalhes-inscricao.component.scss']
 })
@@ -242,13 +242,32 @@ export class DetalhesInscricaoComponent implements OnInit {
    * @param data Data a ser formatada
    * @returns {string} Data formatada
    */
-  protected formatarData(data: string | undefined): string {
+  protected formatarData(data: string | Date | undefined): string {
     if (!data) return '';
-    const date = new Date(data);
-    if (date instanceof Date && !isNaN(date.getTime())) {
-      return new Date(date).toLocaleDateString('pt-BR');
+    
+    let date: Date;
+    
+    // Se já for uma instância de Date
+    if (data instanceof Date) {
+      date = data;
+    } else {
+      // Tenta criar uma nova Date a partir da string
+      date = new Date(data);
     }
-    return data.substring(0, 10);
+    
+    // Verifica se a data é válida
+    if (isNaN(date.getTime())) {
+      return '';
+    }
+    
+    // Formata a data no padrão brasileiro com hora
+    const dia = date.getDate().toString().padStart(2, '0');
+    const mes = (date.getMonth() + 1).toString().padStart(2, '0');
+    const ano = date.getFullYear();
+    const hora = date.getHours().toString().padStart(2, '0');
+    const minuto = date.getMinutes().toString().padStart(2, '0');
+    
+    return `${dia}/${mes}/${ano} - ${hora}:${minuto}`;
   }
 
   /**

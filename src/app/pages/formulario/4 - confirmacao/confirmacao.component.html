@@ -1,106 +1,108 @@
-<mpc-section subtitulo="agora é só" titulo="Confirmar os" tituloDestaque="Dados">
+<main>
+  <mpc-section subtitulo="agora é só" titulo="Confirmar os" tituloDestaque="Dados">
 
-  <div class="container">
+    <div class="container">
 
-    <mpc-form-progress-bar id="barra-progresso" [etapaAtual]="4" [totalEtapas]="4"></mpc-form-progress-bar>
+      <mpc-form-progress-bar id="barra-progresso" [etapaAtual]="4" [totalEtapas]="4"></mpc-form-progress-bar>
 
-    <h4>Dados Pessoais</h4>
+      <h4>Dados Pessoais</h4>
 
-    <div class="row">
-      <div class="col-md-3 mb-1">
-        <h5 class="mb-1">Nome</h5>
-        <p>{{ dadosInscricao.nome }}</p>
+      <div class="row">
+        <div class="col-md-3 mb-1">
+          <h5 class="mb-1">Nome</h5>
+          <p>{{ dadosInscricao.nome }}</p>
+        </div>
       </div>
+
+      <div class="row">
+        @if (dadosInscricao.descricao) {
+        <div class="col-md-3 mb-1">
+          <h5 class="mb-1">Descrição</h5>
+          <p>{{ dadosInscricao.descricao }}</p>
+        </div>
+        }
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-1">
+          <h5 class="mb-1">Data de Nascimento</h5>
+          <p>{{ dadosInscricao.dataNasc }}</p>
+        </div>
+
+        <div class="col-md-6 mb-1">
+          <h5 class="mb-1">Idade</h5>
+          <p>{{ dadosInscricao.idade }}</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 mb-1">
+          <h5 class="mb-1">CPF/CNPJ</h5>
+          <p>{{ dadosInscricao.cpfCnpj }}</p>
+        </div>
+
+        <div class="col-md-4 mb-1">
+          <h5 class="mb-1">Sexo</h5>
+          <p>{{ getSexo() }}</p>
+        </div>
+
+        <div class="col-md-4 mb-1">
+          <h5 class="mb-1">Estado Civil</h5>
+          <p>{{ dadosInscricao.estadoCivil }}</p>
+        </div>
+      </div>
+
+      <hr>
+
+      <h4>Dados de Contato</h4>
+
+      <div class="row">
+        <div class="col-md-6 mb-1">
+          <h5 class="mb-1">Telefone</h5>
+          <p>{{ dadosInscricao.telefone }}</p>
+        </div>
+
+        <div class="col-md-6 mb-1">
+          <h5 class="mb-1">E-mail</h5>
+          <p>{{ dadosInscricao.email }}</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 mb-1">
+          <h5 class="mb-1">Endereço</h5>
+          <p>{{ dadosInscricao.endereco }}</p>
+        </div>
+      </div>
+
+      <hr>
+
+      <h4>Dados de Pagamento</h4>
+
+      <div class="row">
+        <div class="col-md-6 mb-1">
+          <h5 class="mb-1">Valor</h5>
+          <p>{{ formatarValor(dadosInscricao.valor) }}</p>
+        </div>
+
+        <div class="col-md-6 mb-1">
+          <h5 class="mb-1">Forma de Pagamento</h5>
+          <p>{{ dadosInscricao.formaPagamento }}</p>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-center align-items-center mt-5">
+        <mpc-button (click)="inscrever()" id="btn-inscrever" icone="bi bi-send" texto="Inscrever-se" />
+      </div>
+
+      <div class="d-flex justify-content-center align-items-center mt-3">
+        <mpc-button (click)="etapaAnterior()" id="btn-voltar" posicaoIcone="esquerda" icone="bi bi-arrow-left"
+          texto="Voltar para Pagamento" />
+      </div>
+
     </div>
 
-    <div class="row">
-      @if (dadosInscricao.descricao) {
-      <div class="col-md-3 mb-1">
-        <h5 class="mb-1">Descrição</h5>
-        <p>{{ dadosInscricao.descricao }}</p>
-      </div>
-      }
-    </div>
+  </mpc-section>
 
-    <div class="row">
-      <div class="col-md-6 mb-1">
-        <h5 class="mb-1">Data de Nascimento</h5>
-        <p>{{ dadosInscricao.dataNasc }}</p>
-      </div>
-
-      <div class="col-md-6 mb-1">
-        <h5 class="mb-1">Idade</h5>
-        <p>{{ dadosInscricao.idade }}</p>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-4 mb-1">
-        <h5 class="mb-1">CPF/CNPJ</h5>
-        <p>{{ dadosInscricao.cpfCnpj }}</p>
-      </div>
-
-      <div class="col-md-4 mb-1">
-        <h5 class="mb-1">Sexo</h5>
-        <p>{{ getSexo() }}</p>
-      </div>
-
-      <div class="col-md-4 mb-1">
-        <h5 class="mb-1">Estado Civil</h5>
-        <p>{{ dadosInscricao.estadoCivil }}</p>
-      </div>
-    </div>
-
-    <hr>
-
-    <h4>Dados de Contato</h4>
-
-    <div class="row">
-      <div class="col-md-6 mb-1">
-        <h5 class="mb-1">Telefone</h5>
-        <p>{{ dadosInscricao.telefone }}</p>
-      </div>
-
-      <div class="col-md-6 mb-1">
-        <h5 class="mb-1">E-mail</h5>
-        <p>{{ dadosInscricao.email }}</p>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-12 mb-1">
-        <h5 class="mb-1">Endereço</h5>
-        <p>{{ dadosInscricao.endereco }}</p>
-      </div>
-    </div>
-
-    <hr>
-
-    <h4>Dados de Pagamento</h4>
-
-    <div class="row">
-      <div class="col-md-6 mb-1">
-        <h5 class="mb-1">Valor</h5>
-        <p>{{ formatarValor(dadosInscricao.valor) }}</p>
-      </div>
-
-      <div class="col-md-6 mb-1">
-        <h5 class="mb-1">Forma de Pagamento</h5>
-        <p>{{ dadosInscricao.formaPagamento }}</p>
-      </div>
-    </div>
-
-    <div class="d-flex justify-content-center align-items-center mt-5">
-      <mpc-button (click)="inscrever()" id="btn-inscrever" icone="bi bi-send" texto="Inscrever-se" />
-    </div>
-
-    <div class="d-flex justify-content-center align-items-center mt-3">
-      <mpc-button (click)="etapaAnterior()" id="btn-voltar" posicaoIcone="esquerda" icone="bi bi-arrow-left"
-        texto="Voltar para Pagamento" />
-    </div>
-
-  </div>
-
-</mpc-section>
-
-<mpc-modal #modalSucesso id="modal-sucesso"></mpc-modal>
+  <mpc-modal #modalSucesso id="modal-sucesso"></mpc-modal>
+</main>

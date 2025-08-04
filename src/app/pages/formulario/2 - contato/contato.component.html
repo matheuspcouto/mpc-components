@@ -1,72 +1,75 @@
-<mpc-section subtitulo="preencha seus dados abaixo no " titulo="Formulário de" tituloDestaque="Inscrição">
+<main>
+  <mpc-section subtitulo="preencha seus dados abaixo no " titulo="Formulário de" tituloDestaque="Inscrição">
 
-  <div class="container">
+    <div class="container">
 
-    <mpc-form-progress-bar id="barra-progresso" [etapaAtual]="2" [totalEtapas]="4"></mpc-form-progress-bar>
+      <mpc-form-progress-bar id="barra-progresso" [etapaAtual]="2" [totalEtapas]="4"></mpc-form-progress-bar>
 
-    <h3>Contato</h3>
-    <p class="text-muted mb-3">Campos obrigatórios (*)</p>
+      <h3>Contato</h3>
+      <p class="text-muted mb-3">Campos obrigatórios (*)</p>
 
-    <form [formGroup]="form">
+      <form [formGroup]="form">
 
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <mpc-input-telefone formControlName="telefone" [required]="true" class="form-input" />
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <mpc-input-telefone formControlName="telefone" [required]="true" class="form-input" />
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <mpc-input-email formControlName="email" [required]="true" class="form-input" />
+          </div>
         </div>
 
-        <div class="col-md-6 mb-3">
-          <mpc-input-email formControlName="email" [required]="true" class="form-input" />
-        </div>
-      </div>
-
-      <div class="col-md-6 mb-3 align-items-center justify-content-between">
-        <mpc-input-busca-cep formControlName="cep" [required]="true" (endereco)="definirEnderecoPorCep($event)" class="form-input" />
-      </div>
-
-      <div class="row">
-
-        <div class="col-md-4 mb-3">
-          <mpc-input-text label="Cidade" formControlName="cidade" class="form-input" />
+        <div class="col-md-6 mb-3 align-items-center justify-content-between">
+          <mpc-input-busca-cep formControlName="cep" [required]="true" (endereco)="definirEnderecoPorCep($event)"
+            class="form-input" />
         </div>
 
-        <div class="col-md-4 mb-3">
-          <mpc-input-text label="Estado" formControlName="estado" class="form-input" />
+        <div class="row">
+
+          <div class="col-md-4 mb-3">
+            <mpc-input-text label="Cidade" formControlName="cidade" class="form-input" />
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <mpc-input-text label="Estado" formControlName="estado" class="form-input" />
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <mpc-input-text label="Bairro" formControlName="bairro" class="form-input" />
+          </div>
+
         </div>
 
-        <div class="col-md-4 mb-3">
-          <mpc-input-text label="Bairro" formControlName="bairro" class="form-input" />
+        <div class="row">
+
+          <div class="col-md-8 mb-3">
+            <mpc-input-text label="Rua" formControlName="rua" class="form-input" />
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <mpc-input-text label="Número/Lote" [min]="1" formControlName="numero" class="form-input" />
+          </div>
+
         </div>
 
-      </div>
-
-      <div class="row">
-
-        <div class="col-md-8 mb-3">
-          <mpc-input-text label="Rua" formControlName="rua" class="form-input" />
+        <div class="row">
+          <mpc-input-text label="Complemento" [max]="50" formControlName="complemento" class="form-input" />
         </div>
 
-        <div class="col-md-4 mb-3">
-          <mpc-input-text label="Número/Lote" [min]="1" formControlName="numero" class="form-input" />
+        <div class="d-flex justify-content-center align-items-center mt-5">
+          <mpc-button (click)="proximaEtapa()" id="btn-proximo" icone="bi bi-arrow-right" texto="Próximo"
+            [disabled]="form.invalid" />
         </div>
 
-      </div>
+        <div class="d-flex justify-content-center align-items-center mt-3">
+          <mpc-button (click)="etapaAnterior()" id="btn-voltar" posicaoIcone="esquerda" icone="bi bi-arrow-left"
+            texto="Voltar para Dados Pessoais" />
+        </div>
 
-      <div class="row">
-        <mpc-input-text label="Complemento" [max]="50" formControlName="complemento" class="form-input" />
-      </div>
+      </form>
 
-      <div class="d-flex justify-content-center align-items-center mt-5">
-        <mpc-button (click)="proximaEtapa()" id="btn-proximo" icone="bi bi-arrow-right" texto="Próximo"
-          [disabled]="form.invalid" />
-      </div>
+    </div>
 
-      <div class="d-flex justify-content-center align-items-center mt-3">
-        <mpc-button (click)="etapaAnterior()" id="btn-voltar" posicaoIcone="esquerda" icone="bi bi-arrow-left"
-          texto="Voltar para Dados Pessoais" />
-      </div>
-
-    </form>
-
-  </div>
-
-</mpc-section>
+  </mpc-section>
+</main>

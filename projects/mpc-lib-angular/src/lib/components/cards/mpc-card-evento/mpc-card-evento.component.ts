@@ -49,6 +49,12 @@ export class MpcCardEventoComponent {
   @Input() dia: string = '';
   /** Mês do evento */
   @Input() mes: string = '';
+  /** ID único do card para acessibilidade */
+  @Input() id: string = '';
+  /** Índice de tabulação para navegação por teclado */
+  @Input() tabIndex: number = 0;
+  /** Rótulo para leitores de tela */
+  @Input() ariaLabel: string = '';
 
   // ===== MÉTODOS PROTEGIDOS =====
   /**

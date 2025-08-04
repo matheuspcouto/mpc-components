@@ -1,48 +1,50 @@
-<mpc-section subtitulo="preencha seus dados abaixo no" titulo="Formulário de" tituloDestaque="Inscrição">
+<main>
+  <mpc-section subtitulo="preencha seus dados abaixo no" titulo="Formulário de" tituloDestaque="Inscrição">
 
-  <div class="container">
+    <div class="container">
 
-    <mpc-form-progress-bar id="barra-progresso" [etapaAtual]="3" [totalEtapas]="4"></mpc-form-progress-bar>
+      <mpc-form-progress-bar id="barra-progresso" [etapaAtual]="3" [totalEtapas]="4"></mpc-form-progress-bar>
 
-    <h3>Pagamento</h3>
-    <p class="text-muted mb-3">Campos obrigatórios (*)</p>
+      <h3>Pagamento</h3>
+      <p class="text-muted mb-3">Campos obrigatórios (*)</p>
 
-    <form [formGroup]="form">
+      <form [formGroup]="form">
 
-      <!-- Alertas -->
-      @if (form.value.formaPagamento === "Cartão") {
-      <div class="alert alert-warning text-center mt-1">
-        <i class="bi bi-exclamation-circle float-left"></i>
-        Para pagamento via cartão, há um acréscimo ao valor referente a taxa da maquininha.
-      </div>
-      }
-      <!-- Alertas -->
-
-      <div class="row mb-3">
-        <div class="col-12 col-lg-6 mx-auto">
-          <h6>Valor: {{ valorFormatado }}</h6>
+        <div class="row mb-3">
+          <div class="col-12 col-lg-6 mx-auto">
+            <h6>Valor: {{ valorFormatado }}</h6>
+          </div>
         </div>
-      </div>
 
-      <div class="row mb-3">
-        <div class="col-12 col-lg-6 mx-auto">
-          <mpc-input-select label="Forma de Pagamento" [required]="true" formControlName="formaPagamento"
-            (valueChange)="calcularValorTotal()" [options]="formasPagamento" class="form-input" />
+        <div class="row mb-3">
+          <div class="col-12 col-lg-6 mx-auto">
+            <mpc-input-select label="Forma de Pagamento" [required]="true" formControlName="formaPagamento"
+              (valueChange)="calcularValorTotal()" [options]="formasPagamento" class="form-input" />
+          </div>
         </div>
-      </div>
 
-      <div class="d-flex justify-content-center align-items-center mt-5">
-        <mpc-button (click)="proximaEtapa()" id="btn-proximo" icone="bi bi-arrow-right" texto="Próximo"
-          [disabled]="form.invalid" />
-      </div>
+        <!-- Alertas -->
+        @if (form.value.formaPagamento === "Cartão") {
+        <div class="alert alert-warning text-center mt-1">
+          <i class="bi bi-exclamation-circle float-left"></i>
+          Para pagamento via cartão, há um acréscimo ao valor referente a taxa da maquininha.
+        </div>
+        }
+        <!-- Alertas -->
 
-      <div class="d-flex justify-content-center align-items-center mt-3">
-        <mpc-button (click)="etapaAnterior()" id="btn-voltar" posicaoIcone="esquerda" icone="bi bi-arrow-left"
-          texto="Voltar para Contato" />
-      </div>
+        <div class="d-flex justify-content-center align-items-center mt-5">
+          <mpc-button (click)="proximaEtapa()" id="btn-proximo" icone="bi bi-arrow-right" texto="Próximo"
+            [disabled]="form.invalid" />
+        </div>
 
-    </form>
+        <div class="d-flex justify-content-center align-items-center mt-3">
+          <mpc-button (click)="etapaAnterior()" id="btn-voltar" posicaoIcone="esquerda" icone="bi bi-arrow-left"
+            texto="Voltar para Contato" />
+        </div>
 
-  </div>
+      </form>
 
-</mpc-section>
+    </div>
+
+  </mpc-section>
+</main>

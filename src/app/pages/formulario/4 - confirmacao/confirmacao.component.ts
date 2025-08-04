@@ -44,7 +44,7 @@ export class ConfirmacaoComponent implements OnInit {
    * Referência ao modal de sucesso.
    */
   @ViewChild('modalSucesso', { static: true }) private modalSucesso!: MpcModalComponent;
-  
+
   /**
    * Dados da inscrição a serem exibidos.
    */
@@ -119,6 +119,7 @@ export class ConfirmacaoComponent implements OnInit {
       textoBotao: 'Abrir detalhes',
       segundoBotao: () => { this.modalSucesso?.fecharModal(); },
       textoSegundoBotao: 'Fechar',
+      imagem: '/assets/img/success.png'
     }
     this.modalSucesso?.abrirModal(modalSucesso);
   }

@@ -68,6 +68,10 @@ body {
       --mpc-section-font-titulo: var(--font-subtitle);
       --mpc-section-font-titulo-destaque: var(--font-subtitle);
       --mpc-section-font-subtitulo: var(--font-default);
+
+      section {
+        padding: 2rem 0;
+      }
     }
   }
 }
