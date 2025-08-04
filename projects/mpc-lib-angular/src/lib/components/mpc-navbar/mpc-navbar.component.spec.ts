@@ -57,7 +57,7 @@ describe('MpcNavbarComponent', () => {
     ];
     component['abas'] = abasMock;
     component.ngOnInit();
-    expect(component['abas'].length).toBe(2);
+    expect(component['abas'].length).toBe(1);
     expect(component['abaLogin']).toEqual(abasMock[1]);
   });
 

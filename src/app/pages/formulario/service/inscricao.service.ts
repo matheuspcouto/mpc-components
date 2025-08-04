@@ -97,33 +97,33 @@ export class InscricaoService {
   /**
    * Detalha uma inscrição pelo id (mock).
    * @param id ID da inscrição
-   * @returns Observable<Inscricao>
+   * @returns Observable<any>
    * @example
    *   inscricaoService.detalharInscricao('123').subscribe(...)
    */
-  detalharInscricao(id: string): Observable<Inscricao> {
+  detalharInscricao(id: string): Observable<any> {
     const headersWithId = this.headers.append('id', id);
     return this.http.get<any>(`${this.baseUrl}/detalhes`, { headers: headersWithId });
   }
 
   /**
    * Lista todas as inscrições (mock).
-   * @returns Observable<Inscricao[]>
+   * @returns Observable<any>
    * @example
    *   inscricaoService.listarInscricoes().subscribe(...)
    */
-  listarInscricoes(): Observable<Inscricao[]> {
+  listarInscricoes(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/listar`, { headers: this.headers });
   }
 
   /**
    * Realiza a inscrição (mock).
    * @param body Dados da inscrição
-   * @returns Observable<Inscricao>
+   * @returns Observable<any>
    * @example
    *   inscricaoService.inscrever({ ... }).subscribe(...)
    */
-  inscrever(body: Inscricao): Observable<Inscricao> {
+  inscrever(body: Inscricao): Observable<any> {
     const requestBody = JSON.stringify(body);
     return this.http.post<any>(`${this.baseUrl}/inscrever`, requestBody, { headers: this.headers });
   }

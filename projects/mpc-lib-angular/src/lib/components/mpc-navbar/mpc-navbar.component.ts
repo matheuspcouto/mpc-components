@@ -114,6 +114,7 @@ export class MpcNavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.abaLogin = this.abas.find(aba => aba.isAbaLogin);
+    this.abas = this.abas.filter(aba => !aba.isAbaLogin);
   }
 
   /**

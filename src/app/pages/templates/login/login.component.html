@@ -9,21 +9,19 @@
     <form class="login-form" [formGroup]="form">
       <div class="form-group">
         <mpc-input-email [id]="'email'" [tabIndex]="1" [ariaLabel]="'Digite seu e-mail'" [required]="true"
-          formControlName="email">
-        </mpc-input-email>
+          formControlName="email" />
       </div>
 
       <div class="form-group">
         <mpc-input-senha [id]="'password'" label="Senha" [tabIndex]="2" [ariaLabel]="'Digite sua senha'"
-          [required]="true" formControlName="senha">
-        </mpc-input-senha>
+          [required]="true" formControlName="senha" />
       </div>
 
       <div class="form-actions">
-        <mpc-button (click)="login()" [style.background-color]="'var(--mpc-color-primary)'" [style.color]="'white'"
-          icone="bi bi-box-arrow-in-right" posicaoIcone="direita" texto="Entrar" [disabled]="form.invalid" />
+        <mpc-button (click)="login()" icone="bi bi-box-arrow-in-right" posicaoIcone="direita" texto="Entrar"
+          id="btn-entrar" [disabled]="form.invalid" />
 
-        <mpc-button (click)="login()" texto="Cadastrar-se" />
+        <mpc-button (click)="login()" texto="Cadastre-se" id="btn-cadastrar" />
       </div>
 
     </form>

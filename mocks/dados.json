@@ -1,4 +1,22 @@
 {
+    "login": {
+        "admin@teste.com": {
+            "data": {
+                "id": 1,
+                "nome": "Administrador",
+                "email": "admin@teste.com",
+                "token": "token_simulado_admin_123456"
+            }
+        },
+        "usuario@teste.com": {
+            "data": {
+                "id": 2,
+                "nome": "Usuário Teste",
+                "email": "usuario@teste.com",
+                "token": "token_simulado_usuario_789012"
+            }
+        }
+    },
     "detalhes": {
         "id": 1234567890,
         "nome": "Matheus Pimentel",

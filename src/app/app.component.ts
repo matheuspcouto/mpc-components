@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
    * @type {NavbarConfig[]}
    */
   protected abas: NavbarConfig[] = [
-    /* { titulo: 'Login', rota: Rotas.LOGIN, icone: 'bi bi-person-fill' }, */
+    { titulo: 'Login', rota: Rotas.LOGIN, icone: 'bi bi-person-fill', isAbaLogin: true },
     { titulo: 'Home', rota: Rotas.HOME, icone: 'bi bi-house-fill' },
     { titulo: 'Documentação', rota: Rotas.LIB_DOC, icone: 'bi bi-book' },
     {
@@ -81,7 +81,7 @@ export class AppComponent implements OnInit {
       icone: 'bi bi-filetype-html',
       subRotas: [
         { titulo: 'Aguarde', rota: Rotas.AGUARDE },
-        /* { titulo: 'Login', rota: Rotas.LOGIN }, */
+        { titulo: 'Login', rota: Rotas.LOGIN },
         { titulo: 'Erro', rota: Rotas.PAGINA_ERRO },
         { titulo: 'Navbar', rota: Rotas.NAVBAR },
         { titulo: 'Footer', rota: Rotas.FOOTER },
@@ -124,7 +124,7 @@ export class AppComponent implements OnInit {
    * Rotas onde a navbar NÃO deve aparecer
    * @type {string[]}
    */
-  protected esconderNavbar: string[] = ['/aguarde'];
+  protected esconderNavbar: string[] = [Rotas.AGUARDE, Rotas.LOGIN];
 
   /**
    * Verifica se a navbar deve ser exibida com base na URL atual.
@@ -135,8 +135,8 @@ export class AppComponent implements OnInit {
   }
 }
 
-// TODO: Ajustar Tela de Login
-// TODO: Tela de Login com guard e renderizar só o componente de login
 // TODO: Tela de Cadastro
 // TODO: Corrigir documentação (um de cada vez)
 // TODO: Exemplos de arquivos de config/yml em templates ou aba configs
+// TODO: Fluxo de Gerenciamento de Inscrições
+// TODO: Ajustar navbar para login e logout
