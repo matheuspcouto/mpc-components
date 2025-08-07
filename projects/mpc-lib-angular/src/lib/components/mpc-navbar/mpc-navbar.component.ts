@@ -69,25 +69,35 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 export interface SubRotaConfig {
+  /** Identificador da sub-rota */
+  id: string;
   /** Título da sub-rota */
   titulo: string;
   /** Fragmento da URL (opcional) */
   fragment?: string;
   /** Rota da sub-aba (opcional) */
   rota?: string;
+  /** Ação a ser executada ao clicar na aba (opcional) */
+  acao?: () => void;
 }
 
 export interface NavbarConfig {
+  /** Identificador da aba */
+  id: string;
   /** Título da aba */
   titulo: string;
   /** Rota da aba */
   rota?: string;
+  /** Ação a ser executada ao clicar na aba (opcional) */
+  acao?: () => void;
   /** Classe do ícone (ex: 'bi bi-house') (opcional - se houver subRotas) */
   icone: string;
   /** Array de sub-rotas (opcional) */
   subRotas?: SubRotaConfig[];
   /** Flag de aba de login */
   isAbaLogin?: boolean;
+  /** Flag de aba de conta */
+  isAbaConta?: boolean;
 }
 
 @Component({
@@ -104,6 +114,8 @@ export class MpcNavbarComponent implements OnInit {
   @Input() logo?: string;
   /** Aba de login identificada automaticamente */
   protected abaLogin?: NavbarConfig;
+  /** Aba de conta identificada automaticamente */
+  protected abaConta?: NavbarConfig;
   /** Controla o estado de clique */
   protected isClicado = false;
 
@@ -114,7 +126,11 @@ export class MpcNavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.abaLogin = this.abas.find(aba => aba.isAbaLogin);
-    this.abas = this.abas.filter(aba => !aba.isAbaLogin);
+    this.abaConta = this.abas.find(aba => aba.isAbaConta);
+    this.abas = this.abas.filter(aba => !aba.isAbaLogin && !aba.isAbaConta);
+
+    console.log(this.abaLogin, this.abaConta, this.abas);
+    
   }
 
   /**
@@ -222,6 +238,8 @@ export class MpcNavbarComponent implements OnInit {
    */
   protected navegarParaLogin(): void {
     if (this.abaLogin) {
+      console.log(this.abaLogin);
+      
       this.navegarPara(this.abaLogin.rota);
     }
   }

@@ -42,9 +42,7 @@ export class InscricoesGuard implements CanActivate {
           throw new HttpErrorResponse({ error: response.error });
         }
 
-        const homens = response.data || [];
-
-        return homens.length < QTD_VAGAS;
+        return (response.data || []).length < QTD_VAGAS;
 
       }),
       catchError((error) => {

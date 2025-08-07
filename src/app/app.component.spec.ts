@@ -2,17 +2,28 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { ActivatedRoute } from '@angular/router';
 import { PLATFORM_ID } from '@angular/core';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { AuthService } from './shared/services/auth.service';
 
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
   let mockPlatformId: any;
+  let authService: jest.Mocked<AuthService>;
 
   beforeEach(async () => {
     mockPlatformId = 'browser';
 
+    const authServiceMock = {
+      isAuthenticated: jest.fn().mockReturnValue(false),
+      getUsuarioAtual: jest.fn(),
+      getAuthToken: jest.fn(),
+      login: jest.fn(),
+      logout: jest.fn()
+    };
+
     await TestBed.configureTestingModule({
-      imports: [AppComponent],
+      imports: [AppComponent, HttpClientTestingModule],
       providers: [
         {
           provide: ActivatedRoute,
@@ -25,12 +36,17 @@ describe('AppComponent', () => {
         {
           provide: PLATFORM_ID,
           useValue: mockPlatformId
+        },
+        {
+          provide: AuthService,
+          useValue: authServiceMock
         }
       ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
+    authService = TestBed.inject(AuthService) as jest.Mocked<AuthService>;
   });
 
   describe('Inicialização do Componente', () => {

@@ -1,69 +1,74 @@
 {
     "login": {
-        "admin@teste.com": {
-            "data": {
-                "id": 1,
-                "nome": "Administrador",
-                "email": "admin@teste.com",
-                "token": "token_simulado_admin_123456"
-            }
-        },
-        "usuario@teste.com": {
-            "data": {
-                "id": 2,
-                "nome": "Usuário Teste",
-                "email": "usuario@teste.com",
-                "token": "token_simulado_usuario_789012"
-            }
+        "status": 200,
+        "statusText": "OK",
+        "data": {
+            "id": 1,
+            "nome": "Administrador",
+            "email": "admin@teste.com",
+            "token": "token_simulado_admin_123456",
+            "expiresIn": "123456789"
         }
     },
     "detalhes": {
-        "id": 1234567890,
-        "nome": "Matheus Pimentel",
-        "sobrenome": " Do Couto",
-        "descricao": "Desenvolvedor Fullstack",
-        "dataNasc": "23/05/2000",
-        "sexo": "Masculino",
-        "estadoCivil": "Casado(a)",
-        "idade": 25,
-        "cpfCnpj": "123.456.789-00",
-        "telefone": "(11) 99999-8888",
-        "email": "matheus.pimentel@email.com",
-        "endereco": "Rua das Flores, 123, Apto 45, Centro, São Paulo, SP - CEP: 01234-567",
-        "formaPagamento": "PIX",
-        "valor": 150.00,
-        "statusPagamento": "A PAGAR",
-        "dataInscricao": "2025-01-15",
-        "status": "ATIVO"
-    },
-    "listar": [
-        {
-            "nome": "Inscrição 01"
-        },
-        {
-            "nome": "Inscrição 02"
-        },
-        {
-            "nome": "Inscrição 03"
+        "status": 200,
+        "statusText": "OK",
+        "data": {
+            "id": 1234567890,
+            "nome": "Matheus Pimentel",
+            "sobrenome": " Do Couto",
+            "descricao": "Desenvolvedor Fullstack",
+            "dataNasc": "23/05/2000",
+            "sexo": "Masculino",
+            "estadoCivil": "Casado(a)",
+            "idade": 25,
+            "cpfCnpj": "123.456.789-00",
+            "telefone": "(11) 99999-8888",
+            "email": "matheus.pimentel@email.com",
+            "endereco": "Rua das Flores, 123, Apto 45, Centro, São Paulo, SP - CEP: 01234-567",
+            "formaPagamento": "PIX",
+            "valor": 150.00,
+            "statusPagamento": "A PAGAR",
+            "dataInscricao": "2025-01-15",
+            "status": "ATIVO"
         }
-    ],
+    },
+    "listar": {
+        "status": 200,
+        "statusText": "OK",
+        "data": [
+            {
+                "nome": "Inscrição 01"
+            },
+            {
+                "nome": "Inscrição 02"
+            },
+            {
+                "nome": "Inscrição 03"
+            }
+        ]
+    },
     "inscrever": {
-        "id": 1234567890,
-        "nome": "Matheus Pimentel",
-        "sobrenome": " Do Couto",
-        "descricao": "Desenvolvedor Fullstack",
-        "dataNasc": "23/05/2000",
-        "sexo": "Masculino",
-        "estadoCivil": "Casado(a)",
-        "idade": 25,
-        "cpfCnpj": "123.456.789-00",
-        "telefone": "(11) 99999-8888",
-        "email": "matheus.pimentel@email.com",
-        "endereco": "Rua das Flores, 123, Apto 45, Centro, São Paulo, SP - CEP: 01234-567",
-        "formaPagamento": "PIX",
-        "valor": 150.00,
-        "statusPagamento": "A PAGAR",
-        "dataInscricao": "2025-01-15",
-        "status": "ATIVO"
+        "status": 201,
+        "statusText": "CREATED",
+        "data": {
+            "id": 1234567890,
+            "nome": "Matheus Pimentel",
+            "sobrenome": " Do Couto",
+            "descricao": "Desenvolvedor Fullstack",
+            "dataNasc": "23/05/2000",
+            "sexo": "Masculino",
+            "estadoCivil": "Casado(a)",
+            "idade": 25,
+            "cpfCnpj": "123.456.789-00",
+            "telefone": "(11) 99999-8888",
+            "email": "matheus.pimentel@email.com",
+            "endereco": "Rua das Flores, 123, Apto 45, Centro, São Paulo, SP - CEP: 01234-567",
+            "formaPagamento": "PIX",
+            "valor": 150.00,
+            "statusPagamento": "A PAGAR",
+            "dataInscricao": "2025-01-15",
+            "status": "ATIVO"
+        }
     }
 }

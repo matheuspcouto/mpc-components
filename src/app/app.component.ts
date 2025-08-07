@@ -10,13 +10,14 @@
  * @updated 10/07/2025
  */
 
-import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, PLATFORM_ID, Inject } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import { MpcBtnFloatComponent, MpcLoaderComponent, MpcNavbarComponent, NavbarConfig } from 'mpc-lib-angular';
 import { environment } from '../environments/environment';
 import { MpcFooterComponent } from './shared/components/mpc-footer/mpc-footer.component';
 import { Rotas } from './shared/enums/rotas-enum';
+import { AuthService } from './shared/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -30,13 +31,11 @@ export class AppComponent implements OnInit {
    * Identificador da plataforma (browser/server) para controle de funcionalidades específicas.
    * @type {any}
    */
-  private readonly platformId = inject(PLATFORM_ID);
-
-  /**
-   * Serviço de roteamento para navegação entre páginas.
-   * @type {Router}
-   */
-  private readonly router = inject(Router);
+  constructor(
+    @Inject(PLATFORM_ID) private readonly platformId: any,
+    private readonly router: Router,
+    private readonly authService: AuthService
+  ) {}
 
   /**
    * Define visualização do botão de voltar ao topo.
@@ -49,42 +48,43 @@ export class AppComponent implements OnInit {
    * @type {NavbarConfig[]}
    */
   protected abas: NavbarConfig[] = [
-    { titulo: 'Login', rota: Rotas.LOGIN, icone: 'bi bi-person-fill', isAbaLogin: true },
-    { titulo: 'Home', rota: Rotas.HOME, icone: 'bi bi-house-fill' },
-    { titulo: 'Documentação', rota: Rotas.LIB_DOC, icone: 'bi bi-book' },
+    { id: 'home', titulo: 'Home', rota: Rotas.HOME, icone: 'bi bi-house-fill' },
+    { id: 'documentacao', titulo: 'Documentação', rota: Rotas.LIB_DOC, icone: 'bi bi-book' },
     {
+      id: 'componentes',
       titulo: 'Componentes',
       icone: 'bi bi-code-slash',
       subRotas: [
-        { titulo: 'mpc-cards', rota: Rotas.CARDS },
-        { titulo: 'mpc-button', rota: Rotas.BUTTONS },
-        { titulo: 'mpc-btn-float', rota: Rotas.BTN_FLOAT },
-        { titulo: 'mpc-modal', rota: Rotas.MODAIS },
-        { titulo: 'mpc-loader', rota: Rotas.LOADERS },
-        { titulo: 'mpc-tabs', rota: Rotas.TABS },
-        { titulo: 'mpc-pagination', rota: Rotas.PAGINACAO },
-        { titulo: 'mpc-inputs', rota: Rotas.INPUTS },
-        { titulo: 'mpc-page-divider-img', rota: Rotas.PAGE_DIVIDER_IMG },
+        { id: 'mpc-cards', titulo: 'mpc-cards', rota: Rotas.CARDS },
+        { id: 'mpc-button', titulo: 'mpc-button', rota: Rotas.BUTTONS },
+        { id: 'mpc-btn-float', titulo: 'mpc-btn-float', rota: Rotas.BTN_FLOAT },
+        { id: 'mpc-modal', titulo: 'mpc-modal', rota: Rotas.MODAIS },
+        { id: 'mpc-loader', titulo: 'mpc-loader', rota: Rotas.LOADERS },
+        { id: 'mpc-tabs', titulo: 'mpc-tabs', rota: Rotas.TABS },
+        { id: 'mpc-pagination', titulo: 'mpc-pagination', rota: Rotas.PAGINACAO },
+        { id: 'mpc-inputs', titulo: 'mpc-inputs', rota: Rotas.INPUTS },
+        { id: 'mpc-page-divider-img', titulo: 'mpc-page-divider-img', rota: Rotas.PAGE_DIVIDER_IMG },
       ]
     },
     {
+      id: 'formulario',
       titulo: 'Formulário',
       icone: 'bi bi-file-earmark-text-fill',
       subRotas: [
-        { titulo: 'Realizar Inscrição (Fluxo)', rota: Rotas.DADOS_PESSOAIS },
-        { titulo: 'Pesquisar Inscrição', rota: Rotas.PESQUISA },
-        { titulo: 'Inscrições Encerradas', rota: Rotas.INSCRICOES_ENCERRADAS },
+        { id: 'realizar-inscricao', titulo: 'Realizar Inscrição (Fluxo)', rota: Rotas.DADOS_PESSOAIS },
+        { id: 'pesquisar-inscricao', titulo: 'Pesquisar Inscrição', rota: Rotas.PESQUISA },
+        { id: 'inscricoes-encerradas', titulo: 'Inscrições Encerradas', rota: Rotas.INSCRICOES_ENCERRADAS },
       ]
     },
     {
+      id: 'templates',
       titulo: 'Templates',
       icone: 'bi bi-filetype-html',
       subRotas: [
-        { titulo: 'Aguarde', rota: Rotas.AGUARDE },
-        { titulo: 'Login', rota: Rotas.LOGIN },
-        { titulo: 'Erro', rota: Rotas.PAGINA_ERRO },
-        { titulo: 'Navbar', rota: Rotas.NAVBAR },
-        { titulo: 'Footer', rota: Rotas.FOOTER },
+        { id: 'aguarde', titulo: 'Aguarde', rota: Rotas.AGUARDE },
+        { id: 'erro', titulo: 'Erro', rota: Rotas.PAGINA_ERRO },
+        { id: 'navbar', titulo: 'Navbar', rota: Rotas.NAVBAR },
+        { id: 'footer', titulo: 'Footer', rota: Rotas.FOOTER },
       ]
     },
   ];
@@ -94,6 +94,8 @@ export class AppComponent implements OnInit {
    * @returns {void}
    */
   ngOnInit(): void {
+    this.definirAbasLoginConta();
+
     if (isPlatformBrowser(this.platformId)) {
       window.addEventListener('scroll', () => {
         const scrollPosition = window.scrollY;
@@ -108,6 +110,34 @@ export class AppComponent implements OnInit {
     }
 
     console.log(`Server running on: '${environment.env}' mode.`);
+  }
+
+  protected definirAbasLoginConta(): void {
+    if (this.authService.isAuthenticated()) {
+      this.abas = this.abas.filter(aba => !aba.isAbaLogin);
+
+      const abaConta: NavbarConfig = {
+        id: 'conta',
+        titulo: 'Conta',
+        icone: 'bi bi-person-fill',
+        subRotas: [
+          { id: 'perfil', titulo: 'Perfil', rota: "" },
+          { id: 'sair', titulo: 'Sair', acao: () => this.authService.logout() },
+        ],
+        isAbaConta: true,
+      }
+
+      this.abas.push(abaConta);
+    } else {
+      const abaLogin: NavbarConfig = {
+        id: 'login',
+        titulo: 'Login',
+        icone: 'bi bi-person-fill',
+        isAbaLogin: true,
+        rota: Rotas.LOGIN
+      }
+      this.abas.push(abaLogin);
+    }
   }
 
   /**

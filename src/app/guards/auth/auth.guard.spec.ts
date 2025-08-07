@@ -22,11 +22,9 @@ describe('AuthGuard', () => {
 
   beforeEach(() => {
     const authServiceMock = {
-      getAutenticado: jest.fn(),
-      isAutenticado: jest.fn(),
-      getUsuario: jest.fn(),
+      isAuthenticated: jest.fn(),
       getUsuarioAtual: jest.fn(),
-      getToken: jest.fn(),
+      getAuthToken: jest.fn(),
       login: jest.fn(),
       logout: jest.fn()
     };
@@ -51,7 +49,7 @@ describe('AuthGuard', () => {
 
   describe('canActivate', () => {
     it('deve permitir acesso quando usuário está autenticado', () => {
-      authService.getAutenticado.mockReturnValue(true);
+      authService.isAuthenticated.mockReturnValue(true);
       
       const result = guard.canActivate(criarSnapshot(), criarStateSnapshot());
       
@@ -62,42 +60,36 @@ describe('AuthGuard', () => {
     });
 
     it('deve bloquear acesso quando usuário não está autenticado', () => {
-      authService.getAutenticado.mockReturnValue(false);
+      authService.isAuthenticated.mockReturnValue(false);
       
       const result = guard.canActivate(criarSnapshot(), criarStateSnapshot('/pagina-protegida'));
       
       result.subscribe(permitido => {
         expect(permitido).toBe(false);
-        expect(router.navigate).toHaveBeenCalledWith([Rotas.LOGIN], {
-          queryParams: { returnUrl: '/pagina-protegida' }
-        });
+        expect(router.navigate).toHaveBeenCalledWith([Rotas.LOGIN]);
       });
     });
 
-    it('deve redirecionar para login com returnUrl quando não autenticado', () => {
-      authService.getAutenticado.mockReturnValue(false);
+    it('deve redirecionar para login quando não autenticado', () => {
+      authService.isAuthenticated.mockReturnValue(false);
       const urlAtual = '/formulario/dados-pessoais';
       
       const result = guard.canActivate(criarSnapshot(), criarStateSnapshot(urlAtual));
       
       result.subscribe(permitido => {
         expect(permitido).toBe(false);
-        expect(router.navigate).toHaveBeenCalledWith([Rotas.LOGIN], {
-          queryParams: { returnUrl: urlAtual }
-        });
+        expect(router.navigate).toHaveBeenCalledWith([Rotas.LOGIN]);
       });
     });
 
     it('deve redirecionar para login sem returnUrl quando não autenticado e sem URL específica', () => {
-      authService.getAutenticado.mockReturnValue(false);
+      authService.isAuthenticated.mockReturnValue(false);
       
       const result = guard.canActivate(criarSnapshot(), criarStateSnapshot(''));
       
       result.subscribe(permitido => {
         expect(permitido).toBe(false);
-        expect(router.navigate).toHaveBeenCalledWith([Rotas.LOGIN], {
-          queryParams: { returnUrl: '' }
-        });
+        expect(router.navigate).toHaveBeenCalledWith([Rotas.LOGIN]);
       });
     });
   });

@@ -61,6 +61,33 @@
         }
         <!-- Fim da aba de login -->
 
+        <!-- Aba de Conta -->
+        @if (abaConta) {
+        <li class="dropdown" tabindex="0" [attr.aria-label]="'Aba com submenu ' + abaConta.titulo">
+          <a class="dropdown-toggle" [class.aba-ativa]="isAbaAtiva(abaConta)" data-bs-toggle="dropdown"
+            style="cursor: pointer;">
+            <i [class]="abaConta.icone"></i> {{ abaConta.titulo }}
+          </a>
+
+          <ul class="dropdown-menu">
+            @for (sub of abaConta.subRotas; track $index) {
+            <li class="mb-3">
+              @if (sub.rota) {
+              <a class="dropdown-item" (click)="navegarParaSubRota(sub)" [class.aba-ativa]="isSubAbaAtiva(sub)"
+                style="cursor: pointer;">
+                {{ sub.titulo }}
+              </a>
+              }
+              @if (sub.acao) {
+              <a class="dropdown-item" (click)="sub.acao()" style="cursor: pointer;">{{ sub.titulo }}</a>
+              }
+            </li>
+            }
+          </ul>
+        </li>
+        }
+        <!-- Fim da aba de conta -->
+
       </ul>
     </nav>
   </div>

@@ -24,7 +24,7 @@ export const routes: Routes = [
   /*  Rotas para Componentes */
   {
     path: SegmentoRotas.COMPONENTES,
-    canActivate: [AuthGuard, SiteAtivoGuard],
+    canActivate: [SiteAtivoGuard],
     children: [
       {
         path: SegmentoRotas.LIB_DOC,
@@ -68,7 +68,7 @@ export const routes: Routes = [
   /* Rotas do Formulário */
   {
     path: SegmentoRotas.FORMULARIO,
-    canActivate: [AuthGuard, SiteAtivoGuard, InscricoesGuard],
+    canActivate: [SiteAtivoGuard, InscricoesGuard],
     children: [
       {
         path: SegmentoRotas.DADOS_PESSOAIS,
@@ -114,7 +114,7 @@ export const routes: Routes = [
   /*  Rotas para Templates */
   {
     path: SegmentoRotas.TEMPLATES,
-    canActivate: [AuthGuard, SiteAtivoGuard],
+    canActivate: [SiteAtivoGuard],
     children: [
       {
         path: SegmentoRotas.LOGIN,

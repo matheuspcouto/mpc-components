@@ -57,21 +57,14 @@ export default class LoginComponent {
     if (this.form.valid) {
       const { email, senha } = this.form.value;
 
-      if (!email || !senha) {
-        this.notificacaoService.error('Email e senha são obrigatórios.');
-        return;
-      }
-
-      this.authService.login(email, senha).subscribe({
-        next: (response) => {
-          if (response.error) {
-            this.notificacaoService.error(response.error.message);
-          } else {
-            this.router.navigate([Rotas.HOME]);
-          }
+      this.authService.login(email!, senha!).subscribe({
+        next: () => {
+          this.router.navigate([Rotas.HOME]);
         },
         error: (error) => {
-          this.notificacaoService.error(error.error.message);
+          // Verifica se há uma mensagem de erro específica da API
+          const errorMessage = error?.error?.error || 'Não foi possível efetuar o login!';
+          this.notificacaoService.error(errorMessage);
         }
       });
     }

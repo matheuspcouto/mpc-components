@@ -6,45 +6,49 @@
  * @author Matheus Pimentel Do Couto
  * @created 10/07/2025
  */
+import { DOCUMENT } from '@angular/common';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { inject, Injectable, signal } from '@angular/core';
+import { Inject, Injectable, signal } from '@angular/core';
 import { map, Observable, take } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 export interface Usuario {
-  id: number;
+  id: string;
   nome: string;
+  cpf: string;
   email: string;
-  token?: string;
+  senha: string,
+  authToken: string;
+  expiresIn: string;
+  acessos?: string[];
+  status: string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly TOKEN_KEY = 'auth_token';
-  private readonly USER_KEY = 'auth_user';
+  private readonly AUTH_TOKEN = 'AUTH_TOKEN';
 
   // Signals para gerenciar o estado de autenticação
   private _usuarioAutenticado = signal<Usuario | null>(null);
-  private _isAuthenticated = signal<boolean>(false);
+  private _isAuthenticatedSignal = signal<boolean>(false);
 
   // Computed signals para exposição pública
   public readonly usuarioAutenticado = this._usuarioAutenticado.asReadonly();
-  public readonly isAuthenticated = this._isAuthenticated.asReadonly();
+  public readonly isAuthenticatedSignal = this._isAuthenticatedSignal.asReadonly();
 
   // Headers padrão para requisições HTTP.
-  private headers = new HttpHeaders({ 'Content-Type': 'application/json;charset=UTF-8' });
+  private readonly headers = new HttpHeaders({ 'Content-Type': 'application/json;charset=UTF-8' });
 
   // Instância do HttpClient para requisições HTTP.
-  private http = inject(HttpClient);
+  constructor(
+    private readonly http: HttpClient,
+    @Inject(DOCUMENT) private readonly document: Document
+  ) {}
 
   // URL base da API.
-  private baseUrl = environment.baseUrl;
-
-  constructor() {
-    this.carregarUsuarioSalvo();
-  }
+  private readonly baseUrl = environment.baseUrl;
 
   /**
    * Realiza o login do usuário
@@ -53,10 +57,12 @@ export class AuthService {
    * @returns Observable com o resultado da autenticação
    */
   login(email: string, senha: string): Observable<any> {
-    // Simulação de autenticação - em produção, isso seria uma chamada HTTP
-    const headersWithEmailAndSenha = this.headers.append('email', email).append('senha', senha);
+    const body = {
+      email: encodeURIComponent(email),
+      senha: encodeURIComponent(senha)
+    }
 
-    return this.http.post<any>(`${this.baseUrl}/login`, { headers: headersWithEmailAndSenha })
+    return this.http.post<any>(`${this.baseUrl}/login`, body, { headers: this.headers })
       .pipe((take(1)),
         map((response) => {
 
@@ -64,20 +70,8 @@ export class AuthService {
             throw new HttpErrorResponse({ error: response.error });
           }
 
-          if (response.data) {
-            const usuario: Usuario = {
-              id: response.data.id,
-              nome: response.data.nome,
-              email: response.data.email,
-              token: response.data.token
-            };
-
-            this.salvarUsuario(usuario);
-            return true; // Login bem-sucedido
-          } else {
-            throw new HttpErrorResponse({ error: 'Credenciais inválidas' });
-          }
-
+          this.salvarUsuario(response.data);
+          return true; // Login bem-sucedido
         }));
   }
 
@@ -86,71 +80,20 @@ export class AuthService {
  * @param usuario Dados do usuário
  */
   private salvarUsuario(usuario: Usuario): void {
-    if (usuario.token) {
-      this.setCookie(this.TOKEN_KEY, usuario.token, 15); // Expira em 15 minutos
+    if (usuario.authToken) {
+      this.setCookie(this.AUTH_TOKEN, usuario.authToken, usuario.expiresIn);
     }
-    this.setCookie(this.USER_KEY, JSON.stringify(usuario), 15); // Expira em 15 minutos
     this._usuarioAutenticado.set(usuario);
-    this._isAuthenticated.set(true);
-  }
-
-  /**
-   * Carrega o usuário salvo nos cookies
-   */
-  private carregarUsuarioSalvo(): void {
-    const token = this.getCookie(this.TOKEN_KEY);
-    const usuarioStr = this.getCookie(this.USER_KEY);
-
-    if (token && usuarioStr) {
-      try {
-        const usuario: Usuario = JSON.parse(usuarioStr);
-        this._usuarioAutenticado.set(usuario);
-        this._isAuthenticated.set(true);
-      } catch (error) {
-        console.error('Erro ao carregar usuário salvo:', error);
-        this.logout();
-      }
-    }
+    this._isAuthenticatedSignal.set(true);
   }
 
   /**
    * Realiza o logout do usuário
    */
   logout(): void {
-    this.removerCookie(this.TOKEN_KEY);
-    this.removerCookie(this.USER_KEY);
+    this.document.cookie = '';
     this._usuarioAutenticado.set(null);
-    this._isAuthenticated.set(false);
-  }
-
-  /**
-   * Verifica se o usuário está autenticado
-   * @returns Observable com o status de autenticação
-   */
-  isAutenticado(): Observable<boolean> {
-    return new Observable(observer => {
-      observer.next(this._isAuthenticated());
-      observer.complete();
-    });
-  }
-
-  /**
-   * Retorna o valor atual do status de autenticação
-   * @returns boolean indicando se está autenticado
-   */
-  getAutenticado(): boolean {
-    return this._isAuthenticated();
-  }
-
-  /**
-   * Retorna o usuário autenticado atual
-   * @returns Observable com o usuário ou null
-   */
-  getUsuario(): Observable<Usuario | null> {
-    return new Observable(observer => {
-      observer.next(this._usuarioAutenticado());
-      observer.complete();
-    });
+    this._isAuthenticatedSignal.set(false);
   }
 
   /**
@@ -165,22 +108,60 @@ export class AuthService {
    * Retorna o token de autenticação
    * @returns Token ou null
    */
-  getToken(): string | null {
-    return this.getCookie(this.TOKEN_KEY);
+  getAuthToken(): string | null {
+    return this.getCookie(this.AUTH_TOKEN);
+  }
+
+  /**
+   * Verifica se o usuário está autenticado
+   * @returns boolean indicando se está autenticado
+   */
+  isAuthenticated(): boolean {
+    return this._isAuthenticatedSignal();
   }
 
   /**
    * Define um cookie
    * @param name Nome do cookie
    * @param value Valor do cookie
-   * @param minutes Minutos para expiração
+   * @param expiresIn Tempo para expiração
+   * @param path Caminho do cookie
    */
-  private setCookie(name: string, value: string, minutes: number): void {
-    const expires = new Date();
-    expires.setTime(expires.getTime() + (minutes * 60 * 1000));
-    const expiresString = expires.toUTCString();
+  private setCookie(name: string, value: string, expiresIn: string, path: string = '/'): void {
+    let expiresString = '';
+    if (expiresIn) {
+      const expires = new Date(expiresIn);
+      expiresString = `; expires=${expires.toUTCString()}`;
+    }
 
-    document.cookie = `${name}=${encodeURIComponent(value)};expires=${expiresString};path=/;SameSite=Strict`;
+    this.document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}${expiresString};path=${path};SameSite=Strict`;
+  }
+
+  /**
+ * Converte uma string de cookie em um mapa de chaves e valores
+ * @param cookie String de cookie
+ * @returns Map com chaves e valores do cookie
+ */
+  private parseCookie(cookie: string): Map<string, string> {
+    return cookie.split(';')
+      .map(c => c.split('='))
+      .reduce((acc: Map<string, string>, v) => {
+        const key = (v[0] || '').trim();
+        const value = (v[1] || '').trim();
+
+        if (key) {
+          acc.set(decodeURIComponent(key), decodeURIComponent(value));
+        }
+        return acc;
+      }, new Map<string, string>());
+  }
+
+  /**
+   * Obtém todos os cookies
+   * @returns Map com todos os cookies
+   */
+  getAllCookies(): Map<string, string> {
+    return this.parseCookie(this.document.cookie);
   }
 
   /**
@@ -189,24 +170,6 @@ export class AuthService {
    * @returns Valor do cookie ou null
    */
   private getCookie(name: string): string | null {
-    const nameEQ = name + "=";
-    const ca = document.cookie.split(';');
-
-    for (let i = 0; i < ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-      if (c.indexOf(nameEQ) === 0) {
-        return decodeURIComponent(c.substring(nameEQ.length, c.length));
-      }
-    }
-    return null;
-  }
-
-  /**
-   * Remove um cookie
-   * @param name Nome do cookie
-   */
-  private removerCookie(name: string): void {
-    document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;`;
+    return this.getAllCookies().get(name) ?? null;
   }
 } 

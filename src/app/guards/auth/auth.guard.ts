@@ -7,8 +7,8 @@
  * @created 10/07/2025
  */
 import { inject, Injectable } from '@angular/core';
-import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { Observable, map, of } from 'rxjs';
+import { CanActivate, Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
 import { AuthService } from '../../shared/services/auth.service';
 import { Rotas } from '../../shared/enums/rotas-enum';
 
@@ -26,16 +26,14 @@ export class AuthGuard implements CanActivate {
    * @param state Estado da rota
    * @returns Observable<boolean> indicando se pode ativar a rota
    */
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+  canActivate(): Observable<boolean> {
     // Verifica se o usuário está autenticado
-    if (this.authService.getAutenticado()) {
+    if (this.authService.isAuthenticated()) {
       return of(true);
     }
 
     // Se não estiver autenticado, redireciona para login
-    this.router.navigate([Rotas.LOGIN], {
-      queryParams: { returnUrl: state.url }
-    });
+    this.router.navigate([Rotas.LOGIN]);
     return of(false);
   }
 } 

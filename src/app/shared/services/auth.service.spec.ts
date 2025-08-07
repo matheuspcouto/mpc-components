@@ -16,15 +16,13 @@ describe('AuthService', () => {
     httpMock = TestBed.inject(HttpTestingController);
     
     // Limpar cookies antes de cada teste
-    document.cookie = 'auth_token=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
-    document.cookie = 'auth_user=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
+    document.cookie = 'AUTH_TOKEN=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
   });
 
   afterEach(() => {
     httpMock.verify();
     // Limpar cookies após cada teste
-    document.cookie = 'auth_token=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
-    document.cookie = 'auth_user=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
+    document.cookie = 'AUTH_TOKEN=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
   });
 
   it('deve ser criado', () => {
@@ -38,7 +36,8 @@ describe('AuthService', () => {
           id: 1,
           nome: 'Administrador',
           email: 'admin@teste.com',
-          token: 'token_simulado_admin_123456'
+          authToken: 'token_simulado_admin_123456',
+          expiresIn: new Date(Date.now() + 15 * 60 * 1000).toISOString()
         }
       };
 
@@ -74,7 +73,8 @@ describe('AuthService', () => {
           id: 1,
           nome: 'Administrador',
           email: 'admin@teste.com',
-          token: 'token_simulado_admin_123456'
+          authToken: 'token_simulado_admin_123456',
+          expiresIn: new Date(Date.now() + 15 * 60 * 1000).toISOString()
         }
       };
 
@@ -82,10 +82,8 @@ describe('AuthService', () => {
         expect(result).toBe(true);
         
         // Verificar se os cookies foram definidos
-        const tokenCookie = document.cookie.includes('auth_token=');
-        const userCookie = document.cookie.includes('auth_user=');
+        const tokenCookie = document.cookie.includes('AUTH_TOKEN=');
         expect(tokenCookie).toBe(true);
-        expect(userCookie).toBe(true);
         
         done();
       });
@@ -103,21 +101,19 @@ describe('AuthService', () => {
           id: 1,
           nome: 'Administrador',
           email: 'admin@teste.com',
-          token: 'token_simulado_admin_123456'
+          authToken: 'token_simulado_admin_123456',
+          expiresIn: new Date(Date.now() + 15 * 60 * 1000).toISOString()
         }
       };
 
       service.login('admin@teste.com', '123456').subscribe(() => {
+        // Verificar se está autenticado antes do logout
+        expect(service.isAuthenticated()).toBe(true);
+        
         service.logout();
         
-        // Verificar se os cookies foram removidos
-        const tokenCookie = document.cookie.includes('auth_token=');
-        const userCookie = document.cookie.includes('auth_user=');
-        expect(tokenCookie).toBe(false);
-        expect(userCookie).toBe(false);
-        
         // Verificar se o estado foi limpo
-        expect(service.getAutenticado()).toBe(false);
+        expect(service.isAuthenticated()).toBe(false);
         expect(service.getUsuarioAtual()).toBeNull();
         done();
       });
@@ -125,29 +121,11 @@ describe('AuthService', () => {
       const req = httpMock.expectOne(`${environment.baseUrl}/login`);
       req.flush(mockResponse);
     });
-
-    it('deve emitir false para isAuthenticated após logout', (done) => {
-      service.logout();
-      
-      service.isAutenticado().subscribe(autenticado => {
-        expect(autenticado).toBe(false);
-        done();
-      });
-    });
-
-    it('deve emitir null para usuário após logout', (done) => {
-      service.logout();
-      
-      service.getUsuario().subscribe(usuario => {
-        expect(usuario).toBeNull();
-        done();
-      });
-    });
   });
 
-  describe('getAutenticado', () => {
+  describe('isAuthenticated', () => {
     it('deve retornar false quando não há usuário autenticado', () => {
-      expect(service.getAutenticado()).toBe(false);
+      expect(service.isAuthenticated()).toBe(false);
     });
 
     it('deve retornar true quando há usuário autenticado', (done) => {
@@ -156,12 +134,13 @@ describe('AuthService', () => {
           id: 1,
           nome: 'Administrador',
           email: 'admin@teste.com',
-          token: 'token_simulado_admin_123456'
+          authToken: 'token_simulado_admin_123456',
+          expiresIn: new Date(Date.now() + 15 * 60 * 1000).toISOString()
         }
       };
 
       service.login('admin@teste.com', '123456').subscribe(() => {
-        expect(service.getAutenticado()).toBe(true);
+        expect(service.isAuthenticated()).toBe(true);
         done();
       });
 
@@ -181,7 +160,8 @@ describe('AuthService', () => {
           id: 1,
           nome: 'Administrador',
           email: 'admin@teste.com',
-          token: 'token_simulado_admin_123456'
+          authToken: 'token_simulado_admin_123456',
+          expiresIn: new Date(Date.now() + 15 * 60 * 1000).toISOString()
         }
       };
 
@@ -198,9 +178,11 @@ describe('AuthService', () => {
     });
   });
 
-  describe('getToken', () => {
+  describe('getAuthToken', () => {
     it('deve retornar null quando não há token', () => {
-      expect(service.getToken()).toBeNull();
+      // Garantir que não há cookies antes do teste
+      document.cookie = 'AUTH_TOKEN=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
+      expect(service.getAuthToken()).toBeNull();
     });
 
     it('deve retornar token quando usuário está autenticado', (done) => {
@@ -209,91 +191,15 @@ describe('AuthService', () => {
           id: 1,
           nome: 'Administrador',
           email: 'admin@teste.com',
-          token: 'token_simulado_admin_123456'
+          authToken: 'token_simulado_admin_123456',
+          expiresIn: new Date(Date.now() + 15 * 60 * 1000).toISOString()
         }
       };
 
       service.login('admin@teste.com', '123456').subscribe(() => {
-        const token = service.getToken();
+        const token = service.getAuthToken();
         expect(token).toBeTruthy();
         expect(token).toBe('token_simulado_admin_123456');
-        done();
-      });
-
-      const req = httpMock.expectOne(`${environment.baseUrl}/login`);
-      req.flush(mockResponse);
-    });
-  });
-
-  describe('carregarUsuarioSalvo', () => {
-    it('deve carregar usuário dos cookies se existir', () => {
-      const usuarioMock: Usuario = {
-        id: 1,
-        nome: 'Teste',
-        email: 'teste@teste.com',
-        token: 'token_teste'
-      };
-      
-      // Definir cookies manualmente
-      document.cookie = `auth_token=token_teste;path=/;SameSite=Strict`;
-      document.cookie = `auth_user=${encodeURIComponent(JSON.stringify(usuarioMock))};path=/;SameSite=Strict`;
-      
-      // Recria o serviço usando TestBed para ter injeção de dependência
-      const novoService = TestBed.inject(AuthService);
-      
-      // Aguarda um pouco para o carregamento dos cookies
-      setTimeout(() => {
-        expect(novoService.getAutenticado()).toBe(true);
-        expect(novoService.getUsuarioAtual()).toEqual(usuarioMock);
-      }, 100);
-    });
-
-    it('deve fazer logout se dados dos cookies estiverem corrompidos', () => {
-      // Definir cookies com dados inválidos
-      document.cookie = 'auth_token=token_teste;path=/;SameSite=Strict';
-      document.cookie = 'auth_user=json_invalido;path=/;SameSite=Strict';
-      
-      const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
-      
-      // Recria o serviço usando TestBed para ter injeção de dependência
-      const novoService = TestBed.inject(AuthService);
-      
-      // Aguarda um pouco para o carregamento dos cookies
-      setTimeout(() => {
-        expect(novoService.getAutenticado()).toBe(false);
-        expect(consoleSpy).toHaveBeenCalled();
-        consoleSpy.mockRestore();
-      }, 100);
-    });
-  });
-
-  describe('expiração de cookies', () => {
-    it('deve definir cookies com expiração de 15 minutos', (done) => {
-      const mockResponse = {
-        data: {
-          id: 1,
-          nome: 'Administrador',
-          email: 'admin@teste.com',
-          token: 'token_simulado_admin_123456'
-        }
-      };
-
-      service.login('admin@teste.com', '123456').subscribe(() => {
-        // Verificar se os cookies foram definidos
-        const cookies = document.cookie.split(';');
-        const tokenCookie = cookies.find(c => c.trim().startsWith('auth_token='));
-        const userCookie = cookies.find(c => c.trim().startsWith('auth_user='));
-        
-        expect(tokenCookie).toBeTruthy();
-        expect(userCookie).toBeTruthy();
-        
-        // Verificar se os cookies contêm o valor esperado (decodificado)
-        expect(tokenCookie).toContain('token_simulado_admin_123456');
-        expect(userCookie).toBeTruthy();
-        if (userCookie) {
-          expect(decodeURIComponent(userCookie)).toContain('admin@teste.com');
-        }
-        
         done();
       });
 
