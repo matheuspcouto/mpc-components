@@ -1,0 +1,24 @@
+@if (options.length > 0) {
+<div [tabIndex]="tabIndex" [attr.aria-label]="ariaLabel" class="form-group">
+  <label id="label-titulo" [class.error]="errorMessage">{{ required ? label + ' *' : label }}</label>
+
+  <div class="input-group">
+    @for (column of getColumns(); track $index) {
+    <div class="column">
+      @for (option of column; track option.value) {
+      <label>
+        <input [id]="id + '-' + option.value" (focus)="onFocus()" type="checkbox" (change)="setValue(option)"
+          [checked]="option.checked" [required]="required" [readOnly]="readonly" [disabled]="disabled"
+          [class.error]="errorMessage" [class.success]="campoTocado && !errorMessage" /> {{ option.label }}
+      </label>
+      }
+    </div>
+    }
+  </div>
+
+  <p class="mt-1" [class.error]="errorMessage" [style.visibility]="errorMessage ? 'visible' : 'hidden'">
+    {{ errorMessage }}
+  </p>
+
+</div>
+}

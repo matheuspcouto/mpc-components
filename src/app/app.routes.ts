@@ -121,6 +121,10 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/templates/login/login.component').then(c => c.default)
       },
       {
+        path: SegmentoRotas.CADASTRO,
+        loadComponent: () => import('./pages/templates/cadastro/cadastro.component').then(c => c.default)
+      },
+      {
         path: SegmentoRotas.AGUARDE,
         loadComponent: () => import('./pages/templates/aguarde/aguarde.component').then(c => c.default),
       },

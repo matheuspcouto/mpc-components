@@ -13,6 +13,7 @@ export * from './lib/components/cards/mpc-card-menu/mpc-card-menu.component';
 
 // Inputs
 export * from './lib/components/inputs/mpc-input-busca-cep/mpc-input-busca-cep.component';
+export * from './lib/components/inputs/mpc-input-checkbox/mpc-input-checkbox.component';
 export * from './lib/components/inputs/mpc-input-cpfcnpj/mpc-input-cpfcnpj.component';
 export * from './lib/components/inputs/mpc-input-date/mpc-input-date.component';
 export * from './lib/components/inputs/mpc-input-email/mpc-input-email.component';

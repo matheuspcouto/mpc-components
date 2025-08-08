@@ -65,10 +65,17 @@ input {
   }
 }
 
-p {
-  font-size: 14px;
+.error-messages {
+  margin-top: 0.5rem;
 
-  &.error {
-    color: var(--mpc-color-error) !important;
+  p {
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+    line-height: 1.2;
+
+    &.error {
+      color: var(--mpc-color-error) !important;
+    }
   }
 }

@@ -127,10 +127,7 @@ export class MpcNavbarComponent implements OnInit {
   ngOnInit(): void {
     this.abaLogin = this.abas.find(aba => aba.isAbaLogin);
     this.abaConta = this.abas.find(aba => aba.isAbaConta);
-    this.abas = this.abas.filter(aba => !aba.isAbaLogin && !aba.isAbaConta);
-
-    console.log(this.abaLogin, this.abaConta, this.abas);
-    
+    this.abas = this.abas.filter(aba => !aba.isAbaLogin && !aba.isAbaConta);    
   }
 
   /**
@@ -237,9 +234,7 @@ export class MpcNavbarComponent implements OnInit {
    * Navega para a aba de login.
    */
   protected navegarParaLogin(): void {
-    if (this.abaLogin) {
-      console.log(this.abaLogin);
-      
+    if (this.abaLogin) {      
       this.navegarPara(this.abaLogin.rota);
     }
   }

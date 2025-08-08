@@ -5,7 +5,7 @@
   <div class="input-group">
     @for (option of options; track $index) {
     <label class="p-3">
-      <input [id]="id" (focus)="onFocus()" type="radio" (change)="setValue(option)" [checked]="option.checked"
+      <input [id]="id + '-' + option.value"  (focus)="onFocus()" type="radio" (change)="setValue(option)" [checked]="option.checked"
         [required]="required" [readOnly]="readonly" [disabled]="disabled" [class.error]="errorMessage"
         [class.success]="campoTocado && !errorMessage" /> {{ option.label }}
     </label>

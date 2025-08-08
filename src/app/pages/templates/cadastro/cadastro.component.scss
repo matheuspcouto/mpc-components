@@ -1,4 +1,4 @@
-.login-container {
+.cadastro-container {
   min-height: 100vh;
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
   display: flex;
@@ -8,17 +8,17 @@
   padding: 20px;
   box-sizing: border-box;
 
-  .login-card {
+  .cadastro-card {
     background: white;
     border-radius: 16px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 420px;
+    max-width: 80vh;
     padding: 48px 40px;
     box-sizing: border-box;
     transition: all 0.3s ease;
 
-    .login-header {
+    .cadastro-header {
       text-align: center;
       margin-bottom: 40px;
 
@@ -48,7 +48,7 @@
       }
     }
 
-    .login-form {
+    .cadastro-form {
       display: flex;
       flex-direction: column;
 
@@ -58,10 +58,6 @@
         --mpc-color-border: var(--color-tertiary);
         --mpc-color-border-success: var(--color-secondary);
         --mpc-font-text: var(--font-subtitle);
-      }
-
-      .alert {
-        font-weight: 300;
       }
 
       .form-group {
@@ -79,13 +75,13 @@
         flex-direction: column;
         gap: 16px;
 
-        #btn-entrar {
+        #btn-cadastrar {
           --mpc-bg-color-btn: var(--color-primary);
           --mpc-text-color-btn: white;
           --mpc-bg-color-btn-hover: var(--color-secondary);
         }
 
-        #btn-cadastrar {
+        #btn-login {
           --mpc-bg-color-btn: transparent;
           --mpc-text-color-btn: var(--color-secondary);
         }
@@ -144,5 +140,4 @@
       margin-bottom: 0;
     }
   }
-
 }

@@ -38,6 +38,7 @@ export enum SegmentoRotas {
   // Outras páginas
   AGUARDE = "aguarde",
   LOGIN = "login",
+  CADASTRO = "cadastro",
   PAGINA_ERRO = "pagina-erro"
 }
 
@@ -73,6 +74,7 @@ export enum Rotas {
   TEMPLATES = `/${SegmentoRotas.TEMPLATES}`,
   AGUARDE = `/${SegmentoRotas.TEMPLATES}/${SegmentoRotas.AGUARDE}`,
   LOGIN = `/${SegmentoRotas.TEMPLATES}/${SegmentoRotas.LOGIN}`,
+  CADASTRO = `/${SegmentoRotas.TEMPLATES}/${SegmentoRotas.CADASTRO}`,
   PAGINA_ERRO = `/${SegmentoRotas.TEMPLATES}/${SegmentoRotas.PAGINA_ERRO}`,
   NAVBAR = `/${SegmentoRotas.TEMPLATES}/${SegmentoRotas.NAVBAR}`,
   FOOTER = `/${SegmentoRotas.TEMPLATES}/${SegmentoRotas.FOOTER}`,

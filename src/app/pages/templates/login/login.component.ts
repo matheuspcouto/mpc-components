@@ -39,8 +39,12 @@ export default class LoginComponent {
 
   private readonly formBuilder = inject(NonNullableFormBuilder);
   private readonly authService = inject(AuthService);
-  private readonly notificacaoService = inject(ToastrService);
   private readonly router = inject(Router);
+
+  // Exibição de ano atual no footer
+  protected anoAtual = new Date().getFullYear();
+  // Flag de exibição de alert de erro
+  protected loginError: boolean = false;
 
   /**
    * Formulário reativo de login.
@@ -58,15 +62,24 @@ export default class LoginComponent {
       const { email, senha } = this.form.value;
 
       this.authService.login(email!, senha!).subscribe({
-        next: () => {
-          this.router.navigate([Rotas.HOME]);
+        next: (isLoginSuccess: boolean) => {
+
+          if (isLoginSuccess) {
+            this.router.navigate([Rotas.HOME]);
+          } else {
+            this.loginError = true;
+          }
+
         },
-        error: (error) => {
-          // Verifica se há uma mensagem de erro específica da API
-          const errorMessage = error?.error?.error || 'Não foi possível efetuar o login!';
-          this.notificacaoService.error(errorMessage);
-        }
+        error: () => this.loginError = true
       });
     }
+  }
+
+  /**
+   * Redireciona para tela de cadastro de usuário.
+   */
+  protected cadastrar(): void {
+    this.router.navigate([Rotas.CADASTRO]);
   }
 }

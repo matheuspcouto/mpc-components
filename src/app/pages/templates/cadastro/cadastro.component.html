@@ -1,0 +1,74 @@
+<div class="cadastro-container">
+  <div class="cadastro-card">
+    <div class="cadastro-header">
+      <img src="assets/img/logo.png" class="logo">
+      <h1 class="title">Mpc Components</h1>
+      <p class="subtitle mt-3">Crie sua conta para começar.</p>
+    </div>
+
+    <form class="cadastro-form" [formGroup]="form">
+
+      <div class="row">
+        <div class="form-group col-lg-6">
+          <mpc-input-text [id]="'nome'" label="Nome completo" [tabIndex]="1" [ariaLabel]="'Digite seu nome completo'"
+            [min]="3" formControlName="nome" class="form-input" />
+        </div>
+
+        <div class="form-group col-lg-6">
+          <mpc-input-email [id]="'email'" [tabIndex]="2" [ariaLabel]="'Digite seu e-mail'" [required]="true"
+            formControlName="email" class="form-input" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-lg-6">
+          <mpc-input-senha [id]="'password'" label="Senha" [tabIndex]="3" [ariaLabel]="'Digite sua senha'"
+            [required]="true" formControlName="senha" class="form-input" />
+        </div>
+
+        <div class="form-group col-lg-6">
+          <mpc-input-senha [id]="'confirm-password'" label="Confirme sua senha" [tabIndex]="3"
+            [ariaLabel]="'Confirme sua senha'" [required]="true" formControlName="confirmarSenha" class="form-input" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-lg-6">
+          <mpc-input-cpfcnpj [id]="'cpf'" label="CPF" [tabIndex]="4" [ariaLabel]="'Digite seu CPF'" [required]="true"
+            formControlName="cpf" class="form-input" />
+        </div>
+
+        <div class="form-group col-lg-6">
+          <mpc-input-telefone [id]="'telefone'" label="Telefone" [tabIndex]="4" [ariaLabel]="'Digite seu Telefone'"
+            [required]="true" formControlName="telefone" class="form-input" />
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <mpc-input-checkbox [id]="'acessos'" label="Acessos" [tabIndex]="4" [ariaLabel]="'Escolha os acessos'"
+          [required]="true" formControlName="acessos" class="form-input" [options]="acessos" />
+      </div>
+
+      <div class="form-actions">
+        <mpc-button (click)="cadastrar()" icone="bi bi-person-plus" posicaoIcone="direita" texto="Cadastrar"
+          id="btn-cadastrar" [disabled]="form.invalid" />
+
+        <mpc-button (click)="irParaLogin()" texto="Já tenho conta" id="btn-login" />
+      </div>
+    </form>
+  </div>
+
+  <!-- Redes Sociais do Desenvolvedor -->
+  <div class="login-footer">
+    <div class="social-links-dev">
+      <a href="https://matheuspcouto.github.io/" target="_blank"><i class="bi bi-person"></i></a>
+      <a href="https://github.com/matheuspcouto" target="_blank"><i class="bi bi-github"></i></a>
+      <a href="https://www.instagram.com/matheuspcouto/" target="_blank"><i class="bi bi-instagram"></i></a>
+      <a href="https://www.linkedin.com/in/matheuspcouto/" target="_blank"><i class="bi bi-linkedin"></i></a>
+    </div>
+
+    <p>Desenvolvido por Matheus Pimentel Do Couto © - {{ anoAtual }}</p>
+  </div>
+  <!-- Fim Redes Sociais do Desenvolvedor -->
+</div>

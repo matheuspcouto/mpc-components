@@ -64,7 +64,7 @@ import { AccessibilityInputs } from '../../../../shared/accessibility-inputs';
 export interface RadioOption {
   label: string;
   value: string;
-  checked?: boolean;
+  checked: boolean;
 }
 
 @Component({

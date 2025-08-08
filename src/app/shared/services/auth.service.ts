@@ -13,15 +13,16 @@ import { map, Observable, take } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 export interface Usuario {
-  id: string;
-  nome: string;
-  cpf: string;
-  email: string;
-  senha: string,
-  authToken: string;
-  expiresIn: string;
-  acessos?: string[];
-  status: string;
+  id?: string;
+  nome?: string;
+  cpf?: string;
+  telefone?: string;
+  email?: string;
+  senha?: string,
+  authToken?: string;
+  expiresIn?: string;
+  acessos?: string;
+  status?: string;
 }
 
 @Injectable({
@@ -45,7 +46,7 @@ export class AuthService {
   constructor(
     private readonly http: HttpClient,
     @Inject(DOCUMENT) private readonly document: Document
-  ) {}
+  ) { }
 
   // URL base da API.
   private readonly baseUrl = environment.baseUrl;
@@ -97,6 +98,30 @@ export class AuthService {
   }
 
   /**
+   * Realiza o cadastro do usuário
+   * @param usuario Usuario
+   * @returns Observable com o resultado do cadastro
+   */
+  cadastrar(usuario: Usuario): Observable<any> {
+    const body = {
+      ...usuario,
+      email: encodeURIComponent(usuario.email ?? ''),
+      senha: encodeURIComponent(usuario.senha ?? '')
+    }
+
+    return this.http.post<any>(`${this.baseUrl}/criarUsuario`, body, { headers: this.headers })
+      .pipe((take(1)),
+        map((response) => {
+
+          if (response.error) {
+            throw new HttpErrorResponse({ error: response.error });
+          }
+
+          return true; // Login bem-sucedido
+        }));
+  }
+
+  /**
    * Retorna o valor atual do usuário autenticado
    * @returns Usuário ou null
    */
@@ -127,7 +152,7 @@ export class AuthService {
    * @param expiresIn Tempo para expiração
    * @param path Caminho do cookie
    */
-  private setCookie(name: string, value: string, expiresIn: string, path: string = '/'): void {
+  private setCookie(name: string, value: string, expiresIn?: string, path: string = '/'): void {
     let expiresString = '';
     if (expiresIn) {
       const expires = new Date(expiresIn);

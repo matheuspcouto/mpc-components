@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
     @Inject(PLATFORM_ID) private readonly platformId: any,
     private readonly router: Router,
     private readonly authService: AuthService
-  ) {}
+  ) { }
 
   /**
    * Define visualização do botão de voltar ao topo.
@@ -82,6 +82,8 @@ export class AppComponent implements OnInit {
       icone: 'bi bi-filetype-html',
       subRotas: [
         { id: 'aguarde', titulo: 'Aguarde', rota: Rotas.AGUARDE },
+        { id: 'login', titulo: 'Login', rota: Rotas.LOGIN },
+        { id: 'cadastro', titulo: 'Cadastro', rota: Rotas.CADASTRO },
         { id: 'erro', titulo: 'Erro', rota: Rotas.PAGINA_ERRO },
         { id: 'navbar', titulo: 'Navbar', rota: Rotas.NAVBAR },
         { id: 'footer', titulo: 'Footer', rota: Rotas.FOOTER },
@@ -154,7 +156,13 @@ export class AppComponent implements OnInit {
    * Rotas onde a navbar NÃO deve aparecer
    * @type {string[]}
    */
-  protected esconderNavbar: string[] = [Rotas.AGUARDE, Rotas.LOGIN];
+  protected esconderNavbar: string[] = [Rotas.AGUARDE, Rotas.LOGIN, Rotas.CADASTRO];
+
+  /**
+   * Rotas onde o footer NÃO deve aparecer
+   * @type {string[]}
+   */
+  protected esconderFooter: string[] = [Rotas.LOGIN, Rotas.CADASTRO];
 
   /**
    * Verifica se a navbar deve ser exibida com base na URL atual.
@@ -162,6 +170,14 @@ export class AppComponent implements OnInit {
    */
   protected mostrarNavbar(): boolean {
     return !this.esconderNavbar.some(route => this.router.url.startsWith(route));
+  }
+
+  /**
+   * Verifica se o footer deve ser exibido com base na URL atual.
+   * @returns {boolean}
+   */
+  protected mostrarFooter(): boolean {
+    return !this.esconderFooter.some(route => this.router.url.startsWith(route));
   }
 }
 

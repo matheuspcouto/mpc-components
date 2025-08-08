@@ -65,8 +65,8 @@ export interface SelectOption {
   label: string;
   /** Valor da opção */
   value: string;
-  /** Indica se a opção está selecionada (opcional) */
-  selected?: boolean;
+  /** Indica se a opção está selecionada */
+  selected: boolean;
 }
 
 @Component({

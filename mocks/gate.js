@@ -25,17 +25,10 @@ module.exports = (req, res, next) => {
                 return res.status(200).json(dados['inscrever']);
             }
             if (path === '/login') {
-                const email = req.headers.email;
-                const senha = req.headers.senha;
-                
-                // Simulação de autenticação
-                if (email === 'admin@teste.com' && senha === '123456') {
-                    return res.status(200).json(dados['login']['admin@teste.com']);
-                } else if (email === 'usuario@teste.com' && senha === '123456') {
-                    return res.status(200).json(dados['login']['usuario@teste.com']);
-                } else {
-                    return res.status(401).json({ error: 'Credenciais inválidas' });
-                }
+                return res.status(200).json(dados['login']);
+            }
+            if (path === '/cadastrar') {
+                return res.status(201).json(dados['cadastrar']);
             }
         }
 

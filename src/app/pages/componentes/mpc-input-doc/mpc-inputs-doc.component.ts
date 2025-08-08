@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { NonNullableFormBuilder } from '@angular/forms';
-import { MpcInputTextComponent, MpcInputNumberComponent, MpcInputDateComponent, MpcInputEmailComponent, MpcInputSenhaComponent, MpcInputTelefoneComponent, MpcInputCpfcnpjComponent, MpcInputBuscaCepComponent, MpcInputTextAreaComponent, MpcInputRadioComponent, RadioOption, MpcInputSelectComponent, SelectOption, Endereco, MpcSectionComponent } from 'mpc-lib-angular';
+import { MpcInputTextComponent, MpcInputNumberComponent, MpcInputDateComponent, MpcInputEmailComponent, MpcInputSenhaComponent, MpcInputTelefoneComponent, MpcInputCpfcnpjComponent, MpcInputBuscaCepComponent, MpcInputTextAreaComponent, MpcInputRadioComponent, RadioOption, MpcInputSelectComponent, SelectOption, Endereco, MpcSectionComponent, MpcInputCheckboxComponent, CheckboxOption } from 'mpc-lib-angular';
 
 /**
  * @Componente MpcInputsDocComponent
@@ -13,6 +13,7 @@ import { MpcInputTextComponent, MpcInputNumberComponent, MpcInputDateComponent, 
  * @protected maxDate {string} - Data máxima para inputs de data
  * @protected estadosCivis {SelectOption[]} - Opções de estado civil
  * @protected sexos {RadioOption[]} - Opções de sexo
+ * @protected interesses {CheckboxOption[]} - Opções de interesses
  * @protected form {FormGroup} - Formulário reativo de exemplo
  *
  * @Exemplo
@@ -22,7 +23,7 @@ import { MpcInputTextComponent, MpcInputNumberComponent, MpcInputDateComponent, 
  *
  * @author Matheus Pimentel Do Couto
  * @created 10/07/2025
- * @updated 10/07/2025
+ * @updated 08/08/2025
  */
 @Component({
   selector: 'app-mpc-inputs-doc',
@@ -38,6 +39,7 @@ import { MpcInputTextComponent, MpcInputNumberComponent, MpcInputDateComponent, 
     MpcInputTextAreaComponent,
     MpcInputRadioComponent,
     MpcInputSelectComponent,
+    MpcInputCheckboxComponent,
     MpcSectionComponent
   ],
   templateUrl: './mpc-inputs-doc.component.html',
@@ -78,6 +80,21 @@ export class MpcInputsDocComponent {
   ];
 
   /**
+   * Opções de interesses para o checkbox.
+   */
+  protected interesses: CheckboxOption[] = [
+    { label: 'Tecnologia', value: 'tech', checked: false },
+    { label: 'Esportes', value: 'sports', checked: false },
+    { label: 'Música', value: 'music', checked: false },
+    { label: 'Leitura', value: 'reading', checked: false },
+    { label: 'Viagem', value: 'travel', checked: false },
+    { label: 'Culinária', value: 'cooking', checked: false },
+    { label: 'Arte', value: 'art', checked: false },
+    { label: 'Fotografia', value: 'photography', checked: false },
+    { label: 'Jardinagem', value: 'gardening', checked: false }
+  ];
+
+  /**
    * Formulário reativo de exemplo para inputs.
    */
   protected form = this.formBuilder.group({
@@ -86,6 +103,7 @@ export class MpcInputsDocComponent {
     dataNasc: [''],
     sexo: [''],
     estadoCivil: [''],
+    interesses: [[]],
     idade: [0],
     cpfCnpj: [''],
     descricao: [''],

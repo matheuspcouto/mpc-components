@@ -12,6 +12,14 @@
  * @Input() tabIndex {number} - TabIndex para navegação por teclado (opcional, padrão: 0)
  * @Input() ariaLabel {string} - Rótulo para leitores de tela (opcional)
  * 
+ * @Validação de Senha
+ * O componente utiliza um regex fixo que valida senhas com:
+ * - Mínimo 8 caracteres
+ * - Pelo menos uma letra maiúscula
+ * - Pelo menos uma letra minúscula
+ * - Pelo menos um número
+ * - Pelo menos um caractere especial (@$!%*?&_-)
+ * 
  * @Exemplo
  * ```html
  * <!-- Input Senha Básico -->
@@ -62,7 +70,6 @@ import { AccessibilityInputs } from '../../../../shared/accessibility-inputs';
 
 @Component({
   selector: 'mpc-input-senha',
-  imports: [],
   templateUrl: './mpc-input-senha.component.html',
   styleUrls: ['./mpc-input-senha.component.scss'],
   providers: [
@@ -89,18 +96,27 @@ export class MpcInputSenhaComponent extends AccessibilityInputs implements Contr
   @Input() required: boolean = false;
   /** Campo desabilitado */
   @Input() disabled: boolean = false;
-  /** Regex para validação da senha */
-  @Input() regexSenha: string = '';
 
   // ===== PROPRIEDADES PRIVADAS =====
   /** Valor atual do campo */
   public value: string = '';
-  /** Mensagem de erro de validação */
-  protected errorMessage?: string;
+  /** Array de mensagens de erro de validação */
+  protected errorMessages: string[] = [];
   /** Controla se o campo foi tocado */
   protected campoTocado: boolean = false;
   /** Controla a visibilidade da senha */
   protected ocultarSenha: boolean = true;
+
+  // ===== REGEX FIXO PARA VALIDAÇÃO DE SENHA =====
+  /**
+   * Regex que valida senhas com:
+   * - Mínimo 8 caracteres
+   * - Pelo menos uma letra maiúscula
+   * - Pelo menos uma letra minúscula
+   * - Pelo menos um número
+   * - Pelo menos um caractere especial (@$!%*?&_-)
+   */
+  private readonly SENHA_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_-])[A-Za-z\d@$!%*?&_-]{8,}$/;
 
   // ===== MÉTODOS DO CONTROLVALUEACCESSOR =====
   /** Função de mudança do ControlValueAccessor */
@@ -155,42 +171,47 @@ export class MpcInputSenhaComponent extends AccessibilityInputs implements Contr
   // ===== MÉTODOS DO VALIDATOR =====
 
   /**
-   * Valida o campo baseado nas regras de obrigatório e regex.
+   * Valida o campo baseado nas regras de obrigatório e regex fixo.
    * @param control Controle do formulário
    * @returns ValidationErrors | null - Erros de validação ou null se válido
    */
   validate(control: AbstractControl): ValidationErrors | null {
-    if (this.readonly || this.disabled) { return null; }
-    
+    if (this.readonly || this.disabled) {
+      this.errorMessages = [];
+      return null;
+    }
+
+    this.errorMessages = [];
+    const errors: ValidationErrors = {};
+
     if (this.isCampoObrigatorio(this.value)) {
       if (this.campoTocado) {
-        this.errorMessage = `O campo senha é obrigatório`;
+        this.errorMessages.push('O campo senha é obrigatório');
       }
-      return { required: true };
+      errors['required'] = true;
     }
-    
-    if (this.isSenhaInvalida(this.value)) {
-      if (this.campoTocado) {
-        this.errorMessage = `A senha não está em um formato válido`;
+
+    if (this.value && this.value.length > 0) {
+      const senhaErrors = this.validarSenha(this.value);
+      if (senhaErrors.length > 0) {
+        this.errorMessages.push(...senhaErrors);
+        errors['regex'] = true;
       }
-      return { regex: true };
     }
-    
-    this.errorMessage = undefined;
-    return null;
+
+    return Object.keys(errors).length > 0 ? errors : null;
   }
 
   // ===== MÉTODOS PRIVADOS =====
 
   /**
-   * Verifica se o valor do campo é inválido conforme regex.
+   * Verifica se o valor do campo é inválido conforme regex fixo.
    * @param value Valor do campo
    * @returns {boolean} true se a senha for inválida
    */
   private isSenhaInvalida(value: string | undefined): boolean {
-    if (!this.regexSenha || this.regexSenha.length === 0) return false;
-    if (!value) return true;
-    return !new RegExp(this.regexSenha).test(value);
+    if (!value || value.length === 0) return false;
+    return !this.SENHA_REGEX.test(value);
   }
 
   /**
@@ -202,5 +223,44 @@ export class MpcInputSenhaComponent extends AccessibilityInputs implements Contr
     if (!this.required) return false;
     if (!value) return true;
     return this.required && value.length === 0;
+  }
+
+  /**
+   * Valida a senha e retorna um array com as mensagens de erro específicas.
+   * @param value Valor da senha
+   * @returns {string[]} Array com as mensagens de erro
+   */
+  private validarSenha(value: string): string[] {
+    const errors: string[] = [];
+
+    if (value.length < 8) {
+      errors.push('A senha deve ter no mínimo 8 caracteres');
+    }
+
+    if (!/[a-z]/.test(value)) {
+      errors.push('A senha deve conter pelo menos uma letra minúscula');
+    }
+
+    if (!/[A-Z]/.test(value)) {
+      errors.push('A senha deve conter pelo menos uma letra maiúscula');
+    }
+
+    if (!/\d/.test(value)) {
+      errors.push('A senha deve conter pelo menos um número');
+    }
+
+    if (!/[@$!%*?&_-]/.test(value)) {
+      errors.push('A senha deve conter pelo menos um caractere especial (@$!%*?&_-)');
+    }
+
+    return errors;
+  }
+
+  /**
+   * Getter para verificar se há mensagens de erro.
+   * @returns {boolean} true se há mensagens de erro
+   */
+  get hasErrors(): boolean {
+    return this.errorMessages.length > 0;
   }
 }
